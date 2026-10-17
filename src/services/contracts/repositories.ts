@@ -46,6 +46,13 @@ import type {
   UbicacionServicio,
   Verificacion,
   CategoriaReporte,
+  CasoOperacion,
+  CatalogoAreasOperacion,
+  DestinoAsignacion,
+  FiltroBandeja,
+  NuevaIncidenciaInput,
+  ResultadoBandeja,
+  ResumenOperacion,
 } from "@/types";
 
 export interface ServiceCatalogRepository {
@@ -143,6 +150,41 @@ export interface NotificationRepository {
   markAllRead(actor: IdentidadDemo): Promise<void>;
 }
 
+/**
+ * Centro de operaciones (demostración). Todas las operaciones exigen rol operador/administración
+ * y aplican el ámbito de la identidad (coordinación: todo; dirección: sólo su dependencia) EN EL
+ * ADAPTADOR, no sólo en la interfaz. Ninguna operación la ejecuta el asistente: sólo personas.
+ */
+export interface IncidentRepository {
+  /** Dependencias (nombres literales de Portal Ciudadano), equipos ficticios y aviso de agrupación. */
+  listAreas(actor: IdentidadDemo): Promise<CatalogoAreasOperacion>;
+  /** Bandeja filtrada y paginada dentro del ámbito; `conteos` ignora el filtro. */
+  list(filtro: FiltroBandeja, actor: IdentidadDemo): Promise<ResultadoBandeja>;
+  /** null si no existe o está fuera del ámbito. */
+  get(id: string, actor: IdentidadDemo): Promise<CasoOperacion | null>;
+  findByFolio(folio: string, actor: IdentidadDemo): Promise<CasoOperacion | null>;
+  summary(actor: IdentidadDemo): Promise<ResumenOperacion>;
+  /** Registra un caso recibido por teléfono, WhatsApp o portal (simulado). No genera puntos. */
+  register(input: NuevaIncidenciaInput, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /** Una persona confirma la clasificación sugerida: «Nueva» → «Por asignar». Idempotente. */
+  reviewClassification(id: string, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /**
+   * Una persona confirma la canalización. Si el caso está «registrado» pasa a «en_proceso»
+   * (para reportes ciudadanos usa la misma validación que el operador: aprueba sus puntos pendientes).
+   * Coordinación puede asignar a cualquier dependencia; una dirección sólo a la suya. Idempotente.
+   */
+  confirmAssignment(id: string, destino: DestinoAsignacion, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /** Descarta la propuesta de demostración con motivo (no cambia el estado municipal). */
+  discardProposal(id: string, motivo: string, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /** Una dirección devuelve el caso a coordinación con motivo (quita su asignación; no cancela). */
+  returnToCoordination(id: string, motivo: string, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /** en_proceso → solucionado («atención reportada»). Para reportes abre la verificación ciudadana. */
+  registerAttention(id: string, nota: string, actor: IdentidadDemo): Promise<CasoOperacion>;
+  /** Cancela con motivo. Para reportes reutiliza la cancelación existente (anula/revierte puntos). */
+  cancel(id: string, motivo: MotivoCancelacion, actor: IdentidadDemo): Promise<CasoOperacion>;
+  addInternalNote(id: string, texto: string, actor: IdentidadDemo): Promise<CasoOperacion>;
+}
+
 /** Conjunto de repositorios que expone el registro (src/services/registry.ts). */
 export interface Repositories {
   catalog: ServiceCatalogRepository;
@@ -153,4 +195,5 @@ export interface Repositories {
   digitalFile: DigitalFileRepository;
   wellbeing: WellbeingRepository;
   notifications: NotificationRepository;
+  incidents: IncidentRepository;
 }

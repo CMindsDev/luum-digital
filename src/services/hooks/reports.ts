@@ -44,8 +44,8 @@ export function usePossibleDuplicates(input: { categoria: CategoriaReporte; ubic
   });
 }
 
-/** Tras cualquier cambio de reporte se refrescan reportes, puntos y notificaciones. */
-const AFECTADAS = [CLAVES.reportes, CLAVES.verificaciones, CLAVES.recompensas, CLAVES.notificaciones] as const;
+/** Tras cualquier cambio de reporte se refrescan reportes, puntos, notificaciones y la bandeja de operaciones. */
+const AFECTADAS = [CLAVES.reportes, CLAVES.verificaciones, CLAVES.recompensas, CLAVES.notificaciones, CLAVES.incidencias] as const;
 
 export function useCreateReport() {
   const { repos, actor, cliente } = useContextoServicios();

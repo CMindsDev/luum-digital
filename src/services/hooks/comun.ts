@@ -12,6 +12,7 @@ export const CLAVES = {
   expediente: "expediente",
   bienestar: "bienestar",
   notificaciones: "notificaciones",
+  incidencias: "incidencias",
 } as const;
 
 export type RaizClave = (typeof CLAVES)[keyof typeof CLAVES];

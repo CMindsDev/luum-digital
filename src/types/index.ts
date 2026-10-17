@@ -6,6 +6,7 @@ export type * from "./gestiones";
 export type * from "./identidad";
 export type * from "./mapa";
 export type * from "./notificaciones";
+export type * from "./operaciones";
 export type * from "./participacion";
 export type * from "./reportes";
 export type * from "./asistente";

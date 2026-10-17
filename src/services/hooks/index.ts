@@ -1,5 +1,6 @@
 export * from "./catalog";
 export * from "./digital-file";
+export * from "./incidents";
 export * from "./notifications";
 export * from "./procedures";
 export * from "./reports";
