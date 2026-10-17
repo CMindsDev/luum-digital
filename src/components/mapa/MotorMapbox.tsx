@@ -43,9 +43,12 @@ export default function MotorMapbox({
   fuentes,
   capasInteractivas,
   marcador,
+  marcadores,
   cooperativo,
   sinAnimacion,
   onClic,
+  interaccion = "normal",
+  onPuntero,
   onMovido,
   onCargado,
   onFallo,
@@ -73,10 +76,13 @@ export default function MotorMapbox({
       touchPitch={false}
       attributionControl={false}
       interactiveLayerIds={capasInteractivas}
-      cursor={cursor}
+      cursor={interaccion === "trazar" ? "crosshair" : interaccion === "mover" ? "grab" : cursor}
+      dragPan={interaccion !== "trazar"}
+      doubleClickZoom={interaccion === "normal"}
       style={{ width: "100%", height: "100%" }}
       onMouseEnter={() => setCursor("pointer")}
-      onMouseLeave={() => setCursor("")}
+      onMouseLeave={() => { setCursor(""); onPuntero?.(null); }}
+      onMouseMove={evento => onPuntero?.({ lat: evento.lngLat.lat, lng: evento.lngLat.lng })}
       onClick={(evento: MapMouseEvent) => onClic?.(convertirClic(evento.lngLat, evento.features))}
       onMoveEnd={(evento) =>
         onMovido?.({ latitude: evento.viewState.latitude, longitude: evento.viewState.longitude, zoom: evento.viewState.zoom })
@@ -127,6 +133,10 @@ export default function MotorMapbox({
           <PinMarcador etiqueta={marcador.etiqueta} />
         </Marker>
       ) : null}
+      {marcadores?.map(pin => <Marker key={pin.id} longitude={pin.posicion.lng} latitude={pin.posicion.lat} anchor="center" draggable={pin.arrastrable}
+        onDragStart={() => pin.onArrastreIniciado?.()}
+        onDrag={evento => pin.onArrastrando?.({ lat: evento.lngLat.lat, lng: evento.lngLat.lng })}
+        onDragEnd={evento => pin.onArrastrado?.({ lat: evento.lngLat.lat, lng: evento.lngLat.lng })}>{pin.contenido}</Marker>)}
       {children}
     </MapaGL>
   );

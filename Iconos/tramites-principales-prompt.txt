@@ -1,0 +1,25 @@
+Generado con image_gen (herramienta integrada).
+Referencias: las dos capturas proporcionadas por el usuario.
+
+Use case: ui-mockup / icon collection.
+Create ONE polished high-resolution icon sheet, a cohesive family of exactly THIRTEEN distinct municipal service icons for Mérida, Yucatán.
+Input images: both attached images are STYLE REFERENCES ONLY. They show thick dark chocolate-brown silhouettes on warm ivory, stepped orthogonal geometry, hand-cut slightly irregular edges, softened corners, bold square blocks, strongly simplified silhouettes, generous negative space. Reproduce this visual grammar faithfully, not the literal tree/star shapes for every category. No thin outlined modern UI symbols. No 3D, gradients, shadows, multicolor, photorealism, decorative frames, or invented logos. Do not copy the faint reference watermark "Recurso 3 1".
+Palette exactly two colors: warm ivory background approximately #FFF8ED and dark earthy chocolate marks approximately #583B33. All icons SAME brown, matte flat silhouettes. Slight organic edge wobble but crisp professional quality, no distressed speckles.
+Layout: wide landscape sheet, generous margins. Three balanced rows: FIVE icons across first row, FOUR centered icons across second row, FOUR centered icons across third row, total exactly 13. Equal visual scale and spacing; no overlaps; every icon recognizable in small sizes. Short readable Spanish label under each icon, same brown in restrained clean sans serif. Small title at top "Trámites principales". Labels must be exact, accents correct. Icons carry visual information, not text inside icons. No other words or captions.
+Row 1 left to right:
+1. "Reportes urbanos": stepped pothole in a short road with an upright blocky location pin, one unified emblem.
+2. "Atención a la violencia": sturdy protective shield enclosing a simplified person; sensitive supportive symbol, no weapons or violence.
+3. "Salud y cuidados": broad stepped medical cross cradled by two simplified supporting hands or integrated protective base.
+4. "Apoyos sociales": small blocky family of three under a stepped roof, with connected base.
+5. "Predial y pagos": blocky house with a large simple coin integrated beside it; no tiny currency text.
+Row 2:
+6. "Agua en comisarías": squared faucet above a blocky water droplet; clear readable silhouette.
+7. "Empleo": thick blocky briefcase with stepped handle and large cream negative-space clasp.
+8. "Educación y becas": strong stepped open book with a simple squared graduation cap.
+9. "Vivienda y obra": sturdy stepped house silhouette joined to a thick construction tool or hammer, one balanced emblem.
+Row 3:
+10. "Negocios": square market stall with stepped striped canopy using broad ivory cuts and a single doorway.
+11. "Documentos": broad document silhouette with stepped folded corner, a square portrait and just two broad ivory information cuts.
+12. "Bienestar animal": very simplified symmetrical paw with blocky stepped pads, avoiding soft circles.
+13. "Servicios funerarios": dignified stepped flower growing from a low ceremonial base, inspired by the reference tree's architecture; no religious cross, skull or coffin.
+All thirteen must belong to the SAME visual family as the references, with deliberate block construction, substantial strokes, softened handmade corners, strong simple silhouettes. Wide airy editorial brand asset sheet, high definition.

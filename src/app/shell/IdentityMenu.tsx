@@ -1,6 +1,6 @@
 import { Check, ChevronDown, RotateCcw, UserRound } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useRestablecerDemo } from "@/app/hooks/useRestablecerDemo";
 import { ETIQUETA_ROL } from "@/app/session/roles";
 import { buscarIdentidad, useDemoSession } from "@/app/session/store";
@@ -12,6 +12,7 @@ import { Avatar, ConfirmDialog, cx, notificar } from "@/design-system";
  * Cambiar de identidad no es autenticación: sólo elige qué datos de demostración ves.
  */
 export function IdentityMenu() {
+  const navegar = useNavigate();
   const identidadId = useDemoSession((estado) => estado.identidadId);
   const cambiarIdentidad = useDemoSession((estado) => estado.cambiarIdentidad);
   const identidad = buscarIdentidad(identidadId);
@@ -42,6 +43,7 @@ export function IdentityMenu() {
       notificar({ tono: "info", titulo: `Ahora usas la demostración como ${buscarIdentidad(id).nombre}`, descripcion: "Identidad ficticia: no es una cuenta municipal." });
     }
     cerrarYEnfocar();
+    navegar(buscarIdentidad(id).rol === "ciudadania" ? "/" : "/operador");
   };
 
   return (

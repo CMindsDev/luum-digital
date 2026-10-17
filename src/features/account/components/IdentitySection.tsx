@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { useDemoSession } from "@/app/session/store";
 import { ETIQUETA_ROL } from "@/app/session/roles";
 import { IDENTIDADES_DEMO } from "@/data/identidades";
@@ -5,12 +6,14 @@ import { Avatar, Badge, Card, notificar, RadioCardGroup } from "@/design-system"
 
 /** Selector de identidad ficticia (no es autenticación municipal). */
 export function IdentitySection() {
+  const navegar = useNavigate();
   const identidadId = useDemoSession((estado) => estado.identidadId);
   const cambiarIdentidad = useDemoSession((estado) => estado.cambiarIdentidad);
 
   const elegir = (id: string) => {
     if (id === identidadId) return;
     cambiarIdentidad(id);
+    if (id === "admin" || id === "operador") navegar("/operador");
     const elegida = IDENTIDADES_DEMO.find((identidad) => identidad.id === id);
     if (elegida) notificar({ tono: "info", titulo: `Ahora usas la demostración como ${elegida.nombre}` });
   };

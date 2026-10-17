@@ -187,3 +187,15 @@ export function agregarAportacion(reporte: Reporte, aportacion: Aportacion): Rep
 export function ordenarPorFecha<T extends { creadoEn: string }>(lista: readonly T[]): T[] {
   return [...lista].sort((a, b) => (a.creadoEn < b.creadoEn ? 1 : a.creadoEn > b.creadoEn ? -1 : 0));
 }
+
+
+/** Seguimiento operativo local: nunca envía mensajes ni modifica estados municipales. */
+export function registrarSeguimiento(reporte: Reporte, tipo: "asignado" | "contacto_simulado", texto: string, fecha: FechaISO): Reporte {
+  const valor = texto.trim();
+  if (valor.length < 3 || valor.length > 1000) throw new ReglaDeNegocioError("seguimiento_invalido", "Escribe entre 3 y 1000 caracteres.");
+  if (tipo === "asignado" && !estaAbierto(reporte)) throw new ReglaDeNegocioError("reporte_cerrado", "Sólo puedes asignar reportes abiertos.");
+  return conEvento(reporte, {
+    fecha, tipo, actor: "operador",
+    descripcion: tipo === "asignado" ? `Asignación simulada: ${valor}.` : `Contacto simulado, sin envío: ${valor}`,
+  }, tipo === "asignado" ? { equipoAsignado: valor } : {});
+}

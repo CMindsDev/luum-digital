@@ -1,9 +1,10 @@
 import { LoaderCircle } from "lucide-react";
 import { lazy, Suspense, useCallback, useEffect, useId, useState, useSyncExternalStore, type ReactNode } from "react";
 import { cx } from "@/design-system";
+import type { Coordenadas } from "@/types";
 import { configMapa, TIEMPO_LIMITE_CARGA_MS, VISTA_CIUDAD, type ConfigMapa } from "./config";
 import { LimiteErrorMapa } from "./LimiteErrorMapa";
-import type { ClicMapa, ControlMapa, EstadoCargaMapa, FuenteMapa, MarcadorMapa, VistaMapa } from "./tipos";
+import type { ClicMapa, ControlMapa, EstadoCargaMapa, FuenteMapa, MarcadorMapa, MarcadorContenidoMapa, VistaMapa } from "./tipos";
 
 /** Cada motor vive en su propio fragmento: sólo se descarga el que se usa y sólo al abrir un mapa. */
 const MotorMaplibre = lazy(() => import("./MotorMaplibre"));
@@ -55,8 +56,11 @@ export interface MapaInteractivoProps {
   fuentes?: FuenteMapa[];
   capasInteractivas?: string[];
   marcador?: MarcadorMapa | null;
+  marcadores?: MarcadorContenidoMapa[];
   /** Gestos cooperativos: recomendable cuando el mapa está dentro de un formulario desplazable. */
   cooperativo?: boolean;
+  interaccion?: "normal" | "trazar" | "mover";
+  onPuntero?: (posicion: Coordenadas | null) => void;
   onClic?: (clic: ClicMapa) => void;
   onMovido?: (vista: VistaMapa) => void;
   onEstado?: (estado: EstadoCargaMapa) => void;
@@ -85,8 +89,11 @@ export function MapaInteractivo({
   fuentes = [],
   capasInteractivas = [],
   marcador = null,
+  marcadores,
   cooperativo = false,
   onClic,
+  interaccion = "normal",
+  onPuntero,
   onMovido,
   onEstado,
   onControl,
@@ -162,9 +169,12 @@ export function MapaInteractivo({
                 fuentes={fuentes}
                 capasInteractivas={capasInteractivas}
                 marcador={marcador}
+                marcadores={marcadores}
                 cooperativo={cooperativo}
                 sinAnimacion={sinAnimacion}
                 onClic={onClic}
+                interaccion={interaccion}
+                onPuntero={onPuntero}
                 onMovido={onMovido}
                 onCargado={() => cambiarEstado("listo")}
                 onFallo={(motivoFallo) => {

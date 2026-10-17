@@ -50,6 +50,8 @@ export interface Ubicacion extends Coordenadas {
 export interface EventoReporte {
   fecha: FechaISO;
   tipo:
+    | "asignado"
+    | "contacto_simulado"
     | "creado"
     | "aportacion"
     | "validado"
@@ -102,6 +104,7 @@ export interface Reporte {
   asistencia?: AsistenciaReporte;
   /** Reporte de semilla (datos ficticios iniciales). */
   semilla?: boolean;
+  equipoAsignado?: string;
 }
 
 export interface NuevoReporteInput {

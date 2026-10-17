@@ -13,6 +13,8 @@ import { Timeline, type EventoTimeline, type TonoInsignia } from "@/design-syste
 import type { EventoReporte } from "@/types";
 
 const PRESENTACION: Record<EventoReporte["tipo"], { titulo: string; icono: LucideIcon; tono: TonoInsignia }> = {
+  asignado: { titulo: "Equipo asignado (simulado)", icono: Inbox, tono: "info" },
+  contacto_simulado: { titulo: "Contacto simulado", icono: MessageSquarePlus, tono: "azul" },
   creado: { titulo: "Registrado", icono: Inbox, tono: "neutro" },
   aportacion: { titulo: "Aportación de información", icono: MessageSquarePlus, tono: "azul" },
   validado: { titulo: "En proceso de atención", icono: Clock, tono: "info" },

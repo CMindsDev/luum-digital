@@ -82,6 +82,7 @@ export interface ReportRepository {
   create(input: NuevoReporteInput, actor: IdentidadDemo): Promise<Reporte>;
   /** "Es el mismo incidente: aportar información". No crea reporte ni puntos. */
   addContribution(reporteId: string, input: { descripcion: string; tieneFoto: boolean }, actor: IdentidadDemo): Promise<Reporte>;
+  followUp(reporteId: string, tipo: "asignado" | "contacto_simulado", texto: string, actor: IdentidadDemo): Promise<Reporte>;
   // --- Operador de demostración ---
   /** registrado -> en_proceso; aprueba el movimiento pendiente del reporte. */
   validate(reporteId: string, actor: IdentidadDemo): Promise<Reporte>;

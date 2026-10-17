@@ -17,17 +17,18 @@ export interface VistaMapa {
 
 /** GeoJSON mínimo que usa el prototipo (puntos y polígonos). */
 export type GeometriaPunto = { type: "Point"; coordinates: [number, number] };
+export type GeometriaLinea = { type: "LineString"; coordinates: [number, number][] };
 export type GeometriaPoligono = { type: "Polygon"; coordinates: [number, number][][] };
 export type PropiedadesGeo = Record<string, string | number | boolean | null>;
 
-export type ElementoGeo<G extends GeometriaPunto | GeometriaPoligono = GeometriaPunto | GeometriaPoligono, P extends PropiedadesGeo = PropiedadesGeo> = {
+export type ElementoGeo<G extends GeometriaPunto | GeometriaPoligono | GeometriaLinea = GeometriaPunto | GeometriaPoligono | GeometriaLinea, P extends PropiedadesGeo = PropiedadesGeo> = {
   type: "Feature";
   id?: string | number;
   geometry: G;
   properties: P;
 };
 
-export type ColeccionGeo<G extends GeometriaPunto | GeometriaPoligono = GeometriaPunto | GeometriaPoligono, P extends PropiedadesGeo = PropiedadesGeo> = {
+export type ColeccionGeo<G extends GeometriaPunto | GeometriaPoligono | GeometriaLinea = GeometriaPunto | GeometriaPoligono | GeometriaLinea, P extends PropiedadesGeo = PropiedadesGeo> = {
   type: "FeatureCollection";
   features: ElementoGeo<G, P>[];
 };
@@ -124,6 +125,16 @@ export interface FuenteMapa {
   capas: EspecCapa[];
 }
 
+export interface MarcadorContenidoMapa {
+  id: string;
+  posicion: Coordenadas;
+  contenido: ReactNode;
+  arrastrable?: boolean;
+  onArrastrado?: (posicion: Coordenadas) => void;
+  onArrastrando?: (posicion: Coordenadas) => void;
+  onArrastreIniciado?: () => void;
+}
+
 export interface MarcadorMapa {
   posicion: Coordenadas;
   etiqueta: string;
@@ -165,10 +176,13 @@ export interface PropsMotorMapa {
   /** Ids de capas que responden a clic y cambian el cursor. */
   capasInteractivas: string[];
   marcador?: MarcadorMapa | null;
+  marcadores?: MarcadorContenidoMapa[];
   /** Gestos cooperativos (dos dedos en móvil, Ctrl + rueda en escritorio) para mapas dentro de formularios. */
   cooperativo: boolean;
   /** Sin animaciones de cámara (prefers-reduced-motion). */
   sinAnimacion: boolean;
+  interaccion?: "normal" | "trazar" | "mover";
+  onPuntero?: (posicion: Coordenadas | null) => void;
   onClic?: (clic: ClicMapa) => void;
   onMovido?: (vista: VistaMapa) => void;
   onCargado: () => void;

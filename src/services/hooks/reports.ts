@@ -2,12 +2,13 @@ import { keepPreviousData, useMutation, useQuery } from "@tanstack/react-query";
 import type { CategoriaReporte, FiltroReportes, MotivoCancelacion, NuevoReporteInput, Ubicacion } from "@/types";
 import { CLAVES, invalidar, useContextoServicios } from "./comun";
 
-export function useReports(filtro: FiltroReportes = {}) {
+export function useReports(filtro: FiltroReportes = {}, enVivo = false) {
   const { repos } = useContextoServicios();
   return useQuery({
     queryKey: [CLAVES.reportes, "lista", filtro],
     queryFn: () => repos.reports.list(filtro),
     placeholderData: keepPreviousData,
+    refetchInterval: enVivo ? 15_000 : false,
   });
 }
 
@@ -83,6 +84,15 @@ export function useCancelReport() {
   const { repos, actor, cliente } = useContextoServicios();
   return useMutation({
     mutationFn: (input: { reporteId: string; motivo: MotivoCancelacion }) => repos.reports.cancel(input.reporteId, input.motivo, actor),
+    onSuccess: () => invalidar(cliente, ...AFECTADAS),
+  });
+}
+
+
+export function useReportFollowUp() {
+  const { repos, actor, cliente } = useContextoServicios();
+  return useMutation({
+    mutationFn: (input: { reporteId: string; tipo: "asignado" | "contacto_simulado"; texto: string }) => repos.reports.followUp(input.reporteId, input.tipo, input.texto, actor),
     onSuccess: () => invalidar(cliente, ...AFECTADAS),
   });
 }

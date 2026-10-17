@@ -1,5 +1,5 @@
 import { Suspense, useLayoutEffect, useRef, type RefObject } from "react";
-import { Outlet, ScrollRestoration } from "react-router";
+import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { useSinConexion } from "@/app/hooks/useSinConexion";
 import { DemoRibbon, LoadingState, OfflineNotice, SkipLink, Toaster } from "@/design-system";
 import { AssistantMount } from "@/features/assistant/AssistantMount";
@@ -33,6 +33,19 @@ export function AppShell() {
   const encabezadoRef = useRef<HTMLElement>(null);
   const sinConexion = useSinConexion();
   useAlturaEncabezado(encabezadoRef);
+  const panelOperador = useLocation().pathname === "/operador";
+
+  if (panelOperador) return (
+    <div className="h-dvh overflow-hidden bg-fondo text-tinta flex flex-col">
+      <SkipLink />
+      <DemoRibbon />
+      <main id="contenido" tabIndex={-1} className="relative min-h-0 flex-1 outline-none">
+        {sinConexion ? <OfflineNotice /> : null}
+        <Suspense fallback={<LoadingState etiqueta="Abriendo centro de operaciones…" />}><Outlet /></Suspense>
+      </main>
+      <Toaster /><RouteAnnouncer />
+    </div>
+  );
 
   return (
     <div className="min-h-dvh bg-fondo text-tinta">

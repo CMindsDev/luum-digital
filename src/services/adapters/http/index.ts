@@ -47,6 +47,7 @@ const reports: ReportRepository = {
   findPossibleDuplicates: noDisponible("ReportRepository.findPossibleDuplicates"),
   create: noDisponible("ReportRepository.create"),
   addContribution: noDisponible("ReportRepository.addContribution"),
+  followUp: noDisponible("ReportRepository.followUp"),
   validate: noDisponible("ReportRepository.validate"),
   registerAttention: noDisponible("ReportRepository.registerAttention"),
   cancel: noDisponible("ReportRepository.cancel"),

@@ -7,6 +7,7 @@
 export const TOKENS_MAPA = [
   "marino",
   "azul",
+  "peligro",
   "azul-suave",
   "ambar",
   "ambar-suave",

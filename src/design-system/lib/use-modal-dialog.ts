@@ -98,7 +98,8 @@ export function useModalDialog({ abierto, onCerrar, enfocarAlAbrir, cerrarAlToca
     };
     // Cierre por otros medios (p. ej. <form method="dialog">): sincroniza el estado.
     const alCerrar = () => {
-      if (abiertoRef.current) onCerrarRef.current();
+      // Un close pendiente del cleanup de StrictMode no debe cerrar un diálogo reabierto.
+      if (abiertoRef.current && !dialogo.open) onCerrarRef.current();
     };
     dialogo.addEventListener("cancel", alCancelar);
     dialogo.addEventListener("close", alCerrar);

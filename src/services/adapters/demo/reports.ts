@@ -10,6 +10,7 @@ import {
   NOMBRE_CATEGORIA_REPORTE,
   ordenarPorFecha,
   registrarAtencion,
+  registrarSeguimiento,
   validarReporte,
 } from "@/domain/reportes";
 import { aportacionSchema, nuevoReporteSchema } from "@/domain/validaciones";
@@ -119,6 +120,12 @@ export function crearReportesDemo(contexto: ContextoDemo): ReportRepository {
         }
         // Una aportación nunca crea reporte ni puntos (evita premiar duplicados).
         return guardarReporte(actualizado);
+      }),
+
+    followUp: (reporteId, tipo, texto, actor) =>
+      operacionDemo(contexto, "reports", "mutacion", () => {
+        exigirOperador(actor);
+        return guardarReporte(registrarSeguimiento(obtener(reporteId), tipo, texto, ahoraIso()));
       }),
 
     validate: (reporteId, actor) =>
