@@ -3,6 +3,7 @@ import { routes as accountRoutes } from "@/features/account/routes";
 import { routes as demoOperatorRoutes } from "@/features/demo-operator/routes";
 import { routes as digitalFileRoutes } from "@/features/digital-file/routes";
 import { routes as homeRoutes } from "@/features/home/routes";
+import { routes as legalRoutes } from "@/features/legal/routes";
 import { routes as mapRoutes } from "@/features/map/routes";
 import { routes as mentalHealthRoutes } from "@/features/mental-health/routes";
 import { routes as notificationsRoutes } from "@/features/notifications/routes";
@@ -20,6 +21,7 @@ import { PaginaNoEncontrada } from "./shell/PaginaNoEncontrada";
 /** Rutas de los módulos, relativas al layout del AppShell (cada módulo carga en diferido). */
 export const rutasDeModulos: RouteObject[] = [
   ...homeRoutes,
+  ...legalRoutes,
   ...servicesRoutes,
   ...proceduresRoutes,
   ...notificationsRoutes,

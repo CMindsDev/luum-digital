@@ -10,6 +10,8 @@ import { test as base, expect } from "@playwright/test";
  * - Service workers bloqueados por omisión (la prueba de PWA puede usar test.use({ serviceWorkers: "allow" })).
  */
 export interface OpcionesE2E {
+  /** Los recorridos ajenos a privacidad empiezan con el aviso ya leído. */
+  avisoCookiesAtendido: boolean;
   /** Mensajes de consola tolerados en una prueba concreta (usar con moderación y explicar por qué). */
   erroresPermitidos: RegExp[];
 }
@@ -22,9 +24,10 @@ const HOSTS_LOCALES = new Set(["localhost", "127.0.0.1", "[::1]"]);
 
 export const test = base.extend<FixturesE2E & OpcionesE2E>({
   serviceWorkers: "block",
+  avisoCookiesAtendido: [true, { option: true }],
   erroresPermitidos: [[], { option: true }],
   erroresDeConsola: [
-    async ({ page, erroresPermitidos }, use) => {
+    async ({ page, erroresPermitidos, avisoCookiesAtendido }, use) => {
     const errores: string[] = [];
     const permitido = (texto: string) => erroresPermitidos.some((patron) => patron.test(texto));
 
@@ -37,16 +40,17 @@ export const test = base.extend<FixturesE2E & OpcionesE2E>({
       }
     });
 
-    await page.addInitScript(() => {
+    await page.addInitScript((avisoAtendido) => {
       try {
         if (!window.sessionStorage.getItem("__e2e_almacenamiento_limpio")) {
           window.localStorage.clear();
+          if (avisoAtendido) window.localStorage.setItem("luum:aviso-cookies:v1", "leido");
           window.sessionStorage.setItem("__e2e_almacenamiento_limpio", "1");
         }
       } catch {
         // Almacenamiento bloqueado: la app usa memoria.
       }
-    });
+    }, avisoCookiesAtendido);
 
     page.on("console", (mensaje) => {
       if (mensaje.type() !== "error") return;

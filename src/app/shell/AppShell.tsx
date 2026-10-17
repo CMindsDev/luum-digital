@@ -4,6 +4,7 @@ import { Outlet, ScrollRestoration, useLocation } from "react-router";
 import { useSinConexion } from "@/app/hooks/useSinConexion";
 import { DemoRibbon, LoadingState, OfflineNotice, SkipLink, Toaster } from "@/design-system";
 import { AssistantMount } from "@/features/assistant/AssistantMount";
+import { LegalFooter } from "@/features/legal/components/LegalFooter";
 import { AvisoTraduccion } from "./AvisoTraduccion";
 import { BottomNav } from "./BottomNav";
 import { Header } from "./Header";
@@ -51,6 +52,7 @@ export function AppShell() {
         {sinConexion ? <OfflineNotice /> : null}
       <Suspense fallback={<LoadingState etiqueta={t("Abriendo centro de operaciones…")} />}><Outlet /></Suspense>
       </main>
+      <div className="px-4"><LegalFooter compacto /></div>
       <Toaster /><RouteAnnouncer />
     </div>
   );
@@ -66,14 +68,19 @@ export function AppShell() {
 
       <div className="flex w-full">
         <SideNav />
-        <main id="contenido" tabIndex={-1} className="@container/pagina min-w-0 flex-1 outline-none">
-          <div className="mx-auto w-full max-w-6xl px-4 pt-5 pb-[calc(var(--altura-nav-inferior)+var(--espacio-asistente)+2.5rem)] sm:px-6 sm:pt-6 lg:px-10 lg:pt-8">
-            {sinConexion ? <OfflineNotice className="mb-5" /> : null}
-            <Suspense fallback={<LoadingState etiqueta={t("Cargando sección…")} />}>
-              <Outlet />
-            </Suspense>
+        <div className="min-w-0 flex-1">
+          <main id="contenido" tabIndex={-1} className="@container/pagina min-w-0 flex-1 outline-none">
+            <div className="mx-auto w-full max-w-6xl px-4 pt-5 pb-10 sm:px-6 sm:pt-6 lg:px-10 lg:pt-8">
+              {sinConexion ? <OfflineNotice className="mb-5" /> : null}
+              <Suspense fallback={<LoadingState etiqueta={t("Cargando sección…")} />}>
+                <Outlet />
+              </Suspense>
+            </div>
+          </main>
+          <div className="mx-auto w-full max-w-6xl px-4 pb-[calc(var(--altura-nav-inferior)+var(--espacio-asistente)+2.5rem)] sm:px-6 lg:px-10">
+            <LegalFooter />
           </div>
-        </main>
+        </div>
       </div>
 
       <BottomNav />
