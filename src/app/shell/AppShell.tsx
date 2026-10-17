@@ -57,7 +57,7 @@ export function AppShell() {
 
       <div className="flex w-full">
         <SideNav />
-        <main id="contenido" tabIndex={-1} className="min-w-0 flex-1 outline-none">
+        <main id="contenido" tabIndex={-1} className="@container/pagina min-w-0 flex-1 outline-none">
           <div className="mx-auto w-full max-w-6xl px-4 pt-5 pb-[calc(var(--altura-nav-inferior)+var(--espacio-asistente)+2.5rem)] sm:px-6 sm:pt-6 lg:px-10 lg:pt-8">
             {sinConexion ? <OfflineNotice className="mb-5" /> : null}
             <Suspense fallback={<LoadingState etiqueta="Cargando sección…" />}>

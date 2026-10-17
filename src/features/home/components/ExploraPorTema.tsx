@@ -4,7 +4,7 @@ import { BandaTema } from "./BandaTema";
 
 /**
  * «Explora por tema»: las seis bandas del tablero 32:162 apiladas como en Figma, dentro de un solo
- * contenedor redondeado, y el cierre con el patrón de cadena azul (banda 10, decorativo).
+ * contenedor a todo el ancho del área principal, y el cierre con el patrón de cadena azul.
  */
 export function ExploraPorTema() {
   return (
@@ -12,7 +12,7 @@ export function ExploraPorTema() {
       <SectionLabel id="titulo-temas" className="mb-3">
         Explora por tema
       </SectionLabel>
-      <div className="overflow-hidden rounded-[2rem] bg-crema">
+      <div className="relative left-1/2 w-[100cqw] -translate-x-1/2 overflow-hidden bg-crema">
         {TEMAS_INICIO.map((tema) => (
           <BandaTema key={tema.id} tema={tema} />
         ))}

@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { Link } from "react-router";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { cx } from "@/design-system";
-import type { AlineacionTema, FondoTema, TemaInicio } from "../lib/temas";
+import type { FondoTema, TemaInicio } from "../lib/temas";
 import { FUENTE_MONO_ROTULO, FUENTE_SERIF_ACENTO } from "../lib/tipografia";
 
 /*
@@ -35,13 +35,6 @@ const ESTILO: Record<FondoTema, { fondo: string; texto: string; boton: string; o
   territorio: { fondo: "bg-cafe", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", oscuro: true },
 };
 
-/** En móvil y tableta todo va a la izquierda (el texto alineado a la derecha se lee mal en pantallas angostas). */
-const ALINEACION: Record<AlineacionTema, { columna: string; acciones: string }> = {
-  izquierda: { columna: "items-start text-left", acciones: "justify-start" },
-  derecha: { columna: "items-start text-left @5xl/banda:items-end @5xl/banda:text-right", acciones: "justify-start @5xl/banda:justify-end" },
-  centro: { columna: "items-center text-center", acciones: "justify-center" },
-};
-
 /*
  * Titular a la medida de su columna: cada línea es una unidad (sin saltos dentro de la línea, como en el
  * tablero) y el tamaño es el menor entre el del tablero y el que cabe en la columna (100cqi de la
@@ -68,17 +61,14 @@ export interface BandaTemaProps {
 
 export function BandaTema({ tema }: BandaTemaProps) {
   const estilo = ESTILO[tema.id];
-  const alineacion = ALINEACION[tema.alineacion];
   const centrada = tema.alineacion === "centro";
   const idTitulo = `tema-${tema.id}`;
 
   const foto = (
     <div
       className={cx(
-        "w-full max-w-[26rem] shrink-0",
-        centrada ? "mx-auto" : "@5xl/banda:max-w-[24.7rem]",
-        tema.alineacion === "derecha" && "@5xl/banda:order-first",
-        tema.alineacion === "izquierda" && "@5xl/banda:justify-self-end",
+        "min-w-0 w-full max-w-[26rem] lg:mx-0 lg:justify-self-end",
+        centrada && "mx-auto",
       )}
     >
       <img
@@ -87,7 +77,7 @@ export function BandaTema({ tema }: BandaTemaProps) {
         loading="lazy"
         decoding="async"
         style={tema.posicionFoto ? { objectPosition: tema.posicionFoto } : undefined}
-        className="aspect-[370/400] w-full rounded-[2rem] object-cover @5xl/banda:aspect-[395/427] @5xl/banda:rounded-[3.125rem]"
+        className="aspect-[370/400] w-full rounded-[2rem] object-cover lg:aspect-[395/427] lg:rounded-[3.125rem]"
       />
     </div>
   );
@@ -100,15 +90,11 @@ export function BandaTema({ tema }: BandaTemaProps) {
     >
       <div
         className={cx(
-          "grid gap-10 px-5 pt-10 pb-12 @3xl/banda:px-12 @3xl/banda:pt-14 @3xl/banda:pb-16 @5xl/banda:items-center @5xl/banda:gap-12 @5xl/banda:px-[8.5cqw] @5xl/banda:py-24",
+          "grid gap-10 px-5 pt-10 pb-12 @3xl/banda:px-12 @3xl/banda:pt-14 @3xl/banda:pb-16 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:items-center lg:gap-[clamp(1.5rem,4cqw,4rem)] lg:px-[clamp(1.5rem,5cqw,5rem)] lg:py-20",
           tema.id === "salud" && "pt-14 @3xl/banda:pt-20",
-          tema.alineacion === "izquierda" &&
-            (tema.largo ? "@5xl/banda:grid-cols-[minmax(0,1.8fr)_minmax(0,1fr)]" : "@5xl/banda:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]"),
-          // La foto va primero (a la izquierda): la columna ancha es la segunda.
-          tema.alineacion === "derecha" && "@5xl/banda:grid-cols-[minmax(0,1fr)_minmax(0,1.45fr)]",
         )}
       >
-        <div className={cx("@container/texto flex min-w-0 flex-col", alineacion.columna)} style={metricaTitulo(tema)}>
+        <div className={cx("@container/texto flex min-w-0 flex-col lg:items-start lg:text-left", centrada ? "items-center text-center" : "items-start text-left")} style={metricaTitulo(tema)}>
           <img
             src={tema.icono}
             alt=""
@@ -118,10 +104,7 @@ export function BandaTema({ tema }: BandaTemaProps) {
           />
           <h3
             id={idTitulo}
-            className={cx(
-              "mt-8 w-full font-normal leading-[0.972] tracking-[-0.05em] break-words text-current @5xl/banda:mt-12",
-              tema.alineacion === "derecha" && "@5xl/banda:pr-[0.05em]",
-            )}
+            className="mt-8 w-full font-normal leading-[0.972] tracking-[-0.05em] break-words text-current lg:mt-10"
           >
             <span className="block text-(length:--titulo-sans) whitespace-nowrap">{tema.lineaSans.trim()}</span>{" "}
             <span className={cx("block text-[length:calc(var(--titulo-sans)*1.14)] tracking-[-0.044em] whitespace-nowrap italic", FUENTE_SERIF_ACENTO)}>
@@ -137,7 +120,7 @@ export function BandaTema({ tema }: BandaTemaProps) {
           >
             {tema.descriptor}
           </p>
-          <div className={cx("mt-7 flex flex-wrap gap-3", alineacion.acciones)}>
+          <div className={cx("mt-7 flex flex-wrap gap-3 lg:justify-start", centrada ? "justify-center" : "justify-start")}>
             {tema.enlaces.map((enlace) => (
               <Link
                 key={enlace.ruta}
