@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { createElement, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { CLASES_MOSAICO, ChainPattern, cx, resolverIcono } from "@/design-system";
 import type { Categoria } from "@/types";
@@ -17,6 +18,7 @@ export interface EncabezadoCategoriaProps {
  * Los pares de color vienen de CLASES_MOSAICO (contraste AA calculado en tokens.css).
  */
 export function EncabezadoCategoria({ categoria, rotulo }: EncabezadoCategoriaProps) {
+  const { t } = useTranslation();
   const colores = CLASES_MOSAICO[categoria.tono];
   const [linea1, linea2] = lineasTitulo(categoria.nombre);
   return (
@@ -27,11 +29,11 @@ export function EncabezadoCategoria({ categoria, rotulo }: EncabezadoCategoriaPr
           className="inline-flex min-h-11 w-fit items-center gap-2 rounded-pildora bg-superficie px-4 text-sm font-semibold text-marino no-underline shadow-suave hover:bg-marino-suave"
         >
           <ArrowLeft aria-hidden="true" className="size-4" />
-          Todas las categorías
+          {t("Todas las categorías")}
         </Link>
         {createElement(resolverIcono(categoria.icono), { "aria-hidden": true, className: cx("size-12 sm:size-14", colores.icono), strokeWidth: 1.75 })}
         <div>
-          <p className="font-mono-rotulo text-xs font-medium tracking-[0.12em] uppercase">Categoría del catálogo</p>
+          <p className="font-mono-rotulo text-xs font-medium tracking-[0.12em] uppercase">{t("Categoría del catálogo")}</p>
           <h1 tabIndex={-1} className="mt-1 text-[2.25rem] leading-[0.98] font-semibold tracking-[-0.03em] text-current sm:text-5xl">
             <span className="block">{linea1}</span>{linea2 ? " " : null}
             {linea2 ? <span className="font-serif-acento block font-normal italic">{linea2}</span> : null}

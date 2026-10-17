@@ -1,4 +1,5 @@
 import { Gift, ListChecks } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { ButtonLink, DemoTag, PageHeader } from "@/design-system";
 import { ResumenPuntos } from "@/features/rewards";
 import { ComoFunciona } from "../components/ComoFunciona";
@@ -10,15 +11,16 @@ import { ReportesPorVerificar } from "../components/ReportesPorVerificar";
  * verificaciones y el resumen de puntos (pendientes y aprobados por separado).
  */
 export default function ParticipationPage() {
+  const { t } = useTranslation();
   return (
     <>
       <PageHeader
         destacado
-        antetitulo="Participa"
-        titulo="Participación y recompensas"
-        descripcion="Verifica reparaciones de reportes de otras personas y suma puntos de demostración. Se premia la calidad, no la respuesta positiva."
+        antetitulo={t("Participa")}
+        titulo={t("Participación y recompensas")}
+        descripcion={t("Verifica reparaciones de reportes de otras personas y suma puntos de demostración. Se premia la calidad, no la respuesta positiva.")}
       >
-        <DemoTag>Puntos de demostración</DemoTag>
+        <DemoTag>{t("Puntos de demostración")}</DemoTag>
       </PageHeader>
 
       <div className="flex flex-col gap-8">
@@ -26,10 +28,10 @@ export default function ParticipationPage() {
           acciones={
             <>
               <ButtonLink to="/participacion/recompensas" iconoInicio={Gift} data-guia="participacion.ver_recompensas">
-                Ver recompensas
+                {t("Ver recompensas")}
               </ButtonLink>
               <ButtonLink to="/participacion/reglas" variante="secundario" iconoInicio={ListChecks} data-guia="participacion.ver_reglas">
-                Reglas de puntos
+                {t("Reglas de puntos")}
               </ButtonLink>
             </>
           }

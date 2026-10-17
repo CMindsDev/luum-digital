@@ -1,5 +1,6 @@
 import { ClipboardCheck, History, Inbox } from "lucide-react";
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useActiveIdentity } from "@/app/session/store";
 import { ButtonLink, DemoTag, PageHeader, Tabs } from "@/design-system";
 import { useVerificationsForReview } from "@/services/hooks";
@@ -12,6 +13,7 @@ import type { AccionRegistrada, RegistrarAccion } from "../lib/registro";
 
 /** Vista de operación (sólo operador y administración): cola, revisión de verificaciones y registro. */
 function VistaOperacion() {
+  const { t } = useTranslation();
   const [pestana, setPestana] = useState("cola");
   const [acciones, setAcciones] = useState<AccionRegistrada[]>([]);
   const pendientes = useVerificationsForReview().data?.filter((v) => v.estadoRevision === "pendiente_revision").length;
@@ -25,19 +27,19 @@ function VistaOperacion() {
     <div className="flex flex-col gap-5">
       <AvisoDemostracion />
       <Tabs
-        etiqueta="Secciones de operación"
+        etiqueta={t("Secciones de operación")}
         seleccionada={pestana}
         onCambiar={setPestana}
         pestanas={[
-          { id: "cola", etiqueta: "Cola de reportes", icono: Inbox, contenido: <ColaReportes registrar={registrar} /> },
+          { id: "cola", etiqueta: t("Cola de reportes"), icono: Inbox, contenido: <ColaReportes registrar={registrar} /> },
           {
             id: "verificaciones",
-            etiqueta: "Verificaciones",
+            etiqueta: t("Verificaciones"),
             icono: ClipboardCheck,
             conteo: pendientes,
             contenido: <RevisionVerificaciones registrar={registrar} />,
           },
-          { id: "registro", etiqueta: "Registro", icono: History, conteo: acciones.length, contenido: <RegistroAcciones acciones={acciones} /> },
+          { id: "registro", etiqueta: t("Registro"), icono: History, conteo: acciones.length, contenido: <RegistroAcciones acciones={acciones} /> },
         ]}
       />
     </div>
@@ -49,6 +51,7 @@ function VistaOperacion() {
  * validar, registrar atención, cancelar con motivo y revisión de verificaciones ciudadanas.
  */
 export default function OperatorPage() {
+  const { t } = useTranslation();
   const actor = useActiveIdentity();
   const esOperacion = actor.rol === "operador" || actor.rol === "administracion";
 
@@ -56,14 +59,20 @@ export default function OperatorPage() {
     <>
       <PageHeader
         destacado
-        antetitulo="Demostración"
-        titulo="Operador de demostración"
-        descripcion="Valida reportes, registra la atención y revisa verificaciones ciudadanas. Todo es simulado y se refleja en las pantallas de las personas ficticias."
+        antetitulo={t("Demostración")}
+        titulo={t("Operador de demostración")}
+        descripcion={t("Valida reportes, registra la atención y revisa verificaciones ciudadanas. Todo es simulado y se refleja en las pantallas de las personas ficticias.")}
       >
-        <DemoTag>Sólo demostración</DemoTag>
-        {esOperacion && <ButtonLink to="/operador" variante="secundario">Volver al mapa de operaciones</ButtonLink>}
+        <DemoTag>{t("Sólo demostración")}</DemoTag>
+        {esOperacion ? (
+          <ButtonLink to="/operador" variante="secundario">
+            {t("Volver al mapa de operaciones")}
+          </ButtonLink>
+        ) : null}
       </PageHeader>
-      {esOperacion ? <VistaOperacion /> : (
+      {esOperacion ? (
+        <VistaOperacion />
+      ) : (
         <div className="flex flex-col gap-5">
           <AvisoDemostracion />
           <SinPermisoOperador />

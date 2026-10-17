@@ -1,4 +1,5 @@
 import type { LineaAyuda } from "@/types";
+import { msg } from "@/i18n";
 
 /**
  * Lógica pura de presentación de las líneas de ayuda humana (sin DOM ni datos propios: las líneas
@@ -12,9 +13,9 @@ export type EnfoqueAyuda = "general" | "salud_mental" | "violencia";
 export const NUMERO_EMERGENCIAS = "911";
 
 export const ETIQUETA_AMBITO: Readonly<Record<LineaAyuda["ambito"], string>> = {
-  municipal: "Municipal",
-  estatal: "Estatal",
-  nacional: "Nacional",
+  municipal: msg("Municipal"),
+  estatal: msg("Estatal"),
+  nacional: msg("Nacional"),
 };
 
 export interface GruposLineas {

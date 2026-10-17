@@ -1,10 +1,9 @@
+import { t } from "i18next";
 import type { RepositoriosEjecutor } from "@/features/assistant/runtime";
 import type { LineaAyuda } from "@/types";
 
-const MENSAJE_NO_DISPONIBLE = "Esta consulta no está disponible en el acompañante de bienestar.";
-
 function noDisponible(): Promise<never> {
-  return Promise.reject(new Error(MENSAJE_NO_DISPONIBLE));
+  return Promise.reject(new Error(t("Esta consulta no está disponible en el acompañante de bienestar.")));
 }
 
 /**

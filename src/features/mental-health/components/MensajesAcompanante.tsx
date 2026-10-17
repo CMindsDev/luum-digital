@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
 import type { MensajeConversacion } from "@/features/assistant/runtime";
 
@@ -14,6 +15,7 @@ export interface MensajesAcompananteProps {
  * copia a ningún otro lugar.
  */
 export function MensajesAcompanante({ mensajes, pensando }: MensajesAcompananteProps) {
+  const { t } = useTranslation();
   const finalRef = useRef<HTMLDivElement>(null);
   const cantidad = mensajes.length;
 
@@ -27,14 +29,16 @@ export function MensajesAcompanante({ mensajes, pensando }: MensajesAcompananteP
   return (
     <div
       role="log"
-      aria-label="Conversación con el acompañante de demostración"
+      aria-label={t("Conversación con el acompañante de demostración")}
       aria-live="polite"
       aria-relevant="additions"
       tabIndex={0}
       className="max-h-[26rem] min-h-32 space-y-3 overflow-y-auto rounded-tarjeta border border-borde bg-superficie p-3 sm:p-4"
     >
       {mensajes.length === 0 ? (
-        <p className="py-6 text-center text-sm text-tinta-suave">Aquí aparecerá la conversación. Puedes empezar con una de las opciones o escribir.</p>
+        <p className="py-6 text-center text-sm text-tinta-suave">
+          {t("Aquí aparecerá la conversación. Puedes empezar con una de las opciones o escribir.")}
+        </p>
       ) : null}
       {mensajes.map((mensaje) => {
         const propio = mensaje.rol === "persona";
@@ -46,10 +50,10 @@ export function MensajesAcompanante({ mensajes, pensando }: MensajesAcompananteP
                 propio ? "rounded-br-md bg-marino text-white" : "rounded-bl-md bg-azul-suave text-tinta",
               )}
             >
-              <span className="sr-only">{propio ? "Tú: " : "Acompañante (simulación): "}</span>
+              <span className="sr-only">{propio ? t("Tú: ") : t("Acompañante (simulación): ")}</span>
               {!propio ? (
                 <span aria-hidden="true" className="mb-0.5 block text-xs font-semibold tracking-[0.06em] text-tinta-suave uppercase">
-                  Acompañante · simulación
+                  {t("Acompañante · simulación")}
                 </span>
               ) : null}
               {mensaje.texto}
@@ -61,7 +65,7 @@ export function MensajesAcompanante({ mensajes, pensando }: MensajesAcompananteP
                         <a href={fuente.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-enlace underline underline-offset-2">
                           {fuente.titulo}
                           <ExternalLink aria-hidden="true" className="size-3.5 shrink-0" />
-                          <span className="sr-only">(se abre en otra pestaña)</span>
+                          <span className="sr-only">{t("(se abre en otra pestaña)")}</span>
                         </a>
                       </li>
                     ) : (
@@ -76,7 +80,7 @@ export function MensajesAcompanante({ mensajes, pensando }: MensajesAcompananteP
       })}
       {pensando ? (
         <p role="status" className="text-sm text-tinta-suave">
-          Preparando una respuesta programada…
+          {t("Preparando una respuesta programada…")}
         </p>
       ) : null}
       <div ref={finalRef} />

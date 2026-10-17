@@ -1,5 +1,6 @@
 import { ExternalLink, type LucideIcon } from "lucide-react";
 import type { AnchorHTMLAttributes, ReactNode, Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, type LinkProps } from "react-router";
 import { clasesBoton, type TamanoBoton, type VarianteBoton } from "../lib/button-styles";
 
@@ -29,6 +30,7 @@ function esExterno(props: ButtonLinkProps): props is ButtonLinkExternoProps {
 }
 
 export function ButtonLink(props: ButtonLinkProps) {
+  const { t } = useTranslation();
   if (esExterno(props)) {
     const {
       variante,
@@ -54,7 +56,7 @@ export function ButtonLink(props: ButtonLinkProps) {
         {IconoInicio ? <IconoInicio aria-hidden="true" className="size-[1.15em] shrink-0" /> : null}
         <span>{children}</span>
         <IconoFin aria-hidden="true" className="size-[1.05em] shrink-0" />
-        <span className="sr-only">(se abre en otra pestaña)</span>
+        <span className="sr-only">{t("(se abre en otra pestaña)")}</span>
       </a>
     );
   }

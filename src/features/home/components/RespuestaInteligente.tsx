@@ -1,10 +1,11 @@
 import { ExternalLink } from "lucide-react";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Card, LoadingState, cx, formatearFecha } from "@/design-system";
 import { useBusquedaInteligente } from "@/services/hooks";
-import { SugerenciasBusqueda } from "./SugerenciasBusqueda";
 import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
+import { SugerenciasBusqueda } from "./SugerenciasBusqueda";
 
 const MARCADOR_CITA = /\[(\d+)\]/g;
 const MAXIMO_EXTRACTO = 220;
@@ -31,13 +32,8 @@ function fechaLegible(fecha?: string): string | null {
   return formatearFecha(fecha, "media");
 }
 
-function TextoConFuentes({
-  respuesta,
-  numerosDisponibles,
-}: {
-  respuesta: string;
-  numerosDisponibles: ReadonlySet<number>;
-}) {
+function TextoConFuentes({ respuesta, numerosDisponibles }: { respuesta: string; numerosDisponibles: ReadonlySet<number> }) {
+  const { t } = useTranslation();
   const partes = respuesta.split(/\n+/).filter(Boolean);
 
   const enfocarFuente = (numero: number) => {
@@ -65,7 +61,7 @@ function TextoConFuentes({
                   key={`${indice}-${posicion}`}
                   type="button"
                   onClick={() => enfocarFuente(numero)}
-                  aria-label={`Ir a la fuente ${numero}`}
+                  aria-label={t("Ir a la fuente {{numero}}", { numero })}
                   className="mx-0.5 inline-flex min-h-11 min-w-11 items-center justify-center rounded-pildora border border-borde bg-superficie-2 px-2 text-sm font-semibold text-marino align-middle underline-offset-2 hover:border-azul hover:bg-azul-suave focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lima-logo"
                 >
                   [{numero}]
@@ -80,6 +76,7 @@ function TextoConFuentes({
 }
 
 export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
+  const { t } = useTranslation();
   const busqueda = useBusquedaInteligente(consulta, { habilitada: true });
 
   if (!busqueda.habilitada) return null;
@@ -88,10 +85,10 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
     return (
       <Card as="section" relleno="lg" aria-labelledby="titulo-respuesta-inteligente" aria-live="polite" aria-busy="true" data-guia="busqueda.respuesta">
         <h2 id="titulo-respuesta-inteligente" className="text-xl font-semibold text-marino sm:text-2xl">
-          Respuesta de Pekito
+          {t("Respuesta de Pekito")}
         </h2>
         <div className="mt-4">
-          <LoadingState etiqueta="Buscando información…" variante="compacto" />
+          <LoadingState etiqueta={t("Buscando información…")} variante="compacto" />
           <div className="mt-4 space-y-3" aria-hidden="true">
             <div className="h-4 w-11/12 rounded-pildora bg-superficie-2 motion-safe:animate-pulse" />
             <div className="h-4 w-10/12 rounded-pildora bg-superficie-2 motion-safe:animate-pulse" />
@@ -115,19 +112,17 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
     <Card as="section" relleno="lg" aria-labelledby="titulo-respuesta-inteligente" aria-live="polite" data-guia="busqueda.respuesta">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
-          <p className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>Orientación con fuentes</p>
+          <p className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>{t("Orientación con fuentes")}</p>
           <h2 id="titulo-respuesta-inteligente" className="mt-1 text-xl font-semibold text-marino sm:text-2xl">
-            Respuesta de Pekito
+            {t("Respuesta de Pekito")}
           </h2>
         </div>
-        <p className="text-sm text-tinta-suave">Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial.</p>
+        <p className="text-sm text-tinta-suave">{t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial.")}</p>
       </div>
 
       {mostrarFueraDeAlcance ? (
         <div className="mt-5 space-y-4">
-          <p className="text-[0.9375rem] text-tinta sm:text-base">
-            Eso queda fuera de lo que puedo ayudarte aquí. Prueba con un trámite, una dependencia o un reporte.
-          </p>
+          <p className="text-[0.9375rem] text-tinta sm:text-base">{t("Eso queda fuera de lo que puedo ayudarte aquí. Prueba con un trámite, una dependencia o un reporte.")}</p>
           <SugerenciasBusqueda titulo="Prueba con" nivel={3} />
         </div>
       ) : null}
@@ -141,7 +136,7 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
       {respuesta.citas.length > 0 ? (
         <section className="mt-6 border-t border-borde pt-5" aria-labelledby="titulo-fuentes" data-guia="busqueda.fuentes">
           <h3 id="titulo-fuentes" className="text-lg font-semibold text-marino">
-            Fuentes
+            {t("Fuentes")}
           </h3>
           <ol className="mt-3 space-y-3">
             {respuesta.citas.map((cita) => {
@@ -158,7 +153,7 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
                       <p className="text-sm font-semibold text-marino">
                         [{cita.n}] {cita.titulo}
                       </p>
-                      {fecha ? <p className="mt-1 text-sm text-tinta-suave">Consultada el {fecha}.</p> : null}
+                      {fecha ? <p className="mt-1 text-sm text-tinta-suave">{t("Consultada el {{fecha}}.", { fecha })}</p> : null}
                     </div>
                     <div className="flex min-w-0 flex-col gap-2 text-sm sm:items-end">
                       {cita.url ? (
@@ -169,16 +164,16 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
                           className="inline-flex min-h-11 items-center gap-1 font-medium text-marino underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lima-logo"
                         >
                           <ExternalLink aria-hidden="true" className="size-4 shrink-0" />
-                          Abrir fuente oficial
+                          {t("Abrir fuente oficial")}
                         </a>
                       ) : null}
-                      {cita.url ? <span className="text-xs text-tinta-suave">Se abre en otra pestaña.</span> : null}
+                      {cita.url ? <span className="text-xs text-tinta-suave">{t("Se abre en otra pestaña.")}</span> : null}
                       {cita.ruta ? (
                         <Link
                           to={cita.ruta}
                           className="inline-flex min-h-11 items-center font-medium text-marino underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lima-logo"
                         >
-                          Ver ficha en la app
+                          {t("Ver ficha en la app")}
                         </Link>
                       ) : null}
                     </div>
@@ -193,7 +188,7 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
       {respuesta.pasajes.length > 0 ? (
         <section className="mt-6 border-t border-borde pt-5" aria-labelledby="titulo-relacionada">
           <h3 id="titulo-relacionada" className="text-lg font-semibold text-marino">
-            Información relacionada
+            {t("Información relacionada")}
           </h3>
           <ul className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-3">
             {respuesta.pasajes.slice(0, 3).map((pasaje) => {
@@ -205,14 +200,14 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
                     <p className="mt-2 text-sm leading-6 text-tinta">{resumirTexto(pasaje.texto)}</p>
                     <p className="mt-3 text-sm text-tinta-suave">
                       {pasaje.fuente.titulo}
-                      {fecha ? ` · Consultada el ${fecha}` : ""}
+                      {fecha ? t(" · Consultada el {{fecha}}", { fecha }) : ""}
                     </p>
                     {pasaje.ruta ? (
                       <Link
                         to={pasaje.ruta}
                         className="mt-4 inline-flex min-h-11 items-center font-medium text-marino underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lima-logo"
                       >
-                        Ver ficha en la app
+                        {t("Ver ficha en la app")}
                       </Link>
                     ) : null}
                   </Card>

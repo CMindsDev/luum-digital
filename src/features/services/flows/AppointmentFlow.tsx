@@ -1,36 +1,33 @@
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import type { EscenarioDemo, OpcionCampo } from "@/components/catalogo/datos-demo";
+import { msg } from "@/i18n";
 import { useRequestAppointment } from "@/services/hooks";
-import type { CitaDemo, Servicio } from "@/types";
+import type { CitaDemo } from "@/types";
 import { CargadorEscenario } from "./escenario/CargadorEscenario";
 import { SolicitudSimulada } from "./escenario/SolicitudSimulada";
 import type { FlowProps } from "./tipos";
 
-/** Si la ficha no publica sedes, no se inventan: la sede queda «por confirmar» en la fuente oficial. */
-const SEDE_POR_CONFIRMAR = "Sede por confirmar en la ficha oficial";
-
-function opcionesDeCita(servicio: Servicio, escenario: EscenarioDemo): Record<string, readonly OpcionCampo[]> {
-  const sedes = servicio.canalesDeAtencion
-    .filter((canal) => canal.tipo === "presencial" && canal.verificado)
-    .map((canal) => ({ valor: canal.valor, etiqueta: canal.valor }));
-  return {
-    sede: sedes.length > 0 ? sedes : [{ valor: SEDE_POR_CONFIRMAR, etiqueta: SEDE_POR_CONFIRMAR }],
-    hora: (escenario.horariosEjemplo ?? []).map((hora) => ({ valor: hora, etiqueta: `${hora} h (horario de ejemplo)` })),
-  };
-}
+const SEDE_POR_CONFIRMAR = msg("Sede por confirmar en la ficha oficial");
 
 function texto(valor: unknown): string {
   return typeof valor === "string" ? valor : "";
 }
 
-/**
- * Recorrido «cita»: solicitud de cita SIMULADA con sedes publicadas en la ficha y horarios de
- * ejemplo. Nunca dice «cita confirmada»: nadie recibe la solicitud y no se reserva ningún lugar.
- */
 export function AppointmentFlow({ servicio }: FlowProps) {
+  const { t } = useTranslation();
   const solicitar = useRequestAppointment();
-  // Reintentos tras un error no crean una segunda solicitud con los mismos datos.
   const ultima = useRef<{ clave: string; cita: CitaDemo } | null>(null);
+
+  function opcionesDeCita(escenario: EscenarioDemo): Record<string, readonly OpcionCampo[]> {
+    const sedes = servicio.canalesDeAtencion
+      .filter((canal) => canal.tipo === "presencial" && canal.verificado)
+      .map((canal) => ({ valor: canal.valor, etiqueta: canal.valor }));
+    return {
+      sede: sedes.length > 0 ? sedes : [{ valor: SEDE_POR_CONFIRMAR, etiqueta: t(SEDE_POR_CONFIRMAR) }],
+      hora: (escenario.horariosEjemplo ?? []).map((hora) => ({ valor: hora, etiqueta: t("{{hora}} h (horario de ejemplo)", { hora }) })),
+    };
+  }
 
   return (
     <CargadorEscenario servicio={servicio}>
@@ -39,13 +36,13 @@ export function AppointmentFlow({ servicio }: FlowProps) {
           servicio={servicio}
           escenario={escenario}
           borrador={borrador}
-          opciones={opcionesDeCita(servicio, escenario)}
-          pasos={["Datos y horario", "Revisión", "Solicitud simulada"]}
-          textoEnviar="Enviar solicitud de cita simulada"
+          opciones={opcionesDeCita(escenario)}
+          pasos={[t("Datos y horario"), t("Revisión"), t("Solicitud simulada")]}
+          textoEnviar={t("Enviar solicitud de cita simulada")}
           avisoRevision={
             <>
-              <strong className="font-semibold">No es una cita confirmada.</strong> Es una solicitud de demostración: nadie la recibe y no
-              reserva ningún lugar. Para una cita real, usa los canales oficiales de la ficha.
+              <strong className="font-semibold">{t("No es una cita confirmada.")}</strong>{" "}
+              {t("Es una solicitud de demostración: nadie la recibe y no reserva ningún lugar. Para una cita real, usa los canales oficiales de la ficha.")}
             </>
           }
           prepararEnvio={async (validados) => {

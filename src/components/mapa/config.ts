@@ -1,4 +1,6 @@
+import { t } from "i18next";
 import type { Coordenadas } from "@/types";
+import { msg } from "@/i18n";
 
 /**
  * Configuración del mapa compartida por el Visor Urbano y el selector de ubicación.
@@ -75,7 +77,7 @@ function estiloMapboxValido(valor: unknown): valor is string {
  */
 export function resolverConfigMapa(entorno: EntornoMapa, automatizado = false): ConfigMapa {
   if (automatizado || entorno.MODE === "e2e") {
-    return { motor: "maplibre", tokenMapbox: null, estilo: "", fuentesRotulo: [], proveedor: "Sin mapa base (pruebas)", sinMapaBase: true };
+    return { motor: "maplibre", tokenMapbox: null, estilo: "", fuentesRotulo: [], proveedor: msg("Sin mapa base (pruebas)"), sinMapaBase: true };
   }
   const token = entorno.VITE_MAPBOX_ACCESS_TOKEN?.trim();
   if (esTokenPublicoMapbox(token)) {
@@ -109,27 +111,27 @@ export const configMapa: ConfigMapa = resolverConfigMapa(import.meta.env, navega
 export function textosMapa(etiqueta: string): Record<string, string> {
   return {
     "Map.Title": etiqueta,
-    "Marker.Title": "Marcador del mapa",
-    "NavigationControl.ZoomIn": "Acercar",
-    "NavigationControl.ZoomOut": "Alejar",
-    "NavigationControl.ResetBearing": "Orientar al norte",
-    "AttributionControl.ToggleAttribution": "Mostrar u ocultar la atribución del mapa",
-    "AttributionControl.MapFeedback": "Sugerir una corrección al mapa base",
-    "FullscreenControl.Enter": "Pantalla completa",
-    "FullscreenControl.Exit": "Salir de pantalla completa",
-    "GeolocateControl.FindMyLocation": "Buscar mi ubicación",
-    "GeolocateControl.LocationNotAvailable": "Ubicación no disponible",
-    "LogoControl.Title": "Logotipo del proveedor del mapa",
-    "Popup.Close": "Cerrar",
+    "Marker.Title": t("Marcador del mapa"),
+    "NavigationControl.ZoomIn": t("Acercar"),
+    "NavigationControl.ZoomOut": t("Alejar"),
+    "NavigationControl.ResetBearing": t("Orientar al norte"),
+    "AttributionControl.ToggleAttribution": t("Mostrar u ocultar la atribución del mapa"),
+    "AttributionControl.MapFeedback": t("Sugerir una corrección al mapa base"),
+    "FullscreenControl.Enter": t("Pantalla completa"),
+    "FullscreenControl.Exit": t("Salir de pantalla completa"),
+    "GeolocateControl.FindMyLocation": t("Buscar mi ubicación"),
+    "GeolocateControl.LocationNotAvailable": t("Ubicación no disponible"),
+    "LogoControl.Title": t("Logotipo del proveedor del mapa"),
+    "Popup.Close": t("Cerrar"),
     "ScaleControl.Meters": "m",
     "ScaleControl.Kilometers": "km",
-    "CooperativeGesturesHandler.WindowsHelpText": "Usa Ctrl + rueda del ratón para acercar o alejar el mapa",
-    "CooperativeGesturesHandler.MacHelpText": "Usa ⌘ + rueda del ratón para acercar o alejar el mapa",
-    "CooperativeGesturesHandler.MobileHelpText": "Usa dos dedos para mover el mapa",
+    "CooperativeGesturesHandler.WindowsHelpText": t("Usa Ctrl + rueda del ratón para acercar o alejar el mapa"),
+    "CooperativeGesturesHandler.MacHelpText": t("Usa ⌘ + rueda del ratón para acercar o alejar el mapa"),
+    "CooperativeGesturesHandler.MobileHelpText": t("Usa dos dedos para mover el mapa"),
     // Claves equivalentes de Mapbox GL JS.
-    "ScrollZoomBlocker.CtrlMessage": "Usa Ctrl + rueda del ratón para acercar o alejar el mapa",
-    "ScrollZoomBlocker.CmdMessage": "Usa ⌘ + rueda del ratón para acercar o alejar el mapa",
-    "TouchPanBlocker.Message": "Usa dos dedos para mover el mapa",
+    "ScrollZoomBlocker.CtrlMessage": t("Usa Ctrl + rueda del ratón para acercar o alejar el mapa"),
+    "ScrollZoomBlocker.CmdMessage": t("Usa ⌘ + rueda del ratón para acercar o alejar el mapa"),
+    "TouchPanBlocker.Message": t("Usa dos dedos para mover el mapa"),
   };
 }
 

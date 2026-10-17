@@ -1,4 +1,5 @@
 import { ListChecks, ShieldCheck } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { ButtonLink, DemoTag, PageHeader } from "@/design-system";
 import { BeneficiosDemo } from "../components/BeneficiosDemo";
 import { HistorialMovimientos } from "../components/HistorialMovimientos";
@@ -10,17 +11,18 @@ import { ResumenPuntos } from "../components/ResumenPuntos";
  * (ConfirmDialog, código DEMO-B sin validez, sin saldo negativo) e historial de movimientos.
  */
 export default function RewardsPage() {
+  const { t } = useTranslation();
   return (
     <>
       <PageHeader
-        titulo="Recompensas"
-        antetitulo="Participación"
+        titulo={t("Recompensas")}
+        antetitulo={t("Participación")}
         regresar="/participacion"
-        descripcion="Canjea tus puntos aprobados por beneficios de ejemplo. Todo es simulado: los beneficios y los códigos no tienen valor real."
+        descripcion={t("Canjea tus puntos aprobados por beneficios de ejemplo. Todo es simulado: los beneficios y los códigos no tienen valor real.")}
       >
         <div className="flex flex-wrap gap-2">
-          <DemoTag>Beneficios de ejemplo</DemoTag>
-          <DemoTag>Reglas de demostración</DemoTag>
+          <DemoTag>{t("Beneficios de ejemplo")}</DemoTag>
+          <DemoTag>{t("Reglas de demostración")}</DemoTag>
         </div>
       </PageHeader>
 
@@ -28,7 +30,7 @@ export default function RewardsPage() {
         <ResumenPuntos
           acciones={
             <ButtonLink to="/participacion/reglas" variante="secundario" tamano="sm" iconoInicio={ListChecks} data-guia="recompensas.reglas">
-              Cómo se ganan los puntos
+              {t("Cómo se ganan los puntos")}
             </ButtonLink>
           }
         />
@@ -42,8 +44,9 @@ export default function RewardsPage() {
             <p className="flex items-start gap-2 rounded-tarjeta border border-borde bg-superficie-2 px-4 py-3 text-sm text-tinta">
               <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-marino" />
               <span>
-                En este prototipo el saldo se calcula en tu navegador con datos ficticios. En una integración real, los puntos, la validación y
-                los canjes se controlarían en el servidor.
+                {t(
+                  "En este prototipo el saldo se calcula en tu navegador con datos ficticios. En una integración real, los puntos, la validación y los canjes se controlarían en el servidor.",
+                )}
               </span>
             </p>
           </div>

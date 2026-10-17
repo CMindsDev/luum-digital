@@ -17,12 +17,12 @@ import { PuenteNavegacion } from "./puente-navegacion";
 import { suscribirActuacion } from "./runtime/acting-bus";
 import { crearControladorAsistente, type ControladorAsistente } from "./runtime/controlador";
 import { crearClienteGuardas } from "./runtime/guardas";
+import { i18n, msg } from "@/i18n";
 import { usePekitoUI } from "./ui/estado-pekito";
 
 export type ProveedorElegido = "demo" | "realtime";
 
-export const MOTIVO_SIN_VOZ_PREDETERMINADO =
-  "La voz no está disponible ahora. Puedes escribirme.";
+export const MOTIVO_SIN_VOZ_PREDETERMINADO = msg("La voz no está disponible ahora. Puedes escribirme.");
 
 export interface ServidorPekito {
   /** Ya respondió (o falló) GET /api/asistente/estado. */
@@ -98,6 +98,13 @@ export function useControladorPekito(): Pekito {
       vigente = false;
     };
   }, [controlador, puente]);
+
+  // Al cambiar de idioma se cuelga la sesión (conserva los mensajes): la siguiente abre otra que responde en el idioma nuevo.
+  useEffect(() => {
+    const alCambiar = () => controlador.pausar();
+    i18n.on("languageChanged", alCambiar);
+    return () => i18n.off("languageChanged", alCambiar);
+  }, [controlador]);
 
   // Al desmontar el AppShell se cuelga y se borra la conversación (sólo vive en memoria).
   useEffect(

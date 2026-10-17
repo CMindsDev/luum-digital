@@ -1,17 +1,20 @@
+import { t } from "i18next";
+import { msg } from "@/i18n";
+
 /** Nombre visible del módulo interno al que apunta una ruta del prototipo. */
 const MODULOS: ReadonlyArray<readonly [string, string]> = [
-  ["/bienestar/salud-mental", "Salud mental"],
-  ["/bienestar/linea-mujer", "Línea Mujer"],
-  ["/bienestar", "Bienestar"],
-  ["/reportes", "Reportes"],
-  ["/mapa", "Mapa / Visor Urbano"],
-  ["/expediente", "Mi expediente"],
-  ["/participacion", "Participación y recompensas"],
-  ["/gestiones", "Mis gestiones"],
+  ["/bienestar/salud-mental", msg("Salud mental")],
+  ["/bienestar/linea-mujer", msg("Línea Mujer")],
+  ["/bienestar", msg("Bienestar")],
+  ["/reportes", msg("Reportes")],
+  ["/mapa", msg("Mapa / Visor Urbano")],
+  ["/expediente", msg("Mi expediente")],
+  ["/participacion", msg("Participación y recompensas")],
+  ["/gestiones", msg("Mis gestiones")],
 ];
 
 export function nombreModulo(ruta: string): string {
-  return MODULOS.find(([prefijo]) => ruta === prefijo || ruta.startsWith(`${prefijo}/`))?.[1] ?? "la app";
+  return t(MODULOS.find(([prefijo]) => ruta === prefijo || ruta.startsWith(`${prefijo}/`))?.[1] ?? msg("la app"));
 }
 
 /** true si la ruta interna del servicio vive en otro módulo (no en el catálogo). */

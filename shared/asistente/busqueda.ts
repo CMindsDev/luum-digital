@@ -5,11 +5,14 @@
 import { z } from "zod";
 import { CATEGORIAS_INTENCION, MODOS_GUARDAS } from "./servidor";
 import { PasajeSchema } from "./conocimiento";
+import { IdiomaAsistenteSchema } from "./idioma";
 
 export const LIMITES_BUSQUEDA = { consultaMin: 2, consultaMax: 160, respuestaMax: 1200, citasMax: 6, pasajesMax: 3 } as const;
 
 export const SolicitudBusquedaSchema = z.object({
   consulta: z.string().trim().min(LIMITES_BUSQUEDA.consultaMin).max(LIMITES_BUSQUEDA.consultaMax),
+  /** Idioma de la respuesta redactada (por omisión, español). */
+  idioma: IdiomaAsistenteSchema.optional(),
 });
 export type SolicitudBusqueda = z.infer<typeof SolicitudBusquedaSchema>;
 

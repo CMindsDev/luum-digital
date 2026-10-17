@@ -1,7 +1,8 @@
+import { t } from "i18next";
 import { normalizarTexto } from "@/domain/busqueda";
-import { NOMBRE_CATEGORIA_REPORTE } from "@/domain/reportes";
 import { DESCRIPCION_REPORTE } from "@/domain/validaciones";
 import type { AsistenciaReporte, CategoriaReporte, Ubicacion } from "@/types";
+import { NOMBRE_CATEGORIA_REPORTE_UI } from "./i18n";
 
 /**
  * «Asistencia simulada» del formulario de reporte: reglas locales reproducibles, sin IA.
@@ -56,24 +57,30 @@ export function evaluarFaltantes(datos: DatosAsistencia): Faltante[] {
   const faltantes: Faltante[] = [];
 
   if (descripcion.length < DESCRIPCION_REPORTE.minimo) {
-    faltantes.push({ aspecto: "descripcion", texto: `Describe el problema con al menos ${DESCRIPCION_REPORTE.minimo} caracteres.` });
+    faltantes.push({
+      aspecto: "descripcion",
+      texto: t("Describe el problema con al menos {{minimo}} caracteres.", { minimo: DESCRIPCION_REPORTE.minimo }),
+    });
   } else if (!REFERENCIA_EN_TEXTO.test(normalizarTexto(descripcion)) && datos.categoria !== "recoleccion_basura") {
-    faltantes.push({ aspecto: "descripcion", texto: "Di en qué parte está: esquina, carril, frente a qué lugar…" });
+    faltantes.push({ aspecto: "descripcion", texto: t("Di en qué parte está: esquina, carril, frente a qué lugar…") });
   }
 
   if (!datos.ubicacion) {
-    faltantes.push({ aspecto: "ubicacion", texto: "Falta confirmar la ubicación." });
+    faltantes.push({ aspecto: "ubicacion", texto: t("Falta confirmar la ubicación.") });
   } else {
     if (datos.ubicacion.origen === "manual" && datos.conCruzamientos === false) {
-      faltantes.push({ aspecto: "ubicacion", texto: "Agrega los cruzamientos para ubicarlo mejor." });
+      faltantes.push({ aspecto: "ubicacion", texto: t("Agrega los cruzamientos para ubicarlo mejor.") });
     }
     if (!datos.ubicacion.colonia) {
-      faltantes.push({ aspecto: "ubicacion", texto: "Indica la colonia o comisaría: ayuda a encontrar reportes iguales." });
+      faltantes.push({
+        aspecto: "ubicacion",
+        texto: t("Indica la colonia o comisaría: ayuda a encontrar reportes iguales."),
+      });
     }
   }
 
   if (!datos.tieneFoto) {
-    faltantes.push({ aspecto: "foto", texto: "Si es seguro tomarla, puedes agregar una foto (opcional)." });
+    faltantes.push({ aspecto: "foto", texto: t("Si es seguro tomarla, puedes agregar una foto (opcional).") });
   }
   return faltantes;
 }
@@ -84,12 +91,12 @@ export function generarAsistencia(datos: DatosAsistencia): AsistenciaReporte {
   const faltantes = evaluarFaltantes(datos).map((faltante) => faltante.texto);
 
   const partes: string[] = [];
-  if (datos.categoria) partes.push(NOMBRE_CATEGORIA_REPORTE[datos.categoria]);
+  if (datos.categoria) partes.push(t(NOMBRE_CATEGORIA_REPORTE_UI[datos.categoria]));
   if (descripcion) partes.push(primeraFrase(descripcion));
   let resumen = partes.join(": ");
   if (datos.ubicacion) {
     const lugar = datos.ubicacion.colonia ? `${datos.ubicacion.referencia}, ${datos.ubicacion.colonia}` : datos.ubicacion.referencia;
-    resumen += `${resumen ? ". " : ""}Ubicación: ${lugar}`;
+    resumen = resumen ? t("{{resumen}}. Ubicación: {{lugar}}", { resumen, lugar }) : t("Ubicación: {{lugar}}", { lugar });
   }
   if (resumen) resumen += ".";
 
@@ -103,9 +110,9 @@ export function generarAsistencia(datos: DatosAsistencia): AsistenciaReporte {
 
 /** Texto de coincidencias para la asistencia (el detalle está en el paso «Coincidencias»). */
 export function describirCoincidencias(total: number | null): string {
-  if (total === null) return "Revisaremos si hay reportes iguales abiertos cerca antes de enviar.";
-  if (total === 0) return "No encontramos reportes iguales abiertos cerca (mismo tipo, a 60 m o en la misma calle y colonia).";
+  if (total === null) return t("Revisaremos si hay reportes iguales abiertos cerca antes de enviar.");
+  if (total === 0) return t("No encontramos reportes iguales abiertos cerca (mismo tipo, a 60 m o en la misma calle y colonia).");
   return total === 1
-    ? "Encontramos 1 posible reporte igual cerca. Revísalo para no duplicar."
-    : `Encontramos ${total} posibles reportes iguales cerca. Revísalos para no duplicar.`;
+    ? t("Encontramos 1 posible reporte igual cerca. Revísalo para no duplicar.")
+    : t("Encontramos {{total}} posibles reportes iguales cerca. Revísalos para no duplicar.", { total });
 }

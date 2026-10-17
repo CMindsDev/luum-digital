@@ -15,7 +15,7 @@ export { ButtonLink, type ButtonLinkProps } from "./components/ButtonLink";
 export { Card, type CardProps } from "./components/Card";
 export { ChainPattern, type ChainPatternProps } from "./components/ChainPattern";
 export { ConfirmDialog, type ConfirmDialogProps } from "./components/ConfirmDialog";
-export { DemoRibbon, TEXTO_ROTULO_DEMO, type DemoRibbonProps } from "./components/DemoRibbon";
+export { DemoRibbon, type DemoRibbonProps } from "./components/DemoRibbon";
 export { DemoTag, type DemoTagProps } from "./components/DemoTag";
 export { Dialog, type DialogProps } from "./components/Dialog";
 export { EmptyState, type EmptyStateProps } from "./components/EmptyState";
@@ -58,6 +58,7 @@ export { clasesBoton, clasesBotonIcono, type TamanoBoton, type VarianteBoton } f
 export { unirIds, useCampo } from "./lib/campo";
 export { cx } from "./lib/cx";
 export { describirError, esErrorDefinitivo, type ErrorDescrito, type TipoError } from "./lib/errores";
+export { TEXTO_ROTULO_DEMO } from "./lib/demo-ribbon";
 export * from "./lib/estados";
 export { formatearFecha, formatearFechaHora, type EstiloFecha } from "./lib/fechas";
 export { ICONO_PREDETERMINADO, NOMBRES_ICONOS, resolverIcono } from "./lib/iconos";

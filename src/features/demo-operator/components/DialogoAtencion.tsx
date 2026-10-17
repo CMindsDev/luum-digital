@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { TFunction } from "i18next";
 import { CircleCheck } from "lucide-react";
 import { useId, type FormEvent } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { Button, Dialog, Field, TextArea } from "@/design-system";
 import { useRegisterAttention } from "@/services/hooks";
@@ -9,8 +11,13 @@ import type { Reporte } from "@/types";
 import { ErrorAccion } from "./ErrorAccion";
 
 const MAXIMO_NOTA = 200;
-const esquema = z.object({ nota: z.string().trim().max(MAXIMO_NOTA, `Usa como máximo ${MAXIMO_NOTA} caracteres.`) });
-type Valores = z.infer<typeof esquema>;
+
+const esquemaAtencion = (t: TFunction) =>
+  z.object({
+    nota: z.string().trim().max(MAXIMO_NOTA, t("Usa como máximo {{n}} caracteres.", { n: MAXIMO_NOTA })),
+  });
+
+type Valores = z.infer<ReturnType<typeof esquemaAtencion>>;
 
 export interface DialogoAtencionProps {
   reporte: Reporte | null;
@@ -23,6 +30,7 @@ export interface DialogoAtencionProps {
  * Ayuntamiento, simulada). Abre la verificación ciudadana; no significa que alguien lo comprobó.
  */
 export function DialogoAtencion({ reporte, onCerrar, onHecho }: DialogoAtencionProps) {
+  const { t } = useTranslation();
   const idFormulario = `atencion-${useId().replace(/:/g, "")}`;
   const atender = useRegisterAttention();
   const {
@@ -30,7 +38,7 @@ export function DialogoAtencion({ reporte, onCerrar, onHecho }: DialogoAtencionP
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<Valores>({ resolver: zodResolver(esquema), defaultValues: { nota: "" } });
+  } = useForm<Valores>({ resolver: zodResolver(esquemaAtencion(t)), defaultValues: { nota: "" } });
 
   const cerrar = () => {
     if (atender.isPending) return;
@@ -57,21 +65,35 @@ export function DialogoAtencion({ reporte, onCerrar, onHecho }: DialogoAtencionP
     <Dialog
       abierto={reporte !== null}
       onCerrar={cerrar}
-      titulo={reporte ? `Registrar atención de ${reporte.folio}` : "Registrar atención"}
-      descripcion="El reporte pasará a «Solucionado» (atención reportada). Esto abre la verificación ciudadana; no significa que alguien ya comprobó la reparación."
+      titulo={reporte ? t("Registrar atención de {{folio}}", { folio: reporte.folio }) : t("Registrar atención")}
+      descripcion={t(
+        "El reporte pasará a «Solucionado» (atención reportada). Esto abre la verificación ciudadana; no significa que alguien ya comprobó la reparación.",
+      )}
       acciones={
         <>
           <Button variante="secundario" onClick={cerrar} disabled={atender.isPending}>
-            Cancelar
+            {t("Cancelar")}
           </Button>
-          <Button type="submit" form={idFormulario} variante="exito" iconoInicio={CircleCheck} cargando={isSubmitting || atender.isPending} textoCargando="Registrando…">
-            Registrar atención
+          <Button
+            type="submit"
+            form={idFormulario}
+            variante="exito"
+            iconoInicio={CircleCheck}
+            cargando={isSubmitting || atender.isPending}
+            textoCargando={t("Registrando…")}
+          >
+            {t("Registrar atención")}
           </Button>
         </>
       }
     >
       <form id={idFormulario} onSubmit={alEnviar} noValidate className="flex flex-col gap-4 pb-1">
-        <Field etiqueta="Nota de atención" opcional ayuda="Qué se hizo, en pocas palabras. Es una nota simulada; no escribas datos personales." error={errors.nota?.message}>
+        <Field
+          etiqueta={t("Nota de atención")}
+          opcional
+          ayuda={t("Qué se hizo, en pocas palabras. Es una nota simulada; no escribas datos personales.")}
+          error={errors.nota?.message}
+        >
           <TextArea {...register("nota")} maxLength={MAXIMO_NOTA} rows={3} data-guia="operador.nota_atencion" />
         </Field>
         <ErrorAccion error={atender.error} />

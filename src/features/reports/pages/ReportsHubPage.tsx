@@ -1,4 +1,5 @@
 import { DemoTag, IntegrationBadge, PageHeader } from "@/design-system";
+import { useTranslation } from "react-i18next";
 import { CatalogoReportes } from "../components/hub/CatalogoReportes";
 import { ComoFunciona } from "../components/hub/ComoFunciona";
 import { ReportesRapidos } from "../components/hub/ReportesRapidos";
@@ -6,17 +7,21 @@ import { ResumenMisReportes } from "../components/hub/ResumenMisReportes";
 
 /** /reportes — «Reportes rápidos», «Catálogo de reportes» y «Mis reportes» (estructura de Mérida Móvil). */
 export default function ReportsHubPage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <PageHeader
         destacado
-        antetitulo="Reporta y da seguimiento"
-        titulo="Reportes"
-        descripcion="Avisa de baches, luminarias, rejillas tapadas y más. En este prototipo los reportes se simulan: reciben un folio DEMO y no llegan al Ayuntamiento."
+        antetitulo={t("Reporta y da seguimiento")}
+        titulo={t("Reportes")}
+        descripcion={t(
+          "Avisa de baches, luminarias, rejillas tapadas y más. En este prototipo los reportes se simulan: reciben un folio DEMO y no llegan al Ayuntamiento.",
+        )}
       >
         <div className="flex flex-wrap gap-2">
           <IntegrationBadge estado="simulada" />
-          <DemoTag>Datos ficticios</DemoTag>
+          <DemoTag>{t("Datos ficticios")}</DemoTag>
         </div>
       </PageHeader>
 

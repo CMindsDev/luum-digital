@@ -14,14 +14,15 @@ import {
   Wallet,
   type LucideIcon,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { ButtonLink, cx } from "@/design-system";
 import { extraerFolio } from "@/domain/folios";
 import type { AccionSugerida, IntencionDetectada } from "@/types";
 import { accionesComplementarias, rutaDeAccion, TEXTO_INTENCION, unirAcciones, type TipoIntencion } from "../lib/acciones";
+import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
 import { AyudaRequisitos } from "./AyudaRequisitos";
 import { ConsultaFolio } from "./ConsultaFolio";
-import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
 
 const ICONO_INTENCION: Record<TipoIntencion, LucideIcon> = {
   reportar: Megaphone,
@@ -56,12 +57,12 @@ export interface PanelIntencionProps {
  * pantallas internas. La persona decide; nada se ejecuta solo.
  */
 export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
+  const { t } = useTranslation();
   const tipo = intencion.intencion;
   const texto = TEXTO_INTENCION[tipo];
   const Icono = ICONO_INTENCION[tipo];
   const acciones = unirAcciones(intencion.acciones, accionesComplementarias(tipo));
   const urgente = tipo === "ayuda_inmediata";
-  // Violencia → Línea Mujer primero; riesgo personal → líneas de salud mental primero (siempre tras el 911).
   const enfoque = intencion.acciones.some((accion) => rutaDeAccion(accion).startsWith("/bienestar/linea-mujer")) ? "violencia" : "salud_mental";
 
   return (
@@ -74,7 +75,7 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
         urgente ? "border-peligro/30 bg-peligro-suave" : "border-borde bg-superficie shadow-suave",
       )}
     >
-      <p className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>Lo que entendí</p>
+      <p className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>{t("Lo que entendí")}</p>
       <div className="mt-2 flex items-start gap-3">
         <span
           aria-hidden="true"
@@ -87,9 +88,9 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
         </span>
         <div className="min-w-0">
           <h2 id="titulo-intencion" className="text-xl leading-snug font-semibold text-marino sm:text-2xl">
-            {texto.titulo}
+            {t(texto.titulo)}
           </h2>
-          <p className="mt-1 text-[0.9375rem] text-tinta-suave sm:text-base">{texto.descripcion}</p>
+          <p className="mt-1 text-[0.9375rem] text-tinta-suave sm:text-base">{t(texto.descripcion)}</p>
         </div>
       </div>
 
@@ -101,7 +102,7 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
       ) : null}
 
       {acciones.length > 0 ? (
-        <ul className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap" aria-label="Acciones sugeridas">
+        <ul className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap" aria-label={t("Acciones sugeridas")}>
           {acciones.map((accion, indice) => (
             <li key={rutaDeAccion(accion)} className="min-w-0">
               <ButtonLink
@@ -112,7 +113,7 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
                 data-accion={accion.tipo}
                 className="h-auto w-full py-2.5 text-left sm:w-auto"
               >
-                {accion.etiqueta}
+                {t(accion.etiqueta)}
               </ButtonLink>
             </li>
           ))}
@@ -131,7 +132,7 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
         </div>
       ) : null}
 
-      <p className="mt-5 text-sm text-tinta-suave">Interpretación automática para orientarte dentro de la app. Si no es lo que buscabas, revisa las fichas de abajo o escribe con otras palabras.</p>
+      <p className="mt-5 text-sm text-tinta-suave">{t("Interpretación automática para orientarte dentro de la app. Si no es lo que buscabas, revisa las fichas de abajo o escribe con otras palabras.")}</p>
     </section>
   );
 }

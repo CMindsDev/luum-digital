@@ -1,5 +1,6 @@
 import { ArrowRight, Mail, MapPin, Phone, Smartphone } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Badge, ButtonLink, Card, cx, InfoStatusBadge, SourceNote } from "@/design-system";
 import type { CanalAtencion, ProgramaBienestar, UbicacionServicio } from "@/types";
 import { ETIQUETA_AREA, TONO_AREA } from "./etiquetas";
@@ -28,6 +29,7 @@ function direccionDe(sede: CanalAtencion, ubicaciones: readonly UbicacionServici
  * la fuente, contactos de oficina (texto, no son líneas de crisis), sedes, ficha interna y fuente.
  */
 export function ProgramaBienestarCard({ programa, ubicaciones = [], nivel = 3, nota, guia, children, className }: ProgramaBienestarCardProps) {
+  const { t } = useTranslation();
   const Titulo = nivel === 2 ? "h2" : "h3";
   const contactos = programa.canales.filter((canal) => canal.tipo === "telefono" || canal.tipo === "correo");
   const apps = programa.canales.filter((canal) => canal.tipo === "app");
@@ -36,21 +38,21 @@ export function ProgramaBienestarCard({ programa, ubicaciones = [], nivel = 3, n
   return (
     <Card as="article" className={cx("flex h-full flex-col gap-3", className)}>
       <div className="flex flex-wrap items-center gap-1.5">
-        <Badge tono={TONO_AREA[programa.area]}>{ETIQUETA_AREA[programa.area]}</Badge>
+        <Badge tono={TONO_AREA[programa.area]}>{t(ETIQUETA_AREA[programa.area])}</Badge>
         <InfoStatusBadge estado={programa.estadoDeInformacion} />
       </div>
       <Titulo className="text-lg leading-snug font-semibold text-marino">{programa.nombre}</Titulo>
       <p className="text-[0.9375rem] text-tinta">{programa.descripcion}</p>
       {programa.dirigidoA ? (
         <p className="text-sm text-tinta-suave">
-          <span className="font-semibold text-tinta">A quién se dirige: </span>
+          <span className="font-semibold text-tinta">{t("A quién se dirige:")} </span>
           {programa.dirigidoA}
         </p>
       ) : null}
       {children}
 
       {contactos.length > 0 ? (
-        <ul className="space-y-1.5 text-sm text-tinta" aria-label="Contactos de oficina">
+        <ul className="space-y-1.5 text-sm text-tinta" aria-label={t("Contactos de oficina")}>
           {contactos.map((canal) => {
             const Icono = canal.tipo === "correo" ? Mail : Phone;
             return (
@@ -87,7 +89,7 @@ export function ProgramaBienestarCard({ programa, ubicaciones = [], nivel = 3, n
         <details className="group rounded-control border border-borde bg-superficie-2 px-3 py-2">
           <summary className="flex min-h-11 cursor-pointer items-center gap-2 font-semibold text-marino">
             <MapPin aria-hidden="true" className="size-4 shrink-0" />
-            {sedes.length === 1 ? "Ver la sede" : `Ver las ${sedes.length} sedes`}
+            {sedes.length === 1 ? t("Ver la sede") : t("Ver las {{n}} sedes", { n: sedes.length })}
           </summary>
           <ul className="mt-1 space-y-2 pb-1 text-sm">
             {sedes.map((sede) => {
@@ -107,7 +109,7 @@ export function ProgramaBienestarCard({ programa, ubicaciones = [], nivel = 3, n
 
       {programa.servicioId ? (
         <ButtonLink to={`/servicios/${programa.servicioId}`} variante="fantasma" tamano="sm" iconoFin={ArrowRight} className="self-start" data-guia={guia}>
-          Ver la ficha del servicio
+          {t("Ver la ficha del servicio")}
         </ButtonLink>
       ) : null}
     </Card>

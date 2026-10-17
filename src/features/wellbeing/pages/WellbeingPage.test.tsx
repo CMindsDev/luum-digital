@@ -1,8 +1,9 @@
-import { screen, within } from "@testing-library/react";
+import { act, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { createRepositories } from "@/services/registry";
 import type { Repositories } from "@/services/contracts";
 import { renderWithProviders } from "@/test/renderWithProviders";
+import { cambiarIdioma, i18n } from "@/i18n";
 import WellbeingPage from "./WellbeingPage";
 
 describe("Bienestar", () => {
@@ -13,6 +14,23 @@ describe("Bienestar", () => {
     expect(screen.getByRole("link", { name: /Salud mental/ })).toHaveAttribute("href", "/bienestar/salud-mental");
     expect(screen.getByRole("link", { name: /Línea Mujer/ })).toHaveAttribute("href", "/bienestar/linea-mujer");
     expect(screen.getByRole("button", { name: "Ayuda inmediata" })).toBeInTheDocument();
+  });
+
+  it("traduce también el texto nuevo de la banda de Salud y vuelve a español", async () => {
+    const texto = "Encuentra programas de salud, salud mental, educación, deporte y atención para mujeres. Cada programa indica su fuente oficial.";
+    await cambiarIdioma("yua");
+    try {
+      expect(i18n.language).toBe("yua");
+      expect(i18n.getResource("yua", "translation", texto)).toEqual(expect.any(String));
+      renderWithProviders(<WellbeingPage />);
+      const traduccion = i18n.t(texto);
+      expect(traduccion).not.toBe(texto);
+      expect(screen.getByText(traduccion)).toBeInTheDocument();
+      expect(screen.queryByText(texto)).not.toBeInTheDocument();
+    } finally {
+      await act(() => cambiarIdioma("es"));
+    }
+    expect(screen.getByText(texto)).toBeInTheDocument();
   });
 
   it("filtra los programas por área sin tocar la URL", async () => {

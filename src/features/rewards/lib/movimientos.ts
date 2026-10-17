@@ -1,5 +1,7 @@
 import { CircleCheck, CircleMinus, CircleX, Hourglass, Undo2, type LucideIcon } from "lucide-react";
+import { t } from "i18next";
 import type { TonoInsignia } from "@/design-system";
+import { msg } from "@/i18n";
 import type { EstadoMovimiento, MovimientoPuntos, TipoMovimiento } from "@/types";
 
 /**
@@ -8,18 +10,18 @@ import type { EstadoMovimiento, MovimientoPuntos, TipoMovimiento } from "@/types
  */
 
 export const ETIQUETA_TIPO_MOVIMIENTO: Record<TipoMovimiento, string> = {
-  reporte_validado: "Reporte",
-  verificacion_aprobada: "Verificación",
-  canje: "Canje de ejemplo",
-  reversion: "Reversión",
-  cancelacion: "Cancelación",
+  reporte_validado: msg("Reporte"),
+  verificacion_aprobada: msg("Verificación"),
+  canje: msg("Canje de ejemplo"),
+  reversion: msg("Reversión"),
+  cancelacion: msg("Cancelación"),
 };
 
 export const ETIQUETA_ESTADO_MOVIMIENTO: Record<EstadoMovimiento, string> = {
-  pendiente: "Pendiente de validación",
-  aprobado: "Aprobado",
-  cancelado: "Cancelado: no suma",
-  revertido: "Revertido",
+  pendiente: msg("Pendiente de validación"),
+  aprobado: msg("Aprobado"),
+  cancelado: msg("Cancelado: no suma"),
+  revertido: msg("Revertido"),
 };
 
 export const ICONO_ESTADO_MOVIMIENTO: Record<EstadoMovimiento, LucideIcon> = {
@@ -45,7 +47,7 @@ export function describirEstadoMovimiento(movimiento: Pick<MovimientoPuntos, "es
   icono: LucideIcon;
   tono: TonoInsignia;
 } {
-  if (movimiento.estado === "aprobado" && movimiento.puntos < 0) return { etiqueta: "Descontado", icono: CircleMinus, tono: "neutro" };
+  if (movimiento.estado === "aprobado" && movimiento.puntos < 0) return { etiqueta: msg("Descontado"), icono: CircleMinus, tono: "neutro" };
   return {
     etiqueta: ETIQUETA_ESTADO_MOVIMIENTO[movimiento.estado],
     icono: ICONO_ESTADO_MOVIMIENTO[movimiento.estado],
@@ -68,5 +70,5 @@ export function formatearPuntos(puntos: number): string {
 
 /** «1 punto» / «40 puntos». */
 export function puntosEnTexto(puntos: number): string {
-  return `${formatearPuntos(puntos)} ${Math.abs(puntos) === 1 ? "punto" : "puntos"}`;
+  return Math.abs(puntos) === 1 ? t("{{n}} punto", { n: formatearPuntos(puntos) }) : t("{{n}} puntos", { n: formatearPuntos(puntos) });
 }

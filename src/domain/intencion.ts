@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import type { AccionSugerida, CategoriaReporte, IntencionDetectada, ResultadoBusqueda } from "@/types";
 import { extraerFolio, tipoDeFolio } from "./folios";
 import { normalizarTexto } from "./busqueda";
@@ -90,7 +91,7 @@ function accionesDeResultados(resultados: readonly ResultadoBusqueda[] | undefin
   return (resultados ?? []).slice(0, maximo).map((r) => ({
     tipo: "abrir_servicio",
     servicioId: r.servicio.id,
-    etiqueta: `Abrir «${r.servicio.nombreCiudadano ?? r.servicio.nombre}»`,
+    etiqueta: t("Abrir «{{nombre}}»", { nombre: r.servicio.nombreCiudadano ?? r.servicio.nombre }),
   }));
 }
 
@@ -103,8 +104,8 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "ayuda_inmediata",
       confianza: 0.95,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/bienestar/salud-mental", etiqueta: "Ver ayuda inmediata" },
-        { tipo: "abrir_ruta", ruta: "/bienestar", etiqueta: "Ver opciones de bienestar" },
+        { tipo: "abrir_ruta", ruta: "/bienestar/salud-mental", etiqueta: t("Ver ayuda inmediata") },
+        { tipo: "abrir_ruta", ruta: "/bienestar", etiqueta: t("Ver opciones de bienestar") },
       ],
     };
   }
@@ -113,8 +114,8 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "ayuda_inmediata",
       confianza: 0.9,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/bienestar/linea-mujer", etiqueta: "Abrir Línea Mujer y ayuda inmediata" },
-        { tipo: "abrir_ruta", ruta: "/bienestar", etiqueta: "Ver opciones de bienestar" },
+        { tipo: "abrir_ruta", ruta: "/bienestar/linea-mujer", etiqueta: t("Abrir Línea Mujer y ayuda inmediata") },
+        { tipo: "abrir_ruta", ruta: "/bienestar", etiqueta: t("Ver opciones de bienestar") },
       ],
     };
   }
@@ -125,16 +126,16 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "apoyo_psicologico",
       confianza: 0.9,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/bienestar/salud-mental", etiqueta: "Abrir salud mental (ayuda inmediata visible)" },
+        { tipo: "abrir_ruta", ruta: "/bienestar/salud-mental", etiqueta: t("Abrir salud mental (ayuda inmediata visible)") },
         {
           tipo: "abrir_servicio",
           servicioId: SERVICIOS_APOYO_PSICOLOGICO.apoyoPsicologico,
-          etiqueta: "Ver «Apoyo Psicológico» (centros Alma Nova)",
+          etiqueta: t("Ver «Apoyo Psicológico» (centros Alma Nova)"),
         },
         {
           tipo: "abrir_servicio",
           servicioId: SERVICIOS_APOYO_PSICOLOGICO.atencionPsicologica,
-          etiqueta: "Ver «Atención Psicológica» (módulos de salud)",
+          etiqueta: t("Ver «Atención Psicológica» (módulos de salud)"),
         },
       ],
     };
@@ -148,22 +149,22 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       return {
         intencion: "consultar_folio",
         confianza: 0.95,
-        acciones: [{ tipo: "consultar_gestion", ruta: `/reportes/mis-reportes?folio=${folio}`, etiqueta: `Consultar el reporte ${folio}` }],
+        acciones: [{ tipo: "consultar_gestion", ruta: `/reportes/mis-reportes?folio=${folio}`, etiqueta: t("Consultar el reporte {{folio}}", { folio }) }],
       };
     }
     if (folio && tipo !== null) {
       return {
         intencion: "consultar_folio",
         confianza: 0.95,
-        acciones: [{ tipo: "consultar_gestion", ruta: `/gestiones?folio=${folio}`, etiqueta: `Consultar la gestión ${folio}` }],
+        acciones: [{ tipo: "consultar_gestion", ruta: `/gestiones?folio=${folio}`, etiqueta: t("Consultar la gestión {{folio}}", { folio }) }],
       };
     }
     return {
       intencion: "consultar_folio",
       confianza: 0.85,
       acciones: [
-        { tipo: "consultar_gestion", ruta: "/reportes/mis-reportes", etiqueta: "Consultar mis reportes" },
-        { tipo: "consultar_gestion", ruta: "/gestiones", etiqueta: "Consultar mis gestiones" },
+        { tipo: "consultar_gestion", ruta: "/reportes/mis-reportes", etiqueta: t("Consultar mis reportes") },
+        { tipo: "consultar_gestion", ruta: "/gestiones", etiqueta: t("Consultar mis gestiones") },
       ],
     };
   }
@@ -172,13 +173,13 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
   const categoria = categoriaDeReporte(texto);
   if (VERBOS_REPORTE.test(texto) || categoria !== null) {
     if (categoria) {
-      const nombre = NOMBRE_CATEGORIA_REPORTE[categoria];
+      const nombre = t(NOMBRE_CATEGORIA_REPORTE[categoria]);
       return {
         intencion: "reportar",
         confianza: VERBOS_REPORTE.test(texto) ? 0.9 : 0.75,
         acciones: [
-          { tipo: "abrir_formulario", ruta: `/reportes/nuevo/${categoria}`, etiqueta: `Reportar: ${nombre}` },
-          { tipo: "abrir_mapa", ruta: `/mapa?categoria=${categoria}`, etiqueta: `Ver reportes de ${nombre.toLowerCase()} en el mapa` },
+          { tipo: "abrir_formulario", ruta: `/reportes/nuevo/${categoria}`, etiqueta: t("Reportar: {{nombre}}", { nombre }) },
+          { tipo: "abrir_mapa", ruta: `/mapa?categoria=${categoria}`, etiqueta: t("Ver reportes de {{nombre}} en el mapa", { nombre: nombre.toLowerCase() }) },
         ],
       };
     }
@@ -186,7 +187,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       return {
         intencion: "reportar",
         confianza: 0.6,
-        acciones: [{ tipo: "abrir_ruta", ruta: "/reportes", etiqueta: "Elegir el tipo de reporte" }],
+        acciones: [{ tipo: "abrir_ruta", ruta: "/reportes", etiqueta: t("Elegir el tipo de reporte") }],
       };
     }
   }
@@ -197,7 +198,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       return {
         intencion: "requisitos",
         confianza: 0.9,
-        acciones: [{ tipo: "mostrar_requisitos", servicioId: contexto.servicioActualId, etiqueta: "Ver los requisitos de este trámite" }],
+        acciones: [{ tipo: "mostrar_requisitos", servicioId: contexto.servicioActualId, etiqueta: t("Ver los requisitos de este trámite") }],
       };
     }
     const concretos = (contexto.resultados ?? []).filter((r) => r.puntuacion >= 10).slice(0, 3);
@@ -208,9 +209,9 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
         ...concretos.map<AccionSugerida>((r) => ({
           tipo: "mostrar_requisitos",
           servicioId: r.servicio.id,
-          etiqueta: `Requisitos de «${r.servicio.nombreCiudadano ?? r.servicio.nombre}»`,
+          etiqueta: t("Requisitos de «{{nombre}}»", { nombre: r.servicio.nombreCiudadano ?? r.servicio.nombre }),
         })),
-        { tipo: "abrir_ruta", ruta: "/servicios", etiqueta: "Elige el trámite para ver sus requisitos" },
+        { tipo: "abrir_ruta", ruta: "/servicios", etiqueta: t("Elige el trámite para ver sus requisitos") },
       ],
     };
   }
@@ -221,7 +222,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "negocio",
       confianza: 0.85,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/servicios/categoria/negocios", etiqueta: "Ver trámites para tu negocio" },
+        { tipo: "abrir_ruta", ruta: "/servicios/categoria/negocios", etiqueta: t("Ver trámites para tu negocio") },
         ...accionesDeResultados(contexto.resultados, 2),
       ],
     };
@@ -233,7 +234,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "pago",
       confianza: 0.8,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/servicios/categoria/pagos", etiqueta: "Ver pagos y contribuciones" },
+        { tipo: "abrir_ruta", ruta: "/servicios/categoria/pagos", etiqueta: t("Ver pagos y contribuciones") },
         ...accionesDeResultados(contexto.resultados, 2),
       ],
     };
@@ -245,7 +246,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
       intencion: "cultura",
       confianza: 0.85,
       acciones: [
-        { tipo: "abrir_ruta", ruta: "/servicios/categoria/cultura", etiqueta: "Ver cultura y actividades" },
+        { tipo: "abrir_ruta", ruta: "/servicios/categoria/cultura", etiqueta: t("Ver cultura y actividades") },
         ...accionesDeResultados(contexto.resultados, 2),
       ],
     };
@@ -256,7 +257,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
     return {
       intencion: "expediente",
       confianza: 0.8,
-      acciones: [{ tipo: "abrir_ruta", ruta: "/expediente", etiqueta: "Abrir mi Expediente Digital (ejemplo)" }],
+      acciones: [{ tipo: "abrir_ruta", ruta: "/expediente", etiqueta: t("Abrir mi Expediente Digital (ejemplo)") }],
     };
   }
 
@@ -265,7 +266,7 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
     return {
       intencion: "mapa",
       confianza: 0.75,
-      acciones: [{ tipo: "abrir_mapa", ruta: "/mapa", etiqueta: "Abrir el mapa" }],
+      acciones: [{ tipo: "abrir_mapa", ruta: "/mapa", etiqueta: t("Abrir el mapa") }],
     };
   }
 
@@ -274,6 +275,6 @@ export function detectarIntencion(consulta: string, contexto: ContextoIntencion 
   return {
     intencion: "general",
     confianza: acciones.length > 0 ? 0.5 : 0.2,
-    acciones: acciones.length > 0 ? acciones : [{ tipo: "abrir_ruta", ruta: "/servicios", etiqueta: "Explorar el catálogo" }],
+    acciones: acciones.length > 0 ? acciones : [{ tipo: "abrir_ruta", ruta: "/servicios", etiqueta: t("Explorar el catálogo") }],
   };
 }

@@ -1,5 +1,6 @@
 import { FlaskConical } from "lucide-react";
 import { useId } from "react";
+import { useTranslation } from "react-i18next";
 import { CLASES_MOSAICO, cx, formatearFecha } from "@/design-system";
 import type { DocumentoDemo } from "@/types";
 import { lineasVistaPrevia, MARCA_DOCUMENTO_EJEMPLO, TIPO_DOCUMENTO } from "../lib/documentos";
@@ -17,11 +18,14 @@ const FILAS_MARCA = ["top-[18%]", "top-[48%]", "top-[78%]"] as const;
  * diagonal y el texto de ejemplo. Sin sellos, escudos ni elementos que lo hagan parecer oficial.
  */
 export function VistaPreviaDocumento({ documento, className }: VistaPreviaDocumentoProps) {
+  const { t } = useTranslation();
   const idTitulo = useId();
   const tipo = TIPO_DOCUMENTO[documento.tipo];
   const colores = CLASES_MOSAICO[tipo.tono];
   const Icono = tipo.icono;
   const lineas = lineasVistaPrevia(documento);
+  const marca = t(MARCA_DOCUMENTO_EJEMPLO);
+  const marcaRepetida = `${marca} · ${marca}`;
 
   return (
     <figure
@@ -29,23 +33,23 @@ export function VistaPreviaDocumento({ documento, className }: VistaPreviaDocume
       data-guia="expediente.vista_previa"
       className={cx("relative isolate overflow-hidden rounded-tarjeta border border-borde bg-superficie shadow-elevada", className)}
     >
-      {/* Marca de agua con contenido de pseudoelemento: decorativa y fuera del árbol de accesibilidad. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
         {FILAS_MARCA.map((posicion) => (
           <div
             key={posicion}
             className={cx(
               "absolute -left-1/4 w-[150%] -rotate-18 text-center font-mono-rotulo text-2xl font-semibold tracking-[0.3em] whitespace-nowrap text-ambar/25 sm:text-4xl",
-              "before:content-['DOCUMENTO_DE_EJEMPLO___DOCUMENTO_DE_EJEMPLO']",
               posicion,
             )}
-          />
+          >
+            {marcaRepetida}
+          </div>
         ))}
       </div>
 
       <div className="flex items-center gap-2 bg-ambar px-4 py-2.5 text-cafe sm:px-6">
         <FlaskConical aria-hidden="true" className="size-4 shrink-0" />
-        <p className="font-mono-rotulo text-sm font-semibold tracking-[0.14em] uppercase">{MARCA_DOCUMENTO_EJEMPLO}</p>
+        <p className="font-mono-rotulo text-sm font-semibold tracking-[0.14em] uppercase">{marca}</p>
       </div>
 
       <div className="px-4 py-6 sm:px-8 sm:py-8">
@@ -55,10 +59,10 @@ export function VistaPreviaDocumento({ documento, className }: VistaPreviaDocume
           </span>
           <div className="min-w-0">
             <p id={idTitulo} className="text-lg leading-snug font-semibold break-words text-marino">
-              {documento.titulo}
+              {t(documento.titulo)}
             </p>
             <p className="text-sm text-tinta-suave">
-              Fecha de ejemplo: <time dateTime={documento.fecha}>{formatearFecha(documento.fecha, "media")}</time>
+              {t("Fecha de ejemplo: ")}<time dateTime={documento.fecha}>{formatearFecha(documento.fecha, "media")}</time>
             </p>
           </div>
         </div>
@@ -66,13 +70,13 @@ export function VistaPreviaDocumento({ documento, className }: VistaPreviaDocume
         <ul className="mt-5 flex flex-col gap-2.5 font-mono text-[0.9375rem] text-tinta">
           {lineas.map((linea, indice) => (
             <li key={`${indice}-${linea}`} className="break-words">
-              {linea}
+              {t(linea)}
             </li>
           ))}
         </ul>
 
         <figcaption className="mt-6 rounded-boton border border-ambar bg-ambar-suave px-3 py-2.5 text-sm font-medium text-cafe">
-          Documento ficticio de la demostración. Sin validez oficial: no sirve como identificación, comprobante ni recibo.
+          {t("Documento ficticio de la demostración. Sin validez oficial: no sirve como identificación, comprobante ni recibo.")}
         </figcaption>
       </div>
     </figure>

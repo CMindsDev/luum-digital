@@ -1,10 +1,12 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { cx } from "@/design-system";
+import { msg } from "@/i18n";
 import { destinoDeBusqueda } from "../lib/destino-busqueda";
 import { FUENTE_SERIF_ACENTO } from "../lib/tipografia";
 import { CampoBusqueda } from "./CampoBusqueda";
 
-const ATAJOS = ["Quiero reportar un bache", "Quiero consultar mi folio", "Busco apoyo psicológico"] as const;
+const ATAJOS = [msg("Quiero reportar un bache"), msg("Quiero consultar mi folio"), msg("Busco apoyo psicológico")] as const;
 
 export interface HeroInicioProps {
   nombre: string;
@@ -17,14 +19,16 @@ export interface HeroInicioProps {
  * sobre el degradado el texto marino bajaba a ~2.5:1. El buscador y los atajos llevan superficie propia.
  */
 export function HeroInicio({ nombre }: HeroInicioProps) {
+  const { t } = useTranslation();
+
   return (
     <section aria-labelledby="saludo-inicio" className="flex flex-col gap-4 sm:gap-6">
       <div>
         <h1 id="saludo-inicio" tabIndex={-1} className="text-[2.25rem] leading-[1.02] font-semibold tracking-[-0.03em] text-marino sm:text-5xl lg:text-6xl">
-          Hola, {nombre}
+          {t("Hola, {{nombre}}", { nombre })}
         </h1>
         <p className={cx("mt-1.5 text-[1.625rem] leading-tight text-marino italic sm:text-4xl lg:text-[2.75rem]", FUENTE_SERIF_ACENTO)}>
-          ¿Qué quieres hacer hoy?
+          {t("¿Qué quieres hacer hoy?")}
         </p>
       </div>
 
@@ -37,8 +41,8 @@ export function HeroInicio({ nombre }: HeroInicioProps) {
           className="pointer-events-none absolute right-5 bottom-5 -z-10 h-auto w-16 select-none sm:top-1/2 sm:right-9 sm:bottom-auto sm:w-28 sm:-translate-y-1/2 lg:right-12 lg:w-40"
         />
         <div className="sm:max-w-[calc(100%_-_9rem)] lg:max-w-[min(calc(100%_-_13rem),48rem)]">
-          <CampoBusqueda etiqueta="Describe lo que necesitas" guia="inicio.buscador" />
-          <ul aria-label="Ejemplos de búsqueda" className="mt-4 flex flex-wrap items-center gap-2 pr-20 sm:pr-0">
+          <CampoBusqueda etiqueta={t("Describe lo que necesitas")} guia="inicio.buscador" />
+          <ul aria-label={t("Ejemplos de búsqueda")} className="mt-4 flex flex-wrap items-center gap-2 pr-20 sm:pr-0">
             {ATAJOS.map((atajo) => {
               const destino = destinoDeBusqueda(atajo);
               return (
@@ -48,7 +52,7 @@ export function HeroInicio({ nombre }: HeroInicioProps) {
                     state={destino.state}
                     className="inline-flex min-h-11 items-center rounded-pildora bg-superficie px-4 text-sm font-medium text-marino shadow-suave transition-colors hover:bg-crema"
                   >
-                    {atajo}
+                    {t(atajo)}
                   </Link>
                 </li>
               );

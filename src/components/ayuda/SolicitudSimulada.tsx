@@ -1,4 +1,5 @@
 import { FlaskConical, Info, RotateCcw } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button, Card, cx, DemoTag, ErrorState, formatearFechaHora, IntegrationBadge } from "@/design-system";
 import { useRequestSupportDemo } from "@/services/hooks";
 import type { SolicitudApoyoDemo } from "@/types";
@@ -20,6 +21,7 @@ export interface SolicitudSimuladaProps {
  * no se guarda y nunca afirma que una persona la recibió ni que hay una cita.
  */
 export function SolicitudSimulada({ tipo, titulo, descripcion, atencionReal, nivel = 3, guia, className }: SolicitudSimuladaProps) {
+  const { t } = useTranslation();
   const solicitud = useRequestSupportDemo();
   const Titulo = nivel === 2 ? "h2" : "h3";
   const resultado = solicitud.data;
@@ -27,14 +29,14 @@ export function SolicitudSimulada({ tipo, titulo, descripcion, atencionReal, niv
   return (
     <Card as="section" tono="crema" className={cx("space-y-3", className)}>
       <div className="flex flex-wrap items-center gap-1.5">
-        <DemoTag>Simulación</DemoTag>
+        <DemoTag>{t("Simulación")}</DemoTag>
         <IntegrationBadge estado="simulada" />
       </div>
       <Titulo className="text-lg font-semibold text-marino">{titulo}</Titulo>
       <p className="text-[0.9375rem] text-tinta">{descripcion}</p>
       <p className="flex items-start gap-2 text-sm text-tinta-suave">
         <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
-        <span>No pide datos personales, no envía alertas, ubicación ni mensajes, y no se guarda.</span>
+        <span>{t("No pide datos personales, no envía alertas, ubicación ni mensajes, y no se guarda.")}</span>
       </p>
 
       {!resultado ? (
@@ -43,29 +45,29 @@ export function SolicitudSimulada({ tipo, titulo, descripcion, atencionReal, niv
           iconoInicio={FlaskConical}
           onClick={() => solicitud.mutate(tipo)}
           cargando={solicitud.isPending}
-          textoCargando="Simulando…"
+          textoCargando={t("Simulando…")}
           data-guia={guia}
         >
-          Simular solicitud
+          {t("Simular solicitud")}
         </Button>
       ) : null}
 
       {solicitud.isError ? (
-        <ErrorState nivel={3} error={solicitud.error} titulo="No se pudo simular la solicitud" onReintentar={() => solicitud.mutate(tipo)} />
+        <ErrorState nivel={3} error={solicitud.error} titulo={t("No se pudo simular la solicitud")} onReintentar={() => solicitud.mutate(tipo)} />
       ) : null}
 
       <div role="status" aria-live="polite">
         {resultado ? (
           <div className="space-y-2 rounded-tarjeta border border-ambar bg-ambar-suave px-4 py-3 text-tinta">
-            <p className="font-semibold text-cafe">{resultado.leyenda}.</p>
+            <p className="font-semibold text-cafe">{t("Solicitud simulada: nadie la ha recibido")}.</p>
             <p className="text-sm">
-              Referencia de demostración: <span className="font-mono font-semibold">{resultado.referencia}</span> (no es un folio oficial) ·{" "}
+              {t("Referencia de demostración:")} <span className="font-mono font-semibold">{resultado.referencia}</span> {t("(no es un folio oficial)")} ·{" "}
               {formatearFechaHora(resultado.fecha)}
             </p>
-            <p className="text-sm">No se envió nada: no hay cita, seguimiento ni persona asignada.</p>
+            <p className="text-sm">{t("No se envió nada: no hay cita, seguimiento ni persona asignada.")}</p>
             <p className="text-sm font-medium">{atencionReal}</p>
             <Button variante="fantasma" tamano="sm" iconoInicio={RotateCcw} onClick={() => solicitud.reset()}>
-              Descartar simulación
+              {t("Descartar simulación")}
             </Button>
           </div>
         ) : null}

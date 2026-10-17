@@ -1,4 +1,5 @@
 import { Loader, MessageSquareText, Radio } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
 import type { EtiquetaModo } from "./etiqueta-modo";
 
@@ -13,6 +14,7 @@ const ICONOS = { demo: MessageSquareText, real: Radio, pendiente: Loader } as co
 
 /** Etiqueta breve de estado; se oculta cuando no aporta contexto útil. */
 export function EtiquetaModoPekito({ etiqueta, oscuro = false, className }: EtiquetaModoPekitoProps) {
+  const { t } = useTranslation();
   if (!etiqueta.texto.trim()) return null;
   const Icono = ICONOS[etiqueta.tono];
   return (
@@ -30,8 +32,8 @@ export function EtiquetaModoPekito({ etiqueta, oscuro = false, className }: Etiq
       )}
     >
       <Icono aria-hidden="true" className="size-3.5 shrink-0" />
-      <span className="sr-only">Estado de Pekito: </span>
-      <span className="min-w-0">{etiqueta.texto}</span>
+      <span className="sr-only">{t("Estado de Pekito: ")}</span>
+      <span className="min-w-0">{t(etiqueta.texto)}</span>
     </p>
   );
 }

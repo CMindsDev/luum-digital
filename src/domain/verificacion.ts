@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import type {
   CalidadVerificacion,
   EstadoVerificacionCiudadana,
@@ -6,6 +7,7 @@ import type {
   ResultadoVerificacion,
   Verificacion,
 } from "@/types";
+import { msg } from "@/i18n";
 
 /**
  * Verificación ciudadana (propuesta del prototipo; no existe en Mérida Móvil).
@@ -23,9 +25,9 @@ export type MotivoNoElegible = "no_solucionado" | "reporte_propio" | "ya_verific
 export type Elegibilidad = { elegible: true } | { elegible: false; codigo: MotivoNoElegible; motivo: string };
 
 export const ETIQUETA_RESULTADO: Record<ResultadoVerificacion, string> = {
-  reparacion_completada: "La reparación parece completada",
-  problema_persiste: "El problema persiste",
-  no_puedo_comprobar: "No pude comprobarlo",
+  reparacion_completada: msg("La reparación parece completada"),
+  problema_persiste: msg("El problema persiste"),
+  no_puedo_comprobar: msg("No pude comprobarlo"),
 };
 
 export function evaluarElegibilidad(
@@ -34,17 +36,17 @@ export function evaluarElegibilidad(
   verificaciones: readonly Pick<Verificacion, "reporteId" | "identidadId">[],
 ): Elegibilidad {
   if (reporte.identidadId === identidadId) {
-    return { elegible: false, codigo: "reporte_propio", motivo: "No puedes verificar un reporte que tú hiciste." };
+    return { elegible: false, codigo: "reporte_propio", motivo: t("No puedes verificar un reporte que tú hiciste.") };
   }
   if (reporte.estadoMunicipal !== "solucionado") {
     return {
       elegible: false,
       codigo: "no_solucionado",
-      motivo: "Sólo se pueden verificar reportes con atención reportada por el Ayuntamiento.",
+      motivo: t("Sólo se pueden verificar reportes con atención reportada por el Ayuntamiento."),
     };
   }
   if (verificaciones.some((v) => v.reporteId === reporte.id && v.identidadId === identidadId)) {
-    return { elegible: false, codigo: "ya_verificado", motivo: "Ya enviaste una verificación para este reporte." };
+    return { elegible: false, codigo: "ya_verificado", motivo: t("Ya enviaste una verificación para este reporte.") };
   }
   return { elegible: true };
 }

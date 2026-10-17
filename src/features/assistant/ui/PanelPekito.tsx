@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowLeftRight, Trash2, X } from "lucide-react";
 import { useId, useRef, useState, type RefObject } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { cx, TEXTO_ROTULO_DEMO } from "@/design-system";
 import { useAsistenteStore } from "../runtime/store";
@@ -34,6 +35,7 @@ const CLASE_ICONO_ENCABEZADO =
  * la llamada de voz, con el tema noche del asistente. Escape cierra y el foco vuelve a la mascota.
  */
 export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProps) {
+  const { t } = useTranslation();
   const { controlador, servidor, proveedor, repetirNavegacion } = pekito;
   const navigate = useNavigate();
   const abierto = usePekitoUI((estado) => estado.abierto);
@@ -150,7 +152,7 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
                 <button
                   type="button"
                   onClick={() => usePekitoUI.getState().cambiarVista("lanzador")}
-                  aria-label="Volver a «Por texto o por voz»"
+                  aria-label={t("Volver a «Por texto o por voz»")}
                   data-guia="asistente.volver"
                   className={`${CLASE_ICONO_ENCABEZADO} -ml-2`}
                 >
@@ -170,23 +172,23 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
               <button
                 type="button"
                 onClick={() => usePekitoUI.getState().moverA(lado === "derecha" ? "izquierda" : "derecha")}
-                aria-label={`Mover Pekito al lado ${lado === "derecha" ? "izquierdo" : "derecho"}`}
+                aria-label={lado === "derecha" ? t("Mover Pekito al lado izquierdo") : t("Mover Pekito al lado derecho")}
                 data-guia="asistente.mover"
                 className={CLASE_ICONO_ENCABEZADO}
               >
                 <ArrowLeftRight aria-hidden="true" className="size-5" />
               </button>
               {hayMensajes ? (
-                <button type="button" onClick={borrar} aria-label="Borrar conversación" data-guia="asistente.borrar" className={CLASE_ICONO_ENCABEZADO}>
+                <button type="button" onClick={borrar} aria-label={t("Borrar conversación")} data-guia="asistente.borrar" className={CLASE_ICONO_ENCABEZADO}>
                   <Trash2 aria-hidden="true" className="size-5" />
                 </button>
               ) : null}
-              <button type="button" onClick={cerrar} aria-label="Cerrar Pekito" data-guia="asistente.cerrar" className={`${CLASE_ICONO_ENCABEZADO} -mr-2`}>
+              <button type="button" onClick={cerrar} aria-label={t("Cerrar Pekito")} data-guia="asistente.cerrar" className={`${CLASE_ICONO_ENCABEZADO} -mr-2`}>
                 <X aria-hidden="true" className="size-5" />
               </button>
             </div>
             <EtiquetaModoPekito etiqueta={etiqueta} oscuro className="mt-1" />
-            <p className="pekito-rotulo mt-2 text-[0.6875rem] leading-snug text-(--pk-texto-suave)">{TEXTO_ROTULO_DEMO}</p>
+            <p className="pekito-rotulo mt-2 text-[0.6875rem] leading-snug text-(--pk-texto-suave)">{t(TEXTO_ROTULO_DEMO)}</p>
           </header>
 
           {vista === "lanzador" ? (

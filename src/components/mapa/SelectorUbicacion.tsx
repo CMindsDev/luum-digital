@@ -1,6 +1,8 @@
 import { Crosshair, MapPinned, MapPinOff, RotateCcw } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { Button, cx } from "@/design-system";
+import { msg } from "@/i18n";
 import { LIMITES_MERIDA } from "@/domain/validaciones";
 import type { Coordenadas } from "@/types";
 import { formatearCoordenadas, redondearCoordenadas, VISTA_CIUDAD, ZOOM_COLONIA } from "./config";
@@ -19,6 +21,8 @@ export interface SelectorUbicacionProps {
   className?: string;
 }
 
+const AVISO_FUERA_DE_MERIDA = msg("Ese punto está fuera del municipio de Mérida. Elige un lugar dentro de la ciudad o sus comisarías.");
+
 function dentroDeMerida({ lat, lng }: Coordenadas): boolean {
   return lat >= LIMITES_MERIDA.latMin && lat <= LIMITES_MERIDA.latMax && lng >= LIMITES_MERIDA.lngMin && lng <= LIMITES_MERIDA.lngMax;
 }
@@ -36,6 +40,7 @@ function mismaPosicion(a: Coordenadas | null, b: Coordenadas | null): boolean {
  * No pide la ubicación del dispositivo: eso es una acción explícita del formulario.
  */
 export function SelectorUbicacion({ valor, onCambiar, etiqueta, guia = "ubicacion", className }: SelectorUbicacionProps) {
+  const { t } = useTranslation();
   const idAyuda = useId();
   const idEstado = useId();
   const control = useRef<ControlMapa | null>(null);
@@ -50,7 +55,7 @@ export function SelectorUbicacion({ valor, onCambiar, etiqueta, guia = "ubicacio
   const elegir = useCallback(
     (coordenadas: Coordenadas) => {
       if (!dentroDeMerida(coordenadas)) {
-        setAviso("Ese punto está fuera del municipio de Mérida. Elige un lugar dentro de la ciudad o sus comisarías.");
+        setAviso(AVISO_FUERA_DE_MERIDA);
         return;
       }
       const redondeadas = redondearCoordenadas(coordenadas);
@@ -77,20 +82,19 @@ export function SelectorUbicacion({ valor, onCambiar, etiqueta, guia = "ubicacio
     <fieldset className={cx("min-w-0", className)} data-guia={`${guia}.selector`}>
       <legend className="mb-1 font-semibold text-tinta">{etiqueta}</legend>
       <p id={idAyuda} className="mb-3 text-sm text-tinta-suave">
-        Toca el mapa o arrastra el marcador hasta el punto exacto. Con teclado: enfoca el mapa, muévelo con las flechas y elige
-        «Marcar el centro del mapa».
+        {t("Toca el mapa o arrastra el marcador hasta el punto exacto. Con teclado: enfoca el mapa, muévelo con las flechas y elige «Marcar el centro del mapa».")}
       </p>
 
       <MapaInteractivo
-        etiqueta="Mapa para elegir la ubicación"
-        descripcion="Mapa de Mérida para marcar el lugar del reporte. Si no puedes usarlo, escribe la dirección en el formulario."
+        etiqueta={t("Mapa para elegir la ubicación")}
+        descripcion={t("Mapa de Mérida para marcar el lugar del reporte. Si no puedes usarlo, escribe la dirección en el formulario.")}
         vistaInicial={vistaInicial}
         cooperativo
         marcador={
           valor
             ? {
                 posicion: valor,
-                etiqueta: `Ubicación elegida: ${formatearCoordenadas(valor)}`,
+                etiqueta: t("Ubicación elegida: {{coordenadas}}", { coordenadas: formatearCoordenadas(valor) }),
                 arrastrable: true,
                 onArrastrado: elegir,
               }
@@ -115,14 +119,15 @@ export function SelectorUbicacion({ valor, onCambiar, etiqueta, guia = "ubicacio
           <div role="status" className="flex h-full flex-col justify-center gap-3 bg-aviso-suave p-5">
             <p className="flex items-start gap-2 text-[0.9375rem] text-tinta">
               <MapPinOff aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-aviso" />
-              <span>
-                <strong className="font-semibold">El mapa no está disponible.</strong> {motivo} Puedes seguir con la dirección escrita
-                (calle, cruzamientos y colonia): el formulario no depende del mapa.
-              </span>
+              <Trans
+                i18nKey="<0>El mapa no está disponible.</0> {{motivo}} Puedes seguir con la dirección escrita (calle, cruzamientos y colonia): el formulario no depende del mapa."
+                values={{ motivo }}
+                components={[<strong className="font-semibold" />]}
+              />
             </p>
             <div>
               <Button variante="secundario" tamano="sm" iconoInicio={RotateCcw} onClick={reintentar}>
-                Reintentar el mapa
+                {t("Reintentar el mapa")}
               </Button>
             </div>
           </div>
@@ -140,21 +145,21 @@ export function SelectorUbicacion({ valor, onCambiar, etiqueta, guia = "ubicacio
           aria-describedby={idAyuda}
           data-guia={`${guia}.marcar_centro`}
         >
-          Marcar el centro del mapa
+          {t("Marcar el centro del mapa")}
         </Button>
         <p id={idEstado} aria-live="polite" className="min-w-0 text-sm text-tinta">
           {valor ? (
             <>
-              <span className="font-semibold">Ubicación marcada:</span> <span className="font-mono">{formatearCoordenadas(valor)}</span>
+              <span className="font-semibold">{t("Ubicación marcada:")}</span> <span className="font-mono">{formatearCoordenadas(valor)}</span>
             </>
           ) : (
-            "Aún no marcas un punto en el mapa."
+            t("Aún no marcas un punto en el mapa.")
           )}
         </p>
       </div>
       {aviso ? (
         <p role="alert" className="mt-2 text-sm font-medium text-peligro">
-          {aviso}
+          {t(aviso)}
         </p>
       ) : null}
     </fieldset>

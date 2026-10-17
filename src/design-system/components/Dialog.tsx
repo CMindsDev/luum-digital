@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { useId, useRef, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { useModalDialog } from "../lib/use-modal-dialog";
 import { IconButton } from "./IconButton";
@@ -38,6 +39,7 @@ export function Dialog({
   sinBotonCerrar = false,
   className,
 }: DialogProps) {
+  const { t } = useTranslation();
   const tituloRef = useRef<HTMLHeadingElement>(null);
   const idTitulo = useId();
   const idDescripcion = useId();
@@ -74,7 +76,7 @@ export function Dialog({
                 </div>
               ) : null}
             </div>
-            {sinBotonCerrar ? null : <IconButton etiqueta="Cerrar" icono={X} onClick={onCerrar} className="-mt-1.5 -mr-2" />}
+            {sinBotonCerrar ? null : <IconButton etiqueta={t("Cerrar")} icono={X} onClick={onCerrar} className="-mt-1.5 -mr-2" />}
           </div>
           {children ? <div className="min-h-0 flex-1 overflow-y-auto px-5 pt-4 pb-1 sm:px-6">{children}</div> : null}
           {acciones ? (

@@ -1,4 +1,5 @@
 import { Building2, ExternalLink, Globe, Mail, Phone, Smartphone, type LucideIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { ETIQUETA_TIPO_CANAL } from "@/components/catalogo";
 import { Badge, cx } from "@/design-system";
 import type { CanalAtencion } from "@/types";
@@ -11,7 +12,6 @@ const ICONO_CANAL: Record<CanalAtencion["tipo"], LucideIcon> = {
   app: Smartphone,
 };
 
-/** Número marcable para tel: (sólo dígitos y +). */
 function numeroMarcable(valor: string): string {
   return valor.replace(/[^\d+]/g, "");
 }
@@ -19,6 +19,8 @@ function numeroMarcable(valor: string): string {
 const CLASES_ENLACE = "inline-flex min-h-11 items-center gap-1.5 font-semibold break-words text-enlace underline underline-offset-2";
 
 function AccionCanal({ canal }: { canal: CanalAtencion }) {
+  const { t } = useTranslation();
+
   if (!canal.verificado) {
     return <span className="break-all text-tinta">{canal.valor}</span>;
   }
@@ -27,23 +29,23 @@ function AccionCanal({ canal }: { canal: CanalAtencion }) {
       return (
         <a href={`tel:${numeroMarcable(canal.valor)}`} className={CLASES_ENLACE}>
           <Phone aria-hidden="true" className="size-4 shrink-0" />
-          Llamar al {canal.valor}
+          {t("Llamar al {{valor}}", { valor: canal.valor })}
         </a>
       );
     case "correo":
       return (
         <a href={`mailto:${canal.valor}`} className={CLASES_ENLACE}>
           <Mail aria-hidden="true" className="size-4 shrink-0" />
-          Escribir a {canal.valor}
+          {t("Escribir a {{valor}}", { valor: canal.valor })}
         </a>
       );
     case "en_linea":
     case "app":
       return (
         <a href={canal.valor} target="_blank" rel="noopener noreferrer" className={CLASES_ENLACE}>
-          {canal.tipo === "app" ? "Ver la app oficial" : "Abrir el sitio oficial"}
+          {canal.tipo === "app" ? t("Ver la app oficial") : t("Abrir el sitio oficial")}
           <ExternalLink aria-hidden="true" className="size-4 shrink-0" />
-          <span className="sr-only">(se abre en otra pestaña)</span>
+          <span className="sr-only">{t("(se abre en otra pestaña)")}</span>
         </a>
       );
     case "presencial":
@@ -61,6 +63,8 @@ export interface ListaCanalesProps {
  * (tel:, mailto: o enlace externo que la persona elige abrir); los demás, como texto pendiente.
  */
 export function ListaCanales({ canales, className }: ListaCanalesProps) {
+  const { t } = useTranslation();
+
   return (
     <ul className={cx("divide-y divide-borde", className)}>
       {canales.map((canal, indice) => {
@@ -72,15 +76,15 @@ export function ListaCanales({ canales, className }: ListaCanalesProps) {
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-sm text-tinta-suave">
-                {ETIQUETA_TIPO_CANAL[canal.tipo]} · <span className="font-semibold text-tinta">{canal.etiqueta}</span>
+                {t(ETIQUETA_TIPO_CANAL[canal.tipo])} · <span className="font-semibold text-tinta">{canal.etiqueta}</span>
               </p>
               <div className="mt-0.5">
                 <AccionCanal canal={canal} />
               </div>
-              {canal.horario ? <p className="text-sm text-tinta-suave">Horario publicado: {canal.horario}</p> : null}
+              {canal.horario ? <p className="text-sm text-tinta-suave">{t("Horario publicado: {{horario}}", { horario: canal.horario })}</p> : null}
               {!canal.verificado ? (
                 <Badge tono="aviso" className="mt-1.5">
-                  Pendiente de verificar
+                  {t("Pendiente de verificar")}
                 </Badge>
               ) : null}
             </div>

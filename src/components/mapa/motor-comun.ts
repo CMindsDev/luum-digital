@@ -1,3 +1,4 @@
+import { msg } from "@/i18n";
 import type { ClicMapa, ControlMapa, ObjetoMapa } from "./tipos";
 
 /**
@@ -58,7 +59,7 @@ export function crearControl(mapa: CamaraMinima, sinAnimacion: boolean): Control
 /** Mensaje legible de un error del motor (sin detalles técnicos ni URLs con claves). */
 export function motivoDeFallo(error: unknown): string {
   const mensaje = error instanceof Error ? error.message : "";
-  if (/webgl/i.test(mensaje)) return "Tu navegador no pudo iniciar los gráficos del mapa (WebGL).";
-  if (/style|estilo|fetch|network|load/i.test(mensaje)) return "No se pudo descargar el mapa base.";
-  return "El mapa no respondió como se esperaba.";
+  if (/webgl/i.test(mensaje)) return msg("Tu navegador no pudo iniciar los gráficos del mapa (WebGL).");
+  if (/style|estilo|fetch|network|load/i.test(mensaje)) return msg("No se pudo descargar el mapa base.");
+  return msg("El mapa no respondió como se esperaba.");
 }

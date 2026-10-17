@@ -1,6 +1,8 @@
 import { BadgeCheck, Check, ClipboardList, Eye, EyeOff, Info, Megaphone, Trophy, type LucideIcon } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Badge, Button, ButtonLink, cx, formatearFechaHora } from "@/design-system";
+import { msg } from "@/i18n";
 import type { Notificacion } from "@/types";
 
 const ICONO_TIPO: Record<Notificacion["tipo"], LucideIcon> = {
@@ -12,11 +14,11 @@ const ICONO_TIPO: Record<Notificacion["tipo"], LucideIcon> = {
 };
 
 const ETIQUETA_TIPO: Record<Notificacion["tipo"], string> = {
-  gestion: "Gestión",
-  reporte: "Reporte",
-  verificacion: "Verificación",
-  puntos: "Puntos",
-  sistema: "Sistema",
+  gestion: msg("Gestión"),
+  reporte: msg("Reporte"),
+  verificacion: msg("Verificación"),
+  puntos: msg("Puntos"),
+  sistema: msg("Sistema"),
 };
 
 export interface ItemNotificacionProps {
@@ -31,6 +33,7 @@ export interface ItemNotificacionProps {
 
 /** Notificación con ícono + texto, estado de lectura visible y vista previa discreta para las sensibles. */
 export function ItemNotificacion({ notificacion, discreta, onMarcarLeida, onAbrir, marcando = false }: ItemNotificacionProps) {
+  const { t } = useTranslation();
   const [revelada, setRevelada] = useState(false);
   const Icono = ICONO_TIPO[notificacion.tipo];
   const oculta = discreta && !revelada;
@@ -53,42 +56,35 @@ export function ItemNotificacion({ notificacion, discreta, onMarcarLeida, onAbri
         <div className="flex flex-wrap items-center gap-2">
           {notificacion.leida ? (
             <Badge tono="neutro" icono={Check}>
-              Leída
+              {t("Leída")}
             </Badge>
           ) : (
-            <Badge tono="azul">Sin leer</Badge>
+            <Badge tono="azul">{t("Sin leer")}</Badge>
           )}
           <span className="text-sm text-tinta-suave">
-            {ETIQUETA_TIPO[notificacion.tipo]} · <time dateTime={notificacion.fecha}>{formatearFechaHora(notificacion.fecha)}</time>
+            {t(ETIQUETA_TIPO[notificacion.tipo])} · <time dateTime={notificacion.fecha}>{formatearFechaHora(notificacion.fecha)}</time>
           </span>
         </div>
         <h2 id={idTitulo} className="mt-1.5 text-base font-semibold text-marino">
-          {oculta ? "Aviso con vista previa discreta" : notificacion.titulo}
+          {oculta ? t("Aviso con vista previa discreta") : t(notificacion.titulo)}
         </h2>
-        <p className="mt-0.5 text-[0.9375rem] text-tinta">
-          {oculta ? "El contenido está oculto para proteger tu privacidad en pantallas compartidas." : notificacion.cuerpo}
-        </p>
+        <p className="mt-0.5 text-[0.9375rem] text-tinta">{oculta ? t("El contenido está oculto para proteger tu privacidad en pantallas compartidas.") : t(notificacion.cuerpo)}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {discreta ? (
             <Button variante="fantasma" tamano="sm" iconoInicio={revelada ? EyeOff : Eye} onClick={() => setRevelada((actual) => !actual)} aria-expanded={revelada}>
-              {revelada ? "Ocultar contenido" : "Mostrar contenido"}
+              {revelada ? t("Ocultar contenido") : t("Mostrar contenido")}
             </Button>
           ) : null}
           {notificacion.enlace ? (
-            <ButtonLink
-              to={notificacion.enlace}
-              variante="secundario"
-              tamano="sm"
-              onClick={() => onAbrir(notificacion)}
-            >
-              Abrir
-              <span className="sr-only">: {oculta ? "aviso discreto" : notificacion.titulo}</span>
+            <ButtonLink to={notificacion.enlace} variante="secundario" tamano="sm" onClick={() => onAbrir(notificacion)}>
+              {t("Abrir")}
+              <span className="sr-only">: {oculta ? t("aviso discreto") : t(notificacion.titulo)}</span>
             </ButtonLink>
           ) : null}
           {!notificacion.leida ? (
             <Button variante="fantasma" tamano="sm" iconoInicio={Check} onClick={() => onMarcarLeida(notificacion.id)} disabled={marcando}>
-              Marcar como leída
-              <span className="sr-only">: {oculta ? "aviso discreto" : notificacion.titulo}</span>
+              {t("Marcar como leída")}
+              <span className="sr-only">: {oculta ? t("aviso discreto") : t(notificacion.titulo)}</span>
             </Button>
           ) : null}
         </div>

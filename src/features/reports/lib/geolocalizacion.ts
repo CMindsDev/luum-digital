@@ -1,4 +1,5 @@
 import { LIMITES_MERIDA } from "@/domain/validaciones";
+import { msg } from "@/i18n";
 import type { Coordenadas } from "@/types";
 
 /**
@@ -12,13 +13,15 @@ export type ResultadoUbicacion =
   | { ok: false; motivo: MotivoFalloUbicacion; mensaje: string };
 
 export const MENSAJE_FALLO_UBICACION: Record<MotivoFalloUbicacion, string> = {
-  sin_soporte: "Este navegador no puede compartir tu ubicación. Escribe la dirección o elígela en el mapa.",
-  denegada:
+  sin_soporte: msg("Este navegador no puede compartir tu ubicación. Escribe la dirección o elígela en el mapa."),
+  denegada: msg(
     "No diste permiso para usar tu ubicación (o el navegador lo tiene bloqueado). No pasa nada: escribe la dirección o elígela en el mapa.",
-  no_disponible: "No pudimos obtener tu ubicación en este momento. Escribe la dirección o elígela en el mapa.",
-  tiempo_agotado: "Tu ubicación tardó demasiado en llegar. Escribe la dirección o elígela en el mapa.",
-  fuera_de_merida:
+  ),
+  no_disponible: msg("No pudimos obtener tu ubicación en este momento. Escribe la dirección o elígela en el mapa."),
+  tiempo_agotado: msg("Tu ubicación tardó demasiado en llegar. Escribe la dirección o elígela en el mapa."),
+  fuera_de_merida: msg(
     "Tu ubicación parece estar fuera del municipio de Mérida. Si el problema está en Mérida, escribe la dirección o elígela en el mapa.",
+  ),
 };
 
 export const TIEMPO_MAXIMO_UBICACION_MS = 12_000;

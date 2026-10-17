@@ -16,6 +16,7 @@ import {
   Unplug,
   type LucideIcon,
 } from "lucide-react";
+import { msg } from "@/i18n";
 import type {
   EstadoInformacion,
   EstadoIntegracion,
@@ -31,18 +32,18 @@ import type {
 
 /** Etiquetas de estado municipal para una insignia (Mérida Móvil, «Mis reportes»). */
 export const ETIQUETA_ESTADO_MUNICIPAL: Record<EstadoMunicipal, string> = {
-  registrado: "Registrado",
-  en_proceso: "En proceso de atención",
-  solucionado: "Solucionado",
-  cancelado: "Cancelado",
+  registrado: msg("Registrado"),
+  en_proceso: msg("En proceso de atención"),
+  solucionado: msg("Solucionado"),
+  cancelado: msg("Cancelado"),
 };
 
 /** Etiquetas literales de la lista de estatus de «Mis reportes» de Mérida Móvil (para filtros). */
 export const ETIQUETA_FILTRO_ESTADO_MUNICIPAL: Record<EstadoMunicipal, string> = {
-  registrado: "Registrado",
-  en_proceso: "En proceso de atención",
-  solucionado: "Solucionado",
-  cancelado: "Motivo de cancelación",
+  registrado: msg("Registrado"),
+  en_proceso: msg("En proceso de atención"),
+  solucionado: msg("Solucionado"),
+  cancelado: msg("Motivo de cancelación"),
 };
 
 export const ICONO_ESTADO_MUNICIPAL: Record<EstadoMunicipal, LucideIcon> = {
@@ -53,19 +54,19 @@ export const ICONO_ESTADO_MUNICIPAL: Record<EstadoMunicipal, LucideIcon> = {
 };
 
 export const ETIQUETA_MOTIVO_CANCELACION: Record<MotivoCancelacion, string> = {
-  duplicado: "Duplicado",
-  no_procede: "No procede",
-  fuera_de_competencia: "Fuera de competencia municipal",
-  informacion_insuficiente: "Información insuficiente",
+  duplicado: msg("Duplicado"),
+  no_procede: msg("No procede"),
+  fuera_de_competencia: msg("Fuera de competencia municipal"),
+  informacion_insuficiente: msg("Información insuficiente"),
 };
 
 /** Verificación ciudadana: independiente del estado municipal (un voto nunca cierra un reporte). */
 export const ETIQUETA_VERIFICACION: Record<EstadoVerificacionCiudadana, string> = {
-  no_aplica: "Sin atención que verificar",
-  pendiente: "Verificación pendiente",
-  coincide: "Coincide",
-  discrepancia: "Discrepancia",
-  no_concluyente: "No concluyente",
+  no_aplica: msg("Sin atención que verificar"),
+  pendiente: msg("Verificación pendiente"),
+  coincide: msg("Coincide"),
+  discrepancia: msg("Discrepancia"),
+  no_concluyente: msg("No concluyente"),
 };
 
 export const ICONO_VERIFICACION: Record<EstadoVerificacionCiudadana, LucideIcon> = {
@@ -77,15 +78,15 @@ export const ICONO_VERIFICACION: Record<EstadoVerificacionCiudadana, LucideIcon>
 };
 
 export const ETIQUETA_INFORMACION: Record<EstadoInformacion, string> = {
-  verificada: "Verificada",
-  pendiente: "Pendiente de verificar",
-  demostracion: "Demostración",
+  verificada: msg("Verificada"),
+  pendiente: msg("Pendiente de verificar"),
+  demostracion: msg("Demostración"),
 };
 
 export const DESCRIPCION_INFORMACION: Record<EstadoInformacion, string> = {
-  verificada: "Consultada en una fuente oficial, con enlace y fecha de consulta.",
-  pendiente: "Existe en una fuente oficial, pero faltan datos o no se pudieron contrastar.",
-  demostracion: "Contenido ficticio creado para esta demostración.",
+  verificada: msg("Consultada en una fuente oficial, con enlace y fecha de consulta."),
+  pendiente: msg("Existe en una fuente oficial, pero faltan datos o no se pudieron contrastar."),
+  demostracion: msg("Contenido ficticio creado para esta demostración."),
 };
 
 export const ICONO_INFORMACION: Record<EstadoInformacion, LucideIcon> = {
@@ -95,13 +96,13 @@ export const ICONO_INFORMACION: Record<EstadoInformacion, LucideIcon> = {
 };
 
 export const ETIQUETA_INTEGRACION: Record<EstadoIntegracion, string> = {
-  simulada: "Simulada localmente",
-  conectada: "Conectada y comprobada",
+  simulada: msg("Simulada localmente"),
+  conectada: msg("Conectada y comprobada"),
 };
 
 export const DESCRIPCION_INTEGRACION: Record<EstadoIntegracion, string> = {
-  simulada: "Formularios, folios y estados se simulan en este navegador. No llega a ningún sistema municipal.",
-  conectada: "Conectada a un sistema real y comprobada.",
+  simulada: msg("Formularios, folios y estados se simulan en este navegador. No llega a ningún sistema municipal."),
+  conectada: msg("Conectada a un sistema real y comprobada."),
 };
 
 export const ICONO_INTEGRACION: Record<EstadoIntegracion, LucideIcon> = {

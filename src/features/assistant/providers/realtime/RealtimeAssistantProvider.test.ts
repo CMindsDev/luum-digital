@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { AmbitoAsistente } from "@shared/asistente/acciones";
 import type { EventoAsistente } from "@/services/contracts";
+import { cambiarIdioma } from "@/i18n";
 import { pantallaDe } from "../../runtime/__fixtures__/repositorios";
 import { ErrorAsistente } from "../avisos";
 import { RealtimeAssistantProvider, type SalidaAudio } from "./RealtimeAssistantProvider";
@@ -118,9 +119,10 @@ beforeEach(() => {
   vi.stubGlobal("RTCPeerConnection", PeerFalso);
 });
 
-afterEach(() => {
+afterEach(async () => {
   vi.unstubAllGlobals();
   vi.useRealTimers();
+  await cambiarIdioma("es");
 });
 
 describe("RealtimeAssistantProvider", () => {
@@ -134,7 +136,7 @@ describe("RealtimeAssistantProvider", () => {
     const [ruta, init] = fetchFalso.mock.calls[0] ?? [];
     expect(ruta).toBe("/api/asistente/conexiones");
     const cuerpo: unknown = JSON.parse(String(init?.body));
-    expect(cuerpo).toMatchObject({ ambito: "general", sdp: "v=0\r\no=- oferta", pantalla: { ruta: "/", seccion: "inicio" } });
+    expect(cuerpo).toMatchObject({ ambito: "general", idioma: "es", sdp: "v=0\r\no=- oferta", pantalla: { ruta: "/", seccion: "inicio" } });
     expect(JSON.stringify(cuerpo)).not.toMatch(/sk-|api[_-]?key/i);
     expect(peer.remota).toEqual({ type: "answer", sdp: "v=0\r\no=- respuesta" });
     // Sin AudioContext se negocia un transceptor de audio (nunca se pide el micrófono al conectar).
@@ -144,6 +146,14 @@ describe("RealtimeAssistantProvider", () => {
     sesion.cerrar();
     expect(peer.cerrado).toBe(true);
     expect(fetchFalso).toHaveBeenLastCalledWith("/api/asistente/conexiones/conexion-propia-123456", expect.objectContaining({ method: "DELETE", keepalive: true }));
+  });
+
+  it.each(["general", "bienestar"] as const)("envía el idioma maya al abrir una sesión de %s", async (ambito) => {
+    await cambiarIdioma("yua");
+    const { fetchFalso, sesion } = await conectar({ ambito });
+    const cuerpo: unknown = JSON.parse(String(fetchFalso.mock.calls[0]?.[1]?.body));
+    expect(cuerpo).toMatchObject({ ambito, idioma: "yua" });
+    sesion.cerrar();
   });
 
   it("envía texto como ítem de usuario y pide una respuesta; los deltas y el texto final llegan como eventos", async () => {

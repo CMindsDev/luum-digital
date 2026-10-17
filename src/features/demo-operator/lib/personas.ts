@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { buscarIdentidad } from "@/app/session/store";
 
 /**
@@ -6,5 +7,7 @@ import { buscarIdentidad } from "@/app/session/store";
  */
 export function nombrePersona(identidadId: string): string {
   const identidad = buscarIdentidad(identidadId);
-  return identidad.id === identidadId ? `${identidad.nombre} (identidad ficticia)` : "Persona vecina (ficticia)";
+  return identidad.id === identidadId
+    ? t("{{nombre}} (identidad ficticia)", { nombre: identidad.nombre })
+    : t("Persona vecina (ficticia)");
 }

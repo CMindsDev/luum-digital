@@ -1,4 +1,5 @@
 import { Database } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useCoverage } from "@/services/hooks";
 import { Card, ErrorState, LoadingState, SectionLabel, SourceNote } from "@/design-system";
 
@@ -17,18 +18,19 @@ function porcentaje(parte: number, total: number): number {
  * se verificaron. Nunca afirma que están «todos los servicios» del Ayuntamiento.
  */
 export function PanelCobertura({ totalCatalogo }: PanelCoberturaProps) {
+  const { t } = useTranslation();
   const { data, isPending, isError, error, refetch } = useCoverage();
 
-  if (isPending) return <LoadingState etiqueta="Cargando la cobertura del catálogo…" variante="compacto" />;
+  if (isPending) return <LoadingState etiqueta={t("Cargando la cobertura del catálogo…")} variante="compacto" />;
   if (isError) return <ErrorState error={error} nivel={3} onReintentar={() => void refetch()} />;
 
   const verificadas = porcentaje(data.verificados, data.totalImportado);
   const agregados = totalCatalogo !== undefined ? Math.max(totalCatalogo - data.totalImportado, 0) : null;
   const cifras = [
-    { id: "fuente", valor: data.totalFuente, etiqueta: "Fichas publicadas en la fuente" },
-    { id: "importadas", valor: data.totalImportado, etiqueta: "Fichas importadas" },
-    { id: "verificadas", valor: data.verificados, etiqueta: "Con datos verificados" },
-    { id: "pendientes", valor: data.pendientes, etiqueta: "Pendientes de verificar" },
+    { id: "fuente", valor: data.totalFuente, etiqueta: t("Fichas publicadas en la fuente") },
+    { id: "importadas", valor: data.totalImportado, etiqueta: t("Fichas importadas") },
+    { id: "verificadas", valor: data.verificados, etiqueta: t("Con datos verificados") },
+    { id: "pendientes", valor: data.pendientes, etiqueta: t("Pendientes de verificar") },
   ];
 
   return (
@@ -38,13 +40,12 @@ export function PanelCobertura({ totalCatalogo }: PanelCoberturaProps) {
           <Database className="size-5" />
         </span>
         <div className="min-w-0">
-          <SectionLabel as="p">Cobertura del catálogo</SectionLabel>
+          <SectionLabel as="p">{t("Cobertura del catálogo")}</SectionLabel>
           <h2 id="titulo-cobertura" className="mt-0.5 text-lg font-semibold text-marino">
-            ¿Qué tan completo está este catálogo?
+            {t("¿Qué tan completo está este catálogo?")}
           </h2>
           <p className="mt-1 max-w-prose text-[0.9375rem] text-tinta-suave">
-            Reúne las fichas que publicaba la fuente oficial en la fecha de consulta. No es la lista de todos los servicios del
-            Ayuntamiento: una ficha puede faltar o cambiar.
+            {t("Reúne las fichas que publicaba la fuente oficial en la fecha de consulta. No es la lista de todos los servicios del Ayuntamiento: una ficha puede faltar o cambiar.")}
           </p>
         </div>
       </div>
@@ -60,7 +61,7 @@ export function PanelCobertura({ totalCatalogo }: PanelCoberturaProps) {
 
       <div className="mt-5">
         <p id="medidor-verificadas" className="text-sm font-semibold text-tinta">
-          {verificadas} % de las fichas importadas tiene datos verificados
+          {t("{{porcentaje}} % de las fichas importadas tiene datos verificados", { porcentaje: verificadas })}
         </p>
         <div
           role="meter"
@@ -68,15 +69,15 @@ export function PanelCobertura({ totalCatalogo }: PanelCoberturaProps) {
           aria-valuemin={0}
           aria-valuemax={data.totalImportado}
           aria-valuenow={data.verificados}
-          aria-valuetext={`${data.verificados} de ${data.totalImportado} fichas verificadas`}
+          aria-valuetext={t("{{verificadas}} de {{total}} fichas verificadas", { verificadas: data.verificados, total: data.totalImportado })}
           className="mt-2 h-3 overflow-hidden rounded-pildora bg-azul-suave"
         >
           <div className="h-full rounded-pildora bg-azul" style={{ width: `${verificadas}%` }} />
         </div>
         <p className="mt-2 text-sm text-tinta-suave">
-          Las fichas pendientes muestran «Pendiente de verificar» en requisitos, costos y horarios que no se contrastaron.
-          {data.demostracion > 0 ? ` ${data.demostracion.toLocaleString("es-MX")} fichas son de demostración.` : ""}
-          {agregados ? ` Además se agregaron ${agregados} módulos de Mérida Móvil, Expediente Digital y otras fuentes oficiales, cada uno con su fuente.` : ""}
+          {t("Las fichas pendientes muestran «Pendiente de verificar» en requisitos, costos y horarios que no se contrastaron.")}
+          {data.demostracion > 0 ? t(" {{total}} fichas son de demostración.", { total: data.demostracion.toLocaleString("es-MX") }) : ""}
+          {agregados ? t(" Además se agregaron {{total}} módulos de Mérida Móvil, Expediente Digital y otras fuentes oficiales, cada uno con su fuente.", { total: agregados }) : ""}
         </p>
       </div>
 

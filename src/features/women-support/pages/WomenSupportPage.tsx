@@ -1,5 +1,6 @@
 import { Info, LogOut, PhoneCall, FlaskConical, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { SolicitudSimulada } from "@/components/ayuda/SolicitudSimulada";
 import { Badge, PageHeader, type TonoInsignia } from "@/design-system";
 import { AbrirCanalOficial } from "../components/AbrirCanalOficial";
@@ -51,15 +52,19 @@ function Bloque({ numero, id, titulo, insignia, tono, icono, descripcion, childr
  * rápida con botón y con Escape dos veces.
  */
 export default function WomenSupportPage() {
+  const { t } = useTranslation();
   useSalidaRapidaConEscape();
 
   return (
     <div className="mx-auto max-w-5xl">
       <PageHeader
-        antetitulo="Bienestar"
-        titulo="Línea Mujer"
+        antetitulo={t("Bienestar")}
+        titulo={t("Línea Mujer")}
         regresar="/bienestar"
-        descripcion="Atención del Instituto de las Mujeres para mujeres en situación de violencia. Aquí puedes consultar información, abrir el canal oficial o probar una solicitud simulada: son tres cosas distintas."
+        descripcion={t(
+          "Atención del Instituto de las Mujeres para mujeres en situación de violencia. Aquí puedes consultar información, abrir el canal oficial o probar una solicitud simulada: son tres cosas distintas.",
+        )}
+        etiquetaRegresar={t("Regresar")}
       />
 
       <BarraLineaMujer onSalir={() => salirRapido()} idExplicacion={ID_EXPLICACION} />
@@ -67,9 +72,10 @@ export default function WomenSupportPage() {
       <div className="mb-8 flex items-start gap-3 rounded-tarjeta border border-borde bg-superficie-2 px-4 py-3">
         <LogOut aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-marino" />
         <p id={ID_EXPLICACION} className="text-sm text-tinta">
-          <strong className="font-semibold">Salida rápida:</strong> el botón (o pulsar Esc dos veces) cambia esta pestaña por una página
-          neutral (google.com). No borra tu historial de navegación ni garantiza ocultar tu actividad: el botón «Atrás» y el historial pueden
-          mostrar esta sección. Si te preocupa, usa una ventana privada y borra el historial. Esta sección no envía notificaciones.
+          <strong className="font-semibold">{t("Salida rápida:")}</strong>{" "}
+          {t(
+            "el botón (o pulsar Esc dos veces) cambia esta pestaña por una página neutral (google.com). No borra tu historial de navegación ni garantiza ocultar tu actividad: el botón «Atrás» y el historial pueden mostrar esta sección. Si te preocupa, usa una ventana privada y borra el historial. Esta sección no envía notificaciones.",
+          )}
         </p>
       </div>
 
@@ -77,11 +83,11 @@ export default function WomenSupportPage() {
         <Bloque
           numero={1}
           id="consultar-informacion"
-          titulo="Consultar información"
-          insignia="Sólo información"
+          titulo={t("Consultar información")}
+          insignia={t("Sólo información")}
           tono="info"
           icono={Info}
-          descripcion="Leer no abre ningún canal ni avisa a nadie. Cada servicio indica su fuente oficial y si la información está verificada."
+          descripcion={t("Leer no abre ningún canal ni avisa a nadie. Cada servicio indica su fuente oficial y si la información está verificada.")}
         >
           <InformacionLineaMujer />
         </Bloque>
@@ -89,11 +95,11 @@ export default function WomenSupportPage() {
         <Bloque
           numero={2}
           id="abrir-canal-oficial"
-          titulo="Abrir el canal oficial"
-          insignia="Acción explícita"
+          titulo={t("Abrir el canal oficial")}
+          insignia={t("Acción explícita")}
           tono="marino"
           icono={PhoneCall}
-          descripcion="Llamar requiere dos pasos: eliges a quién llamar y confirmas. La llamada la hace tu teléfono; el prototipo no la registra."
+          descripcion={t("Llamar requiere dos pasos: eliges a quién llamar y confirmas. La llamada la hace tu teléfono; el prototipo no la registra.")}
         >
           <AbrirCanalOficial />
         </Bloque>
@@ -101,17 +107,19 @@ export default function WomenSupportPage() {
         <Bloque
           numero={3}
           id="simular-solicitud"
-          titulo="Simular una solicitud"
-          insignia="Simulación"
+          titulo={t("Simular una solicitud")}
+          insignia={t("Simulación")}
           tono="ambar"
           icono={FlaskConical}
-          descripcion="Sirve para ver cómo podría funcionar desde la app. No se envía a nadie."
+          descripcion={t("Sirve para ver cómo podría funcionar desde la app. No se envía a nadie.")}
         >
           <SolicitudSimulada
             tipo="linea_mujer"
-            titulo="Solicitud de orientación de demostración"
-            descripcion="En un servicio real, la orientación se pide llamando a Línea Mujer o acudiendo al Instituto de las Mujeres. Aquí sólo se simula."
-            atencionReal="Para recibir atención real, usa «Abrir el canal oficial» o acude a una sede del Instituto de las Mujeres."
+            titulo={t("Solicitud de orientación de demostración")}
+            descripcion={t(
+              "En un servicio real, la orientación se pide llamando a Línea Mujer o acudiendo al Instituto de las Mujeres. Aquí sólo se simula.",
+            )}
+            atencionReal={t("Para recibir atención real, usa «Abrir el canal oficial» o acude a una sede del Instituto de las Mujeres.")}
             guia="linea_mujer.solicitud_simulada"
           />
         </Bloque>

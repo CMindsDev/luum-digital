@@ -3,6 +3,7 @@
  * mascota pequeña que se estira en una píldora de UNA línea sólo cuando hay algo que decir o hacer.
  * Todo aquí es puro: la interfaz deriva qué mostrar a partir del estado del asistente.
  */
+import { msg } from "@/i18n";
 import type { EstadoSesionAsistente } from "@/services/contracts";
 import type { AccionEnCurso, AvisoVisible, MensajeConversacion } from "../runtime/store";
 
@@ -83,15 +84,15 @@ export function describirPresencia(entrada: EntradaPresencia): LineaPresencia | 
   if (entrada.vozActiva) {
     if (entrada.estadoSesion === "hablando") {
       const ultimo = ultimoMensajeAsistente(entrada.mensajes);
-      return { tipo: "hablando", texto: ultimo ? colaSubtitulo(ultimo.texto) : "Pekito está hablando", enLlamada };
+      return { tipo: "hablando", texto: ultimo ? colaSubtitulo(ultimo.texto) : msg("Pekito está hablando"), enLlamada };
     }
-    if (entrada.estadoSesion === "pensando") return { tipo: "pensando", texto: "Pensando…", enLlamada };
-    if (entrada.estadoSesion === "conectando") return { tipo: "conectando", texto: "Conectando…", enLlamada };
-    return { tipo: "escuchando", texto: "Te escucho", enLlamada };
+    if (entrada.estadoSesion === "pensando") return { tipo: "pensando", texto: msg("Pensando…"), enLlamada };
+    if (entrada.estadoSesion === "conectando") return { tipo: "conectando", texto: msg("Conectando…"), enLlamada };
+    return { tipo: "escuchando", texto: msg("Te escucho"), enLlamada };
   }
 
-  if (entrada.estadoSesion === "conectando") return { tipo: "conectando", texto: "Conectando…", enLlamada };
-  if (entrada.estadoSesion === "pensando") return { tipo: "pensando", texto: "Pensando…", enLlamada };
+  if (entrada.estadoSesion === "conectando") return { tipo: "conectando", texto: msg("Conectando…"), enLlamada };
+  if (entrada.estadoSesion === "pensando") return { tipo: "pensando", texto: msg("Pensando…"), enLlamada };
 
   const ultimo = ultimoMensajeAsistente(entrada.mensajes);
   if (ultimo && !ultimo.pendiente && ultimo.id !== entrada.mensajeVisto) {

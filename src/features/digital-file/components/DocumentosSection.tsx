@@ -1,4 +1,5 @@
 import { FolderOpen } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Card, EmptyState, ErrorState, LoadingState } from "@/design-system";
 import { useDocuments } from "@/services/hooks";
 import { EncabezadoSeccion } from "./EncabezadoSeccion";
@@ -6,6 +7,7 @@ import { TarjetaDocumento } from "./TarjetaDocumento";
 
 /** Documentos ficticios del expediente con acceso a su vista previa marcada «DOCUMENTO DE EJEMPLO». */
 export function DocumentosSection() {
+  const { t } = useTranslation();
   const documentos = useDocuments();
 
   return (
@@ -13,28 +15,23 @@ export function DocumentosSection() {
       <EncabezadoSeccion
         id="titulo-documentos"
         icono={FolderOpen}
-        rotulo="Documentos"
-        titulo="Documentos de ejemplo"
-        descripcion="Copias ficticias para la demostración. Ninguna tiene validez oficial."
+        rotulo={t("Documentos")}
+        titulo={t("Documentos de ejemplo")}
+        descripcion={t("Copias ficticias para la demostración. Ninguna tiene validez oficial.")}
       />
 
-      {documentos.isPending ? <LoadingState etiqueta="Cargando tus documentos de ejemplo…" variante="compacto" /> : null}
+      {documentos.isPending ? <LoadingState etiqueta={t("Cargando tus documentos de ejemplo…")} variante="compacto" /> : null}
 
       {documentos.isError ? (
-        <ErrorState
-          error={documentos.error}
-          nivel={3}
-          titulo="No pudimos cargar tus documentos"
-          onReintentar={() => void documentos.refetch()}
-        />
+        <ErrorState error={documentos.error} nivel={3} titulo={t("No pudimos cargar tus documentos")} onReintentar={() => void documentos.refetch()} />
       ) : null}
 
       {documentos.isSuccess && documentos.data.length === 0 ? (
         <EmptyState
           nivel={3}
           icono={FolderOpen}
-          titulo="Esta identidad no tiene documentos de ejemplo"
-          descripcion="Las cuentas de operación de la demostración no guardan documentos. Cambia a una identidad ciudadana para verlos."
+          titulo={t("Esta identidad no tiene documentos de ejemplo")}
+          descripcion={t("Las cuentas de operación de la demostración no guardan documentos. Cambia a una identidad ciudadana para verlos.")}
           className="py-6"
         />
       ) : null}
@@ -49,9 +46,7 @@ export function DocumentosSection() {
         </ul>
       ) : null}
 
-      <p className="mt-4 text-sm text-tinta-suave">
-        Aquí no se suben archivos: el prototipo nunca pide CURP, INE ni comprobantes reales.
-      </p>
+      <p className="mt-4 text-sm text-tinta-suave">{t("Aquí no se suben archivos: el prototipo nunca pide CURP, INE ni comprobantes reales.")}</p>
     </Card>
   );
 }

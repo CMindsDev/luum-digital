@@ -1,4 +1,5 @@
 import { LogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { Button } from "@/design-system";
 
@@ -13,6 +14,8 @@ export interface BarraLineaMujerProps {
  * mano al desplazarse. La explicación completa está en la página (idExplicacion).
  */
 export function BarraLineaMujer({ onSalir, idExplicacion }: BarraLineaMujerProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="sticky top-[calc(var(--altura-encabezado)+0.5rem)] z-30 mb-6">
       <div className="rounded-tarjeta border border-magenta/40 bg-superficie/95 p-2.5 shadow-elevada backdrop-blur-sm sm:px-4 sm:py-3">
@@ -26,13 +29,14 @@ export function BarraLineaMujer({ onSalir, idExplicacion }: BarraLineaMujerProps
             tamano="sm"
             className="flex-1"
           >
-            Salida rápida
+            {t("Salida rápida")}
           </Button>
           <AyudaInmediata enfoque="violencia" guia="linea_mujer.ayuda_inmediata" tamano="sm" className="flex-1" />
         </div>
         <p className="mt-2 hidden text-sm text-tinta-suave sm:block">
-          También puedes pulsar <kbd className="rounded border border-borde bg-superficie-2 px-1 font-mono text-[0.8125rem]">Esc</kbd> dos veces.
-          No borra tu historial ni garantiza ocultar tu actividad.
+          {t("También puedes pulsar")}{" "}
+          <kbd className="rounded border border-borde bg-superficie-2 px-1 font-mono text-[0.8125rem]">Esc</kbd>{" "}
+          {t("dos veces. No borra tu historial ni garantiza ocultar tu actividad.")}
         </p>
       </div>
     </div>

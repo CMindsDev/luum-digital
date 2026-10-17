@@ -1,5 +1,6 @@
 import { ArrowUp } from "lucide-react";
 import { useReducedMotion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { Button, SectionLabel } from "@/design-system";
 import { TEMAS_INICIO } from "../lib/temas";
 import { BandaTema } from "./BandaTema";
@@ -9,6 +10,7 @@ import { BandaTema } from "./BandaTema";
  * contenedor a todo el ancho del área principal, con un botón para volver al inicio.
  */
 export function ExploraPorTema() {
+  const { t } = useTranslation();
   const reducirMovimiento = useReducedMotion();
 
   function volverArriba() {
@@ -19,7 +21,7 @@ export function ExploraPorTema() {
   return (
     <section aria-labelledby="titulo-temas">
       <SectionLabel id="titulo-temas" className="mb-3">
-        Explora por tema
+        {t("Explora por tema")}
       </SectionLabel>
       <div className="relative left-1/2 w-[100cqw] -translate-x-1/2 overflow-hidden bg-crema">
         {TEMAS_INICIO.map((tema) => (
@@ -27,7 +29,7 @@ export function ExploraPorTema() {
         ))}
         <div className="flex justify-center px-5 py-10 sm:py-14">
           <Button variante="primario" tamano="lg" iconoInicio={ArrowUp} onClick={volverArriba} className="cursor-pointer rounded-pildora" data-guia="inicio.volver_arriba">
-            Volver arriba
+            {t("Volver arriba")}
           </Button>
         </div>
       </div>

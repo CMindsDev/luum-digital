@@ -24,6 +24,7 @@ import type {
 } from "@/services/contracts";
 import { fuentesDeRecibo } from "../../runtime/ejecutor";
 import { pantallaMinima } from "../../runtime/pantalla";
+import { i18n } from "@/i18n";
 import { aviso, avisoPorCodigo, ErrorAsistente } from "../avisos";
 
 /** Turnos de voz por detección semántica; hablar encima interrumpe al asistente. */
@@ -420,6 +421,7 @@ export class SesionRealtime implements SesionAsistente {
           pantalla,
           ...(opciones.consentimientoBienestar !== undefined ? { consentimientoBienestar: opciones.consentimientoBienestar } : {}),
           ...(opciones.nombreParaSaludo ? { nombreParaSaludo: opciones.nombreParaSaludo } : {}),
+          idioma: i18n.language === "yua" ? "yua" : "es",
         }),
       });
     let respuesta: Response;

@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/design-system";
 import type { MotivoApoyo } from "@/features/assistant/runtime";
 import { useHelpLines } from "@/services/hooks";
@@ -29,6 +30,7 @@ function desplazarA(elemento: HTMLElement | null, enfocar: boolean) {
  * dónde hay atención. Sin persistencia, notificaciones, analítica ni datos en la URL.
  */
 export default function MentalHealthPage() {
+  const { t } = useTranslation();
   const [ayudaAbierta, setAyudaAbierta] = useState(false);
   const [alertaRiesgo, setAlertaRiesgo] = useState<MotivoApoyo | null>(null);
   const lineas = useHelpLines();
@@ -65,10 +67,11 @@ export default function MentalHealthPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <PageHeader
-        antetitulo="Bienestar"
-        titulo="Salud mental"
+        antetitulo={t("Bienestar")}
+        titulo={t("Salud mental")}
         regresar="/bienestar"
-        descripcion="Un espacio para orientarte y encontrar atención. Si estás en peligro, usa «Ayuda inmediata»: no tienes que conversar primero."
+        descripcion={t("Un espacio para orientarte y encontrar atención. Si estás en peligro, usa «Ayuda inmediata»: no tienes que conversar primero.")}
+        etiquetaRegresar={t("Regresar")}
       />
 
       <BarraAyudaInmediata abierta={ayudaAbierta} onCambiar={setAyudaAbierta} />
@@ -76,7 +79,7 @@ export default function MentalHealthPage() {
       <div className="space-y-10">
         <section aria-labelledby="que-necesitas" className="space-y-3">
           <h2 id="que-necesitas" className="text-xl font-semibold text-marino sm:text-2xl">
-            ¿Qué necesitas?
+            {t("¿Qué necesitas?")}
           </h2>
           <EntradasSaludMental onElegir={elegirEntrada} />
         </section>

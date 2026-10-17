@@ -1,5 +1,6 @@
 import { Ellipsis } from "lucide-react";
 import { useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
 import { useActiveIdentity } from "@/app/session/store";
 import { SECCIONES, SECCIONES_BARRA_INFERIOR, seccionDeRuta, seccionesVisibles } from "@/app/navigation";
@@ -24,6 +25,7 @@ function IconoItem({ activo, children }: { activo: boolean; children: ReactNode 
 
 /** Barra inferior móvil de 5 elementos: Inicio, Servicios, Reportes, Mapa y Más. */
 export function BottomNav() {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const identidad = useActiveIdentity();
   const [masAbierto, setMasAbierto] = useState(false);
@@ -35,7 +37,7 @@ export function BottomNav() {
   return (
     <>
       <nav
-        aria-label="Principal"
+        aria-label={t("Principal")}
         className="fixed inset-x-0 bottom-0 z-40 rounded-t-[1.5rem] border-t border-borde bg-superficie pb-[env(safe-area-inset-bottom)] shadow-barra md:hidden"
       >
         <ul className="mx-auto grid h-[4.5rem] max-w-lg grid-cols-5 items-center gap-0.5 px-1.5">
@@ -53,7 +55,7 @@ export function BottomNav() {
                   <IconoItem activo={actual}>
                     <Icono aria-hidden="true" className="size-5" />
                   </IconoItem>
-                  {seccion.etiquetaCorta}
+                  {t(seccion.etiquetaCorta)}
                 </Link>
               </li>
             );
@@ -70,7 +72,7 @@ export function BottomNav() {
               <IconoItem activo={masActivo}>
                 <Ellipsis aria-hidden="true" className="size-5" />
               </IconoItem>
-              Más
+              {t("Más")}
             </button>
           </li>
         </ul>

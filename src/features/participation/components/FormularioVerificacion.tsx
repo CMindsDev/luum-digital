@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleAlert, Scale, Send, ShieldAlert, WifiOff } from "lucide-react";
 import { useRef, type FormEvent } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import type { z } from "zod";
 import { useSinConexion } from "@/app/hooks/useSinConexion";
 import { Button, Checkbox, Field, RadioCardGroup, TextArea, describirError } from "@/design-system";
@@ -29,6 +30,7 @@ export interface FormularioVerificacionProps {
  * resultado queda pendiente de revisión. React Hook Form + Zod; sin dobles envíos.
  */
 export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerificacionProps) {
+  const { t } = useTranslation();
   const reglas = useRewardRules();
   const verificar = useSubmitVerification();
   const sinConexion = useSinConexion();
@@ -80,12 +82,12 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
   const errorEnvio = verificar.error ? describirError(verificar.error) : null;
 
   return (
-    <form onSubmit={alEnviar} noValidate data-formulario="Verificar reparación" className="flex flex-col gap-6">
+    <form onSubmit={alEnviar} noValidate data-formulario={t("Verificar reparación")} className="flex flex-col gap-6">
       <p role="note" className="flex items-start gap-3 rounded-tarjeta border border-lima bg-lima-suave px-4 py-3 text-[0.9375rem] text-tinta">
         <Scale aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-cafe" />
         <span>
-          <strong className="font-semibold">Se premia la calidad, no la respuesta positiva.</strong> Decir que el problema persiste vale lo mismo que
-          decir que la reparación parece completada. Suman puntos el comentario útil, confirmar que observaste el punto y la foto.
+          <strong className="font-semibold">{t("Se premia la calidad, no la respuesta positiva.")}</strong>{" "}
+          {t("Decir que el problema persiste vale lo mismo que decir que la reparación parece completada. Suman puntos el comentario útil, confirmar que observaste el punto y la foto.")}
         </span>
       </p>
 
@@ -96,17 +98,17 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
           render={({ field }) => (
             <RadioCardGroup
               // Sin `requerido`: RadioCardGroup pondría aria-required en un <fieldset> (axe: aria-allowed-attr).
-              leyenda="¿Qué observaste en el lugar? (obligatorio)"
+              leyenda={t("¿Qué observaste en el lugar? (obligatorio)")}
               name="resultado-verificacion"
               opciones={OPCIONES_RESULTADO.map((opcion) => ({
                 valor: opcion.valor,
-                etiqueta: opcion.etiqueta,
-                descripcion: opcion.descripcion,
+                etiqueta: t(opcion.etiqueta),
+                descripcion: t(opcion.descripcion),
                 icono: opcion.icono,
               }))}
               valor={field.value ?? null}
               onCambiar={field.onChange}
-              error={errors.resultado?.message}
+              error={errors.resultado?.message ? t(errors.resultado.message) : undefined}
               guia="participacion.resultado"
             />
           )}
@@ -114,22 +116,22 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
       </div>
 
       <Field
-        etiqueta="Comentario"
+        etiqueta={t("Comentario")}
         opcional
         ayuda={
           minimo
-            ? `Describe lo que viste. Con ${minimo} caracteres o más cuenta como comentario útil. No escribas datos personales.`
-            : "Describe lo que viste. No escribas datos personales."
+            ? t("Describe lo que viste. Con {{minimo}} caracteres o más cuenta como comentario útil. No escribas datos personales.", { minimo })
+            : t("Describe lo que viste. No escribas datos personales.")
         }
-        error={errors.comentario?.message}
+        error={errors.comentario?.message ? t(errors.comentario.message) : undefined}
       >
         <TextArea {...register("comentario")} maxLength={DESCRIPCION_REPORTE.maximo} rows={3} data-guia="participacion.comentario" />
       </Field>
 
       <Checkbox
         {...register("ubicacionConfirmada")}
-        etiqueta="Confirmo que observé el punto exacto del reporte"
-        descripcion="Márcalo sólo si estuviste en ese lugar. Cuenta como criterio de calidad."
+        etiqueta={t("Confirmo que observé el punto exacto del reporte")}
+        descripcion={t("Márcalo sólo si estuviste en ese lugar. Cuenta como criterio de calidad.")}
         data-guia="participacion.confirmar_punto"
       />
 
@@ -137,7 +139,7 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
         <p role="note" className="flex items-start gap-3 rounded-tarjeta border border-ambar bg-aviso-suave px-4 py-3 text-sm text-tinta">
           <ShieldAlert aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-aviso" />
           <span>
-            <strong className="font-semibold">Primero tu seguridad.</strong> No te expongas al tránsito para tomar la foto.
+            <strong className="font-semibold">{t("Primero tu seguridad.")}</strong> {t("No te expongas al tránsito para tomar la foto.")}
           </span>
         </p>
         <SelectorFotoEvidencia foto={fotos.foto} error={fotos.error} onSeleccionar={fotos.seleccionar} onQuitar={fotos.quitar} />
@@ -146,10 +148,10 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
       {calidad ? (
         <div className="rounded-tarjeta border border-borde bg-superficie-2 px-4 py-3 text-[0.9375rem] text-tinta" data-guia="participacion.calidad">
           <p>
-            <strong className="font-semibold">Calidad: {criteriosCumplidos(calidad)} de 3 criterios.</strong>{" "}
+            <strong className="font-semibold">{t("Calidad: {{n}} de 3 criterios.", { n: criteriosCumplidos(calidad) })}</strong>{" "}
             {puntos !== null
-              ? `Si se aprueba, sumarías ${puntosEnTexto(puntos)}. Quedan pendientes de revisión.`
-              : "Elige qué observaste para ver cuántos puntos sumarías si se aprueba."}
+              ? t("Si se aprueba, sumarías {{puntos}}. Quedan pendientes de revisión.", { puntos: puntosEnTexto(puntos) })
+              : t("Elige qué observaste para ver cuántos puntos sumarías si se aprueba.")}
           </p>
         </div>
       ) : null}
@@ -167,7 +169,7 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
       {sinConexion ? (
         <p role="status" className="flex items-start gap-2 text-sm text-tinta">
           <WifiOff aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-aviso" />
-          Sin conexión: tus respuestas se conservan en esta pantalla. Podrás enviar al reconectar.
+          {t("Sin conexión: tus respuestas se conservan en esta pantalla. Podrás enviar al reconectar.")}
         </p>
       ) : null}
 
@@ -176,11 +178,11 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
           type="submit"
           iconoInicio={Send}
           cargando={isSubmitting || verificar.isPending}
-          textoCargando="Enviando verificación…"
+          textoCargando={t("Enviando verificación…")}
           disabled={sinConexion}
           data-guia="participacion.enviar_verificacion"
         >
-          Enviar verificación
+          {t("Enviar verificación")}
         </Button>
       </div>
     </form>

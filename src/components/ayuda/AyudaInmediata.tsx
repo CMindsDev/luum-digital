@@ -1,5 +1,6 @@
 import { LifeBuoy, Phone } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, clasesBoton, cx, Sheet, type TamanoBoton } from "@/design-system";
 import { hrefTelefono, NUMERO_EMERGENCIAS, type EnfoqueAyuda } from "./lineas";
 import { ListaLineasAyuda } from "./ListaLineasAyuda";
@@ -39,6 +40,7 @@ export function AyudaInmediata({
   tamano = "md",
   className,
 }: AyudaInmediataProps) {
+  const { t } = useTranslation();
   const [abiertoInterno, setAbiertoInterno] = useState(false);
   const controlado = abierto !== undefined;
   const hojaAbierta = controlado ? abierto : abiertoInterno;
@@ -51,17 +53,16 @@ export function AyudaInmediata({
     <Sheet
       abierto={hojaAbierta}
       onCerrar={() => cambiar(false)}
-      titulo="Ayuda inmediata"
-      descripcion="Si tu vida o la de alguien más está en riesgo, llama al 911. Estas líneas las atienden personas."
+      titulo={t("Ayuda inmediata")}
+      descripcion={t("Si tu vida o la de alguien más está en riesgo, llama al 911. Estas líneas las atienden personas.")}
     >
       <div className="space-y-5">
         <ListaLineasAyuda enfoque={enfoque} />
         <div className="rounded-tarjeta bg-superficie-2 px-4 py-3 text-sm text-tinta">
           <p>
-            Llamar abre la app de teléfono de tu dispositivo. Este prototipo no llama por ti, no avisa a nadie, no comparte tu ubicación y no
-            registra la llamada.
+            {t("Llamar abre la app de teléfono de tu dispositivo. Este prototipo no llama por ti, no avisa a nadie, no comparte tu ubicación y no registra la llamada.")}
           </p>
-          <p className="mt-1.5">Horarios: sólo se muestran los que publica la fuente oficial.</p>
+          <p className="mt-1.5">{t("Horarios: sólo se muestran los que publica la fuente oficial.")}</p>
         </div>
       </div>
     </Sheet>
@@ -76,9 +77,9 @@ export function AyudaInmediata({
             <LifeBuoy aria-hidden="true" className="size-6" />
           </span>
           <div className="min-w-0 flex-1">
-            <Titulo className="text-lg font-semibold text-marino">¿Necesitas ayuda ahora?</Titulo>
+            <Titulo className="text-lg font-semibold text-marino">{t("¿Necesitas ayuda ahora?")}</Titulo>
             <p className="mt-1 text-[0.9375rem] text-tinta-suave">
-              No tienes que llenar nada ni conversar primero. Si estás en peligro, llama al 911.
+              {t("No tienes que llenar nada ni conversar primero. Si estás en peligro, llama al 911.")}
             </p>
           </div>
         </div>
@@ -86,11 +87,11 @@ export function AyudaInmediata({
           <a href={hrefTelefono(NUMERO_EMERGENCIAS)} className={clasesBoton({ variante: "peligro", className: "sm:flex-1" })}>
             <Phone aria-hidden="true" className="size-[1.15em] shrink-0" />
             <span>
-              Llamar al 911<span className="sr-only"> (Emergencias)</span>
+              {t("Llamar al 911")}<span className="sr-only"> {t("(Emergencias)")}</span>
             </span>
           </a>
           <Button variante="secundario" iconoInicio={LifeBuoy} onClick={() => cambiar(true)} data-guia={guia} className="sm:flex-1">
-            Ver líneas de ayuda
+            {t("Ver líneas de ayuda")}
           </Button>
         </div>
         {hoja}
@@ -110,7 +111,7 @@ export function AyudaInmediata({
         tamano={tamano}
         className={className}
       >
-        Ayuda inmediata
+        {t("Ayuda inmediata")}
       </Button>
       {hoja}
     </>

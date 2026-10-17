@@ -1,8 +1,10 @@
 import { ChevronDown } from "lucide-react";
 import { useId } from "react";
+import { useTranslation } from "react-i18next";
 import { ReportCard } from "@/components/reportes/ReportCard";
-import { ETIQUETA_FILTRO_ESTADO_MUNICIPAL, ICONO_ESTADO_MUNICIPAL, cx } from "@/design-system";
+import { ICONO_ESTADO_MUNICIPAL, cx } from "@/design-system";
 import type { EstadoMunicipal, Reporte } from "@/types";
+import { ETIQUETA_FILTRO_ESTADO_MUNICIPAL_UI } from "../../lib/i18n";
 
 const PUNTO: Record<EstadoMunicipal, string> = {
   registrado: "bg-estado-registrado",
@@ -20,9 +22,10 @@ export interface GrupoEstadoProps {
 
 /** Fila de estatus con punto de color, ícono, etiqueta y contador (como Mérida Móvil); se despliega. */
 export function GrupoEstado({ estado, reportes, abierto, onAlternar }: GrupoEstadoProps) {
+  const { t } = useTranslation();
   const idPanel = useId();
   const Icono = ICONO_ESTADO_MUNICIPAL[estado];
-  const etiqueta = ETIQUETA_FILTRO_ESTADO_MUNICIPAL[estado];
+  const etiqueta = t(ETIQUETA_FILTRO_ESTADO_MUNICIPAL_UI[estado]);
 
   return (
     <section data-estado={estado} className="rounded-tarjeta border border-borde bg-superficie shadow-suave">
@@ -39,14 +42,14 @@ export function GrupoEstado({ estado, reportes, abierto, onAlternar }: GrupoEsta
           <span className="min-w-0 flex-1 font-semibold text-marino">{etiqueta}</span>
           <span className="inline-flex min-w-8 items-center justify-center rounded-pildora bg-superficie-2 px-2 text-sm font-semibold text-tinta">
             {reportes.length}
-            <span className="sr-only">{reportes.length === 1 ? " reporte" : " reportes"}</span>
+            <span className="sr-only">{reportes.length === 1 ? t(" reporte") : t(" reportes")}</span>
           </span>
           <ChevronDown aria-hidden="true" className={cx("size-5 shrink-0 text-tinta-suave transition-transform", abierto && "rotate-180")} />
         </button>
       </h2>
       <div id={idPanel} hidden={!abierto} className="border-t border-borde px-3 pt-3 pb-3 sm:px-4">
         {reportes.length === 0 ? (
-          <p className="px-1 py-2 text-[0.9375rem] text-tinta-suave">No tienes reportes con este estatus en este periodo.</p>
+          <p className="px-1 py-2 text-[0.9375rem] text-tinta-suave">{t("No tienes reportes con este estatus en este periodo.")}</p>
         ) : (
           <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
             {reportes.map((reporte) => (

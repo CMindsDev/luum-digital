@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useSinConexion } from "@/app/hooks/useSinConexion";
 import { esConsultaSensible } from "@/features/home/lib/destino-busqueda";
 import { crearClienteBusquedaInteligente } from "@/services/busqueda-inteligente";
@@ -21,10 +22,11 @@ export function puedeUsarBusquedaInteligente(
 
 export function useBusquedaInteligente(consulta: string, { habilitada = true }: OpcionesBusquedaInteligente = {}) {
   const sinConexion = useSinConexion();
+  const { i18n } = useTranslation();
   const texto = consulta.trim();
   const activa = puedeUsarBusquedaInteligente(texto, { habilitada, sinConexion });
   const query = useQuery({
-    queryKey: [CLAVES.busquedaInteligente, activa ? "activa" : "silencio", texto],
+    queryKey: [CLAVES.busquedaInteligente, activa ? "activa" : "silencio", texto, i18n.language],
     queryFn: () => cliente.buscar(texto),
     enabled: activa,
     staleTime: 2 * 60_000,

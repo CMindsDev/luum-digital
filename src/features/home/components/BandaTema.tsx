@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import type { CSSProperties } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { cx } from "@/design-system";
@@ -37,15 +38,9 @@ const ESTILO: Record<FondoTema, { fondo: string; texto: string; boton: string; s
   territorio: { fondo: "bg-cafe", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", secundario: "border-white text-white hover:bg-white/10", oscuro: true },
 };
 
-/*
- * Titular a la medida de su columna: cada línea es una unidad (sin saltos dentro de la línea, como en el
- * tablero) y el tamaño es el menor entre el del tablero y el que cabe en la columna (100cqi de la
- * columna de texto ÷ ancho estimado de la línea en em). La estimación es conservadora para que tampoco
- * se desborde con las fuentes de respaldo mientras cargan Host Grotesk e Instrument Serif.
- */
 const EM_POR_LETRA_SANS = 0.58;
 const EM_POR_LETRA_SERIF = 0.52;
-const PROPORCION_SERIF = 1.14; // 120 / 105.218 en el tablero
+const PROPORCION_SERIF = 1.14;
 
 function metricaTitulo(tema: TemaInicio): CSSProperties {
   const ancho = Math.max(
@@ -62,6 +57,7 @@ export interface BandaTemaProps {
 }
 
 export function BandaTema({ tema }: BandaTemaProps) {
+  const { t } = useTranslation();
   const estilo = ESTILO[tema.id];
   const centrada = tema.alineacion === "centro";
   const idTitulo = `tema-${tema.id}`;
@@ -108,9 +104,9 @@ export function BandaTema({ tema }: BandaTemaProps) {
             id={idTitulo}
             className="mt-8 w-full font-normal leading-[0.972] tracking-[-0.05em] break-words text-current lg:mt-10"
           >
-            <span className="block text-(length:--titulo-sans) whitespace-nowrap">{tema.lineaSans.trim()}</span>{" "}
+            <span className="block text-(length:--titulo-sans) whitespace-nowrap">{t(tema.lineaSans.trim())}</span>{" "}
             <span className={cx("block text-[length:calc(var(--titulo-sans)*1.14)] tracking-[-0.044em] whitespace-nowrap italic", FUENTE_SERIF_ACENTO)}>
-              {tema.lineaSerif.trim()}
+              {t(tema.lineaSerif.trim())}
             </span>
           </h3>
           <p
@@ -119,7 +115,7 @@ export function BandaTema({ tema }: BandaTemaProps) {
               centrada ? "max-w-[53rem]" : "max-w-[30rem]",
             )}
           >
-            {tema.descriptor}
+            {t(tema.descriptor)}
           </p>
           <div className={cx("mt-7 flex flex-wrap gap-3 lg:justify-start", centrada ? "justify-center" : "justify-start")}>
             {tema.enlaces.map((enlace, indice) => (
@@ -132,7 +128,7 @@ export function BandaTema({ tema }: BandaTemaProps) {
                   indice === 0 ? cx("border-transparent shadow-suave", estilo.boton) : estilo.secundario,
                 )}
               >
-                {enlace.etiqueta}
+                {t(enlace.etiqueta)}
                 <ArrowRight aria-hidden="true" className="size-4 shrink-0 transition-transform motion-safe:group-hover:translate-x-0.5" />
               </Link>
             ))}

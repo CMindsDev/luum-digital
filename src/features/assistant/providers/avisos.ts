@@ -3,6 +3,7 @@
  * amable, un detalle y, si sirve, una acción. Nunca muestran detalles internos del proveedor.
  */
 import { CODIGOS_ERROR } from "@shared/asistente/servidor";
+import { msg } from "@/i18n";
 import type { AvisoAsistente } from "@/services/contracts";
 
 export type TipoAviso =
@@ -25,88 +26,88 @@ export type TipoAviso =
 const AVISOS: Record<TipoAviso, AvisoAsistente> = {
   sin_configuracion: {
     tono: "neutral",
-    titulo: "No pude conectarme ahora",
-    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
+    titulo: msg("No pude conectarme ahora"),
+    detalle: msg("Inténtalo de nuevo en un momento o escríbeme."),
   },
   sin_creditos: {
     tono: "precaucion",
-    titulo: "No pude conectarme ahora",
-    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
+    titulo: msg("No pude conectarme ahora"),
+    detalle: msg("Inténtalo de nuevo en un momento o escríbeme."),
     accion: "reintentar",
   },
   ocupado: {
     tono: "precaucion",
-    titulo: "Estoy atendiendo varias conversaciones",
-    detalle: "Inténtalo de nuevo en un momento.",
+    titulo: msg("Estoy atendiendo varias conversaciones"),
+    detalle: msg("Inténtalo de nuevo en un momento."),
     accion: "reintentar",
   },
   limite: {
     tono: "precaucion",
-    titulo: "Por ahora no puedo abrir otra conversación",
-    detalle: "Inténtalo más tarde.",
+    titulo: msg("Por ahora no puedo abrir otra conversación"),
+    detalle: msg("Inténtalo más tarde."),
   },
   bienestar_desactivado: {
     tono: "info",
-    titulo: "En Bienestar la voz no está disponible ahora",
-    detalle: "Si quieres, puedo mostrarte ayuda humana.",
+    titulo: msg("En Bienestar la voz no está disponible ahora"),
+    detalle: msg("Si quieres, puedo mostrarte ayuda humana."),
   },
   consentimiento: {
     tono: "info",
-    titulo: "Antes de continuar",
-    detalle: "Acepta el aviso para seguir en Bienestar.",
+    titulo: msg("Antes de continuar"),
+    detalle: msg("Acepta el aviso para seguir en Bienestar."),
   },
   conexion_fallida: {
     tono: "critico",
-    titulo: "No pude conectarme ahora",
-    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
+    titulo: msg("No pude conectarme ahora"),
+    detalle: msg("Inténtalo de nuevo en un momento o escríbeme."),
     accion: "reintentar",
   },
   red_cortada: {
     tono: "critico",
-    titulo: "Se perdió la conexión",
-    detalle: "Inténtalo de nuevo o escríbeme.",
+    titulo: msg("Se perdió la conexión"),
+    detalle: msg("Inténtalo de nuevo o escríbeme."),
     accion: "reconectar",
   },
   tiempo_agotado: {
     tono: "precaucion",
-    titulo: "La conexión tardó demasiado",
-    detalle: "Inténtalo de nuevo o escríbeme.",
+    titulo: msg("La conexión tardó demasiado"),
+    detalle: msg("Inténtalo de nuevo o escríbeme."),
     accion: "reintentar",
   },
   tiempo_maximo: {
     tono: "info",
-    titulo: "La llamada terminó",
-    detalle: "Puedes iniciar otra cuando quieras.",
+    titulo: msg("La llamada terminó"),
+    detalle: msg("Puedes iniciar otra cuando quieras."),
     accion: "reconectar",
   },
   microfono_bloqueado: {
     tono: "precaucion",
-    titulo: "No pude usar el micrófono",
-    detalle: "Permítelo en tu navegador o escríbeme.",
+    titulo: msg("No pude usar el micrófono"),
+    detalle: msg("Permítelo en tu navegador o escríbeme."),
     accion: "escribir",
   },
   microfono_no_disponible: {
     tono: "precaucion",
-    titulo: "La voz no está disponible ahora",
-    detalle: "Puedes escribirme.",
+    titulo: msg("La voz no está disponible ahora"),
+    detalle: msg("Puedes escribirme."),
     accion: "escribir",
   },
   audio_bloqueado: {
     tono: "precaucion",
-    titulo: "Activa el audio",
-    detalle: "Tu navegador bloqueó el sonido. Toca «Activar audio» para escucharme.",
+    titulo: msg("Activa el audio"),
+    detalle: msg("Tu navegador bloqueó el sonido. Toca «Activar audio» para escucharme."),
     accion: "activar_audio",
   },
   respuesta_fallida: {
     tono: "precaucion",
-    titulo: "No pude terminar la respuesta",
-    detalle: "Inténtalo de nuevo.",
+    titulo: msg("No pude terminar la respuesta"),
+    detalle: msg("Inténtalo de nuevo."),
     accion: "reintentar",
   },
   accion_fallida: {
     tono: "precaucion",
-    titulo: "No pude completar eso",
-    detalle: "Puedes intentarlo de nuevo.",
+    titulo: msg("No pude completar eso"),
+    detalle: msg("Puedes intentarlo de nuevo."),
   },
 };
 

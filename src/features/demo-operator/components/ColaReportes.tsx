@@ -1,5 +1,6 @@
 import { ChevronDown, Inbox, Scale } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSinConexion } from "@/app/hooks/useSinConexion";
 import { AVISO_PRIORIDAD } from "@/domain/prioridad";
 import { Button, ConfirmDialog, EmptyState, ErrorState, LoadingState, SegmentedControl, notificar } from "@/design-system";
@@ -21,6 +22,7 @@ const POR_PAGINA = 8;
  * popularidad ni puntos). Acciones: validar, registrar atención y cancelar con motivo.
  */
 export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
+  const { t } = useTranslation();
   const reportes = useReports(FILTRO_COLA);
   const reglas = useRewardRules();
   const validar = useValidateReport();
@@ -37,7 +39,6 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
   const cola = useMemo(() => ordenarCola(reportes.data ?? [], ahora), [reportes.data, ahora]);
   const filtrada = vista === "todos" ? cola : cola.filter((elemento) => elemento.reporte.estadoMunicipal === vista);
 
-  // Si el botón que abrió el diálogo desapareció (el reporte salió de la cola), el foco vuelve al título.
   useEffect(() => {
     if (accionesHechas === 0) return;
     if (document.activeElement === document.body || document.activeElement === null) tituloRef.current?.focus();
@@ -49,10 +50,10 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
       const actualizado = await validar.mutateAsync(porValidar.id);
       setPorValidar(null);
       validar.reset();
-      notificar({ tono: "exito", titulo: `${actualizado.folio}: reporte validado`, descripcion: "Ahora está «En proceso de atención»." });
+      notificar({ tono: "exito", titulo: t("{{folio}}: reporte validado", { folio: actualizado.folio }), descripcion: t("Ahora está «En proceso de atención».") });
       registrar({
-        texto: `${actualizado.folio} validado: «En proceso de atención». Los puntos pendientes de quien reportó se aprobaron una sola vez.`,
-        enlace: { to: `/reportes/${encodeURIComponent(actualizado.id)}`, etiqueta: `Ver ${actualizado.folio}` },
+        texto: t("{{folio}} validado: «En proceso de atención». Los puntos pendientes de quien reportó se aprobaron una sola vez.", { folio: actualizado.folio }),
+        enlace: { to: `/reportes/${encodeURIComponent(actualizado.id)}`, etiqueta: t("Ver {{folio}}", { folio: actualizado.folio }) },
       });
       setAccionesHechas((n) => n + 1);
     } catch {
@@ -62,20 +63,20 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
 
   const atendido = (reporte: Reporte) => {
     setPorAtender(null);
-    notificar({ tono: "exito", titulo: `${reporte.folio}: atención registrada`, descripcion: "Estado: «Solucionado» (atención reportada)." });
+    notificar({ tono: "exito", titulo: t("{{folio}}: atención registrada", { folio: reporte.folio }), descripcion: t("Estado: «Solucionado» (atención reportada).") });
     registrar({
-      texto: `${reporte.folio}: atención registrada. Estado «Solucionado» (atención reportada); se abrió la verificación ciudadana.`,
-      enlace: { to: `/reportes/${encodeURIComponent(reporte.id)}`, etiqueta: `Ver ${reporte.folio}` },
+      texto: t("{{folio}}: atención registrada. Estado «Solucionado» (atención reportada); se abrió la verificación ciudadana.", { folio: reporte.folio }),
+      enlace: { to: `/reportes/${encodeURIComponent(reporte.id)}`, etiqueta: t("Ver {{folio}}", { folio: reporte.folio }) },
     });
     setAccionesHechas((n) => n + 1);
   };
 
   const cancelado = (reporte: Reporte) => {
     setPorCancelar(null);
-    notificar({ tono: "info", titulo: `${reporte.folio}: reporte cancelado`, descripcion: "Se registró el motivo y se ajustaron sus puntos." });
+    notificar({ tono: "info", titulo: t("{{folio}}: reporte cancelado", { folio: reporte.folio }), descripcion: t("Se registró el motivo y se ajustaron sus puntos.") });
     registrar({
-      texto: `${reporte.folio} cancelado con motivo. Sus puntos pendientes se cancelaron y los aprobados se revirtieron.`,
-      enlace: { to: `/reportes/${encodeURIComponent(reporte.id)}`, etiqueta: `Ver ${reporte.folio}` },
+      texto: t("{{folio}} cancelado con motivo. Sus puntos pendientes se cancelaron y los aprobados se revirtieron.", { folio: reporte.folio }),
+      enlace: { to: `/reportes/${encodeURIComponent(reporte.id)}`, etiqueta: t("Ver {{folio}}", { folio: reporte.folio }) },
     });
     setAccionesHechas((n) => n + 1);
   };
@@ -84,38 +85,41 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
     <section aria-labelledby="titulo-cola" className="flex flex-col gap-4" data-guia="operador.cola_reportes">
       <div className="flex flex-col gap-2">
         <h2 id="titulo-cola" ref={tituloRef} tabIndex={-1} className="text-xl font-semibold text-marino outline-none">
-          Reportes por atender{reportes.data ? <span className="font-normal text-tinta-suave"> ({filtrada.length})</span> : null}
+          {t("Reportes por atender")}
+          {reportes.data ? <span className="font-normal text-tinta-suave"> ({filtrada.length})</span> : null}
         </h2>
         <p className="flex max-w-prose items-start gap-2 text-[0.9375rem] text-tinta">
           <Scale aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-marino" />
-          <span>{AVISO_PRIORIDAD} Criterios: riesgo declarado, antigüedad y tipo de incidente.</span>
+          <span>
+            {t(AVISO_PRIORIDAD)} {t("Criterios: riesgo declarado, antigüedad y tipo de incidente.")}
+          </span>
         </p>
       </div>
 
       <SegmentedControl
-        etiqueta="Estado municipal"
+        etiqueta={t("Estado municipal")}
         valor={vista}
         onCambiar={(valor) => {
           setVista(valor);
           setVisibles(POR_PAGINA);
         }}
         opciones={[
-          { valor: "todos", etiqueta: "Todos" },
-          { valor: "registrado", etiqueta: "Registrados" },
-          { valor: "en_proceso", etiqueta: "En proceso" },
+          { valor: "todos", etiqueta: t("Todos") },
+          { valor: "registrado", etiqueta: t("Registrados") },
+          { valor: "en_proceso", etiqueta: t("En proceso") },
         ]}
         guia="operador.filtro_cola"
       />
 
       {reportes.isPending ? (
-        <LoadingState etiqueta="Cargando la cola de reportes…" />
+        <LoadingState etiqueta={t("Cargando la cola de reportes…")} />
       ) : reportes.isError ? (
-        <ErrorState error={reportes.error} nivel={3} titulo="No pudimos cargar la cola" onReintentar={() => void reportes.refetch()} />
+        <ErrorState error={reportes.error} nivel={3} titulo={t("No pudimos cargar la cola")} onReintentar={() => void reportes.refetch()} />
       ) : filtrada.length === 0 ? (
-        <EmptyState nivel={3} icono={Inbox} titulo="No hay reportes en esta vista" descripcion="Cuando haya reportes registrados o en proceso de atención aparecerán aquí." />
+        <EmptyState nivel={3} icono={Inbox} titulo={t("No hay reportes en esta vista")} descripcion={t("Cuando haya reportes registrados o en proceso de atención aparecerán aquí.")} />
       ) : (
         <>
-          <ol className="flex flex-col gap-3" aria-label="Cola de reportes, de mayor a menor prioridad">
+          <ol className="flex flex-col gap-3" aria-label={t("Cola de reportes, de mayor a menor prioridad")}>
             {filtrada.slice(0, visibles).map((elemento) => (
               <li key={elemento.reporte.id}>
                 <TarjetaReporteCola
@@ -133,7 +137,7 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
           </ol>
           {filtrada.length > visibles ? (
             <Button variante="fantasma" iconoInicio={ChevronDown} className="self-start" onClick={() => setVisibles((n) => n + POR_PAGINA)}>
-              Mostrar más ({filtrada.length - visibles} restantes)
+              {t("Mostrar más ({{restantes}} restantes)", { restantes: filtrada.length - visibles })}
             </Button>
           ) : null}
         </>
@@ -145,15 +149,15 @@ export function ColaReportes({ registrar }: { registrar: RegistrarAccion }) {
           if (!validar.isPending) setPorValidar(null);
         }}
         onConfirmar={() => void confirmarValidacion()}
-        titulo={porValidar ? `¿Validar ${porValidar.folio}?` : "¿Validar el reporte?"}
+        titulo={porValidar ? t("¿Validar {{folio}}?", { folio: porValidar.folio }) : t("¿Validar el reporte?")}
         descripcion={
-          <>
-            Pasará a «En proceso de atención». Los{" "}
-            {reglas.data ? puntosEnTexto(reglas.data.reporteValidado) : "puntos"} pendientes de quien reportó se aprueban una sola vez (la misma
-            validación nunca acredita dos veces).
-          </>
+          porValidar
+            ? t("Pasará a «En proceso de atención». Los {{puntos}} pendientes de quien reportó se aprueban una sola vez.", {
+                puntos: reglas.data ? puntosEnTexto(reglas.data.reporteValidado) : t("puntos"),
+              })
+            : undefined
         }
-        textoConfirmar="Validar reporte"
+        textoConfirmar={t("Validar reporte")}
         cargando={validar.isPending}
       >
         <ErrorAccion error={validar.error} />

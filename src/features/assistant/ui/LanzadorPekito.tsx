@@ -1,5 +1,6 @@
 import { Keyboard, Mic } from "lucide-react";
 import { useId } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
 import type { ServidorPekito } from "../useControladorPekito";
 import { ListaAvisosPekito } from "./ListaAvisosPekito";
@@ -58,24 +59,25 @@ function TarjetaModo({ icono: Icono, titulo, detalle, onClick, deshabilitada = f
  * disponible; si no, lo explica con un mensaje breve y humano.
  */
 export function LanzadorPekito({ servidor, onHablar, onEscribir, onVerBienvenida, onAccionAviso, conectando }: LanzadorPekitoProps) {
+  const { t } = useTranslation();
   const idNotaVoz = useId();
   const estadoMascota = useEstadoMascota({ saludaEnReposo: true });
   const hayReal = servidor.realtime !== null;
   const puedeHablar = hayReal;
   const notaVoz = !servidor.consultado
-    ? "Revisando si la voz está disponible…"
+    ? t("Revisando si la voz está disponible…")
     : !hayReal
-      ? servidor.motivoSinVoz
-      : "Pekito te escucha sólo mientras dure la llamada.";
+      ? t(servidor.motivoSinVoz)
+      : t("Pekito te escucha sólo mientras dure la llamada.");
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-6 pt-2 pb-6">
       <h3 className="text-[2.5rem] leading-[1.02] font-bold tracking-[-0.024em] text-(--pk-texto)">
-        Por texto{" "}
+        {t("Por texto")}{" "}
         <br />
-        <span className="pekito-serif text-[2.9rem] font-normal">o por voz.</span>
+        <span className="pekito-serif text-[2.9rem] font-normal">{t("o por voz.")}</span>
       </h3>
-      <p className="mt-3 text-base leading-snug text-(--pk-texto-suave)">Habla de forma natural o escribe cuando prefieras.</p>
+      <p className="mt-3 text-base leading-snug text-(--pk-texto-suave)">{t("Habla de forma natural o escribe cuando prefieras.")}</p>
 
       <div aria-hidden="true" className="relative mx-auto my-6 grid size-[15.5rem] shrink-0 place-items-center">
         <span className="pekito-halo absolute inset-0 rounded-full bg-(--pekito-halo)" />
@@ -89,29 +91,29 @@ export function LanzadorPekito({ servidor, onHablar, onEscribir, onVerBienvenida
       <div className="flex gap-2.5">
         <TarjetaModo
           icono={Mic}
-          titulo="Hablar"
-          detalle="Como conversas normalmente"
+          titulo={t("Hablar")}
+          detalle={t("Como conversas normalmente")}
           onClick={onHablar}
           deshabilitada={!puedeHablar}
           ocupada={conectando}
           describedBy={idNotaVoz}
           guia="asistente.hablar"
         />
-        <TarjetaModo icono={Keyboard} titulo="Escribir" detalle="Cuando lo prefieras" onClick={onEscribir} guia="asistente.escribir" />
+        <TarjetaModo icono={Keyboard} titulo={t("Escribir")} detalle={t("Cuando lo prefieras")} onClick={onEscribir} guia="asistente.escribir" />
       </div>
       <p id={idNotaVoz} className="mt-3 text-xs leading-snug text-(--pk-texto-suave)">
         {notaVoz}
       </p>
 
       <p className="mt-5 text-xs leading-snug text-(--pk-texto-suave)">
-        Pekito te ayuda a orientarte en la app. Lo que conversas en Bienestar va por separado.
+        {t("Pekito te ayuda a orientarte en la app. Lo que conversas en Bienestar va por separado.")}
       </p>
       <button
         type="button"
         onClick={onVerBienvenida}
         className="mt-2 inline-flex min-h-11 items-center self-start text-sm text-(--pk-texto-suave) underline underline-offset-2 hover:text-(--pk-texto)"
       >
-        Ver la bienvenida otra vez
+        {t("Ver la bienvenida otra vez")}
       </button>
     </div>
   );

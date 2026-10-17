@@ -1,24 +1,24 @@
 import { CircleAlert, CircleCheck, CircleX, Hourglass, PenLine, Send, type LucideIcon } from "lucide-react";
 import type { TonoInsignia } from "@/design-system";
+import { msg } from "@/i18n";
 import type { EstadoGestion, EventoGestion, Gestion } from "@/types";
 
-/** Estados de una gestión simulada: siempre ícono + texto (el color sólo refuerza). */
 export const ETIQUETA_ESTADO_GESTION: Record<EstadoGestion, string> = {
-  borrador: "Borrador",
-  enviada: "Enviada",
-  en_revision: "En revisión",
-  requiere_informacion: "Requiere información",
-  resuelta: "Resuelta",
-  cancelada: "Cancelada",
+  borrador: msg("Borrador"),
+  enviada: msg("Enviada"),
+  en_revision: msg("En revisión"),
+  requiere_informacion: msg("Requiere información"),
+  resuelta: msg("Resuelta"),
+  cancelada: msg("Cancelada"),
 };
 
 export const ETIQUETA_GRUPO_ESTADO: Record<EstadoGestion, string> = {
-  borrador: "Borradores",
-  enviada: "Enviadas",
-  en_revision: "En revisión",
-  requiere_informacion: "Requieren información",
-  resuelta: "Resueltas",
-  cancelada: "Canceladas",
+  borrador: msg("Borradores"),
+  enviada: msg("Enviadas"),
+  en_revision: msg("En revisión"),
+  requiere_informacion: msg("Requieren información"),
+  resuelta: msg("Resueltas"),
+  cancelada: msg("Canceladas"),
 };
 
 export const ICONO_ESTADO_GESTION: Record<EstadoGestion, LucideIcon> = {
@@ -39,13 +39,12 @@ export const TONO_ESTADO_GESTION: Record<EstadoGestion, TonoInsignia> = {
   cancelada: "neutro",
 };
 
-/** Orden de los grupos en «Mis gestiones»: primero lo que pide acción. */
 export const ORDEN_ESTADOS: readonly EstadoGestion[] = ["requiere_informacion", "borrador", "enviada", "en_revision", "resuelta", "cancelada"];
 
 export const ETIQUETA_ACTOR: Record<EventoGestion["actor"], string> = {
-  ciudadania: "Tú",
-  sistema_demo: "Sistema de demostración",
-  operador: "Operador de demostración",
+  ciudadania: msg("Tú"),
+  sistema_demo: msg("Sistema de demostración"),
+  operador: msg("Operador de demostración"),
 };
 
 export function agruparPorEstado(gestiones: readonly Gestion[]): Array<{ estado: EstadoGestion; gestiones: Gestion[] }> {

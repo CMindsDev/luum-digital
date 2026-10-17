@@ -1,5 +1,6 @@
 import { PhoneOff, X } from "lucide-react";
 import { useRef, type RefObject } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
 import type { LineaPresencia } from "./presencia";
 import { PekitoMascota } from "./PekitoMascota";
@@ -26,11 +27,13 @@ export interface PresenciaPekitoProps {
  * sobre la barra inferior (--altura-nav-inferior) y junto a la navegación lateral.
  */
 export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLinea, onColgar, onMover, botonRef }: PresenciaPekitoProps) {
+  const { t } = useTranslation();
   const contenedorRef = useRef<HTMLDivElement>(null);
   useArrastreLado({ asa: botonRef, contenedor: contenedorRef, onSoltar: onMover });
   const estadoMascota = useEstadoMascota();
 
   const visible = abierto ? null : linea;
+  const textoVisible = visible ? t(visible.texto) : "";
   const mascota = (
     <button
       ref={botonRef}
@@ -40,9 +43,9 @@ export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLine
       data-pekito-origen
       aria-haspopup="dialog"
       aria-expanded={abierto}
-      aria-label="Abrir Pekito, tu asistente de servicios"
+      aria-label={t("Abrir Pekito, tu asistente de servicios")}
       aria-keyshortcuts="Alt+ArrowLeft Alt+ArrowRight"
-      title="Pekito, tu asistente de servicios. Arrastra o usa Alt y las flechas para moverlo de lado."
+      title={t("Pekito, tu asistente de servicios. Arrastra o usa Alt y las flechas para moverlo de lado.")}
       className="grid size-[3.25rem] shrink-0 touch-none place-items-center rounded-full border-2 border-(--pekito-acento) bg-(--pekito-fondo) text-(--pekito-tinta) shadow-flotante transition-transform hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
       <PekitoMascota ancho={38} estado={estadoMascota} />
@@ -62,7 +65,7 @@ export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLine
       )}
     >
       <span data-guia="asistente.linea" className={cx("min-w-0 truncate", visible && "max-w-[min(18rem,calc(100vw-13rem))] cursor-pointer")}>
-        {visible ? visible.texto : ""}
+        {textoVisible}
       </span>
       {visible?.enLlamada ? (
         <button
@@ -71,7 +74,7 @@ export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLine
             evento.stopPropagation();
             onColgar();
           }}
-          aria-label="Colgar"
+          aria-label={t("Colgar")}
           data-guia="asistente.colgar"
           className="grid size-11 shrink-0 place-items-center rounded-full bg-peligro text-white"
         >
@@ -84,7 +87,7 @@ export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLine
             evento.stopPropagation();
             onDescartarLinea();
           }}
-          aria-label="Descartar mensaje de Pekito"
+          aria-label={t("Descartar mensaje de Pekito")}
           className="grid size-11 shrink-0 place-items-center rounded-full text-(--pekito-tenue) hover:bg-superficie-2"
         >
           <X aria-hidden="true" className="size-4" />

@@ -1,6 +1,8 @@
 import { Brain, ChevronRight, HeartHandshake, type LucideIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { cx } from "@/design-system";
+import { msg } from "@/i18n";
 
 interface Acceso {
   titulo: string;
@@ -14,16 +16,16 @@ interface Acceso {
 
 const ACCESOS: readonly Acceso[] = [
   {
-    titulo: "Salud mental",
-    descripcion: "Cómo me siento, apoyo para alguien, dónde hay atención y ayuda inmediata.",
+    titulo: msg("Salud mental"),
+    descripcion: msg("Cómo me siento, apoyo para alguien, dónde hay atención y ayuda inmediata."),
     ruta: "/bienestar/salud-mental",
     guia: "bienestar.salud_mental",
     tono: "calma",
     icono: Brain,
   },
   {
-    titulo: "Línea Mujer",
-    descripcion: "Atención a mujeres en situación de violencia: información, línea 24 horas y salida rápida.",
+    titulo: msg("Línea Mujer"),
+    descripcion: msg("Atención a mujeres en situación de violencia: información, línea 24 horas y salida rápida."),
     ruta: "/bienestar/linea-mujer",
     guia: "bienestar.linea_mujer",
     tono: "mujeres",
@@ -38,6 +40,8 @@ const TONOS = {
 
 /** Accesos a las vistas internas de Salud mental y Línea Mujer. */
 export function AccesosBienestar() {
+  const { t } = useTranslation();
+
   return (
     <ul className="grid gap-4 sm:grid-cols-2">
       {ACCESOS.map((acceso) => {
@@ -56,8 +60,8 @@ export function AccesosBienestar() {
                 <Icono aria-hidden="true" className="size-6" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-lg font-semibold text-marino underline-offset-4 group-hover:underline group-focus-visible:underline">{acceso.titulo}</span>
-                <span className="mt-1 block text-[0.9375rem] text-tinta">{acceso.descripcion}</span>
+                <span className="block text-lg font-semibold text-marino underline-offset-4 group-hover:underline group-focus-visible:underline">{t(acceso.titulo)}</span>
+                <span className="mt-1 block text-[0.9375rem] text-tinta">{t(acceso.descripcion)}</span>
               </span>
               <ChevronRight aria-hidden="true" className="mt-1 size-5 shrink-0 text-marino" />
             </Link>

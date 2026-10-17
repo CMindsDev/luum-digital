@@ -1,16 +1,17 @@
 import { House, IdCard, ReceiptText, ScrollText, type LucideIcon } from "lucide-react";
 import type { TonoMosaico } from "@/design-system";
+import { msg } from "@/i18n";
 import type { DocumentoDemo, TipoDocumentoDemo } from "@/types";
 
 /** Marca visible en toda vista previa: los documentos del expediente de la demo son ficticios. */
-export const MARCA_DOCUMENTO_EJEMPLO = "DOCUMENTO DE EJEMPLO";
+export const MARCA_DOCUMENTO_EJEMPLO = msg("DOCUMENTO DE EJEMPLO");
 
 /** Presentación por tipo de documento ficticio (ícono + texto; el color sólo refuerza). */
 export const TIPO_DOCUMENTO: Record<TipoDocumentoDemo, { etiqueta: string; icono: LucideIcon; tono: TonoMosaico }> = {
-  identificacion_ejemplo: { etiqueta: "Identificación de ejemplo", icono: IdCard, tono: "azul" },
-  comprobante_domicilio_ejemplo: { etiqueta: "Comprobante de domicilio de ejemplo", icono: House, tono: "lima" },
-  constancia_ejemplo: { etiqueta: "Constancia de ejemplo", icono: ScrollText, tono: "ambar" },
-  recibo_simulado: { etiqueta: "Recibo simulado (sin validez fiscal)", icono: ReceiptText, tono: "cafe" },
+  identificacion_ejemplo: { etiqueta: msg("Identificación de ejemplo"), icono: IdCard, tono: "azul" },
+  comprobante_domicilio_ejemplo: { etiqueta: msg("Comprobante de domicilio de ejemplo"), icono: House, tono: "lima" },
+  constancia_ejemplo: { etiqueta: msg("Constancia de ejemplo"), icono: ScrollText, tono: "ambar" },
+  recibo_simulado: { etiqueta: msg("Recibo simulado (sin validez fiscal)"), icono: ReceiptText, tono: "cafe" },
 };
 
 export function rutaDocumento(id: string): string {

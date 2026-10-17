@@ -1,14 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { TFunction } from "i18next";
 import type { LucideIcon } from "lucide-react";
 import { useId, type FormEvent, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
 import { Button, Dialog, Field, TextArea } from "@/design-system";
-import { motivoObligatorioSchema } from "@/domain/validaciones";
 import { ErrorAccion } from "./ErrorAccion";
 
-const esquema = z.object({ motivo: motivoObligatorioSchema });
-type Valores = z.infer<typeof esquema>;
+const esquemaMotivo = (t: TFunction) =>
+  z.object({
+    motivo: z.string().trim().min(5, t("Escribe el motivo (al menos 5 caracteres).")).max(200, t("Usa como máximo 200 caracteres.")),
+  });
+
+type Valores = z.infer<ReturnType<typeof esquemaMotivo>>;
 
 export interface DialogoMotivoProps {
   abierto: boolean;
@@ -33,7 +38,7 @@ export function DialogoMotivo({
   titulo,
   descripcion,
   etiquetaMotivo,
-  ayuda = "Entre 5 y 200 caracteres. La persona verá este motivo.",
+  ayuda,
   textoConfirmar,
   iconoConfirmar,
   error,
@@ -42,13 +47,14 @@ export function DialogoMotivo({
   onCerrar,
   onConfirmar,
 }: DialogoMotivoProps) {
+  const { t } = useTranslation();
   const idFormulario = `motivo-${useId().replace(/:/g, "")}`;
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<Valores>({ resolver: zodResolver(esquema), defaultValues: { motivo: "" } });
+  } = useForm<Valores>({ resolver: zodResolver(esquemaMotivo(t)), defaultValues: { motivo: "" } });
 
   const cerrar = () => {
     if (procesando) return;
@@ -77,7 +83,7 @@ export function DialogoMotivo({
       acciones={
         <>
           <Button variante="secundario" onClick={cerrar} disabled={procesando}>
-            Volver
+            {t("Volver")}
           </Button>
           <Button type="submit" form={idFormulario} variante="peligro" iconoInicio={iconoConfirmar} cargando={isSubmitting || procesando}>
             {textoConfirmar}
@@ -86,7 +92,7 @@ export function DialogoMotivo({
       }
     >
       <form id={idFormulario} onSubmit={alEnviar} noValidate className="flex flex-col gap-4 pb-1">
-        <Field etiqueta={etiquetaMotivo} requerido ayuda={ayuda} error={errors.motivo?.message}>
+        <Field etiqueta={etiquetaMotivo} requerido ayuda={ayuda ?? t("Entre 5 y 200 caracteres. La persona verá este motivo.")} error={errors.motivo?.message}>
           <TextArea {...register("motivo")} maxLength={200} rows={3} data-guia={guia} />
         </Field>
         <ErrorAccion error={error} />

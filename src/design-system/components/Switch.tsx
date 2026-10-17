@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { useId, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 
 export interface SwitchProps {
@@ -15,6 +16,7 @@ export interface SwitchProps {
 
 /** Interruptor (role="switch"). El estado se ve por posición, ícono y texto, no sólo por color. */
 export function Switch({ activado, onCambiar, etiqueta, descripcion, deshabilitado = false, guia, className }: SwitchProps) {
+  const { t } = useTranslation();
   const base = useId().replace(/:/g, "");
   const idEtiqueta = `${base}-etiqueta`;
   const idDescripcion = descripcion ? `${base}-descripcion` : undefined;
@@ -42,7 +44,7 @@ export function Switch({ activado, onCambiar, etiqueta, descripcion, deshabilita
         className="group inline-flex min-h-11 shrink-0 items-center gap-2 rounded-pildora px-1 disabled:cursor-not-allowed disabled:opacity-55"
       >
         <span className="w-8 text-right text-sm font-semibold text-tinta-suave" aria-hidden="true">
-          {activado ? "Sí" : "No"}
+          {activado ? t("Sí") : t("No")}
         </span>
         <span
           aria-hidden="true"

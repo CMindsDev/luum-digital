@@ -1,4 +1,5 @@
 import { ChevronRight, Camera, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { NOMBRE_CATEGORIA_REPORTE } from "@/domain/reportes";
 import { Card, cx, formatearFecha } from "@/design-system";
@@ -27,9 +28,10 @@ export interface ReportCardProps {
  * (municipal y verificación ciudadana). Toda la tarjeta enlaza a /reportes/:id.
  */
 export function ReportCard({ reporte, compacta = false, enlace = true, nivelTitulo = 3, className }: ReportCardProps) {
+  const { t } = useTranslation();
   const Icono = ICONO_CATEGORIA_REPORTE[reporte.categoria];
   const tono = TONO_CATEGORIA_REPORTE[reporte.categoria];
-  const nombre = NOMBRE_CATEGORIA_REPORTE[reporte.categoria];
+  const nombre = t(NOMBRE_CATEGORIA_REPORTE[reporte.categoria]);
   const Titulo = `h${nivelTitulo}` as const;
 
   return (
@@ -59,7 +61,7 @@ export function ReportCard({ reporte, compacta = false, enlace = true, nivelTitu
                 className="no-underline outline-none after:absolute after:inset-0 after:rounded-tarjeta after:content-['']"
               >
                 {nombre}
-                <span className="sr-only">, folio {reporte.folio}</span>
+                <span className="sr-only">{t(", folio {{folio}}", { folio: reporte.folio })}</span>
               </Link>
             ) : (
               nombre
@@ -74,17 +76,20 @@ export function ReportCard({ reporte, compacta = false, enlace = true, nivelTitu
           <EstadosReporte reporte={reporte} className="mt-3" />
           <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-tinta-suave">
             <span>
-              Registrado el <time dateTime={reporte.creadoEn}>{formatearFecha(reporte.creadoEn)}</time>
+              {t("Registrado el")} <time dateTime={reporte.creadoEn}>{formatearFecha(reporte.creadoEn)}</time>
             </span>
             {reporte.tieneFoto ? (
               <span className="inline-flex items-center gap-1">
                 <Camera aria-hidden="true" className="size-3.5" />
-                Con foto
+                {t("Con foto")}
               </span>
             ) : null}
             {reporte.aportaciones.length > 0 ? (
               <span>
-                {reporte.aportaciones.length} {reporte.aportaciones.length === 1 ? "aportación" : "aportaciones"}
+                {t("{{n}} {{etiqueta}}", {
+                  n: reporte.aportaciones.length,
+                  etiqueta: reporte.aportaciones.length === 1 ? t("aportación") : t("aportaciones"),
+                })}
               </span>
             ) : null}
           </p>

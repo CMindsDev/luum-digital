@@ -1,11 +1,12 @@
 import { LayoutGrid, Map as MapIcon, Megaphone, Type } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { ButtonLink, cx, EmptyState, ErrorState, LoadingState } from "@/design-system";
 import { useCatalogSearch } from "@/services/hooks";
+import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
 import { PanelIntencion } from "./PanelIntencion";
 import { RespuestaInteligente } from "./RespuestaInteligente";
 import { ResultadosCatalogo } from "./ResultadosCatalogo";
 import { SugerenciasBusqueda } from "./SugerenciasBusqueda";
-import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
 
 export interface ContenidoBusquedaProps {
   consulta: string;
@@ -16,6 +17,7 @@ export interface ContenidoBusquedaProps {
  * aviso de sin conexión vía ErrorState), y éxito con intención + fichas (vacío con sugerencias).
  */
 export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
+  const { t } = useTranslation();
   const busqueda = useCatalogSearch(consulta);
 
   if (consulta === "") {
@@ -24,17 +26,17 @@ export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
         <SugerenciasBusqueda />
         <section aria-labelledby="titulo-explorar">
           <h2 id="titulo-explorar" className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>
-            O explora
+            {t("O explora")}
           </h2>
           <div className="mt-3 flex flex-wrap gap-2">
             <ButtonLink to="/servicios" variante="secundario" tamano="sm" iconoInicio={LayoutGrid}>
-              Trámites y servicios
+              {t("Trámites y servicios")}
             </ButtonLink>
             <ButtonLink to="/reportes" variante="secundario" tamano="sm" iconoInicio={Megaphone}>
-              Reportes
+              {t("Reportes")}
             </ButtonLink>
             <ButtonLink to="/mapa" variante="secundario" tamano="sm" iconoInicio={MapIcon}>
-              Mapa de la ciudad
+              {t("Mapa de la ciudad")}
             </ButtonLink>
           </div>
         </section>
@@ -46,8 +48,8 @@ export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
     return (
       <EmptyState
         icono={Type}
-        titulo="Escribe un poco más"
-        descripcion="Necesito al menos dos letras para buscar. También puedes probar con un ejemplo."
+        titulo={t("Escribe un poco más")}
+        descripcion={t("Necesito al menos dos letras para buscar. También puedes probar con un ejemplo.")}
         accion={<SugerenciasBusqueda titulo="Ejemplos" nivel={3} className="text-left" />}
       />
     );
@@ -66,7 +68,7 @@ export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
     return (
       <div className="space-y-8">
         <RespuestaInteligente consulta={consulta} />
-        <LoadingState etiqueta="Buscando en el catálogo…" variante="tarjetas" />
+        <LoadingState etiqueta={t("Buscando en el catálogo…")} variante="tarjetas" />
       </div>
     );
   }
@@ -76,7 +78,7 @@ export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
   return (
     <div className="space-y-8" aria-busy={actualizando || undefined}>
       <RespuestaInteligente consulta={consulta} />
-      {actualizando ? <LoadingState etiqueta="Actualizando resultados…" variante="compacto" /> : null}
+      {actualizando ? <LoadingState etiqueta={t("Actualizando resultados…")} variante="compacto" /> : null}
       {busqueda.isError ? <ErrorState error={busqueda.error} onReintentar={() => void busqueda.refetch()} /> : null}
       <PanelIntencion key={`intencion-${busqueda.data.consulta}`} consulta={busqueda.data.consulta} intencion={busqueda.data.intencion} />
       <ResultadosCatalogo key={`resultados-${busqueda.data.consulta}`} consulta={busqueda.data.consulta} resultados={busqueda.data.resultados} />

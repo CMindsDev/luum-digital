@@ -1,12 +1,14 @@
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
 import { useActiveIdentity } from "@/app/session/store";
 import { seccionDeRuta, seccionesVisibles, type SeccionNavegacion } from "@/app/navigation";
 import { cx } from "@/design-system";
+import { msg } from "@/i18n";
 
 const GRUPOS: { titulo: string; ids: SeccionNavegacion["id"][] }[] = [
-  { titulo: "Servicios", ids: ["inicio", "servicios", "reportes", "mapa", "bienestar"] },
-  { titulo: "Lo tuyo", ids: ["participacion", "expediente", "gestiones", "notificaciones"] },
-  { titulo: "Demostración", ids: ["operador", "cuenta"] },
+  { titulo: msg("Servicios"), ids: ["inicio", "servicios", "reportes", "mapa", "bienestar"] },
+  { titulo: msg("Lo tuyo"), ids: ["participacion", "expediente", "gestiones", "notificaciones"] },
+  { titulo: msg("Demostración"), ids: ["operador", "cuenta"] },
 ];
 
 /**
@@ -14,6 +16,7 @@ const GRUPOS: { titulo: string; ids: SeccionNavegacion["id"][] }[] = [
  * tableta (768–1023 px). En móvil se oculta: la reemplaza la barra inferior.
  */
 export function SideNav() {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const identidad = useActiveIdentity();
   const visibles = seccionesVisibles(identidad.rol);
@@ -21,7 +24,7 @@ export function SideNav() {
 
   return (
     <nav
-      aria-label="Principal"
+      aria-label={t("Principal")}
       className="sticky top-(--altura-encabezado) hidden h-[calc(100dvh-var(--altura-encabezado))] w-(--ancho-nav-lateral) shrink-0 overflow-y-auto border-r border-borde bg-superficie md:block"
     >
       <div className="flex flex-col gap-4 px-2 py-4 lg:px-4 lg:py-6">
@@ -30,7 +33,7 @@ export function SideNav() {
           if (secciones.length === 0) return null;
           return (
             <div key={grupo.titulo}>
-              <p className="mb-1.5 hidden px-3 font-mono-rotulo text-xs font-medium tracking-[0.08em] text-tinta-suave uppercase lg:block">{grupo.titulo}</p>
+              <p className="mb-1.5 hidden px-3 font-mono-rotulo text-xs font-medium tracking-[0.08em] text-tinta-suave uppercase lg:block">{t(grupo.titulo)}</p>
               <ul className="flex flex-col gap-1">
                 {secciones.map((seccion) => {
                   const actual = activa?.id === seccion.id;
@@ -55,9 +58,9 @@ export function SideNav() {
                           <Icono aria-hidden="true" className="size-5" />
                         </span>
                         <span aria-hidden="true" className="text-[0.6875rem] leading-tight font-semibold break-words lg:hidden">
-                          {seccion.etiquetaCorta}
+                          {t(seccion.etiquetaCorta)}
                         </span>
-                        <span className="sr-only text-[0.9375rem] leading-snug font-semibold lg:not-sr-only">{seccion.etiqueta}</span>
+                        <span className="sr-only text-[0.9375rem] leading-snug font-semibold lg:not-sr-only">{t(seccion.etiqueta)}</span>
                       </Link>
                     </li>
                   );

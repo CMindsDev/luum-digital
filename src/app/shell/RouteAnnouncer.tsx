@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-
-const SUFIJO_TITULO = "Servicios digitales de Mérida (prototipo)";
 
 /**
  * Rutas de apoyo confidencial: el título de la pestaña (visible en el historial, en pantallas
@@ -25,8 +24,10 @@ function enfocar(elemento: HTMLElement) {
  * Si la URL trae un ancla (#acerca), enfoca y desplaza a ese elemento.
  */
 export function RouteAnnouncer() {
+  const { t } = useTranslation();
   const { pathname, hash } = useLocation();
   const [anuncio, setAnuncio] = useState("");
+  const sufijoTitulo = t("Servicios digitales de Mérida (prototipo)");
   const esPrimeraCarga = useRef(true);
   const h1Anterior = useRef<Element | null>(null);
 
@@ -49,7 +50,7 @@ export function RouteAnnouncer() {
       const titulo = h1.textContent?.trim() ?? "";
       h1Anterior.current = h1;
       esPrimeraCarga.current = false;
-      document.title = esRutaConfidencial(pathname) ? SUFIJO_TITULO : `${titulo} · ${SUFIJO_TITULO}`;
+      document.title = esRutaConfidencial(pathname) ? sufijoTitulo : `${titulo} · ${sufijoTitulo}`;
 
       const ancla = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
       if (ancla) {
@@ -66,7 +67,7 @@ export function RouteAnnouncer() {
       cancelado = true;
       window.clearTimeout(temporizador);
     };
-  }, [pathname, hash]);
+  }, [pathname, hash, sufijoTitulo]);
 
   return (
     <div aria-live="polite" aria-atomic="true" className="sr-only">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Checkbox, Dialog, ErrorState, LoadingState } from "@/design-system";
 import { useReusableFields } from "@/services/hooks";
 import type { CampoReutilizable } from "@/types";
@@ -24,6 +25,7 @@ export interface ConfirmarReutilizacionDialogProps {
  * Nada viene marcado por omisión y el botón de copiar se deshabilita hasta elegir al menos uno.
  */
 export function ConfirmarReutilizacionDialog({ abierto, onCerrar, campos, onConfirmar }: ConfirmarReutilizacionDialogProps) {
+  const { t } = useTranslation();
   const reutilizables = useReusableFields();
   const [elegidos, setElegidos] = useState<ReadonlySet<string>>(() => new Set());
 
@@ -55,42 +57,44 @@ export function ConfirmarReutilizacionDialog({ abierto, onCerrar, campos, onConf
     });
 
   const total = elegidos.size;
+  const textoConfirmar =
+    total === 0 ? t("Elige al menos un dato") : total === 1 ? t("Copiar 1 dato") : t("Copiar {{total}} datos", { total });
 
   return (
     <Dialog
       abierto={abierto}
       onCerrar={cerrar}
-      titulo="Usar datos de mi expediente"
-      descripcion="Marca uno por uno los datos que quieres copiar. Nada se copia sin tu confirmación y puedes cambiarlos después."
+      titulo={t("Usar datos de mi expediente")}
+      descripcion={t("Marca uno por uno los datos que quieres copiar. Nada se copia sin tu confirmación y puedes cambiarlos después.")}
       acciones={
         <>
           <Button variante="secundario" onClick={cerrar}>
-            Cancelar
+            {t("Cancelar")}
           </Button>
           <Button onClick={confirmar} disabled={total === 0} data-guia="expediente.confirmar_reutilizar">
-            {total === 0 ? "Elige al menos un dato" : `Copiar ${total} ${total === 1 ? "dato" : "datos"}`}
+            {textoConfirmar}
           </Button>
         </>
       }
     >
-      {reutilizables.isPending ? <LoadingState etiqueta="Cargando tu expediente de ejemplo…" variante="compacto" /> : null}
+      {reutilizables.isPending ? <LoadingState etiqueta={t("Cargando tu expediente de ejemplo…")} variante="compacto" /> : null}
       {reutilizables.isError ? (
         <ErrorState error={reutilizables.error} nivel={3} onReintentar={() => void reutilizables.refetch()} />
       ) : null}
       {reutilizables.isSuccess ? (
         opciones.length === 0 ? (
-          <p className="text-tinta">Tu expediente de ejemplo no tiene datos que sirvan para este formulario.</p>
+          <p className="text-tinta">{t("Tu expediente de ejemplo no tiene datos que sirvan para este formulario.")}</p>
         ) : (
           <fieldset>
-            <legend className="mb-1 font-semibold text-tinta">Datos que se copiarían</legend>
+            <legend className="mb-1 font-semibold text-tinta">{t("Datos que se copiarían")}</legend>
             <div className="flex flex-col divide-y divide-borde">
               {opciones.map(({ campo, valor }) => (
                 <Checkbox
                   key={campo.nombre}
-                  etiqueta={campo.etiqueta}
+                  etiqueta={t(campo.etiqueta)}
                   descripcion={
                     <>
-                      Valor en tu expediente: <span className="font-semibold break-words text-tinta">{valor}</span>
+                      {t("Valor en tu expediente: ")}<span className="font-semibold break-words text-tinta">{valor}</span>
                     </>
                   }
                   checked={elegidos.has(campo.nombre)}

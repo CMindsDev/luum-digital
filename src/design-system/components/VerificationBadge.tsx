@@ -1,4 +1,5 @@
 import type { EstadoVerificacionCiudadana } from "@/types";
+import { useTranslation } from "react-i18next";
 import { ETIQUETA_VERIFICACION, ICONO_VERIFICACION } from "../lib/estados";
 import type { TonoInsignia } from "../lib/tonos";
 import { Badge } from "./Badge";
@@ -21,10 +22,11 @@ export interface VerificationBadgeProps {
 
 /** Verificación ciudadana con ícono + texto. Un voto ciudadano nunca cierra un reporte. */
 export function VerificationBadge({ estado, conPrefijo = false, className }: VerificationBadgeProps) {
+  const { t } = useTranslation();
   return (
     <Badge tono={TONOS[estado]} icono={ICONO_VERIFICACION[estado]} className={className} data-verificacion={estado}>
-      <span className={conPrefijo ? undefined : "sr-only"}>Verificación ciudadana: </span>
-      {ETIQUETA_VERIFICACION[estado]}
+      <span className={conPrefijo ? undefined : "sr-only"}>{t("Verificación ciudadana:")} </span>
+      {t(ETIQUETA_VERIFICACION[estado])}
     </Badge>
   );
 }

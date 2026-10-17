@@ -1,3 +1,4 @@
+import { msg } from "@/i18n";
 import type { PreferenciasPrivacidad } from "@/types";
 
 /** Preferencias que la persona puede cambiar. La confirmación antes de reutilizar siempre está activa. */
@@ -14,20 +15,20 @@ export interface DefinicionPreferencia {
 export const PREFERENCIAS_EDITABLES: readonly DefinicionPreferencia[] = [
   {
     clave: "asistentePuedeUsarNombre",
-    etiqueta: "Pekito puede saludarte por tu nombre",
-    descripcion: "Sólo usa tu nombre ficticio. Nunca lee tus documentos ni tus datos de contacto, y no envía nada por ti.",
+    etiqueta: msg("Pekito puede saludarte por tu nombre"),
+    descripcion: msg("Sólo usa tu nombre ficticio. Nunca lee tus documentos ni tus datos de contacto, y no envía nada por ti."),
     guia: "expediente.privacidad_nombre_asistente",
   },
   {
     clave: "notificacionesDiscretas",
-    etiqueta: "Notificaciones discretas",
-    descripcion: "Las vistas previas ocultan los detalles. Útil si compartes pantalla o usas un equipo público.",
+    etiqueta: msg("Notificaciones discretas"),
+    descripcion: msg("Las vistas previas ocultan los detalles. Útil si compartes pantalla o usas un equipo público."),
     guia: "expediente.privacidad_notificaciones_discretas",
   },
   {
     clave: "avisosDeVerificacion",
-    etiqueta: "Avisos de verificaciones cercanas",
-    descripcion: "Te avisamos cuando hay un reporte cerca que puedes verificar. Son avisos ficticios de la demostración.",
+    etiqueta: msg("Avisos de verificaciones cercanas"),
+    descripcion: msg("Te avisamos cuando hay un reporte cerca que puedes verificar. Son avisos ficticios de la demostración."),
     guia: "expediente.privacidad_avisos_verificacion",
   },
 ];

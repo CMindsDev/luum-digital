@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { DemoTag, IntegrationBadge, PageHeader } from "@/design-system";
 import { AvisoCuentaDemo } from "../components/AvisoCuentaDemo";
 import { DatosReutilizablesSection } from "../components/DatosReutilizablesSection";
@@ -14,16 +15,20 @@ import { PruebaReutilizacionSection } from "../components/PruebaReutilizacionSec
  * Es la cuenta de demostración compartida: no hay autenticación municipal.
  */
 export default function ExpedientePage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <PageHeader
         destacado
-        antetitulo="Expediente Digital"
-        titulo="Mi expediente"
-        descripcion="Tu perfil, tus documentos de ejemplo y los datos que puedes reutilizar en trámites, siempre con tu confirmación."
+        antetitulo={t("Expediente Digital")}
+        titulo={t("Mi expediente")}
+        descripcion={t(
+          "Tu perfil, tus documentos de ejemplo y los datos que puedes reutilizar en trámites, siempre con tu confirmación.",
+        )}
       >
         <div className="flex flex-wrap items-center gap-2">
-          <DemoTag>Expediente ficticio</DemoTag>
+          <DemoTag>{t("Expediente ficticio")}</DemoTag>
           <IntegrationBadge estado="simulada" />
         </div>
       </PageHeader>

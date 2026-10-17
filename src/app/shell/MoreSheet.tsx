@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import type { SeccionId, SeccionNavegacion } from "@/app/navigation";
 import { cx, Sheet } from "@/design-system";
@@ -13,9 +14,10 @@ interface MoreSheetProps {
 
 /** Hoja «Más» de la barra inferior: el resto de secciones, sin ocultar ninguna. */
 export function MoreSheet({ abierto, onCerrar, secciones, activa }: MoreSheetProps) {
+  const { t } = useTranslation();
   return (
-    <Sheet abierto={abierto} onCerrar={onCerrar} titulo="Más secciones">
-      <nav aria-label="Más secciones">
+    <Sheet abierto={abierto} onCerrar={onCerrar} titulo={t("Más secciones")}>
+      <nav aria-label={t("Más secciones")}>
         <ul className="flex flex-col gap-1.5">
           {secciones.map((seccion) => {
             const Icono = seccion.icono;
@@ -36,8 +38,8 @@ export function MoreSheet({ abierto, onCerrar, secciones, activa }: MoreSheetPro
                     <Icono aria-hidden="true" className="size-5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-semibold text-marino">{seccion.etiqueta}</span>
-                    <span className="block text-sm text-tinta-suave">{seccion.descripcion}</span>
+                    <span className="block font-semibold text-marino">{t(seccion.etiqueta)}</span>
+                    <span className="block text-sm text-tinta-suave">{t(seccion.descripcion)}</span>
                   </span>
                   <ChevronRight aria-hidden="true" className="size-5 shrink-0 text-tinta-suave" />
                 </Link>

@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import type { CategoriaReporte, Coordenadas, PosibleDuplicado, Reporte, Ubicacion } from "@/types";
 import { NOMBRE_CATEGORIA_REPORTE, estaAbierto } from "./reportes";
 
@@ -61,9 +62,9 @@ function diasEntre(desde: string, hasta: Date): number {
 
 function describirAntiguedad(dias: number): string {
   const enteros = Math.max(0, Math.floor(dias));
-  if (enteros === 0) return "hoy";
-  if (enteros === 1) return "hace 1 día";
-  return `hace ${enteros} días`;
+  if (enteros === 0) return t("hoy");
+  if (enteros === 1) return t("hace 1 día");
+  return t("hace {{n}} días", { n: enteros });
 }
 
 export function buscarPosiblesDuplicados(
@@ -89,12 +90,20 @@ export function buscarPosiblesDuplicados(
       normalizarColonia(reporte.ubicacion.colonia) === coloniaBuscada &&
       normalizarCalle(reporte.ubicacion.referencia) === calleBuscada;
     if (distancia > radio && !mismaCalle) continue;
-    const tipo = NOMBRE_CATEGORIA_REPORTE[reporte.categoria];
+    const tipo = t(NOMBRE_CATEGORIA_REPORTE[reporte.categoria]);
     const cuando = describirAntiguedad(dias);
     const motivo =
       distancia <= radio
-        ? `${tipo} a ${Math.round(distancia)} m de tu ubicación, registrado ${cuando} y aún abierto.`
-        : `${tipo} en la misma calle y colonia (${reporte.ubicacion.referencia}), registrado ${cuando} y aún abierto.`;
+        ? t("{{tipo}} a {{distancia}} m de tu ubicación, registrado {{cuando}} y aún abierto.", {
+            tipo,
+            distancia: Math.round(distancia),
+            cuando,
+          })
+        : t("{{tipo}} en la misma calle y colonia ({{referencia}}), registrado {{cuando}} y aún abierto.", {
+            tipo,
+            referencia: reporte.ubicacion.referencia,
+            cuando,
+          });
     resultado.push({ reporte, distanciaMetros: Math.round(distancia), motivo });
   }
   return resultado.sort((a, b) => a.distanciaMetros - b.distanciaMetros);

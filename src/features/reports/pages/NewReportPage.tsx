@@ -1,5 +1,6 @@
 import { Megaphone, SearchX } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useParams } from "react-router";
 import { esCategoriaReporte } from "@/domain/reportes";
 import { ButtonLink, DemoTag, EmptyState, IntegrationBadge, PageHeader } from "@/design-system";
@@ -11,6 +12,7 @@ import { tituloNuevoReporte } from "../lib/tipos-reporte";
 
 /** /reportes/nuevo/:categoria — «Bache a la vista» y los demás tipos del catálogo de reportes. */
 export default function NewReportPage() {
+  const { t } = useTranslation();
   const { categoria: parametro = "" } = useParams();
   const location = useLocation();
   const prefillCrudo = useMemo(() => leerPrefillReporte(location.state), [location.state]);
@@ -20,14 +22,14 @@ export default function NewReportPage() {
   if (!esCategoriaReporte(parametro)) {
     return (
       <>
-        <PageHeader titulo="Tipo de reporte no encontrado" regresar="/reportes" />
+        <PageHeader titulo={t("Tipo de reporte no encontrado")} regresar="/reportes" />
         <EmptyState
           icono={SearchX}
-          titulo="No conocemos ese tipo de reporte"
-          descripcion="Elige uno de los reportes rápidos o del catálogo de reportes."
+          titulo={t("No conocemos ese tipo de reporte")}
+          descripcion={t("Elige uno de los reportes rápidos o del catálogo de reportes.")}
           accion={
             <ButtonLink to="/reportes" iconoInicio={Megaphone}>
-              Ver tipos de reporte
+              {t("Ver tipos de reporte")}
             </ButtonLink>
           }
         />
@@ -42,14 +44,14 @@ export default function NewReportPage() {
   return (
     <>
       <PageHeader
-        titulo={titulo}
-        antetitulo={rapido ? "Reporte rápido" : "Catálogo de reportes"}
+        titulo={t(titulo)}
+        antetitulo={t(rapido ? "Reporte rápido" : "Catálogo de reportes")}
         regresar="/reportes"
-        descripcion="Describe el problema, confirma dónde está y revisa si alguien ya lo reportó."
+        descripcion={t("Describe el problema, confirma dónde está y revisa si alguien ya lo reportó.")}
       >
         <div className="flex flex-wrap gap-2">
           <IntegrationBadge estado="simulada" />
-          <DemoTag>Folio DEMO</DemoTag>
+          <DemoTag>{t("Folio DEMO")}</DemoTag>
         </div>
       </PageHeader>
       {prefill ? <AvisoAsistente /> : null}

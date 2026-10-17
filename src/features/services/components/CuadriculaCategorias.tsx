@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useCategories } from "@/services/hooks";
 import { ErrorState, LoadingState, Tile, resolverIcono } from "@/design-system";
 
@@ -6,8 +7,9 @@ import { ErrorState, LoadingState, Tile, resolverIcono } from "@/design-system";
  * Llevan a la portada interna de cada categoría.
  */
 export function CuadriculaCategorias() {
+  const { t } = useTranslation();
   const { data, isPending, isError, error, refetch } = useCategories();
-  if (isPending) return <LoadingState etiqueta="Cargando categorías…" variante="tarjetas" />;
+  if (isPending) return <LoadingState etiqueta={t("Cargando categorías…")} variante="tarjetas" />;
   if (isError) return <ErrorState error={error} nivel={3} onReintentar={() => void refetch()} />;
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">

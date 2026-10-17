@@ -4,12 +4,13 @@
  * - "general": catálogo, reportes, folios, mapa, beneficios, señalar y navegar.
  * - "bienestar": acompañante de demostración (sin diagnóstico; ayuda humana primero).
  */
+import { msg } from "@/i18n";
 import type { AssistantProvider, OpcionesSesion, SesionAsistente } from "@/services/contracts";
 import { escenariosBienestar } from "./escenarios-bienestar";
 import { escenariosGeneral } from "./escenarios-general";
 import { SesionDemo } from "./sesion-demo";
 
-export const ETIQUETA_DEMO = "Respuestas programadas (demostración)";
+export const ETIQUETA_DEMO = msg("Respuestas programadas (demostración)");
 
 export interface OpcionesProveedorDemo {
   /** Pausa antes de cada respuesta (por defecto 450 ms; 0 en pruebas). */

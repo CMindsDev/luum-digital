@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import {
   IntegracionNoDisponibleError,
   NoEncontradoError,
@@ -41,47 +42,49 @@ export function describirError(error: unknown): ErrorDescrito {
   if (error instanceof IntegracionNoDisponibleError || nombre === "IntegracionNoDisponibleError") {
     return {
       tipo: "integracion",
-      titulo: "Integración no disponible",
-      descripcion: `${mensaje ?? "No hay una integración real disponible."} Este prototipo no está conectado a sistemas municipales.`,
+      titulo: t("Integración no disponible"),
+      descripcion: t("{{mensaje}} Este prototipo no está conectado a sistemas municipales.", {
+        mensaje: mensaje ?? t("No hay una integración real disponible."),
+      }),
       reintentable: false,
     };
   }
   if (error instanceof SinConexionError || nombre === "SinConexionError") {
     return {
       tipo: "sin_conexion",
-      titulo: "Sin conexión",
-      descripcion: mensaje ?? "Sin conexión. Tus datos de demostración se conservan; intenta de nuevo al reconectar.",
+      titulo: t("Sin conexión"),
+      descripcion: mensaje ?? t("Sin conexión. Tus datos de demostración se conservan; intenta de nuevo al reconectar."),
       reintentable: true,
     };
   }
   if (error instanceof PermisoDemoError || nombre === "PermisoDemoError") {
     return {
       tipo: "permiso",
-      titulo: "No disponible para esta identidad",
-      descripcion: mensaje ?? "Cambia de identidad ficticia en «Cuenta de demostración» para usar esta acción.",
+      titulo: t("No disponible para esta identidad"),
+      descripcion: mensaje ?? t("Cambia de identidad ficticia en «Cuenta de demostración» para usar esta acción."),
       reintentable: false,
     };
   }
   if (error instanceof ReglaDeNegocioError || nombre === "ReglaDeNegocioError") {
     return {
       tipo: "regla",
-      titulo: "No se pudo completar",
-      descripcion: mensaje ?? "Una regla de la demostración impidió esta acción.",
+      titulo: t("No se pudo completar"),
+      descripcion: mensaje ?? t("Una regla de la demostración impidió esta acción."),
       reintentable: false,
     };
   }
   if (error instanceof NoEncontradoError || nombre === "NoEncontradoError") {
     return {
       tipo: "no_encontrado",
-      titulo: "No encontramos lo que buscas",
-      descripcion: mensaje ?? "Puede que se haya eliminado al restablecer la demostración.",
+      titulo: t("No encontramos lo que buscas"),
+      descripcion: mensaje ?? t("Puede que se haya eliminado al restablecer la demostración."),
       reintentable: false,
     };
   }
   return {
     tipo: "desconocido",
-    titulo: "Algo salió mal",
-    descripcion: "No pudimos cargar esta información. Intenta de nuevo en un momento.",
+    titulo: t("Algo salió mal"),
+    descripcion: t("No pudimos cargar esta información. Intenta de nuevo en un momento."),
     reintentable: true,
   };
 }

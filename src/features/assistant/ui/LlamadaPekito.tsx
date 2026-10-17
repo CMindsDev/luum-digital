@@ -1,6 +1,8 @@
 import { Mic, MicOff, PhoneOff } from "lucide-react";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
+import { msg } from "@/i18n";
 import { useAsistenteStore } from "../runtime/store";
 import type { AccionAviso } from "./AvisoPekito";
 import { ListaAvisosPekito } from "./ListaAvisosPekito";
@@ -17,11 +19,11 @@ export interface LlamadaPekitoProps {
 }
 
 const ESTADOS: Record<string, string> = {
-  conectando: "Conectando…",
-  escuchando: "Te escucho",
-  pensando: "Pensando…",
-  hablando: "Pekito está hablando",
-  listo: "Te escucho",
+  conectando: msg("Conectando…"),
+  escuchando: msg("Te escucho"),
+  pensando: msg("Pensando…"),
+  hablando: msg("Pekito está hablando"),
+  listo: msg("Te escucho"),
 };
 
 /**
@@ -29,6 +31,7 @@ const ESTADOS: Record<string, string> = {
  * se dice, silenciar y colgar. Con movimiento reducido la mascota no se mueve.
  */
 export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso }: LlamadaPekitoProps) {
+  const { t } = useTranslation();
   const estadoSesion = useAsistenteStore("general", (estado) => estado.estadoSesion);
   const nivel = useAsistenteStore("general", (estado) => estado.nivelVoz);
   const mensajes = useAsistenteStore("general", (estado) => estado.mensajes);
@@ -37,9 +40,9 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
 
   const ultimo = mensajes.at(-1);
   const subtitulo = ultimo ? colaSubtitulo(ultimo.texto) : "";
-  const quienHabla = ultimo?.rol === "persona" ? "Tú" : "Pekito";
+  const quienHabla = ultimo?.rol === "persona" ? t("Tú") : "Pekito";
   const ultimoFinal = useMemo(() => [...mensajes].reverse().find((mensaje) => !mensaje.pendiente), [mensajes]);
-  const estado = silenciado ? "Micrófono silenciado" : (ESTADOS[estadoSesion] ?? "En llamada");
+  const estado = silenciado ? t("Micrófono silenciado") : t(ESTADOS[estadoSesion] ?? msg("En llamada"));
 
   return (
     <div className="flex min-h-0 flex-1 flex-col items-center overflow-y-auto px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center">
@@ -66,7 +69,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
         ) : null}
       </p>
       <div role="log" aria-live="polite" className="sr-only">
-        {ultimoFinal ? `${ultimoFinal.rol === "persona" ? "Tú" : "Pekito"}: ${ultimoFinal.texto}` : ""}
+        {ultimoFinal ? `${ultimoFinal.rol === "persona" ? t("Tú") : "Pekito"}: ${ultimoFinal.texto}` : ""}
       </div>
 
       <ListaAvisosPekito onAccion={onAccionAviso} className="mt-3 w-full max-w-[24rem] space-y-2 text-left" />
@@ -83,7 +86,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
           )}
         >
           {silenciado ? <MicOff aria-hidden="true" className="size-6" /> : <Mic aria-hidden="true" className="size-6" />}
-          <span className="sr-only">{silenciado ? "Activar micrófono" : "Silenciar micrófono"}</span>
+          <span className="sr-only">{silenciado ? t("Activar micrófono") : t("Silenciar micrófono")}</span>
         </button>
         <button
           type="button"
@@ -92,11 +95,11 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
           className="grid size-14 place-items-center rounded-full bg-(--pk-peligro) text-(--pk-noche)"
         >
           <PhoneOff aria-hidden="true" className="size-6" />
-          <span className="sr-only">Colgar</span>
+          <span className="sr-only">{t("Colgar")}</span>
         </button>
       </div>
       <p className="mt-4 max-w-[22rem] text-xs leading-snug text-(--pk-texto-suave)">
-        Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.
+        {t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
       </p>
     </div>
   );

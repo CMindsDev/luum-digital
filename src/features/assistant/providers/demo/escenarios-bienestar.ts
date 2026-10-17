@@ -6,24 +6,29 @@
  * deriva a ayuda humana. Ante señales de riesgo o «Necesito ayuda inmediata», muestra ayuda humana
  * ANTES de escribir nada. Para personas adultas.
  */
+import { t } from "i18next";
+import { msg } from "@/i18n";
 import type { Escenarios, HerramientasEscenario } from "./sesion-demo";
 import { contiene, detectarRiesgo, esAfirmacion, esNegacion } from "./texto";
 
 export const ENTRADAS_BIENESTAR = [
-  "Quiero hablar de cómo me siento",
-  "Busco apoyo para alguien",
-  "Quiero encontrar atención",
-  "Necesito ayuda inmediata",
+  msg("Quiero hablar de cómo me siento"),
+  msg("Busco apoyo para alguien"),
+  msg("Quiero encontrar atención"),
+  msg("Necesito ayuda inmediata"),
 ] as const;
 
-const PRESENTACION =
-  "No soy una persona y no sustituyo a una profesional. Estoy aquí para acompañarte un momento y ayudarte a encontrar apoyo humano si lo necesitas.";
+const PRESENTACION = msg(
+  "No soy una persona y no sustituyo a una profesional. Estoy aquí para acompañarte un momento y ayudarte a encontrar apoyo humano si lo necesitas.",
+);
 
 /** Respuestas de escucha: validan sin dramatizar ni minimizar y recuerdan la ayuda humana. */
 const ESCUCHA = [
-  "Te leo. Gracias por compartirlo. ¿Qué te ayudaría ahora: seguir contando, buscar atención profesional o ver opciones de ayuda humana?",
-  "Tiene sentido que te sientas así con lo que estás viviendo. No tienes que resolverlo todo hoy. ¿Hay alguien de confianza con quien puedas hablar?",
-  "Aquí sigo para leerte un momento más. Recuerda que no soy una persona profesional: si lo que sientes pesa mucho, hablar con alguien puede ayudar, y «Ayuda inmediata» siempre está visible.",
+  msg("Te leo. Gracias por compartirlo. ¿Qué te ayudaría ahora: seguir contando, buscar atención profesional o ver opciones de ayuda humana?"),
+  msg("Tiene sentido que te sientas así con lo que estás viviendo. No tienes que resolverlo todo hoy. ¿Hay alguien de confianza con quien puedas hablar?"),
+  msg(
+    "Aquí sigo para leerte un momento más. Recuerda que no soy una persona profesional: si lo que sientes pesa mucho, hablar con alguien puede ayudar, y «Ayuda inmediata» siempre está visible.",
+  ),
 ] as const;
 
 /** Frases con las que la persona pide empezar a conversar (abren la escucha una sola vez). */
@@ -34,9 +39,15 @@ const SENTIMIENTOS = ["me siento", "me he sentido", "me senti", "me estoy sintie
 
 /** Reflejos breves, no clínicos: nombran lo que la persona comparte y ofrecen ayuda humana sin presionar. */
 const REFLEJOS = [
-  "Gracias por contarme cómo te sientes. Lo que sientes importa y no tienes que justificarlo. ¿Quieres contarme un poco más de lo que está pasando? Si prefieres hablar con una persona, puedo mostrarte las líneas de ayuda humana.",
-  "Te leo. Suena a que esto te está pesando. No tienes que resolverlo todo ahora. Si te ayuda, sigue contándome a tu ritmo; y si quieres hablar con alguien, las líneas de ayuda humana y «Ayuda inmediata» están a la mano.",
-  "Entiendo que te sientas así. Gracias por seguir compartiéndolo. Recuerda que no soy una persona profesional: hablar con alguien de confianza o con una línea de ayuda humana puede acompañarte mejor que yo.",
+  msg(
+    "Gracias por contarme cómo te sientes. Lo que sientes importa y no tienes que justificarlo. ¿Quieres contarme un poco más de lo que está pasando? Si prefieres hablar con una persona, puedo mostrarte las líneas de ayuda humana.",
+  ),
+  msg(
+    "Te leo. Suena a que esto te está pesando. No tienes que resolverlo todo ahora. Si te ayuda, sigue contándome a tu ritmo; y si quieres hablar con alguien, las líneas de ayuda humana y «Ayuda inmediata» están a la mano.",
+  ),
+  msg(
+    "Entiendo que te sientas así. Gracias por seguir compartiéndolo. Recuerda que no soy una persona profesional: hablar con alguien de confianza o con una línea de ayuda humana puede acompañarte mejor que yo.",
+  ),
 ] as const;
 
 function objetivoDeAtencion(herramientas: HerramientasEscenario): string | null {
@@ -48,7 +59,7 @@ async function encontrarAtencion(herramientas: HerramientasEscenario) {
   const objetivo = objetivoDeAtencion(herramientas);
   if (objetivo) await herramientas.accion("senalarElemento", { objetivo });
   herramientas.decir(
-    "Te mostré los canales y lugares de atención verificados, con su fuente. Tú decides si y cuándo contactarlos. Si quieres, también puedes probar la solicitud de orientación simulada.",
+    t("Te mostré los canales y lugares de atención verificados, con su fuente. Tú decides si y cuándo contactarlos. Si quieres, también puedes probar la solicitud de orientación simulada."),
   );
 }
 
@@ -62,8 +73,10 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
     await herramientas.accion("mostrarApoyoHumano", { motivo: riesgo });
     herramientas.decir(
       riesgo === "emergencia"
-        ? "Te mostré la ayuda humana disponible ahora. Si estás en peligro, llama ya con «Ayuda inmediata». No tienes que explicarme nada para hacerlo."
-        : "Gracias por decírmelo. Lo más importante ahora es que hables con una persona: te mostré la ayuda humana disponible. Si estás en peligro inmediato, usa «Ayuda inmediata». Puedo quedarme aquí mientras tanto.",
+        ? t("Te mostré la ayuda humana disponible ahora. Si estás en peligro, llama ya con «Ayuda inmediata». No tienes que explicarme nada para hacerlo.")
+        : t(
+            "Gracias por decírmelo. Lo más importante ahora es que hables con una persona: te mostré la ayuda humana disponible. Si estás en peligro inmediato, usa «Ayuda inmediata». Puedo quedarme aquí mientras tanto.",
+          ),
     );
     return;
   }
@@ -72,19 +85,25 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
   if (/\btengo (1[0-7]|[1-9]) anos\b|\bsoy menor\b|\bsoy (un )?nin[oa]\b|\bvoy en la secundaria\b/.test(n)) {
     await herramientas.accion("mostrarApoyoHumano", { motivo: "orientacion" });
     herramientas.decir(
-      "Gracias por contarme. Este espacio es para personas adultas, así que no es el lugar adecuado para acompañarte. Te mostré opciones de ayuda humana; también puedes hablar con una persona adulta de confianza.",
+      t(
+        "Gracias por contarme. Este espacio es para personas adultas, así que no es el lugar adecuado para acompañarte. Te mostré opciones de ayuda humana; también puedes hablar con una persona adulta de confianza.",
+      ),
     );
     return;
   }
 
   // 3) ¿Quién eres? / privacidad.
   if (/\b(eres|estoy hablando con) (una |un )?(ia|inteligencia artificial|persona|humano|humana|real|robot|bot|psicolog[oa])\b|\bquien eres\b|\bque eres\b/.test(n)) {
-    herramientas.decir(`${PRESENTACION} Esta conversación sólo vive en esta pestaña: no se guarda ni se comparte con el asistente general.`);
+    herramientas.decir(
+      t("{{presentacion}} Esta conversación sólo vive en esta pestaña: no se guarda ni se comparte con el asistente general.", {
+        presentacion: t(PRESENTACION),
+      }),
+    );
     return;
   }
   if (/guarda|privad|confidencial|quien lee|se queda/.test(n)) {
     herramientas.decir(
-      "Esta conversación sólo vive en la memoria de esta pestaña: no se guarda, no va a analítica ni al asistente general. Al cerrar o al borrar la conversación desaparece.",
+      t("Esta conversación sólo vive en la memoria de esta pestaña: no se guarda, no va a analítica ni al asistente general. Al cerrar o al borrar la conversación desaparece."),
     );
     return;
   }
@@ -98,7 +117,7 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
     }
     if (esNegacion(n)) {
       memoria.propuesta = null;
-      herramientas.decir("Está bien. Si cambias de opinión, aquí estará la opción. ¿Quieres contarme algo más?");
+      herramientas.decir(t("Está bien. Si cambias de opinión, aquí estará la opción. ¿Quieres contarme algo más?"));
       return;
     }
   }
@@ -112,7 +131,9 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
   if (contiene(n, ["apoyo para alguien", "ayudar a alguien", "para alguien", "mi amigo", "mi amiga", "mi hijo", "mi hija", "mi pareja", "mi mama", "mi papa", "mi hermano", "mi hermana"])) {
     memoria.propuesta = { tipo: "atencion" };
     herramientas.decir(
-      "Qué bueno que quieras acompañar a alguien. Suele ayudar escuchar sin juzgar, preguntarle qué necesita y no forzarle a hablar. Cuídate también tú. Si notas señales de peligro, busca ayuda humana de inmediato. ¿Quieres que te muestre dónde hay atención?",
+      t(
+        "Qué bueno que quieras acompañar a alguien. Suele ayudar escuchar sin juzgar, preguntarle qué necesita y no forzarle a hablar. Cuídate también tú. Si notas señales de peligro, busca ayuda humana de inmediato. ¿Quieres que te muestre dónde hay atención?",
+      ),
     );
     return;
   }
@@ -121,7 +142,10 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
     memoria.escuchando = true;
     memoria.turnosEscucha = 0;
     herramientas.decir(
-      `Gracias por darte este espacio. Puedes contarme lo que quieras, a tu ritmo; no tienes que explicarlo todo. ${PRESENTACION} Si en algún momento prefieres hablar con alguien, «Ayuda inmediata» siempre está visible.`,
+      t(
+        "Gracias por darte este espacio. Puedes contarme lo que quieras, a tu ritmo; no tienes que explicarlo todo. {{presentacion}} Si en algún momento prefieres hablar con alguien, «Ayuda inmediata» siempre está visible.",
+        { presentacion: t(PRESENTACION) },
+      ),
     );
     return;
   }
@@ -131,7 +155,7 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
     memoria.escuchando = true;
     const respuesta = REFLEJOS[memoria.turnosEscucha % REFLEJOS.length] ?? REFLEJOS[0];
     memoria.turnosEscucha += 1;
-    herramientas.decir(primeraVez ? `${respuesta} ${PRESENTACION}` : respuesta);
+    herramientas.decir(primeraVez ? t("{{respuesta}} {{presentacion}}", { respuesta: t(respuesta), presentacion: t(PRESENTACION) }) : t(respuesta));
     return;
   }
 
@@ -139,11 +163,14 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
   if (memoria.escuchando) {
     const respuesta = ESCUCHA[memoria.turnosEscucha % ESCUCHA.length] ?? ESCUCHA[0];
     memoria.turnosEscucha += 1;
-    herramientas.decir(respuesta);
+    herramientas.decir(t(respuesta));
     return;
   }
 
   herramientas.decir(
-    `Puedo acompañarte con alguna de estas opciones: «${ENTRADAS_BIENESTAR.join("», «")}». ${PRESENTACION}`,
+    t("Puedo acompañarte con alguna de estas opciones: «{{opciones}}». {{presentacion}}", {
+      opciones: ENTRADAS_BIENESTAR.map((entrada) => t(entrada)).join("», «"),
+      presentacion: t(PRESENTACION),
+    }),
   );
 };

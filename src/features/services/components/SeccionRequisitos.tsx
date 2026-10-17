@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Badge, cx } from "@/design-system";
 import type { Requisito } from "@/types";
 import { AvisoPendiente } from "./AvisoPendiente";
@@ -15,9 +16,10 @@ function etiquetaObligatorio(obligatorio: boolean | null): { texto: string; tono
 
 /** Requisitos tal como los publica la fuente (o «Pendiente de verificar» si son null). */
 export function SeccionRequisitos({ requisitos, className }: SeccionRequisitosProps) {
-  if (requisitos === null) return <AvisoPendiente que="la lista de requisitos" className={className} />;
+  const { t } = useTranslation();
+  if (requisitos === null) return <AvisoPendiente que={t("la lista de requisitos")} className={className} />;
   if (requisitos.length === 0) {
-    return <p className={cx("text-tinta", className)}>La fuente no publica requisitos para este servicio.</p>;
+    return <p className={cx("text-tinta", className)}>{t("La fuente no publica requisitos para este servicio.")}</p>;
   }
   return (
     <ol className={cx("flex flex-col gap-3", className)}>
@@ -31,13 +33,13 @@ export function SeccionRequisitos({ requisitos, className }: SeccionRequisitosPr
                 {requisito.nombre}
               </p>
               <Badge tono={obligatorio.tono} className="whitespace-normal">
-                {obligatorio.texto}
+                {t(obligatorio.texto)}
               </Badge>
             </div>
             {requisito.descripcion ? <p className="mt-1 text-[0.9375rem] text-tinta-suave">{requisito.descripcion}</p> : null}
             {requisito.documentosAceptados && requisito.documentosAceptados.length > 0 ? (
               <div className="mt-2 text-[0.9375rem]">
-                <p className="font-semibold text-tinta">Documentos aceptados</p>
+                <p className="font-semibold text-tinta">{t("Documentos aceptados")}</p>
                 <ul className="mt-0.5 list-disc pl-5 text-tinta">
                   {requisito.documentosAceptados.map((documento) => (
                     <li key={documento}>{documento}</li>
@@ -45,7 +47,7 @@ export function SeccionRequisitos({ requisitos, className }: SeccionRequisitosPr
                 </ul>
               </div>
             ) : null}
-            {requisito.presentacion ? <p className="mt-1 text-sm text-tinta-suave">Presentación: {requisito.presentacion}</p> : null}
+            {requisito.presentacion ? <p className="mt-1 text-sm text-tinta-suave">{t("Presentación: {{presentacion}}", { presentacion: requisito.presentacion })}</p> : null}
           </li>
         );
       })}

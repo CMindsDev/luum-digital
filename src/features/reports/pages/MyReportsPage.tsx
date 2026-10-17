@@ -1,5 +1,6 @@
 import { FileText, Plus } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 import { useActiveIdentity } from "@/app/session/store";
 import { ButtonLink, Card, Chip, EmptyState, ErrorState, LoadingState, PageHeader, formatearFecha } from "@/design-system";
@@ -17,6 +18,7 @@ import { aFiltroReportes, agruparPorEstado, escribirFiltros, leerFiltros, ORDEN_
  * cancelación) con su contador, como en Mérida Móvil. Los filtros viven en la URL.
  */
 export default function MyReportsPage() {
+  const { t } = useTranslation();
   const actor = useActiveIdentity();
   const [parametros, setParametros] = useSearchParams();
   const filtros = leerFiltros(parametros);
@@ -35,12 +37,12 @@ export default function MyReportsPage() {
   return (
     <>
       <PageHeader
-        titulo="Mis reportes"
+        titulo={t("Mis reportes")}
         regresar="/reportes"
-        descripcion={`Reportes de demostración de ${actor.nombre} (identidad ficticia).`}
+        descripcion={t("Reportes de demostración de {{nombre}} (identidad ficticia).", { nombre: actor.nombre })}
         accion={
           <ButtonLink to="/reportes" tamano="sm" iconoInicio={Plus} variante="secundario">
-            Nuevo reporte
+            {t("Nuevo reporte")}
           </ButtonLink>
         }
       />
@@ -49,20 +51,20 @@ export default function MyReportsPage() {
         <FiltroFechasForm desde={filtros.desde} hasta={filtros.hasta} onFiltrar={(valores) => aplicar(valores)} />
         <BuscarFolioForm key={filtros.folio} valorInicial={filtros.folio} onBuscar={(folio) => aplicar({ folio })} className="border-t border-borde pt-4" />
         {conFiltros ? (
-          <div className="flex flex-wrap items-center gap-2" aria-label="Filtros aplicados" role="group">
+          <div className="flex flex-wrap items-center gap-2" aria-label={t("Filtros aplicados")} role="group">
             {filtros.desde ? (
-              <Chip onQuitar={() => aplicar({ desde: "" })} etiquetaQuitar="Quitar fecha inicio">
-                Desde {formatearFecha(filtros.desde)}
+              <Chip onQuitar={() => aplicar({ desde: "" })} etiquetaQuitar={t("Quitar fecha inicio")}>
+                {t("Desde {{fecha}}", { fecha: formatearFecha(filtros.desde) })}
               </Chip>
             ) : null}
             {filtros.hasta ? (
-              <Chip onQuitar={() => aplicar({ hasta: "" })} etiquetaQuitar="Quitar fecha fin">
-                Hasta {formatearFecha(filtros.hasta)}
+              <Chip onQuitar={() => aplicar({ hasta: "" })} etiquetaQuitar={t("Quitar fecha fin")}>
+                {t("Hasta {{fecha}}", { fecha: formatearFecha(filtros.hasta) })}
               </Chip>
             ) : null}
             {filtros.folio ? (
-              <Chip onQuitar={() => aplicar({ folio: "" })} etiquetaQuitar="Quitar búsqueda por folio">
-                Folio: {filtros.folio}
+              <Chip onQuitar={() => aplicar({ folio: "" })} etiquetaQuitar={t("Quitar búsqueda por folio")}>
+                {t("Folio: {{folio}}", { folio: filtros.folio })}
               </Chip>
             ) : null}
           </div>
@@ -70,29 +72,38 @@ export default function MyReportsPage() {
       </Card>
 
       {consulta.isPending ? (
-        <LoadingState etiqueta="Cargando tus reportes…" variante="tarjetas" />
+        <LoadingState etiqueta={t("Cargando tus reportes…")} variante="tarjetas" />
       ) : consulta.isError ? (
-        <ErrorState error={consulta.error} onReintentar={() => void consulta.refetch()} titulo="No pudimos cargar tus reportes" />
+        <ErrorState error={consulta.error} onReintentar={() => void consulta.refetch()} titulo={t("No pudimos cargar tus reportes")} />
       ) : reportes.length === 0 && filtros.folio ? (
         <FolioFueraDeMisReportes folio={filtros.folio} />
       ) : reportes.length === 0 ? (
         <EmptyState
           icono={FileText}
-          titulo={conFiltros ? "No tienes reportes en este periodo" : "Todavía no tienes reportes"}
+          titulo={t(conFiltros ? "No tienes reportes en este periodo" : "Todavía no tienes reportes")}
           descripcion={
-            conFiltros ? "Prueba con otras fechas o quita los filtros." : "Cuando reportes un bache, una luminaria u otro problema, aquí verás su estatus."
+            t(
+              conFiltros
+                ? "Prueba con otras fechas o quita los filtros."
+                : "Cuando reportes un bache, una luminaria u otro problema, aquí verás su estatus.",
+            )
           }
           accion={
             <ButtonLink to="/reportes" iconoInicio={Plus}>
-              Hacer un reporte
+              {t("Hacer un reporte")}
             </ButtonLink>
           }
         />
       ) : (
         <div className="flex flex-col gap-3" aria-busy={consulta.isFetching || undefined}>
           <p className="text-sm text-tinta-suave" role="status">
-            {reportes.length} {reportes.length === 1 ? "reporte" : "reportes"}
-            {conFiltros ? " con los filtros aplicados" : ""}.
+            {conFiltros
+              ? reportes.length === 1
+                ? t("1 reporte con los filtros aplicados.")
+                : t("{{n}} reportes con los filtros aplicados.", { n: reportes.length })
+              : reportes.length === 1
+                ? t("1 reporte.")
+                : t("{{n}} reportes.", { n: reportes.length })}
           </p>
           {ORDEN_ESTADOS.map((estado) => (
             <GrupoEstado

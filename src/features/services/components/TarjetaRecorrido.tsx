@@ -1,4 +1,5 @@
 import { ArrowRight, PenLine } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   ACCION_TIPO_RECORRIDO,
   DESCRIPCION_TIPO_RECORRIDO,
@@ -19,6 +20,7 @@ export interface TarjetaRecorridoProps {
  * Si la persona tiene un borrador de este servicio, ofrece continuarlo.
  */
 export function TarjetaRecorrido({ servicio }: TarjetaRecorridoProps) {
+  const { t } = useTranslation();
   const gestiones = useProcedures();
   const borrador = gestiones.data?.find((gestion) => gestion.servicioId === servicio.id && gestion.estado === "borrador");
   const Icono = ICONO_TIPO_RECORRIDO[servicio.tipoDeRecorrido];
@@ -30,19 +32,19 @@ export function TarjetaRecorrido({ servicio }: TarjetaRecorridoProps) {
           <Icono className="size-5" />
         </span>
         <div className="min-w-0">
-          <p className="text-xs font-semibold tracking-[0.12em] text-white uppercase">Recorrido en la app</p>
+          <p className="text-xs font-semibold tracking-[0.12em] text-white uppercase">{t("Recorrido en la app")}</p>
           <h2 id="titulo-recorrido" className="text-lg font-semibold text-white">
-            {ETIQUETA_TIPO_RECORRIDO[servicio.tipoDeRecorrido]}
+            {t(ETIQUETA_TIPO_RECORRIDO[servicio.tipoDeRecorrido])}
           </h2>
         </div>
       </div>
-      <p className="mt-3 text-[0.9375rem] text-white">{DESCRIPCION_TIPO_RECORRIDO[servicio.tipoDeRecorrido]}</p>
+      <p className="mt-3 text-[0.9375rem] text-white">{t(DESCRIPCION_TIPO_RECORRIDO[servicio.tipoDeRecorrido])}</p>
       <div className="mt-3">
-        <DemoTag>Simulación: no es una gestión oficial</DemoTag>
+        <DemoTag>{t("Simulación: no es una gestión oficial")}</DemoTag>
       </div>
       <div className="mt-5 flex flex-col gap-2.5">
         <ButtonLink to={rutaRecorrido(servicio.id)} variante="acento" tamano="lg" anchoCompleto iconoFin={ArrowRight} data-guia="servicios.iniciar">
-          {ACCION_TIPO_RECORRIDO[servicio.tipoDeRecorrido]}
+          {t(ACCION_TIPO_RECORRIDO[servicio.tipoDeRecorrido])}
         </ButtonLink>
         {borrador ? (
           <ButtonLink
@@ -52,12 +54,10 @@ export function TarjetaRecorrido({ servicio }: TarjetaRecorridoProps) {
             iconoInicio={PenLine}
             data-guia="servicios.continuar_borrador"
           >
-            Continuar mi borrador
+            {t("Continuar mi borrador")}
           </ButtonLink>
         ) : null}
-        {borrador ? (
-          <p className="text-sm text-white">Borrador guardado el {formatearFechaHora(borrador.actualizadaEn)}.</p>
-        ) : null}
+        {borrador ? <p className="text-sm text-white">{t("Borrador guardado el {{fecha}}.", { fecha: formatearFechaHora(borrador.actualizadaEn) })}</p> : null}
       </div>
     </Card>
   );

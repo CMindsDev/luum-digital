@@ -1,4 +1,5 @@
 import { ChevronRight, ClipboardList, LayoutGrid } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Badge, ButtonLink, Card, DemoTag, EmptyState, ErrorState, formatearFecha, LoadingState } from "@/design-system";
 import { useProcedures } from "@/services/hooks";
@@ -6,35 +7,34 @@ import { ESTADO_GESTION, gestionesRecientes } from "../lib/gestiones";
 
 /** Resumen de «Mis gestiones» (simuladas) de la identidad activa, con enlace a cada una. */
 export function ResumenGestiones() {
+  const { t } = useTranslation();
   const gestiones = useProcedures();
   const recientes = gestiones.data ? gestionesRecientes(gestiones.data) : [];
   const total = gestiones.data?.length ?? 0;
 
   return (
-    <Card as="section" aria-labelledby="titulo-resumen-gestiones" relleno="md" className="flex flex-col" data-guia="inicio.resumen_gestiones">
+    <Card as="section" aria-labelledby="titulo-resumen-gestiones" relleno="md" className="flex min-w-0 flex-col" data-guia="inicio.resumen_gestiones">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <h3 id="titulo-resumen-gestiones" className="flex items-center gap-2 text-lg font-semibold text-marino">
           <ClipboardList aria-hidden="true" className="size-5 text-azul" />
-          Mis gestiones
+          {t("Mis gestiones")}
         </h3>
-        <DemoTag>Simuladas</DemoTag>
+        <DemoTag>{t("Simuladas")}</DemoTag>
       </div>
 
-      {gestiones.isPending ? <LoadingState etiqueta="Cargando tus gestiones…" variante="compacto" /> : null}
+      {gestiones.isPending ? <LoadingState etiqueta={t("Cargando tus gestiones…")} variante="compacto" /> : null}
 
-      {gestiones.isError ? (
-        <ErrorState error={gestiones.error} nivel={3} onReintentar={() => void gestiones.refetch()} />
-      ) : null}
+      {gestiones.isError ? <ErrorState error={gestiones.error} nivel={3} onReintentar={() => void gestiones.refetch()} /> : null}
 
       {gestiones.isSuccess && total === 0 ? (
         <EmptyState
           nivel={3}
           icono={ClipboardList}
-          titulo="Aún no tienes gestiones"
-          descripcion="Cuando inicies un trámite de demostración, aquí verás su estado y su folio."
+          titulo={t("Aún no tienes gestiones")}
+          descripcion={t("Cuando inicies un trámite de demostración, aquí verás su estado y su folio.")}
           accion={
             <ButtonLink to="/servicios" variante="secundario" tamano="sm" iconoInicio={LayoutGrid}>
-              Explorar trámites
+              {t("Explorar trámites")}
             </ButtonLink>
           }
           className="py-6"
@@ -55,13 +55,11 @@ export function ResumenGestiones() {
                     <span className="line-clamp-2 font-medium text-tinta">{gestion.servicioNombre}</span>
                     <span className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-tinta-suave">
                       <Badge tono={estado.tono} icono={estado.icono}>
-                        <span className="sr-only">Estado: </span>
-                        {estado.etiqueta}
+                        <span className="sr-only">{t("Estado: ")}</span>
+                        {t(estado.etiqueta)}
                       </Badge>
-                      <span className="font-mono text-[0.8125rem] font-medium text-tinta">{gestion.folio ?? "Sin folio (borrador)"}</span>
-                      <span>
-                        Actualizada el <time dateTime={gestion.actualizadaEn}>{formatearFecha(gestion.actualizadaEn)}</time>
-                      </span>
+                      <span className="font-mono text-[0.8125rem] font-medium text-tinta">{gestion.folio ?? t("Sin folio (borrador)")}</span>
+                      <span>{t("Actualizada el {{fecha}}", { fecha: formatearFecha(gestion.actualizadaEn) })}</span>
                     </span>
                   </span>
                   <ChevronRight aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-tinta-suave transition-transform group-hover:translate-x-0.5" />
@@ -75,7 +73,7 @@ export function ResumenGestiones() {
       {gestiones.isSuccess && total > 0 ? (
         <div className="mt-auto pt-4">
           <ButtonLink to="/gestiones" variante="secundario" tamano="sm" iconoFin={ChevronRight} data-guia="inicio.ver_gestiones">
-            {total > recientes.length ? `Ver mis ${total} gestiones` : "Ver mis gestiones"}
+            {total > recientes.length ? t("Ver mis {{total}} gestiones", { total }) : t("Ver mis gestiones")}
           </ButtonLink>
         </div>
       ) : null}

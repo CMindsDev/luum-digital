@@ -1,5 +1,6 @@
 import { Check, ChevronDown, RotateCcw, UserRound } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { useRestablecerDemo } from "@/app/hooks/useRestablecerDemo";
 import { ETIQUETA_ROL } from "@/app/session/roles";
@@ -12,6 +13,7 @@ import { Avatar, ConfirmDialog, cx, notificar } from "@/design-system";
  * Cambiar de identidad no es autenticación: sólo elige qué datos de demostración ves.
  */
 export function IdentityMenu() {
+  const { t } = useTranslation();
   const navegar = useNavigate();
   const identidadId = useDemoSession((estado) => estado.identidadId);
   const cambiarIdentidad = useDemoSession((estado) => estado.cambiarIdentidad);
@@ -40,7 +42,11 @@ export function IdentityMenu() {
   const elegir = (id: string) => {
     if (id !== identidadId) {
       cambiarIdentidad(id);
-      notificar({ tono: "info", titulo: `Ahora usas la demostración como ${buscarIdentidad(id).nombre}`, descripcion: "Identidad ficticia: no es una cuenta municipal." });
+      notificar({
+        tono: "info",
+        titulo: t("Ahora usas la demostración como {{nombre}}", { nombre: buscarIdentidad(id).nombre }),
+        descripcion: t("Identidad ficticia: no es una cuenta municipal."),
+      });
     }
     cerrarYEnfocar();
     navegar(buscarIdentidad(id).rol === "ciudadania" ? "/" : "/operador");
@@ -67,7 +73,7 @@ export function IdentityMenu() {
         className="flex min-h-11 items-center gap-1.5 rounded-pildora py-1 pr-2 pl-1 text-white hover:bg-white/12"
       >
         <Avatar iniciales={identidad.iniciales} tamano="sm" />
-        <span className="sr-only">Identidad de demostración: {identidad.nombre}. Abrir menú de identidad</span>
+        <span className="sr-only">{t("Identidad de demostración: {{nombre}}. Abrir menú de identidad", { nombre: identidad.nombre })}</span>
         <ChevronDown aria-hidden="true" className={cx("size-4 transition-transform", abierto && "rotate-180")} />
       </button>
 
@@ -77,15 +83,15 @@ export function IdentityMenu() {
         className="absolute top-full right-0 z-50 mt-2 w-[min(20rem,calc(100vw-2rem))] rounded-tarjeta border border-borde bg-superficie p-2 text-tinta shadow-flotante [--color-foco:var(--color-azul)] motion-safe:animate-entrada"
       >
         <div className="px-3 pt-2 pb-3">
-          <p className="text-xs font-semibold tracking-[0.12em] text-tinta-suave uppercase">Usas la demo como</p>
+          <p className="text-xs font-semibold tracking-[0.12em] text-tinta-suave uppercase">{t("Usas la demo como")}</p>
           <p className="mt-1 font-semibold text-marino">{identidad.nombre}</p>
           <p className="text-sm text-tinta-suave">
-            {ETIQUETA_ROL[identidad.rol]} · Identidad ficticia
+            {t(ETIQUETA_ROL[identidad.rol])} · {t("Identidad ficticia")}
           </p>
         </div>
         <div className="border-t border-borde pt-2">
           <p id={`${idPanel}-titulo`} className="px-3 pb-1 text-sm font-semibold text-marino">
-            Cambiar identidad ficticia
+            {t("Cambiar identidad ficticia")}
           </p>
           <ul aria-labelledby={`${idPanel}-titulo`} className="flex flex-col">
             {IDENTIDADES_DEMO.map((opcion) => {
@@ -120,7 +126,7 @@ export function IdentityMenu() {
             className="flex min-h-11 items-center gap-3 rounded-boton px-3 text-sm font-semibold text-marino hover:bg-superficie-2"
           >
             <UserRound aria-hidden="true" className="size-4" />
-            Cuenta de demostración
+            {t("Cuenta de demostración")}
           </Link>
           <button
             type="button"
@@ -131,7 +137,7 @@ export function IdentityMenu() {
             className="flex min-h-11 items-center gap-3 rounded-boton px-3 text-left text-sm font-semibold text-peligro hover:bg-peligro-suave"
           >
             <RotateCcw aria-hidden="true" className="size-4" />
-            Restablecer demostración
+            {t("Restablecer demostración")}
           </button>
         </div>
       </div>
@@ -142,9 +148,9 @@ export function IdentityMenu() {
         onConfirmar={restablecer}
         cargando={restableciendo}
         tono="peligro"
-        titulo="¿Restablecer la demostración?"
-        descripcion="Se borrarán los reportes, gestiones, puntos y preferencias que creaste en este navegador. Volverás al inicio con los datos ficticios originales."
-        textoConfirmar="Sí, restablecer"
+        titulo={t("¿Restablecer la demostración?")}
+        descripcion={t("Se borrarán los reportes, gestiones, puntos y preferencias que creaste en este navegador. Volverás al inicio con los datos ficticios originales.")}
+        textoConfirmar={t("Sí, restablecer")}
       />
     </div>
   );

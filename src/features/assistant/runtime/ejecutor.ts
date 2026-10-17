@@ -30,6 +30,7 @@ import type {
   ServiceCatalogRepository,
   WellbeingRepository,
 } from "@/services/contracts";
+import { msg } from "@/i18n";
 import type {
   CategoriaReporte,
   EstadoGestion,
@@ -94,47 +95,47 @@ export const RUTAS_SECCION: Record<Seccion, string> = {
 };
 
 const NOMBRES_SECCION: Record<Seccion, string> = {
-  inicio: "Inicio",
-  servicios: "Trámites y servicios",
-  reportes: "Reportes",
-  mis_reportes: "Mis reportes",
-  mapa: "Visor Urbano",
-  bienestar: "Bienestar",
-  salud_mental: "Salud mental",
-  linea_mujer: "Línea Mujer",
-  participacion: "Participación y recompensas",
-  expediente: "Mi expediente",
-  gestiones: "Mis gestiones",
-  notificaciones: "Notificaciones",
-  cuenta: "Cuenta de demostración",
+  inicio: msg("Inicio"),
+  servicios: msg("Trámites y servicios"),
+  reportes: msg("Reportes"),
+  mis_reportes: msg("Mis reportes"),
+  mapa: msg("Visor Urbano"),
+  bienestar: msg("Bienestar"),
+  salud_mental: msg("Salud mental"),
+  linea_mujer: msg("Línea Mujer"),
+  participacion: msg("Participación y recompensas"),
+  expediente: msg("Mi expediente"),
+  gestiones: msg("Mis gestiones"),
+  notificaciones: msg("Notificaciones"),
+  cuenta: msg("Cuenta de demostración"),
 };
 
 /** Nombres de Mérida Móvil («Selecciona un servicio»). */
 export const NOMBRES_REPORTE: Record<CategoriaReporte, string> = {
-  bache: "Bache a la vista",
-  luminaria: "Luminaria",
-  desazolve_rejilla: "Desazolve de rejilla",
-  basura_via_publica: "Basura en vía pública",
-  animal_muerto: "Animal muerto",
-  parques_jardines: "Parques y jardines",
-  recoleccion_basura: "Recolección de basura",
+  bache: msg("Bache a la vista"),
+  luminaria: msg("Luminaria"),
+  desazolve_rejilla: msg("Desazolve de rejilla"),
+  basura_via_publica: msg("Basura en vía pública"),
+  animal_muerto: msg("Animal muerto"),
+  parques_jardines: msg("Parques y jardines"),
+  recoleccion_basura: msg("Recolección de basura"),
 };
 
 /** Etiquetas de «Mis reportes» de Mérida Móvil. */
 const ESTADOS_MUNICIPALES: Record<EstadoMunicipal, string> = {
-  registrado: "Registrado",
-  en_proceso: "En proceso de atención",
-  solucionado: "Solucionado",
-  cancelado: "Cancelado",
+  registrado: msg("Registrado"),
+  en_proceso: msg("En proceso de atención"),
+  solucionado: msg("Solucionado"),
+  cancelado: msg("Cancelado"),
 };
 
 const ESTADOS_GESTION: Record<EstadoGestion, string> = {
-  borrador: "Borrador",
-  enviada: "Enviada",
-  en_revision: "En revisión",
-  requiere_informacion: "Requiere información",
-  resuelta: "Resuelta",
-  cancelada: "Cancelada",
+  borrador: msg("Borrador"),
+  enviada: msg("Enviada"),
+  en_revision: msg("En revisión"),
+  requiere_informacion: msg("Requiere información"),
+  resuelta: msg("Resuelta"),
+  cancelada: msg("Cancelada"),
 };
 
 const TIPOS_AYUDA: Record<MotivoApoyo, LineaAyuda["tipo"][]> = {
@@ -300,13 +301,13 @@ async function obtenerServicio(contexto: ContextoEjecucion, servicioId: string):
 async function consultarConocimiento(contexto: ContextoEjecucion, { consulta }: ArgumentosAccion<"consultarConocimiento">): Promise<Resultado> {
   const respuesta = (await contexto.conocimiento?.buscar(consulta)) ?? null;
   if (!respuesta) {
-    throw new FalloAccion("No pude consultar la información en este momento. Inténtalo de nuevo en un momento.");
+    throw new FalloAccion(msg("No pude consultar la información en este momento. Inténtalo de nuevo en un momento."));
   }
   if (respuesta.pasajes.length === 0) {
     return {
       estado: "completada",
-      mensaje: "No encontré información sobre eso en las fuentes de la plataforma.",
-      datos: { consulta, pasajes: [], indicacion: "Sin información: dile a la persona que no la tienes y ofrécele lo que sí puedes hacer." },
+      mensaje: msg("No encontré información sobre eso en las fuentes de la plataforma."),
+      datos: { consulta, pasajes: [], indicacion: msg("Sin información: dile a la persona que no la tienes y ofrécele lo que sí puedes hacer.") },
     };
   }
   const fuentes: FuenteCitada[] = [];
@@ -322,7 +323,7 @@ async function consultarConocimiento(contexto: ContextoEjecucion, { consulta }: 
   }
   return {
     estado: "completada",
-    mensaje: `Consulté ${respuesta.pasajes.length === 1 ? "1 fuente" : `${respuesta.pasajes.length} fuentes`} de la plataforma.`,
+    mensaje: respuesta.pasajes.length === 1 ? msg("Consulté 1 fuente de la plataforma.") : `Consulté ${respuesta.pasajes.length} fuentes de la plataforma.`,
     datos: {
       consulta,
       pasajes: respuesta.pasajes.map((pasaje) => ({ tipo: pasaje.tipo, titulo: pasaje.titulo, texto: pasaje.texto, fuente: pasaje.fuente.titulo, ...(pasaje.fuente.fechaConsulta ? { consultadaEl: pasaje.fuente.fechaConsulta } : {}), ...(pasaje.ruta ? { ruta: pasaje.ruta } : {}) })),
@@ -344,7 +345,7 @@ async function buscarServicios(contexto: ContextoEjecucion, { consulta }: Argume
   }
   return {
     estado: "completada",
-    mensaje: `Encontré ${resultados.length} ${resultados.length === 1 ? "servicio" : "servicios"} para «${consulta}» y los mostré en pantalla.`,
+    mensaje: `Encontré ${resultados.length} ${resultados.length === 1 ? msg("servicio") : msg("servicios")} para «${consulta}» y los mostré en pantalla.`,
     datos: { consulta, resultados: resultados.map(servicioCompacto), fuentes: resultados.map(fuenteDeServicio) },
   };
 }
@@ -404,7 +405,7 @@ async function consultarReporte(contexto: ContextoEjecucion, { folio }: Argument
   }
   const normalizado = normalizarFolio(folio);
   if (!FOLIO_DEMO.test(normalizado)) {
-    throw new FalloAccion("Ese folio no tiene el formato esperado (DEMO-R-… para reportes o DEMO-G-… para gestiones).");
+    throw new FalloAccion(msg("Ese folio no tiene el formato esperado (DEMO-R-… para reportes o DEMO-G-… para gestiones)."));
   }
   if (normalizado.startsWith("DEMO-G-")) {
     const gestion = await repositorios.procedures.findByFolio(normalizado, actor);
@@ -441,7 +442,7 @@ function abrirMapa(contexto: ContextoEjecucion, argumentos: ArgumentosAccion<"ab
     estado: "completada",
     mensaje: argumentos.categoria
       ? `Abrí el Visor Urbano con las incidencias de «${NOMBRES_REPORTE[argumentos.categoria]}».`
-      : "Abrí el Visor Urbano con las incidencias.",
+      : msg("Abrí el Visor Urbano con las incidencias."),
     datos: { categoria: argumentos.categoria ?? null, vista: argumentos.vista ?? "puntos", datosDeDemostracion: true },
   };
 }
@@ -458,7 +459,7 @@ async function consultarGestionesDemo(contexto: ContextoEjecucion): Promise<Resu
     estado: "completada",
     mensaje:
       gestiones.length === 0
-        ? "Abrí «Mis gestiones». Todavía no tienes gestiones simuladas."
+        ? msg("Abrí «Mis gestiones». Todavía no tienes gestiones simuladas.")
         : `Abrí «Mis gestiones». Tienes ${gestiones.length} ${gestiones.length === 1 ? "gestión simulada" : "gestiones simuladas"}.`,
     datos: { total: gestiones.length, porEstado, recientes: gestiones.slice(0, MAX_RESULTADOS).map(gestionCompacta) },
   };
@@ -488,7 +489,7 @@ async function explicarBeneficiosDemo(contexto: ContextoEjecucion): Promise<Resu
         disponible: beneficio.disponible,
         ejemplo: true,
       })),
-      aviso: "Beneficios de ejemplo: no hay descuentos ni patrocinios reales.",
+      aviso: msg("Beneficios de ejemplo: no hay descuentos ni patrocinios reales."),
     },
   };
 }
@@ -506,7 +507,7 @@ async function mostrarApoyoHumano(contexto: ContextoEjecucion, { motivo }: Argum
   }
   return {
     estado: "completada",
-    mensaje: "Mostré en pantalla los canales de ayuda humana verificados.",
+    mensaje: msg("Mostré en pantalla los canales de ayuda humana verificados."),
     datos: {
       motivo,
       lineas: lineas.slice(0, MAX_RESULTADOS).map((linea) => ({
@@ -529,7 +530,7 @@ function navegar(contexto: ContextoEjecucion, { seccion }: ArgumentosAccion<"nav
 
 function senalarElemento(contexto: ContextoEjecucion, { objetivo }: ArgumentosAccion<"senalarElemento">): Resultado {
   const visible = contexto.pantalla.objetivos.find((candidato) => candidato.id === objetivo);
-  if (!visible) throw new FalloAccion("Ese elemento no está visible ahora.");
+  if (!visible) throw new FalloAccion(msg("Ese elemento no está visible ahora."));
   emitirActuacion({ tipo: "point", objetivo: visible.id, etiqueta: visible.etiqueta });
   return { estado: "completada", mensaje: `Señalé «${visible.etiqueta}» en la pantalla.`, datos: { objetivo: visible.id } };
 }
@@ -639,7 +640,7 @@ export async function ejecutarAccion(llamada: LlamadaAccion, contexto: ContextoE
   if (visible) emitirActuacion({ tipo: "intent", id: llamadaId, accion, objetivo: objetivoVisible(candidatosDeObjetivo(accion, argumentos), contexto.pantalla) });
 
   if (!accionesDelAmbito(contexto.ambito).includes(accion)) {
-    return recibo({ estado: "fallida", mensaje: "Esa acción no está disponible en este espacio. No se hizo nada." });
+    return recibo({ estado: "fallida", mensaje: msg("Esa acción no está disponible en este espacio. No se hizo nada.") });
   }
   const validacion = validarArgumentos(accion, argumentos);
   if (!validacion.ok) return recibo(invalidos(validacion.error));
@@ -650,7 +651,7 @@ export async function ejecutarAccion(llamada: LlamadaAccion, contexto: ContextoE
     if (guarda.decision === "preguntar") {
       return recibo({
         estado: "fallida",
-        mensaje: "No preparé nada: antes pregunta a la persona si quiere que lo prepare.",
+        mensaje: msg("No preparé nada: antes pregunta a la persona si quiere que lo prepare."),
         datos: { motivo: "confirmar_con_la_persona" },
       });
     }

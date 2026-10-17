@@ -1,4 +1,5 @@
 import type { EstadoMunicipal, MotivoCancelacion } from "@/types";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { ETIQUETA_ESTADO_MUNICIPAL, ETIQUETA_MOTIVO_CANCELACION, ICONO_ESTADO_MUNICIPAL } from "../lib/estados";
 
@@ -28,9 +29,13 @@ export interface StatusBadgeProps {
 
 /** Estado municipal con punto de color de Mérida Móvil + ícono + texto (nunca sólo color). */
 export function StatusBadge({ estado, motivo, tamano = "sm", className }: StatusBadgeProps) {
+  const { t } = useTranslation();
   const Icono = ICONO_ESTADO_MUNICIPAL[estado];
   const clases = CLASES[estado];
-  const texto = estado === "cancelado" && motivo ? `Cancelado: ${ETIQUETA_MOTIVO_CANCELACION[motivo]}` : ETIQUETA_ESTADO_MUNICIPAL[estado];
+  const texto =
+    estado === "cancelado" && motivo
+      ? t("Cancelado: {{motivo}}", { motivo: t(ETIQUETA_MOTIVO_CANCELACION[motivo]) })
+      : t(ETIQUETA_ESTADO_MUNICIPAL[estado]);
   return (
     <span
       data-estado={estado}
@@ -43,7 +48,7 @@ export function StatusBadge({ estado, motivo, tamano = "sm", className }: Status
     >
       <span aria-hidden="true" className={cx("size-2 shrink-0 rounded-full", clases.punto)} />
       <Icono aria-hidden="true" className="size-3.5 shrink-0" />
-      <span className="sr-only">Estado municipal: </span>
+      <span className="sr-only">{t("Estado municipal:")} </span>
       <span className="truncate">{texto}</span>
     </span>
   );

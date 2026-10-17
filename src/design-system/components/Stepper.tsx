@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 
 export interface PasoStepper {
@@ -16,15 +17,16 @@ export interface StepperProps {
 }
 
 /** Pasos de un asistente de formulario. En móvil muestra «Paso n de m» con barra de progreso. */
-export function Stepper({ pasos, actual, etiqueta = "Pasos del trámite", className }: StepperProps) {
+export function Stepper({ pasos, actual, etiqueta, className }: StepperProps) {
+  const { t } = useTranslation();
   const total = pasos.length;
   const indice = Math.min(Math.max(actual, 0), Math.max(total - 1, 0));
   const pasoActual = pasos[indice];
   return (
-    <nav aria-label={etiqueta} className={className}>
+    <nav aria-label={etiqueta ?? t("Pasos del trámite")} className={className}>
       <div className="sm:hidden">
         <p className="text-sm font-semibold text-marino">
-          Paso {indice + 1} de {total}
+          {t("Paso {{actual}} de {{total}}", { actual: indice + 1, total })}
           {pasoActual ? <span className="font-normal text-tinta-suave"> · {pasoActual.titulo}</span> : null}
         </p>
         <div aria-hidden="true" className="mt-2 h-2 overflow-hidden rounded-pildora bg-superficie-2">
@@ -50,7 +52,7 @@ export function Stepper({ pasos, actual, etiqueta = "Pasos del trámite", classN
               </span>
               <span className={cx("truncate text-sm", esActual ? "font-semibold text-marino" : "text-tinta-suave")}>
                 {paso.titulo}
-                <span className="sr-only">{completado ? " (completado)" : esActual ? " (paso actual)" : " (pendiente)"}</span>
+                <span className="sr-only">{completado ? ` ${t("(completado)")}` : esActual ? ` ${t("(paso actual)")}` : ` ${t("(pendiente)")}`}</span>
               </span>
               {i < total - 1 ? <span aria-hidden="true" className={cx("h-0.5 min-w-4 flex-1 rounded-pildora", completado ? "bg-exito" : "bg-borde")} /> : null}
             </li>

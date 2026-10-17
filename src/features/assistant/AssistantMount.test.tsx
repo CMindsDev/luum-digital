@@ -100,7 +100,7 @@ describe("AssistantMount", () => {
     await user.type(within(panel).getByRole("textbox", { name: "Escribe a Pekito" }), "Quiero reportar un bache en la calle 60 del Centro{Enter}");
 
     await waitFor(() => expect(router.state.location.pathname).toBe("/reportes/nuevo/bache"), { timeout: 4000 });
-    const estado = JSON.parse(screen.getByTestId("estado").textContent ?? "null") as { prefill: Record<string, unknown> };
+    const estado = JSON.parse((await screen.findByTestId("estado")).textContent ?? "null") as { prefill: Record<string, unknown> };
     expect(estado.prefill).toMatchObject({
       tipo: "reporte",
       categoria: "bache",

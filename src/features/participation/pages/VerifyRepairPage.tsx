@@ -1,28 +1,31 @@
 import { ClipboardList, MapPin, SearchX, Trophy } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { useActiveIdentity } from "@/app/session/store";
 import { EstadosReporte } from "@/components/reportes/EstadosReporte";
-import { NOMBRE_CATEGORIA_REPORTE } from "@/domain/reportes";
 import { evaluarElegibilidad } from "@/domain/verificacion";
 import { ButtonLink, Card, DemoTag, EmptyState, ErrorState, LoadingState, PageHeader, formatearFecha } from "@/design-system";
+import { msg } from "@/i18n";
 import { useReport, useReportVerifications } from "@/services/hooks";
 import type { Reporte, Verificacion } from "@/types";
 import { AvisoNoElegible } from "../components/AvisoNoElegible";
 import { FormularioVerificacion } from "../components/FormularioVerificacion";
 import { VerificacionEnviada } from "../components/VerificacionEnviada";
+import { NOMBRE_CATEGORIA_REPORTE_PARTICIPACION_UI } from "../lib/i18n";
 import { fechaAtencion } from "../lib/verificacion";
 
-const TITULO = "Verificar reparación";
+const TITULO = msg("Verificar reparación");
 
 function ResumenReporte({ reporte }: { reporte: Reporte }) {
+  const { t } = useTranslation();
   const { referencia, colonia } = reporte.ubicacion;
   const atendido = fechaAtencion(reporte);
   return (
     <Card as="section" aria-labelledby="titulo-reporte-verificar" className="flex flex-col gap-3">
       <div>
         <h2 id="titulo-reporte-verificar" className="text-lg font-semibold text-marino">
-          {NOMBRE_CATEGORIA_REPORTE[reporte.categoria]}
+          {t(NOMBRE_CATEGORIA_REPORTE_PARTICIPACION_UI[reporte.categoria])}
         </h2>
         <p className="mt-0.5 font-mono text-sm font-medium tracking-wide text-tinta">{reporte.folio}</p>
       </div>
@@ -37,11 +40,11 @@ function ResumenReporte({ reporte }: { reporte: Reporte }) {
       <EstadosReporte reporte={reporte} />
       {reporte.estadoMunicipal === "solucionado" ? (
         <p className="text-sm text-tinta-suave">
-          Atención reportada el <time dateTime={atendido}>{formatearFecha(atendido)}</time> (simulada). Ubicación aproximada de demostración.
+          {t("Atención reportada el")} <time dateTime={atendido}>{formatearFecha(atendido)}</time> {t("(simulada). Ubicación aproximada de demostración.")}
         </p>
       ) : null}
       <ButtonLink to={`/reportes/${encodeURIComponent(reporte.id)}`} variante="fantasma" tamano="sm" iconoInicio={ClipboardList} className="self-start">
-        Ver el detalle del reporte
+        {t("Ver el detalle del reporte")}
       </ButtonLink>
     </Card>
   );
@@ -52,6 +55,7 @@ function ResumenReporte({ reporte }: { reporte: Reporte }) {
  * verificar el propio reporte ni verificar dos veces; el resultado queda pendiente de revisión.
  */
 export default function VerifyRepairPage() {
+  const { t } = useTranslation();
   const { reporteId = "" } = useParams();
   const actor = useActiveIdentity();
   const reporte = useReport(reporteId);
@@ -60,8 +64,8 @@ export default function VerifyRepairPage() {
   const [enviada, setEnviada] = useState<Verificacion | null>(null);
 
   const cabecera = (
-    <PageHeader titulo={TITULO} antetitulo="Participación" regresar="/participacion">
-      <DemoTag>Verificación simulada</DemoTag>
+    <PageHeader titulo={t(TITULO)} antetitulo={t("Participación")} regresar="/participacion">
+      <DemoTag>{t("Verificación simulada")}</DemoTag>
     </PageHeader>
   );
 
@@ -80,7 +84,7 @@ export default function VerifyRepairPage() {
     return (
       <>
         {cabecera}
-        <LoadingState etiqueta="Cargando el reporte…" />
+        <LoadingState etiqueta={t("Cargando el reporte…")} />
       </>
     );
   }
@@ -92,7 +96,7 @@ export default function VerifyRepairPage() {
         {cabecera}
         <ErrorState
           error={error}
-          titulo="No pudimos cargar el reporte"
+          titulo={t("No pudimos cargar el reporte")}
           onReintentar={() => {
             void reporte.refetch();
             void verificaciones.refetch();
@@ -108,11 +112,11 @@ export default function VerifyRepairPage() {
         {cabecera}
         <EmptyState
           icono={SearchX}
-          titulo="No encontramos este reporte"
-          descripcion="Puede que se haya borrado al restablecer la demostración. Elige otro reporte en Participación."
+          titulo={t("No encontramos este reporte")}
+          descripcion={t("Puede que se haya borrado al restablecer la demostración. Elige otro reporte en Participación.")}
           accion={
             <ButtonLink to="/participacion" iconoInicio={Trophy}>
-              Ir a Participación
+              {t("Ir a Participación")}
             </ButtonLink>
           }
         />
@@ -132,10 +136,10 @@ export default function VerifyRepairPage() {
           </div>
           <Card as="section" aria-labelledby="titulo-formulario-verificacion" relleno="lg" className="min-w-0">
             <h2 id="titulo-formulario-verificacion" className="mb-1 text-xl font-semibold text-marino">
-              Cuéntanos qué observaste
+              {t("Cuéntanos qué observaste")}
             </h2>
             <p className="mb-5 max-w-prose text-[0.9375rem] text-tinta-suave">
-              Tu verificación quedará pendiente de revisión. No cambia el estado municipal: un voto ciudadano nunca cierra ni reabre un reporte.
+              {t("Tu verificación quedará pendiente de revisión. No cambia el estado municipal: un voto ciudadano nunca cierra ni reabre un reporte.")}
             </p>
             <FormularioVerificacion reporte={reporte.data} onEnviada={setEnviada} />
           </Card>

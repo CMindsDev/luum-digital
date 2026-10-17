@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useActiveIdentity } from "@/app/session/store";
 import type { EstadoCargaMapa } from "@/components/mapa/tipos";
@@ -29,6 +30,7 @@ import { useEstadoVisor } from "../hooks/useEstadoVisor";
  * demanda de bienestar agregada. Vista, representación y filtros viven en la URL.
  */
 export default function VisorPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const actor = useActiveIdentity();
   const { estado, actualizar } = useEstadoVisor();
@@ -120,18 +122,18 @@ export default function VisorPage() {
       onReintentar={() => void reportes.refetch()}
       hayFiltros={numeroFiltros > 0}
       onLimpiarFiltros={limpiarFiltros}
-      titulo={titulo}
+      titulo={titulo ? t(titulo) : undefined}
     />
   );
 
   return (
     <>
       <PageHeader
-        titulo="Mapa / Visor Urbano"
-        descripcion="Incidencias de demostración, zonas con más reportes y ubicaciones de atención. No sustituye al Visor Urbano oficial del Ayuntamiento."
+        titulo={t("Mapa / Visor Urbano")}
+        descripcion={t("Incidencias de demostración, zonas con más reportes y ubicaciones de atención. No sustituye al Visor Urbano oficial del Ayuntamiento.")}
       >
         <div className="flex flex-wrap items-center gap-2">
-          <DemoTag>Datos de demostración</DemoTag>
+          <DemoTag>{t("Datos de demostración")}</DemoTag>
           <IntegrationBadge estado="simulada" />
         </div>
       </PageHeader>
@@ -164,7 +166,7 @@ export default function VisorPage() {
           <aside aria-labelledby="titulo-filtros" className="space-y-6">
             <section className="rounded-tarjeta border border-borde bg-superficie p-4">
               <h2 id="titulo-filtros" className="mb-3 text-lg font-semibold text-marino">
-                Filtrar incidencias
+                {t("Filtrar incidencias")}
               </h2>
               {panelFiltros}
             </section>
@@ -178,7 +180,7 @@ export default function VisorPage() {
               {reportes.isError && !reportes.data ? (
                 <ErrorState
                   error={reportes.error}
-                  titulo="No se pudieron cargar las incidencias"
+                  titulo={t("No se pudieron cargar las incidencias")}
                   onReintentar={() => void reportes.refetch()}
                 />
               ) : null}
@@ -212,16 +214,16 @@ export default function VisorPage() {
         <Sheet
           abierto={filtrosAbiertos}
           onCerrar={() => setFiltrosAbiertos(false)}
-          titulo="Filtrar incidencias"
-          descripcion="Los filtros se aplican al momento y se conservan al volver de un detalle."
+          titulo={t("Filtrar incidencias")}
+          descripcion={t("Los filtros se aplican al momento y se conservan al volver de un detalle.")}
           pie={
             <div className="flex flex-wrap gap-3">
               <Button className="flex-1" onClick={() => setFiltrosAbiertos(false)}>
-                {reportes.data ? `Ver ${visibles.length} incidencias` : "Listo"}
+                {reportes.data ? t("Ver {{n}} incidencias", { n: visibles.length }) : t("Listo")}
               </Button>
               {numeroFiltros > 0 ? (
                 <Button variante="secundario" onClick={limpiarFiltros}>
-                  Limpiar
+                  {t("Limpiar")}
                 </Button>
               ) : null}
             </div>

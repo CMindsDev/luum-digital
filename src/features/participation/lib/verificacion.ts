@@ -1,5 +1,6 @@
 import { BadgeCheck, CircleCheck, CircleHelp, CircleX, Hourglass, TriangleAlert, Undo2, type LucideIcon } from "lucide-react";
 import type { TonoInsignia } from "@/design-system";
+import { msg } from "@/i18n";
 import type { EstadoRevision, Reporte, ResultadoVerificacion } from "@/types";
 
 /**
@@ -18,20 +19,20 @@ export interface OpcionResultado {
 export const OPCIONES_RESULTADO: readonly OpcionResultado[] = [
   {
     valor: "reparacion_completada",
-    etiqueta: "La reparación parece completada",
-    descripcion: "Estuviste en el lugar y el problema ya no se ve.",
+    etiqueta: msg("La reparación parece completada"),
+    descripcion: msg("Estuviste en el lugar y el problema ya no se ve."),
     icono: CircleCheck,
   },
   {
     valor: "problema_persiste",
-    etiqueta: "El problema persiste",
-    descripcion: "Estuviste en el lugar y el problema sigue ahí, total o parcialmente.",
+    etiqueta: msg("El problema persiste"),
+    descripcion: msg("Estuviste en el lugar y el problema sigue ahí, total o parcialmente."),
     icono: TriangleAlert,
   },
   {
     valor: "no_puedo_comprobar",
-    etiqueta: "No puedo comprobarlo",
-    descripcion: "No pudiste ver bien el punto o no estás seguro. También es una respuesta útil.",
+    etiqueta: msg("No puedo comprobarlo"),
+    descripcion: msg("No pudiste ver bien el punto o no estás seguro. También es una respuesta útil."),
     icono: CircleHelp,
   },
 ];
@@ -43,10 +44,10 @@ export const ICONO_RESULTADO: Record<ResultadoVerificacion, LucideIcon> = {
 };
 
 export const ETIQUETA_REVISION: Record<EstadoRevision, string> = {
-  pendiente_revision: "Pendiente de revisión",
-  aprobada: "Aprobada",
-  rechazada: "No aprobada",
-  revertida: "Validación revertida",
+  pendiente_revision: msg("Pendiente de revisión"),
+  aprobada: msg("Aprobada"),
+  rechazada: msg("No aprobada"),
+  revertida: msg("Validación revertida"),
 };
 
 export const ICONO_REVISION: Record<EstadoRevision, LucideIcon> = {

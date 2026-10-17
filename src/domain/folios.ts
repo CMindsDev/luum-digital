@@ -1,3 +1,4 @@
+import { t } from "i18next";
 /**
  * Folios de demostración. ÚNICO lugar donde se generan identificadores visibles DEMO-…
  *
@@ -32,7 +33,7 @@ export const CONTADORES_INICIALES: ContadoresFolio = {
 };
 
 export function formatearFolio(tipo: TipoFolio, numero: number): string {
-  if (!Number.isInteger(numero) || numero < 1) throw new RangeError("El número de folio debe ser un entero positivo.");
+  if (!Number.isInteger(numero) || numero < 1) throw new RangeError(t("El número de folio debe ser un entero positivo."));
   return `${PREFIJOS_FOLIO[tipo]}${String(numero).padStart(DIGITOS_FOLIO, "0")}`;
 }
 

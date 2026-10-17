@@ -3,6 +3,7 @@ import type * as MaplibreGL from "maplibre-gl";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import { useMemo, useRef, useState } from "react";
 import MapaGL, { AttributionControl, Layer, Marker, NavigationControl, Source, type MapLayerMouseEvent } from "react-map-gl/maplibre";
+import { msg } from "@/i18n";
 import { leerColoresMapa } from "./colores";
 import { LIMITES_NAVEGACION, textosMapa, ZOOM_MAXIMO, ZOOM_MINIMO, type ConfigMapa } from "./config";
 import { convertirClic, crearControl, motivoDeFallo } from "./motor-comun";
@@ -96,7 +97,7 @@ export default function MotorMaplibre({
         cargado.current = true;
         const lienzo = evento.target.getCanvas();
         if (idDescripcion) lienzo.setAttribute("aria-describedby", idDescripcion);
-        lienzo.addEventListener("webglcontextlost", () => onFallo("Se perdió el contexto gráfico del mapa (WebGL)."), {
+        lienzo.addEventListener("webglcontextlost", () => onFallo(msg("Se perdió el contexto gráfico del mapa (WebGL).")), {
           once: true,
         });
         registrarControl(crearControl(evento.target, sinAnimacion));

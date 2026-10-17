@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { FOTOS_BANDA, ICONOS_BANDA } from "@/design-system/lib/recursos-laboratorio";
 
@@ -8,6 +9,8 @@ import { FOTOS_BANDA, ICONOS_BANDA } from "@/design-system/lib/recursos-laborato
  * inmediata tiene prioridad visual sobre la decoración; la foto se omite en móvil.
  */
 export function BandaSaludBienestar() {
+  const { t } = useTranslation();
+
   return (
     <header className="superficie-oscura relative left-1/2 mb-8 w-[100cqw] -translate-x-1/2 overflow-hidden bg-azul text-white">
       <div aria-hidden="true" className="h-14 bg-linear-to-b from-crema to-azul sm:h-20" />
@@ -15,11 +18,11 @@ export function BandaSaludBienestar() {
         <div className="min-w-0">
           <img src={ICONOS_BANDA.salud} alt="" aria-hidden="true" width={64} height={52} className="h-13 w-auto" />
           <h1 tabIndex={-1} className="mt-5 text-[clamp(2.4rem,8vw,4.75rem)] leading-[0.972] font-normal tracking-[-0.05em] text-white">
-            <span className="block">Salud y</span>{" "}
-            <span className="block font-serif tracking-[-0.044em] italic">Bienestar</span>
+            <span className="block">{t("Salud y")}</span>{" "}
+            <span className="block font-serif tracking-[-0.044em] italic">{t("Bienestar")}</span>
           </h1>
           <p className="mt-5 max-w-md text-base leading-relaxed text-white">
-            Encuentra programas de salud, salud mental, educación, deporte y atención para mujeres. Cada programa indica su fuente oficial.
+            {t("Encuentra programas de salud, salud mental, educación, deporte y atención para mujeres. Cada programa indica su fuente oficial.")}
           </p>
           <div className="mt-6 max-w-sm">
             <AyudaInmediata guia="bienestar.ayuda_inmediata" anchoCompleto className="ring-2 ring-white" />

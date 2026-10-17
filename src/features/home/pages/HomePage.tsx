@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useActiveIdentity } from "@/app/session/store";
 import { SectionLabel } from "@/design-system";
 import { AccesosRapidos } from "../components/AccesosRapidos";
@@ -13,6 +14,7 @@ import { ResumenReportes } from "../components/ResumenReportes";
  * Sin estadísticas ficticias ni gráficas decorativas; sin novedades no verificadas.
  */
 export default function HomePage() {
+  const { t } = useTranslation();
   const identidad = useActiveIdentity();
   const nombre = identidad.nombre.split(" ")[0] ?? identidad.nombre;
 
@@ -22,7 +24,7 @@ export default function HomePage() {
       <AccesosRapidos />
       <section aria-labelledby="titulo-seguimiento">
         <SectionLabel id="titulo-seguimiento" className="mb-3">
-          Tu seguimiento
+          {t("Tu seguimiento")}
         </SectionLabel>
         <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-2 lg:gap-6">
           <ResumenGestiones />

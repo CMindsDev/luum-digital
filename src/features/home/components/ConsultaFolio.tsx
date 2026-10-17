@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useRef, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { Button, Field, TextInput } from "@/design-system";
 import { rutaDeFolio } from "../lib/folio";
@@ -14,6 +15,7 @@ export interface ConsultaFolioProps {
  * gestiones» (DEMO-G-…, DEMO-P-…, DEMO-C-…). Valida el formato antes de navegar.
  */
 export function ConsultaFolio({ valorInicial = "" }: ConsultaFolioProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [folio, setFolio] = useState(valorInicial);
   const [error, setError] = useState<string | null>(null);
@@ -34,8 +36,8 @@ export function ConsultaFolio({ valorInicial = "" }: ConsultaFolioProps) {
   return (
     <form onSubmit={enviar} noValidate className="flex max-w-xl flex-col items-start gap-3" data-guia="busqueda.folio">
       <Field
-        etiqueta="Tu folio de demostración"
-        ayuda="Por ejemplo DEMO-R-0000001 (reporte) o DEMO-G-0000001 (gestión)."
+        etiqueta={t("Tu folio de demostración")}
+        ayuda={t("Por ejemplo DEMO-R-0000001 (reporte) o DEMO-G-0000001 (gestión).")}
         error={error ?? undefined}
         className="w-full"
       >
@@ -53,7 +55,7 @@ export function ConsultaFolio({ valorInicial = "" }: ConsultaFolioProps) {
         />
       </Field>
       <Button type="submit" variante="primario" iconoFin={ArrowRight}>
-        Consultar folio
+        {t("Consultar folio")}
       </Button>
     </form>
   );

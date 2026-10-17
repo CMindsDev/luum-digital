@@ -138,6 +138,7 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
         modelo: config.modeloRealtime,
         voz: config.voz,
         ...(solicitud.nombreParaSaludo ? { nombreParaSaludo: solicitud.nombreParaSaludo } : {}),
+        ...(solicitud.idioma ? { idioma: solicitud.idioma } : {}),
       });
       const llamada = await realtime.crearLlamada(solicitud.sdp, sesion);
       if (!llamada.ok) {
@@ -226,7 +227,7 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
     if (!resultado.success) {
       return respuestaError(c, 400, { error: "La consulta no es válida.", codigo: CODIGOS_ERROR.solicitudInvalida });
     }
-    const { consulta } = resultado.data;
+    const { consulta, idioma } = resultado.data;
     const [intencion, encontrados] = await Promise.all([
       clasificarIntencion({ clef, modo: config.guardas, texto: consulta, registrar }),
       conocimiento.buscar(consulta),
@@ -239,7 +240,7 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
     let redactada: RespuestaRedactada | null = null;
     if (redactor && !sinRespuesta && pasajes.length > 0) {
       try {
-        redactada = await redactor(consulta, pasajes);
+        redactada = await redactor(consulta, pasajes, idioma);
       } catch (error) {
         registrar("busqueda_redaccion_fallida", { tipo: error instanceof Error ? error.message.slice(0, 40) : "desconocido" });
       }

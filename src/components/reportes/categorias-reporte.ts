@@ -1,5 +1,6 @@
 import { Construction, Grid3x3, Lightbulb, PawPrint, Trash2, Trees, Truck, type LucideIcon } from "lucide-react";
 import type { TonoMosaico } from "@/design-system";
+import { msg } from "@/i18n";
 import type { CategoriaReporte, Ubicacion } from "@/types";
 
 /**
@@ -39,9 +40,9 @@ export const CLASES_ICONO_CATEGORIA: Record<TonoMosaico, string> = {
 
 /** Cómo se obtuvo la ubicación, en palabras. */
 export const ETIQUETA_ORIGEN_UBICACION: Record<Ubicacion["origen"], string> = {
-  manual: "Escrita a mano (ubicación aproximada: centro de la colonia)",
-  mapa: "Marcada en el mapa",
-  dispositivo: "Ubicación del dispositivo",
+  manual: msg("Escrita a mano (ubicación aproximada: centro de la colonia)"),
+  mapa: msg("Marcada en el mapa"),
+  dispositivo: msg("Ubicación del dispositivo"),
 };
 
 /** «Calle 60 x 59 y 61 · Centro». */

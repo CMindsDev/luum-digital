@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import type { Coordenadas, Reporte } from "@/types";
 
 /** Inclusión por ray casting, incluyendo puntos sobre los bordes. Coordenadas WGS84. */
@@ -42,23 +43,23 @@ function seCruzan(a: Coordenadas, b: Coordenadas, c: Coordenadas, d: Coordenadas
 
 /** Diagnóstico compartido por el dibujo, la edición y la entrada manual. */
 export function diagnosticoArea(vertices: readonly Coordenadas[]): string | null {
-  if (vertices.length < 3) return "Agrega al menos 3 puntos para delimitar el área.";
-  if (vertices.some(p => !Number.isFinite(p.lat) || !Number.isFinite(p.lng) || Math.abs(p.lat) > 90 || Math.abs(p.lng) > 180)) return "Revisa las coordenadas de los puntos.";
+  if (vertices.length < 3) return t("Agrega al menos 3 puntos para delimitar el área.");
+  if (vertices.some(p => !Number.isFinite(p.lat) || !Number.isFinite(p.lng) || Math.abs(p.lat) > 90 || Math.abs(p.lng) > 180)) return t("Revisa las coordenadas de los puntos.");
   for (let i = 0; i < vertices.length; i++) {
     for (let j = i + 1; j < vertices.length; j++) {
-      if (Math.hypot(vertices[i]!.lat - vertices[j]!.lat, vertices[i]!.lng - vertices[j]!.lng) < 0.000005) return "Hay puntos repetidos o demasiado juntos. Arrástralos o elimina uno.";
+      if (Math.hypot(vertices[i]!.lat - vertices[j]!.lat, vertices[i]!.lng - vertices[j]!.lng) < 0.000005) return t("Hay puntos repetidos o demasiado juntos. Arrástralos o elimina uno.");
     }
   }
   for (let i = 0; i < vertices.length; i++) {
     for (let j = i + 2; j < vertices.length; j++) {
       if (i === 0 && j === vertices.length - 1) continue;
-      if (seCruzan(vertices[i]!, vertices[(i + 1) % vertices.length]!, vertices[j]!, vertices[(j + 1) % vertices.length]!)) return "Dos bordes se cruzan. Arrastra un punto o deshaz el último.";
+      if (seCruzan(vertices[i]!, vertices[(i + 1) % vertices.length]!, vertices[j]!, vertices[(j + 1) % vertices.length]!)) return t("Dos bordes se cruzan. Arrastra un punto o deshaz el último.");
     }
     // Impide que dos bordes adyacentes retrocedan sobre el mismo tramo.
     const a = vertices[i]!, b = vertices[(i + 1) % vertices.length]!, c = vertices[(i + 2) % vertices.length]!;
-    if (Math.abs(orientacion(a, b, c)) <= EPSILON && ((a.lng - b.lng) * (c.lng - b.lng) + (a.lat - b.lat) * (c.lat - b.lat)) > 0) return "Hay bordes superpuestos. Mueve o elimina el punto intermedio.";
+    if (Math.abs(orientacion(a, b, c)) <= EPSILON && ((a.lng - b.lng) * (c.lng - b.lng) + (a.lat - b.lat) * (c.lat - b.lat)) > 0) return t("Hay bordes superpuestos. Mueve o elimina el punto intermedio.");
   }
-  if (superficieArea(vertices) < 0.000001) return "El área es demasiado pequeña o sus puntos están alineados.";
+  if (superficieArea(vertices) < 0.000001) return t("El área es demasiado pequeña o sus puntos están alineados.");
   return null;
 }
 

@@ -1,6 +1,7 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useMemo, useRef, useState } from "react";
 import MapaGL, { AttributionControl, Layer, Marker, NavigationControl, Source, type MapLib, type MapMouseEvent } from "react-map-gl/mapbox";
+import { msg } from "@/i18n";
 import { LIMITES_NAVEGACION, textosMapa, ZOOM_MAXIMO, ZOOM_MINIMO } from "./config";
 import { convertirClic, crearControl, motivoDeFallo } from "./motor-comun";
 import { PinMarcador } from "./PinMarcador";
@@ -91,7 +92,7 @@ export default function MotorMapbox({
         cargado.current = true;
         const lienzo = evento.target.getCanvas();
         if (idDescripcion) lienzo.setAttribute("aria-describedby", idDescripcion);
-        lienzo.addEventListener("webglcontextlost", () => onFallo("Se perdió el contexto gráfico del mapa (WebGL)."), {
+        lienzo.addEventListener("webglcontextlost", () => onFallo(msg("Se perdió el contexto gráfico del mapa (WebGL).")), {
           once: true,
         });
         registrarControl(crearControl(evento.target, sinAnimacion));

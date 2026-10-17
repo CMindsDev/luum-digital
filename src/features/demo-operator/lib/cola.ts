@@ -1,6 +1,7 @@
 import { ChevronDown, ChevronsUp, ChevronUp, type LucideIcon } from "lucide-react";
 import type { TonoInsignia } from "@/design-system";
 import { calcularPrioridad, type NivelPrioridad, type PrioridadCalculada } from "@/domain/prioridad";
+import { msg } from "@/i18n";
 import type { EstadoMunicipal, FiltroReportes, Reporte } from "@/types";
 
 /**
@@ -33,9 +34,9 @@ export function ordenarCola(reportes: readonly Reporte[], ahora: Date): Elemento
 }
 
 export const ETIQUETA_NIVEL: Record<NivelPrioridad, string> = {
-  alta: "Prioridad alta",
-  media: "Prioridad media",
-  baja: "Prioridad baja",
+  alta: msg("Prioridad alta"),
+  media: msg("Prioridad media"),
+  baja: msg("Prioridad baja"),
 };
 
 export const ICONO_NIVEL: Record<NivelPrioridad, LucideIcon> = {

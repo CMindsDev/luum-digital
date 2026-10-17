@@ -1,5 +1,6 @@
 import { CircleAlert, CircleCheck, Info, TriangleAlert, X, type LucideIcon } from "lucide-react";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { useAvisos, type AvisoEmergente, type TonoAviso } from "../lib/toast-store";
 
@@ -13,6 +14,7 @@ const BORDE: Record<TonoAviso, string> = {
 };
 
 function Aviso({ aviso }: { aviso: AvisoEmergente }) {
+  const { t } = useTranslation();
   const descartar = useAvisos((estado) => estado.descartar);
   const Icono = ICONOS[aviso.tono];
 
@@ -49,8 +51,8 @@ function Aviso({ aviso }: { aviso: AvisoEmergente }) {
       <button
         type="button"
         onClick={() => descartar(aviso.id)}
-        aria-label="Cerrar aviso"
-        title="Cerrar aviso"
+        aria-label={t("Cerrar aviso")}
+        title={t("Cerrar aviso")}
         className="-mt-2 -mr-2 inline-flex size-11 shrink-0 items-center justify-center rounded-boton text-tinta-suave hover:bg-superficie-2"
       >
         <X aria-hidden="true" className="size-4" />
@@ -64,10 +66,11 @@ function Aviso({ aviso }: { aviso: AvisoEmergente }) {
  * no tapar contenido. Usa `notificar()` de design-system para mostrar un aviso.
  */
 export function Toaster() {
+  const { t } = useTranslation();
   const avisos = useAvisos((estado) => estado.avisos);
   return (
     <section
-      aria-label="Avisos"
+      aria-label={t("Avisos")}
       className="pointer-events-none fixed inset-x-0 z-50 flex justify-center px-4 md:right-6 md:left-auto md:w-[24rem] md:px-0"
       style={{ bottom: "calc(var(--altura-nav-inferior) + var(--espacio-asistente) + 1rem)" }}
     >

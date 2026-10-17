@@ -6,6 +6,7 @@
  * nada: la confirmación en pantalla sigue siendo obligatoria.
  */
 import { z } from "zod";
+import { IdiomaAsistenteSchema } from "./idioma";
 import { PantallaActualSchema } from "./pantalla";
 
 export const RUTAS_API_ASISTENTE = {
@@ -57,6 +58,8 @@ export const SolicitudConexionSchema = z.object({
   consentimientoBienestar: z.boolean().optional(),
   /** Nombre ficticio para saludar, sólo si las preferencias de privacidad lo permiten. */
   nombreParaSaludo: z.string().max(40).optional(),
+  /** Idioma en que debe responder el asistente (por omisión, español). */
+  idioma: IdiomaAsistenteSchema.optional(),
 });
 export type SolicitudConexion = z.infer<typeof SolicitudConexionSchema>;
 

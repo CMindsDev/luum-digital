@@ -1,4 +1,5 @@
 import { FolderSearch, SearchX } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useParams, useSearchParams } from "react-router";
 import { esCategoriaId } from "@/components/catalogo";
 import { useCategories, useServices } from "@/services/hooks";
@@ -12,6 +13,7 @@ import { escribirFiltro, leerFiltro } from "../lib/filtros";
 
 /** /servicios/categoria/:categoriaId — portada de una categoría con sus servicios y filtros. */
 export default function CategoryPage() {
+  const { t } = useTranslation();
   const { categoriaId } = useParams();
   const [parametros, setParametros] = useSearchParams();
   const categorias = useCategories();
@@ -24,11 +26,11 @@ export default function CategoryPage() {
     setParametros(escribirFiltro(parametros, cambios), { replace: true });
   const limpiar = () => setParametros(escribirFiltro(parametros, { texto: undefined, estadoDeInformacion: undefined, tipoDeRecorrido: undefined }), { replace: true });
 
-  if (categorias.isPending) return <LoadingState etiqueta="Cargando la categoría…" />;
+  if (categorias.isPending) return <LoadingState etiqueta={t("Cargando la categoría…")} />;
   if (categorias.isError) {
     return (
       <>
-        <PageHeader titulo="Categoría de servicios" regresar="/servicios" />
+        <PageHeader titulo={t("Categoría de servicios")} regresar="/servicios" />
         <ErrorState error={categorias.error} onReintentar={() => void categorias.refetch()} />
       </>
     );
@@ -38,12 +40,12 @@ export default function CategoryPage() {
   if (!categoria) {
     return (
       <>
-        <PageHeader titulo="No encontramos esta categoría" regresar="/servicios" />
+        <PageHeader titulo={t("No encontramos esta categoría")} regresar="/servicios" />
         <EmptyState
           icono={FolderSearch}
-          titulo="La categoría no existe en el catálogo"
-          descripcion="Puede que el enlace esté incompleto. Revisa las categorías disponibles en el catálogo."
-          accion={<ButtonLink to="/servicios">Ver todas las categorías</ButtonLink>}
+          titulo={t("La categoría no existe en el catálogo")}
+          descripcion={t("Puede que el enlace esté incompleto. Revisa las categorías disponibles en el catálogo.")}
+          accion={<ButtonLink to="/servicios">{t("Ver todas las categorías")}</ButtonLink>}
         />
       </>
     );
@@ -51,21 +53,19 @@ export default function CategoryPage() {
 
   const conFiltros = Boolean(filtroUrl.texto || filtroUrl.estadoDeInformacion || filtroUrl.tipoDeRecorrido);
   const total = servicios.data?.length;
+  const rotulo = total !== undefined && !conFiltros ? (total === 1 ? t("1 ficha en el catálogo") : t("{{total}} fichas en el catálogo", { total })) : undefined;
 
   return (
     <>
-      <EncabezadoCategoria
-        categoria={categoria}
-        rotulo={total !== undefined && !conFiltros ? `${total} ${total === 1 ? "ficha" : "fichas"} en el catálogo` : undefined}
-      />
+      <EncabezadoCategoria categoria={categoria} rotulo={rotulo} />
 
       <div className="flex flex-col gap-6">
-        <section aria-label="Buscar en la categoría" className="flex flex-col gap-4 rounded-tarjeta border border-borde bg-superficie p-4 shadow-suave sm:p-5">
+        <section aria-label={t("Buscar en la categoría")} className="flex flex-col gap-4 rounded-tarjeta border border-borde bg-superficie p-4 shadow-suave sm:p-5">
           <BuscadorCatalogo
             key={filtroUrl.texto ?? ""}
             inicial={filtroUrl.texto}
-            etiqueta={`Buscar en ${categoria.nombre}`}
-            marcador="Escribe un trámite o servicio"
+            etiqueta={t("Buscar en {{categoria}}", { categoria: categoria.nombre })}
+            marcador={t("Escribe un trámite o servicio")}
             onBuscar={(texto) => cambiar({ texto: texto || undefined })}
           />
           <FiltrosCatalogo filtro={filtroUrl} onCambiar={cambiar} onLimpiar={limpiar} />
@@ -74,39 +74,39 @@ export default function CategoryPage() {
         <section aria-labelledby="titulo-servicios-categoria">
           <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h2 id="titulo-servicios-categoria" className="text-xl font-semibold text-marino">
-              Servicios
+              {t("Servicios")}
             </h2>
             <p aria-live="polite" className="text-sm text-tinta-suave">
-              {total !== undefined ? `${total} ${total === 1 ? "resultado" : "resultados"}` : ""}
+              {total !== undefined ? (total === 1 ? t("1 resultado") : t("{{total}} resultados", { total })) : ""}
             </p>
           </div>
           {servicios.isPending ? (
-            <LoadingState etiqueta="Cargando servicios de la categoría…" variante="tarjetas" />
+            <LoadingState etiqueta={t("Cargando servicios de la categoría…")} variante="tarjetas" />
           ) : servicios.isError ? (
             <ErrorState error={servicios.error} onReintentar={() => void servicios.refetch()} />
           ) : servicios.data.length === 0 ? (
             <EmptyState
               icono={SearchX}
-              titulo={conFiltros ? "Ningún servicio coincide con los filtros" : "Esta categoría aún no tiene fichas"}
+              titulo={conFiltros ? t("Ningún servicio coincide con los filtros") : t("Esta categoría aún no tiene fichas")}
               descripcion={
                 conFiltros
-                  ? "Quita algún filtro o prueba con otras palabras."
-                  : "El catálogo sólo incluye fichas publicadas por fuentes oficiales en la fecha de consulta."
+                  ? t("Quita algún filtro o prueba con otras palabras.")
+                  : t("El catálogo sólo incluye fichas publicadas por fuentes oficiales en la fecha de consulta.")
               }
               accion={
                 conFiltros ? (
                   <Button variante="secundario" onClick={limpiar}>
-                    Quitar filtros
+                    {t("Quitar filtros")}
                   </Button>
                 ) : (
                   <ButtonLink to="/servicios" variante="secundario">
-                    Volver al catálogo
+                    {t("Volver al catálogo")}
                   </ButtonLink>
                 )
               }
             />
           ) : (
-            <ListaServicios key={parametros.toString()} servicios={servicios.data} etiqueta={`Servicios de ${categoria.nombre}`} />
+            <ListaServicios key={parametros.toString()} servicios={servicios.data} etiqueta={t("Servicios de {{categoria}}", { categoria: categoria.nombre })} />
           )}
         </section>
       </div>

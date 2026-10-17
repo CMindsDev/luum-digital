@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { useId, useRef, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { useModalDialog } from "../lib/use-modal-dialog";
 import { IconButton } from "./IconButton";
@@ -24,6 +25,7 @@ export interface SheetProps {
  * Dialog (dialog nativo con showModal, Escape, foco atrapado y devuelto).
  */
 export function Sheet({ abierto, onCerrar, titulo, descripcion, children, pie, lado = "derecha", siemprePanel = false, className }: SheetProps) {
+  const { t } = useTranslation();
   const tituloRef = useRef<HTMLHeadingElement>(null);
   const idTitulo = useId();
   const idDescripcion = useId();
@@ -66,7 +68,7 @@ export function Sheet({ abierto, onCerrar, titulo, descripcion, children, pie, l
                 </div>
               ) : null}
             </div>
-            <IconButton etiqueta="Cerrar" icono={X} onClick={onCerrar} className="-mt-1 -mr-2" />
+            <IconButton etiqueta={t("Cerrar")} icono={X} onClick={onCerrar} className="-mt-1 -mr-2" />
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto px-5 pt-2 pb-5">{children}</div>
           {pie ? <div className="border-t border-borde px-5 py-4">{pie}</div> : null}

@@ -4,6 +4,7 @@ import {
   type RespuestaBusqueda,
 } from "@shared/asistente/busqueda";
 import { RUTAS_API_ASISTENTE } from "@shared/asistente/servidor";
+import { i18n } from "@/i18n";
 
 const TIEMPO_MAXIMO_MS = 12_000;
 
@@ -15,7 +16,7 @@ export function crearClienteBusquedaInteligente(opciones: { fetch?: typeof fetch
   const solicitar = opciones.fetch ?? ((entrada, init) => globalThis.fetch(entrada, init));
   return {
     async buscar(consulta) {
-      const validacion = SolicitudBusquedaSchema.safeParse({ consulta });
+      const validacion = SolicitudBusquedaSchema.safeParse({ consulta, idioma: i18n.language === "yua" ? "yua" : "es" });
       if (!validacion.success) return null;
       try {
         const respuesta = await solicitar(RUTAS_API_ASISTENTE.busqueda, {

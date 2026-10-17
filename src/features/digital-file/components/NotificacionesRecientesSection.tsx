@@ -1,4 +1,5 @@
 import { BadgeCheck, Bell, ChevronRight, ClipboardList, EyeOff, Info, Megaphone, Trophy, type LucideIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Badge, ButtonLink, Card, EmptyState, ErrorState, formatearFechaHora, LoadingState } from "@/design-system";
 import { useNotifications, usePrivacy } from "@/services/hooks";
@@ -18,6 +19,7 @@ const ICONO_TIPO: Record<Notificacion["tipo"], LucideIcon> = {
 
 /** Notificaciones recientes de la identidad activa; respeta «Notificaciones discretas». */
 export function NotificacionesRecientesSection() {
+  const { t } = useTranslation();
   const notificaciones = useNotifications();
   const privacidad = usePrivacy();
   const recientes = notificaciones.data ? [...notificaciones.data].sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, MAXIMO) : [];
@@ -28,30 +30,36 @@ export function NotificacionesRecientesSection() {
       <EncabezadoSeccion
         id="titulo-notificaciones-recientes"
         icono={Bell}
-        rotulo="Avisos"
-        titulo="Notificaciones recientes"
+        rotulo={t("Avisos")}
+        titulo={t("Notificaciones recientes")}
         extra={
           discretas ? (
             <Badge tono="marino" icono={EyeOff}>
-              Discretas
+              {t("Discretas")}
             </Badge>
           ) : null
         }
       />
 
-      {notificaciones.isPending ? <LoadingState etiqueta="Cargando tus notificaciones…" variante="compacto" /> : null}
+      {notificaciones.isPending ? <LoadingState etiqueta={t("Cargando tus notificaciones…")} variante="compacto" /> : null}
 
       {notificaciones.isError ? (
         <ErrorState
           error={notificaciones.error}
           nivel={3}
-          titulo="No pudimos cargar tus notificaciones"
+          titulo={t("No pudimos cargar tus notificaciones")}
           onReintentar={() => void notificaciones.refetch()}
         />
       ) : null}
 
       {notificaciones.isSuccess && recientes.length === 0 ? (
-        <EmptyState nivel={3} icono={Bell} titulo="No tienes notificaciones" descripcion="Aquí verás avisos de tus gestiones y reportes de demostración." className="py-6" />
+        <EmptyState
+          nivel={3}
+          icono={Bell}
+          titulo={t("No tienes notificaciones")}
+          descripcion={t("Aquí verás avisos de tus gestiones y reportes de demostración.")}
+          className="py-6"
+        />
       ) : null}
 
       {recientes.length > 0 ? (
@@ -65,24 +73,25 @@ export function NotificacionesRecientesSection() {
                 <div className="min-w-0 flex-1">
                   {notificacion.enlace ? (
                     <Link to={notificacion.enlace} className="flex min-h-11 items-center font-semibold break-words text-tinta underline-offset-2 hover:underline">
-                      {notificacion.titulo}
+                      {t(notificacion.titulo)}
                     </Link>
                   ) : (
-                    <p className="flex min-h-11 items-center font-semibold break-words text-tinta">{notificacion.titulo}</p>
+                    <p className="flex min-h-11 items-center font-semibold break-words text-tinta">{t(notificacion.titulo)}</p>
                   )}
                   {detalle ? (
-                    <p className="mt-0.5 text-sm break-words text-tinta-suave">{notificacion.cuerpo}</p>
+                    <p className="mt-0.5 text-sm break-words text-tinta-suave">{t(notificacion.cuerpo)}</p>
                   ) : (
                     <p className="mt-0.5 flex items-center gap-1.5 text-sm text-tinta-suave">
                       <EyeOff aria-hidden="true" className="size-3.5 shrink-0" />
-                      Vista previa oculta
+                      {t("Vista previa oculta")}
                     </p>
                   )}
                   <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-tinta-suave">
                     <time dateTime={notificacion.fecha}>{formatearFechaHora(notificacion.fecha)}</time>
                     {notificacion.leida ? null : (
                       <Badge tono="azul">
-                        <span className="sr-only">Estado: </span>Sin leer
+                        <span className="sr-only">{t("Estado: ")}</span>
+                        {t("Sin leer")}
                       </Badge>
                     )}
                   </p>
@@ -94,7 +103,7 @@ export function NotificacionesRecientesSection() {
       ) : null}
 
       <ButtonLink to="/notificaciones" variante="fantasma" tamano="sm" iconoFin={ChevronRight} className="mt-3">
-        Ver todas las notificaciones
+        {t("Ver todas las notificaciones")}
       </ButtonLink>
     </Card>
   );

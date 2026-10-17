@@ -1,4 +1,5 @@
 import { UserCog, Users } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 import { ButtonLink, Card, SourceNote } from "@/design-system";
 import type { FuenteConsultada } from "@/types";
 
@@ -14,6 +15,8 @@ const EXPEDIENTE_OFICIAL: FuenteConsultada = {
  * municipal) y que nunca se piden CURP, INE ni comprobantes reales.
  */
 export function AvisoCuentaDemo() {
+  const { t } = useTranslation();
+
   return (
     <Card as="section" aria-labelledby="titulo-cuenta-compartida" relleno="md" tono="crema" className="mb-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
@@ -22,20 +25,18 @@ export function AvisoCuentaDemo() {
         </span>
         <div className="min-w-0 flex-1">
           <h2 id="titulo-cuenta-compartida" className="text-lg font-semibold text-marino">
-            Cuenta de demostración compartida
+            {t("Cuenta de demostración compartida")}
           </h2>
           <p className="mt-1 max-w-prose text-[0.9375rem] text-tinta">
-            Este expediente es ficticio y lo comparte toda la demostración. <strong className="font-semibold">No es una cuenta ni una
-            autenticación municipal</strong>: no hay contraseña, nunca te pedimos CURP, INE ni comprobantes reales y nada de lo que ves
-            aquí tiene validez oficial.
+            <Trans i18nKey="Este expediente es ficticio y lo comparte toda la demostración. <strong>No es una cuenta ni una autenticación municipal</strong>: no hay contraseña, nunca te pedimos CURP, INE ni comprobantes reales y nada de lo que ves aquí tiene validez oficial." components={{ strong: <strong className="font-semibold" /> }} />
           </p>
           <SourceNote
             className="mt-3"
             fuente={EXPEDIENTE_OFICIAL}
-            nota="Es otro sistema. Este prototipo no se conecta con él: no lee ni guarda nada ahí."
+            nota={t("Es otro sistema. Este prototipo no se conecta con él: no lee ni guarda nada ahí.")}
           />
           <ButtonLink to="/cuenta" variante="secundario" tamano="sm" iconoInicio={UserCog} className="mt-4" data-guia="expediente.cambiar_identidad">
-            Cambiar identidad ficticia
+            {t("Cambiar identidad ficticia")}
           </ButtonLink>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { ArrowUp, Mic } from "lucide-react";
 import { useEffect, useId, useLayoutEffect, useRef, type FormEvent, type KeyboardEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
 
 const MAX_CARACTERES = 500;
@@ -26,6 +27,7 @@ export interface CompositorPekitoProps {
  * Enter envía; Mayús + Enter agrega una línea. La ayuda «Puede equivocarse…» queda asociada al campo.
  */
 export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDisponible, onHablar, enfoquePendiente, onEnfocado }: CompositorPekitoProps) {
+  const { t } = useTranslation();
   const propio = useRef<HTMLTextAreaElement>(null);
   const idCampo = useId();
   const idAyuda = useId();
@@ -69,10 +71,10 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
   };
 
   return (
-    <form onSubmit={enviar} aria-label="Escribe a Pekito" className="px-4 pt-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-5">
+    <form onSubmit={enviar} aria-label={t("Escribe a Pekito")} className="px-4 pt-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-5">
       <div className="pekito-compositor flex items-end gap-1.5 rounded-[28px] p-1.5">
         <label htmlFor={idCampo} className="sr-only">
-          Escribe a Pekito
+          {t("Escribe a Pekito")}
         </label>
         <textarea
           id={idCampo}
@@ -82,7 +84,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
           onKeyDown={alTeclear}
           rows={1}
           maxLength={MAX_CARACTERES}
-          placeholder="Escribe un mensaje…"
+          placeholder={t("Escribe un mensaje…")}
           aria-describedby={idAyuda}
           autoComplete="off"
           data-guia="asistente.mensaje"
@@ -92,7 +94,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
           <button
             type="button"
             onClick={onHablar}
-            aria-label="Hablar con Pekito"
+            aria-label={t("Hablar con Pekito")}
             data-guia="asistente.dictar"
             className="grid size-11 shrink-0 place-items-center rounded-full text-(--pk-texto-suave) hover:text-(--pk-texto)"
           >
@@ -101,7 +103,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
         ) : null}
         <button
           type="submit"
-          aria-label={ocupado ? "Enviar (espera a que Pekito termine)" : "Enviar"}
+          aria-label={ocupado ? t("Enviar (espera a que Pekito termine)") : t("Enviar")}
           disabled={deshabilitado}
           data-guia="asistente.enviar"
           className={cx(
@@ -113,7 +115,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
         </button>
       </div>
       <p id={idAyuda} className="mt-2 px-2 text-center text-xs text-(--pk-texto-suave)">
-        Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.
+        {t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
       </p>
     </form>
   );

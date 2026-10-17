@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useStore } from "zustand";
 import { useActiveIdentity } from "@/app/session/store";
+import { i18n } from "@/i18n";
 import { DemoAssistantProvider, detectarRiesgo, elegirProveedores, ETIQUETA_DEMO, type ProveedoresAsistente } from "@/features/assistant/providers";
 import { createAssistantStore, crearControladorAsistente, type ControladorAsistente, type MotivoApoyo } from "@/features/assistant/runtime";
 import type { AssistantProvider } from "@/services/contracts";
@@ -68,6 +69,12 @@ export function useAcompanante({ abrirApoyoHumano, lineas }: OpcionesAcompanante
     controladorRef.current = { controlador, configuracion };
     return controlador;
   }, [configuracion, store]);
+
+  useEffect(() => {
+    const alCambiar = () => controladorRef.current?.controlador.pausar();
+    i18n.on("languageChanged", alCambiar);
+    return () => i18n.off("languageChanged", alCambiar);
+  }, []);
 
   // Al salir de la pantalla (o al cambiar de proveedor) se cuelga y se borra la conversación.
   useEffect(() => {

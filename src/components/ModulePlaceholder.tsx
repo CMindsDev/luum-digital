@@ -1,4 +1,5 @@
 import { Construction, House } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 import { useMatches } from "react-router";
 import { ButtonLink, DemoTag, EmptyState, PageHeader } from "@/design-system";
 import { leerHandleMarcador } from "./handle-marcador";
@@ -18,24 +19,26 @@ export interface ModulePlaceholderProps {
  * por pantalla para que el AppShell, las pruebas y el asistente funcionen desde el inicio.
  */
 export function ModulePlaceholder({ modulo, titulo, descripcion, regresar }: ModulePlaceholderProps) {
+  const { t } = useTranslation();
   const handle = leerHandleMarcador(useMatches());
   return (
     <>
-      <PageHeader titulo={titulo ?? handle?.titulo ?? "Sección en construcción"} descripcion={descripcion} regresar={regresar ?? handle?.regresar}>
-        <DemoTag>En construcción</DemoTag>
+      <PageHeader titulo={titulo ?? handle?.titulo ?? t("Sección en construcción")} descripcion={descripcion} regresar={regresar ?? handle?.regresar}>
+        <DemoTag>{t("En construcción")}</DemoTag>
       </PageHeader>
       <EmptyState
         icono={Construction}
-        titulo="Esta sección está en construcción"
+        titulo={t("Esta sección está en construcción")}
         descripcion={
-          <p>
-            Falta el módulo <strong className="font-semibold text-tinta">«{modulo}»</strong> de este prototipo. Mientras tanto, puedes
-            explorar las demás secciones desde el menú.
-          </p>
+          <Trans
+            i18nKey="Falta el módulo <0>«{{modulo}}»</0> de este prototipo. Mientras tanto, puedes explorar las demás secciones desde el menú."
+            values={{ modulo }}
+            components={[<strong className="font-semibold text-tinta" />]}
+          />
         }
         accion={
           <ButtonLink to="/" variante="secundario" iconoInicio={House}>
-            Ir al inicio
+            {t("Ir al inicio")}
           </ButtonLink>
         }
       />

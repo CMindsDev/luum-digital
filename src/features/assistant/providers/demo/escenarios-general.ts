@@ -6,17 +6,19 @@
  * actividades culturales»; además mapa, beneficios, señalar y navegar.
  * Ante señales de riesgo, lo primero es mostrar ayuda humana.
  */
+import { t } from "i18next";
 import { z } from "zod";
 import type { ReciboAccion, Seccion } from "@shared/asistente/acciones";
+import { msg } from "@/i18n";
 import type { CategoriaReporte } from "@/types";
 import { fuentesDeRecibo, NOMBRES_REPORTE } from "../../runtime/ejecutor";
 import type { Escenarios, HerramientasEscenario } from "./sesion-demo";
 import { capitalizar, contiene, detectarRiesgo, esAfirmacion, esNegacion, normalizar } from "./texto";
 
 const ETIQUETA_INFORMACION: Record<"verificada" | "pendiente" | "demostracion", string> = {
-  verificada: "información verificada",
-  pendiente: "pendiente de verificar",
-  demostracion: "información de ejemplo",
+  verificada: msg("información verificada"),
+  pendiente: msg("pendiente de verificar"),
+  demostracion: msg("información de ejemplo"),
 };
 
 const ResultadosSchema = z.object({
@@ -50,8 +52,9 @@ const SaldoSchema = z.object({
   beneficios: z.array(z.object({ nombre: z.string(), costoPuntos: z.number() })),
 });
 
-const SUGERENCIAS =
-  "Prueba con: «Quiero reportar un bache», «¿Qué documentos pide este trámite?», «Quiero consultar mi folio», «Busco apoyo psicológico», «Quiero revisar un trámite de mi negocio» o «Busco actividades culturales».";
+const SUGERENCIAS = msg(
+  "Prueba con: «Quiero reportar un bache», «¿Qué documentos pide este trámite?», «Quiero consultar mi folio», «Busco apoyo psicológico», «Quiero revisar un trámite de mi negocio» o «Busco actividades culturales».",
+);
 
 const PALABRAS_REPORTE: readonly (readonly [CategoriaReporte, readonly string[]])[] = [
   ["bache", ["bache", "hoyo en la calle", "hoyo en el pavimento", "socavon", "hundimiento"]],
@@ -136,26 +139,26 @@ function servicioEnPantalla(herramientas: HerramientasEscenario): string | null 
 
 // --- Respuestas a partir de los recibos ---
 
-function falla(herramientas: HerramientasEscenario, recibo: ReciboAccion, prefijo = "No pude completarlo") {
-  herramientas.decir(`${prefijo}: ${recibo.mensaje}`);
+function falla(herramientas: HerramientasEscenario, recibo: ReciboAccion, prefijo = msg("No pude completarlo")) {
+  herramientas.decir(t("{{prefijo}}: {{mensaje}}", { prefijo: t(prefijo), mensaje: t(recibo.mensaje) }));
 }
 
 async function buscarYProponer(herramientas: HerramientasEscenario, consulta: string, cierre?: string) {
   const recibo = await herramientas.accion("buscarServicios", { consulta });
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude buscar en el catálogo");
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude buscar en el catálogo"));
   const datos = ResultadosSchema.safeParse(recibo.datos);
   const resultados = datos.success ? datos.data.resultados : [];
   if (resultados.length === 0) {
-    herramientas.decir(`No encontré servicios para «${consulta}» en el catálogo de servicios. Prueba con otras palabras o explora «Trámites y servicios».`);
+    herramientas.decir(t("No encontré servicios para «{{consulta}}» en el catálogo de servicios. Prueba con otras palabras o explora «Trámites y servicios».", { consulta }));
     return;
   }
-  const lista = resultados.map((resultado, indice) => `${indice + 1}. ${resultado.nombre} (${ETIQUETA_INFORMACION[resultado.estadoDeInformacion]})`).join("\n");
+  const lista = resultados.map((resultado, indice) => `${indice + 1}. ${resultado.nombre} (${t(ETIQUETA_INFORMACION[resultado.estadoDeInformacion])})`).join("\n");
   const primero = resultados[0];
   if (primero) herramientas.memoria.propuesta = { tipo: "requisitos", servicioId: primero.id, nombre: primero.nombre };
   herramientas.decir(
     [
-      `Encontré esto en el catálogo de servicios y lo dejé en pantalla:\n${lista}`,
-      primero ? `¿Quieres que te muestre los requisitos de «${primero.nombre}»?` : "",
+      t("Encontré esto en el catálogo de servicios y lo dejé en pantalla:\n{{lista}}", { lista }),
+      primero ? t("¿Quieres que te muestre los requisitos de «{{nombre}}»?", { nombre: primero.nombre }) : "",
       cierre ?? "",
     ]
       .filter(Boolean)
@@ -166,28 +169,34 @@ async function buscarYProponer(herramientas: HerramientasEscenario, consulta: st
 
 async function mostrarRequisitos(herramientas: HerramientasEscenario, servicioId: string) {
   const recibo = await herramientas.accion("consultarRequisitos", { servicioId });
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir los requisitos");
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude abrir los requisitos"));
   const datos = RequisitosSchema.safeParse(recibo.datos);
   if (!datos.success) {
-    herramientas.decir(recibo.mensaje, fuentesDeRecibo(recibo));
+    herramientas.decir(t(recibo.mensaje), fuentesDeRecibo(recibo));
     return;
   }
   const { servicio, requisitos, costo, tiempoDeRespuesta } = datos.data;
   if (requisitos === "pendiente de verificar") {
     herramientas.decir(
-      `Abrí la ficha de «${servicio.nombre}». Sus requisitos están pendientes de verificar, así que no te los voy a inventar: confírmalos en la fuente oficial que aparece en la ficha.`,
+      t(
+        "Abrí la ficha de «{{servicio}}». Sus requisitos están pendientes de verificar, así que no te los voy a inventar: confírmalos en la fuente oficial que aparece en la ficha.",
+        { servicio: servicio.nombre },
+      ),
       fuentesDeRecibo(recibo),
     );
     return;
   }
   const lista = requisitos.length
-    ? requisitos.map((requisito) => `• ${requisito.nombre}${requisito.obligatorio === false ? " (si aplica)" : ""}`).join("\n")
-    : "• La fuente no publica requisitos.";
+    ? requisitos.map((requisito) => `• ${requisito.nombre}${requisito.obligatorio === false ? t(" (si aplica)") : ""}`).join("\n")
+    : t("• La fuente no publica requisitos.");
   herramientas.decir(
     [
-      `Estos son los requisitos de «${servicio.nombre}», tal como los publica la fuente oficial:\n${lista}`,
-      `Costo: ${costo}.${tiempoDeRespuesta ? ` Tiempo de respuesta: ${tiempoDeRespuesta}.` : ""}`,
-      "Te dejé la ficha abierta en la sección de requisitos.",
+      t("Estos son los requisitos de «{{servicio}}», tal como los publica la fuente oficial:\n{{lista}}", { servicio: servicio.nombre, lista }),
+      t("Costo: {{costo}}.{{tiempo}}", {
+        costo,
+        tiempo: tiempoDeRespuesta ? t(" Tiempo de respuesta: {{tiempo}}.", { tiempo: tiempoDeRespuesta }) : "",
+      }),
+      t("Te dejé la ficha abierta en la sección de requisitos."),
     ].join("\n\n"),
     fuentesDeRecibo(recibo),
   );
@@ -200,9 +209,12 @@ async function prepararReporte(herramientas: HerramientasEscenario, texto: strin
     descripcion: descripcionSugerida(texto, categoria, referencia),
     ...(referencia ? { referenciaUbicacion: referencia } : {}),
   });
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir el formulario");
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude abrir el formulario"));
   herramientas.decir(
-    `Listo: abrí «${NOMBRES_REPORTE[categoria]}» con una descripción sugerida. Revísala, confirma la ubicación (en el mapa o escrita) y envíalo tú cuando esté bien. No se envía nada hasta que confirmes.`,
+    t(
+      "Listo: abrí «{{categoria}}» con una descripción sugerida. Revísala, confirma la ubicación (en el mapa o escrita) y envíalo tú cuando esté bien. No se envía nada hasta que confirmes.",
+      { categoria: t(NOMBRES_REPORTE[categoria]) },
+    ),
   );
 }
 
@@ -210,34 +222,43 @@ async function prepararReporte(herramientas: HerramientasEscenario, texto: strin
 async function consultarFolio(herramientas: HerramientasEscenario, folio: string | null) {
   const recibo = await herramientas.accion("consultarReporte", folio ? { folio } : {});
   if (recibo.estado === "fallida") {
-    herramientas.decir(recibo.mensaje);
+    herramientas.decir(t(recibo.mensaje));
     return;
   }
   const reporte = ReporteSchema.safeParse(recibo.datos);
   if (reporte.success) {
     const { folio: encontrado, tipo, estadoMunicipal } = reporte.data.reporte;
-    herramientas.decir(`El reporte ${encontrado} («${tipo}») está «${estadoMunicipal}». Te abrí su detalle con el historial.`);
+    herramientas.decir(t("El reporte {{folio}} («{{tipo}}») está «{{estado}}». Te abrí su detalle con el historial.", { folio: encontrado, tipo: t(tipo), estado: t(estadoMunicipal) }));
     return;
   }
   const gestion = GestionSchema.safeParse(recibo.datos);
   if (gestion.success) {
     const { folio: encontrado, servicio, estado } = gestion.data.gestion;
-    herramientas.decir(`La gestión ${encontrado} («${servicio}») está «${estado}». Te abrí su detalle.`);
+    herramientas.decir(t("La gestión {{folio}} («{{servicio}}») está «{{estado}}». Te abrí su detalle.", { folio: encontrado, servicio, estado: t(estado) }));
     return;
   }
-  herramientas.decir(`${recibo.mensaje} Si tienes un folio, escríbelo tal cual (empieza con DEMO-R- para reportes o DEMO-G- para gestiones).`);
+  herramientas.decir(
+    t("{{mensaje}} Si tienes un folio, escríbelo tal cual (empieza con DEMO-R- para reportes o DEMO-G- para gestiones).", {
+      mensaje: t(recibo.mensaje),
+    }),
+  );
 }
 
 async function consultarGestiones(herramientas: HerramientasEscenario) {
   const recibo = await herramientas.accion("consultarGestionesDemo", {});
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir tus gestiones");
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude abrir tus gestiones"));
   const datos = ResumenGestionesSchema.safeParse(recibo.datos);
   if (!datos.success || datos.data.total === 0) {
-    herramientas.decir(recibo.mensaje);
+    herramientas.decir(t(recibo.mensaje));
     return;
   }
   const lista = datos.data.recientes.map((gestion) => `• ${gestion.folio} — ${gestion.servicio}: ${gestion.estado}`).join("\n");
-  herramientas.decir(`${recibo.mensaje}\n${lista}\n\nRevísalas con calma antes de continuar: no sustituyen un trámite oficial.`);
+  herramientas.decir(
+    t("{{mensaje}}\n{{lista}}\n\nRevísalas con calma antes de continuar: no sustituyen un trámite oficial.", {
+      mensaje: t(recibo.mensaje),
+      lista,
+    }),
+  );
 }
 
 async function apoyoPsicologico(herramientas: HerramientasEscenario) {
@@ -245,30 +266,37 @@ async function apoyoPsicologico(herramientas: HerramientasEscenario) {
   const recibo = await herramientas.accion("navegar", { seccion: "salud_mental" });
   herramientas.decir(
     recibo.estado === "fallida"
-      ? "Te mostré los canales de ayuda humana verificados. También puedes abrir «Bienestar» → «Salud mental» desde el menú."
-      : "Te llevé a «Salud mental». Ahí están los canales de ayuda humana verificados. Si estás en peligro ahora, usa «Ayuda inmediata».",
+      ? t("Te mostré los canales de ayuda humana verificados. También puedes abrir «Bienestar» → «Salud mental» desde el menú.")
+      : t("Te llevé a «Salud mental». Ahí están los canales de ayuda humana verificados. Si estás en peligro ahora, usa «Ayuda inmediata»."),
   );
 }
 
 async function beneficios(herramientas: HerramientasEscenario) {
   const recibo = await herramientas.accion("explicarBeneficiosDemo", {});
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir tus recompensas");
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude abrir tus recompensas"));
   const datos = SaldoSchema.safeParse(recibo.datos);
   if (!datos.success) {
-    herramientas.decir(recibo.mensaje);
+    herramientas.decir(t(recibo.mensaje));
     return;
   }
   const { saldo, beneficios: lista } = datos.data;
-  const ejemplos = lista.length ? `\nBeneficios de ejemplo: ${lista.map((beneficio) => `${beneficio.nombre} (${beneficio.costoPuntos} pts)`).join(", ")}.` : "";
+  const ejemplos = lista.length
+    ? t("\nBeneficios de ejemplo: {{beneficios}}.", {
+        beneficios: lista.map((beneficio) => `${beneficio.nombre} (${beneficio.costoPuntos} pts)`).join(", "),
+      })
+    : "";
   herramientas.decir(
-    `Tienes ${saldo.disponible} puntos disponibles y ${saldo.pendientes} pendientes de validación. Los puntos sólo se suman cuando se valida un reporte o una verificación (reglas del programa).${ejemplos}\nSon ejemplos: no hay descuentos ni patrocinios reales.`,
+    t(
+      "Tienes {{disponibles}} puntos disponibles y {{pendientes}} pendientes de validación. Los puntos sólo se suman cuando se valida un reporte o una verificación (reglas del programa).{{ejemplos}}\nSon ejemplos: no hay descuentos ni patrocinios reales.",
+      { disponibles: saldo.disponible, pendientes: saldo.pendientes, ejemplos },
+    ),
   );
 }
 
 async function abrirMapa(herramientas: HerramientasEscenario, categoria: CategoriaReporte | null) {
   const recibo = await herramientas.accion("abrirMapa", categoria ? { categoria } : {});
-  if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir el mapa");
-  herramientas.decir(`${recibo.mensaje} Si el mapa no carga, la vista de lista sigue funcionando.`);
+  if (recibo.estado === "fallida") return falla(herramientas, recibo, msg("No pude abrir el mapa"));
+  herramientas.decir(t("{{mensaje}} Si el mapa no carga, la vista de lista sigue funcionando.", { mensaje: t(recibo.mensaje) }));
 }
 
 /** Busca un control visible cuya etiqueta o id coincida con lo que pidió la persona. */
@@ -288,16 +316,20 @@ async function senalar(herramientas: HerramientasEscenario, consulta: string) {
   const objetivo = objetivoParecido(herramientas, consulta);
   if (objetivo) {
     const recibo = await herramientas.accion("senalarElemento", { objetivo: objetivo.id });
-    herramientas.decir(recibo.estado === "completada" ? `Aquí está: «${objetivo.etiqueta}».` : recibo.mensaje);
+    herramientas.decir(recibo.estado === "completada" ? t("Aquí está: «{{etiqueta}}».", { etiqueta: objetivo.etiqueta }) : t(recibo.mensaje));
     return;
   }
   const seccion = seccionMencionada(consulta);
   if (seccion) {
     const recibo = await herramientas.accion("navegar", { seccion });
-    herramientas.decir(recibo.estado === "completada" ? `${recibo.mensaje} No lo veía en esta pantalla, así que te llevé ahí.` : recibo.mensaje);
+    herramientas.decir(
+      recibo.estado === "completada"
+        ? t("{{mensaje}} No lo veía en esta pantalla, así que te llevé ahí.", { mensaje: t(recibo.mensaje) })
+        : t(recibo.mensaje),
+    );
     return;
   }
-  herramientas.decir("No veo ese control en esta pantalla. Dime qué quieres hacer y te llevo a la sección correcta.");
+  herramientas.decir(t("No veo ese control en esta pantalla. Dime qué quieres hacer y te llevo a la sección correcta."));
 }
 
 // --- Enrutador ---
@@ -313,8 +345,12 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
     await herramientas.accion("mostrarApoyoHumano", { motivo: riesgo });
     herramientas.decir(
       riesgo === "violencia"
-        ? "Lo que cuentas es serio y no estás sola ni solo. Te mostré los canales de ayuda humana verificados. Si estás en peligro ahora, usa «Ayuda inmediata» para llamar a emergencias."
-        : "Gracias por decírmelo. Lo más importante ahora es que hables con una persona: te mostré los canales de ayuda humana verificados. Si estás en peligro inmediato, usa «Ayuda inmediata».",
+        ? t(
+            "Lo que cuentas es serio y no estás sola ni solo. Te mostré los canales de ayuda humana verificados. Si estás en peligro ahora, usa «Ayuda inmediata» para llamar a emergencias.",
+          )
+        : t(
+            "Gracias por decírmelo. Lo más importante ahora es que hables con una persona: te mostré los canales de ayuda humana verificados. Si estás en peligro inmediato, usa «Ayuda inmediata».",
+          ),
     );
     return;
   }
@@ -328,7 +364,7 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
   }
   if (propuesta && esNegacion(n)) {
     memoria.propuesta = null;
-    herramientas.decir("Va. Escribe el nombre de otro trámite o elige uno de la lista en pantalla.");
+    herramientas.decir(t("Va. Escribe el nombre de otro trámite o elige uno de la lista en pantalla."));
     return;
   }
   memoria.propuesta = null;
@@ -336,18 +372,22 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
   // 3) Intenciones.
   if (/\b(eres|estoy hablando con) (una |un )?(ia|inteligencia artificial|persona|humano|humana|real|robot|bot|oficial)\b|\bquien eres\b|\bque eres\b/.test(n)) {
     herramientas.decir(
-      "No soy una persona: soy Pekito, un asistente virtual para orientarte en la app. Tampoco sustituyo la atención oficial: te ayudo a encontrar servicios, preparar reportes y moverte por aquí. Tú siempre confirmas antes de continuar.",
+      t(
+        "No soy una persona: soy Pekito, un asistente virtual para orientarte en la app. Tampoco sustituyo la atención oficial: te ayudo a encontrar servicios, preparar reportes y moverte por aquí. Tú siempre confirmas antes de continuar.",
+      ),
     );
     return;
   }
   if (/^(hola|buenas|buenos dias|buenas tardes|buenas noches|que tal|hey)\b/.test(n) && n.length <= 30) {
     herramientas.decir(
-      `¡Hola! Puedo ayudarte a reportar un bache o una luminaria, consultar requisitos de un trámite, revisar un folio, encontrar apoyo psicológico, ver el mapa o tus beneficios. ¿Qué necesitas?`,
+      t(
+        "¡Hola! Puedo ayudarte a reportar un bache o una luminaria, consultar requisitos de un trámite, revisar un folio, encontrar apoyo psicológico, ver el mapa o tus beneficios. ¿Qué necesitas?",
+      ),
     );
     return;
   }
   if (/^(gracias|muchas gracias|mil gracias|ok gracias|perfecto gracias)\b/.test(n)) {
-    herramientas.decir("Con gusto. Aquí sigo si necesitas algo más.");
+    herramientas.decir(t("Con gusto. Aquí sigo si necesitas algo más."));
     return;
   }
 
@@ -373,7 +413,7 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
 
   if (/negocio|licencia de funcionamiento|abrir un local|mi empresa|mi comercio|emprend/.test(n)) {
     memoria.esperandoTramite = false;
-    await buscarYProponer(herramientas, "licencia de funcionamiento", "Si ya iniciaste una gestión de tu negocio, también puedo abrir «Mis gestiones».");
+    await buscarYProponer(herramientas, "licencia de funcionamiento", t("Si ya iniciaste una gestión de tu negocio, también puedo abrir «Mis gestiones»."));
     return;
   }
 
@@ -391,7 +431,9 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
       return;
     }
     memoria.esperandoTramite = true;
-    herramientas.decir("Claro. ¿De qué trámite? Escribe su nombre (por ejemplo, «licencia de funcionamiento») y busco sus requisitos en el catálogo.");
+    herramientas.decir(
+      t("Claro. ¿De qué trámite? Escribe su nombre (por ejemplo, «licencia de funcionamiento») y busco sus requisitos en el catálogo."),
+    );
     return;
   }
 
@@ -414,7 +456,7 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
 
   if (/cultura|cultural|museo|teatro|concierto|festival|exposicion|actividades/.test(n)) {
     memoria.esperandoTramite = false;
-    await buscarYProponer(herramientas, "cultura", "La información de actividades puede cambiar: revisa la fuente de cada ficha.");
+    await buscarYProponer(herramientas, "cultura", t("La información de actividades puede cambiar: revisa la fuente de cada ficha."));
     return;
   }
 
@@ -436,7 +478,7 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
   if (seccion) {
     memoria.esperandoTramite = false;
     const recibo = await herramientas.accion("navegar", { seccion });
-    herramientas.decir(recibo.mensaje);
+    herramientas.decir(t(recibo.mensaje));
     return;
   }
 
@@ -453,5 +495,5 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
     return;
   }
 
-  herramientas.decir(`Todavía no sé ayudarte con eso. ${SUGERENCIAS}`);
+  herramientas.decir(t("Todavía no sé ayudarte con eso. {{sugerencias}}", { sugerencias: t(SUGERENCIAS) }));
 };

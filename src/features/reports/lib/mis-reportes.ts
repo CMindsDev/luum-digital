@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { folioSchema } from "@/domain/validaciones";
+import { msg } from "@/i18n";
 import type { EstadoMunicipal, FiltroReportes, Reporte } from "@/types";
 
 /** Orden de los estatus en «Mis reportes» de Mérida Móvil. */
@@ -60,16 +60,18 @@ export function aFiltroReportes(filtros: FiltrosMisReportes, identidadId: string
 /** «Fecha inicio» y «Fecha fin» (ambas opcionales; fin no puede ser anterior a inicio). */
 export const filtroFechasSchema = z
   .object({
-    desde: z.string().regex(FECHA, "Elige una fecha válida.").or(z.literal("")),
-    hasta: z.string().regex(FECHA, "Elige una fecha válida.").or(z.literal("")),
+    desde: z.string().regex(FECHA, msg("Elige una fecha válida.")).or(z.literal("")),
+    hasta: z.string().regex(FECHA, msg("Elige una fecha válida.")).or(z.literal("")),
   })
   .refine((valores) => !valores.desde || !valores.hasta || valores.hasta >= valores.desde, {
     path: ["hasta"],
-    message: "La fecha fin debe ser igual o posterior a la fecha inicio.",
+    message: msg("La fecha fin debe ser igual o posterior a la fecha inicio."),
   });
 
 export type ValoresFiltroFechas = z.infer<typeof filtroFechasSchema>;
 
-export const busquedaFolioSchema = z.object({ folio: folioSchema });
+export const busquedaFolioSchema = z.object({
+  folio: z.string().trim().min(1, msg("Escribe el folio.")).max(24, msg("El folio es demasiado largo.")),
+});
 
 export type ValoresBusquedaFolio = z.infer<typeof busquedaFolioSchema>;

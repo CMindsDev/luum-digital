@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { cx } from "@/design-system";
 import { destinoDeBusqueda, LARGO_MAXIMO_CONSULTA } from "../lib/destino-busqueda";
@@ -24,19 +25,13 @@ export interface CampoBusquedaProps {
  * violencia, a /buscar con la consulta fuera de la URL). La intención y los resultados los calcula la
  * pantalla de búsqueda con useCatalogSearch.
  */
-export function CampoBusqueda({
-  valorInicial = "",
-  etiqueta,
-  etiquetaVisible = false,
-  ayuda,
-  placeholder = "p. ej. «bache frente a mi casa»",
-  guia,
-  className,
-}: CampoBusquedaProps) {
+export function CampoBusqueda({ valorInicial = "", etiqueta, etiquetaVisible = false, ayuda, placeholder, guia, className }: CampoBusquedaProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [consulta, setConsulta] = useState(valorInicial);
   const idCampo = useId();
   const idAyuda = useId();
+  const placeholderActual = placeholder ?? t("p. ej. «bache frente a mi casa»");
 
   const enviar = (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
@@ -58,7 +53,7 @@ export function CampoBusqueda({
             name="q"
             value={consulta}
             onChange={(evento) => setConsulta(evento.target.value)}
-            placeholder={placeholder}
+            placeholder={placeholderActual}
             enterKeyHint="search"
             autoComplete="off"
             maxLength={LARGO_MAXIMO_CONSULTA}
@@ -70,7 +65,7 @@ export function CampoBusqueda({
           type="submit"
           className="inline-flex h-14 shrink-0 items-center justify-center gap-2 rounded-pildora bg-marino px-7 text-base font-semibold text-white shadow-suave transition-colors hover:bg-marino-portal"
         >
-          Buscar
+          {t("Buscar")}
         </button>
       </div>
       {ayuda ? (

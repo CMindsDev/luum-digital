@@ -6,6 +6,7 @@
  */
 import { LIMITES_BUSQUEDA, type Cita } from "../../shared/asistente/busqueda";
 import type { Pasaje } from "../../shared/asistente/conocimiento";
+import type { IdiomaAsistente } from "../../shared/asistente/idioma";
 
 const URL_CHAT = "https://api.openai.com/v1/chat/completions";
 const SIN_INFORMACION = "SIN_INFORMACION";
@@ -16,7 +17,10 @@ export interface RespuestaRedactada {
   citas: Cita[];
 }
 
-export type Redactor = (consulta: string, pasajes: readonly Pasaje[]) => Promise<RespuestaRedactada | null>;
+export type Redactor = (consulta: string, pasajes: readonly Pasaje[], idioma?: IdiomaAsistente) => Promise<RespuestaRedactada | null>;
+
+const REGLA_MAYA = `
+- IDIOMA: redacta la respuesta en maya yucateco (Maaya t'aan) sencillo y respetuoso, con ortografía moderna. Si no conoces un término establecido en maya, deja esa palabra en español; nunca inventes palabras. Los números, teléfonos, horarios, direcciones y nombres de dependencias, trámites y fuentes se escriben tal como vienen en los pasajes (en español). Conserva las citas [1], [2]. Si no hay información, responde exactamente: ${SIN_INFORMACION}`;
 
 const INSTRUCCIONES = `Eres Pekito, el asistente de los servicios digitales del Ayuntamiento de Mérida. Responde la pregunta de la persona usando ÚNICAMENTE los pasajes numerados que recibes.
 Reglas:
@@ -81,7 +85,7 @@ export function normalizarRespuesta(bruta: string, pasajes: readonly Pasaje[]): 
 
 export function crearRedactor(opciones: { apiKey: string; modelo: string; fetch?: typeof fetch; timeoutMs?: number }): Redactor {
   const solicitar = opciones.fetch ?? fetch;
-  return async (consulta, pasajes) => {
+  return async (consulta, pasajes, idioma) => {
     if (pasajes.length === 0) return null;
     const contexto = pasajes
       .map((pasaje, indice) => `[${indice + 1}] ${pasaje.titulo}\n${pasaje.texto.slice(0, MAX_CARACTERES_PASAJE)}\n(Fuente: ${pasaje.fuente.titulo}${pasaje.fuente.fechaConsulta ? `, consultada el ${pasaje.fuente.fechaConsulta}` : ""})`)
@@ -94,7 +98,7 @@ export function crearRedactor(opciones: { apiKey: string; modelo: string; fetch?
         temperature: 0.1,
         max_tokens: 280,
         messages: [
-          { role: "system", content: INSTRUCCIONES },
+          { role: "system", content: idioma === "yua" ? `${INSTRUCCIONES}${REGLA_MAYA}` : INSTRUCCIONES },
           { role: "user", content: `Pasajes:\n${contexto}\n\nPregunta de la persona: ${consulta}` },
         ],
       }),

@@ -64,7 +64,7 @@ describe("las seis consultas del brief", () => {
   it.each(CONSULTAS_SUGERIDAS)("«%s» propone acciones internas útiles", (consulta) => {
     const resultados = buscarEnIndice(consulta, indice, 20);
     const intencion = detectarIntencion(consulta, { resultados });
-    const esperado = ESPERADO[consulta];
+    const esperado = ESPERADO[consulta]!;
     expect(intencion.intencion).toBe(esperado.intencion);
     const acciones = unirAcciones(intencion.acciones, accionesComplementarias(intencion.intencion));
     expect(acciones.length).toBeGreaterThan(0);

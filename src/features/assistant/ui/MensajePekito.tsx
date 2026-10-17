@@ -1,4 +1,5 @@
 import { ExternalLink, FileText, Mic } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cx, formatearFecha, InfoStatusBadge } from "@/design-system";
 import type { FuenteCitada } from "@/services/contracts";
 import type { MensajeConversacion } from "../runtime/store";
@@ -44,9 +45,10 @@ function TextoPekito({ texto }: { texto: string }) {
 }
 
 function Fuentes({ fuentes, onIrA }: { fuentes: FuenteCitada[]; onIrA: (ruta: string) => void }) {
+  const { t } = useTranslation();
   return (
     <div className="mt-3 rounded-[16px] bg-(--pk-superficie) p-3 shadow-[inset_0_0_0_1px_var(--pk-borde)]">
-      <p className="pekito-rotulo text-[0.75rem] text-(--pk-texto-suave)">Fuentes citadas</p>
+      <p className="pekito-rotulo text-[0.75rem] text-(--pk-texto-suave)">{t("Fuentes citadas")}</p>
       <ul className="mt-2 space-y-3">
         {fuentes.map((fuente, indice) => (
           <li key={`${fuente.titulo}-${indice}`} className="text-sm">
@@ -59,14 +61,14 @@ function Fuentes({ fuentes, onIrA }: { fuentes: FuenteCitada[]; onIrA: (ruta: st
               >
                 <span>{fuente.titulo}</span>
                 <ExternalLink aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
-                <span className="sr-only"> (se abre en otra pestaña)</span>
+                <span className="sr-only">{t(" (se abre en otra pestaña)")}</span>
               </a>
             ) : (
               <span className="font-semibold">{fuente.titulo}</span>
             )}
             <div className="mt-1 flex flex-wrap items-center gap-2 text-(--pk-texto-suave)">
               {fuente.estadoDeInformacion ? <InfoStatusBadge estado={fuente.estadoDeInformacion} /> : null}
-              {fuente.fechaConsulta ? <span>Consultada el {formatearFecha(fuente.fechaConsulta)}</span> : null}
+              {fuente.fechaConsulta ? <span>{t("Consultada el {{fecha}}", { fecha: formatearFecha(fuente.fechaConsulta) })}</span> : null}
               {fuente.ruta ? (
                 <button
                   type="button"
@@ -74,7 +76,7 @@ function Fuentes({ fuentes, onIrA }: { fuentes: FuenteCitada[]; onIrA: (ruta: st
                   className="inline-flex min-h-11 items-center gap-1 rounded-pildora px-2 font-semibold text-(--pk-texto) underline underline-offset-2"
                 >
                   <FileText aria-hidden="true" className="size-4" />
-                  Ver ficha en la app
+                  {t("Ver ficha en la app")}
                 </button>
               ) : null}
             </div>
@@ -87,11 +89,12 @@ function Fuentes({ fuentes, onIrA }: { fuentes: FuenteCitada[]; onIrA: (ruta: st
 
 /** Un turno del hilo: la persona a la derecha (píldora lima); Pekito a la izquierda, con fuentes. */
 export function MensajePekito({ mensaje, onIrA }: MensajePekitoProps) {
+  const { t } = useTranslation();
   if (mensaje.rol === "persona") {
     return (
       <div className="flex justify-end">
         <div className="max-w-[85%] rounded-[22px] rounded-br-md bg-(--pk-lima) px-4 py-2.5 text-[0.9375rem] leading-snug text-(--pk-noche)">
-          <span className="sr-only">Tú{mensaje.origen === "voz" ? " (por voz)" : ""}: </span>
+          <span className="sr-only">{mensaje.origen === "voz" ? t("Tú (por voz): ") : t("Tú: ")}</span>
           {mensaje.origen === "voz" ? <Mic aria-hidden="true" className="mr-1 inline size-3.5 align-[-2px]" /> : null}
           <span className="whitespace-pre-line">{mensaje.texto}</span>
         </div>
@@ -102,7 +105,7 @@ export function MensajePekito({ mensaje, onIrA }: MensajePekitoProps) {
     <div className="flex items-start gap-2.5" aria-busy={mensaje.pendiente || undefined}>
       <PekitoMascota ancho={28} className="mt-0.5 shrink-0" />
       <div className="min-w-0 flex-1 text-[0.9375rem] leading-relaxed text-(--pk-texto)">
-        <span className="sr-only">Pekito: </span>
+        <span className="sr-only">{t("Pekito: ")}</span>
         <TextoPekito texto={mensaje.texto} />
         {mensaje.fuentes && mensaje.fuentes.length > 0 ? <Fuentes fuentes={mensaje.fuentes} onIrA={onIrA} /> : null}
       </div>

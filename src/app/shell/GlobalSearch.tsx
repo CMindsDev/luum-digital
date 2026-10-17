@@ -1,10 +1,12 @@
 import { Search } from "lucide-react";
 import { useId, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { consultaDelEstado, destinoDeBusqueda, LARGO_MAXIMO_CONSULTA } from "@/features/home/lib/destino-busqueda";
 
 /** Buscador global del encabezado de escritorio: abre /buscar y respeta la privacidad de consultas sensibles. */
 export function GlobalSearch() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [parametros] = useSearchParams();
@@ -21,7 +23,7 @@ export function GlobalSearch() {
   return (
     <form key={consultaActual} role="search" onSubmit={enviar} className="relative w-full max-w-md" data-guia="encabezado.buscador">
       <label htmlFor={id} className="sr-only">
-        Buscar trámites, servicios o reportes
+        {t("Buscar trámites, servicios o reportes")}
       </label>
       <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-3.5 size-5 -translate-y-1/2 text-tinta-suave" />
       <input
@@ -29,7 +31,7 @@ export function GlobalSearch() {
         type="search"
         name="q"
         defaultValue={consultaActual}
-        placeholder="¿Qué necesitas? p. ej. «bache en mi calle»"
+        placeholder={t("¿Qué necesitas? p. ej. «bache en mi calle»")}
         autoComplete="off"
         enterKeyHint="search"
         maxLength={LARGO_MAXIMO_CONSULTA}
@@ -39,7 +41,7 @@ export function GlobalSearch() {
         type="submit"
         className="absolute top-1 right-1 inline-flex h-9 items-center rounded-pildora bg-lima-logo px-4 text-sm font-semibold text-marino hover:bg-lima"
       >
-        Buscar
+        {t("Buscar")}
       </button>
     </form>
   );

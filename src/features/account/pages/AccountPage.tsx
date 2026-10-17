@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { PageHeader } from "@/design-system";
 import { AboutSection } from "../components/AboutSection";
 import { DemoControlsSection } from "../components/DemoControlsSection";
@@ -6,13 +7,15 @@ import { ResetSection } from "../components/ResetSection";
 
 /** /cuenta — Cuenta de demostración: identidad ficticia, controles, restablecer y limitaciones. */
 export default function AccountPage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <PageHeader
         destacado
-        antetitulo="Demostración"
-        titulo="Cuenta de demostración"
-        descripcion="Elige una identidad ficticia, ajusta los controles de la demo y conoce qué hace y qué no hace este prototipo."
+        antetitulo={t("Demostración")}
+        titulo={t("Cuenta de demostración")}
+        descripcion={t("Elige una identidad ficticia, ajusta los controles de la demo y conoce qué hace y qué no hace este prototipo.")}
       />
       <div className="flex flex-col gap-5">
         <IdentitySection />

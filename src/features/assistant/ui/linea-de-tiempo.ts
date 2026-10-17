@@ -1,14 +1,15 @@
+import { msg } from "@/i18n";
 import type { ReciboAccion } from "@shared/asistente/acciones";
 import type { AccionEnCurso, MensajeConversacion } from "../runtime/store";
 
 /** Sugerencias del inicio del chat (22:218/22:253). Prellenan el compositor; nunca envían solas. */
 export const SUGERENCIAS_PEKITO = [
-  { etiqueta: "Reportar un bache", texto: "Quiero reportar un bache" },
-  { etiqueta: "Requisitos de un trámite", texto: "¿Qué requisitos pide el trámite de " },
-  { etiqueta: "Consultar mi folio", texto: "Quiero consultar mi folio" },
-  { etiqueta: "Apoyo psicológico", texto: "Busco apoyo psicológico" },
-  { etiqueta: "Trámite de mi negocio", texto: "Quiero revisar un trámite de mi negocio" },
-  { etiqueta: "Actividades culturales", texto: "Busco actividades culturales" },
+  { etiqueta: msg("Reportar un bache"), texto: msg("Quiero reportar un bache") },
+  { etiqueta: msg("Requisitos de un trámite"), texto: msg("¿Qué requisitos pide el trámite de ") },
+  { etiqueta: msg("Consultar mi folio"), texto: msg("Quiero consultar mi folio") },
+  { etiqueta: msg("Apoyo psicológico"), texto: msg("Busco apoyo psicológico") },
+  { etiqueta: msg("Trámite de mi negocio"), texto: msg("Quiero revisar un trámite de mi negocio") },
+  { etiqueta: msg("Actividades culturales"), texto: msg("Busco actividades culturales") },
 ] as const;
 
 export type ElementoLinea =

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { CLASES_MOSAICO, cx, formatearFecha } from "@/design-system";
 import type { DocumentoDemo } from "@/types";
@@ -11,6 +12,7 @@ export interface TarjetaDocumentoProps {
 
 /** Acceso a la vista previa de un documento ficticio del expediente. */
 export function TarjetaDocumento({ documento, className }: TarjetaDocumentoProps) {
+  const { t } = useTranslation();
   const tipo = TIPO_DOCUMENTO[documento.tipo];
   const colores = CLASES_MOSAICO[tipo.tono];
   const Icono = tipo.icono;
@@ -29,11 +31,11 @@ export function TarjetaDocumento({ documento, className }: TarjetaDocumentoProps
         <Icono aria-hidden="true" className={cx("size-6", colores.icono)} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block leading-snug font-semibold text-tinta">{documento.titulo}</span>
+        <span className="block leading-snug font-semibold text-tinta">{t(documento.titulo)}</span>
         <span className="mt-0.5 block text-sm text-tinta-suave">
-          Agregado el <time dateTime={documento.fecha}>{formatearFecha(documento.fecha)}</time>
+          {t("Agregado el ")}<time dateTime={documento.fecha}>{formatearFecha(documento.fecha)}</time>
         </span>
-        <span className="mt-1 block font-mono-rotulo text-xs font-medium tracking-[0.08em] text-cafe uppercase">{MARCA_DOCUMENTO_EJEMPLO}</span>
+        <span className="mt-1 block font-mono-rotulo text-xs font-medium tracking-[0.08em] text-cafe uppercase">{t(MARCA_DOCUMENTO_EJEMPLO)}</span>
       </span>
       <ChevronRight aria-hidden="true" className="size-5 shrink-0 text-tinta-suave transition-transform group-hover:translate-x-0.5" />
     </Link>

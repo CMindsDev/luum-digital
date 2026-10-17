@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./Button";
 import { Dialog } from "./Dialog";
 
@@ -25,11 +26,12 @@ export function ConfirmDialog({
   titulo,
   descripcion,
   children,
-  textoConfirmar = "Confirmar",
-  textoCancelar = "Cancelar",
+  textoConfirmar,
+  textoCancelar,
   tono = "primario",
   cargando = false,
 }: ConfirmDialogProps) {
+  const { t } = useTranslation();
   return (
     <Dialog
       abierto={abierto}
@@ -40,10 +42,10 @@ export function ConfirmDialog({
       acciones={
         <>
           <Button variante="secundario" onClick={onCerrar} disabled={cargando}>
-            {textoCancelar}
+            {textoCancelar ?? t("Cancelar")}
           </Button>
           <Button variante={tono} onClick={onConfirmar} cargando={cargando}>
-            {textoConfirmar}
+            {textoConfirmar ?? t("Confirmar")}
           </Button>
         </>
       }

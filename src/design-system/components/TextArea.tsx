@@ -1,4 +1,5 @@
 import { useCallback, useId, useRef, useState, type ChangeEvent, type Ref, type TextareaHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import { unirIds, useCampo } from "../lib/campo";
 import { cx } from "../lib/cx";
 import { CLASES_CONTROL } from "./TextInput";
@@ -31,6 +32,7 @@ export function TextArea({
   ref,
   ...resto
 }: TextAreaProps) {
+  const { t } = useTranslation();
   const idContador = `contador-${useId().replace(/:/g, "")}`;
   const mostrarContador = (contador ?? true) && typeof maxLength === "number";
   const campo = useCampo({
@@ -75,7 +77,7 @@ export function TextArea({
       />
       {mostrarContador ? (
         <p id={idContador} className={cx("mt-1 text-right text-sm", cerca ? "font-semibold text-aviso" : "text-tinta-suave")}>
-          {largo} / {maxLength} <span className="sr-only">caracteres</span>
+          {largo} / {maxLength} <span className="sr-only">{t("caracteres")}</span>
         </p>
       ) : null}
     </div>

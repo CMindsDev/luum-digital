@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { ReglaDeNegocioError } from "@/services/contracts/errors";
 import type { FechaISO, MovimientoPuntos, SaldoPuntos, TipoMovimiento } from "@/types";
 
@@ -35,7 +36,7 @@ export interface ResultadoLibro {
 
 function exigirMotivo(motivo: string): string {
   const limpio = motivo.trim();
-  if (!limpio) throw new ReglaDeNegocioError("motivo_obligatorio", "Toda reversión o cancelación de puntos necesita un motivo.");
+  if (!limpio) throw new ReglaDeNegocioError("motivo_obligatorio", t("Toda reversión o cancelación de puntos necesita un motivo."));
   return limpio;
 }
 
@@ -48,7 +49,7 @@ export function registrarCredito(libro: LibroMayor, credito: NuevoCredito): Resu
   const existente = buscarPorClave(libro, credito.claveEvento);
   if (existente) return { libro: [...libro], movimiento: existente, cambio: false };
   if (!Number.isFinite(credito.puntos) || credito.puntos < 0) {
-    throw new ReglaDeNegocioError("puntos_invalidos", "Un crédito de puntos no puede ser negativo.");
+    throw new ReglaDeNegocioError("puntos_invalidos", t("Un crédito de puntos no puede ser negativo."));
   }
   const movimiento: MovimientoPuntos = {
     id: credito.id,
@@ -81,7 +82,11 @@ export function cancelarCredito(libro: LibroMayor, claveEvento: string, motivo: 
   if (!existente || existente.estado !== "pendiente") {
     return { libro: [...libro], movimiento: existente ?? null, cambio: false };
   }
-  const cancelado: MovimientoPuntos = { ...existente, estado: "cancelado", motivo: `${existente.motivo} · Cancelado: ${texto}` };
+  const cancelado: MovimientoPuntos = {
+    ...existente,
+    estado: "cancelado",
+    motivo: t("{{motivo}} · Cancelado: {{texto}}", { motivo: existente.motivo, texto }),
+  };
   return { libro: libro.map((m) => (m.id === existente.id ? cancelado : m)), movimiento: cancelado, cambio: true };
 }
 
@@ -183,13 +188,13 @@ export function registrarCanje(
   const existente = buscarPorClave(libro, canje.claveEvento);
   if (existente) return { libro: [...libro], movimiento: existente, cambio: false };
   if (!Number.isInteger(canje.costo) || canje.costo <= 0) {
-    throw new ReglaDeNegocioError("costo_invalido", "El costo del beneficio debe ser un número entero positivo.");
+    throw new ReglaDeNegocioError("costo_invalido", t("El costo del beneficio debe ser un número entero positivo."));
   }
   const { disponible } = calcularSaldo(libro, canje.identidadId);
   if (disponible < canje.costo) {
     throw new ReglaDeNegocioError(
       "saldo_insuficiente",
-      `Te faltan ${canje.costo - Math.max(disponible, 0)} puntos aprobados para este beneficio de ejemplo.`,
+      t("Te faltan {{n}} puntos aprobados para este beneficio de ejemplo.", { n: canje.costo - Math.max(disponible, 0) }),
     );
   }
   const movimiento: MovimientoPuntos = {

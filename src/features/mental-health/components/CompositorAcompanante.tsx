@@ -1,5 +1,6 @@
 import { SendHorizontal } from "lucide-react";
 import { useId, useState, type FormEvent, type KeyboardEvent, type Ref } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, CLASES_CONTROL, cx } from "@/design-system";
 
 const MAXIMO = 600;
@@ -16,6 +17,7 @@ export interface CompositorAcompananteProps {
  * nunca termina en la URL, en el historial del navegador ni en almacenamiento.
  */
 export function CompositorAcompanante({ onEnviar, ocupado, ref }: CompositorAcompananteProps) {
+  const { t } = useTranslation();
   const [texto, setTexto] = useState("");
   const id = useId().replace(/:/g, "");
   const idCampo = `mensaje-${id}`;
@@ -43,10 +45,10 @@ export function CompositorAcompanante({ onEnviar, ocupado, ref }: CompositorAcom
   return (
     <form onSubmit={alEnviar} className="space-y-1.5" autoComplete="off">
       <label htmlFor={idCampo} className="text-[0.9375rem] font-semibold text-tinta">
-        Escribe tu mensaje
+        {t("Escribe tu mensaje")}
       </label>
       <p id={idAyuda} className="text-sm text-tinta-suave">
-        Enter envía; Mayús + Enter hace un salto de línea. No escribas datos personales.
+        {t("Enter envía; Mayús + Enter hace un salto de línea. No escribas datos personales.")}
       </p>
       <div className="flex items-end gap-2">
         <textarea
@@ -64,7 +66,7 @@ export function CompositorAcompanante({ onEnviar, ocupado, ref }: CompositorAcom
           className={cx(CLASES_CONTROL, "min-h-12 flex-1 resize-none py-2.5 leading-snug")}
         />
         <Button type="submit" iconoInicio={SendHorizontal} disabled={!texto.trim() || ocupado} data-guia="salud_mental.enviar" className="shrink-0">
-          Enviar
+          {t("Enviar")}
         </Button>
       </div>
     </form>

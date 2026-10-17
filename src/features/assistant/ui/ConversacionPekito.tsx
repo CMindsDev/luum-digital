@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { msg } from "@/i18n";
 import { useAsistenteStore } from "../runtime/store";
 import type { AccionAviso } from "./AvisoPekito";
 import { CompositorPekito } from "./CompositorPekito";
@@ -10,10 +12,11 @@ import { TarjetaRecibo } from "./TarjetaRecibo";
 import { useEstadoMascota } from "./useEstadoMascota";
 
 function Pensando({ texto }: { texto: string }) {
+  const { t } = useTranslation();
   return (
     <div className="flex items-center gap-2.5 text-sm text-(--pk-texto-suave)">
       <img src="/brand/laboratorio/agente/pekito-mascota.svg" alt="" aria-hidden="true" width={28} height={26} className="shrink-0 opacity-80" />
-      <span>{texto}</span>
+      <span>{t(texto)}</span>
       <span aria-hidden="true" className="flex gap-1">
         <span className="pekito-punto size-1.5 rounded-full bg-(--pk-lima)" />
         <span className="pekito-punto size-1.5 rounded-full bg-(--pk-lima)" />
@@ -43,6 +46,7 @@ export interface ConversacionPekitoProps {
  * mascota y sugerencias, hilo con role="log", recibos de cada acción, avisos legibles y compositor.
  */
 export function ConversacionPekito(props: ConversacionPekitoProps) {
+  const { t } = useTranslation();
   const mensajes = useAsistenteStore("general", (estado) => estado.mensajes);
   const recibos = useAsistenteStore("general", (estado) => estado.recibos);
   const acciones = useAsistenteStore("general", (estado) => estado.accionesEnCurso);
@@ -73,19 +77,19 @@ export function ConversacionPekito(props: ConversacionPekitoProps) {
         {vacio ? (
           <div className="flex min-h-full flex-col items-center justify-center gap-4 py-6 text-center">
             <PekitoMascota ancho={150} estado={estadoMascota} className="max-w-[45vw]" />
-            <h3 className="pekito-marca text-[1.5rem] leading-[1.25] font-extrabold tracking-tight text-(--pk-texto) uppercase">Hola, soy Pekito</h3>
+            <h3 className="pekito-marca text-[1.5rem] leading-[1.25] font-extrabold tracking-tight text-(--pk-texto) uppercase">{t("Hola, soy Pekito")}</h3>
             <p className="max-w-[20rem] text-base leading-snug text-(--pk-texto-suave)">
-              Te ayudo a encontrar trámites, preparar reportes y consultar tus folios. Tú siempre confirmas.
+              {t("Te ayudo a encontrar trámites, preparar reportes y consultar tus folios. Tú siempre confirmas.")}
             </p>
-            <ul aria-label="Sugerencias para empezar" className="flex max-w-[23rem] flex-wrap justify-center gap-x-2.5 gap-y-2.5">
+            <ul aria-label={t("Sugerencias para empezar")} className="flex max-w-[23rem] flex-wrap justify-center gap-x-2.5 gap-y-2.5">
               {SUGERENCIAS_PEKITO.map((sugerencia) => (
                 <li key={sugerencia.etiqueta}>
                   <button
                     type="button"
-                    onClick={() => props.onSugerencia(sugerencia.texto)}
+                    onClick={() => props.onSugerencia(t(sugerencia.texto))}
                     className="inline-flex min-h-11 items-center rounded-[22px] bg-(--pk-chip) px-[18px] text-sm text-white hover:bg-(--pk-noche-2)"
                   >
-                    {sugerencia.etiqueta}
+                    {t(sugerencia.etiqueta)}
                   </button>
                 </li>
               ))}
@@ -93,13 +97,13 @@ export function ConversacionPekito(props: ConversacionPekitoProps) {
           </div>
         ) : null}
 
-        <div role="log" aria-live="polite" aria-relevant="additions text" aria-label="Conversación con Pekito" className="space-y-4">
+        <div role="log" aria-live="polite" aria-relevant="additions text" aria-label={t("Conversación con Pekito")} className="space-y-4">
           {elementos.map((elemento) => {
             if (elemento.tipo === "mensaje") return <MensajePekito key={elemento.clave} mensaje={elemento.mensaje} onIrA={props.onIrA} />;
             if (elemento.tipo === "recibo") return <TarjetaRecibo key={elemento.clave} recibo={elemento.recibo} onRevisar={props.onRevisar} />;
             return <Pensando key={elemento.clave} texto={elemento.accion.estadoTexto} />;
           })}
-          {pensando && acciones.length === 0 ? <Pensando texto={estadoSesion === "conectando" ? "Conectando…" : "Pekito está pensando…"} /> : null}
+          {pensando && acciones.length === 0 ? <Pensando texto={estadoSesion === "conectando" ? msg("Conectando…") : msg("Pekito está pensando…")} /> : null}
         </div>
 
         <ListaAvisosPekito onAccion={props.onAccionAviso} className="mt-4 space-y-2" />

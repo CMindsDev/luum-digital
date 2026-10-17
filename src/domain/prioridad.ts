@@ -1,5 +1,7 @@
+import { t } from "i18next";
 import type { CategoriaReporte, Reporte } from "@/types";
 import { NOMBRE_CATEGORIA_REPORTE } from "./reportes";
+import { msg } from "@/i18n";
 
 /**
  * Prioridad sugerida de atención (demostración), con criterios EXPLÍCITOS y explicables:
@@ -36,7 +38,7 @@ export const PESO_POR_TIPO: Record<CategoriaReporte, number> = {
 };
 
 export const AVISO_PRIORIDAD =
-  "Prioridad sugerida para la demostración con criterios explícitos. No depende de cuántas personas reportan ni de puntos.";
+  msg("Prioridad sugerida para la demostración con criterios explícitos. No depende de cuántas personas reportan ni de puntos.");
 
 export function calcularPrioridad(
   reporte: Pick<Reporte, "categoria" | "riesgoDeclarado" | "creadoEn">,
@@ -44,23 +46,25 @@ export function calcularPrioridad(
 ): PrioridadCalculada {
   const criterios: CriterioPrioridad[] = [];
   if (reporte.riesgoDeclarado) {
-    criterios.push({ id: "riesgo_declarado", descripcion: "La persona declaró un riesgo para quienes transitan.", peso: 3 });
+    criterios.push({ id: "riesgo_declarado", descripcion: t("La persona declaró un riesgo para quienes transitan."), peso: 3 });
   }
   const dias = Math.floor((ahora.getTime() - new Date(reporte.creadoEn).getTime()) / 86_400_000);
   if (dias >= 7) {
-    criterios.push({ id: "antiguedad", descripcion: `Lleva ${dias} días sin cerrarse.`, peso: 2 });
+    criterios.push({ id: "antiguedad", descripcion: t("Lleva {{n}} días sin cerrarse.", { n: dias }), peso: 2 });
   } else if (dias >= 3) {
-    criterios.push({ id: "antiguedad", descripcion: `Lleva ${dias} días sin cerrarse.`, peso: 1 });
+    criterios.push({ id: "antiguedad", descripcion: t("Lleva {{n}} días sin cerrarse.", { n: dias }), peso: 1 });
   }
   const pesoTipo = PESO_POR_TIPO[reporte.categoria];
   if (pesoTipo > 0) {
     criterios.push({
       id: "tipo",
-      descripcion: `${NOMBRE_CATEGORIA_REPORTE[reporte.categoria]}: puede afectar la seguridad vial o sanitaria.`,
+      descripcion: t("{{tipo}}: puede afectar la seguridad vial o sanitaria.", {
+        tipo: t(NOMBRE_CATEGORIA_REPORTE[reporte.categoria]),
+      }),
       peso: pesoTipo,
     });
   }
   const puntaje = criterios.reduce((suma, c) => suma + c.peso, 0);
   const nivel: NivelPrioridad = puntaje >= 4 ? "alta" : puntaje >= 2 ? "media" : "baja";
-  return { nivel, puntaje, criterios, aviso: AVISO_PRIORIDAD };
+  return { nivel, puntaje, criterios, aviso: t(AVISO_PRIORIDAD) };
 }

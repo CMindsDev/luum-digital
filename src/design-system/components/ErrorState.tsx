@@ -1,5 +1,6 @@
 import { CircleAlert, PlugZap, RotateCcw, WifiOff } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { describirError } from "../lib/errores";
 import { Button } from "./Button";
@@ -22,6 +23,7 @@ export interface ErrorStateProps {
  * (nunca un éxito ficticio); para SinConexionError explica que los datos se conservan.
  */
 export function ErrorState({ error, titulo, descripcion, onReintentar, accion, nivel = 2, className }: ErrorStateProps) {
+  const { t } = useTranslation();
   const descrito = describirError(error);
   const Icono = descrito.tipo === "sin_conexion" ? WifiOff : descrito.tipo === "integracion" ? PlugZap : CircleAlert;
   const Titulo = nivel === 2 ? "h2" : "h3";
@@ -36,7 +38,7 @@ export function ErrorState({ error, titulo, descripcion, onReintentar, accion, n
             <div className="mt-4 flex flex-wrap gap-3">
               {onReintentar && descrito.reintentable ? (
                 <Button variante="secundario" tamano="sm" iconoInicio={RotateCcw} onClick={onReintentar}>
-                  Reintentar
+                  {t("Reintentar")}
                 </Button>
               ) : null}
               {accion}

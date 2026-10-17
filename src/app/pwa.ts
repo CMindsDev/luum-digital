@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { notificar } from "@/design-system";
 
 /**
@@ -13,16 +14,16 @@ export function registrarServiceWorker(): void {
         onNeedRefresh() {
           notificar({
             tono: "info",
-            titulo: "Hay una versión nueva del prototipo",
-            descripcion: "Actualiza para usar la versión más reciente. Tus datos de demostración se conservan.",
-            accion: { etiqueta: "Actualizar", alActivar: () => void actualizar(true) },
+            titulo: t("Hay una versión nueva del prototipo"),
+            descripcion: t("Actualiza para usar la versión más reciente. Tus datos de demostración se conservan."),
+            accion: { etiqueta: t("Actualizar"), alActivar: () => void actualizar(true) },
           });
         },
         onOfflineReady() {
           notificar({
             tono: "exito",
-            titulo: "Lista para usarse sin conexión",
-            descripcion: "Las pantallas ya visitadas abren sin red. Las acciones de la demo siguen siendo simuladas.",
+            titulo: t("Lista para usarse sin conexión"),
+            descripcion: t("Las pantallas ya visitadas abren sin red. Las acciones de la demo siguen siendo simuladas."),
           });
         },
       });

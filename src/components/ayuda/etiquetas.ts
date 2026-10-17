@@ -1,13 +1,14 @@
 import type { AreaBienestar } from "@/types";
 import type { TonoInsignia } from "@/design-system";
+import { msg } from "@/i18n";
 
 /** Nombres visibles de las áreas de bienestar. */
 export const ETIQUETA_AREA: Readonly<Record<AreaBienestar, string>> = {
-  salud: "Salud",
-  salud_mental: "Salud mental",
-  educacion: "Educación",
-  deporte: "Deporte",
-  mujeres: "Mujeres",
+  salud: msg("Salud"),
+  salud_mental: msg("Salud mental"),
+  educacion: msg("Educación"),
+  deporte: msg("Deporte"),
+  mujeres: msg("Mujeres"),
 };
 
 /** Tono de la insignia de área (siempre con texto; el color nunca es el único indicador). */

@@ -19,6 +19,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -180,6 +181,7 @@ function ModePills({
   disabled: boolean;
   onChange: (mode: string) => void;
 }) {
+  const { t } = useTranslation();
   const name = useId();
   const reduced = useReducedMotion() ?? false;
   return (
@@ -188,7 +190,7 @@ function ModePills({
         className="flex flex-wrap items-center gap-1"
         disabled={disabled}
       >
-        <legend className="sr-only">Modo de respuesta</legend>
+        <legend className="sr-only">{t("Modo de respuesta")}</legend>
         {modes.map((mode) => (
           <ModePill
             checked={mode.value === value}
@@ -215,9 +217,10 @@ function SendButton({
   canStop: boolean;
   onStop?: () => void;
 }) {
+  const { t } = useTranslation();
   const busy = status === "submitted" || status === "streaming";
   const stoppable = busy && canStop;
-  const label = stoppable ? "Detener respuesta" : "Enviar mensaje";
+  const label = stoppable ? t("Detener respuesta") : t("Enviar mensaje");
   let icon = <ArrowUp aria-hidden="true" className="size-4" />;
   if (status === "submitted") {
     icon = (
@@ -238,8 +241,8 @@ function SendButton({
       onClick={stoppable ? onStop : undefined}
       title={
         stoppable
-          ? "Detener respuesta"
-          : "Enter para enviar, Shift+Enter para nueva línea"
+          ? t("Detener respuesta")
+          : t("Enter para enviar, Shift+Enter para nueva línea")
       }
       type={stoppable ? "button" : "submit"}
     >
@@ -263,13 +266,14 @@ export function AssistantComposer({
   onModeChange,
   onAttach,
   onDraftChange,
-  placeholder = "Pregunta sobre tu ciudad…",
+  placeholder,
   maxLength = 4000,
   maxRows = 8,
   disabled = false,
-  label = "Mensaje al asistente municipal",
+  label,
   className,
 }: AssistantComposerProps) {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [innerMode, setInnerMode] = useState(defaultMode ?? modes?.[0]?.value);
   const currentMode = mode ?? innerMode;
@@ -353,7 +357,7 @@ export function AssistantComposer({
 
   return (
     <form
-      aria-label={label}
+      aria-label={label ?? t("Mensaje al asistente municipal")}
       className={cn(
         "flex w-full flex-col gap-2 rounded-2xl border border-borde bg-superficie p-2 text-tinta shadow-sm transition-[border-color,box-shadow]",
         "focus-within:border-foco focus-within:ring-[3px] focus-within:ring-foco/30",
@@ -367,12 +371,12 @@ export function AssistantComposer({
       <textarea
         aria-describedby={text.length > 0 ? counterId : undefined}
         aria-invalid={over || undefined}
-        aria-label="Mensaje"
+        aria-label={t("Mensaje")}
         className="block w-full resize-none bg-transparent px-2.5 py-2 text-sm leading-6 outline-none placeholder:text-tinta-suave disabled:cursor-not-allowed"
         disabled={disabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        placeholder={placeholder}
+        placeholder={placeholder ?? t("Pregunta sobre tu ciudad…")}
         ref={field}
         rows={MIN_ROWS}
         value={text}
@@ -381,11 +385,11 @@ export function AssistantComposer({
         <div className="flex min-w-0 flex-1 flex-wrap items-center gap-1">
           {onAttach ? (
             <button
-              aria-label="Agregar contexto"
+              aria-label={t("Agregar contexto")}
               className="inline-flex size-11 items-center justify-center rounded-full text-tinta-suave outline-none transition-colors hover:bg-superficie-2 hover:text-tinta focus-visible:ring-2 focus-visible:ring-foco disabled:opacity-50"
               disabled={disabled}
               onClick={onAttach}
-              title="Agregar contexto"
+              title={t("Agregar contexto")}
               type="button"
             >
               <Plus aria-hidden="true" className="size-4" />

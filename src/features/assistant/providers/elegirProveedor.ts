@@ -9,13 +9,14 @@
  */
 import type { AmbitoAsistente } from "@shared/asistente/acciones";
 import { EstadoServidorSchema, RUTAS_API_ASISTENTE } from "@shared/asistente/servidor";
+import { msg } from "@/i18n";
 import type { AssistantProvider, EstadoServidorAsistente } from "@/services/contracts";
 import { DemoAssistantProvider, type OpcionesProveedorDemo } from "./demo/DemoAssistantProvider";
 import { RealtimeAssistantProvider, type DependenciasRealtime } from "./realtime/RealtimeAssistantProvider";
 
 const TIEMPO_ESTADO_MS = 4000;
 
-export const MOTIVO_SIN_SERVIDOR = "La voz no está disponible ahora. Puedes escribirme.";
+export const MOTIVO_SIN_SERVIDOR = msg("La voz no está disponible ahora. Puedes escribirme.");
 
 /** Estado del servidor sin secretos, o null si no responde (sin servidor = sólo demostración). */
 export async function consultarEstadoServidor(opciones: { fetch?: typeof fetch; signal?: AbortSignal } = {}): Promise<EstadoServidorAsistente | null> {
@@ -76,9 +77,9 @@ export async function elegirProveedores(opciones: OpcionesElegirProveedor): Prom
   if (!estado) {
     motivoSinRealtime = MOTIVO_SIN_SERVIDOR;
   } else if (!estado.realtime.disponible) {
-    motivoSinRealtime = "La voz no está disponible ahora. Puedes escribirme.";
+    motivoSinRealtime = msg("La voz no está disponible ahora. Puedes escribirme.");
   } else if (opciones.ambito === "bienestar" && !estado.bienestarIaReal) {
-    motivoSinRealtime = "La voz no está disponible ahora. Puedes escribirme.";
+    motivoSinRealtime = msg("La voz no está disponible ahora. Puedes escribirme.");
   } else {
     realtime = new RealtimeAssistantProvider({
       ...(opciones.fetch ? { fetch: opciones.fetch } : {}),

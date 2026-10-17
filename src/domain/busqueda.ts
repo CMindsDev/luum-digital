@@ -1,4 +1,6 @@
+import { t } from "i18next";
 import type { Categoria, ResultadoBusqueda, Servicio } from "@/types";
+import { msg } from "@/i18n";
 
 /**
  * Búsqueda en lenguaje natural sobre el catálogo (reglas locales, reproducibles).
@@ -140,12 +142,12 @@ const PESOS = {
 type CampoBusqueda = keyof typeof PESOS;
 
 const ETIQUETA_CAMPO: Record<CampoBusqueda, string> = {
-  nombre: "nombre",
-  nombreCiudadano: "nombre ciudadano",
-  palabrasClave: "palabras clave",
-  categoria: "categoría",
-  dependencia: "dependencia",
-  descripcion: "descripción",
+  nombre: msg("nombre"),
+  nombreCiudadano: msg("nombre ciudadano"),
+  palabrasClave: msg("palabras clave"),
+  categoria: msg("categoría"),
+  dependencia: msg("dependencia"),
+  descripcion: msg("descripción"),
 };
 
 export interface IndiceServicio {
@@ -184,7 +186,7 @@ export function puntuar(indice: IndiceServicio, terminos: readonly string[], ter
     }
     if (aciertos > 0) {
       puntuacion += PESOS[campo] * aciertos;
-      coincidencias.push(ETIQUETA_CAMPO[campo]);
+      coincidencias.push(t(ETIQUETA_CAMPO[campo]));
     }
   }
   // Prioriza la información verificada a igual coincidencia.

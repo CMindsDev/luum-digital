@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { cx } from "../lib/cx";
 import { GlifoPixel } from "./GlifoPixel";
@@ -59,15 +60,16 @@ export function PageHeader({
   descripcion,
   antetitulo,
   regresar,
-  etiquetaRegresar = "Regresar",
+  etiquetaRegresar,
   accion,
   destacado = false,
   children,
   className,
 }: PageHeaderProps) {
+  const { t } = useTranslation();
   const cabecera = (
     <div className="flex items-start gap-3">
-      {regresar ? <BotonRegresar regresar={regresar} etiqueta={etiquetaRegresar} /> : null}
+      {regresar ? <BotonRegresar regresar={regresar} etiqueta={etiquetaRegresar ?? t("Regresar")} /> : null}
       <div className="min-w-0 flex-1">
         {antetitulo ? (
           <p className="mb-1.5 font-mono-rotulo text-xs font-medium tracking-rotulo text-tinta-suave uppercase">{antetitulo}</p>

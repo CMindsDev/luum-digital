@@ -1,5 +1,6 @@
 import { PenLine, Send } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import type { EscenarioDemo, OpcionCampo } from "@/components/catalogo/datos-demo";
 import { useSaveDraft, useSubmitProcedure } from "@/services/hooks";
@@ -15,23 +16,14 @@ export interface SolicitudSimuladaProps {
   escenario: EscenarioDemo;
   borrador: Gestion | null;
   opciones?: Readonly<Record<string, readonly OpcionCampo[]>>;
-  /** Títulos de los tres pasos (captura, revisión, folio). */
   pasos: readonly [string, string, string];
   textoEnviar: string;
-  /** Aviso visible en la revisión (p. ej. «No es una cita confirmada»). */
   avisoRevision?: ReactNode;
-  /**
-   * Trabajo previo al envío (p. ej. la solicitud de cita simulada). Devuelve datos adicionales
-   * que se guardan en la gestión. Debe ser idempotente: puede llamarse otra vez tras un error.
-   */
   prepararEnvio?: (validados: Record<string, unknown>) => Promise<DatosGestion>;
 }
 
-/**
- * Recorrido genérico de solicitud simulada: captura → revisión → envío con folio DEMO-G.
- * Guarda borradores, revalida con zod, evita dobles envíos y lleva a la gestión al terminar.
- */
 export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pasos, textoEnviar, avisoRevision, prepararEnvio }: SolicitudSimuladaProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const guardar = useSaveDraft();
   const enviar = useSubmitProcedure();
@@ -44,7 +36,6 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
   const tituloPasoRef = useRef<HTMLHeadingElement>(null);
   const pasoAnterior = useRef(paso);
 
-  // Al cambiar de paso, el foco va al título del paso (no en la primera carga: ahí va al h1).
   useEffect(() => {
     if (pasoAnterior.current === paso) return;
     pasoAnterior.current = paso;
@@ -61,7 +52,7 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
         camposReutilizados: formulario.reutilizados,
       });
       setGestionId(gestion.id);
-      notificar({ tono: "exito", titulo: "Borrador guardado", descripcion: "Lo encuentras en «Mis gestiones». Se guarda sólo en este navegador." });
+      notificar({ tono: "exito", titulo: t("Borrador guardado"), descripcion: t("Lo encuentras en «Mis gestiones». Se guarda sólo en este navegador.") });
     } catch {
       // El error se muestra con ErrorState (guardar.error).
     }
@@ -94,8 +85,8 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
       const enviada = await enviar.mutateAsync(gestion.id);
       notificar({
         tono: "exito",
-        titulo: `Folio de demostración ${enviada.folio ?? ""}`.trim(),
-        descripcion: "Gestión simulada enviada. No es un trámite oficial.",
+        titulo: t("Folio de demostración {{folio}}", { folio: enviada.folio ?? "" }).trim(),
+        descripcion: t("Gestión simulada enviada. No es un trámite oficial."),
       });
       navigate(`/gestiones/${encodeURIComponent(enviada.id)}`, { state: { recienEnviada: true } });
     } catch {
@@ -109,7 +100,7 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
   return (
     <div className="flex flex-col gap-5">
       <Stepper
-        etiqueta="Pasos de la solicitud simulada"
+        etiqueta={t("Pasos de la solicitud simulada")}
         pasos={[
           { id: "captura", titulo: pasos[0] },
           { id: "revision", titulo: pasos[1] },
@@ -120,20 +111,18 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
 
       <section aria-labelledby="titulo-paso" className="rounded-tarjeta border border-borde bg-superficie p-4 shadow-suave sm:p-6">
         <h2 id="titulo-paso" ref={tituloPasoRef} tabIndex={-1} className="mb-1 text-xl font-semibold text-marino">
-          {paso === "captura" ? escenario.titulo : "Revisa antes de enviar"}
+          {paso === "captura" ? t(escenario.titulo) : t("Revisa antes de enviar")}
         </h2>
-        <p className="mb-5 text-sm font-medium text-aviso">{escenario.leyenda}</p>
+        <p className="mb-5 text-sm font-medium text-aviso">{t(escenario.leyenda)}</p>
 
-        {errorEnvio ? (
-          <ErrorState error={errorEnvio} nivel={3} titulo="No se completó la acción" className="mb-5" />
-        ) : null}
+        {errorEnvio ? <ErrorState error={errorEnvio} nivel={3} titulo={t("No se completó la acción")} className="mb-5" /> : null}
 
         {paso === "captura" ? (
           <PasoCaptura
             escenario={escenario}
             formulario={formulario}
             opciones={opciones}
-            textoContinuar="Revisar solicitud"
+            textoContinuar={t("Revisar solicitud")}
             onContinuar={(valores) => {
               setValidados(valores);
               setPaso("revision");
@@ -143,18 +132,13 @@ export function SolicitudSimulada({ servicio, escenario, borrador, opciones, pas
           />
         ) : (
           <div className="flex flex-col gap-5">
-            <RevisionDatos
-              campos={escenario.campos}
-              valores={validados ?? formulario.form.getValues()}
-              reutilizados={formulario.reutilizados}
-              opciones={opciones}
-            />
+            <RevisionDatos campos={escenario.campos} valores={validados ?? formulario.form.getValues()} reutilizados={formulario.reutilizados} opciones={opciones} />
             {avisoRevision ? <div className="rounded-boton border border-borde bg-fondo p-4 text-[0.9375rem] text-tinta">{avisoRevision}</div> : null}
             <div className="flex flex-col-reverse gap-2.5 border-t border-borde pt-5 sm:flex-row sm:justify-end">
               <Button variante="secundario" iconoInicio={PenLine} onClick={() => setPaso("captura")} disabled={procesando} data-guia="servicios.corregir">
-                Corregir datos
+                {t("Corregir datos")}
               </Button>
-              <Button iconoInicio={Send} onClick={() => void enviarSolicitud()} cargando={procesando} textoCargando="Enviando…" data-guia="servicios.enviar">
+              <Button iconoInicio={Send} onClick={() => void enviarSolicitud()} cargando={procesando} textoCargando={t("Enviando…")} data-guia="servicios.enviar">
                 {textoEnviar}
               </Button>
             </div>

@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ServiceCard } from "@/components/catalogo";
 import { Button } from "@/design-system";
 import type { Servicio } from "@/types";
@@ -19,6 +20,7 @@ export interface ListaServiciosProps {
  * para que quien navega con teclado o lector de pantalla no pierda su lugar.
  */
 export function ListaServicios({ servicios, etiqueta, porPagina = 24, compacta = false, nivelTitulo = 3 }: ListaServiciosProps) {
+  const { t } = useTranslation();
   const [visibles, setVisibles] = useState(porPagina);
   const listaRef = useRef<HTMLUListElement>(null);
   const enfocarDesde = useRef<number | null>(null);
@@ -36,11 +38,7 @@ export function ListaServicios({ servicios, etiqueta, porPagina = 24, compacta =
 
   return (
     <div>
-      <ul
-        ref={listaRef}
-        aria-label={etiqueta}
-        className={compacta ? "grid gap-2.5 md:grid-cols-2" : "grid gap-4 sm:grid-cols-2 xl:grid-cols-3"}
-      >
+      <ul ref={listaRef} aria-label={etiqueta} className={compacta ? "grid gap-2.5 md:grid-cols-2" : "grid gap-4 sm:grid-cols-2 xl:grid-cols-3"}>
         {mostrados.map((servicio) => (
           <li key={servicio.id} className="min-w-0">
             <ServiceCard servicio={servicio} compacta={compacta} nivelTitulo={nivelTitulo} />
@@ -49,9 +47,7 @@ export function ListaServicios({ servicios, etiqueta, porPagina = 24, compacta =
       </ul>
       {restantes > 0 ? (
         <div className="mt-5 flex flex-col items-center gap-2">
-          <p className="text-sm text-tinta-suave">
-            Mostrando {mostrados.length} de {servicios.length}
-          </p>
+          <p className="text-sm text-tinta-suave">{t("Mostrando {{mostrados}} de {{total}}", { mostrados: mostrados.length, total: servicios.length })}</p>
           <Button
             variante="secundario"
             iconoInicio={ChevronDown}
@@ -60,7 +56,7 @@ export function ListaServicios({ servicios, etiqueta, porPagina = 24, compacta =
               setVisibles((actual) => actual + porPagina);
             }}
           >
-            Mostrar {Math.min(porPagina, restantes)} más
+            {t("Mostrar {{cantidad}} más", { cantidad: Math.min(porPagina, restantes) })}
           </Button>
         </div>
       ) : null}

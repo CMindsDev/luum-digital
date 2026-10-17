@@ -1,15 +1,27 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MessageSquarePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { aportacionSchema, DESCRIPCION_REPORTE } from "@/domain/validaciones";
+import { z } from "zod";
+import { DESCRIPCION_REPORTE } from "@/domain/validaciones";
 import { Button, Checkbox, Field, TextArea, describirError } from "@/design-system";
+import { msg } from "@/i18n";
 import { useAddContribution } from "@/services/hooks";
 import type { Reporte } from "@/types";
+import { useTranslation } from "react-i18next";
 
 interface ValoresAportacion {
   descripcion: string;
   tieneFoto: boolean;
 }
+
+const aportacionSchema = z.object({
+  descripcion: z
+    .string()
+    .trim()
+    .min(DESCRIPCION_REPORTE.minimo, msg("Aporta al menos 15 caracteres."))
+    .max(DESCRIPCION_REPORTE.maximo, msg("Usa como máximo 300 caracteres.")),
+  tieneFoto: z.boolean(),
+});
 
 export interface AportacionFormProps {
   reporte: Pick<Reporte, "id" | "folio">;
@@ -35,6 +47,7 @@ export function AportacionForm({
   onAportado,
   onCancelar,
 }: AportacionFormProps) {
+  const { t } = useTranslation();
   const aportar = useAddContribution();
   const {
     register,
@@ -56,21 +69,28 @@ export function AportacionForm({
   });
 
   return (
-    <form onSubmit={(evento) => void enviar(evento)} noValidate data-formulario="Aportar información" className="flex flex-col gap-4">
+    <form onSubmit={(evento) => void enviar(evento)} noValidate data-formulario={t("Aportar información")} className="flex flex-col gap-4">
       <p className="text-[0.9375rem] text-tinta">
-        Tu información se suma al reporte <strong className="font-mono font-semibold">{reporte.folio}</strong>. No se crea un reporte nuevo y las
-        aportaciones no generan puntos.
+        {t("Tu información se suma al reporte")} <strong className="font-mono font-semibold">{reporte.folio}</strong>.{" "}
+        {t("No se crea un reporte nuevo y las aportaciones no generan puntos.")}
       </p>
       <Field
-        etiqueta="Información que aportas"
+        etiqueta={t("Información que aportas")}
         requerido
-        ayuda={`Entre ${DESCRIPCION_REPORTE.minimo} y ${DESCRIPCION_REPORTE.maximo} caracteres. Por ejemplo: sigue igual, creció, hay otro cerca…`}
-        error={errors.descripcion?.message}
+        ayuda={t("Entre {{minimo}} y {{maximo}} caracteres. Por ejemplo: sigue igual, creció, hay otro cerca…", {
+          minimo: DESCRIPCION_REPORTE.minimo,
+          maximo: DESCRIPCION_REPORTE.maximo,
+        })}
+        error={errors.descripcion?.message ? t(errors.descripcion.message) : undefined}
       >
         <TextArea {...register("descripcion")} maxLength={DESCRIPCION_REPORTE.maximo} rows={3} data-guia="reportes.aportacion_texto" />
       </Field>
       {mostrarCasillaFoto ? (
-        <Checkbox {...register("tieneFoto")} etiqueta="Tengo una foto del lugar" descripcion="La foto no se guarda: sólo se registra que existe." />
+        <Checkbox
+          {...register("tieneFoto")}
+          etiqueta={t("Tengo una foto del lugar")}
+          descripcion={t("La foto no se guarda: sólo se registra que existe.")}
+        />
       ) : null}
       {aportar.error ? (
         <p role="alert" className="rounded-control border border-peligro/25 bg-peligro-suave px-3 py-2.5 text-sm text-tinta">
@@ -81,17 +101,17 @@ export function AportacionForm({
       <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         {onCancelar ? (
           <Button variante="secundario" onClick={onCancelar}>
-            Cancelar
+            {t("Cancelar")}
           </Button>
         ) : null}
         <Button
           type="submit"
           iconoInicio={MessageSquarePlus}
           cargando={isSubmitting || aportar.isPending}
-          textoCargando="Enviando aportación…"
+          textoCargando={t("Enviando aportación…")}
           data-guia="reportes.enviar_aportacion"
         >
-          Enviar aportación
+          {t("Enviar aportación")}
         </Button>
       </div>
     </form>

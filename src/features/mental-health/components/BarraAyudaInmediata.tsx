@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 
 export interface BarraAyudaInmediataProps {
@@ -10,12 +11,14 @@ export interface BarraAyudaInmediataProps {
  * y funcional sin conversar antes.
  */
 export function BarraAyudaInmediata({ abierta, onCambiar }: BarraAyudaInmediataProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="sticky top-[calc(var(--altura-encabezado)+0.5rem)] z-30 mb-6">
       <div className="flex flex-col gap-2 rounded-tarjeta border border-peligro/30 bg-superficie/95 px-4 py-3 shadow-elevada backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-tinta">
-          <strong className="font-semibold text-peligro">¿Estás en peligro o necesitas hablar con alguien ya?</strong>{" "}
-          <span className="text-tinta-suave">No necesitas conversar primero.</span>
+          <strong className="font-semibold text-peligro">{t("¿Estás en peligro o necesitas hablar con alguien ya?")}</strong>{" "}
+          <span className="text-tinta-suave">{t("No necesitas conversar primero.")}</span>
         </p>
         <AyudaInmediata
           enfoque="salud_mental"

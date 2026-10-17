@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Badge, Card, InfoStatusBadge, cx } from "@/design-system";
 import type { Servicio } from "@/types";
@@ -22,6 +23,7 @@ export interface ServiceCardProps {
  * Toda la tarjeta es clicable, pero el único enlace es «Ver ficha» (sin enlaces duplicados).
  */
 export function ServiceCard({ servicio, compacta = false, nivelTitulo = 3, className }: ServiceCardProps) {
+  const { t } = useTranslation();
   const categoria = useCategoria(servicio.categoria);
   const ruta = rutaFicha(servicio.id);
 
@@ -63,7 +65,7 @@ export function ServiceCard({ servicio, compacta = false, nivelTitulo = 3, class
       <p className="line-clamp-3 text-[0.9375rem] text-tinta">{servicio.descripcion}</p>
       <div className="flex flex-wrap gap-1.5">
         <Badge tono="neutro" icono={IconoTipo}>
-          {ETIQUETA_TIPO_RECORRIDO[servicio.tipoDeRecorrido]}
+          {t(ETIQUETA_TIPO_RECORRIDO[servicio.tipoDeRecorrido])}
         </Badge>
       </div>
       <EstadosServicio servicio={servicio} sinFuente />
@@ -77,8 +79,8 @@ export function ServiceCard({ servicio, compacta = false, nivelTitulo = 3, class
             "after:absolute after:inset-0 after:rounded-tarjeta after:content-['']",
           )}
         >
-          Ver ficha
-          <span className="sr-only"> de {servicio.nombre}</span>
+          {t("Ver ficha")}
+          <span className="sr-only"> {t("de {{nombre}}", { nombre: servicio.nombre })}</span>
           <ChevronRight aria-hidden="true" className="size-4" />
         </Link>
         {servicio.clave ? <span className="text-xs font-medium tracking-[0.05em] text-tinta-suave uppercase">{servicio.clave}</span> : null}

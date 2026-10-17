@@ -1,5 +1,6 @@
 import { BellOff, CheckCheck, Inbox } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMarkAllRead, useMarkRead, useNotifications, usePrivacy } from "@/services/hooks";
 import { Button, EmptyState, ErrorState, LoadingState, PageHeader, SegmentedControl, notificar } from "@/design-system";
 import { ItemNotificacion } from "../components/ItemNotificacion";
@@ -8,6 +9,7 @@ type Vista = "todas" | "sin_leer";
 
 /** /notificaciones — avisos de gestiones, reportes, verificaciones y puntos (simulados). */
 export default function NotificationsPage() {
+  const { t } = useTranslation();
   const { data, isPending, isError, error, refetch } = useNotifications();
   const privacidad = usePrivacy();
   const marcar = useMarkRead();
@@ -16,23 +18,22 @@ export default function NotificationsPage() {
 
   const sinLeer = data?.filter((notificacion) => !notificacion.leida).length ?? 0;
   const visibles = (data ?? []).filter((notificacion) => vista === "todas" || !notificacion.leida);
-  // Si la persona eligió notificaciones discretas en su expediente, todas se muestran así.
   const todasDiscretas = privacidad.data?.notificacionesDiscretas === true;
 
   const marcarTodasLeidas = async () => {
     try {
       await marcarTodas.mutateAsync();
-      notificar({ tono: "exito", titulo: "Todas tus notificaciones están leídas" });
+      notificar({ tono: "exito", titulo: t("Todas tus notificaciones están leídas") });
     } catch (fallo) {
-      notificar({ tono: "error", titulo: "No se pudieron marcar como leídas", descripcion: fallo instanceof Error ? fallo.message : undefined });
+      notificar({ tono: "error", titulo: t("No se pudieron marcar como leídas"), descripcion: fallo instanceof Error ? fallo.message : undefined });
     }
   };
 
   return (
     <>
       <PageHeader
-        titulo="Notificaciones"
-        descripcion="Avisos de tus gestiones, reportes, verificaciones y puntos de demostración."
+        titulo={t("Notificaciones")}
+        descripcion={t("Avisos de tus gestiones, reportes, verificaciones y puntos de demostración.")}
         accion={
           sinLeer > 0 ? (
             <Button
@@ -41,11 +42,11 @@ export default function NotificationsPage() {
               iconoInicio={CheckCheck}
               onClick={() => void marcarTodasLeidas()}
               cargando={marcarTodas.isPending}
-              textoCargando="Marcando…"
+              textoCargando={t("Marcando…")}
               data-guia="notificaciones.marcar_todas"
             >
-              <span className="hidden sm:inline">Marcar todas como leídas</span>
-              <span className="sm:hidden">Marcar todas</span>
+              <span className="hidden sm:inline">{t("Marcar todas como leídas")}</span>
+              <span className="sm:hidden">{t("Marcar todas")}</span>
             </Button>
           ) : null
         }
@@ -54,43 +55,43 @@ export default function NotificationsPage() {
       <div className="flex flex-col gap-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <SegmentedControl<Vista>
-            etiqueta="Mostrar notificaciones"
+            etiqueta={t("Mostrar notificaciones")}
             valor={vista}
             onCambiar={setVista}
             guia="notificaciones.filtro"
             opciones={[
-              { valor: "todas", etiqueta: "Todas" },
-              { valor: "sin_leer", etiqueta: `Sin leer (${sinLeer})` },
+              { valor: "todas", etiqueta: t("Todas") },
+              { valor: "sin_leer", etiqueta: t("Sin leer ({{sinLeer}})", { sinLeer }) },
             ]}
           />
           <p aria-live="polite" className="text-sm text-tinta-suave">
-            {data ? (sinLeer === 0 ? "No tienes avisos sin leer." : `${sinLeer} ${sinLeer === 1 ? "aviso sin leer" : "avisos sin leer"}.`) : ""}
+            {data ? (sinLeer === 0 ? t("No tienes avisos sin leer.") : sinLeer === 1 ? t("1 aviso sin leer.") : t("{{sinLeer}} avisos sin leer.", { sinLeer })) : ""}
           </p>
         </div>
 
         {isPending ? (
-          <LoadingState etiqueta="Cargando notificaciones…" />
+          <LoadingState etiqueta={t("Cargando notificaciones…")} />
         ) : isError ? (
           <ErrorState error={error} onReintentar={() => void refetch()} />
         ) : visibles.length === 0 ? (
           <EmptyState
             icono={vista === "sin_leer" ? Inbox : BellOff}
-            titulo={vista === "sin_leer" ? "No tienes notificaciones sin leer" : "No tienes notificaciones"}
+            titulo={vista === "sin_leer" ? t("No tienes notificaciones sin leer") : t("No tienes notificaciones")}
             descripcion={
               vista === "sin_leer"
-                ? "Cuando haya novedades de tus gestiones o reportes, aparecerán aquí."
-                : "Cuando envíes una gestión o un reporte de demostración, te avisaremos aquí."
+                ? t("Cuando haya novedades de tus gestiones o reportes, aparecerán aquí.")
+                : t("Cuando envíes una gestión o un reporte de demostración, te avisaremos aquí.")
             }
             accion={
               vista === "sin_leer" && (data?.length ?? 0) > 0 ? (
                 <Button variante="secundario" onClick={() => setVista("todas")}>
-                  Ver todas
+                  {t("Ver todas")}
                 </Button>
               ) : null
             }
           />
         ) : (
-          <ul aria-label="Notificaciones" className="flex flex-col gap-3">
+          <ul aria-label={t("Notificaciones")} className="flex flex-col gap-3">
             {visibles.map((notificacion) => (
               <li key={notificacion.id}>
                 <ItemNotificacion
@@ -108,8 +109,7 @@ export default function NotificationsPage() {
         )}
 
         <p className="text-sm text-tinta-suave">
-          Bienestar, salud mental y Línea Mujer nunca generan notificaciones. Las notificaciones son simuladas y se guardan sólo en este
-          navegador.
+          {t("Bienestar, salud mental y Línea Mujer nunca generan notificaciones. Las notificaciones son simuladas y se guardan sólo en este navegador.")}
         </p>
       </div>
     </>

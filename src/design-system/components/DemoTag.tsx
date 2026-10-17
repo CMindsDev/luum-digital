@@ -1,4 +1,5 @@
 import { FlaskConical } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Badge } from "./Badge";
 
 export interface DemoTagProps {
@@ -8,10 +9,11 @@ export interface DemoTagProps {
 }
 
 /** Marca contenido ficticio o simulado («Demostración», «Pago simulado», «Ejemplo»…). */
-export function DemoTag({ children = "Demostración", className }: DemoTagProps) {
+export function DemoTag({ children, className }: DemoTagProps) {
+  const { t } = useTranslation();
   return (
     <Badge tono="ambar" icono={FlaskConical} className={className}>
-      {children}
+      {children ?? t("Demostración")}
     </Badge>
   );
 }

@@ -1,5 +1,6 @@
 import { ChevronDown, SearchX } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ServiceCard } from "@/components/catalogo/ServiceCard";
 import { Button, ButtonLink, EmptyState } from "@/design-system";
 import type { ResultadoBusqueda } from "@/types";
@@ -17,6 +18,7 @@ export interface ResultadosCatalogoProps {
  * (/servicios/:id); nadie necesita saber qué dependencia la atiende.
  */
 export function ResultadosCatalogo({ consulta, resultados }: ResultadosCatalogoProps) {
+  const { t } = useTranslation();
   const [verTodos, setVerTodos] = useState(false);
   const visibles = verTodos ? resultados : resultados.slice(0, INICIALES);
 
@@ -24,16 +26,16 @@ export function ResultadosCatalogo({ consulta, resultados }: ResultadosCatalogoP
     return (
       <EmptyState
         icono={SearchX}
-        titulo="No encontré fichas del catálogo con esas palabras"
+        titulo={t("No encontré fichas del catálogo con esas palabras")}
         descripcion={
           <>
-            <p>Prueba con palabras más sencillas (p. ej. «bache», «licencia», «predial») o explora el catálogo por categorías.</p>
+            <p>{t("Prueba con palabras más sencillas (p. ej. «bache», «licencia», «predial») o explora el catálogo por categorías.")}</p>
             <SugerenciasBusqueda titulo="Ejemplos" nivel={3} className="mt-5 text-left" />
           </>
         }
         accion={
           <ButtonLink to="/servicios" variante="secundario">
-            Explorar el catálogo
+            {t("Explorar el catálogo")}
           </ButtonLink>
         }
       />
@@ -44,10 +46,10 @@ export function ResultadosCatalogo({ consulta, resultados }: ResultadosCatalogoP
     <section aria-labelledby="titulo-resultados" data-guia="busqueda.resultados">
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="titulo-resultados" className="text-lg font-semibold text-marino">
-          Fichas del catálogo
+          {t("Fichas del catálogo")}
         </h2>
         <p className="text-sm text-tinta-suave" aria-live="polite">
-          {resultados.length === 1 ? "1 coincidencia" : `${resultados.length} coincidencias`} para «{consulta}»
+          {resultados.length === 1 ? t("1 coincidencia para «{{consulta}}»", { consulta }) : t("{{total}} coincidencias para «{{consulta}}»", { total: resultados.length, consulta })}
         </p>
       </div>
       <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
@@ -60,7 +62,7 @@ export function ResultadosCatalogo({ consulta, resultados }: ResultadosCatalogoP
       {resultados.length > visibles.length ? (
         <div className="mt-4">
           <Button variante="secundario" iconoInicio={ChevronDown} onClick={() => setVerTodos(true)} data-guia="busqueda.ver_mas">
-            Mostrar {resultados.length - visibles.length} más
+            {t("Mostrar {{cantidad}} más", { cantidad: resultados.length - visibles.length })}
           </Button>
         </div>
       ) : null}

@@ -1,27 +1,29 @@
+import { t } from "i18next";
 import { CircleAlert, CircleCheck, CircleX, Clock, PencilLine, Send, type LucideIcon } from "lucide-react";
 import type { TonoInsignia } from "@/design-system";
+import { msg } from "@/i18n";
 import type { CampoReutilizable, DocumentoDemo, EstadoGestion, Gestion } from "@/types";
 import { documentosDeGestion } from "./documentos";
 
 /** Estado de una gestión simulada con ícono + texto (nunca sólo color). */
 export const ESTADO_GESTION: Record<EstadoGestion, { etiqueta: string; icono: LucideIcon; tono: TonoInsignia }> = {
-  borrador: { etiqueta: "Borrador", icono: PencilLine, tono: "neutro" },
-  enviada: { etiqueta: "Enviada (simulada)", icono: Send, tono: "azul" },
-  en_revision: { etiqueta: "En revisión", icono: Clock, tono: "info" },
-  requiere_informacion: { etiqueta: "Requiere información", icono: CircleAlert, tono: "aviso" },
-  resuelta: { etiqueta: "Resuelta", icono: CircleCheck, tono: "exito" },
-  cancelada: { etiqueta: "Cancelada", icono: CircleX, tono: "peligro" },
+  borrador: { etiqueta: msg("Borrador"), icono: PencilLine, tono: "neutro" },
+  enviada: { etiqueta: msg("Enviada (simulada)"), icono: Send, tono: "azul" },
+  en_revision: { etiqueta: msg("En revisión"), icono: Clock, tono: "info" },
+  requiere_informacion: { etiqueta: msg("Requiere información"), icono: CircleAlert, tono: "aviso" },
+  resuelta: { etiqueta: msg("Resuelta"), icono: CircleCheck, tono: "exito" },
+  cancelada: { etiqueta: msg("Cancelada"), icono: CircleX, tono: "peligro" },
 };
 
 /** Etiquetas de los datos del expediente que pueden reutilizarse. */
 export const ETIQUETA_CAMPO_EXPEDIENTE: Record<CampoReutilizable["campo"], string> = {
-  nombreCompleto: "Nombre completo",
-  correo: "Correo electrónico",
-  telefono: "Teléfono",
-  calle: "Calle",
-  numero: "Número",
-  colonia: "Colonia",
-  codigoPostal: "Código postal",
+  nombreCompleto: msg("Nombre completo"),
+  correo: msg("Correo electrónico"),
+  telefono: msg("Teléfono"),
+  calle: msg("Calle"),
+  numero: msg("Número"),
+  colonia: msg("Colonia"),
+  codigoPostal: msg("Código postal"),
 };
 
 function esCampoExpediente(nombre: string): nombre is CampoReutilizable["campo"] {
@@ -37,7 +39,7 @@ export function etiquetaCampo(nombre: string): string {
 
 function valorLegible(valor: Gestion["datos"][string] | undefined): string | null {
   if (valor === null || valor === undefined) return null;
-  if (typeof valor === "boolean") return valor ? "Sí" : "No";
+  if (typeof valor === "boolean") return valor ? t("Sí") : t("No");
   const texto = String(valor).trim();
   return texto === "" ? null : texto;
 }

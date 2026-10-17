@@ -1,7 +1,8 @@
 import type { FieldErrors, Resolver } from "react-hook-form";
 import { z } from "zod";
 import { CATEGORIAS_REPORTE } from "@/domain/reportes";
-import { LIMITES_MERIDA, descripcionReporteSchema, referenciaUbicacionSchema } from "@/domain/validaciones";
+import { LIMITES_MERIDA } from "@/domain/validaciones";
+import { msg } from "@/i18n";
 import type { CategoriaReporte } from "@/types";
 import { coloniaMencionada } from "./colonias";
 import type { PrefillReporte } from "./prefill";
@@ -23,11 +24,11 @@ export interface ValoresReporte extends CamposUbicacion {
 export const ORDEN_PASOS: readonly PasoReporte[] = ["descripcion", "ubicacion", "foto", "coincidencias", "revision"];
 
 export const DEFINICION_PASO: Record<PasoReporte, { titulo: string; encabezado: string }> = {
-  descripcion: { titulo: "Describe", encabezado: "Describe la incidencia" },
-  ubicacion: { titulo: "Ubicación", encabezado: "Confirma la ubicación" },
-  foto: { titulo: "Foto", encabezado: "Agrega una fotografía (opcional)" },
-  coincidencias: { titulo: "Coincidencias", encabezado: "Revisa si ya lo reportaron" },
-  revision: { titulo: "Revisa y envía", encabezado: "Revisa tu reporte" },
+  descripcion: { titulo: msg("Describe"), encabezado: msg("Describe la incidencia") },
+  ubicacion: { titulo: msg("Ubicación"), encabezado: msg("Confirma la ubicación") },
+  foto: { titulo: msg("Foto"), encabezado: msg("Agrega una fotografía (opcional)") },
+  coincidencias: { titulo: msg("Coincidencias"), encabezado: msg("Revisa si ya lo reportaron") },
+  revision: { titulo: msg("Revisa y envía"), encabezado: msg("Revisa tu reporte") },
 };
 
 /** Paso anterior (o null en el primero). */
@@ -71,23 +72,42 @@ export function valoresIniciales(categoria: CategoriaReporte, prefill: PrefillRe
   };
 }
 
-const textoMaximo = (maximo: number) => z.string().trim().max(maximo, `Usa como máximo ${maximo} caracteres.`);
+function mensajeMaximo(maximo: number): string {
+  switch (maximo) {
+    case 25:
+      return msg("Usa como máximo 25 caracteres.");
+    case 40:
+      return msg("Usa como máximo 40 caracteres.");
+    case 50:
+      return msg("Usa como máximo 50 caracteres.");
+    case 160:
+      return msg("Usa como máximo 160 caracteres.");
+    default:
+      return msg("Usa como máximo 300 caracteres.");
+  }
+}
+
+const textoMaximo = (maximo: number) => z.string().trim().max(maximo, mensajeMaximo(maximo));
 
 const esquemaDescripcion = z.object({
-  categoria: z.enum(CATEGORIAS_REPORTE, { error: "Elige el tipo de reporte." }),
-  descripcion: descripcionReporteSchema,
+  categoria: z.enum(CATEGORIAS_REPORTE, { error: msg("Elige el tipo de reporte.") }),
+  descripcion: z
+    .string()
+    .trim()
+    .min(15, msg("Describe el problema con al menos 15 caracteres."))
+    .max(300, msg("Usa como máximo 300 caracteres.")),
 });
 
 const esquemaUbicacionManual = z.object({
-  coloniaId: z.string().min(1, "Elige la colonia o comisaría."),
-  calle: textoMaximo(LIMITES_CAMPOS.calle).min(1, "Escribe la calle (por ejemplo, 60)."),
-  cruzamiento1: textoMaximo(LIMITES_CAMPOS.cruzamiento).min(1, "Escribe al menos un cruzamiento."),
+  coloniaId: z.string().min(1, msg("Elige la colonia o comisaría.")),
+  calle: textoMaximo(LIMITES_CAMPOS.calle).min(1, msg("Escribe la calle (por ejemplo, 60).")),
+  cruzamiento1: textoMaximo(LIMITES_CAMPOS.cruzamiento).min(1, msg("Escribe al menos un cruzamiento.")),
   cruzamiento2: textoMaximo(LIMITES_CAMPOS.cruzamiento),
   referenciaAdicional: textoMaximo(LIMITES_CAMPOS.referenciaAdicional),
 });
 
-const MENSAJE_SIN_PUNTO = "Marca el punto en el mapa o usa la ubicación de tu dispositivo.";
-const MENSAJE_FUERA = "La ubicación está fuera del municipio de Mérida.";
+const MENSAJE_SIN_PUNTO = msg("Marca el punto en el mapa o usa la ubicación de tu dispositivo.");
+const MENSAJE_FUERA = msg("La ubicación está fuera del municipio de Mérida.");
 
 const esquemaUbicacionMapa = z.object({
   lat: z
@@ -98,7 +118,11 @@ const esquemaUbicacionMapa = z.object({
     .number({ error: MENSAJE_SIN_PUNTO })
     .min(LIMITES_MERIDA.lngMin, MENSAJE_FUERA)
     .max(LIMITES_MERIDA.lngMax, MENSAJE_FUERA),
-  referenciaMapa: referenciaUbicacionSchema,
+  referenciaMapa: z
+    .string()
+    .trim()
+    .min(5, msg("Escribe la calle y sus cruzamientos o una referencia."))
+    .max(LIMITES_CAMPOS.referenciaMapa, msg("Usa como máximo 160 caracteres.")),
 });
 
 const sinCampos = z.object({});

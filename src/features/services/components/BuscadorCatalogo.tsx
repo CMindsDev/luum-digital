@@ -1,5 +1,6 @@
 import { Search, X } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, IconButton } from "@/design-system";
 
 export interface BuscadorCatalogoProps {
@@ -12,16 +13,13 @@ export interface BuscadorCatalogoProps {
 }
 
 /** Buscador del catálogo en lenguaje natural (envía al pulsar «Buscar» o Enter). */
-export function BuscadorCatalogo({
-  inicial = "",
-  onBuscar,
-  etiqueta = "Buscar en el catálogo",
-  marcador = "p. ej. «licencia de funcionamiento», «becas», «predial»",
-  guia = "servicios.buscador",
-}: BuscadorCatalogoProps) {
+export function BuscadorCatalogo({ inicial = "", onBuscar, etiqueta, marcador, guia = "servicios.buscador" }: BuscadorCatalogoProps) {
+  const { t } = useTranslation();
   const [texto, setTexto] = useState(inicial);
   const id = useId();
   const idAyuda = `${id}-ayuda`;
+  const etiquetaActual = etiqueta ?? t("Buscar en el catálogo");
+  const marcadorActual = marcador ?? t("p. ej. «licencia de funcionamiento», «becas», «predial»");
 
   const enviar = (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
@@ -29,12 +27,12 @@ export function BuscadorCatalogo({
   };
 
   return (
-    <form role="search" aria-label={etiqueta} onSubmit={enviar} data-guia={guia} className="flex flex-col gap-1.5">
+    <form role="search" aria-label={etiquetaActual} onSubmit={enviar} data-guia={guia} className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-[0.9375rem] font-semibold text-tinta">
-        {etiqueta}
+        {etiquetaActual}
       </label>
       <p id={idAyuda} className="text-sm text-tinta-suave">
-        Escribe con tus palabras: buscamos en nombres, descripciones y sinónimos de las fichas.
+        {t("Escribe con tus palabras: buscamos en nombres, descripciones y sinónimos de las fichas.")}
       </p>
       <div className="flex gap-2">
         <div className="relative min-w-0 flex-1">
@@ -44,7 +42,7 @@ export function BuscadorCatalogo({
             type="search"
             value={texto}
             onChange={(evento) => setTexto(evento.target.value)}
-            placeholder={marcador}
+            placeholder={marcadorActual}
             aria-describedby={idAyuda}
             autoComplete="off"
             enterKeyHint="search"
@@ -53,7 +51,7 @@ export function BuscadorCatalogo({
           />
           {texto ? (
             <IconButton
-              etiqueta="Borrar búsqueda"
+              etiqueta={t("Borrar búsqueda")}
               icono={X}
               onClick={() => {
                 setTexto("");
@@ -64,7 +62,7 @@ export function BuscadorCatalogo({
           ) : null}
         </div>
         <Button type="submit" iconoInicio={Search}>
-          Buscar
+          {t("Buscar")}
         </Button>
       </div>
     </form>

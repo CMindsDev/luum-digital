@@ -1,4 +1,5 @@
 import { ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { InfoStatusBadge, IntegrationBadge, cx, formatearFecha } from "@/design-system";
 import type { Servicio } from "@/types";
 
@@ -17,19 +18,20 @@ export interface EstadosServicioProps {
  * más la fuente oficial con su fecha de consulta.
  */
 export function EstadosServicio({ servicio, conDescripcion = false, sinFuente = false, className }: EstadosServicioProps) {
+  const { t } = useTranslation();
   const { fuenteOficial: fuente } = servicio;
   return (
     <div className={cx("flex flex-col gap-2", className)} data-estados-servicio="">
       {conDescripcion ? (
         <dl className="grid gap-3 sm:grid-cols-2">
           <div>
-            <dt className="mb-1 text-xs font-semibold tracking-[0.08em] text-tinta-suave uppercase">Información</dt>
+            <dt className="mb-1 text-xs font-semibold tracking-[0.08em] text-tinta-suave uppercase">{t("Información")}</dt>
             <dd>
               <InfoStatusBadge estado={servicio.estadoDeInformacion} conDescripcion />
             </dd>
           </div>
           <div>
-            <dt className="mb-1 text-xs font-semibold tracking-[0.08em] text-tinta-suave uppercase">Integración</dt>
+            <dt className="mb-1 text-xs font-semibold tracking-[0.08em] text-tinta-suave uppercase">{t("Integración")}</dt>
             <dd>
               <IntegrationBadge estado={servicio.estadoDeIntegracion} conDescripcion />
             </dd>
@@ -43,7 +45,7 @@ export function EstadosServicio({ servicio, conDescripcion = false, sinFuente = 
       )}
       {sinFuente ? null : (
         <p className="text-sm text-tinta-suave">
-          <span className="font-semibold text-tinta">Fuente: </span>
+          <span className="font-semibold text-tinta">{t("Fuente:")} </span>
           <a
             href={fuente.url}
             target="_blank"
@@ -52,9 +54,9 @@ export function EstadosServicio({ servicio, conDescripcion = false, sinFuente = 
           >
             {fuente.nombre}
             <ExternalLink aria-hidden="true" className="size-3.5 shrink-0" />
-            <span className="sr-only">(se abre en otra pestaña)</span>
+            <span className="sr-only">{t("(se abre en otra pestaña)")}</span>
           </a>
-          <span> · consultada el {formatearFecha(fuente.fechaConsulta, "media")}</span>
+          <span> · {t("consultada el")} {formatearFecha(fuente.fechaConsulta, "media")}</span>
         </p>
       )}
     </div>

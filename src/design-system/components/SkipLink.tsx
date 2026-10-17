@@ -1,4 +1,5 @@
 import type { MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface SkipLinkProps {
   /** Id del contenido principal (sin #). */
@@ -7,7 +8,8 @@ export interface SkipLinkProps {
 }
 
 /** Enlace «Saltar al contenido», visible al recibir foco. Mueve el foco sin cambiar la URL. */
-export function SkipLink({ destino = "contenido", children = "Saltar al contenido" }: SkipLinkProps) {
+export function SkipLink({ destino = "contenido", children }: SkipLinkProps) {
+  const { t } = useTranslation();
   const alActivar = (evento: MouseEvent<HTMLAnchorElement>) => {
     const objetivo = document.getElementById(destino);
     if (!objetivo) return;
@@ -22,7 +24,7 @@ export function SkipLink({ destino = "contenido", children = "Saltar al contenid
       onClick={alActivar}
       className="superficie-oscura fixed top-2 left-2 z-[100] -translate-y-[200%] rounded-boton bg-marino px-4 py-3 font-semibold text-white shadow-elevada focus:translate-y-0"
     >
-      {children}
+      {children ?? t("Saltar al contenido")}
     </a>
   );
 }

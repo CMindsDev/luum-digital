@@ -1,6 +1,8 @@
 import { LoaderCircle } from "lucide-react";
 import { lazy, Suspense, useCallback, useEffect, useId, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "@/design-system";
+import { msg } from "@/i18n";
 import type { Coordenadas } from "@/types";
 import { configMapa, TIEMPO_LIMITE_CARGA_MS, VISTA_CIUDAD, type ConfigMapa } from "./config";
 import { LimiteErrorMapa } from "./LimiteErrorMapa";
@@ -9,6 +11,10 @@ import type { ClicMapa, ControlMapa, EstadoCargaMapa, FuenteMapa, MarcadorMapa, 
 /** Cada motor vive en su propio fragmento: sólo se descarga el que se usa y sólo al abrir un mapa. */
 const MotorMaplibre = lazy(() => import("./MotorMaplibre"));
 const MotorMapbox = lazy(() => import("./MotorMapbox"));
+const MOTIVO_MAPA_LENTO = msg("El mapa tardó demasiado en cargar.");
+const MOTIVO_SIN_CONEXION = msg("Sin conexión: el mapa base necesita internet.");
+const ETIQUETA_CARGANDO_MAPA = msg("Cargando el mapa…");
+const ETIQUETA_SIN_MAPA_BASE = msg("Mapa base omitido: pruebas automatizadas sin red externa");
 
 function suscribirRed(aviso: () => void) {
   window.addEventListener("online", aviso);
@@ -103,6 +109,7 @@ export function MapaInteractivo({
   guia,
   config = configMapa,
 }: MapaInteractivoProps) {
+  const { t } = useTranslation();
   const idDescripcion = useId();
   const enLinea = useEnLinea();
   const sinAnimacion = usePrefiereMenosMovimiento();
@@ -132,7 +139,7 @@ export function MapaInteractivo({
   // Tiempo límite de carga.
   useEffect(() => {
     if (estado !== "cargando" || fallidoPorRed) return;
-    const temporizador = window.setTimeout(() => cambiarEstado("fallido", "El mapa tardó demasiado en cargar."), TIEMPO_LIMITE_CARGA_MS);
+    const temporizador = window.setTimeout(() => cambiarEstado("fallido", MOTIVO_MAPA_LENTO), TIEMPO_LIMITE_CARGA_MS);
     return () => window.clearTimeout(temporizador);
   }, [estado, intento, fallidoPorRed, cambiarEstado]);
 
@@ -154,7 +161,7 @@ export function MapaInteractivo({
       ) : null}
       {fallido ? (
         <div className="h-full overflow-y-auto">
-          {respaldo({ motivo: fallidoPorRed ? "Sin conexión: el mapa base necesita internet." : motivo, reintentar })}
+          {respaldo({ motivo: t(fallidoPorRed ? MOTIVO_SIN_CONEXION : motivo), reintentar })}
         </div>
       ) : (
         <>
@@ -189,14 +196,14 @@ export function MapaInteractivo({
             <div role="status" className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-superficie-2/80">
               <span className="inline-flex items-center gap-2 rounded-pildora bg-superficie px-4 py-2 text-sm font-semibold text-tinta shadow-suave">
                 <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
-                Cargando el mapa…
+                {t(ETIQUETA_CARGANDO_MAPA)}
               </span>
             </div>
           ) : null}
           {estado === "listo" ? superposicion : null}
           {estado === "listo" && config.sinMapaBase ? (
             <p className="pointer-events-none absolute top-2 left-2 z-10 rounded-pildora bg-superficie/90 px-3 py-1 text-xs font-medium text-tinta shadow-suave">
-              Mapa base omitido: pruebas automatizadas sin red externa
+              {t(ETIQUETA_SIN_MAPA_BASE)}
             </p>
           ) : null}
         </>

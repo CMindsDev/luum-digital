@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { cx, VisuallyHidden } from "@/design-system";
+import { msg } from "@/i18n";
 import { useModalDialog } from "@/design-system/lib/use-modal-dialog";
 import { PekitoMascota } from "./PekitoMascota";
 import { guardarPreferenciasPekito, leerPreferenciasPekito, type ModoPreferido } from "./pekito-preferencias";
@@ -12,7 +14,7 @@ import "./pekito.css";
  */
 
 const TOTAL_PASOS = 5;
-const SALUDO = "Hola, puedes hablar,\nyo te escucho...";
+const SALUDO = msg("Hola, puedes hablar,\nyo te escucho...");
 const ESTADO_URL = "/api/asistente/estado";
 
 function usePrefiereMovimientoReducido(): boolean {
@@ -76,6 +78,7 @@ export interface PekitoOnboardingProps {
 }
 
 export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
+  const { t } = useTranslation();
   const [paso, setPaso] = useState(1);
   const [modo, setModo] = useState<ModoPreferido>(() => leerPreferenciasPekito().modo);
   const reducido = usePrefiereMovimientoReducido();
@@ -103,6 +106,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
   };
 
   const ultimo = paso === TOTAL_PASOS;
+  const saludo = t(SALUDO);
 
   return (
     <dialog
@@ -123,11 +127,11 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
         <div className="flex items-center gap-4 px-2 min-[400px]:pr-[9px] min-[400px]:pl-4">
           <div
             role="progressbar"
-            aria-label="Avance de la bienvenida"
+            aria-label={t("Avance de la bienvenida")}
             aria-valuemin={1}
             aria-valuemax={TOTAL_PASOS}
             aria-valuenow={paso}
-            aria-valuetext={`Paso ${paso} de ${TOTAL_PASOS}`}
+            aria-valuetext={t("Paso {{paso}} de {{total}}", { paso, total: TOTAL_PASOS })}
             className="relative h-[7px] flex-1 overflow-hidden rounded-[3.54px] bg-[var(--pekito-pista)]"
           >
             <div
@@ -143,7 +147,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
             onClick={cerrar}
             className="-m-2 min-h-11 rounded-md p-2 text-xs text-tinta-suave underline-offset-2 hover:underline focus-visible:outline-3 focus-visible:outline-foco"
           >
-            Saltar
+            {t("Saltar")}
           </button>
         </div>
 
@@ -151,7 +155,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
           {/* Título (22:76): PEKITO en Unbounded + subtítulo en Host Grotesk, 26/33. */}
           <h2 id={idTitulo} ref={tituloRef} tabIndex={-1} className="text-[26px] leading-[33px] font-normal text-[var(--pekito-tinta)] outline-none">
             <span className="pekito-marca block">PEKITO</span>
-            <span className="block">Un agente que sí te atiende</span>
+            <span className="block">{t("Un agente que sí te atiende")}</span>
           </h2>
 
           <PekitoMascota ancho={paso === 1 ? 213 : 150} estado={paso === 1 ? "saludando" : "reposo"} className="max-w-[60vw]" />
@@ -160,25 +164,25 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
             {paso === 1 && (
               <p className="flex items-center justify-center gap-[1.842px] text-[28px] leading-[31.316px] text-[var(--pekito-tenue)]">
                 <span aria-hidden="true" className="pekito-cursor h-[35px] w-[1.842px] shrink-0 bg-[var(--pekito-cursor)]" />
-                {abierto && <TextoEscrito texto={SALUDO} reducido={reducido} />}
-                <VisuallyHidden>{SALUDO.replace("\n", " ")}</VisuallyHidden>
+                {abierto && <TextoEscrito texto={saludo} reducido={reducido} />}
+                <VisuallyHidden>{saludo.replace("\n", " ")}</VisuallyHidden>
               </p>
             )}
 
             {paso === 2 && (
               <fieldset className="space-y-3 text-left">
-                <legend className="mb-3 w-full text-center text-[22px] leading-7">¿Cómo quieres que te atienda?</legend>
+                <legend className="mb-3 w-full text-center text-[22px] leading-7">{t("¿Cómo quieres que te atienda?")}</legend>
                 {(
                   [
                     {
                       valor: "hablar",
-                      titulo: "Hablar",
+                      titulo: t("Hablar"),
                       detalle: vozDisponible
-                        ? "Como conversas normalmente."
-                        : "La voz no está disponible ahora. Por ahora puedes escribir.",
+                        ? t("Como conversas normalmente.")
+                        : t("La voz no está disponible ahora. Por ahora puedes escribir."),
                       deshabilitado: vozDisponible !== true,
                     },
-                    { valor: "escribir", titulo: "Escribir", detalle: "Cuando lo prefieras.", deshabilitado: false },
+                    { valor: "escribir", titulo: t("Escribir"), detalle: t("Cuando lo prefieras."), deshabilitado: false },
                   ] as const
                 ).map((opcion) => (
                   <label
@@ -209,30 +213,30 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
 
             {paso === 3 && (
               <div className="space-y-3">
-                <p className="text-[22px] leading-7">Puedo ayudarte a…</p>
+                <p className="text-[22px] leading-7">{t("Puedo ayudarte a…")}</p>
                 <ul className="space-y-2 text-left text-base text-tinta-suave">
-                  <li>· Buscar trámites y servicios.</li>
-                  <li>· Explicarte requisitos y mostrarte la fuente oficial.</li>
-                  <li>· Preparar reportes y ayudarte a moverte por la app.</li>
-                  <li>· Llevarte al área del Ayuntamiento que te puede servir.</li>
+                  <li>{t("· Buscar trámites y servicios.")}</li>
+                  <li>{t("· Explicarte requisitos y mostrarte la fuente oficial.")}</li>
+                  <li>{t("· Preparar reportes y ayudarte a moverte por la app.")}</li>
+                  <li>{t("· Llevarte al área del Ayuntamiento que te puede servir.")}</li>
                 </ul>
               </div>
             )}
 
             {paso === 4 && (
               <div className="space-y-3">
-                <p className="text-[22px] leading-7">Tú siempre confirmas</p>
+                <p className="text-[22px] leading-7">{t("Tú siempre confirmas")}</p>
                 <p className="text-base text-tinta-suave">
-                  Abro pantallas y preparo formularios por ti. Nada se envía sin que lo revises y lo confirmes.
+                  {t("Abro pantallas y preparo formularios por ti. Nada se envía sin que lo revises y lo confirmes.")}
                 </p>
               </div>
             )}
 
             {paso === 5 && (
               <div className="space-y-3">
-                <p className="text-[22px] leading-7">Verifica lo importante</p>
+                <p className="text-[22px] leading-7">{t("Verifica lo importante")}</p>
                 <p className="text-base text-tinta-suave">
-                  Puedo equivocarme. Confirma requisitos, horarios, teléfonos y otros datos importantes con la fuente oficial antes de seguir.
+                  {t("Puedo equivocarme. Confirma requisitos, horarios, teléfonos y otros datos importantes con la fuente oficial antes de seguir.")}
                 </p>
               </div>
             )}
@@ -242,7 +246,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
           <button
             type="button"
             onClick={avanzar}
-            aria-label={ultimo ? "Empezar con Pekito" : "Continuar"}
+            aria-label={ultimo ? t("Empezar con Pekito") : t("Continuar")}
             className="grid size-11 place-items-center rounded-full focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-foco"
           >
             <span className="grid size-[38px] place-items-center rounded-[19px] bg-[var(--pekito-acento)]">
@@ -256,7 +260,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
               />
             </span>
           </button>
-          {ultimo && <span className="-mt-3 text-sm font-semibold">Empezar</span>}
+          {ultimo && <span className="-mt-3 text-sm font-semibold">{t("Empezar")}</span>}
         </div>
       </div>
     </dialog>

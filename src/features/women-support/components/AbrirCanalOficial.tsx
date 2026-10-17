@@ -1,7 +1,9 @@
 import { Phone, PhoneCall } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { esEmergencias911, hrefTelefono, NUMERO_EMERGENCIAS } from "@/components/ayuda/lineas";
 import { Badge, Button, clasesBoton, Dialog, ErrorState, LoadingState } from "@/design-system";
+import { msg } from "@/i18n";
 import { useHelpLines } from "@/services/hooks";
 
 interface Canal {
@@ -18,7 +20,7 @@ const EMERGENCIAS_RESPALDO: Canal = {
   nombre: "Emergencias 911",
   telefono: NUMERO_EMERGENCIAS,
   telefonoMarcable: NUMERO_EMERGENCIAS,
-  detalle: "Si tu vida o la de alguien más está en riesgo inmediato.",
+  detalle: msg("Si tu vida o la de alguien más está en riesgo inmediato."),
 };
 
 /**
@@ -27,6 +29,7 @@ const EMERGENCIAS_RESPALDO: Canal = {
  * envía alertas, ubicación ni mensajes, y no registra la llamada.
  */
 export function AbrirCanalOficial() {
+  const { t } = useTranslation();
   const lineas = useHelpLines();
   const [canal, setCanal] = useState<Canal | null>(null);
   const lineaMujer = lineas.data?.find((linea) => linea.tipo === "violencia" && linea.verificado);
@@ -37,13 +40,13 @@ export function AbrirCanalOficial() {
 
   return (
     <div className="space-y-3">
-      {lineas.isPending ? <LoadingState variante="compacto" etiqueta="Cargando el número verificado…" /> : null}
+      {lineas.isPending ? <LoadingState variante="compacto" etiqueta={t("Cargando el número verificado…")} /> : null}
       {lineas.isError ? (
         <ErrorState
           nivel={3}
           error={lineas.error}
-          titulo="No se pudo cargar el número de Línea Mujer"
-          descripcion="Puedes reintentar. El 911 sigue disponible."
+          titulo={t("No se pudo cargar el número de Línea Mujer")}
+          descripcion={t("Puedes reintentar. El 911 sigue disponible.")}
           onReintentar={() => void lineas.refetch()}
         />
       ) : null}
@@ -66,11 +69,11 @@ export function AbrirCanalOficial() {
               })
             }
           >
-            Llamar a Línea Mujer
+            {t("Llamar a Línea Mujer")}
           </Button>
         ) : null}
         <Button variante="secundario" iconoInicio={Phone} aria-haspopup="dialog" className="sm:flex-1" onClick={() => setCanal(emergencias)}>
-          Llamar al 911
+          {t("Llamar al 911")}
         </Button>
       </div>
 
@@ -78,17 +81,17 @@ export function AbrirCanalOficial() {
         abierto={canal !== null}
         onCerrar={() => setCanal(null)}
         tamano="sm"
-        titulo={canal ? `¿Llamar a ${canal.nombre}?` : "Llamar"}
-        descripcion="Tu teléfono abrirá la llamada. Este prototipo no llama por ti, no envía alertas, ubicación ni mensajes, y no registra la llamada."
+        titulo={canal ? t("¿Llamar a {{canal}}?", { canal: canal.nombre }) : t("Llamar")}
+        descripcion={t("Tu teléfono abrirá la llamada. Este prototipo no llama por ti, no envía alertas, ubicación ni mensajes, y no registra la llamada.")}
         acciones={
           canal ? (
             <>
               <Button variante="secundario" onClick={() => setCanal(null)}>
-                Cancelar
+                {t("Cancelar")}
               </Button>
               <a href={hrefTelefono(canal.telefonoMarcable)} onClick={() => setCanal(null)} className={clasesBoton({ variante: "primario" })}>
                 <Phone aria-hidden="true" className="size-[1.15em] shrink-0" />
-                <span>Llamar al {canal.telefono}</span>
+                <span>{t("Llamar al {{telefono}}", { telefono: canal.telefono })}</span>
               </a>
             </>
           ) : null
@@ -97,8 +100,8 @@ export function AbrirCanalOficial() {
         {canal ? (
           <div className="space-y-2">
             <p className="text-2xl font-semibold tracking-wide text-tinta">{canal.telefono}</p>
-            <p className="text-[0.9375rem] text-tinta">{canal.detalle}</p>
-            <Badge tono="exito">Número verificado en su fuente oficial</Badge>
+            <p className="text-[0.9375rem] text-tinta">{canal.id === "emergencias" ? t(canal.detalle) : canal.detalle}</p>
+            <Badge tono="exito">{t("Número verificado en su fuente oficial")}</Badge>
           </div>
         ) : null}
       </Dialog>

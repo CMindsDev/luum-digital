@@ -4,6 +4,7 @@
  * recibo de cada acción (entregarRecibo) para redactar la respuesta siguiente con los datos y
  * fuentes devueltos. Nunca simula ser un modelo real.
  */
+import { t } from "i18next";
 import type { AmbitoAsistente, ArgumentosAccion, NombreAccion, ReciboAccion } from "@shared/asistente/acciones";
 import type { PantallaActual } from "@shared/asistente/pantalla";
 import type { EventoAsistente, FuenteCitada, SesionAsistente } from "@/services/contracts";
@@ -93,7 +94,7 @@ export class SesionDemo implements SesionAsistente {
     if (this.cerrada) return;
     this.cerrada = true;
     for (const [llamadaId, resolver] of this.recibosPendientes) {
-      resolver({ llamadaId, accion: "navegar", estado: "fallida", mensaje: "La conversación se cerró." });
+      resolver({ llamadaId, accion: "navegar", estado: "fallida", mensaje: t("La conversación se cerró.") });
     }
     this.recibosPendientes.clear();
     this.emitir({ tipo: "estado", estado: "cerrado" });
@@ -146,12 +147,12 @@ export class SesionDemo implements SesionAsistente {
 
   private llamar<N extends NombreAccion>(accion: N, argumentos: ArgumentosAccion<N>): Promise<ReciboAccion> {
     const llamadaId = this.siguienteId("llamada");
-    if (this.cerrada) return Promise.resolve({ llamadaId, accion, estado: "fallida", mensaje: "La conversación se cerró." });
+    if (this.cerrada) return Promise.resolve({ llamadaId, accion, estado: "fallida", mensaje: t("La conversación se cerró.") });
     return new Promise<ReciboAccion>((resolver) => {
       const temporizador = setTimeout(() => {
         if (!this.recibosPendientes.has(llamadaId)) return;
         this.recibosPendientes.delete(llamadaId);
-        resolver({ llamadaId, accion, estado: "fallida", mensaje: "No llegó el resultado de la acción." });
+        resolver({ llamadaId, accion, estado: "fallida", mensaje: t("No llegó el resultado de la acción.") });
       }, this.tiempoReciboMs);
       this.recibosPendientes.set(llamadaId, (recibo) => {
         clearTimeout(temporizador);

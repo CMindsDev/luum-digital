@@ -1,7 +1,8 @@
-import { screen, waitFor, within } from "@testing-library/react";
+import { act, screen, waitFor, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { storeAsistenteGeneral } from "@/features/assistant/runtime";
 import { renderWithProviders } from "@/test/renderWithProviders";
+import { cambiarIdioma } from "@/i18n";
 import { ROTULO_ACOMPANANTE } from "../textos";
 import MentalHealthPage from "./MentalHealthPage";
 
@@ -76,5 +77,22 @@ describe("Salud mental", () => {
     expect(await screen.findByRole("heading", { name: "Apoyo Psicológico (centros Alma Nova)" })).toBeInTheDocument();
     expect(screen.getAllByText(/Ficha MID-BIH-007/).length).toBeGreaterThan(0);
     expect(screen.getByText(/no implica vigencia/)).toBeInTheDocument();
+  });
+
+  it("cambiar el idioma conserva la conversación sólo en memoria y mantiene la ayuda inmediata", async () => {
+    const { user } = renderWithProviders(<MentalHealthPage />);
+    const mensaje = "Hoy tuve un día pesado";
+    await escribir(user, mensaje);
+    const registro = screen.getByRole("log");
+    await within(registro).findByText(/Puedo acompañarte con alguna de estas opciones/, undefined, { timeout: 3000 });
+    try {
+      await act(() => cambiarIdioma("yua"));
+      expect(within(registro).getByText(mensaje)).toBeInTheDocument();
+      expect(document.querySelector('[data-guia="salud_mental.ayuda_inmediata"]')).toBeVisible();
+      expect(contenidoAlmacenado()).not.toContain(mensaje);
+      expect(JSON.stringify(storeAsistenteGeneral.getState().mensajes)).not.toContain(mensaje);
+    } finally {
+      await act(() => cambiarIdioma("es"));
+    }
   });
 });

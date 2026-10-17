@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import { ReglaDeNegocioError } from "@/services/contracts/errors";
 import type {
   Aportacion,
@@ -9,6 +10,7 @@ import type {
   NuevoReporteInput,
   Reporte,
 } from "@/types";
+import { msg } from "@/i18n";
 
 /**
  * Máquina de estados del reporte (estado municipal, etiquetas de «Mis reportes» de Mérida Móvil):
@@ -32,13 +34,13 @@ export const TRANSICIONES_REPORTE: Readonly<Record<EstadoMunicipal, readonly Est
 export const ESTADOS_ABIERTOS: readonly EstadoMunicipal[] = ["registrado", "en_proceso"];
 
 export const NOMBRE_CATEGORIA_REPORTE: Record<CategoriaReporte, string> = {
-  bache: "Bache",
-  luminaria: "Luminaria",
-  desazolve_rejilla: "Desazolve de rejilla",
-  basura_via_publica: "Basura en vía pública",
-  animal_muerto: "Animal muerto",
-  parques_jardines: "Limpieza de parques y jardines",
-  recoleccion_basura: "Queja por falta de recolección de basura",
+  bache: msg("Bache"),
+  luminaria: msg("Luminaria"),
+  desazolve_rejilla: msg("Desazolve de rejilla"),
+  basura_via_publica: msg("Basura en vía pública"),
+  animal_muerto: msg("Animal muerto"),
+  parques_jardines: msg("Limpieza de parques y jardines"),
+  recoleccion_basura: msg("Queja por falta de recolección de basura"),
 };
 
 export const CATEGORIAS_REPORTE: readonly CategoriaReporte[] = [
@@ -52,10 +54,10 @@ export const CATEGORIAS_REPORTE: readonly CategoriaReporte[] = [
 ];
 
 export const TEXTO_MOTIVO_CANCELACION: Record<MotivoCancelacion, string> = {
-  duplicado: "Duplicado",
-  no_procede: "No procede",
-  fuera_de_competencia: "Fuera de competencia municipal",
-  informacion_insuficiente: "Información insuficiente",
+  duplicado: msg("Duplicado"),
+  no_procede: msg("No procede"),
+  fuera_de_competencia: msg("Fuera de competencia municipal"),
+  informacion_insuficiente: msg("Información insuficiente"),
 };
 
 export function esCategoriaReporte(valor: string): valor is CategoriaReporte {
@@ -74,7 +76,11 @@ function exigirTransicion(reporte: Reporte, a: EstadoMunicipal): void {
   if (!puedeTransicionar(reporte.estadoMunicipal, a)) {
     throw new ReglaDeNegocioError(
       "transicion_invalida",
-      `No se puede pasar el reporte ${reporte.folio} de «${reporte.estadoMunicipal}» a «${a}».`,
+      t("No se puede pasar el reporte {{folio}} de «{{de}}» a «{{a}}».", {
+        folio: reporte.folio,
+        de: reporte.estadoMunicipal,
+        a,
+      }),
     );
   }
 }
@@ -108,7 +114,7 @@ export function crearReporte(
       {
         fecha: datos.fecha,
         tipo: "creado",
-        descripcion: `Reporte registrado con folio ${datos.folio} (simulado).`,
+        descripcion: t("Reporte registrado con folio {{folio}} (simulado).", { folio: datos.folio }),
         actor: "ciudadania",
       },
     ],
@@ -122,7 +128,7 @@ export function validarReporte(reporte: Reporte, fecha: FechaISO): Reporte {
   exigirTransicion(reporte, "en_proceso");
   return conEvento(
     reporte,
-    { fecha, tipo: "validado", descripcion: "Reporte validado: en proceso de atención (simulado).", actor: "operador" },
+    { fecha, tipo: "validado", descripcion: t("Reporte validado: en proceso de atención (simulado)."), actor: "operador" },
     { estadoMunicipal: "en_proceso" },
   );
 }
@@ -136,7 +142,9 @@ export function registrarAtencion(reporte: Reporte, nota: string, fecha: FechaIS
     {
       fecha,
       tipo: "atencion_registrada",
-      descripcion: texto ? `Atención reportada por el Ayuntamiento (simulado): ${texto}` : "Atención reportada por el Ayuntamiento (simulado).",
+      descripcion: texto
+        ? t("Atención reportada por el Ayuntamiento (simulado): {{texto}}", { texto })
+        : t("Atención reportada por el Ayuntamiento (simulado)."),
       actor: "operador",
     },
     { estadoMunicipal: "solucionado", verificacion: "pendiente" },
@@ -151,7 +159,7 @@ export function cancelarReporte(reporte: Reporte, motivo: MotivoCancelacion, fec
     {
       fecha,
       tipo: "cancelado",
-      descripcion: `Motivo de cancelación: ${TEXTO_MOTIVO_CANCELACION[motivo]} (simulado).`,
+      descripcion: t("Motivo de cancelación: {{motivo}} (simulado).", { motivo: t(TEXTO_MOTIVO_CANCELACION[motivo]) }),
       actor: "operador",
     },
     { estadoMunicipal: "cancelado", motivoCancelacion: motivo, verificacion: "no_aplica" },
@@ -160,7 +168,7 @@ export function cancelarReporte(reporte: Reporte, motivo: MotivoCancelacion, fec
 
 /** Motivo que acompaña la cancelación/reversión de los puntos de un reporte cancelado. */
 export function motivoPuntosCancelacion(reporte: Pick<Reporte, "folio">, motivo: MotivoCancelacion): string {
-  return `Reporte cancelado: ${TEXTO_MOTIVO_CANCELACION[motivo]} (${reporte.folio})`;
+  return t("Reporte cancelado: {{motivo}} ({{folio}})", { motivo: t(TEXTO_MOTIVO_CANCELACION[motivo]), folio: reporte.folio });
 }
 
 /**
@@ -169,14 +177,14 @@ export function motivoPuntosCancelacion(reporte: Pick<Reporte, "folio">, motivo:
  */
 export function agregarAportacion(reporte: Reporte, aportacion: Aportacion): Reporte {
   if (!estaAbierto(reporte)) {
-    throw new ReglaDeNegocioError("reporte_cerrado", "Sólo puedes aportar información a reportes registrados o en proceso de atención.");
+    throw new ReglaDeNegocioError("reporte_cerrado", t("Sólo puedes aportar información a reportes registrados o en proceso de atención."));
   }
   return conEvento(
     reporte,
     {
       fecha: aportacion.fecha,
       tipo: "aportacion",
-      descripcion: "Otra persona aportó información sobre el mismo incidente.",
+      descripcion: t("Otra persona aportó información sobre el mismo incidente."),
       actor: "ciudadania",
     },
     { aportaciones: [...reporte.aportaciones, aportacion] },
@@ -192,10 +200,10 @@ export function ordenarPorFecha<T extends { creadoEn: string }>(lista: readonly 
 /** Seguimiento operativo local: nunca envía mensajes ni modifica estados municipales. */
 export function registrarSeguimiento(reporte: Reporte, tipo: "asignado" | "contacto_simulado", texto: string, fecha: FechaISO): Reporte {
   const valor = texto.trim();
-  if (valor.length < 3 || valor.length > 1000) throw new ReglaDeNegocioError("seguimiento_invalido", "Escribe entre 3 y 1000 caracteres.");
-  if (tipo === "asignado" && !estaAbierto(reporte)) throw new ReglaDeNegocioError("reporte_cerrado", "Sólo puedes asignar reportes abiertos.");
+  if (valor.length < 3 || valor.length > 1000) throw new ReglaDeNegocioError("seguimiento_invalido", t("Escribe entre 3 y 1000 caracteres."));
+  if (tipo === "asignado" && !estaAbierto(reporte)) throw new ReglaDeNegocioError("reporte_cerrado", t("Sólo puedes asignar reportes abiertos."));
   return conEvento(reporte, {
     fecha, tipo, actor: "operador",
-    descripcion: tipo === "asignado" ? `Asignación simulada: ${valor}.` : `Contacto simulado, sin envío: ${valor}`,
+    descripcion: tipo === "asignado" ? t("Asignación simulada: {{valor}}.", { valor }) : t("Contacto simulado, sin envío: {{valor}}", { valor }),
   }, tipo === "asignado" ? { equipoAsignado: valor } : {});
 }

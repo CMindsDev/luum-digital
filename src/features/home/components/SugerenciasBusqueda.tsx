@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { cx } from "@/design-system";
 import { CONSULTAS_SUGERIDAS } from "../lib/acciones";
@@ -14,10 +15,11 @@ export interface SugerenciasBusquedaProps {
 
 /** Consultas de ejemplo en lenguaje natural (las seis del brief). */
 export function SugerenciasBusqueda({ titulo = "Prueba con", nivel = 2, className }: SugerenciasBusquedaProps) {
+  const { t } = useTranslation();
   const Titulo = nivel === 2 ? "h2" : "h3";
   return (
     <div className={className}>
-      <Titulo className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>{titulo}</Titulo>
+      <Titulo className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>{t(titulo)}</Titulo>
       <ul className="mt-3 flex flex-wrap gap-2">
         {CONSULTAS_SUGERIDAS.map((consulta, indice) => {
           const destino = destinoDeBusqueda(consulta);
@@ -33,7 +35,7 @@ export function SugerenciasBusqueda({ titulo = "Prueba con", nivel = 2, classNam
                 )}
               >
                 <Search aria-hidden="true" className="size-4 shrink-0 text-azul" />
-                {consulta}
+                {t(consulta)}
               </Link>
             </li>
           );

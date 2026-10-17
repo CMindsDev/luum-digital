@@ -1,5 +1,6 @@
 import { CircleAlert } from "lucide-react";
 import { useId, useMemo, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { CampoContext, type ContextoCampo } from "../lib/campo";
 import { cx } from "../lib/cx";
 
@@ -26,6 +27,7 @@ export interface FieldProps {
  * (id, aria-describedby, aria-invalid, aria-required).
  */
 export function Field({ etiqueta, ayuda, error, requerido = false, opcional = false, id, ocultarEtiqueta = false, children, className }: FieldProps) {
+  const { t } = useTranslation();
   const generado = useId();
   const idControl = id ?? `campo-${generado.replace(/:/g, "")}`;
   const idAyuda = ayuda ? `${idControl}-ayuda` : undefined;
@@ -42,10 +44,10 @@ export function Field({ etiqueta, ayuda, error, requerido = false, opcional = fa
         {requerido ? (
           <span className="text-azul">
             <span aria-hidden="true"> *</span>
-            <span className="sr-only"> (obligatorio)</span>
+            <span className="sr-only"> {t("(obligatorio)")}</span>
           </span>
         ) : null}
-        {opcional ? <span className="font-normal text-tinta-suave"> (opcional)</span> : null}
+        {opcional ? <span className="font-normal text-tinta-suave"> {t("(opcional)")}</span> : null}
       </label>
       {ayuda ? (
         <p id={idAyuda} className="text-sm text-tinta-suave">

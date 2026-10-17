@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { Skeleton } from "./Skeleton";
 
@@ -16,7 +17,8 @@ const MOSAICOS = ["bg-azul", "bg-ambar", "bg-cafe", "bg-magenta"] as const;
  * Estado de carga con región role="status" y texto visible. El indicador son 4 mosaicos que aparecen
  * en secuencia; con movimiento reducido quedan quietos (el texto sigue anunciando la carga).
  */
-export function LoadingState({ etiqueta = "Cargando…", variante = "lineas", className }: LoadingStateProps) {
+export function LoadingState({ etiqueta, variante = "lineas", className }: LoadingStateProps) {
+  const { t } = useTranslation();
   return (
     <div role="status" aria-live="polite" className={cx("w-full", className)}>
       <p className="flex items-center gap-2 text-sm font-medium text-tinta-suave">
@@ -29,7 +31,7 @@ export function LoadingState({ etiqueta = "Cargando…", variante = "lineas", cl
             />
           ))}
         </span>
-        {etiqueta}
+        {etiqueta ?? t("Cargando…")}
       </p>
       {variante === "lineas" ? (
         <div className="mt-4 space-y-3">

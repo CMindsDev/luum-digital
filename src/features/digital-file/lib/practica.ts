@@ -1,17 +1,25 @@
+import type { TFunction } from "i18next";
 import { Mail, Phone, UserRound, type LucideIcon } from "lucide-react";
 import { z } from "zod";
-import { correoSchema, nombreCompletoSchema, telefonoFicticioSchema } from "@/domain/validaciones";
+import { msg } from "@/i18n";
 import type { CampoReutilizable } from "@/types";
 
 /**
  * Formulario de práctica del expediente: muestra cómo se piden los datos reutilizables con
  * confirmación campo por campo. No envía ni guarda nada.
  */
-export const esquemaPractica = z.object({
-  nombreCompleto: nombreCompletoSchema,
-  correo: correoSchema,
-  telefono: telefonoFicticioSchema,
-});
+export function crearEsquemaPractica(t: TFunction = ((texto: string) => texto) as TFunction) {
+  return z.object({
+    nombreCompleto: z.string().trim().min(3, t("Escribe el nombre completo.")).max(120, t("Usa como máximo 120 caracteres.")),
+    correo: z.email({ error: t("Escribe un correo válido.") }),
+    telefono: z
+      .string()
+      .transform((valor) => valor.replace(/\s+/g, ""))
+      .pipe(z.string().regex(/^\d{10}$/, t("Escribe un teléfono de 10 dígitos."))),
+  });
+}
+
+export const esquemaPractica = crearEsquemaPractica();
 
 export type EntradaPractica = z.input<typeof esquemaPractica>;
 export type CampoPractica = keyof EntradaPractica;
@@ -31,32 +39,32 @@ export interface DefinicionCampoPractica {
 export const CAMPOS_PRACTICA: readonly DefinicionCampoPractica[] = [
   {
     nombre: "nombreCompleto",
-    etiqueta: "Nombre completo",
+    etiqueta: msg("Nombre completo"),
     icono: UserRound,
     tipo: "text",
     autocompletar: "name",
-    marcador: "Nombre y apellidos",
-    ayuda: "Como aparece en tu expediente de ejemplo.",
+    marcador: msg("Nombre y apellidos"),
+    ayuda: msg("Como aparece en tu expediente de ejemplo."),
     reutilizable: "nombreCompleto",
   },
   {
     nombre: "correo",
-    etiqueta: "Correo electrónico",
+    etiqueta: msg("Correo electrónico"),
     icono: Mail,
     tipo: "email",
     autocompletar: "email",
-    marcador: "nombre@ejemplo.mx",
-    ayuda: "Usa un correo ficticio.",
+    marcador: msg("nombre@ejemplo.mx"),
+    ayuda: msg("Usa un correo ficticio."),
     reutilizable: "correo",
   },
   {
     nombre: "telefono",
-    etiqueta: "Teléfono",
+    etiqueta: msg("Teléfono"),
     icono: Phone,
     tipo: "tel",
     autocompletar: "tel",
-    marcador: "999 000 0000",
-    ayuda: "10 dígitos. Usa un número ficticio.",
+    marcador: msg("999 000 0000"),
+    ayuda: msg("10 dígitos. Usa un número ficticio."),
     reutilizable: "telefono",
   },
 ];

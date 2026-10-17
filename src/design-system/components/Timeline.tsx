@@ -1,5 +1,6 @@
 import { Circle, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { cx } from "../lib/cx";
 import { formatearFechaHora } from "../lib/fechas";
 import { CLASES_ICONO_INSIGNIA, CLASES_INSIGNIA, type TonoInsignia } from "../lib/tonos";
@@ -24,9 +25,10 @@ export interface TimelineProps {
 }
 
 /** Historial cronológico (gestiones, reportes). Cada evento con ícono + texto + fecha. */
-export function Timeline({ eventos, etiqueta = "Historial", className }: TimelineProps) {
+export function Timeline({ eventos, etiqueta, className }: TimelineProps) {
+  const { t } = useTranslation();
   return (
-    <ol aria-label={etiqueta} className={cx("relative", className)}>
+    <ol aria-label={etiqueta ?? t("Historial")} className={cx("relative", className)}>
       {eventos.map((evento, indice) => {
         const Icono = evento.icono ?? Circle;
         const tono = evento.tono ?? "neutro";
@@ -40,7 +42,7 @@ export function Timeline({ eventos, etiqueta = "Historial", className }: Timelin
             <div className="min-w-0 flex-1 pt-1">
               <p className={cx("font-semibold", evento.actual ? "text-marino" : "text-tinta")}>
                 {evento.titulo}
-                {evento.actual ? <span className="sr-only"> (más reciente)</span> : null}
+                {evento.actual ? <span className="sr-only"> {t("(más reciente)")}</span> : null}
               </p>
               {evento.fecha ? (
                 <p className="text-sm text-tinta-suave">
