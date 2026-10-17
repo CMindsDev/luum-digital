@@ -17,6 +17,7 @@
     "test:e2e": "playwright test",
     "preview": "vite preview",
     "catalogo:importar": "tsx scripts/import-catalog.ts",
+    "conocimiento:construir": "tsx scripts/construir-conocimiento.ts",
     "check": "npm run lint && npm run typecheck && npm run test && npm run build",
     "docs:inventario": "tsx scripts/generar-inventario.ts"
   },

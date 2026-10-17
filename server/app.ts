@@ -7,6 +7,8 @@ import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import { routePath } from "hono/route";
 import { CODIGOS_ERROR } from "../shared/asistente/servidor";
+import { indiceVacio } from "./conocimiento/cargar";
+import type { IndiceConocimiento } from "./conocimiento/indice";
 import { RegistroLlamadas, type Temporizador } from "./asistente/llamadas";
 import { rutasAsistente } from "./asistente/rutas";
 import type { ConfiguracionServidor } from "./config";
@@ -26,6 +28,8 @@ export interface DependenciasServidor {
   registrar?: Registrador;
   ahora?: () => number;
   temporizador?: Temporizador;
+  /** Conocimiento (RAG). Por omisión, un índice vacío (el arranque real lo carga de data/conocimiento/). */
+  conocimiento?: IndiceConocimiento;
 }
 
 export type AppServidor = Hono & {
@@ -85,6 +89,7 @@ export function createApp(config: ConfiguracionServidor, dependencias: Dependenc
       llamadas,
       limitadorInicios: new LimitadorVentana({ limite: config.maxIniciosHora, ventanaMs: 60 * 60 * 1000, ahora }),
       limitadorGuardas: new LimitadorVentana({ limite: LIMITE_GUARDAS_POR_MINUTO, ventanaMs: 60 * 1000, ahora }),
+      conocimiento: dependencias.conocimiento ?? indiceVacio(),
       registrar,
       ahora,
     }),

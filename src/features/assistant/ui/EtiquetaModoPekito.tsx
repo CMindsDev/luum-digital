@@ -11,8 +11,9 @@ export interface EtiquetaModoPekitoProps {
 
 const ICONOS = { demo: MessageSquareText, real: Radio, pendiente: Loader } as const;
 
-/** Etiqueta siempre visible del modo: «Respuestas programadas (demostración)» o «Conectado a OpenAI Realtime». */
+/** Etiqueta breve de estado; se oculta cuando no aporta contexto útil. */
 export function EtiquetaModoPekito({ etiqueta, oscuro = false, className }: EtiquetaModoPekitoProps) {
+  if (!etiqueta.texto.trim()) return null;
   const Icono = ICONOS[etiqueta.tono];
   return (
     <p
@@ -29,7 +30,7 @@ export function EtiquetaModoPekito({ etiqueta, oscuro = false, className }: Etiq
       )}
     >
       <Icono aria-hidden="true" className="size-3.5 shrink-0" />
-      <span className="sr-only">Modo del asistente: </span>
+      <span className="sr-only">Estado de Pekito: </span>
       <span className="min-w-0">{etiqueta.texto}</span>
     </p>
   );

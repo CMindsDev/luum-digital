@@ -73,6 +73,14 @@ export const ACCIONES = {
     estado: "Buscando en el catálogo…",
     argumentos: z.object({ consulta: z.string().min(2).max(120) }),
   },
+  consultarConocimiento: {
+    nivel: "A",
+    ambitos: ["general"],
+    descripcion:
+      "Consulta la base de conocimiento verificada de la plataforma: las áreas y dependencias del Ayuntamiento de Mérida (cuántas hay, de qué tipo y cuáles son), los trámites y servicios con su área, requisitos, costos, pasos y canales, y cómo usar la plataforma. Úsala SIEMPRE antes de responder cualquier pregunta de datos sobre el Ayuntamiento o la plataforma, también para conteos y listas. Devuelve hasta 5 pasajes con su fuente. Responde SÓLO con lo que devuelvan los pasajes; si no devuelve nada o no contesta la pregunta, di que no tienes esa información. No abre pantallas.",
+    estado: "Consultando información…",
+    argumentos: z.object({ consulta: z.string().min(2).max(200) }),
+  },
   abrirServicio: {
     nivel: "A",
     ambitos: ["general"],

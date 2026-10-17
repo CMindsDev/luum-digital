@@ -14,6 +14,7 @@ export const RUTAS_API_ASISTENTE = {
   conexiones: "/api/asistente/conexiones",
   guardaAccion: "/api/asistente/guardas/accion",
   guardaIntencion: "/api/asistente/guardas/intencion",
+  conocimiento: "/api/asistente/conocimiento",
 } as const;
 
 export const MODOS_GUARDAS = ["off", "shadow", "enforce"] as const;

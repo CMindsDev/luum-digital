@@ -1,7 +1,7 @@
 import { Keyboard, Mic } from "lucide-react";
 import { useId } from "react";
 import { cx } from "@/design-system";
-import type { ProveedorElegido, ServidorPekito } from "../useControladorPekito";
+import type { ServidorPekito } from "../useControladorPekito";
 import { ListaAvisosPekito } from "./ListaAvisosPekito";
 import type { AccionAviso } from "./AvisoPekito";
 import { PekitoMascota } from "./PekitoMascota";
@@ -9,8 +9,6 @@ import { useEstadoMascota } from "./useEstadoMascota";
 
 export interface LanzadorPekitoProps {
   servidor: ServidorPekito;
-  proveedor: ProveedorElegido;
-  onElegirProveedor: (proveedor: ProveedorElegido) => void;
   onHablar: () => void;
   onEscribir: () => void;
   onVerBienvenida: () => void;
@@ -56,22 +54,19 @@ function TarjetaModo({ icono: Icono, titulo, detalle, onClick, deshabilitada = f
 
 /**
  * Lanzador «Por texto o por voz» (Vital Oceans 3539:642 con la piel del Laboratorio): título,
- * mascota con halos y tarjetas Hablar / Escribir. «Hablar» sólo funciona con OpenAI Realtime
- * disponible en el servidor y elegido de forma explícita; si no, explica por qué.
+ * mascota con halos y tarjetas Hablar / Escribir. «Hablar» sólo funciona cuando la voz está
+ * disponible; si no, lo explica con un mensaje breve y humano.
  */
-export function LanzadorPekito({ servidor, proveedor, onElegirProveedor, onHablar, onEscribir, onVerBienvenida, onAccionAviso, conectando }: LanzadorPekitoProps) {
+export function LanzadorPekito({ servidor, onHablar, onEscribir, onVerBienvenida, onAccionAviso, conectando }: LanzadorPekitoProps) {
   const idNotaVoz = useId();
-  const idGrupo = useId();
   const estadoMascota = useEstadoMascota({ saludaEnReposo: true });
   const hayReal = servidor.realtime !== null;
-  const puedeHablar = hayReal && proveedor === "realtime";
+  const puedeHablar = hayReal;
   const notaVoz = !servidor.consultado
-    ? "Consultando si el servidor ofrece voz…"
+    ? "Revisando si la voz está disponible…"
     : !hayReal
       ? servidor.motivoSinVoz
-      : proveedor !== "realtime"
-        ? "Para hablar, elige «IA con OpenAI Realtime» arriba."
-        : "Pekito te escucha por el micrófono sólo mientras dure la llamada.";
+      : "Pekito te escucha sólo mientras dure la llamada.";
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-6 pt-2 pb-6">
@@ -91,41 +86,6 @@ export function LanzadorPekito({ servidor, proveedor, onElegirProveedor, onHabla
 
       <ListaAvisosPekito onAccion={onAccionAviso} className="mb-4 space-y-2" />
 
-      {hayReal ? (
-        <fieldset className="mb-4 space-y-2">
-          <legend id={idGrupo} className="pekito-rotulo mb-2 text-[0.75rem] text-(--pk-texto-suave)">
-            ¿Con qué quieres hablar?
-          </legend>
-          {(
-            [
-              { valor: "demo", titulo: "Respuestas programadas (demostración)", detalle: "Sin IA: reglas locales y reproducibles. No sale nada de tu navegador." },
-              { valor: "realtime", titulo: "IA con OpenAI Realtime", detalle: "Se conecta desde el servidor del prototipo. Tus mensajes y tu voz se envían al proveedor de IA." },
-            ] as const
-          ).map((opcion) => (
-            <label
-              key={opcion.valor}
-              className={cx(
-                "flex min-h-11 cursor-pointer items-start gap-3 rounded-[16px] p-3 has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-foco",
-                proveedor === opcion.valor ? "shadow-[inset_0_0_0_2px_var(--pk-lima)]" : "shadow-[inset_0_0_0_1px_var(--pk-borde)]",
-              )}
-            >
-              <input
-                type="radio"
-                name="pekito-proveedor"
-                value={opcion.valor}
-                checked={proveedor === opcion.valor}
-                onChange={() => onElegirProveedor(opcion.valor)}
-                className="mt-1 size-5 shrink-0 accent-(--pk-lima)"
-              />
-              <span>
-                <span className="block text-[0.9375rem] font-semibold text-(--pk-texto)">{opcion.titulo}</span>
-                <span className="block text-xs text-(--pk-texto-suave)">{opcion.detalle}</span>
-              </span>
-            </label>
-          ))}
-        </fieldset>
-      ) : null}
-
       <div className="flex gap-2.5">
         <TarjetaModo
           icono={Mic}
@@ -144,7 +104,7 @@ export function LanzadorPekito({ servidor, proveedor, onElegirProveedor, onHabla
       </p>
 
       <p className="mt-5 text-xs leading-snug text-(--pk-texto-suave)">
-        Pekito es un asistente de demostración (nombre provisional del Laboratorio de Innovación): no es un personaje oficial del Ayuntamiento ni realiza gestiones oficiales. Lo que conversas en Bienestar va aparte y no pasa por aquí.
+        Pekito te ayuda a orientarte en la app. Lo que conversas en Bienestar va por separado.
       </p>
       <button
         type="button"

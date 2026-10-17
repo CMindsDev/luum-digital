@@ -25,87 +25,87 @@ export type TipoAviso =
 const AVISOS: Record<TipoAviso, AvisoAsistente> = {
   sin_configuracion: {
     tono: "neutral",
-    titulo: "La IA no está configurada en este servidor",
-    detalle: "Puedes seguir con las respuestas programadas de demostración.",
+    titulo: "No pude conectarme ahora",
+    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
   },
   sin_creditos: {
     tono: "precaucion",
-    titulo: "La IA no está disponible ahora",
-    detalle: "Puedes seguir sin ella; tu avance se conserva.",
+    titulo: "No pude conectarme ahora",
+    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
     accion: "reintentar",
   },
   ocupado: {
     tono: "precaucion",
-    titulo: "El asistente está atendiendo a muchas personas",
-    detalle: "Vuelve a intentarlo en un minuto.",
+    titulo: "Estoy atendiendo varias conversaciones",
+    detalle: "Inténtalo de nuevo en un momento.",
     accion: "reintentar",
   },
   limite: {
     tono: "precaucion",
-    titulo: "Límite de conversaciones por hora",
-    detalle: "Puedes seguir con las respuestas programadas y volver a intentarlo más tarde.",
+    titulo: "Por ahora no puedo abrir otra conversación",
+    detalle: "Inténtalo más tarde.",
   },
   bienestar_desactivado: {
     tono: "info",
-    titulo: "La IA real está desactivada en Bienestar",
-    detalle: "Puedes usar el acompañante con respuestas programadas.",
+    titulo: "En Bienestar la voz no está disponible ahora",
+    detalle: "Si quieres, puedo mostrarte ayuda humana.",
   },
   consentimiento: {
     tono: "info",
-    titulo: "Falta tu consentimiento",
-    detalle: "Para conversar con IA real en Bienestar acepta antes el aviso de consentimiento.",
+    titulo: "Antes de continuar",
+    detalle: "Acepta el aviso para seguir en Bienestar.",
   },
   conexion_fallida: {
     tono: "critico",
-    titulo: "No pudimos conectar con el asistente",
-    detalle: "Tu avance se conserva. Inténtalo de nuevo.",
+    titulo: "No pude conectarme ahora",
+    detalle: "Inténtalo de nuevo en un momento o escríbeme.",
     accion: "reintentar",
   },
   red_cortada: {
     tono: "critico",
-    titulo: "Se cortó la conexión",
-    detalle: "Puedes reconectar o seguir escribiendo con las respuestas programadas.",
+    titulo: "Se perdió la conexión",
+    detalle: "Inténtalo de nuevo o escríbeme.",
     accion: "reconectar",
   },
   tiempo_agotado: {
     tono: "precaucion",
     titulo: "La conexión tardó demasiado",
-    detalle: "Inténtalo de nuevo.",
+    detalle: "Inténtalo de nuevo o escríbeme.",
     accion: "reintentar",
   },
   tiempo_maximo: {
     tono: "info",
-    titulo: "Se terminó el tiempo de la conversación",
+    titulo: "La llamada terminó",
     detalle: "Puedes iniciar otra cuando quieras.",
     accion: "reconectar",
   },
   microfono_bloqueado: {
     tono: "precaucion",
-    titulo: "Micrófono bloqueado",
-    detalle: "Permite el micrófono en tu navegador o sigue escribiendo.",
+    titulo: "No pude usar el micrófono",
+    detalle: "Permítelo en tu navegador o escríbeme.",
     accion: "escribir",
   },
   microfono_no_disponible: {
     tono: "precaucion",
-    titulo: "El micrófono no está disponible",
-    detalle: "La voz necesita HTTPS o localhost y un micrófono. Puedes seguir escribiendo.",
+    titulo: "La voz no está disponible ahora",
+    detalle: "Puedes escribirme.",
     accion: "escribir",
   },
   audio_bloqueado: {
     tono: "precaucion",
-    titulo: "Activa el audio del asistente",
-    detalle: "Tu navegador bloqueó el sonido. Toca «Activar audio» para escucharlo.",
+    titulo: "Activa el audio",
+    detalle: "Tu navegador bloqueó el sonido. Toca «Activar audio» para escucharme.",
     accion: "activar_audio",
   },
   respuesta_fallida: {
     tono: "precaucion",
-    titulo: "El asistente no pudo terminar la respuesta",
+    titulo: "No pude terminar la respuesta",
     detalle: "Inténtalo de nuevo.",
     accion: "reintentar",
   },
   accion_fallida: {
     tono: "precaucion",
-    titulo: "No se pudo completar esa solicitud",
+    titulo: "No pude completar eso",
     detalle: "Puedes intentarlo de nuevo.",
   },
 };
@@ -117,21 +117,22 @@ export function aviso(tipo: TipoAviso, detalle?: string): AvisoAsistente {
 
 /** Aviso para un código de error del servidor (/api/asistente/*). */
 export function avisoPorCodigo(codigo: string | undefined, detalleServidor?: string): AvisoAsistente {
+  void detalleServidor;
   switch (codigo) {
     case CODIGOS_ERROR.sinConfiguracion:
-      return aviso("sin_configuracion", detalleServidor);
+      return aviso("sin_configuracion");
     case CODIGOS_ERROR.sinCreditos:
-      return aviso("sin_creditos", detalleServidor);
+      return aviso("sin_creditos");
     case CODIGOS_ERROR.ocupado:
-      return aviso("ocupado", detalleServidor);
+      return aviso("ocupado");
     case CODIGOS_ERROR.limite:
-      return aviso("limite", detalleServidor);
+      return aviso("limite");
     case CODIGOS_ERROR.bienestarDesactivado:
-      return aviso("bienestar_desactivado", detalleServidor);
+      return aviso("bienestar_desactivado");
     case CODIGOS_ERROR.consentimientoRequerido:
-      return aviso("consentimiento", detalleServidor);
+      return aviso("consentimiento");
     default:
-      return aviso("conexion_fallida", detalleServidor);
+      return aviso("conexion_fallida");
   }
 }
 

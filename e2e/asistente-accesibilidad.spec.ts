@@ -29,12 +29,11 @@ async function abrirChat(page: Page) {
 }
 
 test.describe("Pekito · accesibilidad y layout", () => {
-  // Independiente del servidor real: por omisión el estado del asistente dice «sin IA configurada»
-  // (las pruebas con IA simulada registran su propia ruta después y ésta gana).
+  // Independiente del servidor real: por omisión la voz no está disponible.
   test.beforeEach(async ({ page }) => {
     await page.route("**/api/asistente/estado", (ruta) =>
       ruta.fulfill({
-        json: { realtime: { disponible: false, motivo: "El asistente con IA no está configurado en este servidor (falta OPENAI_API_KEY). Puedes usar las respuestas programadas." }, clef: { disponible: false, modo: "off" }, bienestarIaReal: false },
+        json: { realtime: { disponible: false, motivo: "La voz no está disponible ahora. Puedes escribirme." }, clef: { disponible: false, modo: "off" }, bienestarIaReal: false },
       }),
     );
   });

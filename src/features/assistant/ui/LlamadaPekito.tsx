@@ -96,7 +96,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
         </button>
       </div>
       <p className="mt-4 max-w-[22rem] text-xs leading-snug text-(--pk-texto-suave)">
-        Llamada con OpenAI Realtime. Pekito puede equivocarse; revisa las fuentes. No digas datos personales reales.
+        Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.
       </p>
     </div>
   );

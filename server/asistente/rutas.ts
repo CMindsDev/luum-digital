@@ -3,6 +3,7 @@
  * Patrones de Vital Oceans (AlexRuntime) y Tricologs (rutas del asistente).
  */
 import { Hono } from "hono";
+import { SolicitudConocimientoSchema } from "../../shared/asistente/conocimiento";
 import {
   CODIGOS_ERROR,
   SolicitudConexionSchema,
@@ -12,6 +13,7 @@ import {
   type RespuestaConexion,
 } from "../../shared/asistente/servidor";
 import type { ConfiguracionServidor } from "../config";
+import type { IndiceConocimiento } from "../conocimiento/indice";
 import type { ClienteClef } from "../proveedores/clef";
 import type { ClienteRealtime } from "../proveedores/openai-realtime";
 import type { Registrador } from "../registro";
@@ -30,12 +32,13 @@ export interface DependenciasRutasAsistente {
   llamadas: RegistroLlamadas;
   limitadorInicios: LimitadorVentana;
   limitadorGuardas: LimitadorVentana;
+  conocimiento: IndiceConocimiento;
   registrar: Registrador;
   ahora: () => number;
 }
 
 export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
-  const { config, clef, realtime, llamadas, limitadorInicios, limitadorGuardas, registrar, ahora } = dependencias;
+  const { config, clef, realtime, llamadas, limitadorInicios, limitadorGuardas, conocimiento, registrar, ahora } = dependencias;
   const app = new Hono();
   let sinCreditosHasta = 0;
 
@@ -182,6 +185,25 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
     await llamadas.cerrar(id);
     registrar("realtime_llamada_cerrada", { ambito: llamada.ambito, activas: llamadas.activas });
     return c.body(null, 204);
+  });
+
+  // Conocimiento (RAG): sólo devuelve pasajes del corpus verificado. No registra la consulta.
+  app.post("/conocimiento", async (c) => {
+    const limite = limitadorGuardas.intentar(ipDe(c));
+    if (!limite.permitido) {
+      return respuestaError(c, 429, {
+        error: "Demasiadas consultas en poco tiempo.",
+        codigo: CODIGOS_ERROR.limite,
+        reintentarEnSegundos: limite.reintentarEnSegundos,
+      });
+    }
+    const lectura = await leerJson(c);
+    if (!lectura.ok) return lectura.respuesta;
+    const resultado = SolicitudConocimientoSchema.safeParse(lectura.valor);
+    if (!resultado.success) {
+      return respuestaError(c, 400, { error: "La consulta no es válida.", codigo: CODIGOS_ERROR.solicitudInvalida });
+    }
+    return c.json(await conocimiento.buscar(resultado.data.consulta));
   });
 
   app.post("/guardas/accion", async (c) => {

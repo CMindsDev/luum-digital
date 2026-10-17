@@ -5,6 +5,7 @@
 import { existsSync } from "node:fs";
 import { serve } from "@hono/node-server";
 import { createApp } from "./app";
+import { cargarIndiceConocimiento } from "./conocimiento/cargar";
 import { leerConfiguracion } from "./config";
 import { crearRegistradorConsola } from "./registro";
 
@@ -21,7 +22,8 @@ if (process.env.NODE_ENV !== "test" && existsSync(".env.local")) {
 const { config, variablesInvalidas } = leerConfiguracion(process.env);
 for (const variable of variablesInvalidas) registrar("config_variable_invalida", { variable });
 
-const app = createApp(config, { registrar });
+const conocimiento = cargarIndiceConocimiento({ apiKey: config.openaiApiKey, registrar });
+const app = createApp(config, { registrar, conocimiento });
 
 const servidor = serve({ fetch: app.fetch, hostname: "127.0.0.1", port: config.puerto }, (info) => {
   registrar("servidor_listo", {
@@ -29,6 +31,8 @@ const servidor = serve({ fetch: app.fetch, hostname: "127.0.0.1", port: config.p
     realtime: config.openaiApiKey !== null,
     clef: config.cloudflareAccountId !== null && config.cloudflareAiToken !== null,
     guardas: config.guardas,
+    conocimiento: conocimiento.tamano,
+    conocimientoVectores: conocimiento.conVectores,
     bienestarIaReal: config.bienestarIaReal,
   });
 });

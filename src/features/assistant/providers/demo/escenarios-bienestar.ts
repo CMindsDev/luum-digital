@@ -17,7 +17,7 @@ export const ENTRADAS_BIENESTAR = [
 ] as const;
 
 const PRESENTACION =
-  "Soy un acompañante de demostración con respuestas programadas: no soy una persona, no soy una IA conectada ni un servicio oficial, y no doy diagnósticos.";
+  "No soy una persona y no sustituyo a una profesional. Estoy aquí para acompañarte un momento y ayudarte a encontrar apoyo humano si lo necesitas.";
 
 /** Respuestas de escucha: validan sin dramatizar ni minimizar y recuerdan la ayuda humana. */
 const ESCUCHA = [
@@ -48,7 +48,7 @@ async function encontrarAtencion(herramientas: HerramientasEscenario) {
   const objetivo = objetivoDeAtencion(herramientas);
   if (objetivo) await herramientas.accion("senalarElemento", { objetivo });
   herramientas.decir(
-    "Te mostré los canales y lugares de atención verificados, con su fuente. Tú decides si y cuándo contactarlos. Si quieres, también puedes probar la solicitud de orientación simulada (es una demostración: nadie la recibe).",
+    "Te mostré los canales y lugares de atención verificados, con su fuente. Tú decides si y cuándo contactarlos. Si quieres, también puedes probar la solicitud de orientación simulada.",
   );
 }
 
@@ -72,7 +72,7 @@ export const escenariosBienestar: Escenarios = async (texto, n, herramientas) =>
   if (/\btengo (1[0-7]|[1-9]) anos\b|\bsoy menor\b|\bsoy (un )?nin[oa]\b|\bvoy en la secundaria\b/.test(n)) {
     await herramientas.accion("mostrarApoyoHumano", { motivo: "orientacion" });
     herramientas.decir(
-      "Gracias por contarme. Este espacio de demostración es para personas adultas, así que no es el lugar adecuado para acompañarte. Te mostré opciones de ayuda humana; también puedes hablar con una persona adulta de confianza.",
+      "Gracias por contarme. Este espacio es para personas adultas, así que no es el lugar adecuado para acompañarte. Te mostré opciones de ayuda humana; también puedes hablar con una persona adulta de confianza.",
     );
     return;
   }

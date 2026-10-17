@@ -74,6 +74,17 @@ El navegador sólo habla con `/api` (proxy de Vite al servidor Hono en `127.0.0.
 - Los nombres de modelo y voz por defecto (`gpt-realtime-2.1`, `marin`) provienen de proyectos de referencia: **verificar su disponibilidad y precio** en la documentación oficial antes de usarlos.
 - Salud mental y Línea Mujer **no usan** este asistente: tienen su propio ámbito, almacén en memoria y escenarios revisables.
 
+### Conocimiento del asistente (RAG)
+
+El asistente general **sólo responde datos con lo que consulta** a `POST /api/asistente/conocimiento` (acción `consultarConocimiento`, nivel A: no navega ni abre nada).
+
+- **Fuentes**: lista oficial de áreas municipales (`data/sources/dependencias/dependencias.html`, guardada desde el navegador porque el portal está tras un captcha anti-bot que no se evade), el catálogo de trámites (`src/data/catalogo/servicios.generated.json`) y una guía breve de la plataforma (`server/conocimiento/ingesta.ts`). Los conteos (p. ej. «14 direcciones») se calculan al ingerir y viajan ya hechos en pasajes de tipo `estructura`.
+- **Índice**: `data/conocimiento/corpus.json` (pasajes con fuente y fecha) y `vectores.json` (embeddings `text-embedding-3-small`, 512 dimensiones, normalizados). Se regeneran con `npm run conocimiento:construir`; si cambias la página de dependencias o el catálogo, vuelve a correrlo.
+- **Búsqueda híbrida**: palabras (BM25) + vectores con fusión por rangos. Sin clave de OpenAI o si falla la red, cae a sólo palabras. Si ningún pasaje supera los umbrales (`server/conocimiento/indice.ts`) devuelve una lista vacía y el asistente dice que no tiene el dato.
+- **Alcance**: las instrucciones (`server/instrucciones/general.ts`) limitan al asistente a la plataforma; lo demás se declina con amabilidad.
+- **Privacidad**: la consulta (máx. 200 caracteres) se envía a OpenAI sólo para calcular su embedding; no se registra ni se guarda. No se envían datos personales ni el expediente.
+- **Pendiente**: las páginas individuales de cada dependencia (ubicación, teléfonos, directorio) no están en el corpus; el asistente remite al sitio oficial de cada área.
+
 ## 5. Mapa
 
 - Con `VITE_MAPBOX_ACCESS_TOKEN` público (`pk.`) se usa Mapbox GL; sin token, MapLibre con el estilo gratuito de OpenFreeMap. Un token secreto (`sk.`) se rechaza. Restringe el token por URL en tu cuenta de Mapbox.

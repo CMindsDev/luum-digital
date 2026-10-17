@@ -75,7 +75,7 @@ export function ConversacionPekito(props: ConversacionPekitoProps) {
             <PekitoMascota ancho={150} estado={estadoMascota} className="max-w-[45vw]" />
             <h3 className="pekito-marca text-[1.5rem] leading-[1.25] font-extrabold tracking-tight text-(--pk-texto) uppercase">Hola, soy Pekito</h3>
             <p className="max-w-[20rem] text-base leading-snug text-(--pk-texto-suave)">
-              Te ayudo a encontrar trámites, preparar reportes y consultar tus folios de demostración. Tú siempre confirmas.
+              Te ayudo a encontrar trámites, preparar reportes y consultar tus folios. Tú siempre confirmas.
             </p>
             <ul aria-label="Sugerencias para empezar" className="flex max-w-[23rem] flex-wrap justify-center gap-x-2.5 gap-y-2.5">
               {SUGERENCIAS_PEKITO.map((sugerencia) => (

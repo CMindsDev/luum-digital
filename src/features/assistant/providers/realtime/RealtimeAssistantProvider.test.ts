@@ -259,7 +259,7 @@ describe("RealtimeAssistantProvider", () => {
     );
     const error = await conectar({ fetch: fetchFalso }).catch((motivo: unknown) => motivo);
     expect(error).toBeInstanceOf(ErrorAsistente);
-    expect(error instanceof ErrorAsistente ? error.aviso.titulo : "").toBe("La IA no está configurada en este servidor");
+    expect(error instanceof ErrorAsistente ? error.aviso.titulo : "").toBe("No pude conectarme ahora");
     expect(PeerFalso.ultimo?.cerrado).toBe(true);
     expect(fetchFalso).toHaveBeenCalledTimes(1);
   });
@@ -293,10 +293,10 @@ describe("RealtimeAssistantProvider", () => {
   it("avisa si el micrófono está bloqueado y si se corta la red", async () => {
     const { sesion, peer, eventos } = await conectar();
     await expect(sesion.iniciarVoz?.()).rejects.toBeInstanceOf(ErrorAsistente);
-    expect(eventos).toContainEqual({ tipo: "aviso", aviso: expect.objectContaining({ titulo: "Micrófono bloqueado", accion: "escribir" }) });
+    expect(eventos).toContainEqual({ tipo: "aviso", aviso: expect.objectContaining({ titulo: "No pude usar el micrófono", accion: "escribir" }) });
 
     peer.fallar();
-    expect(eventos).toContainEqual({ tipo: "aviso", aviso: expect.objectContaining({ titulo: "Se cortó la conexión", accion: "reconectar" }) });
+    expect(eventos).toContainEqual({ tipo: "aviso", aviso: expect.objectContaining({ titulo: "Se perdió la conexión", accion: "reconectar" }) });
     expect(eventos.at(-1)).toEqual({ tipo: "estado", estado: "cerrado" });
     expect(peer.cerrado).toBe(true);
   });

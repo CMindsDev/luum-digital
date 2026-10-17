@@ -16,7 +16,7 @@ import { capitalizar, contiene, detectarRiesgo, esAfirmacion, esNegacion, normal
 const ETIQUETA_INFORMACION: Record<"verificada" | "pendiente" | "demostracion", string> = {
   verificada: "información verificada",
   pendiente: "pendiente de verificar",
-  demostracion: "de demostración",
+  demostracion: "información de ejemplo",
 };
 
 const ResultadosSchema = z.object({
@@ -146,7 +146,7 @@ async function buscarYProponer(herramientas: HerramientasEscenario, consulta: st
   const datos = ResultadosSchema.safeParse(recibo.datos);
   const resultados = datos.success ? datos.data.resultados : [];
   if (resultados.length === 0) {
-    herramientas.decir(`No encontré servicios para «${consulta}» en el catálogo del prototipo. Prueba con otras palabras o explora «Trámites y servicios».`);
+    herramientas.decir(`No encontré servicios para «${consulta}» en el catálogo de servicios. Prueba con otras palabras o explora «Trámites y servicios».`);
     return;
   }
   const lista = resultados.map((resultado, indice) => `${indice + 1}. ${resultado.nombre} (${ETIQUETA_INFORMACION[resultado.estadoDeInformacion]})`).join("\n");
@@ -154,7 +154,7 @@ async function buscarYProponer(herramientas: HerramientasEscenario, consulta: st
   if (primero) herramientas.memoria.propuesta = { tipo: "requisitos", servicioId: primero.id, nombre: primero.nombre };
   herramientas.decir(
     [
-      `Encontré esto en el catálogo del prototipo y lo dejé en pantalla:\n${lista}`,
+      `Encontré esto en el catálogo de servicios y lo dejé en pantalla:\n${lista}`,
       primero ? `¿Quieres que te muestre los requisitos de «${primero.nombre}»?` : "",
       cierre ?? "",
     ]
@@ -175,7 +175,7 @@ async function mostrarRequisitos(herramientas: HerramientasEscenario, servicioId
   const { servicio, requisitos, costo, tiempoDeRespuesta } = datos.data;
   if (requisitos === "pendiente de verificar") {
     herramientas.decir(
-      `Abrí la ficha de «${servicio.nombre}». Sus requisitos están pendientes de verificar en este prototipo, así que no te los voy a inventar: confírmalos en la fuente oficial que aparece en la ficha.`,
+      `Abrí la ficha de «${servicio.nombre}». Sus requisitos están pendientes de verificar, así que no te los voy a inventar: confírmalos en la fuente oficial que aparece en la ficha.`,
       fuentesDeRecibo(recibo),
     );
     return;
@@ -237,7 +237,7 @@ async function consultarGestiones(herramientas: HerramientasEscenario) {
     return;
   }
   const lista = datos.data.recientes.map((gestion) => `• ${gestion.folio} — ${gestion.servicio}: ${gestion.estado}`).join("\n");
-  herramientas.decir(`${recibo.mensaje}\n${lista}\n\nSon gestiones simuladas: no son trámites oficiales.`);
+  herramientas.decir(`${recibo.mensaje}\n${lista}\n\nRevísalas con calma antes de continuar: no sustituyen un trámite oficial.`);
 }
 
 async function apoyoPsicologico(herramientas: HerramientasEscenario) {
@@ -246,7 +246,7 @@ async function apoyoPsicologico(herramientas: HerramientasEscenario) {
   herramientas.decir(
     recibo.estado === "fallida"
       ? "Te mostré los canales de ayuda humana verificados. También puedes abrir «Bienestar» → «Salud mental» desde el menú."
-      : "Te llevé a «Salud mental». Ahí están los canales de ayuda humana verificados y, si quieres, un acompañante de demostración. Si estás en peligro ahora, usa «Ayuda inmediata».",
+      : "Te llevé a «Salud mental». Ahí están los canales de ayuda humana verificados. Si estás en peligro ahora, usa «Ayuda inmediata».",
   );
 }
 
@@ -261,14 +261,14 @@ async function beneficios(herramientas: HerramientasEscenario) {
   const { saldo, beneficios: lista } = datos.data;
   const ejemplos = lista.length ? `\nBeneficios de ejemplo: ${lista.map((beneficio) => `${beneficio.nombre} (${beneficio.costoPuntos} pts)`).join(", ")}.` : "";
   herramientas.decir(
-    `Tienes ${saldo.disponible} puntos disponibles y ${saldo.pendientes} pendientes de validación. Los puntos sólo se suman cuando se valida un reporte o una verificación (reglas de demostración).${ejemplos}\nSon ejemplos: no hay descuentos ni patrocinios reales.`,
+    `Tienes ${saldo.disponible} puntos disponibles y ${saldo.pendientes} pendientes de validación. Los puntos sólo se suman cuando se valida un reporte o una verificación (reglas del programa).${ejemplos}\nSon ejemplos: no hay descuentos ni patrocinios reales.`,
   );
 }
 
 async function abrirMapa(herramientas: HerramientasEscenario, categoria: CategoriaReporte | null) {
   const recibo = await herramientas.accion("abrirMapa", categoria ? { categoria } : {});
   if (recibo.estado === "fallida") return falla(herramientas, recibo, "No pude abrir el mapa");
-  herramientas.decir(`${recibo.mensaje} Son incidencias de demostración. Si el mapa no carga, la vista de lista sigue funcionando.`);
+  herramientas.decir(`${recibo.mensaje} Si el mapa no carga, la vista de lista sigue funcionando.`);
 }
 
 /** Busca un control visible cuya etiqueta o id coincida con lo que pidió la persona. */
@@ -336,13 +336,13 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
   // 3) Intenciones.
   if (/\b(eres|estoy hablando con) (una |un )?(ia|inteligencia artificial|persona|humano|humana|real|robot|bot|oficial)\b|\bquien eres\b|\bque eres\b/.test(n)) {
     herramientas.decir(
-      "Soy un asistente de demostración con respuestas programadas: no soy una persona, no estoy conectado a un modelo de IA y no soy un servicio oficial del Ayuntamiento de Mérida. Te ayudo a moverte por este prototipo; nada de lo que hagas aquí es una gestión oficial.",
+      "No soy una persona: soy Pekito, un asistente virtual para orientarte en la app. Tampoco sustituyo la atención oficial: te ayudo a encontrar servicios, preparar reportes y moverte por aquí. Tú siempre confirmas antes de continuar.",
     );
     return;
   }
   if (/^(hola|buenas|buenos dias|buenas tardes|buenas noches|que tal|hey)\b/.test(n) && n.length <= 30) {
     herramientas.decir(
-      `¡Hola! Soy el asistente de demostración del prototipo (respuestas programadas). Puedo ayudarte a reportar un bache o una luminaria, consultar requisitos de un trámite, revisar un folio DEMO, encontrar apoyo psicológico, ver el mapa o tus beneficios. ¿Qué necesitas?`,
+      `¡Hola! Puedo ayudarte a reportar un bache o una luminaria, consultar requisitos de un trámite, revisar un folio, encontrar apoyo psicológico, ver el mapa o tus beneficios. ¿Qué necesitas?`,
     );
     return;
   }
@@ -453,5 +453,5 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
     return;
   }
 
-  herramientas.decir(`Todavía no tengo una respuesta programada para eso. ${SUGERENCIAS}`);
+  herramientas.decir(`Todavía no sé ayudarte con eso. ${SUGERENCIAS}`);
 };

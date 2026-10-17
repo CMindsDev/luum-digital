@@ -40,9 +40,9 @@ export function PresenciaPekito({ lado, abierto, linea, onAbrir, onDescartarLine
       data-pekito-origen
       aria-haspopup="dialog"
       aria-expanded={abierto}
-      aria-label="Abrir Pekito, asistente de demostración"
+      aria-label="Abrir Pekito, tu asistente de servicios"
       aria-keyshortcuts="Alt+ArrowLeft Alt+ArrowRight"
-      title="Pekito, asistente de demostración. Arrastra o usa Alt y las flechas para moverlo de lado."
+      title="Pekito, tu asistente de servicios. Arrastra o usa Alt y las flechas para moverlo de lado."
       className="grid size-[3.25rem] shrink-0 touch-none place-items-center rounded-full border-2 border-(--pekito-acento) bg-(--pekito-fondo) text-(--pekito-tinta) shadow-flotante transition-transform hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
       <PekitoMascota ancho={38} estado={estadoMascota} />

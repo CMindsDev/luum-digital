@@ -18,7 +18,7 @@ export const SECCIONES_E2E = {
 
 export type SeccionE2E = keyof typeof SECCIONES_E2E;
 
-export const TEXTO_ROTULO_DEMO = "Prototipo de demostración. No realiza gestiones oficiales";
+export const TEXTO_ROTULO_DEMO = "Prototipo de demostración en Laboratorio de Innovación Digital. No realiza gestiones oficiales";
 
 /** true en el proyecto móvil (barra inferior + «Más»); false con navegación lateral. */
 export function esMovil(page: Page): boolean {

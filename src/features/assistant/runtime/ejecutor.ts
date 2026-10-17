@@ -42,6 +42,7 @@ import type {
   Servicio,
 } from "@/types";
 import { emitirActuacion } from "./acting-bus";
+import type { ClienteConocimiento } from "./conocimiento";
 import type { ClienteGuardas } from "./guardas";
 
 /** Sólo los métodos que usa el ejecutor (el conjunto completo de repositorios también sirve). */
@@ -70,6 +71,8 @@ export interface ContextoEjecucion {
   abrirApoyoHumano?: (motivo: MotivoApoyo) => void;
   /** Guardas Clef para acciones de nivel B (opcional; sin ellas no hay señal). */
   guardas?: ClienteGuardas;
+  /** Conocimiento verificado (RAG) del servidor. Sin él, la consulta responde que no pudo hacerse. */
+  conocimiento?: ClienteConocimiento;
   mensajesRecientes?: readonly MensajeReciente[];
 }
 
@@ -276,6 +279,8 @@ function candidatosDeObjetivo(nombre: NombreAccion, argumentos: unknown): string
       return guiasDeSeccion("participacion");
     case "mostrarApoyoHumano":
       return ["ayuda.inmediata", "bienestar.ayuda_inmediata", "salud_mental.ayuda_inmediata"];
+    case "consultarConocimiento":
+      return [];
     case "abrirServicio":
     case "consultarRequisitos":
     case "iniciarTramiteDemo":
@@ -285,11 +290,46 @@ function candidatosDeObjetivo(nombre: NombreAccion, argumentos: unknown): string
 
 async function obtenerServicio(contexto: ContextoEjecucion, servicioId: string): Promise<Servicio> {
   const servicio = await contexto.repositorios.catalog.get(servicioId);
-  if (!servicio) throw new FalloAccion("No encontré ese servicio en el catálogo del prototipo. Puedo buscarlo por nombre.");
+  if (!servicio) throw new FalloAccion("No encontré ese servicio en el catálogo de servicios. Puedo buscarlo por nombre.");
   return servicio;
 }
 
 // --- Acciones de nivel A ---
+
+/** Consulta de conocimiento: no navega ni toca la pantalla; sólo devuelve pasajes con su fuente. */
+async function consultarConocimiento(contexto: ContextoEjecucion, { consulta }: ArgumentosAccion<"consultarConocimiento">): Promise<Resultado> {
+  const respuesta = (await contexto.conocimiento?.buscar(consulta)) ?? null;
+  if (!respuesta) {
+    throw new FalloAccion("No pude consultar la información en este momento. Inténtalo de nuevo en un momento.");
+  }
+  if (respuesta.pasajes.length === 0) {
+    return {
+      estado: "completada",
+      mensaje: "No encontré información sobre eso en las fuentes de la plataforma.",
+      datos: { consulta, pasajes: [], indicacion: "Sin información: dile a la persona que no la tienes y ofrécele lo que sí puedes hacer." },
+    };
+  }
+  const fuentes: FuenteCitada[] = [];
+  for (const pasaje of respuesta.pasajes) {
+    const repetida = fuentes.some((fuente) => fuente.titulo === pasaje.fuente.titulo && fuente.url === pasaje.fuente.url);
+    if (repetida) continue;
+    fuentes.push({
+      titulo: pasaje.fuente.titulo,
+      ...(pasaje.fuente.url ? { url: pasaje.fuente.url } : {}),
+      ...(pasaje.ruta ? { ruta: pasaje.ruta } : {}),
+      ...(pasaje.fuente.fechaConsulta ? { fechaConsulta: pasaje.fuente.fechaConsulta } : {}),
+    });
+  }
+  return {
+    estado: "completada",
+    mensaje: `Consulté ${respuesta.pasajes.length === 1 ? "1 fuente" : `${respuesta.pasajes.length} fuentes`} de la plataforma.`,
+    datos: {
+      consulta,
+      pasajes: respuesta.pasajes.map((pasaje) => ({ tipo: pasaje.tipo, titulo: pasaje.titulo, texto: pasaje.texto, fuente: pasaje.fuente.titulo, ...(pasaje.ruta ? { ruta: pasaje.ruta } : {}) })),
+      fuentes,
+    },
+  };
+}
 
 async function buscarServicios(contexto: ContextoEjecucion, { consulta }: ArgumentosAccion<"buscarServicios">): Promise<Resultado> {
   const respuesta = await contexto.repositorios.catalog.search(consulta);
@@ -298,7 +338,7 @@ async function buscarServicios(contexto: ContextoEjecucion, { consulta }: Argume
   if (resultados.length === 0) {
     return {
       estado: "completada",
-      mensaje: `No encontré servicios para «${consulta}» en el catálogo del prototipo. Prueba con otras palabras.`,
+      mensaje: `No encontré servicios para «${consulta}» en el catálogo de servicios. Prueba con otras palabras.`,
       datos: { consulta, resultados: [] },
     };
   }
@@ -357,14 +397,14 @@ async function consultarReporte(contexto: ContextoEjecucion, { folio }: Argument
       estado: "completada",
       mensaje:
         propios.length === 0
-          ? "Abrí «Mis reportes». Todavía no tienes reportes de demostración."
-          : `Abrí «Mis reportes». Tienes ${propios.length} ${propios.length === 1 ? "reporte" : "reportes"} de demostración.`,
+          ? "Abrí «Mis reportes». Todavía no tienes reportes."
+          : `Abrí «Mis reportes». Tienes ${propios.length} ${propios.length === 1 ? "reporte" : "reportes"}.`,
       datos: { total: propios.length, recientes: propios.slice(0, MAX_RESULTADOS).map(reporteCompacto) },
     };
   }
   const normalizado = normalizarFolio(folio);
   if (!FOLIO_DEMO.test(normalizado)) {
-    throw new FalloAccion("Ese folio no tiene el formato de un folio de demostración (DEMO-R-… para reportes o DEMO-G-… para gestiones).");
+    throw new FalloAccion("Ese folio no tiene el formato esperado (DEMO-R-… para reportes o DEMO-G-… para gestiones).");
   }
   if (normalizado.startsWith("DEMO-G-")) {
     const gestion = await repositorios.procedures.findByFolio(normalizado, actor);
@@ -400,8 +440,8 @@ function abrirMapa(contexto: ContextoEjecucion, argumentos: ArgumentosAccion<"ab
   return {
     estado: "completada",
     mensaje: argumentos.categoria
-      ? `Abrí el Visor Urbano con las incidencias de demostración de «${NOMBRES_REPORTE[argumentos.categoria]}».`
-      : "Abrí el Visor Urbano con las incidencias de demostración.",
+      ? `Abrí el Visor Urbano con las incidencias de «${NOMBRES_REPORTE[argumentos.categoria]}».`
+      : "Abrí el Visor Urbano con las incidencias.",
     datos: { categoria: argumentos.categoria ?? null, vista: argumentos.vista ?? "puntos", datosDeDemostracion: true },
   };
 }
@@ -430,7 +470,7 @@ async function explicarBeneficiosDemo(contexto: ContextoEjecucion): Promise<Resu
   contexto.navegar("/participacion/recompensas");
   return {
     estado: "completada",
-    mensaje: `Abrí «Participación y recompensas». Tienes ${saldo.disponible} puntos disponibles y ${saldo.pendientes} pendientes de validación (reglas de demostración).`,
+    mensaje: `Abrí «Participación y recompensas». Tienes ${saldo.disponible} puntos disponibles y ${saldo.pendientes} pendientes de validación (reglas del programa).`,
     datos: {
       reglas: {
         etiqueta: reglas.etiqueta,
@@ -532,6 +572,10 @@ async function correr(nombre: NombreAccion, contexto: ContextoEjecucion, argumen
       const v = validarArgumentos(nombre, argumentos);
       return v.ok ? buscarServicios(contexto, v.valor) : invalidos(v.error);
     }
+    case "consultarConocimiento": {
+      const v = validarArgumentos(nombre, argumentos);
+      return v.ok ? consultarConocimiento(contexto, v.valor) : invalidos(v.error);
+    }
     case "abrirServicio": {
       const v = validarArgumentos(nombre, argumentos);
       return v.ok ? abrirServicio(contexto, v.valor) : invalidos(v.error);
@@ -586,11 +630,13 @@ function invalidos(error: string): Resultado {
 /** Valida y ejecuta una llamada del proveedor. Nunca lanza: siempre devuelve un recibo. */
 export async function ejecutarAccion(llamada: LlamadaAccion, contexto: ContextoEjecucion): Promise<ReciboAccion> {
   const { llamadaId, accion, argumentos } = llamada;
+  // Una consulta de información no actúa sobre la pantalla: sin cursor, borde ni cesión del panel.
+  const visible = accion !== "consultarConocimiento";
   const recibo = (resultado: Resultado): ReciboAccion => {
-    emitirActuacion({ tipo: "done", id: llamadaId, estado: resultado.estado });
+    if (visible) emitirActuacion({ tipo: "done", id: llamadaId, estado: resultado.estado });
     return { llamadaId, accion, ...resultado };
   };
-  emitirActuacion({ tipo: "intent", id: llamadaId, accion, objetivo: objetivoVisible(candidatosDeObjetivo(accion, argumentos), contexto.pantalla) });
+  if (visible) emitirActuacion({ tipo: "intent", id: llamadaId, accion, objetivo: objetivoVisible(candidatosDeObjetivo(accion, argumentos), contexto.pantalla) });
 
   if (!accionesDelAmbito(contexto.ambito).includes(accion)) {
     return recibo({ estado: "fallida", mensaje: "Esa acción no está disponible en este espacio. No se hizo nada." });
@@ -610,7 +656,7 @@ export async function ejecutarAccion(llamada: LlamadaAccion, contexto: ContextoE
     }
   }
 
-  emitirActuacion({ tipo: "run", id: llamadaId });
+  if (visible) emitirActuacion({ tipo: "run", id: llamadaId });
   try {
     return recibo(await correr(accion, contexto, validacion.valor));
   } catch (error) {

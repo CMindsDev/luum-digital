@@ -15,7 +15,7 @@ import { RealtimeAssistantProvider, type DependenciasRealtime } from "./realtime
 
 const TIEMPO_ESTADO_MS = 4000;
 
-export const MOTIVO_SIN_SERVIDOR = "No se pudo consultar el servidor del asistente. Puedes usar las respuestas programadas.";
+export const MOTIVO_SIN_SERVIDOR = "La voz no está disponible ahora. Puedes escribirme.";
 
 /** Estado del servidor sin secretos, o null si no responde (sin servidor = sólo demostración). */
 export async function consultarEstadoServidor(opciones: { fetch?: typeof fetch; signal?: AbortSignal } = {}): Promise<EstadoServidorAsistente | null> {
@@ -76,9 +76,9 @@ export async function elegirProveedores(opciones: OpcionesElegirProveedor): Prom
   if (!estado) {
     motivoSinRealtime = MOTIVO_SIN_SERVIDOR;
   } else if (!estado.realtime.disponible) {
-    motivoSinRealtime = estado.realtime.motivo ?? "El asistente con IA no está disponible. Puedes usar las respuestas programadas.";
+    motivoSinRealtime = "La voz no está disponible ahora. Puedes escribirme.";
   } else if (opciones.ambito === "bienestar" && !estado.bienestarIaReal) {
-    motivoSinRealtime = "En Bienestar este prototipo usa sólo respuestas programadas.";
+    motivoSinRealtime = "La voz no está disponible ahora. Puedes escribirme.";
   } else {
     realtime = new RealtimeAssistantProvider({
       ...(opciones.fetch ? { fetch: opciones.fetch } : {}),

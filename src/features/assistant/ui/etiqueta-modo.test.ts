@@ -2,17 +2,16 @@ import { describe, expect, it } from "vitest";
 import { etiquetaDeModo } from "./etiqueta-modo";
 
 describe("etiquetaDeModo", () => {
-  it("el modo de demostración siempre se rotula como respuestas programadas, aunque esté «listo»", () => {
+  it("fuera de la conexión no muestra una etiqueta extra", () => {
     for (const estado of ["inactivo", "conectando", "listo", "pensando", "cerrado"] as const) {
-      expect(etiquetaDeModo("demo", estado)).toEqual({ texto: "Respuestas programadas (demostración)", tono: "demo" });
+      expect(etiquetaDeModo("demo", estado)).toEqual({ texto: estado === "conectando" ? "Conectando…" : "", tono: estado === "conectando" ? "pendiente" : "demo" });
     }
   });
 
-  it("sólo dice «Conectado a OpenAI Realtime» con la sesión real abierta", () => {
-    expect(etiquetaDeModo("realtime", "listo").texto).toBe("Conectado a OpenAI Realtime");
-    expect(etiquetaDeModo("realtime", "hablando").texto).toBe("Conectado a OpenAI Realtime");
-    expect(etiquetaDeModo("realtime", "conectando").texto).toBe("Conectando con OpenAI Realtime…");
-    expect(etiquetaDeModo("realtime", "inactivo").texto).toBe("OpenAI Realtime (sin conectar)");
-    expect(etiquetaDeModo("realtime", "cerrado").texto).not.toMatch(/^Conectado/);
+  it("solo conserva un aviso humano al conectar", () => {
+    expect(etiquetaDeModo("realtime", "conectando")).toEqual({ texto: "Conectando…", tono: "pendiente" });
+    expect(etiquetaDeModo("realtime", "listo")).toEqual({ texto: "", tono: "real" });
+    expect(etiquetaDeModo("realtime", "hablando")).toEqual({ texto: "", tono: "real" });
+    expect(etiquetaDeModo("realtime", "inactivo")).toEqual({ texto: "", tono: "real" });
   });
 });

@@ -73,7 +73,7 @@ describe("AssistantMount", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
-  it("primera vez: bienvenida; luego «Por texto o por voz», explica por qué no hay voz y rotula el modo de demostración", async () => {
+  it("primera vez: bienvenida; luego «Por texto o por voz» explica la voz con lenguaje humano", async () => {
     const { user } = montar("/");
     await user.click(await screen.findByRole("button", ABRIR));
     // Bienvenida (Figma 22:67): sigue siendo la primera pantalla.
@@ -84,12 +84,11 @@ describe("AssistantMount", () => {
     // Salta a la conversación escrita (modo «escribir» por omisión): vuelve al lanzador.
     await user.click(within(panel).getByRole("button", { name: /Volver a «Por texto o por voz»/ }));
     expect(within(panel).getByRole("heading", { name: /Por texto o por voz/ })).toBeInTheDocument();
-    expect(within(panel).getByText("Respuestas programadas (demostración)")).toBeInTheDocument();
     const hablar = within(panel).getByRole("button", { name: /Hablar/ });
     expect(hablar).toHaveAttribute("aria-disabled", "true");
-    expect(within(panel).getByText(/OPENAI_API_KEY/)).toBeInTheDocument();
-    expect(within(panel).getByText(/no es un personaje oficial del Ayuntamiento/)).toBeInTheDocument();
-    expect(within(panel).getByText(/Prototipo de demostración\. No realiza gestiones oficiales/i)).toBeInTheDocument();
+    expect(within(panel).getByText("La voz no está disponible ahora. Puedes escribirme.")).toBeInTheDocument();
+    expect(within(panel).getByText(/Pekito te ayuda a orientarte en la app/i)).toBeInTheDocument();
+    expect(within(panel).getByText(/Prototipo de demostración en Laboratorio de Innovación Digital\. No realiza gestiones oficiales/i)).toBeInTheDocument();
   });
 
   it("«Quiero reportar un bache…» abre el formulario preparado, no envía nada y deja la tarjeta «Revisar y confirmar»", async () => {

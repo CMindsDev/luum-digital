@@ -8,7 +8,7 @@ import "./pekito.css";
 /**
  * Bienvenida de Pekito (Figma «Laboratorio de Innovación», nodo 22:67 «1»).
  * El paso 1 reproduce el frame; los pasos 2–5 usan la misma composición con el contenido
- * del prototipo (cómo atender, qué puede hacer, que la persona siempre confirma y que es una demo).
+ * del producto (cómo atender, qué puede hacer, que la persona siempre confirma y que puede equivocarse).
  */
 
 const TOTAL_PASOS = 5;
@@ -52,7 +52,7 @@ function TextoEscrito({ texto, reducido }: { texto: string; reducido: boolean })
   );
 }
 
-/** ¿El servidor ofrece voz con IA? Sin servidor o sin clave, sólo texto (modo demostración). */
+/** ¿La voz está disponible? Si no, la bienvenida ofrece escritura. */
 function useVozDisponible(abierto: boolean): boolean | null {
   const [disponible, setDisponible] = useState<boolean | null>(null);
   useEffect(() => {
@@ -175,7 +175,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
                       titulo: "Hablar",
                       detalle: vozDisponible
                         ? "Como conversas normalmente."
-                        : "La voz necesita IA configurada en el servidor. Por ahora puedes escribir.",
+                        : "La voz no está disponible ahora. Por ahora puedes escribir.",
                       deshabilitado: vozDisponible !== true,
                     },
                     { valor: "escribir", titulo: "Escribir", detalle: "Cuando lo prefieras.", deshabilitado: false },
@@ -211,10 +211,10 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
               <div className="space-y-3">
                 <p className="text-[22px] leading-7">Puedo ayudarte a…</p>
                 <ul className="space-y-2 text-left text-base text-tinta-suave">
-                  <li>· Reportar un bache, una luminaria o basura.</li>
-                  <li>· Encontrar un trámite y sus requisitos con su fuente.</li>
-                  <li>· Consultar tus folios de demostración.</li>
-                  <li>· Encontrar apoyo humano en Bienestar.</li>
+                  <li>· Buscar trámites y servicios.</li>
+                  <li>· Explicarte requisitos y mostrarte la fuente oficial.</li>
+                  <li>· Preparar reportes y ayudarte a moverte por la app.</li>
+                  <li>· Llevarte al área del Ayuntamiento que te puede servir.</li>
                 </ul>
               </div>
             )}
@@ -230,13 +230,9 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
 
             {paso === 5 && (
               <div className="space-y-3">
-                <p className="text-[22px] leading-7">Soy un asistente de demostración</p>
+                <p className="text-[22px] leading-7">Verifica lo importante</p>
                 <p className="text-base text-tinta-suave">
-                  {vozDisponible
-                    ? "Puedo usar IA conectada desde el servidor del prototipo."
-                    : "Uso respuestas programadas: no hay un modelo de IA conectado."}{" "}
-                  No realizo gestiones oficiales y no soy un personaje oficial del Ayuntamiento. Lo que hables en salud
-                  mental va aparte y no se guarda.
+                  Puedo equivocarme. Confirma requisitos, horarios, teléfonos y otros datos importantes con la fuente oficial antes de seguir.
                 </p>
               </div>
             )}

@@ -4,8 +4,8 @@ import { esperarTitulo, sinDesplazamientoHorizontal } from "./helpers";
 
 /**
  * Recorrido J: Pekito, el asistente global.
- * - Sin red externa: el asistente corre con «Respuestas programadas (demostración)» (reglas locales)
- *   y el servidor de OpenAI nunca se contacta. La parte de voz usa un TRANSPORTE FALSO (RTCPeerConnection
+ * - Sin red externa: el asistente corre con su respaldo local y el servidor de IA nunca se contacta.
+ *   La parte de voz usa un TRANSPORTE FALSO (RTCPeerConnection
  *   y micrófono simulados en la página) sólo para probar la interfaz y el contrato con el runtime; no es IA real.
  * - Pekito prepara y abre; la persona confirma. Nunca inventa folios ni envía formularios.
  */
@@ -42,17 +42,16 @@ async function reabrir(page: Page) {
 }
 
 test.describe("Recorrido J · Pekito, el asistente global", () => {
-  // Independiente del servidor real: por omisión el estado del asistente dice «sin IA configurada»
-  // (las pruebas con IA simulada registran su propia ruta después y ésta gana).
+  // Independiente del servidor real: por omisión la voz no está disponible.
   test.beforeEach(async ({ page }) => {
     await page.route("**/api/asistente/estado", (ruta) =>
       ruta.fulfill({
-        json: { realtime: { disponible: false, motivo: "El asistente con IA no está configurado en este servidor (falta OPENAI_API_KEY). Puedes usar las respuestas programadas." }, clef: { disponible: false, modo: "off" }, bienestarIaReal: false },
+        json: { realtime: { disponible: false, motivo: "La voz no está disponible ahora. Puedes escribirme." }, clef: { disponible: false, modo: "off" }, bienestarIaReal: false },
       }),
     );
   });
 
-  test("la bienvenida es opcional y lleva al lanzador «Por texto o por voz» con la etiqueta de modo", async ({ page }) => {
+  test("la bienvenida es opcional y lleva al lanzador «Por texto o por voz» sin jerga técnica", async ({ page }) => {
     await page.goto("/");
     await esperarTitulo(page);
     await page.getByRole("button", MASCOTA).click();
@@ -75,18 +74,17 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     const lanzador = panel(page);
     await expect(lanzador.getByRole("button", { name: /Volver a «Por texto o por voz»/ })).toHaveCount(0);
     await expect(lanzador.getByRole("heading", { name: /Por texto\s+o por voz/ })).toBeVisible();
-    await expect(lanzador.getByText("Respuestas programadas (demostración)")).toBeVisible();
-    await expect(lanzador.getByText(/Prototipo de demostración\. No realiza gestiones oficiales/i)).toBeVisible();
-    await expect(lanzador.getByText(/no es un personaje oficial del Ayuntamiento/)).toBeVisible();
+    await expect(lanzador.getByText(/Prototipo de demostración en Laboratorio de Innovación Digital\. No realiza gestiones oficiales/i)).toBeVisible();
+    await expect(lanzador.getByText(/Pekito te ayuda a orientarte en la app/i)).toBeVisible();
 
     // «Hablar» explica por qué no está disponible; «Escribir» abre el chat con el estado vacío del Figma.
     const hablar = lanzador.getByRole("button", { name: /^Hablar/ });
     await expect(hablar).toHaveAttribute("aria-disabled", "true");
-    await expect(lanzador.getByText(/OPENAI_API_KEY/)).toBeVisible();
+    await expect(lanzador.getByText("La voz no está disponible ahora. Puedes escribirme.")).toBeVisible();
     await lanzador.getByRole("button", { name: /^Escribir/ }).click();
     await expect(lanzador.getByRole("heading", { name: "Hola, soy Pekito" })).toBeVisible();
     await expect(lanzador.getByRole("textbox", { name: "Escribe a Pekito" })).toBeFocused();
-    await expect(lanzador.getByText(/Puede equivocarse; revisa las fuentes/)).toBeVisible();
+    await expect(lanzador.getByText(/Pekito puede equivocarse\. Confirma los datos importantes con la fuente oficial/i)).toBeVisible();
     const sugerencias = lanzador.getByRole("list", { name: "Sugerencias para empezar" }).getByRole("button");
     await expect(sugerencias).toHaveText([
       "Reportar un bache",
@@ -103,7 +101,6 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
-    await expect(panel(page).getByText("Respuestas programadas (demostración)")).toBeVisible();
 
     // Las sugerencias prellenan; nunca envían solas.
     await panel(page).getByRole("button", { name: "Reportar un bache" }).click();
@@ -370,7 +367,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
 
     const servidor = (page: Page, evento: unknown) => page.evaluate((valor) => (window as unknown as { __servidorFalso: (e: unknown) => void }).__servidorFalso(valor), evento);
 
-    test("elección explícita del proveedor, etiqueta «Conectado», actuación con recibo y llamada de voz", async ({ page }) => {
+    test("usa la conexión disponible por omisión y mantiene una llamada de voz útil", async ({ page }) => {
       await simularRealtime(page);
       await page.goto("/");
       await esperarTitulo(page);
@@ -378,22 +375,14 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
       await page.getByRole("button", { name: "Saltar" }).click();
       await panel(page).getByRole("button", { name: /Volver a «Por texto o por voz»/ }).click();
 
-      await test.step("por omisión sigue en demostración; Hablar pide elegir la IA real", async () => {
-        await expect(panel(page).getByText("Respuestas programadas (demostración)").first()).toBeVisible();
-        await expect(panel(page).getByRole("radio", { name: /Respuestas programadas/ })).toBeChecked();
-        await expect(panel(page).getByRole("button", { name: /^Hablar/ })).toHaveAttribute("aria-disabled", "true");
-        await expect(panel(page).getByText(/elige «IA con OpenAI Realtime»/)).toBeVisible();
-      });
-
-      await test.step("al elegir la IA real, la etiqueta pasa a «sin conectar» hasta que haya sesión", async () => {
-        await panel(page).getByRole("radio", { name: /IA con OpenAI Realtime/ }).check();
-        await expect(panel(page).getByText("OpenAI Realtime (sin conectar)")).toBeVisible();
+      await test.step("si la voz está disponible, Pekito la ofrece sin pedir elegir proveedor", async () => {
         await expect(panel(page).getByRole("button", { name: /^Hablar/ })).not.toHaveAttribute("aria-disabled", "true");
+        await expect(panel(page).getByRole("radio")).toHaveCount(0);
+        await expect(panel(page).getByText(/OpenAI Realtime|Respuestas programadas/)).toHaveCount(0);
       });
 
       await test.step("llamada de voz: mascota, estado, silenciar y colgar", async () => {
         await panel(page).getByRole("button", { name: /^Hablar/ }).click();
-        await expect(panel(page).getByText("Conectado a OpenAI Realtime")).toBeVisible();
         await expect(panel(page).getByRole("status").filter({ hasText: "Te escucho" })).toBeVisible();
         const silenciar = panel(page).getByRole("button", { name: "Silenciar micrófono" });
         await silenciar.click();
@@ -462,14 +451,12 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
         await page.getByRole("button", MASCOTA).click();
         await page.getByRole("button", { name: "Saltar" }).click();
         await panel(page).getByRole("button", { name: /Volver a «Por texto o por voz»/ }).click();
-        await panel(page).getByRole("radio", { name: /IA con OpenAI Realtime/ }).check();
         await panel(page).getByRole("button", { name: /^Escribir/ }).click();
         await escribir(page, "Hola");
-        await expect(panel(page).getByText("La IA no está configurada en este servidor")).toBeVisible();
-        await expect(panel(page).getByText("El asistente con IA no está configurado en este servidor.")).toBeVisible();
+        await expect(panel(page).getByText("No pude conectarme ahora")).toBeVisible();
+        await expect(panel(page).getByText("Inténtalo de nuevo en un momento o escríbeme.")).toBeVisible();
         // Nunca simula una conexión real que no existe.
-        await expect(panel(page).getByText("Conectado a OpenAI Realtime")).toHaveCount(0);
-        await expect(panel(page).getByText("OpenAI Realtime (sin conectar)")).toBeVisible();
+        await expect(panel(page).getByText(/OpenAI Realtime|Respuestas programadas/)).toHaveCount(0);
       });
     });
   });

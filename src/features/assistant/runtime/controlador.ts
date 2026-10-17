@@ -16,6 +16,7 @@ import type { IdentidadDemo } from "@/types";
 import { aviso, ErrorAsistente } from "../providers/avisos";
 import { RealtimeAssistantProvider, SesionRealtime, type OpcionesSesionRealtime } from "../providers/realtime/RealtimeAssistantProvider";
 import { ejecutarAccion, type MotivoApoyo, type NavegarAsistente, type RepositoriosEjecutor } from "./ejecutor";
+import { crearClienteConocimiento, type ClienteConocimiento } from "./conocimiento";
 import { crearClienteGuardas, type ClienteGuardas } from "./guardas";
 import { construirPantalla, observarPantalla } from "./pantalla";
 import { obtenerStoreAsistente, type StoreAsistente } from "./store";
@@ -34,6 +35,8 @@ export interface OpcionesControlador {
   abrirApoyoHumano?: (motivo: MotivoApoyo) => void;
   /** Guardas Clef para nivel B. Por defecto, el cliente HTTP; null las desactiva. */
   guardas?: ClienteGuardas | null;
+  /** Conocimiento verificado (RAG). Por defecto, el cliente HTTP; null lo desactiva. */
+  conocimiento?: ClienteConocimiento | null;
   /** Por defecto, el store del ámbito (general o bienestar). */
   store?: StoreAsistente;
   /** Bienestar con IA real: consentimiento explícito de la persona. */
@@ -76,6 +79,7 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
   const { ambito, repositorios, obtenerActor, navegar, abrirApoyoHumano } = opciones;
   const store = opciones.store ?? obtenerStoreAsistente(ambito);
   const guardas = opciones.guardas === undefined ? crearClienteGuardas() : opciones.guardas;
+  const conocimiento = opciones.conocimiento === undefined ? crearClienteConocimiento() : opciones.conocimiento;
   const obtenerPantalla = opciones.obtenerPantalla ?? (() => construirPantalla({ rol: obtenerActor().rol }));
   let proveedor = opciones.proveedor;
   let sesion: SesionAsistente | null = null;
@@ -94,6 +98,7 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
           pantalla: obtenerPantalla(),
           ...(abrirApoyoHumano ? { abrirApoyoHumano } : {}),
           ...(guardas ? { guardas } : {}),
+          ...(conocimiento ? { conocimiento } : {}),
           mensajesRecientes: store.getState().mensajesRecientes(),
         });
         store.getState().registrarRecibo(recibo);

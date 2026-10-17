@@ -34,7 +34,7 @@ const CLASE_ICONO_ENCABEZADO =
  * la llamada de voz, con el tema noche del asistente. Escape cierra y el foco vuelve a la mascota.
  */
 export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProps) {
-  const { controlador, servidor, proveedor, elegirProveedor, repetirNavegacion } = pekito;
+  const { controlador, servidor, proveedor, repetirNavegacion } = pekito;
   const navigate = useNavigate();
   const abierto = usePekitoUI((estado) => estado.abierto);
   const vistaGuardada = usePekitoUI((estado) => estado.vista);
@@ -192,8 +192,6 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
           {vista === "lanzador" ? (
             <LanzadorPekito
               servidor={servidor}
-              proveedor={proveedor}
-              onElegirProveedor={elegirProveedor}
               onHablar={() => void hablar()}
               onEscribir={escribir}
               onVerBienvenida={() => usePekitoUI.getState().abrirBienvenida()}

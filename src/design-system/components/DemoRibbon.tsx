@@ -2,7 +2,7 @@ import { FlaskConical } from "lucide-react";
 import { Link } from "react-router";
 import { cx } from "../lib/cx";
 
-export const TEXTO_ROTULO_DEMO = "Prototipo de demostración. No realiza gestiones oficiales";
+export const TEXTO_ROTULO_DEMO = "Prototipo de demostración en Laboratorio de Innovación Digital. No realiza gestiones oficiales";
 
 export interface DemoRibbonProps {
   /** Ruta con la explicación de las limitaciones. */

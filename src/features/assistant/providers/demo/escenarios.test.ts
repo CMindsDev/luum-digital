@@ -118,12 +118,12 @@ describe("escenarios demo del asistente general: seguridad y otros", () => {
     expect(detectarRiesgo("Quiero reportar un bache")).toBeNull();
   });
 
-  it("dice que es una demostración programada, no un modelo real ni un servicio oficial", async () => {
+  it("responde quién es sin tecnicismos y con honestidad", async () => {
     const { textos, acciones } = await conversar("general", ["¿Eres una IA?"]);
     expect(acciones).toEqual([]);
-    expect(textos[0]).toMatch(/respuestas programadas/);
-    expect(textos[0]).toMatch(/no estoy conectado a un modelo de IA/);
-    expect(textos[0]).toMatch(/no soy un servicio oficial/);
+    expect(textos[0]).toMatch(/No soy una persona/);
+    expect(textos[0]).toMatch(/asistente virtual/);
+    expect(textos[0]).toMatch(/Tú siempre confirmas/);
   });
 
   it("abre el mapa, explica beneficios, señala controles visibles y responde con sugerencias", async () => {
@@ -165,7 +165,7 @@ describe("escenarios demo de bienestar", () => {
     const { acciones, textos } = await conversar("bienestar", ["Quiero hablar de cómo me siento", "Hoy fue un día pesado en el trabajo", "No sé qué hacer"]);
     expect(acciones).toEqual([]);
     expect(textos).toHaveLength(3);
-    expect(textos[0]).toMatch(/acompañante de demostración/);
+    expect(textos[0]).toMatch(/No soy una persona/);
     expect(textos.join(" ")).not.toMatch(DIAGNOSTICO);
   });
 
@@ -185,11 +185,11 @@ describe("escenarios demo de bienestar", () => {
     for (const texto of textos.slice(1)) expect(texto).toMatch(/ayuda humana/);
     expect(textos.join(" ")).not.toMatch(DIAGNOSTICO);
 
-    // Sin la frase de entrada, «me siento…» también responde con un reflejo (y se presenta como demostración).
+    // Sin la frase de entrada, «me siento…» también responde con un reflejo y explica quién es.
     const directa = await conversar("bienestar", ["Me siento sola"]);
     expect(directa.textos[0]).not.toMatch(/Gracias por darte este espacio/);
     expect(directa.textos[0]).toMatch(/ayuda humana/);
-    expect(directa.textos[0]).toMatch(/acompañante de demostración/);
+    expect(directa.textos[0]).toMatch(/No soy una persona/);
   });
 
   it("«me siento…» con señales de riesgo sigue mostrando ayuda humana primero", async () => {
@@ -223,6 +223,6 @@ describe("escenarios demo de bienestar", () => {
     expect(acciones.every((llamada) => llamada.accion === "mostrarApoyoHumano" || llamada.accion === "senalarElemento")).toBe(true);
     const textos = eventos.flatMap((evento) => (evento.tipo === "texto_final" ? [evento.texto] : []));
     expect(textos[1]).toMatch(/personas adultas/);
-    expect(textos[2]).toMatch(/no soy una persona/);
+    expect(textos[2]).toMatch(/No soy una persona/);
   });
 });

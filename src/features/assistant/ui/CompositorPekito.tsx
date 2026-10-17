@@ -92,7 +92,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
           <button
             type="button"
             onClick={onHablar}
-            aria-label="Hablar con Pekito (voz con OpenAI Realtime)"
+            aria-label="Hablar con Pekito"
             data-guia="asistente.dictar"
             className="grid size-11 shrink-0 place-items-center rounded-full text-(--pk-texto-suave) hover:text-(--pk-texto)"
           >
@@ -113,7 +113,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
         </button>
       </div>
       <p id={idAyuda} className="mt-2 px-2 text-center text-xs text-(--pk-texto-suave)">
-        Puede equivocarse; revisa las fuentes. No compartas datos personales reales.
+        Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.
       </p>
     </form>
   );

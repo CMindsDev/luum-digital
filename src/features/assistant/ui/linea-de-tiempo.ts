@@ -28,7 +28,11 @@ export function lineaDeTiempo(
     const posicion = Math.min(Math.max(0, ancla), mensajes.length);
     porAncla.set(posicion, [...(porAncla.get(posicion) ?? []), elemento]);
   };
-  for (const recibo of recibos) agregar(anclas[recibo.llamadaId] ?? mensajes.length, { tipo: "recibo", clave: `r-${recibo.llamadaId}`, recibo });
+  for (const recibo of recibos) {
+    // Una consulta de información lograda no es un paso que la persona deba ver: la respuesta ya cita sus fuentes.
+    if (recibo.accion === "consultarConocimiento" && recibo.estado === "completada") continue;
+    agregar(anclas[recibo.llamadaId] ?? mensajes.length, { tipo: "recibo", clave: `r-${recibo.llamadaId}`, recibo });
+  }
   for (const accion of acciones) agregar(anclas[accion.llamadaId] ?? mensajes.length, { tipo: "accion", clave: `a-${accion.llamadaId}`, accion });
   const elementos: ElementoLinea[] = [];
   mensajes.forEach((mensaje, indice) => {

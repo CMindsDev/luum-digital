@@ -69,7 +69,7 @@ Reglas de **demostración** (valores configurables en `src/data/reglas-puntos.ts
 - **Datos como datos, no como instrucciones**: textos de pantallas, fichas y documentos se tratan como información; nunca como órdenes.
 - **No tiene acceso a la conversación de salud mental** (ámbito separado con su propio almacén, herramientas y escenarios).
 - Modo local sin claves: respuestas **programadas**, etiquetadas como tales; no simula ser un modelo.
-- Con IA real (opcional): la voz y el texto van a **OpenAI** (WebRTC directo del navegador; el servidor sólo intercambia la señalización). Para las **guardas Clef** (Cloudflare Workers AI) se envían los últimos mensajes recientes (máx. 6 × 400 caracteres) únicamente cuando hay credenciales y sólo para acciones de nivel B del asistente general, nunca para bienestar. Clef **nunca autoriza**: la confirmación en pantalla sigue siendo obligatoria y, si Clef falla, el flujo continúa con confirmación.
+- Con IA real (opcional): la voz y el texto van a **OpenAI** (WebRTC directo del navegador; el servidor sólo intercambia la señalización). Para las **guardas Clef** (Cloudflare Workers AI) se envían los últimos mensajes recientes (máx. 6 × 400 caracteres) únicamente cuando hay credenciales y sólo para acciones de nivel B del asistente general, nunca para bienestar. Clef **nunca autoriza**: la confirmación en pantalla sigue siendo obligatoria y, si Clef falla, el flujo continúa con confirmación. Para el **conocimiento del asistente (RAG)** la consulta de la persona (máx. 200 caracteres) se envía a OpenAI sólo para calcular su embedding; no se registra ni se almacena.
 - La retención y el uso de datos por parte de cada proveedor deben revisarse contractualmente antes de enviar cualquier dato real.
 
 ## 6. Salud mental

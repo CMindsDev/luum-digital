@@ -1,7 +1,7 @@
 /**
- * Une la interfaz de Pekito con el núcleo del asistente: crea UN controlador (proveedor demo por
- * omisión), consulta al servidor si hay OpenAI Realtime y guardas Clef, conecta el ejecutor con
- * React Router y recuerda a qué pantalla llevó cada acción (para «Revisar y confirmar»).
+ * Une la interfaz de Pekito con el núcleo del asistente: crea un controlador, consulta si la voz
+ * está disponible, conecta el ejecutor con React Router y recuerda a qué pantalla llevó cada acción
+ * (para «Revisar y confirmar»).
  *
  * Nota de arquitectura: el ejecutor necesita los repositorios de forma imperativa (sólo lectura),
  * por eso este hook usa useRepositories() igual que los hooks de src/services/hooks.
@@ -22,14 +22,14 @@ import { usePekitoUI } from "./ui/estado-pekito";
 export type ProveedorElegido = "demo" | "realtime";
 
 export const MOTIVO_SIN_VOZ_PREDETERMINADO =
-  "La voz requiere IA real: configura OPENAI_API_KEY en el servidor del prototipo. Mientras, puedes escribir con las respuestas programadas.";
+  "La voz no está disponible ahora. Puedes escribirme.";
 
 export interface ServidorPekito {
   /** Ya respondió (o falló) GET /api/asistente/estado. */
   consultado: boolean;
-  /** Proveedor real, sólo si el servidor lo ofrece. La persona debe elegirlo. */
+  /** Proveedor real, sólo si el servidor lo ofrece. */
   realtime: RealtimeAssistantProvider | null;
-  /** Por qué no hay voz ni IA real (siempre explica que requiere OPENAI_API_KEY en el servidor). */
+  /** Por qué no hay voz disponible. */
   motivoSinVoz: string;
 }
 
@@ -37,7 +37,6 @@ export interface Pekito {
   controlador: ControladorAsistente;
   servidor: ServidorPekito;
   proveedor: ProveedorElegido;
-  elegirProveedor(proveedor: ProveedorElegido): void;
   /** Vuelve a abrir la pantalla que preparó una acción (si la persona se movió). */
   repetirNavegacion(llamadaId: string): boolean;
 }
@@ -85,16 +84,20 @@ export function useControladorPekito(): Pekito {
       if (!vigente) return;
       // Clef sólo si el servidor lo ofrece; si no, «sin señal» sin hacer peticiones.
       puente.fijarGuardas(resultado.estado?.clef.disponible ? crearClienteGuardas() : null);
+      if (resultado.realtime && controlador.store.getState().mensajes.length === 0 && !controlador.sesion) {
+        controlador.cambiarProveedor(resultado.realtime);
+        setProveedor("realtime");
+      }
       setServidor({
         consultado: true,
         realtime: resultado.realtime,
-        motivoSinVoz: MOTIVO_SIN_VOZ_PREDETERMINADO,
+        motivoSinVoz: resultado.motivoSinRealtime ?? MOTIVO_SIN_VOZ_PREDETERMINADO,
       });
     });
     return () => {
       vigente = false;
     };
-  }, [puente]);
+  }, [controlador, puente]);
 
   // Al desmontar el AppShell se cuelga y se borra la conversación (sólo vive en memoria).
   useEffect(
@@ -105,23 +108,10 @@ export function useControladorPekito(): Pekito {
     [controlador, puente],
   );
 
-  const elegirProveedor = useCallback(
-    (elegido: ProveedorElegido) => {
-      if (elegido === "realtime") {
-        if (!servidor.realtime) return;
-        controlador.cambiarProveedor(servidor.realtime);
-      } else {
-        controlador.cambiarProveedor(demo);
-      }
-      setProveedor(elegido);
-    },
-    [controlador, demo, servidor.realtime],
-  );
-
   const repetirNavegacion = useCallback(
     (llamadaId: string) => puente.repetir(llamadaId, `${window.location.pathname}${window.location.search}`),
     [puente],
   );
 
-  return { controlador, servidor, proveedor, elegirProveedor, repetirNavegacion };
+  return { controlador, servidor, proveedor, repetirNavegacion };
 }

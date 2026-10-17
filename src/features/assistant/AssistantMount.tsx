@@ -21,7 +21,7 @@ const PanelPekito = lazy(() => import("./ui/PanelPekito"));
 const ESPACIO_ASISTENTE = "5rem";
 
 /** Acciones que no necesitan que el panel ceda la pantalla (se muestran dentro de la conversación). */
-const SIN_CEDER: readonly NombreAccion[] = ["mostrarApoyoHumano"];
+const SIN_CEDER: readonly NombreAccion[] = ["mostrarApoyoHumano", "consultarConocimiento"];
 
 /**
  * Punto de montaje del asistente global (Pekito) en el AppShell.
