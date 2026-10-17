@@ -1,6 +1,6 @@
 import { aprobarCredito, cancelarCredito, registrarCredito, revertirCredito } from "@/domain/puntos";
 import { ordenarPorFecha } from "@/domain/reportes";
-import { motivoObligatorioSchema } from "@/domain/validaciones";
+import { motivoObligatorioSchema, nuevaVerificacionSchema } from "@/domain/validaciones";
 import {
   calcularPuntosVerificacion,
   claveEventoVerificacion,
@@ -79,6 +79,7 @@ export function crearVerificacionesDemo(contexto: ContextoDemo): VerificationRep
 
     submit: (input, actor) =>
       operacionDemo(contexto, "verifications", "mutacion", () => {
+        validarEntrada(nuevaVerificacionSchema, input);
         const reporte = exigir(
           almacen.leer("reportes").find((r) => r.id === input.reporteId),
           "el reporte",

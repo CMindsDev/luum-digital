@@ -265,7 +265,9 @@ export class SesionRealtime implements SesionAsistente {
     this.audio.muted = false;
     this.iniciarMedidor();
     this.cambiarEstado("escuchando");
-    await this.reproducir();
+    // No se espera: play() puede tardar hasta que llegue la pista remota y la llamada ya está activa.
+    // Si el navegador bloquea el audio, reproducir() emite el aviso «Activar audio».
+    void this.reproducir();
   }
 
   /** Silencia o reactiva el micrófono sin colgar: la pista sigue negociada, pero no envía audio. */

@@ -36,7 +36,7 @@ export function BottomNav() {
     <>
       <nav
         aria-label="Principal"
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-borde bg-superficie pb-[env(safe-area-inset-bottom)] shadow-barra md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 rounded-t-[1.5rem] border-t border-borde bg-superficie pb-[env(safe-area-inset-bottom)] shadow-barra md:hidden"
       >
         <ul className="mx-auto grid h-[4.5rem] max-w-lg grid-cols-5 items-center gap-0.5 px-1.5">
           {fijas.map((seccion) => {

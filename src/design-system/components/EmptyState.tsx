@@ -25,7 +25,7 @@ export function EmptyState({ titulo, descripcion, icono: Icono, accion, nivel = 
         className,
       )}
     >
-      <span className="mb-4 inline-flex size-16 items-center justify-center rounded-tarjeta bg-azul-suave text-azul">
+      <span className="mb-4 inline-flex size-16 items-center justify-center rounded-(--radio-mosaico) bg-azul-suave text-azul">
         {Icono ? <Icono aria-hidden="true" className="size-8" /> : <LabGlyph tamano={34} />}
       </span>
       <Titulo className="text-lg font-semibold text-marino">{titulo}</Titulo>

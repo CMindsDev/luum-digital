@@ -112,6 +112,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
       onKeyDown={manejarTeclado}
       onClick={manejarClic}
       data-guia="asistente.bienvenida"
+      data-asistente-ui
       className={cx(
         "pekito m-0 h-dvh max-h-none w-full max-w-none overflow-hidden bg-[var(--pekito-fondo)] p-0 text-[var(--pekito-tinta)] backdrop:bg-marino/45",
         "min-[800px]:m-auto min-[800px]:h-[min(874px,calc(100dvh-2rem))] min-[800px]:w-[480px] min-[800px]:rounded-[15px] min-[800px]:shadow-flotante",
@@ -153,7 +154,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
             <span className="block">Un agente que sí te atiende</span>
           </h2>
 
-          <PekitoMascota ancho={paso === 1 ? 213 : 150} respira={paso === 1} className="max-w-[60vw]" />
+          <PekitoMascota ancho={paso === 1 ? 213 : 150} estado={paso === 1 ? "saludando" : "reposo"} className="max-w-[60vw]" />
 
           <div id={idPaso} aria-live="polite" className="w-full max-w-[340px]">
             {paso === 1 && (

@@ -1,4 +1,3 @@
-import { LoaderCircle } from "lucide-react";
 import { cx } from "../lib/cx";
 import { Skeleton } from "./Skeleton";
 
@@ -10,12 +9,26 @@ export interface LoadingStateProps {
   className?: string;
 }
 
-/** Estado de carga con región role="status". */
+/** Colores del loader de mosaicos del Laboratorio: azul, ámbar, café y magenta. */
+const MOSAICOS = ["bg-azul", "bg-ambar", "bg-cafe", "bg-magenta"] as const;
+
+/**
+ * Estado de carga con región role="status" y texto visible. El indicador son 4 mosaicos que aparecen
+ * en secuencia; con movimiento reducido quedan quietos (el texto sigue anunciando la carga).
+ */
 export function LoadingState({ etiqueta = "Cargando…", variante = "lineas", className }: LoadingStateProps) {
   return (
     <div role="status" aria-live="polite" className={cx("w-full", className)}>
       <p className="flex items-center gap-2 text-sm font-medium text-tinta-suave">
-        <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
+        <span aria-hidden="true" className="inline-flex items-center gap-1">
+          {MOSAICOS.map((color, indice) => (
+            <span
+              key={color}
+              style={{ animationDelay: `${indice * 120}ms` }}
+              className={cx("size-3.5 rounded-[17.5%] motion-safe:animate-carga-mosaico", color)}
+            />
+          ))}
+        </span>
         {etiqueta}
       </p>
       {variante === "lineas" ? (

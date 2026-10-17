@@ -55,8 +55,9 @@ function TarjetaMiVerificacion({ verificacion, reglas }: { verificacion: Verific
         </p>
       ) : null}
       <p className="text-sm text-tinta-suave">
-        Enviada el <time dateTime={verificacion.fecha}>{formatearFechaHora(verificacion.fecha)}</time>. {textoPuntos(verificacion, reglas)}
+        Enviada el <time dateTime={verificacion.fecha}>{formatearFechaHora(verificacion.fecha)}</time>
       </p>
+      {reglas ? <p className="text-sm font-medium text-tinta">{textoPuntos(verificacion, reglas)}</p> : null}
     </Card>
   );
 }

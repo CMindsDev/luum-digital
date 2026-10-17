@@ -37,10 +37,10 @@ export function Field({ etiqueta, ayuda, error, requerido = false, opcional = fa
 
   return (
     <div className={cx("flex flex-col gap-1.5", className)}>
-      <label htmlFor={idControl} className={cx("text-[0.9375rem] font-semibold text-tinta", ocultarEtiqueta && "sr-only")}>
+      <label htmlFor={idControl} className={cx("text-base leading-snug font-medium text-tinta", ocultarEtiqueta && "sr-only")}>
         {etiqueta}
         {requerido ? (
-          <span className="text-peligro">
+          <span className="text-azul">
             <span aria-hidden="true"> *</span>
             <span className="sr-only"> (obligatorio)</span>
           </span>

@@ -84,18 +84,18 @@ export default function RulesPage() {
 
           <div className="flex min-w-0 flex-col gap-5">
             <Card as="section" aria-labelledby="titulo-prioridad" relleno="lg" tono="marino" data-guia="recompensas.regla_prioridad">
-              <h2 id="titulo-prioridad" className="flex items-start gap-2 text-xl font-semibold">
+              <h2 id="titulo-prioridad" className="flex items-start gap-2 text-xl font-semibold text-white">
                 <Scale aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-lima-logo" />
                 Los puntos y la popularidad no deciden la prioridad
               </h2>
               <p className="mt-3 text-[0.9375rem]">{AVISO_PRIORIDAD}</p>
-              <h3 className="mt-4 text-base font-semibold">Criterios que sí se usan</h3>
+              <h3 className="mt-4 text-base font-semibold text-white">Criterios que sí se usan</h3>
               <ul className="mt-2 flex list-disc flex-col gap-1.5 pl-5 text-[0.9375rem]">
                 <li>Riesgo declarado por quien reporta (el de mayor peso).</li>
                 <li>Antigüedad: cuántos días lleva sin cerrarse.</li>
                 <li>Tipo de incidente con riesgo vial o sanitario: {TIPOS_CON_RIESGO.join(", ")}.</li>
               </ul>
-              <h3 className="mt-4 text-base font-semibold">Criterios que nunca se usan</h3>
+              <h3 className="mt-4 text-base font-semibold text-white">Criterios que nunca se usan</h3>
               <ul className="mt-2 flex flex-col gap-1.5 text-[0.9375rem]">
                 {["Puntos o saldo de quien reporta o verifica", "Cuántas personas reportan, aportan o verifican", "Popularidad o insistencia"].map(
                   (texto) => (

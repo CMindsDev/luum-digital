@@ -3,7 +3,9 @@
 
 /*
  * Estilos globales mínimos. Todo lo demás se resuelve con utilidades que usan tokens.
- * La fuente Onest (variable) se importa en src/main.tsx (autoalojada con @fontsource-variable).
+ * Las fuentes del Laboratorio (Host Grotesk variable, Instrument Serif, IBM Plex Mono, Unbounded y
+ * Poppins de respaldo) se importan en src/main.tsx (autoalojadas con @fontsource) y se nombran en
+ * src/design-system/tokens.css (--font-sans, --font-serif, --font-mono, --font-agente).
  */
 
 @layer base {
@@ -24,6 +26,7 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
   }
 
   h1,
@@ -33,6 +36,8 @@
     color: var(--color-marino);
     font-weight: 600;
     line-height: 1.25;
+    /* Host Grotesk lleva los titulares algo cerrados, como el tablero (-0.05em en tamaños grandes). */
+    letter-spacing: -0.015em;
     text-wrap: balance;
   }
 

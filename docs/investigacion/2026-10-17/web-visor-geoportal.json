@@ -1,0 +1,692 @@
+{
+  "summary": "Fecha de consulta: 2026-10-17. EXISTENTE (observado): ambos portales están en línea y detrás de Radware Bot Manager (DNS CNAME a *.radwarecloud.net). La portada del Visor Urbano respondió «Verifying your browser before proceeding...» y después CAPTCHA; el Geoportal entregó su HTML/JS/CSS en las primeras solicitudes y luego redirigió /api/, /geoserver/, /arcgis/ e /informe-trabajo/ a validate.perfdrive.com. No se intentó superar el reto. Ninguna interfaz se renderizó: todo lo descrito proviene de HTML, CSS, JS y archivos de traducción públicos, más prensa fechada.\n\nA) VISOR URBANO (https://visorurbano.merida.gob.mx/). Metadatos de la app: «Plataforma municipal de gestión urbana con mapas interactivos catastrales y visualización de zonificación»; keywords «visor urbano, mapas, catastro, trámites, licencias, zonificación». Prensa (Diario de Yucatán, 11-ago-2026): es una de las tres herramientas de MIDigital (Expediente Digital, Portal Ciudadano y Visor Urbano) con «Planos catastrales, usos de suelos, datos prediales y más de medio centenar de capas de información». Módulos vistos en código y traducciones: capas WMS (pestañas Capas/Simbología), búsqueda multicriterio (folio, dirección, tablaje, catastral, coordenadas), ficha del predio con «Información y plano catastral» (cédula y plano), «Uso del suelo y riesgos» (giros permitidos y clasificación de riesgos, con aceptación de «Condiciones de Uso», declarado como «simulación»), «Diagnóstico comercial», «Solicitar licencia» (comercial / construcción), «Nuevo trámite» con inicio de sesión de Expediente Digital (persona física o moral), Utilidades (medir distancia y área, Street View externo, coordenadas, dibujo), «Cargar archivo» (GeoJSON/GeoPackage/KML/KMZ/Shapefile .zip, EPSG:4326, sólo polígonos), Avisos, Contacto, Mi panel, enlace a pago de predial e idiomas es/en/fr/pt.\n\nB) GEOPORTAL DE MÉRIDA (https://geoportal.merida.gob.mx/). Meta: «portal geográfico que, a través de mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral municipal...». Acerca de: «plataforma de información espacial del Ayuntamiento de Mérida... incluyendo sus comisarías» (Ayuntamiento de Mérida 2024-2027). Herramientas vistas en el código: búsqueda por dirección (calle, número, cruzamientos, colonia, CP), por folio y por tablaje; diálogo «INFORMACIÓN VIGENTE DEL PREDIO» (imagen de cédula y «Ver plano del predio»); compartir folio o coordenada con enlace y QR; medir distancia, área y construcción; coordenadas; ruta óptima; Street View (aviso de «deshabilitado temporalmente»); imprimir; vistas; marcadores; indicadores y tableros; tours virtuales; inicio de sesión (cuentas institucionales/SIIMM), registro de usuario público y proyectos/capas de usuario (CSV/SHP, estilos temáticos).\n\n(b) CAPAS Y SERVICIOS GEOGRÁFICOS\n1. Visor Urbano – WMS por proxy propio. URL base: https://visorurbano.merida.gob.mx/api/v1/geoproxy (GetMap en EPSG:3857 con {bbox-epsg-3857}; leyendas con GetLegendGraphic); consulta puntual en https://visorurbano.merida.gob.mx/api/v1/info. Autenticación: NO determinada; el cliente reescribe las solicitudes hacia https://visorurbano.merida.gob.mx/api (transformRequest) y todo el dominio exige validación anti-bot; no se verificó GetCapabilities. Otros endpoints internos vistos en el JS (no documentados como API pública; no se consultaron): v1/search/multi, v1/sigg/predios/cedulas, v1/sigg/predios/uso-suelo-y-riesgos (POST), v1/announcements/active, v1/ed/tramites, v1/ed/tramites/iniciar (POST), api/auth/ed/me, /rr-api/property?point= y ?folio=, /api/property?polygon=. Capas: los nombres se cargan dinámicamente y no se pudieron enumerar. Capa base: proveedor por defecto «google» (inferido del código) y opción «Ninguna». Condiciones publicadas: sólo descargos (información de carácter informativo sin validez legal; las medidas del plano pueden variar; el uso de suelo es «una simulación»; «Por ningún motivo... otorga autorización alguna»). No se encontró licencia de datos, términos generales, aviso de privacidad ni atribución de datos.\n2. Geoportal – WMS por proxy y API interna. URL base WMS: https://geoportal.merida.gob.mx/api/geoproxy?token=<JWT de sesión> (formato «POSTGIS-WMS»); las capas tipo «WMS» reciben su URL de GeoServer (campo «geoserver») desde el catálogo y el cliente le agrega «?token={geotoken}»; se dibujan con TileWMS o ImageWMS de OpenLayers. Simbología SLD de GeoServer: https://geoportal.merida.gob.mx/api/geoserver/simbologia/estilo/{styleId}. GeoJSON: https://geoportal.merida.gob.mx/api/geojson/{id_capa_doc} y /api/capasdocumento/{id}/geojson. API interna: https://geoportal.merida.gob.mx/api/ (cabecera HTTP «token») y https://geoportal.merida.gob.mx/api/v5; socket en el mismo dominio (puerto configurado 7703). Autenticación: token JWT de sesión que el sitio emite a cualquier visitante (cookie «token», 2 h) más cuentas con inicio de sesión (APP.appAuth = 'true'). GetCapabilities sin token: redirigido a la validación anti-bot, sin resultado. /geoserver/ y /arcgis/rest/services: tampoco verificables. No hay ArcGIS REST, WFS ni teselas XYZ documentados. Licencia y términos: no encontrados; sólo hay atribuciones por capa en la configuración del cliente (p. ej. «Fuente: Ayuntamiento de Mérida», «Asambleas Ciudadanas MID», logotipo de Gobierno del Estado/SSY para COVID-19).\n   Nombres de capas presentes en la configuración pública del cliente (NO confirma que sean visibles para usuarios anónimos ni vigentes): Casos Confirmados por Colonia; COVID-19 en municipios de Yucatán; Reubicación de paraderos de transporte público; Circuito Enlace Centro Histórico v2; Paraderos Centro Histórico; Calles inundadas por DELTA (datos del 07/10/2020); Acciones y acciones zet4 (acciones del 7 al 20 de octubre de 2020); Mérida Cambiando la Diabetes; Reporte parques; Preedial 2025 («Última actualización: 06/03/2026»); Tours virtuales prueba; concentrado sin agrupar; concentrado agrupado; Baches(Waze); Yaaxtal poligono a; Reportes Ciudadanos; Reporte Mantenimiento Vial; Apoyos Otorgados; Apoyos (SUBA). Capa base de información por defecto: «catastral».\n3. Terceros referenciados (enlace o configuración; no implica integración verificada): Google Street View (ambos portales; en el Geoportal está «deshabilitado temporalmente»), Bing Maps (clave en la configuración del Geoportal; uso exacto no verificado), Google reCAPTCHA, Google Analytics y Facebook SDK (Geoportal), y pago de predial en https://isla.merida.gob.mx/serviciosinternet/predialmid/pago.php (enlace desde el Visor).\n4. Catálogo de terceros: TUMI Data Hub lista «Cadastral Layer In Geoportal» con fuente geoportal.merida.gob.mx (revisada el 2022-09-30; advierte que la licencia puede estar desactualizada). El sitio rechazó la conexión y no es fuente oficial.\n\n(c) TECNOLOGÍA\n- Visor Urbano: React Router v7 en modo framework con SSR y build Vite (assets con hash), Tailwind CSS (v4 inferido por la sintaxis), Radix UI, lucide-react 0.563.0, MapLibre GL JS 5.16.0 + @mapbox/mapbox-gl-draw, lightGallery 2.9.0, JSZip 3.10.1 y pako (lectura de shapefile .zip), i18next (es, en, fr, pt), reCAPTCHA. Tipografía Poppins.\n- Geoportal: OpenLayers (ol.js) + ol-ext; jQuery/jQuery UI, Bootstrap 3, plantilla Nifty 2.9.1, DevExtreme, DataTables/Tabulator, SweetAlert2, iziToast, lightGallery, video.js. Backend PHP (cookie PHPSESSID) con JWT, GeoServer (SLD, CQL_FILTER) y PostGIS (formato «POSTGIS-WMS»). Versión del cliente: GT_REV 20260715. Tipografía Barlow.\n- Ambos detrás de Radware (Bot Manager / ShieldSquare).\n\n(e) RECOMENDACIÓN PARA EL PROTOTIPO (PROPUESTA, no existente)\n1. Como «información territorial oficial» mostrar sólo: (a) textos descriptivos publicados, con fecha y URL (meta y Acerca de del Geoportal, metadatos del Visor, nota del 11-ago-2026); (b) los descargos oficiales citados literalmente; (c) botones de enlace profundo que abran el Visor Urbano o el Geoportal oficiales en pestaña nueva. No incrustar, proxyar ni consumir sus WMS ni sus APIs: no hay servicio público documentado, exigen token de sesión, están protegidos anti-bot y no se publicó licencia ni condiciones de reutilización.\n2. Todo lo cartográfico dentro del prototipo debe ser CAPA ILUSTRATIVA con etiqueta visible («Datos simulados – no oficiales»): predios, folios, tablajes, claves catastrales, cédulas, planos, uso de suelo, zonificación, riesgos, giros, reportes, mapa de calor y celdas H3. Usar geometrías genéricas (hexágonos H3 o rejilla) sobre un mapa base abierto con su atribución (p. ej. OpenStreetMap, licencia ODbL, por verificar) y claves evidentemente ficticias (p. ej. «DEMO-0001»). Nunca trazar límites catastrales ni asignar folios, tablajes o usos de suelo a ubicaciones reales.\n3. Consulta de uso de suelo y licencias: simular sólo el flujo (aceptar condiciones y ver un resultado ficticio) con los descargos del Visor y un botón «Consultar en Visor Urbano oficial». El propio Visor declara que su resultado es «una simulación de los giros posibles» y que «no otorga autorización alguna».\n4. «Bache a la vista»: el catálogo de estatus observado en el Geoportal (Inicial, Por Asignar, Asignada, Por Atender, Atendida) puede usarse como vocabulario ilustrativo, aclarando que es un catálogo interno y que no hay integración.\n5. Identidad visual: tomar como referencia los tokens observados (Visor: #002c72 y #74ba47, Poppins; Geoportal: Barlow, #254088, #43b5e5 y #f8b249), sin copiar logotipos ni presentar el prototipo como sitio oficial.\n6. Si se necesita un límite municipal real, obtenerlo de una fuente abierta con licencia verificada (p. ej. el Marco Geoestadístico de INEGI, pendiente de verificar); nunca dibujarlo a mano.\n7. Pendiente de confirmar con el Ayuntamiento: licencia y condiciones de uso de las capas, existencia de servicios públicos (WMS/WFS) para terceros y cualquier convenio de integración.",
+  "inventory": [
+    {
+      "servicio": "Visor cartográfico de capas (Visor Urbano)",
+      "categoria": "Información territorial / catastro y desarrollo urbano",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida (visorurbano.merida.gob.mx)",
+      "funcionalidad": "Mapa interactivo con capas WMS servidas por proxy propio (/api/v1/geoproxy). Panel con pestañas «Capas» y «Simbología», buscador de capas, agrupación («Mostrar por grupos»), reordenar arrastrando, opacidad, etiquetas, ocultar/mostrar/remover. Consulta de atributos en un punto («Información de Capas»). Selector de capa base con opción «Ninguna».",
+      "tipo": "consulta_territorial",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js y https://visorurbano.merida.gob.mx/locales/es/map.json (leídos vía WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Cadenas «Información de Capas», «No hay capas WMS visibles para consultar.», «Mostrar por grupos», «Restablecer orden» y URL «https://visorurbano.merida.gob.mx/api/v1/geoproxy» en el código y las traducciones. La interfaz no se renderizó (reto anti-bot).",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Los nombres de las capas se cargan dinámicamente y no se pudieron enumerar. Según el Diario de Yucatán (11-ago-2026) incluye «más de medio centenar de capas de información».",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Búsqueda de predios multicriterio (Visor Urbano)",
+      "categoria": "Información territorial / catastro",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "Búsqueda por folio, dirección, tablaje, clave catastral y coordenadas (formato «ej: 20.97, -89.62»), con varias búsquedas activas a la vez, búsquedas recientes guardadas en el navegador y marcadores de color por tipo de búsqueda.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-B9irtfCL.css (curl) y https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch), 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Clases CSS marker-folio, marker-direccion, marker-tablaje, marker-catastral y marker-coordenadas; textos «Búsquedas recientes», «Búsquedas activas» y «Formato inválido · ej: 20.97, -89.62»; ruta «v1/search/multi»; clave local «visor_urbano_recent_searches».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "No se ejecutó ninguna búsqueda.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Ficha del predio: información y plano catastral (Visor Urbano)",
+      "categoria": "Catastro",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "«Ficha del predio» con acción «Información y plano catastral» / «Plano y cédula» (cédula catastral, plano, galería de imágenes) y descarga del plano.",
+      "tipo": "consulta_documental",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json y https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch), 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Claves property.info «Ficha del predio» y property.downloadTechnicalSheet «Información y plano catastral»; ruta «v1/sigg/predios/cedulas»; textos «Cédula Catastral» y «Plano Catastral».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Descargos publicados: «La información aquí presentada es de carácter informativo y no constituye un documento oficial con validez legal.» y «Las medidas del plano descargado pueden variar de las que constan en el documento del predio.» Para aclaraciones remite a la Dirección de Catastro Municipal.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Uso del suelo y riesgos (Visor Urbano)",
+      "categoria": "Desarrollo urbano / uso de suelo",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "«Consulta de giros permitidos y clasificación de riesgos para este predio.» Se elige predio o tablaje, hay pestañas «Uso Suelo» y «Riesgos», y se deben aceptar las «Condiciones de Uso» antes de consultar.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Textos «Uso del suelo y riesgos», «He leído y acepto las condiciones de uso de este servicio», «La información desplegada en este sitio es una simulación de los giros posibles para un predio seleccionado.» y «Por ningún motivo la información desplegada en este sitio otorga autorización alguna.»; ruta POST «v1/sigg/predios/uso-suelo-y-riesgos».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Cita el Programa Municipal de Desarrollo Urbano de Mérida (Apartado 5.4 del Nivel Normativo; Tabla de Compatibilidades, Anexo 2: N-03), la Cédula Urbana, la Factibilidad de Uso de Suelo, los Arts. 20, 23 y 24 del Reglamento de Construcciones del Municipio de Mérida y el Art. 76 de la Ley de Asentamientos Humanos del Estado de Yucatán. No se consultó ningún predio.",
+      "requisitosPublicados": ["Aceptar las «Condiciones de Uso» del servicio (casilla en la interfaz)", "Para otorgar un uso o destino a un predio: contar con la Licencia de Uso del Suelo respectiva (según el texto del Visor)"]
+    },
+    {
+      "servicio": "Diagnóstico comercial (Visor Urbano)",
+      "categoria": "Desarrollo económico / uso de suelo",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "Sección del menú lateral llamada «Diagnóstico comercial». Su contenido no se pudo verificar.",
+      "tipo": "otro",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Clave aside.commercial: «Diagnóstico comercial».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Funcionalidad pendiente. La configuración i18n incluye un espacio de nombres «scian»; su relación con este módulo es inferida, no verificada.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Solicitar licencia comercial o de construcción (Visor Urbano)",
+      "categoria": "Licencias",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "Flujo «Solicitar licencia» desde el predio: «¿Qué tipo de licencia necesitas?» con «Licencia comercial» y «Licencia de construcción». Campos observados: «Giro comercial» y «Licencia de alcohol»; sección «Información para licencia de construcción».",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch, 2026-10-17); https://www.poresto.com/yucatan/merida/2026/1/20/presenta-cecilia-patron-el-plan-merida-ordenada-para-un-crecimiento-urbano-sostenible.html",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Claves property.requirements.* con esos textos. Por Esto (20-ene-2026), en futuro: «Esta plataforma permitirá la emisión de licencias a negocios totalmente en línea».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "No se verificó que el flujo esté habilitado ni sus requisitos oficiales, costos o plazos. Los campos de la interfaz no son requisitos publicados.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Nuevo trámite con Expediente Digital (Visor Urbano)",
+      "categoria": "Trámites en línea",
+      "sistemaDeOrigen": "Visor Urbano + Expediente Digital (MIDigital) – Ayuntamiento de Mérida",
+      "funcionalidad": "Lista los trámites disponibles e inicia uno con sesión de Expediente Digital (SSO). Se elige si es a título personal o a nombre de una persona moral vinculada. Incluye «Mi expediente», «Mi panel» y la guía «¿Cómo iniciar un trámite?».",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js y https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Rutas «api/auth/ed/redirect/expediente_digital», «api/auth/ed/me», «v1/ed/tramites» y «v1/ed/tramites/iniciar» (POST). Textos «¿Cómo deseas iniciar este trámite?», «Persona física», «Sesión de ED Expirada» y «Nuevo trámite».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Por los textos se infiere que hace falta una sesión de Expediente Digital; no se inició sesión ni se creó cuenta. El catálogo de trámites no fue accesible.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Utilidades de mapa (Visor Urbano)",
+      "categoria": "Herramientas cartográficas",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "«Medir distancia (línea)», «Medir área (polígono)», obtener coordenadas, «Abrir Street View aquí» (Google Maps externo), dibujo de polígonos y líneas, marcadores, «Encuadrar Mérida» y menú contextual (vista inicial, coordenadas, Street View, limpiar).",
+      "tipo": "otro",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json y https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Textos de utilidades y de Street View en map.json; URL «https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=...»; identificadores measure-area, measure-lineal y draw_polygon.",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "Street View es un enlace a un servicio de terceros.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Cargar archivo vectorial (Visor Urbano)",
+      "categoria": "Herramientas cartográficas",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "«La función de subir permite subir archivos con datos en formato vectorial para identificar la ubicación de predios.»",
+      "tipo": "otro",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "upload.dialog.title «Subir archivo» y upload.dialog.disclaimer con los formatos permitidos.",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "No se subió ningún archivo.",
+      "requisitosPublicados": ["Formato GeoJSON, GeoPackage, KML/KMZ o Shapefile (en un solo .zip, sin carpetas)", "CRS EPSG:4326", "Geometría sólo de tipo Polígono"]
+    },
+    {
+      "servicio": "Avisos (Visor Urbano)",
+      "categoria": "Comunicación",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "Sección «Avisos» del menú lateral que carga los avisos activos.",
+      "tipo": "informativo",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Ruta «v1/announcements/active» y texto «Cargando avisos...».",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "El contenido y las fechas de los avisos no fueron accesibles.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Contacto (Visor Urbano)",
+      "categoria": "Atención ciudadana",
+      "sistemaDeOrigen": "Visor Urbano – Ayuntamiento de Mérida",
+      "funcionalidad": "Formulario de contacto desde el menú lateral.",
+      "tipo": "otro",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json y https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "aside.contact «Contacto»; texto «Cerrar formulario de contacto»; claves contact:form.success.*.",
+      "canales": ["Web: https://visorurbano.merida.gob.mx/"],
+      "notas": "No se envió el formulario. No se observó correo, teléfono ni dirección (los archivos footer.json y common.json quedaron bloqueados por el reto anti-bot).",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Pago de impuesto predial (enlace desde el Visor Urbano)",
+      "categoria": "Pagos",
+      "sistemaDeOrigen": "Sistema externo isla.merida.gob.mx (predialmid)",
+      "funcionalidad": "Acción de predial en el Visor que enlaza a la página de pago de predial del municipio.",
+      "tipo": "pago",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "URL «https://isla.merida.gob.mx/serviciosinternet/predialmid/pago.php?bt=...» y clave actions.propertyTax.",
+      "canales": ["Web: https://isla.merida.gob.mx/serviciosinternet/predialmid/pago.php"],
+      "notas": "Es un enlace a otro sistema y no implica integración técnica. No se visitó.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Visor Urbano como parte de MIDigital",
+      "categoria": "Estrategia digital municipal",
+      "sistemaDeOrigen": "MIDigital (Expediente Digital, Portal Ciudadano, Visor Urbano)",
+      "funcionalidad": "Según prensa, el Visor «permite a los usuarios acceder a información catastral y urbanística de carácter público a cualquier hora» y facilita gestiones de Catastro y Desarrollo Urbano.",
+      "tipo": "informativo",
+      "fuente": "https://www.yucatan.com.mx/merida/2026/08/11/presentan-midigital-nueva-estrategia-del-ayuntamiento-de-merida-para-realizar-mas-de-70-tramites-en-linea.html (publicada 11-ago-2026)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Nota del Diario de Yucatán: «La plataforma MIDigital se divide en tres herramientas: Expediente Digital, Portal Ciudadano y Visor Urbano.»",
+      "canales": ["Web"],
+      "notas": "Fuente secundaria (prensa). Antecedente: Por Esto (20-ene-2026) lo describe como proyecto financiado por Bloomberg, en tiempo futuro.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Servicio WMS por proxy del Visor Urbano",
+      "categoria": "Servicios geográficos",
+      "sistemaDeOrigen": "Visor Urbano – backend /api (GeoServer detrás de proxy, según el código)",
+      "funcionalidad": "GetMap (EPSG:3857), GetLegendGraphic y consulta de información (/api/v1/info) para las capas del Visor.",
+      "tipo": "otro",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "URL «https://visorurbano.merida.gob.mx/api/v1/geoproxy» con parámetros SERVICE=WMS y REQUEST=GetMap, plantilla {bbox-epsg-3857} y plantilla GetLegendGraphic en el código. No se pudo pedir GetCapabilities por el reto anti-bot.",
+      "canales": ["API interna (no documentada como pública)"],
+      "notas": "Autenticación no determinada. No hay licencia, términos ni atribución publicados. No apto para consumo del prototipo.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Visor geográfico del Geoportal",
+      "categoria": "Información territorial / catastro / estadística",
+      "sistemaDeOrigen": "Geoportal de Mérida – Ayuntamiento de Mérida (geoportal.merida.gob.mx)",
+      "funcionalidad": "Mapa (OpenLayers) con capas temáticas WMS o GeoJSON servidas por proxy con token de sesión; hasta 20 capas simultáneas; capa base de información «catastral»; simbología SLD; consulta de información; temas claro y oscuro. La descripción oficial menciona mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral, incluidas las comisarías.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://geoportal.merida.gob.mx/ (HTML) y https://geoportal.merida.gob.mx/js/app.js?gtv=20260715, 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Meta description y APP.ABOUT en el HTML; LIMITE_CARGA_CAPAS: 20; capa_base_info: «catastral»; ol.source.TileWMS e ImageWMS en app.js.",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "La interfaz no se renderizó: es una app JS y luego se activó el reto anti-bot. El catálogo de capas visible para anónimos no se pudo enumerar.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Búsqueda por dirección (Geoportal)",
+      "categoria": "Información territorial",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Búsqueda con el sistema de calles de Mérida: calle (y letra), número (y letra), cruzamiento, segundo cruzamiento, colonia y código postal.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Mensajes de validación como «Debe proporcionar al menos la calle, la colonia o el código postal», «Debe proporcionar al menos el número o un cruzamiento» y «Debe proporcionar un cruzamiento válido»; rutas de la API «direcciones» y «direcciones/2».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "No se ejecutó ninguna búsqueda.",
+      "requisitosPublicados": ["Al menos la calle, la colonia o el código postal", "Al menos el número o un cruzamiento"]
+    },
+    {
+      "servicio": "Búsqueda por folio y por tablaje (Geoportal)",
+      "categoria": "Catastro",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Localiza un predio por folio (numérico) o por tablaje.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Herramientas busfolio y bustablaje; textos «Folio:», «Tablaje:», «Debe proporcionar un folio válido» y «El folio que estás intentando consultar no existe».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "No se consultó ningún folio.",
+      "requisitosPublicados": ["Folio numérico válido"]
+    },
+    {
+      "servicio": "Información vigente del predio (Geoportal)",
+      "categoria": "Catastro",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Diálogo «INFORMACIÓN VIGENTE DEL PREDIO» con la imagen de la cédula y el enlace «Ver plano del predio».",
+      "tipo": "consulta_documental",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 y HTML de https://geoportal.merida.gob.mx/ (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Título del diálogo, campo imagen_cedula, texto «Ver plano del predio» y URL_PREDIOS_IMG «https://geoportal.merida.gob.mx/api/imagenes/planos/{iFolio}» (el plano se abre con ?token= de sesión).",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "No se publicaron condiciones de uso de la cédula ni del plano.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Compartir predio o coordenada con enlace y QR (Geoportal)",
+      "categoria": "Herramientas cartográficas",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Genera un enlace y un código QR para compartir un folio, un idpredio o una coordenada, con los botones «Copiar enlace» y «Descargar QR».",
+      "tipo": "otro",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Acciones compartir.folio, compartir.idpredio y compartir.coordenada; texto «Utiliza este código QR para compartir el siguiente folio en el Geoportal de Mérida»; mensaje «Este folio no está activo y/o vigente».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Herramientas de medición, rutas e impresión (Geoportal)",
+      "categoria": "Herramientas cartográficas",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Medir distancia y área, medir construcción del predio, coordenadas, ruta óptima (tiempo y distancia), zoom por caja, vista anterior y siguiente, limpiar mapa, agregar marcador e imprimir.",
+      "tipo": "otro",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Claves de herramienta medirdist, medirarea, measurebuild, coordenada, rutaoptima, boxzoom, beforeview/nextview, limpiarmapa, addmarker y print; rutas «ruta/optima» y «predio/medir»; textos «Distancia:» y «Tiempo aproximado:».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Street View (Geoportal)",
+      "categoria": "Herramientas cartográficas",
+      "sistemaDeOrigen": "Geoportal de Mérida + Google Street View (tercero)",
+      "funcionalidad": "Vista de calle de Google. Según el aviso de configuración, el visor incorporado está deshabilitado temporalmente y las consultas se abren en una pestaña externa.",
+      "tipo": "otro",
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (CONFIGURACION.IS_ACTIVE_GOOGLE_API), 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "«El visor incorporado de Google Street View se encuentra deshabilitado temporalmente, toda consulta se visualizará de forma externa en una pestaña nueva.»",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "El aviso no tiene fecha publicada.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Cuentas, vistas y proyectos de usuario (Geoportal)",
+      "categoria": "Gestión de información geográfica",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Inicio de sesión (cuentas institucionales y usuario/contraseña del SIIMM), registro de usuario público, recuperación de contraseña, vistas guardadas y compartidas, y proyectos/documentos/capas de usuario (carga de CSV/SHP, estilos temáticos, exportar tabla, publicar y compartir).",
+      "tipo": "otro",
+      "fuente": "https://geoportal.merida.gob.mx/ (HTML) y https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Rutas auth/token, usuarios (registro público), usuarios/mis-vistas, usuarios/vistas-compartidas, capasdocumento/csv y capasdocumento/shp; textos «Iniciar sesión», «usuario y contraseña del SIIMM» y «correo institucional».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "No se creó ninguna cuenta ni se inició sesión. robots.txt excluye /vistas y /embed/ de rastreo.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Capas de reportes ciudadanos, mantenimiento vial y baches (Geoportal)",
+      "categoria": "Reportes urbanos",
+      "sistemaDeOrigen": "Geoportal de Mérida (con catálogo de estatus SIPAC y datos de Waze, según configuración)",
+      "funcionalidad": "Capas configuradas «Reportes Ciudadanos», «Reporte Mantenimiento Vial» y «Baches(Waze)», con filtro «Incluir reportes públicos» / «Ver sólo reportes de gestores». Catálogo de estatus: Inicial, Por Asignar, Asignada, Por Atender, Atendida. Endpoints para agendar y cancelar reportes y para brigadas.",
+      "tipo": "reporte",
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (CONFIGURACION_CAPAS, WS_SIPAC_CATALOGO_ESTATUS) y app.js (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Bloques JSON de configuración con esos nombres y estatus; rutas reportes, reportes/estatus, reportes/procedencias, {proyecto}/reportes/{origen}/agendar y waze-baches/alerta/estado/actualiza.",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "No se verificó si estas capas son visibles al público; el filtro «de gestores» sugiere uso interno (inferido). La configuración de catálogo de servicios SIPAC devolvía el error «La llave de seguridad proporcionada no es valida...» al momento de la consulta.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Indicadores, tableros y tours virtuales (Geoportal)",
+      "categoria": "Información estadística y difusión",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Herramientas de indicadores (medidores), tableros por capa y tours virtuales con recorrido («Iniciar recorrido»).",
+      "tipo": "informativo",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 y HTML (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Claves de herramienta indicadores, tablero, gtVirtualTours y gtVirtualToursPlayer; capa «Tours virtuales prueba» con texto «Iniciar recorrido».",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "El contenido no fue accesible.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Monitoreo GPS de recolección de residuos (Geoportal)",
+      "categoria": "Servicios públicos",
+      "sistemaDeOrigen": "Geoportal de Mérida + proveedor GPS externo (enlaces.quro.com.mx, según configuración)",
+      "funcionalidad": "Vehículos, zonas de recolección, predios por recolectora y kilómetros recorridos.",
+      "tipo": "otro",
+      "fuente": "https://geoportal.merida.gob.mx/ (HTML) y app.js (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Herramienta gtGpsTracking; textos «Zonas de recolección obtenidas exitosamente» y «Kilómetros recorridos obtenidos exitosamente»; rutas recolectoras/{clave}/zonas.",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "Uso interno inferido; no hay evidencia de acceso público.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Capas temáticas presentes en la configuración del cliente (Geoportal)",
+      "categoria": "Capas geográficas",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Capas nombradas en CAPAS_ATRIBUCION y CONFIGURACION_CAPAS: Casos Confirmados por Colonia; COVID-19 en municipios de Yucatán; Reubicación de paraderos de transporte público; Circuito Enlace Centro Histórico v2; Paraderos Centro Histórico; Calles inundadas por DELTA; Acciones; acciones zet4; Mérida Cambiando la Diabetes; Reporte parques; Preedial 2025; Tours virtuales prueba; concentrado sin agrupar; concentrado agrupado; Baches(Waze); Yaaxtal poligono a; Reportes Ciudadanos; Reporte Mantenimiento Vial; Apoyos Otorgados; Apoyos (SUBA).",
+      "tipo": "informativo",
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Bloques de configuración en el HTML. Fechas publicadas en atribuciones: «Fecha de los datos: 07/10/2020» (Calles inundadas por DELTA); «Acciones realizadas del 7 al 20 de octubre de 2020» (Acciones); «Última actualización: 06/03/2026» (Preedial 2025).",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "Estar en la configuración no implica que la capa sea visible al público ni vigente. «Mérida Cambiando la Diabetes» aclara: «La ubicación no representa el hogar encuestado por cuestiones de privacidad.»",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Avisos modales e Informe de trabajo (Geoportal)",
+      "categoria": "Comunicación",
+      "sistemaDeOrigen": "Geoportal de Mérida",
+      "funcionalidad": "Modales de inicio programados por fecha: «INFORMACIÓN IMPORTANTE» (mantenimiento) y banner «SEGUNDO INFORME DE TRABAJO» con enlace a https://geoportal.merida.gob.mx/informe-trabajo/.",
+      "tipo": "informativo",
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (MODALES_INICIO), 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Fechas de configuración: mantenimiento del 2026-07-07 00:00 al 2026-07-09 01:00; Segundo Informe del 2026-08-27 00:00 al 2026-09-02 16:00. Ambas vencidas al 2026-10-17.",
+      "canales": ["Web: https://geoportal.merida.gob.mx/"],
+      "notas": "La página /informe-trabajo/ redirigió al reto anti-bot (no accesible). Que estén en la configuración no implica que sigan vigentes.",
+      "requisitosPublicados": []
+    },
+    {
+      "servicio": "Servicio WMS por proxy y API interna del Geoportal",
+      "categoria": "Servicios geográficos",
+      "sistemaDeOrigen": "Geoportal de Mérida – backend /api (GeoServer + PostGIS, según el código)",
+      "funcionalidad": "WMS (GetMap, simbología SLD) y GeoJSON consumidos por el visor a través de https://geoportal.merida.gob.mx/api/ con token de sesión.",
+      "tipo": "otro",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 y HTML de https://geoportal.merida.gob.mx/ (2026-10-17)",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Código: «URL_WS + \"geoproxy?token=\" + this_.App.sessionManager.getToken()»; cabecera «token» en requestManager.send; rutas geoserver/simbologia/estilo/{styleId} y geojson/{id_capa_doc}. GetCapabilities sin token, /geoserver/ows y /arcgis/rest/services?f=json redirigieron a validate.perfdrive.com.",
+      "canales": ["API interna (no documentada como pública)"],
+      "notas": "Exige token JWT de sesión (2 h) y está protegido anti-bot. No hay licencia, términos ni atribución general publicados. No apto para consumo del prototipo.",
+      "requisitosPublicados": []
+    }
+  ],
+  "uiObservations": [
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/root-D03tG9ZV.css",
+      "aspecto": "Paleta de color (Visor Urbano)",
+      "observacion": "Tokens: --color-vu-primary #002c72 (azul marino; también --color-primary), --color-vu-green #74ba47, --color-vu-blue #006aff, --color-vu-pink #f44c7f, --color-vu-light-gray #f6fafa, --color-vu-light-green #e1f2df, --color-vu-gray #7b868c, --color-vu-dark-gray #272729.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/root-D03tG9ZV.css",
+      "aspecto": "Tipografía y forma (Visor Urbano)",
+      "observacion": "Poppins autoalojada (woff2) en pesos 400, 500, 600, 700, 800 y 900, con respaldo system-ui. Radio base --radius .625rem (también 1rem y 1.5rem). Utilidades Tailwind; variantes «dark:» presentes (modo oscuro inferido).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-B9irtfCL.css",
+      "aspecto": "Codificación de color por tipo de búsqueda (Visor Urbano)",
+      "observacion": "Folio #1e5fa8 (seleccionado #154378); dirección #eb766c (#ea4335); tablaje #6c5ce7 (#5346b8); catastral #0d9488 (#0a6b62); coordenadas #d97706 (#b45309). Insignias (badge-blue/green/purple/amber/teal) con fondo al 5 % y borde al 10 % mediante color-mix.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-B9irtfCL.css",
+      "aspecto": "Marcadores y ventanas emergentes (Visor Urbano)",
+      "observacion": "Pin circular azul marino #002c72 con borde blanco y animación de caída «markerDrop»; el seleccionado se escala 1.4. Popups de 8px de radio con sombra; popup de varias coincidencias con lista desplazable; insignia de tipo, dirección y «score»; botón de galería a todo el ancho en color primario.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-B9irtfCL.css y root-D03tG9ZV.css",
+      "aspecto": "Controles de mapa (Visor Urbano)",
+      "observacion": "MapLibre: grupo de controles blanco con radio de 4px y sombra suave, botones de 30px, geolocalización, zoom, brújula, pantalla completa y escala; atribución de 10px sobre fondo blanco translúcido; controles inferiores derechos desplazados 2em. Herramientas de dibujo de mapbox-gl-draw (polígono, línea, punto, papelera) con los botones nativos ocultos (interfaz propia).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch)",
+      "aspecto": "Panel de capas y leyendas (Visor Urbano)",
+      "observacion": "Pestañas «Capas» y «Simbología»; «Buscar capa...»; «Mostrar por grupos» / «Sin Grupo»; «Arrastrar para reordenar»; «Opacidad»; «Mostrar etiquetas»; «Restablecer orden/opacidad/etiquetas»; «Ocultar / Mostrar / Remover». Las leyendas se obtienen con WMS GetLegendGraphic (según el código).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (WebFetch)",
+      "aspecto": "Navegación lateral (Visor Urbano)",
+      "observacion": "Menú lateral con «Acceder», «Salir», «Nuevo trámite», «Capas», «Diagnóstico comercial», «Utilidades», «Cargar archivo», «Contacto», «Seleccionar predio», «Mi panel» y «Avisos». Menú contextual del mapa: vista inicial, obtener coordenadas, Street View y limpiar.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js y locales/es/map.json (WebFetch)",
+      "aspecto": "Búsqueda y capa base (Visor Urbano)",
+      "observacion": "Barra multibúsqueda («Agregar búsqueda», «Limpiar todo», «Encuadrar todo», «Búsquedas recientes») con ejemplo de formato de coordenadas «ej: 20.97, -89.62». Selector «Capa Base» con íconos map/globe/camera/none y opción «Ninguna» («No cargar teselas de capa base»); proveedor por defecto «google».",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/i18n-D0d3nN_6.js (WebFetch)",
+      "aspecto": "Idiomas (Visor Urbano)",
+      "observacion": "i18next con idioma por defecto «es» y soporte para es, en, fr y pt; selector de idioma (componente LanguageSelector).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/robots.txt (página 404 SSR)",
+      "aspecto": "Páginas de error (Visor Urbano)",
+      "observacion": "La 404 tiene una cabecera con degradado de vu-primary a vu-green, una tarjeta blanca rounded-2xl con shadow-xl y botones primarios. Las claves i18n aparecen sin traducir en el SSR («boundary.pageNotFound», «boundary.goHome»).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (respuesta 403 a curl)",
+      "aspecto": "Página de error institucional",
+      "observacion": "Barra superior azul marino #0B2E6F (10px) y barra de acento verde #6CAE3E (6px), tarjeta centrada con ícono en círculo, texto «¡Ooops! Algo salió mal», botón «Intentar de nuevo» y pie «Ayuntamiento de Mérida»; fuente del sistema.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://geoportal.merida.gob.mx/css/app.css?gtv=20260715",
+      "aspecto": "Tipografía (Geoportal)",
+      "observacion": "Barlow autoalojada (TTF, pesos 100 a 900 con cursivas) y Barlow Semi Condensed. Las leyendas de GeoServer se piden con «legend_options=fontName:Barlow Regular;fontSize:16».",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://geoportal.merida.gob.mx/css/app.css?gtv=20260715 y HTML (APP.themes)",
+      "aspecto": "Paleta y temas (Geoportal)",
+      "observacion": ".azul #43b5e5 (íconos de la barra de herramientas, pestañas activas); .azul-fuerte #254088 (barra de título de diálogos, botones activos, .btn-api); amarillo #f8b249 (.btn-default-geoportal, paginación activa); #ec008c (.highlighted). Temas: light_mode (por defecto; active #488ed9, activeVivid #5bc0de, fondos #FFFFFF/#EEEEEE), dark_mode (fondos #3d4553/#1d222b) y yaaxtal_light.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ y app.css",
+      "aspecto": "Patrón de interfaz cartográfica (Geoportal)",
+      "observacion": "Mapa a pantalla completa (#map) con barra de herramientas flotante (geo-toolbar), contenedor de paneles flotantes, diálogos jQuery UI, notificaciones iziToast, modales SweetAlert2, pestañas DevExtreme y tablas DataTables/Tabulator; plantilla administrativa Nifty (aside-float, mainnav-sm); pantalla de carga con el texto «Cargando».",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (CONFIGURACION.MAPA_PARAMS)",
+      "aspecto": "Encuadre inicial del mapa (Geoportal)",
+      "observacion": "Centro en lat 20.9704, lon -89.6232; zoom inicial 12; zoom máximo 22; zoom mínimo 10; paso de zoom 0.5; sin control de zoom nativo; hasta 20 capas cargadas a la vez.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 y HTML",
+      "aspecto": "Leyendas, simbología y filtros (Geoportal)",
+      "observacion": "Simbología SLD por estilo; clasificación temática por rangos o valor único (1 a 100 clases, 20 por defecto); filtro personalizado por capa con íconos mdi-account / mdi-account-off («Incluir reportes públicos» / «Ver sólo reportes de gestores»); filtro espacial (gtSpatialFilter) y CQL_FILTER; capas en clúster con gráficos de colores #15b015, #e57878, #e7a913, #8c56b1 y #7fc1bf.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715",
+      "aspecto": "Ficha de predio y compartir (Geoportal)",
+      "observacion": "Diálogo modal de 600px como mínimo, titulado «INFORMACIÓN VIGENTE DEL PREDIO», con la imagen de la cédula y el enlace «Ver plano del predio». Modal de QR con «Copiar enlace» (botón ámbar) y «Descargar QR» (botón verde).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ y app.js",
+      "aspecto": "Comportamiento móvil (Geoportal)",
+      "observacion": "Meta viewport con user-scalable=no; detección de teléfono (mobile-detect), en la que los diálogos dejan de ser redimensionables y arrastrables; soporte táctil (jquery.ui.touch-punch, pepjs).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "HTML de https://geoportal.merida.gob.mx/ (MODALES_INICIO)",
+      "aspecto": "Avisos de inicio (Geoportal)",
+      "observacion": "Modales de bienvenida programados con fecha_inicio y fecha_fin, imagen de aviso (/recursos/avisos/modales-avisos.png) y banner del informe; patrón de aviso temporal al abrir el mapa.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Comparativa entre ambos portales",
+      "aspecto": "Coherencia de identidad",
+      "observacion": "Los dos portales no comparten tipografía (Poppins frente a Barlow) ni paleta (#002c72/#74ba47 frente a #254088/#43b5e5/#f8b249). El Visor Urbano sigue un patrón moderno de app con menú lateral e interfaz tipo shadcn/Radix; el Geoportal, un patrón SIG clásico con barra de herramientas y diálogos.",
+      "confianza": "inferido"
+    }
+  ],
+  "criticalFacts": [
+    {
+      "hecho": "Descripción oficial del Geoportal",
+      "valor": "Portal geográfico con mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral municipal",
+      "fuente": "https://geoportal.merida.gob.mx/ (meta description; consulta 2026-10-17)",
+      "citaTextual": "El GEOPORTAL DE MÉRIDA es un portal geográfico que, a través de mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral municipal, en interacción con otras funcionalidades, facilita conocer, ubicar y analizar al Municipio de Mérida para fines tanto personales como profesionales."
+    },
+    {
+      "hecho": "Texto «Acerca de» del Geoportal",
+      "valor": "Plataforma de información espacial del Ayuntamiento, incluidas las comisarías; administración 2024-2027",
+      "fuente": "https://geoportal.merida.gob.mx/ (APP.ABOUT en el HTML; 2026-10-17)",
+      "citaTextual": "Bienvenido a la plataforma de información espacial del Ayuntamiento de Mérida. A través de sus diferentes herramientas puedes consultar imágenes de satélite, información catastral y datos estadísticos del municipio de Mérida incluyendo sus comisarías."
+    },
+    {
+      "hecho": "Descripción oficial del Visor Urbano",
+      "valor": "Plataforma municipal de gestión urbana",
+      "fuente": "https://visorurbano.merida.gob.mx/robots.txt (página 404 SSR con los metadatos de la app; 2026-10-17)",
+      "citaTextual": "Plataforma municipal de gestión urbana con mapas interactivos catastrales y visualización de zonificación."
+    },
+    {
+      "hecho": "Descargo de responsabilidad del Visor (ficha del predio)",
+      "valor": "Información sin validez legal",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (property.disclaimer.text; leído vía WebFetch, 2026-10-17)",
+      "citaTextual": "La información aquí presentada es de carácter informativo y no constituye un documento oficial con validez legal."
+    },
+    {
+      "hecho": "Contacto indicado por el Visor para aclaraciones del predio",
+      "valor": "Oficinas de la Dirección de Catastro Municipal (no se publicaron dirección, teléfono ni correo en lo consultado)",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (property.disclaimer.text; WebFetch, 2026-10-17)",
+      "citaTextual": "Para cualquier aclaración, actualización de datos o trámite relacionado con su predio, le invitamos a acudir directamente a las oficinas de la Dirección de Catastro Municipal."
+    },
+    {
+      "hecho": "Descargo sobre el plano descargado",
+      "valor": "Las medidas oficiales son las del Departamento de Catastro",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (property.downloadBlueprint.disclaimer; WebFetch, 2026-10-17)",
+      "citaTextual": "Las medidas del plano descargado pueden variar de las que constan en el documento del predio."
+    },
+    {
+      "hecho": "La consulta de uso de suelo del Visor es una simulación",
+      "valor": "Simulación de giros; no otorga autorización",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "citaTextual": "La información desplegada en este sitio es una simulación de los giros posibles para un predio seleccionado."
+    },
+    {
+      "hecho": "Exclusión de autorización",
+      "valor": "Nada de lo desplegado otorga autorización",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "citaTextual": "Por ningún motivo la información desplegada en este sitio otorga autorización alguna."
+    },
+    {
+      "hecho": "Requisito normativo citado por el Visor",
+      "valor": "Licencia de Uso del Suelo",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "citaTextual": "para poder otorgar un uso o destino a un predio deberá contar con la Licencia de Uso del Suelo respectiva."
+    },
+    {
+      "hecho": "Formatos aceptados al cargar archivos en el Visor",
+      "valor": "GeoJSON, GeoPackage, KML/KMZ, Shapefile (.zip); EPSG:4326; sólo polígonos",
+      "fuente": "https://visorurbano.merida.gob.mx/locales/es/map.json (upload.dialog.disclaimer; WebFetch, 2026-10-17)",
+      "citaTextual": "El archivo de datos vectoriales debe contar con el sistema de coordenadas de referencia (CRS) EPSG:4326."
+    },
+    {
+      "hecho": "Servicio WMS del Visor por proxy",
+      "valor": "https://visorurbano.merida.gob.mx/api/v1/geoproxy",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "citaTextual": "https://visorurbano.merida.gob.mx/api/v1/geoproxy"
+    },
+    {
+      "hecho": "Servicio WMS del Geoportal por proxy con token de sesión",
+      "valor": "https://geoportal.merida.gob.mx/api/geoproxy?token=<sesión>",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "citaTextual": "return extra ? (URL_WS + \"proxydos\") : (URL_WS + \"geoproxy?token=\" + this_.App.sessionManager.getToken());"
+    },
+    {
+      "hecho": "Visor Urbano dentro de MIDigital (prensa)",
+      "valor": "Diario de Yucatán, publicada el 11-ago-2026",
+      "fuente": "https://www.yucatan.com.mx/merida/2026/08/11/presentan-midigital-nueva-estrategia-del-ayuntamiento-de-merida-para-realizar-mas-de-70-tramites-en-linea.html",
+      "citaTextual": "La plataforma MIDigital se divide en tres herramientas: Expediente Digital, Portal Ciudadano y Visor Urbano."
+    },
+    {
+      "hecho": "Contenido del Visor según prensa",
+      "valor": "Planos catastrales, usos de suelo, datos prediales y más de 50 capas",
+      "fuente": "https://www.yucatan.com.mx/merida/2026/08/11/presentan-midigital-nueva-estrategia-del-ayuntamiento-de-merida-para-realizar-mas-de-70-tramites-en-linea.html (11-ago-2026)",
+      "citaTextual": "Planos catastrales, usos de suelos, datos prediales y más de medio centenar de capas de información"
+    },
+    {
+      "hecho": "Licencias de negocio en línea (anuncio en tiempo futuro)",
+      "valor": "Por Esto, 20-ene-2026; vigencia actual no verificada",
+      "fuente": "https://www.poresto.com/yucatan/merida/2026/1/20/presenta-cecilia-patron-el-plan-merida-ordenada-para-un-crecimiento-urbano-sostenible.html",
+      "citaTextual": "Esta plataforma permitirá la emisión de licencias a negocios totalmente en línea"
+    },
+    {
+      "hecho": "Street View deshabilitado en el Geoportal",
+      "valor": "Aviso sin fecha publicada",
+      "fuente": "https://geoportal.merida.gob.mx/ (CONFIGURACION.IS_ACTIVE_GOOGLE_API; 2026-10-17)",
+      "citaTextual": "El servicio de Google Street View se encuentra deshabilitado temporalmente, no es necesario que lo reportes, disculpa los inconvenientes."
+    },
+    {
+      "hecho": "Aviso «SEGUNDO INFORME DE TRABAJO» del Geoportal",
+      "valor": "Programado del 2026-08-27 al 2026-09-02; vencido al 2026-10-17",
+      "fuente": "https://geoportal.merida.gob.mx/ (MODALES_INICIO; 2026-10-17)",
+      "citaTextual": "\"titulo\":\"SEGUNDO INFORME DE TRABAJO\" ... \"fecha_inicio\":\"2026-08-27 00:00\",\"fecha_fin\":\"2026-09-02 16:00\""
+    },
+    {
+      "hecho": "Aviso de mantenimiento del Geoportal",
+      "valor": "Programado del 2026-07-07 al 2026-07-09; vencido",
+      "fuente": "https://geoportal.merida.gob.mx/ (MODALES_INICIO; 2026-10-17)",
+      "citaTextual": "\"titulo\":\"INFORMACI\\u00d3N IMPORTANTE\" ... \"fecha_inicio\":\"2026-07-07 00:00\",\"fecha_fin\":\"2026-07-09 01:00\""
+    },
+    {
+      "hecho": "Fecha publicada en la atribución de la capa «Preedial 2025»",
+      "valor": "06/03/2026",
+      "fuente": "https://geoportal.merida.gob.mx/ (CAPAS_ATRIBUCION; 2026-10-17)",
+      "citaTextual": "Última actualización: 06/03/2026"
+    },
+    {
+      "hecho": "Catálogo de estatus de reportes (SIPAC) en la configuración del Geoportal",
+      "valor": "Inicial, Por Asignar, Asignada, Por Atender, Atendida",
+      "fuente": "https://geoportal.merida.gob.mx/ (WS_SIPAC_CATALOGO_ESTATUS; 2026-10-17)",
+      "citaTextual": "\"cancelables\": [\"Inicial\", \"Por atender\", \"Asignada\"], \"agendables\": [\"Inicial\", \"Por atender\"]"
+    },
+    {
+      "hecho": "Filtro de visibilidad en capas de reportes",
+      "valor": "Reportes públicos frente a reportes de gestores",
+      "fuente": "https://geoportal.merida.gob.mx/ (CONFIGURACION_CAPAS; 2026-10-17)",
+      "citaTextual": "\"tooltipActive\": \"Incluir reportes públicos\" ... \"tooltipInactive\": \"Ver sólo reportes de gestores\""
+    },
+    {
+      "hecho": "Exclusiones de rastreo del Geoportal",
+      "valor": "/geoapijs, /vistas, /embed/",
+      "fuente": "https://geoportal.merida.gob.mx/robots.txt (2026-10-17)",
+      "citaTextual": "User-agent: * Disallow: /geoapijs Disallow: /vistas Disallow: /embed/"
+    },
+    {
+      "hecho": "Contacto del Geoportal",
+      "valor": "Hay formulario de contacto (endpoint interno utils/contacto); no se observó correo ni teléfono",
+      "fuente": "https://geoportal.merida.gob.mx/ (HTML; 2026-10-17)",
+      "citaTextual": "URL_CONTACT = 'utils/contacto';"
+    },
+    {
+      "hecho": "Mensaje de error del Visor (contacto genérico)",
+      "valor": "Remite al administrador del sitio sin dar datos de contacto",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (respuesta 403 a curl; 2026-10-17)",
+      "citaTextual": "Si el problema persiste, contacta al administrador del sitio."
+    },
+    {
+      "hecho": "Acceso institucional al Geoportal",
+      "valor": "Cuentas de correo institucional / SIIMM",
+      "fuente": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715 (2026-10-17)",
+      "citaTextual": "usuario y contraseña del SIIMM"
+    },
+    {
+      "hecho": "Normativa citada por el Visor en la consulta de uso de suelo",
+      "valor": "Reglamento de Construcciones del Municipio de Mérida, Ley de Asentamientos Humanos del Estado de Yucatán y PMDU",
+      "fuente": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js (WebFetch, 2026-10-17)",
+      "citaTextual": "De acuerdo a los Artículos 20, 23 y 24 del Reglamento de Construcciones del Municipio de Mérida"
+    }
+  ],
+  "limitations": [
+    "Protección anti-bot: ambos dominios están detrás de Radware Bot Manager (CNAME *.radwarecloud.net). La portada del Visor Urbano devolvió «Radware Page – Verifying your browser before proceeding...» por curl y por WebFetch; http:// redirigió a validate.perfdrive.com; www.visorurbano.merida.gob.mx no resuelve en DNS; site.webmanifest devolvió una página de CAPTCHA; footer.json y common.json fueron redirigidos al reto. No se intentó superar ningún reto ni CAPTCHA.",
+    "Geoportal: el HTML, app.js y app.css se obtuvieron en las primeras solicitudes. Después, /api/geoproxy (GetCapabilities), /geoserver/ows, /geoserver/web/, /arcgis/rest/services?f=json e /informe-trabajo/ redirigieron (302) a validate.perfdrive.com, también vía WebFetch. Por eso no se pudo verificar si el WMS exige autenticación desde el servidor; la conclusión de que requiere token se basa en el código cliente.",
+    "merida.gob.mx/geoportal (enlazado desde el «Acerca de») también redirigió al reto anti-bot.",
+    "Ninguna interfaz se renderizó (son apps JavaScript y no se usó navegador). No hay capturas. Las observaciones de UI se derivan de HTML, CSS, JS y archivos de traducción, no de la vista final.",
+    "No se pudo enumerar el catálogo de capas visible al público en ninguno de los portales: se carga dinámicamente desde APIs internas con token. Los nombres de capas reportados del Geoportal provienen de bloques de configuración del cliente y pueden no ser públicos ni vigentes.",
+    "Varios textos del Visor (map-CQ7S38Mg.js, i18n y locales/es/map.json) se leyeron con WebFetch, cuyo modelo resumidor devuelve citas en fragmentos (≤125 caracteres). Pueden existir diferencias menores de transcripción; las citas textuales se reprodujeron tal como las devolvió la herramienta. No se obtuvo el texto completo de las «Condiciones de Uso» (se corta en «Apartado 5.4 del Nivel Normativo del Programa Municipal de Desarrollo Urbano de Mérida»).",
+    "No se encontraron páginas de ayuda, términos de uso, aviso de privacidad, licencia de datos ni metadatos de capas en ninguno de los portales, o no fueron accesibles. No hay teléfonos ni correos de contacto publicados en lo consultado.",
+    "Internet Archive: no hay capturas de visorurbano.merida.gob.mx y todas las capturas de geoportal.merida.gob.mx (2024-09 a 2026-07) son respuestas 403.",
+    "Fuentes de terceros: la ficha de TUMI Data Hub («Cadastral Layer In Geoportal») rechazó la conexión (sólo hay fragmento del buscador). La pieza de Harvard City Leadership (https://cityleadership.harvard.edu/?p=7890) devolvió 404; el fragmento del buscador afirma que el Geoportal es «too technical for most residents» y que seguirá como plataforma complementaria de capas para el Visor Urbano, pero NO se verificó.",
+    "Los manuales y documentos de Visor Urbano de Guadalajara/Jalisco y de Bloomberg aparecen en las búsquedas, pero describen otro sistema; no se usaron para describir el de Mérida.",
+    "Seguridad: el HTML/JS público del Geoportal incrusta claves de terceros (nombres de variable: GOOGLE_API_KEY, BING_KEY, CAPTCHA_WEB_KEY, X-RapidAPI-Key) y un token de sesión (_TOKEN, cookie «token»). No se reproducen sus valores y se censuraron en las copias guardadas. El prototipo no debe reutilizarlos.",
+    "El estado operativo real de trámites, licencias, uso de suelo y avisos no se verificó: no se inició sesión, no se enviaron formularios y no se consultaron predios. Lo marcado como «parcial» existe en código o traducciones, pero no se probó.",
+    "Recuento aproximado de solicitudes: unas 12 al Geoportal (10 por curl y 2 por WebFetch) y unas 16 al Visor Urbano (8 por curl y el resto por WebFetch, varias servidas desde caché), dentro del límite de unas 60 por sitio."
+  ],
+  "assetsSaved": [
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_home.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_home.headers.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_app.js",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_app.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal.merida.gob.mx_robots.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_sitemap_xml_respuesta_spa.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t1.headers",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t1.body",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t2.headers",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t2.body",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t3.headers",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t3.body",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t4.headers",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/t4.body",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/geoportal_meta/informe_trabajo.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_home.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_home.headers.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_404_robots.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_assets/root-D03tG9ZV.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_assets/map-B9irtfCL.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_assets/map-CQ7S38Mg_respuesta403.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/visor_assets/site_webmanifest_respuesta_captcha.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/wayback/cdx_visor.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/wayback/cdx_geoportal_root.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-visor-geoportal/harvard_cityleadership_p7890.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/out/web-visor-geoportal.json"
+  ]
+}

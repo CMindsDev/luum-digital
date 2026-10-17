@@ -66,6 +66,8 @@ export interface ControladorAsistente {
   observarPantalla(debounceMs?: number): () => void;
   /** Cambia de proveedor conservando los mensajes visibles (cierra la sesión anterior). */
   cambiarProveedor(proveedor: AssistantProvider): void;
+  /** Cuelga y descarta la sesión conservando los mensajes (el siguiente mensaje abre otra). */
+  pausar(): void;
   /** Cuelga y borra la conversación (store sin persistencia). */
   cerrar(): void;
 }
@@ -224,6 +226,12 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
       store.getState().establecerVoz(false);
       proveedor = nuevo;
       store.getState().establecerModo(nuevo.modo, nuevo.etiqueta);
+      store.getState().aplicarEvento({ tipo: "estado", estado: "inactivo" });
+    },
+
+    pausar() {
+      desconectar();
+      store.getState().establecerVoz(false);
       store.getState().aplicarEvento({ tipo: "estado", estado: "inactivo" });
     },
 

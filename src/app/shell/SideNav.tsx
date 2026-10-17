@@ -30,7 +30,7 @@ export function SideNav() {
           if (secciones.length === 0) return null;
           return (
             <div key={grupo.titulo}>
-              <p className="mb-1.5 hidden px-3 text-xs font-semibold tracking-[0.12em] text-tinta-suave uppercase lg:block">{grupo.titulo}</p>
+              <p className="mb-1.5 hidden px-3 font-mono-rotulo text-xs font-medium tracking-[0.08em] text-tinta-suave uppercase lg:block">{grupo.titulo}</p>
               <ul className="flex flex-col gap-1">
                 {secciones.map((seccion) => {
                   const actual = activa?.id === seccion.id;
@@ -42,7 +42,7 @@ export function SideNav() {
                         aria-current={actual ? "page" : undefined}
                         data-guia={seccion.guia}
                         className={cx(
-                          "group flex min-h-12 flex-col items-center justify-center gap-1 rounded-boton px-1 py-2 text-center transition-colors lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-left",
+                          "group flex min-h-12 flex-col items-center justify-center gap-1 rounded-[1.25rem] px-1 py-2 text-center transition-colors lg:flex-row lg:justify-start lg:gap-3 lg:px-3 lg:text-left",
                           actual ? "bg-marino text-white" : "text-tinta hover:bg-marino-suave hover:text-marino",
                         )}
                       >

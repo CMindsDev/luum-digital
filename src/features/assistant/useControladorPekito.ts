@@ -6,37 +6,31 @@
  * Nota de arquitectura: el ejecutor necesita los repositorios de forma imperativa (sólo lectura),
  * por eso este hook usa useRepositories() igual que los hooks de src/services/hooks.
  */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { buscarIdentidad, useDemoSession } from "@/app/session/store";
 import { useRepositories } from "@/services/repositories-context";
-import type { EstadoNavegacionAsistente } from "@/types";
-import type { RespuestaGuardaAccion } from "@shared/asistente/servidor";
 import { DemoAssistantProvider } from "./providers/demo/DemoAssistantProvider";
 import { elegirProveedores } from "./providers/elegirProveedor";
 import type { RealtimeAssistantProvider } from "./providers/realtime/RealtimeAssistantProvider";
+import { PuenteNavegacion } from "./puente-navegacion";
 import { suscribirActuacion } from "./runtime/acting-bus";
 import { crearControladorAsistente, type ControladorAsistente } from "./runtime/controlador";
-import { crearClienteGuardas, type ClienteGuardas } from "./runtime/guardas";
+import { crearClienteGuardas } from "./runtime/guardas";
 import { usePekitoUI } from "./ui/estado-pekito";
 
 export type ProveedorElegido = "demo" | "realtime";
 
 export const MOTIVO_SIN_VOZ_PREDETERMINADO =
-  "La voz necesita IA real: configura OPENAI_API_KEY en el servidor del prototipo. Mientras, puedes escribir.";
+  "La voz requiere IA real: configura OPENAI_API_KEY en el servidor del prototipo. Mientras, puedes escribir con las respuestas programadas.";
 
 export interface ServidorPekito {
   /** Ya respondió (o falló) GET /api/asistente/estado. */
   consultado: boolean;
   /** Proveedor real, sólo si el servidor lo ofrece. La persona debe elegirlo. */
   realtime: RealtimeAssistantProvider | null;
-  /** Por qué no hay voz ni IA real (texto legible del servidor o el predeterminado). */
+  /** Por qué no hay voz ni IA real (siempre explica que requiere OPENAI_API_KEY en el servidor). */
   motivoSinVoz: string;
-}
-
-export interface NavegacionPreparada {
-  ruta: string;
-  estado?: EstadoNavegacionAsistente;
 }
 
 export interface Pekito {
@@ -48,23 +42,13 @@ export interface Pekito {
   repetirNavegacion(llamadaId: string): boolean;
 }
 
-const SIN_SENAL: RespuestaGuardaAccion = { probabilidad: null, decision: "sin_senal", modo: "off", aplica: true };
-const MAX_NAVEGACIONES = 30;
-
 export function useControladorPekito(): Pekito {
   const repositorios = useRepositories();
   const navigate = useNavigate();
-  const navegarRef = useRef(navigate);
-  const navegaciones = useRef(new Map<string, NavegacionPreparada>());
-  const enCurso = useRef<string | null>(null);
-  const guardasRef = useRef<ClienteGuardas | null>(null);
+  const [puente] = useState(() => new PuenteNavegacion());
+  const [demo] = useState(() => new DemoAssistantProvider());
   const [servidor, setServidor] = useState<ServidorPekito>({ consultado: false, realtime: null, motivoSinVoz: MOTIVO_SIN_VOZ_PREDETERMINADO });
   const [proveedor, setProveedor] = useState<ProveedorElegido>("demo");
-  const [demo] = useState(() => new DemoAssistantProvider());
-
-  useEffect(() => {
-    navegarRef.current = navigate;
-  }, [navigate]);
 
   const [controlador] = useState(() =>
     crearControladorAsistente({
@@ -72,55 +56,54 @@ export function useControladorPekito(): Pekito {
       proveedor: demo,
       repositorios,
       obtenerActor: () => buscarIdentidad(useDemoSession.getState().identidadId),
-      navegar: (ruta, estado) => {
-        const id = enCurso.current;
-        if (id) {
-          navegaciones.current.set(id, estado ? { ruta, estado } : { ruta });
-          if (navegaciones.current.size > MAX_NAVEGACIONES) {
-            const primera = navegaciones.current.keys().next().value;
-            if (primera !== undefined) navegaciones.current.delete(primera);
-          }
-        }
-        void navegarRef.current(ruta, estado ? { state: estado } : undefined);
-      },
+      navegar: puente.navegar,
       // La ayuda humana se muestra dentro de la conversación, sin sacar a la persona de donde está.
-      abrirApoyoHumano: (motivo) => usePekitoUI.getState().mostrarApoyo(motivo),
-      // Clef sólo si el servidor lo ofrece; si no, "sin señal" sin hacer peticiones.
-      guardas: {
-        evaluarAccion: (entrada) => guardasRef.current?.evaluarAccion(entrada) ?? Promise.resolve(SIN_SENAL),
-        clasificarIntencion: (texto) => guardasRef.current?.clasificarIntencion(texto) ?? Promise.resolve(null),
-      },
+      abrirApoyoHumano: () => usePekitoUI.getState().mostrarApoyo(),
+      guardas: puente.guardas,
     }),
   );
+
+  // El navigate de React Router cambia entre renders; el puente siempre usa el vigente.
+  useEffect(() => {
+    puente.fijarNavegar(navigate);
+    return () => puente.fijarNavegar(null);
+  }, [navigate, puente]);
 
   // Qué acción está corriendo, para asociarle la navegación que haga.
   useEffect(
     () =>
       suscribirActuacion((evento) => {
-        if (evento.tipo === "run") enCurso.current = evento.id;
-        else if (evento.tipo === "done" && enCurso.current === evento.id) enCurso.current = null;
+        if (evento.tipo === "run") puente.fijarAccion(evento.id);
+        else if (evento.tipo === "done") puente.terminarAccion(evento.id);
       }),
-    [],
+    [puente],
   );
 
   useEffect(() => {
     let vigente = true;
     void elegirProveedores({ ambito: "general" }).then((resultado) => {
       if (!vigente) return;
-      guardasRef.current = resultado.estado?.clef.disponible ? crearClienteGuardas() : null;
+      // Clef sólo si el servidor lo ofrece; si no, «sin señal» sin hacer peticiones.
+      puente.fijarGuardas(resultado.estado?.clef.disponible ? crearClienteGuardas() : null);
       setServidor({
         consultado: true,
         realtime: resultado.realtime,
-        motivoSinVoz: resultado.motivoSinRealtime ?? MOTIVO_SIN_VOZ_PREDETERMINADO,
+        motivoSinVoz: MOTIVO_SIN_VOZ_PREDETERMINADO,
       });
     });
     return () => {
       vigente = false;
     };
-  }, []);
+  }, [puente]);
 
   // Al desmontar el AppShell se cuelga y se borra la conversación (sólo vive en memoria).
-  useEffect(() => () => controlador.cerrar(), [controlador]);
+  useEffect(
+    () => () => {
+      controlador.cerrar();
+      puente.olvidar();
+    },
+    [controlador, puente],
+  );
 
   const elegirProveedor = useCallback(
     (elegido: ProveedorElegido) => {
@@ -135,13 +118,10 @@ export function useControladorPekito(): Pekito {
     [controlador, demo, servidor.realtime],
   );
 
-  const repetirNavegacion = useCallback((llamadaId: string) => {
-    const navegacion = navegaciones.current.get(llamadaId);
-    if (!navegacion) return false;
-    const actual = `${window.location.pathname}${window.location.search}`;
-    if (actual !== navegacion.ruta) void navegarRef.current(navegacion.ruta, navegacion.estado ? { state: navegacion.estado } : undefined);
-    return true;
-  }, []);
+  const repetirNavegacion = useCallback(
+    (llamadaId: string) => puente.repetir(llamadaId, `${window.location.pathname}${window.location.search}`),
+    [puente],
+  );
 
   return { controlador, servidor, proveedor, elegirProveedor, repetirNavegacion };
 }
