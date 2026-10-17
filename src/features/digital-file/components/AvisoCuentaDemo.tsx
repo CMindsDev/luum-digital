@@ -34,10 +34,10 @@ export function AvisoCuentaDemo() {
             fuente={EXPEDIENTE_OFICIAL}
             nota="Es otro sistema. Este prototipo no se conecta con él: no lee ni guarda nada ahí."
           />
+          <ButtonLink to="/cuenta" variante="secundario" tamano="sm" iconoInicio={UserCog} className="mt-4" data-guia="expediente.cambiar_identidad">
+            Cambiar identidad ficticia
+          </ButtonLink>
         </div>
-        <ButtonLink to="/cuenta" variante="secundario" tamano="sm" iconoInicio={UserCog} className="shrink-0" data-guia="expediente.cambiar_identidad">
-          Cambiar identidad ficticia
-        </ButtonLink>
       </div>
     </Card>
   );

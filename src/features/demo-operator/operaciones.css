@@ -34,3 +34,6 @@
 @media(max-height:600px){.op-draw-guide{top:100px;padding:6px 12px}.op-draw-guide p:not(.op-eyebrow){display:none}.op-draw-tools{bottom:18px}.op-draw-tally{padding-top:0}}
 .op-area-selection{right:84px}
 @media(max-width:680px){.op-area-selection{right:64px}}
+
+.op-review-link{display:flex;gap:8px;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:0 12px;font-size:11px;font-weight:600;border-radius:100px;color:var(--color-azul)}.op-review-link:hover{background:var(--color-azul-suave)}
+@media(max-width:680px){.op-review-link{padding:0 10px}.op-review-link span{display:none}}

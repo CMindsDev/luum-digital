@@ -1,7 +1,8 @@
 import { lazy } from "react";
 import type { RouteObject } from "react-router";
 
-/** Centro de operaciones con mapa, atención de casos y análisis por área. */
+/** Mapa de operaciones y revisión de reportes/verificaciones ciudadanas. */
 export const routes: RouteObject[] = [
-  { path: "operador", Component: lazy(() => import("./pages/OperatorPage")), handle: { titulo: "Centro de operaciones" } },
+  { path: "operador", Component: lazy(() => import("./pages/OperationsMapPage")), handle: { titulo: "Centro de operaciones" } },
+  { path: "operador/revision", Component: lazy(() => import("./pages/OperatorPage")), handle: { titulo: "Operador de demostración" } },
 ];

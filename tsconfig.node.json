@@ -12,6 +12,8 @@
     "moduleDetection": "force",
     "resolveJsonModule": true,
     "noEmit": true,
+    // Los scripts (p. ej. docs:inventario) importan datos del catálogo, que usan el alias @/.
+    "paths": { "@/*": ["./src/*"] },
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

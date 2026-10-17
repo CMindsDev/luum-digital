@@ -95,9 +95,9 @@ export function FormularioVerificacion({ reporte, onEnviada }: FormularioVerific
           name="resultado"
           render={({ field }) => (
             <RadioCardGroup
-              leyenda="¿Qué observaste en el lugar?"
+              // Sin `requerido`: RadioCardGroup pondría aria-required en un <fieldset> (axe: aria-allowed-attr).
+              leyenda="¿Qué observaste en el lugar? (obligatorio)"
               name="resultado-verificacion"
-              requerido
               opciones={OPCIONES_RESULTADO.map((opcion) => ({
                 valor: opcion.valor,
                 etiqueta: opcion.etiqueta,

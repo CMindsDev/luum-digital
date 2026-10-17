@@ -1,0 +1,1192 @@
+{
+ "summary": "ALCANCE: inventario de sólo lectura (2026-10-17) del Portal Ciudadano (https://portalciudadano.merida.gob.mx/) y del Expediente Digital (https://expedientedigital.merida.gob.mx/), con fichas públicas, ayuda y aviso de privacidad. Son dos aplicaciones Laravel. El Portal abre el Expediente mediante SSO, según su JS público. Una nota de Diario de Yucatán del 11-ago-2026 (fuente secundaria) agrupa ambos sitios y Visor Urbano bajo el nombre \"MIDigital\" y habla de \"78 trámites en línea\".\n\n1) PORTAL CIUDADANO (EXISTENTE).\n- Secciones: Trámites y Servicios (\"Total de registros: 387\"), Registro de Visitas Domiciliarias (119), Padrón de Visitadores (455), Registro de Regulaciones (281), Medios de impugnación, Demanda Ciudadana (con sesión o anónima), buscador global y accesos a Expediente Digital, Visor Urbano y SARE. https://www.merida.gob.mx/catalogomunicipal/ (\"Portal Único de Trámites y Servicios del Municipio de Mérida\") redirige a esta portada.\n- Claves y unidades: claves MID-<PREFIJO>-<n> de 26 unidades: CAT 71, DEU 57, GOB 37, BIH 36, SEP 25, FTM 24, DIF 20, PBE 19, OBP 16, IDC 15, MAB 13, DSC 12, INMU 7, SEC 7, otras ≤4. El filtro ofrece 27 unidades; \"Coordinación General de Buen Gobierno\" no tiene fichas.\n- Categorías: 21, a veces varias por ficha: territorio y vivienda 126, construcción 74, atención ciudadana 68, seguridad/legalidad/justicia 51, servicios públicos 46, salud 43, asistencia social 38, educación 37, economía 34, impuestos 29, apertura de negocios 27, eventos culturales 26, medio ambiente 25, asistencia jurídica 19, laboral 19, turismo 17, identidad 14, protección sanitaria 12, deporte 12, sanidad animal 9, transparencia 4. También hay 9 grupos de población.\n- Modalidades: 100% Presencial 231, 100% en línea 113, Gestión en línea 28, Presolicitud en línea 13, Telefónica 2.\n- Botón \"Iniciar\": aparece en 141 fichas. En 69 usa SSO de Expediente Digital hacia *.gestiondetramites.merida.gob.mx (catmerida 44, gobmerida 6, deumerida 5, ftmmerida 5, difmerida 4, pommerida 2, sadmmerida 1, obpmerida 1, 1 sin dominio). En 72 es un enlace externo: merida.gob.mx/reporta (20), /carrito, /funcionamiento, /predial, isla.merida.gob.mx (12), PNT (3) y otros; un enlace no implica integración. Las 246 restantes no tienen botón.\n- Muestra en inventory: 44 fichas, todas las unidades y categorías. 27 se abrieron (verificada) y 17 vienen sólo del listado (parcial). Se añaden 10 filas de funciones de plataforma.\n\n2) ESTRUCTURA DE FICHA (EXISTENTE; base del modelo de datos).\n- Tarjeta del listado: clave, nombre, unidad, Descripción, Modalidad, botón \"Iniciar\" y \"+\" hacia /TramitesEnLinea/detalle-tramite/{id}. El botón trae data-clave-tramite, data-id-tramite, data-unidad-administrativa, data-id-unidad-administrativa, data-prefijo y data-dominio; la tarjeta trae data-nombre, data-unidad, data-categoria y data-grupo (listas separadas por \"|\").\n- Cabecera y datos generales: Tipo (Trámite/Servicio) | clave | unidad; Modalidad; nombre ciudadano y nombre legal; Descripción; Resolutivo; Vigencia del resolutivo; ¿Quién debe realizarlo?; Última actualización.\n- \"¿De qué trata?\": por qué realizarlo, criterios, tiempo máximo de respuesta, afirmativa/negativa ficta, días del área para observar y del ciudadano para atender observaciones, regulación aplicable con artículos, observaciones, dónde presentar demanda ciudadana o denuncia ante Contraloría, y responsable del trámite (datos personales no copiados).\n- \"¿Cuáles son los requisitos?\": nombre, Obligatorio/Opcional, descripción, documentos aceptados alternativos, quién lo presenta y forma de presentación (Original, Copia simple o Copia certificada, con cantidad).\n- Formatos y visitas: \"¿Debo presentar formatos?\" (visor /TramitesEnLinea/formato/{id}/ver) y \"¿Tiene visitas domiciliarias?\".\n- \"¿Cuál es el costo?\": Gratuito, Fijo o Variable, en UMA y pesos; momento del pago, formas de pago, dónde pagar, facilidades y vigencia de la línea de referencia.\n- \"¿Cómo y dónde realizarlo?\": procedimiento en línea (enlace y pasos), presencial (pasos y módulos con horario, dirección, teléfono y extensión) y telefónico.\n- JSON embebido window.tramiteData con estos campos clave: cHomoclave, cNombreLegal, cNombreCiudadano, estado_tramite, tipo_tramite, unidadAdministrativa{cPrefijo,cDominio,cDominioPublico}, modalidad_tramite{cClave}, textos Quill Delta (jsonDescripcion, jsonCosto…), enumTipoCosto, tiempos (iCantidadDiasRespuestaEstimado + habiles/naturales), enumAplicacionFicta, plazos de prevención, cuando_pagar, donde_pagar[], formas_pago[], categorias[], personas_objetivo[], poblacion_objetivo[], horarios_atencion[], modulos[] (con lat/long), tipos_procedimiento[] (EN_LINEA/MODULOS/TELEFONICO con pasos ordenados), requisitos[] (R-###, documentos_aceptados D-###, formatos_presentacion), formatos[], inspecciones_aprobadas[] y regulaciones_aprobadas[] (artículo, fracción, inciso).\n\n3) EXPEDIENTE DIGITAL (EXISTENTE según páginas públicas; sin iniciar sesión).\n- Qué promete: \"La información y documentos de tu Expediente Digital tienen la misma validez jurídica que la versión física…\". Beneficios declarados: acreditar identidad digital, iniciar trámites 24/7, \"Da seguimiento a tus trámites y recibe notificaciones\" y \"Consulta y descarga tus documentos oficiales\".\n- Acceso: usuario (CURP, celular o correo) y contraseña, con reCAPTCHA.\n- Crear cuenta: 3 pasos (Datos; Dirección con predios catastrales o mapa; Documentos ≤10 MB). Luego aceptar protesta declarativa, aviso de privacidad y notificaciones electrónicas por correo, y verificar la cuenta por correo.\n- Soporte: recuperación de contraseña con CURP o celular más correo; correo expedientedigital@merida.gob.mx; guía en video; remisión a Ventanilla Única Municipal.\n- Funciones internas, descritas sólo en las fichas: crear o ingresar al Expediente, adjuntar documentos, \"Dar seguimiento en tu Expediente Digital\", \"Firmar la solicitud con la e.firma\" (o autógrafamente), pago por liga enviada por correo y \"Descargar el resolutivo\".\n- Flujo técnico observado en JS: /api/auth/ed/check, /initiate (ventana emergente que devuelve jwt_token, refresh_token, ciudadano, expires_in y sesion_id), /callback, /another/auth/ed/sso-session y un POST a expedientedigital…/auth/ed/redirect/formulario con claveTramite, idTramite, cURLRedireccion, unidad y prefijo.\n- Aviso de privacidad integral (16-jul-2026): lo emite la Subdirección de Mejora Regulatoria; trata nombre, CURP, nacionalidad, nacimiento, dirección, estado civil, sexo, RFC, teléfonos y correos para registro, gestión de solicitudes, evaluaciones y estadísticas.\n- No observado (requiere sesión): perfil, bandeja de documentos, notificaciones y firma.\n\n4) POSIBLE FUENTE DE IMPORTACIÓN (no implica autorización; no se descargó masivamente; no hay términos de reutilización publicados).\n- HTML del listado /TramitesEnLinea/tramites: unos 2.1 MB con 387 tarjetas y sus data-*.\n- window.tramiteData en cada ficha.\n- Endpoints JSON declarados en el JS: GET /TramitesEnLinea/resumeninicio (probado una vez: {tramites|inspecciones|inspectores|regulaciones:{total,items[{id,cNombreLegal|cNombreInspeccion|cNombre,tipo_tramite{cNombre}}]}}); /TramitesEnLinea/tramites/:id (por unidad: [{id,cNombreLegal,jsonDescripcion}]); /TramitesEnLinea/tramitesrecientes (lista completa; el JS cita listas de ~8 MB); /TramitesEnLinea/unidades (GET da 405, sólo POST); /buscarTramites; /total{inspecciones,inspectores,regulaciones}; /Busqueda/busqueda/{tipo}. Salvo resumeninicio, ninguno se probó.\n\n5) PROPUESTO (no existe): modelo Tramite con estos grupos de campos; clave MID-* como id estable; nombre ciudadano y nombre legal por separado; requisitos normalizados y reutilizables desde un Expediente Digital ficticio; SSO simulado sin credenciales reales; costos mostrados siempre con la URL de su ficha y su \"Última actualización\".",
+ "inventory": [
+  {
+   "servicio": "Portal Ciudadano Único de Trámites y Servicios (catálogo)",
+   "categoria": "Plataforma | catálogo municipal integrado",
+   "sistemaDeOrigen": "Portal Ciudadano (Laravel). www.merida.gob.mx/catalogomunicipal/ redirige aquí",
+   "funcionalidad": "Listado de 387 fichas con buscador, filtros por Unidad (27), Categoría (21) y Grupo (9), paginación de 10 a 500 resultados y tarjetas con botón \"Iniciar\" (si aplica) y \"+\" hacia la ficha.",
+   "tipo": "informativo",
+   "canales": [
+    "web responsiva"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Texto \"Total de registros: 387\"; selects #filtroUnidad, #filtroCategoria, #filtroGrupo; la redirección de /catalogomunicipal/ se observó con curl.",
+   "notas": "\"Coordinación General de Buen Gobierno\" está en el filtro sin fichas."
+  },
+  {
+   "servicio": "MID-ABM-001 | Sacrificio y faenado de Ganado",
+   "categoria": "Abastos de Mérida | protección sanitaria, salud, servicio de sanidad animal",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Servicio presencial en el Rastro Municipal: llevar el ganado, presentar guía sanitaria, pagar derechos y recoger el producto.",
+   "tipo": "informativo",
+   "canales": [
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Guía sanitaria de movilización animal (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/1",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-10-01.",
+   "notas": "Nombre ciudadano: \"Matanza\". Costo: fijo: Por cabeza de ganado: · VACUNO $469.24 (4 UMA). · OVINO $ 117.31 (1 UMA). · CAPRINO $ 117.31 (1 UMA). ·…. Respuesta: inmediato. Ficta: negativa. Resolutivo: \"Factura del pago al derecho de sacrifio y faenado de ganado\". Vigencia: \"24 horas\"."
+  },
+  {
+   "servicio": "MID-ADM-002 | Registro al Padrón de Proveedores",
+   "categoria": "Administración | economía",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → sadmmerida.gestiondetramites",
+   "funcionalidad": "100% en línea vía Expediente Digital: Iniciar → ingresar/crear Expediente → adjuntar requisitos → solicitar → seguimiento en ED → \"Firmar la solicitud con la e.firma\" → \"Descargar el resolutivo\".",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (Expediente Digital)"
+   ],
+   "requisitosPublicados": [
+    "Constancia de Situación Fiscal SAT (obligatorio)",
+    "Acta de Nacimiento (obligatorio)",
+    "Clave Única de Registro de Población (CURP) (obligatorio)",
+    "Certificado de Antecedentes no Penales (obligatorio)",
+    "Identificación Oficial con fotografía de la Persona Física vigente (obligatorio)",
+    "Licencia de Funcionamiento (opcional)",
+    "+10 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-28.",
+   "notas": "Nombre ciudadano: \"Registro de Proveedor\". Costo: gratuito. Respuesta: 15 días hábiles. Ficta: negativa. Resolutivo: \"Constancia de Registro al Padrón de Proveedores\". Vigencia: \"31 de agosto del año 2027\"."
+  },
+  {
+   "servicio": "MID-BIH-007 | Apoyo Psicológico",
+   "categoria": "Bienestar Humano | salud",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Presolicitud por correo (\"Enviar correo a psicología@merida.gob.mx\") y cita; atención en sedes Alma Nova (Norte, Oriente, Poniente, Sur) y U. D. Caucel, L-V 1:00–7:00 pm; también por teléfono.",
+   "tipo": "cita",
+   "canales": [
+    "presolicitud por correo",
+    "presencial (5 módulos)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Firma de consentimiento (obligatorio)",
+    "Identificación Oficial con fotografía de la Persona Física vigente (opcional)",
+    "Clave Única de Registro de Población (CURP) (opcional)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Presolicitud en línea\"; Última actualización 2026-09-25.",
+   "notas": "Nombre ciudadano: \"Psicología\". Costo: gratuito. Respuesta: 1 día hábil. Ficta: negativa. Resolutivo: \"Respuesta a su solicitud.\". Vigencia: \"En tanto se inicia la prestación del servicio.\"."
+  },
+  {
+   "servicio": "MID-BIH-016 | Atención Psicológica",
+   "categoria": "Bienestar Humano | salud",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Psicología presencial (depto. Salud Mental) en módulos médicos municipales (Centro de Atención Médica a la Mujer, Azcorra, Caucel, Cholul, Sitpach, Mulsay, etc.).",
+   "tipo": "informativo",
+   "canales": [
+    "presencial (14 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Firma de consentimiento (obligatorio)",
+    "Identificación Oficial con fotografía de la Persona Física vigente (obligatorio)",
+    "Clave Única de Registro de Población (CURP) (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Psicología\". Costo: gratuito. Respuesta: inmediato. Ficta: negativa. Resolutivo: \"Respuesta a su solicitud.\". Vigencia: \"Permanente.\"."
+  },
+  {
+   "servicio": "MID-CAT-039 | Copia Simple de Cédula Catastral Vigente",
+   "categoria": "Catastro | territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → catmerida.gestiondetramites",
+   "funcionalidad": "Solicitud en línea vía Expediente Digital (catmerida) o en Ventanilla Única; pago cuando el asesor lo indique; formato \"Solicitud de Tramites Generales\".",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (Expediente Digital)",
+    "presencial (12 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Identificación Oficial con fotografía de la Persona Física vigente (obligatorio)",
+    "Acreditación del representante legal para persona moral (opcional)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/39",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-12.",
+   "notas": "Nombre ciudadano: \"copia de cédula\". Costo: fijo: Copia simple de cédula catastral vigente Veces UMA 0.3 importe $35.19 Nota: Valor actual de la Unidad de…. Respuesta: inmediato. Ficta: no aplica. Resolutivo: \"Copia simple de cédula catastral vigente\". Vigencia: \"Se considera vigente la última Cédula expedida por el Catastro Municipal\"."
+  },
+  {
+   "servicio": "MID-CAT-093 | Información Catastral (Cédula Pública)",
+   "categoria": "Catastro | territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → catmerida.gestiondetramites",
+   "funcionalidad": "Cédula pública con información catastral, en línea vía Expediente Digital (catmerida) o en ventanilla.",
+   "tipo": "consulta_territorial",
+   "canales": [
+    "en línea (Expediente Digital)",
+    "presencial (13 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/93",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-12.",
+   "notas": "Nombre ciudadano: \"Cédula, copia, simple, cédula pública\". Costo: fijo: Copia simple de cédula catastral vigente veces UMA 0.3 importe $35.19 Nota: Valor actual de la Unidad de…. Respuesta: inmediato. Ficta: afirmativa. Resolutivo: \"Copia simple de cédula pública con información catastral.\". Vigencia: \"Se considera vigente la última cédula expedida por el Catastro.\"."
+  },
+  {
+   "servicio": "MID-DEU-117 | Factibilidad de Uso del Suelo",
+   "categoria": "Desarrollo Urbano | apertura de negocios, construcción, economía, territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → deumerida.gestiondetramites",
+   "funcionalidad": "En línea vía Expediente Digital (deumerida); incluye visita domiciliaria, \"Realizar el pago mediante la liga enviada vía correo electrónico\" y \"Esperar la verificación\"; costo variable por giro y zona.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (Expediente Digital)",
+    "presencial (12 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Pago del Trámite o Servicio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/117",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-08-25.",
+   "notas": "Nombre ciudadano: \"Factibilidad de Uso de Suelo\". Costo: variable: a).- Para el establecimiento con venta de bebidas alcohólicas en envase cerrado Veces U.M.A. 73 Unidad de…. Respuesta: 10 días hábiles. Ficta: negativa. Resolutivo: \"Oficio de Factibilidad\". Vigencia: \"Tendrá una vigencia de 30 días hábiles a partir de la fecha de su expedición,…\"."
+  },
+  {
+   "servicio": "MID-DEU-152 | Constancia de Cédula Urbana",
+   "categoria": "Desarrollo Urbano | apertura de negocios, construcción, territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a isla.merida.gob.mx/serviciosinternet/CedulaUrbana (integración no verificada)",
+   "funcionalidad": "En línea en isla.merida.gob.mx/serviciosinternet/CedulaUrbana (capturar datos, pagar, descargar resolutivo) o presencial.",
+   "tipo": "consulta_territorial",
+   "canales": [
+    "en línea (isla.merida.gob.mx/serviciosinternet/CedulaUrbana)",
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Pago del Trámite o Servicio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/152",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-05.",
+   "notas": "Nombre ciudadano: \"Cédula urbana\". Costo: fijo: Veces U.M.A. 5.52 Unidad de medida Cédula $647.55 Nota: Valor actual de la Unidad de Medida y Actualización…. Respuesta: inmediato. Ficta: no aplica. Resolutivo: \"Cédula Urbana\". Vigencia: \"Será vigente en tanto no se modifique el Programa Municipal de Desarrollo…\"."
+  },
+  {
+   "servicio": "MID-DIF-171 | Programa de Otorgamiento de Becas para Personas con Discapacidad",
+   "categoria": "DIF Municipal | asistencia social, economía",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → difmerida.gestiondetramites",
+   "funcionalidad": "Beca: gestión en línea vía Expediente Digital (difmerida) y \"Acudir a las oficinas para finalizar\"; presencial con investigación social; resolutivo \"Tarjetón para el cobro de la beca\".",
+   "tipo": "programa",
+   "canales": [
+    "en línea (Expediente Digital)",
+    "presencial (2 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Clave Única de Registro de Población (CURP) (obligatorio)",
+    "Comprobante de Domicilio (obligatorio)",
+    "Identificación Oficial con fotografía de la Persona Física vigente (obligatorio)",
+    "comprobante de estudios académicos (obligatorio)",
+    "Fotografias (opcional)",
+    "Valoración médica (obligatorio)",
+    "+1 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/171",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Gestión en línea\"; Última actualización 2026-09-18.",
+   "notas": "Nombre ciudadano: \"Becas\". Costo: gratuito. Respuesta: 60 días naturales. Ficta: negativa. Resolutivo: \"Tarjetón para el cobro de la beca\". Vigencia: \"10 meses de septiembre a junio.\"."
+  },
+  {
+   "servicio": "MID-FTM-201 | Pago del Impuesto Predial base Valor Catastral (predio)",
+   "categoria": "Finanzas y Tesorería | impuestos y contribuciones",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.merida.gob.mx/predial (integración no verificada)",
+   "funcionalidad": "Pago en línea en www.merida.gob.mx/predial con datos del predio (\"a)dirección b)tablaje catastral c)folio catastral o d)RMC\") o en módulos de cobro.",
+   "tipo": "pago",
+   "canales": [
+    "en línea (www.merida.gob.mx/predial)",
+    "presencial (19 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Proporcionar los datos de identificación del predio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-14.",
+   "notas": "Nombre ciudadano: \"Pago del impuesto predial\". Costo: variable. Respuesta: inmediato. Ficta: no aplica. Resolutivo: \"Comprobante de pago con el registro del sello de la operación realizada.\". Vigencia: \"Hasta por el periodo pagado\"."
+  },
+  {
+   "servicio": "MID-FTM-206 | Licencia de Funcionamiento Municipal por Apertura de establecimientos comerciales (Alta).",
+   "categoria": "Finanzas y Tesorería | impuestos y contribuciones",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/funcionamiento (integración no verificada)",
+   "funcionalidad": "En línea en merida.gob.mx/funcionamiento: usuario y contraseña, adjuntar requisitos, folio por correo, \"Firmar la solicitud con la e.firma\", presupuesto; o en ventanillas únicas.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (merida.gob.mx/funcionamiento)",
+    "presencial (12 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Registro Federal de Contribuyentes (RFC) (obligatorio)",
+    "Pago actualizado del Impuesto Predial (obligatorio)",
+    "Acreditar la legal posesión del predio (obligatorio)",
+    "Licencia de Uso de Suelo para la Licencia de Funcionamiento (obligatorio)",
+    "Asignación de Categoría a Estacionamiento Público (obligatorio)",
+    "Determinación Sanitaria para la venta de bebidas alcohólicas (obligatorio)",
+    "+5 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/206",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-08-31.",
+   "notas": "Nombre ciudadano: \"Licencia de Funcionamiento Municipal por Apertura de establecimientos comerciales (Alta).\". Costo: fijo: 1.-El importe de $586.55 (5 U.M.A.) por la emisión de la Licencia de Funcionamiento de acuerdo a la Fracción…. Respuesta: 5 días hábiles. Ficta: no aplica. Resolutivo: \"Licencia de Funcionamiento\". Vigencia: \"La vigencia de la Licencia de Funcionamiento inicia en la fecha de su…\"."
+  },
+  {
+   "servicio": "MID-GOB-216 | Cartilla de Identidad Militar",
+   "categoria": "Gobernación | educación, seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.merida.gob.mx/cartillamilitar (integración no verificada)",
+   "funcionalidad": "Pre-registro en línea en www.merida.gob.mx/cartillamilitar (usuario, documentos, correo de confirmación) y \"Acudir a las oficinas para finalizar\".",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (www.merida.gob.mx/cartillamilitar)",
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Acta de Nacimiento (obligatorio)",
+    "Clave Única de Registro de Población (CURP) (obligatorio)",
+    "Comprobante de Domicilio (obligatorio)",
+    "comprobante de estudios académicos (obligatorio)",
+    "Fotografias (obligatorio)",
+    "Constancia de no registro (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/216",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Gestión en línea\"; Última actualización 2026-08-10.",
+   "notas": "Nombre ciudadano: \"Cartilla Militar\". Costo: gratuito. Respuesta: 8 días naturales. Ficta: negativa. Resolutivo: \"Cartilla de Identidad del Servicio Militar Nacional\". Vigencia: \"No tiene vigencia, ya que solo se realiza una vez\"."
+  },
+  {
+   "servicio": "MID-GOB-222 | Constancia de Cumplimiento de Requisitos en Materia de Protección Civil",
+   "categoria": "Gobernación | seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → gobmerida.gestiondetramites",
+   "funcionalidad": "En línea vía Expediente Digital (gobmerida): \"Firmar la solicitud autógrafamente\", adjuntar requisitos, seguimiento, descargar resolutivo, \"Esperar la inspección\"; costo según aforo.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (Expediente Digital)",
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Acreditar que cuenta con servicios de vigilancia para espectaculos y eventos públicos (obligatorio)",
+    "Acreditar que cuenta con servicios médicos de emergencia para eventos espectáculos y eventos públicos (obligatorio)",
+    "Croquis (obligatorio)",
+    "Acreditar que se cuenta con prestación de servicios sanitarios para eventos espectáculos y eventos públicos (obligatorio)",
+    "Carta Responsiva (obligatorio)",
+    "Pago del Trámite o Servicio (obligatorio)",
+    "+5 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/222",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-25.",
+   "notas": "Nombre ciudadano: \"Constancia de cumplimiento de protección civil\". Costo: fijo: a) Por evento con aforo de 1 y hasta 99 personas, 5 U.M.A ($586.55) b) Por evento con aforo de 100 y hasta…. Respuesta: 3 días hábiles. Ficta: negativa. Resolutivo: \"Constancia de Cumplimiento de Requisitos en Materia de Protección Civil\". Vigencia: \"fecha de realización del evento\"."
+  },
+  {
+   "servicio": "MID-INMU-269 | Afiliarse al servicio denominado Mujeres Seguras en tu Establecimiento",
+   "categoria": "Instituto de las Mujeres | economía, laboral",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → (sin dominio de gestión)",
+   "funcionalidad": "Afiliación de establecimientos (personas morales) al distintivo; botón Iniciar de Expediente Digital sin dominio de gestión; resolutivo \"Insignia de Mujeres Seguras\".",
+   "tipo": "programa",
+   "canales": [
+    "gestión en línea (botón \"Iniciar\" de Expediente Digital sin dominio de gestión)",
+    "presencial (Instituto de las Mujeres)"
+   ],
+   "requisitosPublicados": [
+    "Sin requisitos enlistados en la ficha"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/269",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Gestión en línea\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Mujeres seguras en tu establecimiento\". Costo: gratuito. Respuesta: 3 días hábiles. Ficta: no aplica. Resolutivo: \"Insignia de Mujeres Seguras\". Vigencia: \"Durante la administración actual 2024-2027\"."
+  },
+  {
+   "servicio": "MID-OBP-275 | Bacheo de calles",
+   "categoria": "Obras Públicas | construcción, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/reporta (integración no verificada)",
+   "funcionalidad": "Reporte de bache en merida.gob.mx/reporta (domicilio, folio por correo), presencial o por teléfono (\"Contacto Ayuntatel: 9999420000\").",
+   "tipo": "reporte",
+   "canales": [
+    "en línea (merida.gob.mx/reporta)",
+    "presencial (2 módulos)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Bacheo de calles\". Costo: gratuito. Respuesta: 3 días hábiles. Ficta: negativa. Resolutivo: \"Número de Folio de reporte para bacheo de Obras Públicas\". Vigencia: \"Hasta que se realice la atención del servicio.\"."
+  },
+  {
+   "servicio": "MID-PBE-296 | Sistema de Apertura Rápida de Empresas del Municipio de Mérida.",
+   "categoria": "Prosperidad y Bienestar Económico | apertura de negocios",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.merida.gob.mx/cae (integración no verificada)",
+   "funcionalidad": "SARE en línea en www.merida.gob.mx/cae: formato digital, adjuntos, correos de seguimiento, pago al aprobarse y descarga de licencias.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (www.merida.gob.mx/cae)",
+    "presencial (13 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Acreditar la legal posesión del predio (obligatorio)",
+    "Plano arquitectónico (obligatorio)",
+    "Fotografias (obligatorio)",
+    "Pago actualizado del Impuesto Predial (obligatorio)",
+    "Identificación Oficial con fotografía del Representante Legal (obligatorio)",
+    "Registro Federal de Contribuyentes (RFC) (obligatorio)",
+    "+3 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/296",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-12.",
+   "notas": "Nombre ciudadano: \"Apertura de empresas, Licencia de Uso de suelo, Licencia de funcionamiento\". Costo: fijo: 1.- Por la emisión de la Licencia de Funcionamiento: De acuerdo a la Fracción I del Artículo 161 de la Ley de…. Respuesta: 3 días hábiles. Ficta: afirmativa. Resolutivo: \"Licencia de Uso de suelo para Funcionamiento Municipal y Licencia de Funcionamiento…\". Vigencia: \"Lic. de Uso de Suelo para Funcionamiento es de 1 año (a partir de su…\"."
+  },
+  {
+   "servicio": "MID-PAC-315 | Atención Ciudadana en Ayuntatel",
+   "categoria": "Secretaría de Participación y Atención Ciudadana | apertura de negocios, asistencia jurídica, asistencia social, atención ciudadana, construcción, deporte, economía, educación, eventos culturales, identidad, impuestos y contribuciones, laboral, medio ambiente, protección sanitaria, salud, seguridad, legalidad y justicia, servicio de sanidad animal, servicios públicos, territorio y vivienda, turismo",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Reportes y consultas por teléfono a Ayuntatel (9999244000 o 070) con folio; horario extendido L-D.",
+   "tipo": "reporte",
+   "canales": [
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Proporcionar los datos de identificación del predio (obligatorio)",
+    "Número telefónico de contacto (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/315",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Telefónica\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"AYUNTATEL\". Costo: gratuito. Respuesta: inmediato. Ficta: negativa. Resolutivo: \"Folio de Atención Ciudadana\". Vigencia: \"Durante la presente Administración 2024-2027.\"."
+  },
+  {
+   "servicio": "MID-SEC-319 | Certificado de Vecindad",
+   "categoria": "Secretaría Municipal | asistencia jurídica, identidad, seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Trámite presencial en el Departamento de Población Municipal; pago en Oficina Recaudadora; entrega a los 3 días hábiles.",
+   "tipo": "informativo",
+   "canales": [
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Acta de Nacimiento (obligatorio)",
+    "Comprobante de Domicilio (obligatorio)",
+    "Identificación Oficial con fotografía de la persona solicitante (obligatorio)",
+    "Cédula de Inscripción al Registro de Población Municipal (obligatorio)",
+    "Recibo oficial de pago (obligatorio)",
+    "Presencia del padre ó madre ó tutor legal (opcional)",
+    "+3 más (ver ficha)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/319",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Vecindad\". Costo: variable: $117.31(equivalente a una UMA). Respuesta: 3 días hábiles. Ficta: negativa. Resolutivo: \"Certificado de Vecindad\". Vigencia: \"1 año\"."
+  },
+  {
+   "servicio": "MID-SEP-334 | Reportes de Fallas en el Alumbrado Público",
+   "categoria": "Servicios Públicos | atención ciudadana, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/reporta (integración no verificada)",
+   "funcionalidad": "Reporte en merida.gob.mx/reporta con folio por correo; se pide la \"placa de identificación (consiste en una letra y 4 dígitos en posición vertical)\" del poste.",
+   "tipo": "reporte",
+   "canales": [
+    "en línea (merida.gob.mx/reporta)",
+    "presencial (2 módulos)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Dirección, ubicación o referencias del domicilio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/334",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-07.",
+   "notas": "Nombre ciudadano: \"Fallas en el Alumbrado Público\". Costo: gratuito. Respuesta: 2 días hábiles. Ficta: negativa. Resolutivo: \"Número de folio de Reporte\". Vigencia: \"Hasta que se atienda el reporte.\"."
+  },
+  {
+   "servicio": "MID-SEP-345 | Recolección de Basura en la Vía Pública",
+   "categoria": "Servicios Públicos | atención ciudadana, salud, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/reporta (integración no verificada)",
+   "funcionalidad": "Reporte en merida.gob.mx/reporta o en la app \"Ayuntamiento de Mérida\" con folio de seguimiento; también presencial y telefónico.",
+   "tipo": "reporte",
+   "canales": [
+    "en línea (merida.gob.mx/reporta)",
+    "presencial (3 módulos)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Número telefónico de contacto (obligatorio)",
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Dirección, ubicación o referencias del domicilio (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/345",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-10-07.",
+   "notas": "Nombre ciudadano: \"Basura en la calle\". Costo: gratuito. Respuesta: 3 días naturales. Ficta: negativa. Resolutivo: \"Número de folio de Reporte\". Vigencia: \"16 horas a 3 días\"."
+  },
+  {
+   "servicio": "MID-MAB-356 | Aplicación de Vacuna Antirrábica para animales de compañía (perros y gatos).",
+   "categoria": "Unidad de Medio Ambiente y Bienestar Animal | protección sanitaria, salud, servicio de sanidad animal",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Vacunación presencial en Clínica Veterinaria Municipal y Módulo Chichén Itzá; resolutivo \"Carnet de vacunación de la mascota\"; JSON con estado \"Pendiente\".",
+   "tipo": "informativo",
+   "canales": [
+    "presencial (2 módulos)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Carnet de vacunación de la mascota (opcional)",
+    "Formato (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/356",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-10-15.",
+   "notas": "Nombre ciudadano: \"Campaña antirrábica\". Costo: gratuito. Respuesta: inmediato. Ficta: negativa. Resolutivo: \"Carnet de vacunación de la mascota\". Vigencia: \"Permanente\"."
+  },
+  {
+   "servicio": "MID-MAB-363 | Reportes por maltrato animal",
+   "categoria": "Unidad de Medio Ambiente y Bienestar Animal | protección sanitaria, servicio de sanidad animal",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/reporta/reporte.php (integración no verificada)",
+   "funcionalidad": "Denuncia en merida.gob.mx/reporta/reporte.php \"o a la App Mérida Móvil\"; flujo de 14 pasos (folio, entrevista, inspección, juez calificador, cierre); seguimiento web o Ayuntatel.",
+   "tipo": "reporte",
+   "canales": [
+    "en línea (merida.gob.mx/reporta/reporte.php)",
+    "presencial (1 módulo)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (opcional)",
+    "Fotografias (opcional)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/363",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Denuncia por maltrato animal\". Costo: gratuito. Respuesta: 90 días hábiles. Ficta: no aplica. Resolutivo: \"Folio de reporte Ayuntatel por maltrato animal\". Vigencia: \"Permanente\"."
+  },
+  {
+   "servicio": "MID-INMU-370 | Atención Especializada para mujeres en situación de Violencia",
+   "categoria": "Instituto de las Mujeres | atención ciudadana",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Atención presencial especializada (trabajo social asigna número de registro) en el Instituto de las Mujeres y sus sedes oriente, poniente y sur.",
+   "tipo": "informativo",
+   "canales": [
+    "presencial (4 módulos)"
+   ],
+   "requisitosPublicados": [
+    "Sin requisitos enlistados en la ficha"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Atención Especializada para mujeres en situación de Violencia\". Costo: gratuito. Respuesta: inmediato. Ficta: no aplica. Resolutivo: \"Folio de Registro Único de Atención\". Vigencia: \"La vigencia del expediente es de 3 años\"."
+  },
+  {
+   "servicio": "MID-TMM-377 | Solicitud de Acceso a la Información Pública",
+   "categoria": "Unidad de Transparencia | transparencia",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.plataformadetransparencia.org.mx/Inicio (integración no verificada)",
+   "funcionalidad": "Solicitud en la Plataforma Nacional de Transparencia o presencial; sólo se cobra la reproducción de copias.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "en línea (www.plataformadetransparencia.org.mx/Inicio)",
+    "presencial (1 módulo)"
+   ],
+   "requisitosPublicados": [
+    "Sin requisitos enlistados en la ficha"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/377",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Solicitud de Acceso a la Información Pública\". Costo: variable: El costo de las copias quedaría de ta siguiente manera: Las primeras 20 hojas simples son sin costo. Después…. Respuesta: 10 días hábiles. Ficta: no aplica. Resolutivo: \"Respuesta a la solicitud de derecho ARCOP\". Vigencia: \"60 días hábiles para la respuesta, prorrogables hasta por 10 días hábiles…\"."
+  },
+  {
+   "servicio": "MID-INMU-397 | Línea Telefónica de Atención de la Violencia contra las Mujeres",
+   "categoria": "Instituto de las Mujeres | asistencia jurídica, asistencia social, atención ciudadana, seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Línea telefónica \"Linea Mujer\": llamada, atención especializada e invitación a acudir al Instituto de las Mujeres; publicada como 24 h/7 días.",
+   "tipo": "otro",
+   "canales": [
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Sin requisitos enlistados en la ficha"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"Telefónica\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Linea Mujer\". Costo: gratuito. Respuesta: inmediato. Ficta: no aplica. Resolutivo: \"Recibirá atención telefónica especializada al momento de realizar su llamada.\". Vigencia: \"No se tiene vigencia del como tal ya que el servicio está disponible las 24…\"."
+  },
+  {
+   "servicio": "MID-BIH-400 | Médico a Domicilio",
+   "categoria": "Bienestar Humano | salud",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Atención médica a domicilio: solicitar, \"Recibe fecha de cita para atención\", \"Recibir atención médica\".",
+   "tipo": "cita",
+   "canales": [
+    "presencial (1 módulo)",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Solicitud del Trámite o Servicio (obligatorio)",
+    "Firma de consentimiento (obligatorio)",
+    "Cuestionario TRIAGE, COVID-19 (opcional)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/400",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% Presencial\"; Última actualización 2026-09-02.",
+   "notas": "Nombre ciudadano: \"Médico a Domicilio\". Costo: gratuito. Respuesta: 1 día hábil. Ficta: negativa. Resolutivo: \"Receta Médica y/o formato de canalización.\". Vigencia: \"Permanente.\"."
+  },
+  {
+   "servicio": "MID-PAC-404 | Atención Ciudadana por medios digitales",
+   "categoria": "Secretaría de Participación y Atención Ciudadana | apertura de negocios, asistencia jurídica, asistencia social, atención ciudadana, construcción, deporte, economía, educación, eventos culturales, identidad, impuestos y contribuciones, laboral, medio ambiente, protección sanitaria, salud, seguridad, legalidad y justicia, servicio de sanidad animal, servicios públicos, territorio y vivienda, transparencia, turismo",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.merida.gob.mx/atencionciudadana (integración no verificada)",
+   "funcionalidad": "Atención ciudadana digital en www.merida.gob.mx/atencionciudadana: elegir tema y recibir respuesta por correo; formulario de dudas y sugerencias.",
+   "tipo": "otro",
+   "canales": [
+    "en línea (www.merida.gob.mx/atencionciudadana)"
+   ],
+   "requisitosPublicados": [
+    "Correo Electrónico (obligatorio)"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/404",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Ficha abierta; modalidad publicada \"100% en línea\"; Última actualización 2026-09-29.",
+   "notas": "Nombre ciudadano: \"Atención ciudadana digital\". Costo: gratuito. Respuesta: 1 día hábil. Ficta: negativa. Resolutivo: \"Folio de Atención Ciudadana\". Vigencia: \"Durante la presente Administración 2024-2027\"."
+  },
+  {
+   "servicio": "MID-CAM-106 | Carga y descarga de mercancía por proveedores en la Central de abasto de Mérida",
+   "categoria": "Central de Abasto de Mérida | impuestos y contribuciones, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Efectuar el pago del derecho por carga de mercancía en la Central de Abastos de Mérida, establecido en el…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/106",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-CPC-107 | Renta de espacios para los eventos del Carnaval",
+   "categoria": "Comité Permanente del Carnaval | apertura de negocios, eventos culturales, turismo",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Este trámite va dirigido a los interesados en adquirir la renta de un espacio para ofrecer sus productos o…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/107",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-COM-373 | Atención a las quejas e inconformidades presentadas con motivo del servicio que prestan las oficinas, dependencias y entidades del Ayuntamiento de Mérida.",
+   "categoria": "Contraloría Municipal | atención ciudadana",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a www.merida.gob.mx/contraloria/quejas.php (integración no verificada)",
+   "funcionalidad": "Descripción publicada: \"La Dirección de Contraloría Municipal, a través del Departamento de Evaluación e Investigación…\"",
+   "tipo": "reporte",
+   "canales": [
+    "Gestión en línea (www.merida.gob.mx/contraloria/quejas.php)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/373",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-DSC-111 | Gestión de Apoyos para la mejora de vivienda",
+   "categoria": "Desarrollo Social y Combate a la Pobreza | asistencia social, territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Programa de apoyo a la vivienda en comisarías del Municipio de Mérida así como en zonas marginadas Urbanas…\"",
+   "tipo": "programa",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/111",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-IDC-253 | Biblioteca y Espacio con Internet de libre acceso.",
+   "categoria": "Identidad y Cultura | atención ciudadana, educación, eventos culturales",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Préstamo del material bibliográfico disponible para usuarios con credencial de la biblioteca. Espacio de…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/253",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-IGI-265 | Talleres de Alfabetización Digital",
+   "categoria": "Innovación y Gobierno Inteligente | asistencia social, atención ciudadana, educación, laboral",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/cad (integración no verificada)",
+   "funcionalidad": "Descripción publicada: \"Desarrollar habilidades digitales en niñas, niños y adolescentes mediante cursos teórico-prácticos…\"",
+   "tipo": "programa",
+   "canales": [
+    "Gestión en línea (merida.gob.mx/cad)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/265",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-POM-293 | Liberación de Vehículos Retenidos",
+   "categoria": "Policía Municipal | asistencia jurídica, atención ciudadana, seguridad, legalidad y justicia, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Es un trámite para la liberación y devolución de vehículos que fueron retenidos por infracciones al…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/293",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-TGI-324 | Atención de Reportes y Quejas por Contaminación",
+   "categoria": "Secretaría Técnica de Gestión Integral de Residuos Municipales | medio ambiente",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a merida.gob.mx/reporta (integración no verificada)",
+   "funcionalidad": "Descripción publicada: \"Este servicio permite a la ciudadanía reportar o presentar quejas por situaciones de contaminación ambiental,…\"",
+   "tipo": "reporte",
+   "canales": [
+    "100% en línea (merida.gob.mx/reporta)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/324",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-SER-351 | Pago del Servicio Recolección y Traslado de Residuos Sólidos No Peligrosos Domiciliarios",
+   "categoria": "Servilimpia | medio ambiente, protección sanitaria, salud",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a servilimpia.org.mx/Home/Consultas (integración no verificada)",
+   "funcionalidad": "Descripción publicada: \"Pagar la tarifa mensual por la recolección de los residuos sólidos, generados por los domicilios ubicados en…\"",
+   "tipo": "pago",
+   "canales": [
+    "Gestión en línea (servilimpia.org.mx/Home/Consultas)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/351",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-TUR-367 | Visitas Guiadas al Centro Histórico",
+   "categoria": "Unidad de Turismo | turismo",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Servicio dirigido a turistas y ciudadanos, se ofrece de lunes a sábado de 9:30 am a 11.00 am (duración de 1…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/367",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-DEU-132 | Licencia de Uso del Suelo para el trámite de Funcionamiento Municipal",
+   "categoria": "Desarrollo Urbano | apertura de negocios, construcción, territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → deumerida.gestiondetramites",
+   "funcionalidad": "Descripción publicada: \"Es la autorización, que emite la dirección, para asignarle a los \"predios\" o \"inmuebles\" un determinado uso o…\"",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "100% en línea (Expediente Digital)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/132",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-CAT-061 | Constancia de No Propiedad",
+   "categoria": "Catastro | territorio y vivienda",
+   "sistemaDeOrigen": "Portal Ciudadano → SSO Expediente Digital → catmerida.gestiondetramites",
+   "funcionalidad": "Descripción publicada: \"Se proporciona oficio en el cual se hace constar que el solicitante no cuenta con propiedad registrada en la…\"",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "100% en línea (Expediente Digital)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/61",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-ADM-003 | Tu casa segura (incendio)",
+   "categoria": "Administración | asistencia social, construcción",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"El Programa Tu Casa Segura, consiste en la entrega de un apoyo económico a personas propietarias de inmuebles…\"",
+   "tipo": "programa",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/3",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-GOB-247 | Mérida en bici contigo",
+   "categoria": "Gobernación | economía, salud, servicios públicos",
+   "sistemaDeOrigen": "Portal Ciudadano → enlace a play.google.com/store/apps/details?id=com.enbici.app&hl=es_HN&gl=US (integración no verificada)",
+   "funcionalidad": "Descripción publicada: \"Es una nueva forma de moverte por Mérida que consiste en un servicio de transporte sustentable, inteligente,…\"",
+   "tipo": "app",
+   "canales": [
+    "100% en línea (play.google.com/store/apps/details?id=com.enbici.app&hl=es_HN&gl=US)"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/247",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-DIF-179 | Recepción y Atención a Casos de Violencia Familiar",
+   "categoria": "DIF Municipal | asistencia social, seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Atención a la ciudadanía del municipio de Mérida que se encuentren bajo una situación de violencia familiar,…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/179",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-INMU-399 | Refugio y Atención integral a mujeres con o sin hijas e hijos en situación de violencia feminicida",
+   "categoria": "Instituto de las Mujeres | asistencia jurídica, asistencia social, atención ciudadana",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"Ofrecer refugio temporal y seguro a mujeres con o sin hijas e hijos en situación de violencia extrema, que no…\"",
+   "tipo": "informativo",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/399",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "MID-GOB-228 | Queja de Predio Baldío",
+   "categoria": "Gobernación | seguridad, legalidad y justicia",
+   "sistemaDeOrigen": "Portal Ciudadano (ficha informativa, sin botón Iniciar)",
+   "funcionalidad": "Descripción publicada: \"El ciudadano puede realizar el reporte de predios baldíos, así como los problemas que este genera con el fin…\"",
+   "tipo": "reporte",
+   "canales": [
+    "presencial"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/228",
+   "estadoVerificacion": "parcial",
+   "evidencia": "Tarjeta del listado (ficha no abierta).",
+   "notas": "Requisitos, costo y tiempos: pendientes."
+  },
+  {
+   "servicio": "Buscador global \"¿Qué deseas buscar?\"",
+   "categoria": "Plataforma | búsqueda",
+   "sistemaDeOrigen": "Portal Ciudadano /Busqueda/busqueda (js/busqueda.js)",
+   "funcionalidad": "Búsqueda por texto con resultados por tipo (Trámites y Servicios, Visitas domiciliarias, Visitadoras y Visitadores, Regulaciones) y filtros por unidad y categoría.",
+   "tipo": "informativo",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/Busqueda/busqueda?texto=bache",
+   "estadoVerificacion": "parcial",
+   "evidencia": "El HTML estático muestra contadores en 0; los resultados se cargan por JS desde /Busqueda/busqueda/{tipo} (no ejecutado).",
+   "notas": ""
+  },
+  {
+   "servicio": "Registro de Visitas Domiciliarias",
+   "categoria": "Plataforma | inspecciones (mejora regulatoria)",
+   "sistemaDeOrigen": "Portal Ciudadano /InspeccionesEnLinea",
+   "funcionalidad": "119 visitas con filtros por unidad y actividad (Inspección, Notificación - ejecución, Peritaje, Recaudación, Verificación, Visita…). Cada ficha MID-VIS-… indica objetivo, temporalidad, modalidad, quién la realiza, trámite relacionado, procedimiento, duración, frecuencia, derechos y obligaciones, sanciones y órgano de control.",
+   "tipo": "verificacion",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/InspeccionesEnLinea/inspecciones",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"Registro de Visitas Domiciliarias\" \"Total de registros: 119\"; estructura vista en /InspeccionesEnLinea/detalle-inspeccion/2.",
+   "notas": "La ficha de visita contiene nombres y correos de servidores públicos (no copiados; archivo eliminado)."
+  },
+  {
+   "servicio": "Padrón de Visitadores",
+   "categoria": "Plataforma | verificación de inspectores",
+   "sistemaDeOrigen": "Portal Ciudadano /InspectoresEnLinea",
+   "funcionalidad": "Padrón público de 455 visitadores con foto, nombre, unidad y cargo (Inspector, Interventor, Notificador, Perito, Recaudador, Verificador, Visitador), filtros y ficha /InspectoresEnLinea/detalle-inspector/{id}.",
+   "tipo": "verificacion",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/InspectoresEnLinea/inspectores",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"Padrón de Visitadores\" \"Total de registros: 455\"; atributos data-nombre, data-unidad y data-cargo.",
+   "notas": "Datos personales: sólo se registró la estructura; HTML eliminado. PROPUESTO: usar personas ficticias."
+  },
+  {
+   "servicio": "Registro de Regulaciones",
+   "categoria": "Plataforma | normatividad",
+   "sistemaDeOrigen": "Portal Ciudadano /RegulacionesEnLinea",
+   "funcionalidad": "281 regulaciones (nombre y objetivo) con filtros por tipo de normativa (17), ámbito y materia (28). La ficha /detalle-regulacion/{id} trae objeto, tipo, sectores, fechas de emisión, publicación, vigencia y actualización, autoridad emisora, enlace a la Gaceta, fundamento e índice.",
+   "tipo": "consulta_documental",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/RegulacionesEnLinea/regulaciones",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"Registro de Regulaciones\" \"Total de registros: 281\"; ejemplo /RegulacionesEnLinea/detalle-regulacion/159.",
+   "notas": "HTML eliminado: su JSON embebido contenía correos de servidores públicos."
+  },
+  {
+   "servicio": "Demanda Ciudadana",
+   "categoria": "Plataforma | queja por incumplimiento de ficha",
+   "sistemaDeOrigen": "Portal Ciudadano /demanda (Argon Dashboard; POST /demanda/demanda-ciudadana/store)",
+   "funcionalidad": "Se elige \"Iniciar sesión\" o \"Continuar como anónimo\". El formulario pide tipo de demanda, datos de contacto, trámite (unidad, folio, liga), servidor público, 15 motivos más \"Otro\", fecha, hora y lugar, hechos y hasta 3 evidencias.",
+   "tipo": "reporte",
+   "canales": [
+    "web",
+    "presencial",
+    "telefónico"
+   ],
+   "requisitosPublicados": [
+    "Campos con * del formulario",
+    "Evidencias opcionales: PDF, JPG, JPEG, PNG, máx. 3 MB c/u, hasta 3 archivos"
+   ],
+   "fuente": "https://portalciudadano.merida.gob.mx/demanda/demanda-ciudadana/ciudadano",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Texto: \"Agregar demanda\", \"¿Desea que su demanda/denuncia sea anónima?\". No se envió.",
+   "notas": "Tipos: \"Negación de la gestión sin causa justificada\" / \"Alteración o incumplimiento en lo establecido\"."
+  },
+  {
+   "servicio": "Medios de impugnación",
+   "categoria": "Plataforma | información jurídica",
+   "sistemaDeOrigen": "Portal Ciudadano /MediosImpugnacion",
+   "funcionalidad": "Explica el recurso de reconsideración (10 días hábiles), el recurso de revisión ante el Tribunal de lo Contencioso Administrativo municipal (15 días hábiles) y la negativa ficta, con su fundamento.",
+   "tipo": "informativo",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [],
+   "fuente": "https://portalciudadano.merida.gob.mx/MediosImpugnacion/mediosimpugnacion",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"Fundamento: Artículo 176 Ley de Gobierno de los Municipios del Estado de Yucatán.\"",
+   "notas": ""
+  },
+  {
+   "servicio": "Expediente Digital – Iniciar sesión",
+   "categoria": "Identidad digital",
+   "sistemaDeOrigen": "Expediente Digital (Laravel + Argon). /another/auth/ed/redirect/expediente_digital del Portal responde 302 hacia aquí",
+   "funcionalidad": "Usuario (\"CURP, Celular, Correo\") y contraseña con reCAPTCHA v3; \"¿Olvidaste tu contraseña?\", \"Crear cuenta\" y \"Guías\" (video). Beneficios declarados: identidad digital, trámites 24/7, seguimiento y notificaciones, consulta y descarga de documentos oficiales.",
+   "tipo": "otro",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [
+    "Cuenta de Expediente Digital"
+   ],
+   "fuente": "https://expedientedigital.merida.gob.mx/",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"La información y documentos de tu Expediente Digital tienen la misma validez jurídica que la versión física.\"",
+   "notas": "No se inició sesión; las funciones internas no se observaron."
+  },
+  {
+   "servicio": "Expediente Digital – Crear cuenta",
+   "categoria": "Identidad digital",
+   "sistemaDeOrigen": "Expediente Digital /registro-ciudadano (registro.js; mapa con geoapi.js de geoportal.merida.gob.mx y Google Maps)",
+   "funcionalidad": "Asistente de 3 pasos: Datos, Dirección (predio por folio catastral, dirección, tablaje, sección y manzana, o en mapa) y Documentos con fecha de expedición. Termina con aceptaciones legales y verificación por correo.",
+   "tipo": "tramite_en_linea",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [
+    "Datos con *: nacionalidad, nombre, primer apellido, CURP, sexo, nacimiento, estado civil, correo, celular y contraseña",
+    "Contraseña: mínimo 12 caracteres con mayúscula, minúscula, número y carácter especial",
+    "Al menos un predio",
+    "Documentos: acta de nacimiento, CURP, comprobante de domicilio, identificación oficial y constancia de situación fiscal (pdf/jpg/jpeg/png ≤10 MB; obligatoriedad por documento no verificada)",
+    "Aceptar protesta declarativa, aviso de privacidad y notificaciones electrónicas"
+   ],
+   "fuente": "https://expedientedigital.merida.gob.mx/registro-ciudadano",
+   "estadoVerificacion": "verificada",
+   "evidencia": "Texto: \"Crear cuenta\" \"Datos\" \"Dirección\" \"Documentos\". No se envió.",
+   "notas": "Si la CURP, el RFC o el correo ya existen, el JS remite a la \"Ventanilla Única Municipal\"."
+  },
+  {
+   "servicio": "Expediente Digital – Recupera tu contraseña",
+   "categoria": "Identidad digital",
+   "sistemaDeOrigen": "Expediente Digital /changePassword",
+   "funcionalidad": "Recuperación con CURP o celular más el correo principal (persona física) y reCAPTCHA.",
+   "tipo": "otro",
+   "canales": [
+    "web"
+   ],
+   "requisitosPublicados": [
+    "CURP o número celular",
+    "Correo principal registrado"
+   ],
+   "fuente": "https://expedientedigital.merida.gob.mx/changePassword",
+   "estadoVerificacion": "verificada",
+   "evidencia": "\"Para recuperar tu contraseña ingresa tu CURP o número celular, así como el correo electrónico que registraste…\"",
+   "notas": ""
+  }
+ ],
+ "uiObservations": [
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/css/styles.css",
+   "aspecto": "Paleta Portal (variables :root)",
+   "observacion": "--cr-1n #002c72 (azul marino), --cr-2n #74ba47 (verde), --cr-10n/--dfl-blue #1c256a (= meta theme-color), --cr-28 #fa7165 (coral del separador \"|\"), --cr-29 #006CF6 (botones \"Iniciar\" y breadcrumb), --cr-30 #e7f0ff (caja Modalidad), --cr-33 #dd6f62, --cr-6n #f4f9f0, --cr-19n #006aff, --dfl-pink #eb008b, --cr-1 #d43987.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/css/styles.css",
+   "aspecto": "Color de cabecera de ficha",
+   "observacion": "La tarjeta de cabecera usa .bg-dfl-blue. default.css la define #264089, pero styles.css, cargado después, la redefine como var(--cr-2n) #74ba47 con !important; se mostraría en verde.",
+   "confianza": "inferido"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Tipografía y stack",
+   "observacion": "Poppins (Google Fonts, pesos 100–900); default.css trae además clases .montserrat y .barlow. Material Kit/Bootstrap Material Design, jQuery, Font Awesome SVG, slick y select2. jsPDF se carga pero no tiene uso visible.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Navegación",
+   "observacion": "Barra superior con logo, Inicio, ícono de usuario (abre Expediente Digital en pestaña nueva) y hamburguesa. Ésta abre el panel \"Menú de opciones\": Inicio, Trámites y Servicios, Visitas domiciliarias, Visitadoras y visitadores, Regulaciones, Expediente Digital, Visor Urbano, SARE, Denuncia Ciudadana y Medios de impugnación. Hay un mega menú institucional (Ayuntamiento, Transparencia, Mejora Regulatoria) y un pie con dirección, Servicios, \"Avisos de Privacidad\" y redes.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Portada",
+   "observacion": "De arriba abajo: hero \"Lo busco, lo busco... ¡y sí lo encuentro!\" con \"¿Qué deseas buscar?\"; 4 tarjetas con contador (Trámites y servicios, Visitas domiciliarias, Visitadoras y Visitadores, Regulaciones); \"Lo más consultado\" (selector en móvil <768 px); \"Descubre\", con tarjetas \"EXPEDIENTE DIGITAL – Tu identidad digital ante el Ayuntamiento de Mérida. Ahorra tiempo y simplifica tus gestiones.\" y Visor Urbano; e \"Infórmate\" (Medios de impugnación, Demanda ciudadana \"Repórtalo\").",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+   "aspecto": "Tarjeta de trámite",
+   "observacion": "Tarjeta blanca con borde verde y sombra azul: \"MID-XXX-NNN | Nombre\" en negritas, unidad, Descripción y Modalidad, botón pill \"Iniciar >\" azul y botón circular \"+\". Arriba: breadcrumb, contador, buscador, 3 filtros y paginador.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "aspecto": "Ficha",
+   "observacion": "Cabecera con tipo y clave, caja Modalidad con \"Iniciar\", H2 con el nombre legal y debajo el nombre ciudadano. Acordeones con \"+\" o chevron, módulos de atención con horario, dirección, teléfono y extensión, y al final la caja \"Demanda Ciudadana – ¡Repórtalo aquí!\".",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Accesibilidad",
+   "observacion": "Panel de accesibilidad: modo nocturno, escala de grises, contraste, guía de lectura #d43987 y tamaño de fuente. El viewport declara user-scalable=0 y maximum-scale=1, lo que bloquea el zoom en móvil.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Modales en HTML (sin vigencia)",
+   "observacion": "Modales sin fecha: \"Alerta de ciclón tropical\" (comentario \"Temporada… 2024\"), \"Debido al Huracán Milton…\" (2024) y \"1 año contigo – Primer Informe\". \"Paseo de las Ánimas\" tiene ModalTimer 2025/05/20–2025/10/31, ya vencido. La imagen Banner-MID_1.jpg dice: \"MIDigital – Tu trámite en línea\", \"Si un trámite quieres realizar, primero, ¡tu Expediente debes crear!\" y \"Tu usuario de REMTYS ya no está disponible para realizar trámites.\".",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Nombres de marca",
+   "observacion": "\"Portal Ciudadano\", \"Portal Ciudadano Único de Trámites y Servicios.\", \"Portal Único de Trámites y Servicios del Municipio de Mérida\", \"Registro de Visitas Domiciliarias\", \"Padrón de Visitadores\", \"Registro de Regulaciones\", \"Demanda Ciudadana\", \"Expediente Digital\", \"Visor Urbano\", \"MIDigital\" y el lema \"MÉRIDA – CONTIGO ES MEJOR – AYUNTAMIENTO 2024-2027\". Las fichas mencionan la \"App Mérida Móvil\" y la app \"Ayuntamiento de Mérida\".",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/demanda/demanda-ciudadana/ciudadano",
+   "aspecto": "Módulo Demanda Ciudadana",
+   "observacion": "UI distinta: Argon Dashboard + Bootstrap 5.3.3, Open Sans, Font Awesome 6.5 y SweetAlert2. Es un formulario largo con 15 checkboxes de motivo y 3 cargas de evidencia.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "aspecto": "Cabeceras de seguridad",
+   "observacion": "Ambos sitios envían CSP restrictiva, HSTS y X-Frame-Options SAMEORIGIN: no se pueden incrustar en iframe desde otra app. El Portal añade Permissions-Policy camera=(), microphone=(), geolocation=().",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://expedientedigital.merida.gob.mx/assets/css/mid-auth.css",
+   "aspecto": "Paleta Expediente Digital",
+   "observacion": "--mid-blue #002c72, --mid-accent #0072f2, --mid-green #67bd45, --mid-red #d75b63, --mid-soft-red #fde1df, --mid-soft-blue #dbeafe, --mid-soft-green #c9e7b8, --mid-border #b8c6d8, --mid-text-muted #a5acb8, sombra 0 12px 28px rgba(0,0,0,.18). general.css añade #07377f, #0d2c58, #74ba47 y #fe6f61.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://expedientedigital.merida.gob.mx/assets/css/general.css",
+   "aspecto": "Tipografía y stack ED",
+   "observacion": "Poppins local (400–900), Material Icons y Font Awesome 5.15.4. Argon Dashboard + Bootstrap, jQuery 3.7.1, bootstrap-table, SweetAlert2, FullCalendar, bootstrap-tourist (tours), reCAPTCHA v3 y widget de accesibilidad sienna (website-widgets.pages.dev). Laravel.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://expedientedigital.merida.gob.mx/",
+   "aspecto": "Login ED",
+   "observacion": "Fondo blanco con texto #002c72; marca \"Expediente Digital – Ayuntamiento de Mérida 2024-2027\" con insignia \"NUEVO\"; botones \"?\" (validez jurídica) y \"Guías\" (video). Lista de 4 beneficios con íconos PNG y tarjeta de login con radio de 28 px y sombra: Usuario \"CURP, Celular, Correo\", contraseña con botón para mostrar, \"¿Olvidaste tu contraseña?\" y \"Crear cuenta\". Barra de contacto azul y arte lineal verde en el pie (ciclista, silla de ruedas, autobús, monumento).",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://expedientedigital.merida.gob.mx/registro-ciudadano",
+   "aspecto": "Wizard de registro",
+   "observacion": "Stepper de 3 pasos con círculos de 58 px; campos obligatorios con *. Incluye modales para buscar el predio o ubicarlo en un mapa con marcador arrastrable, tabla \"Predios agregados\", carga de documentos por tipo con fecha de expedición y diálogos SweetAlert2.",
+   "confianza": "observado"
+  },
+  {
+   "fuente": "https://expedientedigital.merida.gob.mx/js/modulos/ciudadanos/general/general.js",
+   "aspecto": "Área autenticada (sólo código)",
+   "observacion": "El código define una barra lateral #sidenav-main colapsable (overlay ≤991 px) y un botón \"Quejas y sugerencias\" que hace POST a /general/api/apiFormularioQuejas. No se vio la UI.",
+   "confianza": "inferido"
+  }
+ ],
+ "criticalFacts": [
+  {
+   "hecho": "Correo de soporte de Expediente Digital",
+   "valor": "expedientedigital@merida.gob.mx",
+   "fuente": "https://expedientedigital.merida.gob.mx/",
+   "citaTextual": "¿Tienes dudas sobre el Expediente Digital? Escríbenos a expedientedigital@merida.gob.mx"
+  },
+  {
+   "hecho": "Línea Mujer (atención telefónica de violencia contra las mujeres)",
+   "valor": "8004557672; publicada como disponible 24 h, 7 días",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "citaTextual": "1. La mujer llama a la Línea Mujer (8004557672) y solicita atención ante alguna situación de violencia. | No se tiene vigencia del como tal ya que el servicio está disponible las 24 horas del día, los 7 días de las semana."
+  },
+  {
+   "hecho": "Ayuntatel (reportes y consultas telefónicas) y horario",
+   "valor": "9999244000 o 070 desde celular; L-V 7:30 a.m.–9:30 p.m., sáb 8:30 a.m.–6:30 p.m., dom y festivos 8:30 a.m.–2:30 p.m.",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/315",
+   "citaTextual": "Debe llamar al número de Ayuntatel 9999244000 o al 070 desde el celular para reportar algún servicio o solicitar información de los programas Municipales. ... Horario de atención de lunes a viernes de 7:30 a.m. a 9:30 p.m. Sábados de 8:30 a.m. a 6:30 p.m. Domingos y días festivos de 8:30 a.m. a 2:30 p.m."
+  },
+  {
+   "hecho": "Emergencias, Ayuntatel y Protección Civil (aviso en modal de Protección Civil, sin fecha)",
+   "valor": "911; Ayuntatel 999 924 4000 o 070; Protección Civil 999 928 8311",
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "citaTextual": "Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311."
+  },
+  {
+   "hecho": "Teléfono de contacto que la ficha de Bacheo rotula como Ayuntatel (difiere del 9999244000 de la ficha MID-PAC-315)",
+   "valor": "9999420000",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+   "citaTextual": "Contacto Ayuntatel: 9999420000"
+  },
+  {
+   "hecho": "Reporte de maltrato animal por teléfono y por web o app",
+   "valor": "(999) 924 4000 o 070; https://merida.gob.mx/reporta/reporte.php o App Mérida Móvil",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/363",
+   "citaTextual": "1.- Llamar a Ayuntatel al (999) 924 4000 o al 070 | 1.- Ingresar a la página https://merida.gob.mx/reporta/reporte.php o a la App Mérida Móvil"
+  },
+  {
+   "hecho": "Demanda ciudadana por mala atención en trámites (Subdirección de Mejora Regulatoria; texto común en las fichas)",
+   "valor": "(999)9420000 ext. 83756; calle 64-A número 538-B entre 77 y 79, Centro; L-V 8:00 a.m.–3:00 p.m.",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "citaTextual": "También podrás hacerlo vía telefónica al número (999)9420000 extensión 83756 o través del siguiente enlace:"
+  },
+  {
+   "hecho": "Denuncias ante Contraloría Municipal (texto común en las fichas)",
+   "valor": "contraloriateescucha@merida.gob.mx; https://denunciacontraloria.merida.gob.mx/",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "citaTextual": "Vía correo electrónico a la cuenta institucional: contraloriateescucha@merida.gob.mx En línea en el Sistema Municipal de Denuncias: https://denunciacontraloria.merida.gob.mx/"
+  },
+  {
+   "hecho": "Unidad de Transparencia (encabezado del portal)",
+   "valor": "(999) 924 6361, 24 h, 7 días",
+   "fuente": "https://portalciudadano.merida.gob.mx/",
+   "citaTextual": "Tel. (999) 924 6361 24hrs, 7 días de la semana"
+  },
+  {
+   "hecho": "Apoyo Psicológico (salud mental): presolicitud por correo y teléfono del módulo Unidad Deportiva Caucel",
+   "valor": "psicología@merida.gob.mx; 999 942-00-00 ext. 81951",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "citaTextual": "Enviar correo a psicología@merida.gob.mx | Unidad Deportiva Caucel Horario de atención: Lunes a Viernes de 1:00 pm a 7:00 pm ... Teléfono: 999 942-00-00 Extensión: 81951"
+  },
+  {
+   "hecho": "Total de fichas en el catálogo del Portal Ciudadano",
+   "valor": "387",
+   "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+   "citaTextual": "Total de registros: 387"
+  },
+  {
+   "hecho": "Validez jurídica declarada del Expediente Digital",
+   "valor": "Misma validez que la versión física; documentos vigentes no se vuelven a solicitar en trámites vinculados",
+   "fuente": "https://expedientedigital.merida.gob.mx/",
+   "citaTextual": "La información y documentos de tu Expediente Digital tienen la misma validez jurídica que la versión física. Si están vigentes, las dependencias municipales no podrán solicitarlos nuevamente en los trámites y servicios que estén vinculados a este servicio."
+  },
+  {
+   "hecho": "Reglas de contraseña y archivos en el registro ED",
+   "valor": "≥12 caracteres con mayúscula, minúscula, número y carácter especial; pdf/jpg/jpeg/png ≤10 MB",
+   "fuente": "https://expedientedigital.merida.gob.mx/registro-ciudadano",
+   "citaTextual": "La contraseña debe tener: Mínimo 12 caracteres Al menos una mayúscula Al menos una minúscula Un número Un carácter especial | Formatos permitidos pdf, jpg, jpeg y png. Tamaño máximo 10 MB por archivo"
+  },
+  {
+   "hecho": "Aviso de privacidad integral del Expediente Digital (fecha)",
+   "valor": "PDF ADM-MR-I012, última actualización 16 de julio de 2026",
+   "fuente": "https://www.merida.gob.mx/avisoprivacidad/contenido/pdf/administracion/dep-mejora/ADM-MR-I012.pdf",
+   "citaTextual": "Mérida, Yucatán a dieciséis de julio de dos mil veintiséis. (Última Actualización)."
+  },
+  {
+   "hecho": "Banner MIDigital sobre el cambio de usuario (imagen, sin fecha)",
+   "valor": "Hay que crear el Expediente para hacer trámites; el usuario REMTYS ya no sirve",
+   "fuente": "https://portalciudadano.merida.gob.mx/img/Banner-MID_1.jpg",
+   "citaTextual": "Si un trámite quieres realizar, primero, ¡tu Expediente debes crear! ... Tu usuario de REMTYS ya no está disponible para realizar trámites."
+  }
+ ],
+ "limitations": [
+  "Sólo lectura: sin sesión, sin crear cuentas y sin enviar formularios. Perfil, documentos, notificaciones, firma y seguimiento del Expediente Digital NO se observaron; se describen con textos públicos.",
+  "Sin navegador headless ni capturas: la UI se describe desde HTML y CSS. No se vio el contenido cargado por JS (resultados del buscador global).",
+  "Se abrieron 27 de las 387 fichas, por el límite de ~60 solicitudes por sitio. En las filas \"parcial\" los requisitos, costos y tiempos quedan pendientes. Los costos citados son los publicados en cada ficha (periodo fiscal 2026; UMA 117.31 según las fichas) y hay que reverificarlos.",
+  "https://www.merida.gob.mx/avisoprivacidad/ redirigió a un desafío anti-bot (validate.perfdrive.com) tanto con curl como con WebFetch; no se intentó superarlo. Sólo se leyó el PDF del aviso del Expediente Digital. El enlace al aviso de Demanda Ciudadana tiene href vacío.",
+  "GET /TramitesEnLinea/unidades devolvió 405 (sólo POST) con traza de depuración (no reproducida). No se probaron POST ni los endpoints de listas completas.",
+  "Datos personales: el Padrón de Visitadores, las fichas de visita y regulación y el bloque \"Responsable del trámite\" traen nombres, cargos y correos de servidores públicos. No se copiaron; esos HTML se eliminaron y en las fichas guardadas esos campos se redactaron.",
+  "El HTML público del catálogo y las fichas expone un objeto window.tramiteED con base_url, client_id, client_secret y sso_sesion. Los valores no se reprodujeron ni usaron (en las copias locales quedaron [OMITIDO]). Puede ser una exposición de credenciales que el Ayuntamiento debería revisar.",
+  "Los avisos del HTML (Huracán Milton, Ánimas con fecha final 2025/10/31, Primer Informe, ciclón 2024, banner MIDigital/REMTYS) no implican vigencia.",
+  "Inconsistencias en la fuente: Ayuntatel aparece como 9999244000 (ficha 315 y portada) y como \"Contacto Ayuntatel: 9999420000\" (ficha 275). La Línea Mujer tiene horario JSON \"l-d 00:00-12:00\" pero el texto dice 24/7. Hay correos con errores (\"tramitesdeu@merida.gob,mx\"). La ficha 356 tiene estado \"Pendiente\". La prensa habla de \"78 trámites en línea\" y el catálogo cuenta 113 \"100% en línea\".",
+  "Los enlaces a reporta, carrito, predial, funcionamiento, isla, PNT o Play Store no prueban integración. La única integración observada es el SSO Portal → Expediente Digital → gestiondetramites, que no se ejecutó.",
+  "No hay documentación de los campos lVisorUrbano, idNivelDigital, cAutoLoader ni cDominioPublico. La ruta /<prefijo>merida del ED devolvió 404 sin sesión.",
+  "Solicitudes: ~51 a portalciudadano, 12 a expedientedigital, 3 a www.merida.gob.mx (más 1 por WebFetch, bloqueada), 1 WebFetch a yucatan.com.mx (nota del 11-ago-2026) y 1 búsqueda web."
+ ],
+ "assetsSaved": [
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/ (carpeta base de descargas; HTML con datos personales y credenciales redactados)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/pc_home.html, pc_tramites.html (+ .headers, pc_tramites.txt)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/pc_tramites_parsed.json (387 tarjetas parseadas)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/fichas_resumen.json (27 fichas resumidas, sin datos personales)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/fichas/detalle-tramite-{1,2,7,16,39,93,117,152,171,201,206,216,222,269,275,296,315,319,334,345,356,363,370,377,397,400,404}.html + detalle-tramite-2.tramiteData.json",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/json/resumeninicio.json",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/secciones/ (InspeccionesEnLinea_inspecciones, MediosImpugnacion_mediosimpugnacion, demanda_demanda-ciudadana_ciudadano, busqueda_bache .html)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/js/ (principal.js, ed-auth-tramites.js, dem-auth.js, detalle.js, search-directory.js) y /css/ (styles.css, default.css)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/ed_home.html (+ .headers), ed/registro-ciudadano.html, ed/changePassword.html, ed/sadmmerida.html (404)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/ed/js/ (registro.js, general.js) y ed/css/ (mid-auth.css, general.css, responsive.css)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/merida-gob/ADM-MR-I012.pdf + ADM-MR-I012.txt (aviso de privacidad integral del Expediente Digital), aviso-ED.headers, catalogomunicipal.html",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-ciudadano/assets/ (pc_logo-simple.svg, pc_logo2024-2027.svg, pc_Banner-MID_1.png, ed_favicon_svg.svg, ed_pie_pagina.png, ed_docs.png)",
+  "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/out/web-portal-ciudadano.json"
+ ]
+}

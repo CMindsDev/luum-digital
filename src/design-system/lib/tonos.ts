@@ -16,7 +16,7 @@ export const CLASES_MOSAICO: Record<TonoMosaico, { fondo: string; texto: string;
   ambar: { fondo: "bg-ambar", texto: "text-cafe", icono: "text-cafe" },
   // blanco sobre café #533630 10.84:1
   cafe: { fondo: "bg-cafe", texto: "text-white", icono: "text-white" },
-  // blanco sobre magenta-fuerte #CC1F86 5.11:1 (con texto normal no se usa #F62FA2: 3.59:1)
+  // blanco sobre magenta-fuerte #C2307F 5.22:1 (con texto normal no se usa #F62FA2: 3.59:1)
   magenta: { fondo: "bg-magenta-fuerte", texto: "text-white", icono: "text-white" },
   // café sobre lima #A2D200 6.07:1
   lima: { fondo: "bg-lima", texto: "text-cafe", icono: "text-cafe" },

@@ -1,0 +1,487 @@
+/*
+ * Pekito animado — estados de la mascota (reposo, saludando, conectando, escuchando, silenciado,
+ * pensando, trabajando, hablando, feliz y triste). Todo es CSS sobre `data-estado`.
+ *
+ * - El cuerpo (recurso de Figma) respira y se mueve; los cuatro huecos son luces (--pk-led).
+ * - Los efectos (--pk-fx) rodean la figura: burbujas, arcos de voz, ondas, chispas, estrellas, gota y «z».
+ * - Con «reducir movimiento» no hay animaciones, pero cada estado conserva una pose fija y distinta
+ *   (qué luces están encendidas y qué efecto se ve) para no depender sólo del movimiento.
+ * - Colores: luces lima del asistente; efectos magenta (o lima dentro del tema noche).
+ */
+
+.pekito-mascota {
+  --pk-led: var(--color-lima-agente, #ebff57);
+  --pk-fx: var(--pekito-acento, var(--color-magenta));
+  --nivel: 0.5;
+  overflow: visible;
+}
+
+.pekito-noche .pekito-mascota {
+  --pk-fx: var(--pk-lima, #ebff57);
+}
+
+.pekito-mascota .pk-cuerpo {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+/* --- Luces (los huecos del cuerpo) --- */
+.pekito-mascota .pk-luz {
+  fill: var(--pk-led);
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+}
+
+/* --- Efectos: todos ocultos salvo el del estado vigente --- */
+.pekito-mascota .pk-fx > g,
+.pekito-mascota .pk-fx-conectar {
+  visibility: hidden;
+}
+
+.pekito-mascota .pk-onda,
+.pekito-mascota .pk-fx-conectar {
+  fill: none;
+  stroke: var(--pk-fx);
+  stroke-width: 2.4;
+}
+
+.pekito-mascota .pk-fx-conectar {
+  stroke-dasharray: 5 13;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pekito-mascota .pk-onda {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pekito-mascota .pk-punto,
+.pekito-mascota .pk-chispa,
+.pekito-mascota .pk-estrella,
+.pekito-mascota .pk-gota {
+  fill: var(--pk-fx);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pekito-mascota .pk-arco {
+  fill: none;
+  stroke: var(--pk-fx);
+  stroke-width: 3.6;
+  stroke-linecap: round;
+}
+
+.pekito-mascota .pk-z {
+  fill: var(--pk-fx);
+  font-family: var(--font-marca, "Unbounded", sans-serif);
+  font-weight: 800;
+}
+
+/* Visibilidad de los efectos por estado. */
+.pekito-mascota[data-estado="escuchando"] .pk-fx-escuchar,
+.pekito-mascota[data-estado="pensando"] .pk-fx-pensar,
+.pekito-mascota[data-estado="hablando"] .pk-fx-hablar,
+.pekito-mascota[data-estado="trabajando"] .pk-fx-trabajar,
+.pekito-mascota[data-estado="feliz"] .pk-fx-feliz,
+.pekito-mascota[data-estado="triste"] .pk-fx-triste,
+.pekito-mascota[data-estado="silenciado"] .pk-fx-zzz,
+.pekito-mascota[data-estado="conectando"] .pk-fx-conectar {
+  visibility: visible;
+}
+
+/* --- Pose fija de cada estado: luces encendidas (también con movimiento reducido) --- */
+.pekito-mascota[data-estado="conectando"] .pk-luz:nth-child(1),
+.pekito-mascota[data-estado="pensando"] .pk-luz:nth-child(-n + 2),
+.pekito-mascota[data-estado="escuchando"] .pk-luz,
+.pekito-mascota[data-estado="hablando"] .pk-luz,
+.pekito-mascota[data-estado="trabajando"] .pk-luz:nth-child(odd),
+.pekito-mascota[data-estado="feliz"] .pk-luz {
+  opacity: 0.95;
+}
+
+.pekito-mascota[data-estado="silenciado"] .pk-luz:nth-child(4) {
+  opacity: 0.35;
+}
+
+/* --- Animaciones (sólo si la persona no pidió reducir el movimiento) --- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Cuerpo */
+  .pekito-mascota[data-estado="reposo"] .pk-cuerpo {
+    animation: pkm-respira 4s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="saludando"] .pk-cuerpo {
+    animation:
+      pkm-saluda 1.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1,
+      pkm-respira 4s ease-in-out 1.7s infinite;
+  }
+  .pekito-mascota[data-estado="conectando"] .pk-cuerpo {
+    animation: pkm-respira 1.4s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="escuchando"] .pk-cuerpo {
+    animation: pkm-atento 2.4s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="silenciado"] .pk-cuerpo {
+    animation: pkm-dormita 6s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="pensando"] .pk-cuerpo {
+    animation: pkm-pensando 2.4s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="trabajando"] .pk-cuerpo {
+    animation: pkm-trabaja 0.46s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="hablando"] .pk-cuerpo {
+    animation: pkm-habla 0.5s ease-in-out infinite;
+  }
+  .pekito-mascota[data-estado="feliz"] .pk-cuerpo {
+    animation: pkm-feliz 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3;
+  }
+  .pekito-mascota[data-estado="triste"] .pk-cuerpo {
+    animation: pkm-triste 3.2s ease-in-out infinite;
+  }
+
+  /* Luces */
+  .pekito-mascota[data-estado="saludando"] .pk-luz {
+    animation: pkm-luz-sigue 0.8s ease-in-out calc(var(--i) * 0.14s) 2;
+  }
+  .pekito-mascota[data-estado="conectando"] .pk-luz {
+    animation: pkm-luz-sigue 1.2s ease-in-out calc(var(--i) * 0.3s) infinite;
+  }
+  .pekito-mascota[data-estado="pensando"] .pk-luz {
+    animation: pkm-luz-sigue 1.8s ease-in-out calc(var(--i) * 0.45s) infinite;
+  }
+  .pekito-mascota[data-estado="trabajando"] .pk-luz {
+    animation: pkm-luz-sigue 0.6s ease-in-out calc(var(--i) * 0.15s) infinite;
+  }
+  .pekito-mascota[data-estado="escuchando"] .pk-luz {
+    animation: pkm-luz-late 1.4s ease-in-out calc(var(--i) * 0.12s) infinite;
+  }
+  .pekito-mascota[data-estado="hablando"] .pk-luz {
+    animation: pkm-luz-habla 0.42s ease-in-out calc(var(--i) * 0.07s) infinite alternate;
+  }
+  .pekito-mascota[data-estado="feliz"] .pk-luz {
+    animation: pkm-luz-destello 0.4s ease-in-out 6;
+  }
+  .pekito-mascota[data-estado="silenciado"] .pk-luz:nth-child(4) {
+    animation: pkm-luz-reserva 3s ease-in-out infinite;
+  }
+
+  /* Efectos */
+  .pekito-mascota[data-estado="conectando"] .pk-fx-conectar {
+    animation: pkm-gira 2.6s linear infinite;
+  }
+  .pekito-mascota .pk-onda {
+    animation: pkm-onda 2.2s ease-out infinite;
+  }
+  .pekito-mascota .pk-onda-2 {
+    animation-delay: 1.1s;
+  }
+  .pekito-mascota .pk-punto {
+    animation: pkm-punto 1.4s ease-in-out infinite;
+  }
+  .pekito-mascota .pk-punto:nth-child(2) {
+    animation-delay: 0.25s;
+  }
+  .pekito-mascota .pk-punto:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+  .pekito-mascota .pk-arco {
+    animation: pkm-arco 0.9s ease-out infinite;
+  }
+  .pekito-mascota .pk-arco-2 {
+    animation-delay: 0.22s;
+  }
+  .pekito-mascota .pk-chispa {
+    animation: pkm-chispa 1.1s ease-in-out infinite;
+  }
+  .pekito-mascota .pk-chispa-2 {
+    animation-delay: 0.35s;
+  }
+  .pekito-mascota .pk-chispa-3 {
+    animation-delay: 0.7s;
+  }
+  .pekito-mascota .pk-estrella {
+    animation: pkm-estrella 1.1s ease-out 2;
+  }
+  .pekito-mascota .pk-estrella-2 {
+    animation-delay: 0.15s;
+  }
+  .pekito-mascota .pk-estrella-3 {
+    animation-delay: 0.3s;
+  }
+  .pekito-mascota .pk-gota {
+    animation: pkm-gota 2s ease-in infinite;
+  }
+  .pekito-mascota .pk-z {
+    animation: pkm-zzz 3s ease-out infinite;
+  }
+  .pekito-mascota .pk-z-2 {
+    animation-delay: 1.2s;
+  }
+}
+
+/* Con movimiento reducido las ondas (que sólo existen en movimiento) no se dibujan. */
+@media (prefers-reduced-motion: reduce) {
+  .pekito-mascota .pk-onda {
+    display: none;
+  }
+}
+
+@keyframes pkm-respira {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-1.5%) scaleY(1.014);
+  }
+}
+
+@keyframes pkm-dormita {
+  0%,
+  100% {
+    transform: translateY(1.5%) scaleY(0.985);
+  }
+  50% {
+    transform: translateY(0.5%) scaleY(1);
+  }
+}
+
+@keyframes pkm-saluda {
+  0% {
+    transform: translateY(8%) scale(0.92, 0.88);
+  }
+  25% {
+    transform: translateY(-6%) rotate(-5deg) scale(1.03, 1.05);
+  }
+  45% {
+    transform: rotate(5deg);
+  }
+  65% {
+    transform: rotate(-4deg);
+  }
+  85% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes pkm-atento {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-4deg) translateY(-1.5%);
+  }
+}
+
+@keyframes pkm-pensando {
+  0%,
+  100% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3.5deg) translateY(-1.5%);
+  }
+}
+
+@keyframes pkm-trabaja {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-2.5%) scale(1.012, 0.99);
+  }
+}
+
+@keyframes pkm-habla {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    transform: translateY(calc(var(--nivel) * -2.5%)) scale(calc(1 - var(--nivel) * 0.015), calc(1 + var(--nivel) * 0.045));
+  }
+}
+
+@keyframes pkm-feliz {
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  30% {
+    transform: translateY(0) scale(1.05, 0.9);
+  }
+  60% {
+    transform: translateY(-14%) scale(0.97, 1.06);
+  }
+}
+
+@keyframes pkm-triste {
+  0%,
+  100% {
+    transform: translateY(3%) rotate(-3deg) scaleY(0.965);
+  }
+  50% {
+    transform: translateY(4%) rotate(-4deg) scaleY(0.955);
+  }
+}
+
+@keyframes pkm-luz-sigue {
+  0%,
+  45%,
+  100% {
+    opacity: 0.08;
+  }
+  15%,
+  25% {
+    opacity: 1;
+  }
+}
+
+@keyframes pkm-luz-late {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pkm-luz-habla {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: calc(0.55 + var(--nivel) * 0.45);
+  }
+}
+
+@keyframes pkm-luz-destello {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pkm-luz-reserva {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes pkm-gira {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pkm-onda {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.72);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pkm-punto {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.65) translateY(2px);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.12) translateY(-2px);
+  }
+}
+
+@keyframes pkm-arco {
+  0% {
+    opacity: 0;
+    transform: translateX(-3px);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(5px);
+  }
+}
+
+@keyframes pkm-chispa {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(60deg);
+  }
+}
+
+@keyframes pkm-estrella {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.2) rotate(0deg);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(0) scale(1.1) rotate(45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.6) rotate(90deg);
+  }
+}
+
+@keyframes pkm-gota {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(34px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+}
+
+@keyframes pkm-zzz {
+  0% {
+    opacity: 0;
+    transform: translate(-4px, 6px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(8px, -12px);
+  }
+}

@@ -2,8 +2,8 @@ import { ArrowLeft } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { cx } from "../lib/cx";
-import { ChainPattern } from "./ChainPattern";
-import { LabGlyph } from "./LabGlyph";
+import { GlifoPixel } from "./GlifoPixel";
+import { PatronCadena } from "./PatronCadena";
 
 export interface PageHeaderProps {
   /** Título de la pantalla: es el único h1. */
@@ -70,9 +70,9 @@ export function PageHeader({
       {regresar ? <BotonRegresar regresar={regresar} etiqueta={etiquetaRegresar} /> : null}
       <div className="min-w-0 flex-1">
         {antetitulo ? (
-          <p className="mb-1 text-xs font-semibold tracking-[0.12em] text-tinta-suave uppercase">{antetitulo}</p>
+          <p className="mb-1.5 font-mono-rotulo text-xs font-medium tracking-rotulo text-tinta-suave uppercase">{antetitulo}</p>
         ) : null}
-        <h1 tabIndex={-1} className="text-2xl leading-tight font-semibold text-marino sm:text-[1.75rem] lg:text-[2rem]">
+        <h1 tabIndex={-1} className="text-2xl leading-tight font-bold tracking-[-0.03em] text-marino sm:text-[1.75rem] lg:text-[2rem]">
           {titulo}
         </h1>
         {descripcion ? <div className="mt-2 max-w-prose text-[0.9375rem] text-tinta-suave sm:text-base">{descripcion}</div> : null}
@@ -90,17 +90,20 @@ export function PageHeader({
     );
   }
 
+  /*
+   * Banner del Laboratorio (22:1356): el texto va SIEMPRE sobre crema (tinta-suave 6.47:1). El degradado
+   * crema → azul ocupa el tercio derecho en tableta y escritorio y una franja inferior en móvil, donde
+   * van el glifo y el patrón de cadena en crema (decorativos).
+   */
   return (
-    <header
-      className={cx(
-        "relative mb-6 overflow-hidden rounded-tarjeta border border-borde bg-linear-to-r from-banner-inicio from-45% to-banner-fin p-5 sm:p-7",
-        className,
-      )}
-    >
-      <div className="relative z-10 max-w-[38rem]">{cabecera}</div>
+    <header className={cx("relative mb-6 overflow-hidden rounded-tarjeta border border-borde bg-fondo p-5 pb-14 sm:p-7", className)}>
+      <div aria-hidden="true" className="absolute inset-y-0 right-0 hidden w-[38%] bg-linear-to-r from-fondo to-azul sm:block" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-10 bg-degradado-banner sm:hidden" />
+      <div className="relative z-10 sm:max-w-[min(38rem,62%)]">{cabecera}</div>
       {children ? <div className="relative z-10 mt-4">{children}</div> : null}
-      <LabGlyph tamano={56} className="absolute top-4 right-5 hidden text-white/90 sm:block" />
-      <ChainPattern alto={34} className="absolute right-5 bottom-4 hidden text-white/90 md:block" />
+      <GlifoPixel tamano={56} className="absolute top-4 right-5 hidden text-crema sm:block" />
+      <PatronCadena alto={26} className="absolute right-4 bottom-2 text-crema sm:hidden" />
+      <PatronCadena alto={34} className="absolute right-5 bottom-4 hidden text-crema sm:block" />
     </header>
   );
 }

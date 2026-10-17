@@ -55,9 +55,17 @@ export function usePanelDialogo({ abierto, modal, onCerrar, enfocarAlAbrir, reto
         bloqueo.current = { overflowPrevio: raiz.style.overflow };
         raiz.style.overflow = "hidden";
       } else if (!modal) liberar();
-      if (primeraVez || !dialogo.contains(document.activeElement)) (enfocarAlAbrir?.current ?? dialogo).focus();
+      const enfocar = () => (enfocarAlAbrir?.current ?? dialogo).focus();
+      // Cerrar y volver a mostrar el <dialog> (también en el doble efecto de StrictMode) devuelve el foco
+      // al elemento anterior y show() lo pasa al primer control: siempre se reubica en el título.
+      enfocar();
       yaAbierto.current = true;
-      return;
+      // Otro diálogo que se cierra a la vez (la bienvenida) puede devolver el foco a la mascota un instante después.
+      const reintento = window.setTimeout(() => {
+        // Sólo si el foco se fue a otra parte de la página (nunca le quita el foco a quien ya está escribiendo).
+        if (primeraVez && !dialogo.contains(document.activeElement)) enfocar();
+      }, 120);
+      return () => window.clearTimeout(reintento);
     }
 
     if (!yaAbierto.current) return;

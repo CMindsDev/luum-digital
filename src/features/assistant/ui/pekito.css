@@ -1,5 +1,6 @@
 /*
- * Pekito — asistente de demostración (diseño provisional del Laboratorio de Innovación, Figma 22:67).
+ * Pekito — asistente de demostración (diseño provisional del Laboratorio de Innovación, Figma 22:67,
+ * 22:218, 22:253 y el lanzador «Por texto o por voz» de Vital Oceans 3539:642).
  * No es un personaje oficial del Ayuntamiento.
  *
  * Colores del frame 22:67 con ajustes de contraste (WCAG 2.2 AA) sobre el fondo #FFF8EC:
@@ -8,9 +9,18 @@
  *    se oscurece a #6E6E6E (4.9:1) conservando el gris.
  *  - "1/5" (#BFBFBF, 1.7:1) y "Saltar" (blanco, 1.06:1 en Figma) usan --color-tinta-suave (6.7:1).
  *  - pista de progreso #5B615D y relleno magenta #F62FA2 (gráfico; el progreso también se expone como texto).
+ *
+ * Tema «noche» (sólo dentro del asistente; ESPECIFICACION_FIGMA.md §2.2 B y §8.1), con las
+ * correcciones de §4.2: placeholder #9FA19E (7.3:1) en vez de #5B615D (2.58:1) y anillo del
+ * compositor #5B615D (3:1) en reposo. Sobre #101511: #FFFBE2 17.7:1 · #BFBFBF 10.0:1 ·
+ * lima #EBFF57 16.7:1 (texto #101511 sobre lima, igual) · magenta #F62FA2 5.4:1 (sólo gráfico) ·
+ * coral #FFABA0 10.1:1. Si el design system ya define los tokens (--color-noche…), se usan esos.
  */
 @import "@fontsource/unbounded/400.css";
+@import "@fontsource/unbounded/800.css";
 @import "@fontsource-variable/host-grotesk";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 
 .pekito {
   --pekito-fondo: #fff8ec;
@@ -19,11 +29,106 @@
   --pekito-cursor: #bfbfbf;
   --pekito-pista: #5b615d;
   --pekito-acento: var(--color-magenta);
+  --pekito-halo: rgb(246 47 162 / 0.1);
+  --pekito-halo-2: rgb(246 47 162 / 0.16);
+  --pekito-halo-3: rgb(246 47 162 / 0.22);
   font-family: "Host Grotesk Variable", "Host Grotesk", var(--font-sans);
+}
+
+.pekito-noche {
+  --pk-noche: var(--color-noche, #101511);
+  --pk-noche-2: var(--color-noche-2, #343835);
+  --pk-borde: var(--color-noche-borde, #5b615d);
+  --pk-texto: var(--color-noche-texto, #fffbe2);
+  --pk-texto-suave: var(--color-noche-texto-suave, #bfbfbf);
+  --pk-placeholder: var(--color-noche-placeholder, #9fa19e);
+  --pk-lima: var(--color-lima-agente, #ebff57);
+  --pk-chip: var(--color-chip-noche, rgb(242 255 234 / 0.14));
+  --pk-superficie: #1c211d;
+  --pk-peligro: #ffaba0;
+  --color-foco: var(--pk-lima);
+  background-color: var(--pk-noche);
+  color: var(--pk-texto);
+  color-scheme: dark;
 }
 
 .pekito-marca {
   font-family: "Unbounded", "Host Grotesk Variable", var(--font-sans);
+}
+
+.pekito-serif {
+  font-family: "Instrument Serif", ui-serif, Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.pekito-rotulo {
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Compositor (22:253) --- */
+.pekito-compositor {
+  box-shadow: inset 0 0 0 1px var(--pk-borde);
+  background-color: var(--pk-compositor, rgb(217 217 217 / 0.06));
+}
+
+.pekito-compositor:focus-within {
+  box-shadow: inset 0 0 0 2px var(--pk-lima);
+}
+
+.pekito-compositor textarea::placeholder {
+  color: var(--pk-placeholder);
+  opacity: 1;
+}
+
+/* --- Halos del lanzador (Vital Oceans 3539:642 con la piel del Laboratorio) --- */
+@keyframes pekito-halo {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.pekito-halo {
+  animation: pekito-halo 4.2s ease-in-out infinite;
+}
+
+.pekito-halo-2 {
+  animation-delay: -1.4s;
+}
+
+.pekito-halo-3 {
+  animation-delay: -2.8s;
+}
+
+/* --- Indicador «pensando» --- */
+@keyframes pekito-punto {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.pekito-punto {
+  animation: pekito-punto 1.2s ease-in-out infinite;
+}
+
+.pekito-punto:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.pekito-punto:nth-child(3) {
+  animation-delay: 0.3s;
 }
 
 @keyframes pekito-cursor {
@@ -55,9 +160,127 @@
   animation: pekito-respira 3.6s ease-in-out infinite;
 }
 
+/* --- Presencia flotante: nunca sobre la barra inferior ni la navegación lateral --- */
+.pekito-presencia {
+  bottom: calc(var(--altura-nav-inferior) + 1rem);
+  max-width: calc(100vw - var(--ancho-nav-lateral) - 2rem);
+  transition: transform var(--duracion-media) var(--ease-suave);
+}
+
+.pekito-presencia[data-lado="derecha"] {
+  right: 1rem;
+}
+
+.pekito-presencia[data-lado="izquierda"] {
+  left: calc(var(--ancho-nav-lateral) + 1rem);
+}
+
+.pekito-presencia[data-arrastrando] {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* Panel no modal de escritorio: tarjeta junto a la mascota, debajo del encabezado. */
+.pekito-panel-flotante {
+  position: fixed;
+  inset: auto;
+  bottom: calc(var(--altura-nav-inferior) + 5.25rem);
+  width: min(26rem, calc(100vw - var(--ancho-nav-lateral) - 2rem));
+  height: min(46rem, calc(100dvh - var(--altura-encabezado) - 6.5rem));
+  margin: 0;
+}
+
+.pekito-panel-flotante[data-lado="derecha"] {
+  right: 1rem;
+}
+
+.pekito-panel-flotante[data-lado="izquierda"] {
+  left: calc(var(--ancho-nav-lateral) + 1rem);
+}
+
+/* --- Capa de actuación tipo Clicky (cursor guía, anillo y borde) --- */
+.pekito-cursor-guia,
+.pekito-anillo-guia,
+.pekito-borde-actuacion {
+  --pekito-tinte: var(--color-magenta);
+  --pekito-tinte-45: rgb(246 47 162 / 45%);
+  --pekito-brillo: rgb(246 47 162 / 18%);
+  position: fixed;
+  z-index: 110;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.pekito-cursor-guia {
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  transform-origin: 1.5px 1.5px;
+  will-change: transform, opacity;
+}
+
+.pekito-cursor-guia svg {
+  display: block;
+  overflow: visible;
+}
+
+.pekito-cursor-guia path {
+  fill: var(--pekito-tinte);
+  stroke: #fff;
+  stroke-width: 1.25px;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 1.5px rgb(28 49 116 / 30%));
+}
+
+.pekito-anillo-guia {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: 2px solid var(--pekito-tinte);
+  opacity: 0;
+}
+
+.pekito-borde-actuacion {
+  inset: 0;
+  z-index: 109;
+  box-sizing: border-box;
+  border: 2px solid var(--pekito-tinte-45);
+  box-shadow: inset 0 0 14px var(--pekito-brillo);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+:root[data-pekito-actuando] .pekito-borde-actuacion {
+  opacity: 1;
+  transition-duration: 120ms;
+}
+
+@media (forced-colors: active) {
+  .pekito-cursor-guia,
+  .pekito-anillo-guia,
+  .pekito-borde-actuacion {
+    --pekito-tinte: Highlight;
+    --pekito-tinte-45: Highlight;
+    --pekito-brillo: transparent;
+  }
+}
+
+/* Sin animaciones infinitas ni movimiento con «reducir movimiento». */
 @media (prefers-reduced-motion: reduce) {
   .pekito-cursor,
-  .pekito-respira {
+  .pekito-respira,
+  .pekito-halo,
+  .pekito-punto {
     animation: none;
+  }
+  .pekito-punto {
+    opacity: 1;
+  }
+  .pekito-presencia,
+  .pekito-borde-actuacion {
+    transition: none;
   }
 }

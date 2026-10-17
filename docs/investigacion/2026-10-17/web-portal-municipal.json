@@ -1,0 +1,1122 @@
+{
+  "summary": "Inventario y observación de UI del Portal Municipal de Mérida (https://merida.gob.mx/municipio/portal/index.php), del Portal Ciudadano de MIDigital (https://portalciudadano.merida.gob.mx) y de catálogos por categoría. Consulta: 2026-10-17. (1) Qué es MIDigital según la nota: la nota de prensa núm. 12522 ('Presenta [la alcaldesa] MIDigital, innovadora transformación tecnológica del Ayuntamiento de Mérida', https://prensa.merida.gob.mx/12522/Presenta-Cecilia-Patron-MIDigital-innovadora-transformacion-tecnologica-del-Ayuntamiento-de-Merida/amp, fechada 'Martes 11 de Agosto de 2026') dice que la presidenta municipal 'presentó MIDigital, el nuevo portal ciudadano del Ayuntamiento donde se podrá consultar información oficial, iniciar trámites, dar seguimiento a solicitudes y resolver gestiones de manera digital'. La describe como una estrategia de transformación digital, no como una plataforma aislada, que 'integra en un solo ecosistema' información que antes estaba repartida entre procesos, dependencias y sistemas. (2) Componentes anunciados: Portal Ciudadano (información oficial sobre trámites, servicios, regulaciones e inspecciones), Expediente Digital (resguardo de documentos e información para acreditar identidad ante el Ayuntamiento) y Visor Urbano (mapa digital con 75 capas de información urbana y catastral). Cifras anunciadas: 395 trámites y servicios, 274 regulaciones, 118 tipos de visitas domiciliarias, más de 400 inspectores, y 78 trámites completamente en línea en la primera etapa. También anuncia que se podrá consultar las visitas domiciliarias y confirmar la identidad de los inspectores por fotografía e identificación oficial, y que la plataforma se hizo con acompañamiento de Bloomberg Philanthropies. (3) Lo que parece operar (observado el 2026-10-17): el Portal Ciudadano responde con un catálogo de 387 trámites y servicios con clave MID-XXX-NNN. Por modalidad: 231 '100% Presencial', 113 '100% en línea', 28 'Gestión en línea', 13 'Presolicitud en línea' y 2 'Telefónica'; 141 fichas tienen botón 'Iniciar'. También operan el Registro de Visitas Domiciliarias (119), el Padrón de Inspectores, Verificadores y Visitadores (455 fichas en el HTML, con foto, cargo y vigencia del nombramiento), el Registro de Regulaciones (281), fichas detalladas (requisitos, costo, plazos, fundamento, módulos, visita domiciliaria aplicable), el formulario de Demanda ciudadana y la página de Medios de impugnación. Expediente Digital muestra pantalla de acceso (usuario: CURP, celular o correo) y opción 'Crear cuenta'. Visor Urbano no se pudo verificar por un bloqueo antibots. (4) Anuncio frente a lo verificable: no se pudo verificar la integración 'en un solo ecosistema', las 75 capas, la automatización de asignaciones ni la reducción de discrecionalidad. Las cifras actuales difieren de las anunciadas (387 frente a 395; 281 frente a 274; 119 frente a 118; 113 '100% en línea' frente a 78), así que el catálogo cambia con el tiempo. Los botones 'Iniciar' llevan a sistemas distintos: subdominios *.gestiondetramites.merida.gob.mx (vía atributo data-dominio, con Expediente Digital) o sitios anteriores (merida.gob.mx/predial, /empleo/, /cae/, /funcionamiento, /reporta/). Que se enlacen no prueba integración técnica. (5) El portal municipal (Material Kit 2.0.6 / Bootstrap) funciona como concentrador de enlaces a decenas de micrositios: predial, reportes, empleo, cultura, SARE, Ciudad del Aprendizaje, Bienestar, apps (Mérida Móvil, Línea Mujer, En Bici, Visit Mérida, ÁrbolMID). Identidad visual observada: azul marino #002c72, verde #74ba47 y #6bac42, verde lima del logotipo #B7ED3B con azul #1C3174, tipografía Poppins por defecto más Montserrat y Barlow (Google Fonts) y lema 'Contigo es mejor'. (6) Limitaciones: Radware Bot Manager bloqueó merida.gob.mx con captcha tras unas 14 solicitudes. No se intentó resolverlo; varias páginas se leyeron en la Wayback Machine, con la fecha de captura en cada fila. Todo lo relativo a 'Bache a la vista' con verificación ciudadana y recompensas, la mascota de salud mental, el asistente de IA y la voz es PROPUESTA del prototipo y no existe en las fuentes.",
+  "inventory": [
+    {
+      "servicio": "Portal Municipal de Mérida (página de inicio)",
+      "categoria": "Portal / navegación general",
+      "sistemaDeOrigen": "Portal Municipal merida.gob.mx/municipio/portal",
+      "funcionalidad": "Concentrador de menús (Ayuntamiento, Dependencias, Portal Ciudadano, Transparencia, Mejora Regulatoria, Entérate, Temas), buscador, carrusel de banners, tarjetas de avisos, accesos rápidos, botones de teléfono y secciones Ciudadanía, Negocios y Turismo. Casi todo son enlaces a micrositios.",
+      "tipo": "informativo",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Menú principal: 'Inicio Ayuntamiento Dependencias Portal Ciudadano Transparencia Mejora Regulatoria Entérate Temas'; segundo menú: 'Eventos Ciudadanía Negocios y Empresas Turismo Sitios web oficiales'.",
+      "canales": ["web"],
+      "notas": "Meta autor 'Ayuntamiento de Mérida 2024 - 2027'. Tras unas 14 solicitudes el dominio respondió con captcha Radware (validate.perfdrive.com); las subpáginas se leyeron en Wayback (ver filas)."
+    },
+    {
+      "servicio": "Buscador del portal ('Lo busco, lo busco... ¡y sí lo encuentro!')",
+      "categoria": "Búsqueda",
+      "sistemaDeOrigen": "Portal Municipal (buscador.php)",
+      "funcionalidad": "Formulario de búsqueda por palabra clave (campo 'q', maxlength 30) que envía a buscador.php con parámetros ocultos cx e ie. Esos parámetros siguen el patrón de Google Programmable Search (inferido).",
+      "tipo": "otro",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "<h3> 'Lo busco, lo busco... ¡y sí lo encuentro!'; form action='https://merida.gob.mx/municipio/portal/buscador.php', placeholder 'Escribe aquí para buscar...'.",
+      "canales": ["web"],
+      "notas": "No se ejecutó ninguna búsqueda (sólo lectura)."
+    },
+    {
+      "servicio": "Accesos rápidos '¡Encuéntralo!' (Gaceta, Predial, Reportes, Educación)",
+      "categoria": "Navegación / accesos rápidos",
+      "sistemaDeOrigen": "Portal Municipal",
+      "funcionalidad": "Cuatro botones tipo píldora que llevan a Gaceta (merida.gob.mx/gaceta), Predial (merida.gob.mx/predial), Reportes (merida.gob.mx/reportaenlinea) y Educación (merida.gob.mx/ciudaddelaprendizaje).",
+      "tipo": "informativo",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "verificada",
+      "evidencia": "<h2>'¡Encuéntralo!' con enlaces 'Gaceta', 'Predial', 'Reportes', 'Educación' (clase btn btn-round bg-color-2n).",
+      "canales": ["web"]
+    },
+    {
+      "servicio": "Ayuntatel (línea de reportes y atención)",
+      "categoria": "Atención ciudadana",
+      "sistemaDeOrigen": "Ayuntatel (línea telefónica municipal)",
+      "funcionalidad": "Recibe por teléfono reportes, dudas y solicitudes ciudadanas.",
+      "tipo": "reporte",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311.' Botón 'Ayuntatel' con href='tel:9999244000'.",
+      "canales": ["teléfono 999 924 4000", "070"],
+      "notas": "Horarios publicados en una captura del 2025-12-04 de merida.gob.mx/atencionciudadana (ver criticalFacts). La ficha MID-OBP-275 publica 'Contacto Ayuntatel: 9999420000', que no coincide con 999 924 4000. No se llamó."
+    },
+    {
+      "servicio": "Atención Ciudadana / Orientación (merida.gob.mx/atencionciudadana)",
+      "categoria": "Atención ciudadana",
+      "sistemaDeOrigen": "Micrositio Atención Ciudadana (título 'Ayuntamiento de Mérida Yucatán - Orientación')",
+      "funcionalidad": "Orientación guiada: el selector '¿Cómo podemos ayudarte?' ofrece temas (Predial catastral, Ventanillas Únicas y Oficinas recaudadoras, Trámites y Servicios Municipales, Cartilla Militar, Reportes y seguimiento, Mi primer crédito, Plataformas web, Leyes y Reglamentos, Información general, Envío de sugerencias, entre otros). Cada tema muestra respuestas predefinidas y botones 'Entendido' / 'Aún tengo dudas', con formulario de contacto. Publica horarios de los canales presencial, en línea (correo y chat ciudadano) y telefónico.",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Presencial Módulo de atención ciudadana De lunes a viernes de 8:00 a.m. a 5:00 p.m. Bajos del Palacio Municipal'; 'Chat ciudadano De lunes a viernes de 8:00 a.m. a 9:00 p.m.'; 'Los reportes son confidenciales pero no pueden ser anónimos.'",
+      "canales": ["presencial (Bajos del Palacio Municipal)", "correo electrónico", "chat ciudadano", "Ayuntatel 070 / (999) 924.4000", "web"],
+      "notas": "La página en vivo devolvió captcha Radware el 2026-10-17; la captura es del 2025-12-04 y puede estar desactualizada. Sus avisos (p. ej. 'líneas telefónicas de Ayuntatel se encuentran en mantenimiento') no implican vigencia. El patrón de árbol de decisiones sirve de referencia para el asistente propuesto, pero no implica que exista IA."
+    },
+    {
+      "servicio": "Atención Ciudadana Presencial (MID-PAC-314)",
+      "categoria": "Atención ciudadana",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) / Secretaría de Participación y Atención Ciudadana",
+      "funcionalidad": "Atención personalizada para solicitar apoyos, información u orientación y para hacer reportes. Con un reporte se obtiene un folio de atención ciudadana.",
+      "tipo": "otro",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/314",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Recibir atención personalizada para solicitar algún apoyo económico o en especie, información, orientación y/o realizar reportes que le corresponda resolver al Ayuntamiento de Mérida.' Resolutivo: 'En caso de realizar algún reporte se obtiene el folio de atención ciudadana.'",
+      "requisitosPublicados": ["Solicitud del Trámite o Servicio - Obligatorio"],
+      "canales": ["presencial: Palacio Municipal, Calle 62, No. Ext. Sin número, Entre 61, y 63, Col. Centro; Teléfono 999-942-00-00 Extensión 80119"],
+      "notas": "Costo 'Gratuito'; tiempo máximo '5 días hábiles'; afirmativa/negativa ficta: 'Negativa'; 'La persona solicitante deberá tener domicilio en la ciudad de Mérida, Yucatán.' Última actualización 2026-06-05 09:22. Se omitieron el nombre y el correo personal de la responsable."
+    },
+    {
+      "servicio": "Miércoles Ciudadano",
+      "categoria": "Atención ciudadana / participación",
+      "sistemaDeOrigen": "Presidencia municipal (nota de prensa)",
+      "funcionalidad": "Audiencia pública quincenal en los bajos del Palacio Municipal para recibir solicitudes ciudadanas.",
+      "tipo": "programa",
+      "fuente": "https://prensa.merida.gob.mx/12478/Escuchar-y-resolver-es-la-mejor-forma-de-gobernar-Cecilia-Patron/amp",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'este ejercicio de atención directa, que se realiza cada quince días en los bajos del Palacio Municipal' (nota del miércoles 22 de julio de 2026).",
+      "canales": ["presencial"],
+      "notas": "Según la nota, al 20 de julio de 2026 había 4 mil 618 solicitudes, de las cuales 3 mil 263 estaban atendidas. Las cifras provienen de la nota y no se verificaron."
+    },
+    {
+      "servicio": "Reporta en línea (merida.gob.mx/reportaenlinea / merida.gob.mx/reporta)",
+      "categoria": "Reportes urbanos",
+      "sistemaDeOrigen": "Sistema de reportes en línea del Ayuntamiento",
+      "funcionalidad": "Crear y dar seguimiento a reportes urbanos (baches, luminarias, etc.). Según las fichas: ingresar, capturar usuario y contraseña, capturar el domicilio y recibir el folio por correo.",
+      "tipo": "reporte",
+      "fuente": "https://web.archive.org/web/20260415224220/https://merida.gob.mx/municipio/portal/sitios.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Reporta en línea Realiza y da seguimiento a reportes de baches, luminarias, y mucho más. merida.gob.mx/reportaenlinea'.",
+      "canales": ["web", "app Mérida Móvil", "Ayuntatel"],
+      "notas": "El destino en vivo y su captura en Wayback sólo contienen el captcha Radware; no se vio la interfaz. Hoy los botones 'Iniciar' de las fichas 275 y 334 apuntan a https://merida.gob.mx/reporta/."
+    },
+    {
+      "servicio": "Bacheo de calles (MID-OBP-275)",
+      "categoria": "Reportes urbanos / Obras Públicas",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) → merida.gob.mx/reporta/",
+      "funcionalidad": "Reporte de baches para que los atienda Obras Públicas. El resolutivo es un número de folio; la respuesta máxima es de 3 días hábiles.",
+      "tipo": "reporte",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Resolutivo: 'Número de Folio de reporte para bacheo de Obras Públicas'; criterios: 'Que las calles se encuentren pavimentadas y dentro del Municipio de Mérida. Si es dentro de algún fraccionamiento, este debe estar Municipalizado.'",
+      "requisitosPublicados": ["Solicitud del Trámite o Servicio - Obligatorio"],
+      "canales": ["en línea: https://merida.gob.mx/reporta/", "presencial: Palacio Municipal y Dirección de Obras Públicas (Calle 73 A, No. Ext. 478, Entre 48, y 46, Col. Centro)", "telefónico: 'Contacto Ayuntatel: 9999420000'"],
+      "notas": "Modalidad '100% en línea'; costo 'Gratuito'; 'Tiene visitas domiciliarias? No'; última actualización 2026-09-29. Es el servicio real más cercano al módulo PROPUESTO 'Bache a la vista'. La verificación ciudadana, las recompensas y el mapa de calor no existen en la fuente."
+    },
+    {
+      "servicio": "Reportes de Fallas en el Alumbrado Público (MID-SEP-334)",
+      "categoria": "Reportes urbanos / Servicios Públicos",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) → merida.gob.mx/reporta/",
+      "funcionalidad": "Reporte de luminarias con falla. El resolutivo es un folio. La ficha incluye una visita domiciliaria para recabar la firma de conformidad del ciudadano.",
+      "tipo": "reporte",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/334",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Los reportes por sector apagado-sector encendido se atienden en 24 horas ... Los reportes de luminarias encendidas de día, apagadas de noche, que prenden y apagan se atienden en 48 horas'; datos solicitados: 'placa de identificación (consiste en una letra y 4 dígitos en posición vertical)'.",
+      "requisitosPublicados": ["Dirección, ubicación o referencias del domicilio - Obligatorio"],
+      "canales": ["en línea: https://merida.gob.mx/reporta/", "presencial: Subdirección de Servicios Oriente; Dirección de Servicios Públicos (Sector Poniente)"],
+      "notas": "Tiempo máximo '2 días hábiles'; costo 'Gratuito'; visita domiciliaria con objetivo 'Recabar la firma de conformidad del ciudadano que solicita el servicio.' Pasos en línea: 'Capturar nombre de usuario y contraseña ... Recibir por correo electrónico el folio de reporte'."
+    },
+    {
+      "servicio": "Solicitudes de servicios públicos 100% en línea (desazolve, parques, basura, árbol caído, etc.)",
+      "categoria": "Reportes urbanos / Servicios Públicos",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo)",
+      "funcionalidad": "Fichas de servicio con modalidad '100% en línea': MID-SEP-330 Desazolve de Zanja con Rejilla, 331 Mantenimiento de Avenidas, Áreas Verdes y Andadores, 332 Señales de Nomenclatura, 333 Recolección de Animales Muertos, 335 Mantenimiento a Parques, 343 Desagüe de Calles, 344 Reparación de juegos infantiles, 345 Recolección de Basura en la Vía Pública, 347 Tapa/Rejilla, 348 Recoja de árbol caído, 349 Sistemas de Riego, 350 Desazolve de Pozo Colector, 375 Limpieza de Calles; además MID-TGI-325 quejas por recolección de basura.",
+      "tipo": "reporte",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Listado con 'Modalidad: 100% en línea' y botón 'Iniciar' en cada una de esas fichas.",
+      "canales": ["web"],
+      "notas": "Sólo se verificó el listado; sus fichas no se abrieron (salvo la 334)."
+    },
+    {
+      "servicio": "App Mérida Móvil",
+      "categoria": "Apps / reportes",
+      "sistemaDeOrigen": "App Mérida Móvil (iOS / Android)",
+      "funcionalidad": "App para hacer reportes e informarse de eventos y empleos. La página de Ciudadanía menciona la función 'Reporte Express'.",
+      "tipo": "app",
+      "fuente": "https://web.archive.org/web/20260828115138/https://merida.gob.mx/municipio/portal/apps.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'MÉRIDA MÓVIL ¡Nuevas formas de reportar! además, infórmate de eventos, empleos y más. merida.gob.mx/app'. En Ciudadanía (captura del 2026-03-31): 'el nuevo Reporte Express, para ayudar a detectar las zonas de mayor necesidad de atención en la ciudad. Disponible en iOS y Android'.",
+      "canales": ["App Store: https://itunes.apple.com/mx/app/merida-movil/id1065129797", "Google Play: https://play.google.com/store/apps/details?id=app.meridamovil.com"],
+      "notas": "Captura del 2026-08-28; apps.php en vivo estaba bloqueada. No se revisaron las tiendas ni la app. El proyecto debe conservar su identidad."
+    },
+    {
+      "servicio": "Línea Telefónica de Atención de la Violencia contra las Mujeres / Línea Mujer (MID-INMU-397)",
+      "categoria": "Mujeres / atención a violencia",
+      "sistemaDeOrigen": "Instituto de las Mujeres (ficha en Portal Ciudadano)",
+      "funcionalidad": "Atención telefónica especializada e inmediata las 24 horas para mujeres en situación de violencia, con canalización al Instituto.",
+      "tipo": "otro",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'1. La mujer llama a la Línea Mujer (8004557672) y solicita atención ante alguna situación de violencia. 2. Proporciona la información solicitada por la operadora...'; 'el servicio está disponible las 24 horas del día, los 7 días de las semana.'",
+      "canales": ["teléfono 8004557672 (botón 'Línea Mujer' en el portal: href='tel:8004557672')"],
+      "notas": "Modalidad 'Telefónica'; costo 'Gratuito'; tiempo 'Inmediato'. Criterio: canalización 'únicamente aplica a las mujeres del Municipio de Mérida y sus comisarías'. Última actualización 2026-09-29."
+    },
+    {
+      "servicio": "App Línea Mujer",
+      "categoria": "Apps / mujeres",
+      "sistemaDeOrigen": "App Línea Mujer (iOS / Android)",
+      "funcionalidad": "Acceso directo al número gratuito para pedir ayuda en una emergencia.",
+      "tipo": "app",
+      "fuente": "https://web.archive.org/web/20260828115138/https://merida.gob.mx/municipio/portal/apps.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'LÍNEA MUJER Acceso directo al número gratuito para solicitar ayuda en caso de emergencia. merida.gob.mx/mujer'.",
+      "canales": ["App Store: https://apps.apple.com/in/app/l%C3%ADnea-mujer/id1293535345", "Google Play: https://play.google.com/store/apps/details?id=com.ayuntamientodemerida.linearosa"],
+      "notas": "Captura del 2026-08-28. merida.gob.mx/mujer está bloqueado y Wayback sólo guardó el captcha."
+    },
+    {
+      "servicio": "Atención especializada y refugio para mujeres en situación de violencia (MID-INMU-370, MID-INMU-399)",
+      "categoria": "Mujeres / atención a violencia",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo) / Instituto de las Mujeres",
+      "funcionalidad": "Servicios presenciales: 'Atención Especializada para mujeres en situación de Violencia' y 'Refugio y Atención integral a mujeres con o sin hijas e hijos en situación de violencia feminicida'.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Listado: 'MID-INMU-370 | Atención Especializada para mujeres en situación de Violencia ... Modalidad: 100% Presencial'; 'MID-INMU-399 | Refugio y Atención integral ...'.",
+      "canales": ["presencial"],
+      "notas": "Sólo se verificó el listado; las fichas no se abrieron."
+    },
+    {
+      "servicio": "Atención Psicológica (MID-BIH-016)",
+      "categoria": "Bienestar / salud mental",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) / Bienestar Humano, Departamento de Salud Mental",
+      "funcionalidad": "Consultas psicológicas, talleres y pláticas en módulos de salud municipales. Si se requiere tratamiento especializado, se canaliza a otra institución.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Para solicitar el servicio, es necesario ser mayor de edad. Si se es menor, la solicitud debe hacerla el tutor legal... En caso de necesitar un tratamiento especializado es canalizado a otra institución de salud.'",
+      "requisitosPublicados": ["Solicitud del Trámite o Servicio - Obligatorio", "Firma de consentimiento. - Obligatorio", "Identificación Oficial con fotografía de la Persona Física vigente - Obligatorio", "Clave Única de Registro de Población (CURP) - Obligatorio"],
+      "canales": ["presencial (módulos: Centro de Atención Médica a la Mujer, Centro de Desarrollo Integral Sara Mena de Correa, Módulo Médico Azcorra, entre otros)"],
+      "notas": "Modalidad '100% Presencial'; costo 'Gratuito'; tiempo 'Inmediato'. Última actualización 2026-09-29. La mascota o agente de salud mental del prototipo es PROPUESTA."
+    },
+    {
+      "servicio": "Apoyo Psicológico (MID-BIH-007)",
+      "categoria": "Bienestar / salud mental",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) / Bienestar Humano, Departamento de Salud Mental",
+      "funcionalidad": "Atención psicológica (niñas y niños mayores de 5 años, adolescentes, adultos y adultos mayores) con presolicitud de cita por correo, en persona o por teléfono, en las sedes Alma Nova.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Atender, educar, prevenir y rehabilitar a individuos que presentan problemáticas de tipo cognoscitivo, emocional, conductual y social.' Procedimiento en línea: 'Se envía correo electrónico / Recibe fecha de cita para atención'; 'Enviar correo a psicología@merida.gob.mx'.",
+      "requisitosPublicados": ["Solicitud del Trámite o Servicio - Obligatorio", "Firma de consentimiento. - Obligatorio", "Identificación Oficial con fotografía de la Persona Física vigente - Opcional", "Clave Única de Registro de Población (CURP) - Opcional"],
+      "canales": ["correo (publicado como psicología@merida.gob.mx)", "presencial: Alma Nova Sede Norte, Oriente, Poniente y Sur; Unidad Deportiva Caucel (Lunes a Viernes de 1:00 pm a 7:00 pm)", "teléfono"],
+      "notas": "Modalidad 'Presolicitud en línea'; costo 'Gratuito'; tiempo '1 días hábiles'. El correo se publica con tilde, tal cual. Última actualización 2026-09-25."
+    },
+    {
+      "servicio": "Mastografías gratuitas (campaña de octubre)",
+      "categoria": "Salud / mujer",
+      "sistemaDeOrigen": "Portal Municipal (carrusel) → merida.gob.mx/bienestar",
+      "funcionalidad": "Aviso de campaña de mastografías gratuitas que remite a los servicios de atención a la mujer.",
+      "tipo": "programa",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Tarjeta 'Mujer' – 'Mastografías gratuitas' – 'Durante todo el mes de octubre. Conoce más servicios de atención a la mujer en: merida.gob.mx/bienestar'.",
+      "canales": ["web"],
+      "notas": "El texto no indica el año. El sitio de destino (bienestar) está bloqueado. En el catálogo existe la ficha 'MID-BIH-025 Mastografía y Ultrasonido Ginecológico CAMM' (100% Presencial)."
+    },
+    {
+      "servicio": "Portal Ciudadano MIDigital – Trámites y Servicios",
+      "categoria": "Catálogo municipal de trámites y servicios",
+      "sistemaDeOrigen": "Portal Ciudadano (portalciudadano.merida.gob.mx) – MIDigital",
+      "funcionalidad": "Consulta de 387 fichas (clave MID-XXX-NNN, unidad, descripción, modalidad) con búsqueda por palabra clave, filtros por Unidad (27), Categoría (21) y Grupo (9) y paginación de 10 a 500. Cada ficha detalla resolutivo, vigencia, plazos, ficta, fundamento, responsable, requisitos, formatos, visitas domiciliarias, costo, formas y lugares de pago, procedimiento en línea, presencial o telefónico y módulos con mapa. 141 fichas tienen botón 'Iniciar'.",
+      "tipo": "consulta_documental",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Total de registros: 387'; '<h2> Buscar por trámite y servicio'; filtros 'Todas las Unidades', 'Todas las Categorías', 'Todos los Grupos'.",
+      "canales": ["web"],
+      "notas": "Modalidades: 100% Presencial 231; 100% en línea 113; Gestión en línea 28; Presolicitud en línea 13; Telefónica 2. Los botones 'Iniciar' de 68 fichas declaran data-dominio con valor en 8 subdominios *.gestiondetramites.merida.gob.mx (catmerida 44, gobmerida 6, deumerida 5, ftmmerida 5, difmerida 4, pommerida 2, sadmmerida 1, obpmerida 1); otros apuntan a sitios anteriores. Categorías: Apertura de negocios, Asistencia jurídica, Asistencia social, Atención ciudadana, Construcción, Deporte, Economía, Educación, Eventos culturales, Identidad, Impuestos y contribuciones, Laboral, Medio ambiente, Protección sanitaria, Salud, Seguridad, legalidad y justicia, Servicio de sanidad animal, Servicios públicos, Territorio y vivienda, Transparencia, Turismo."
+    },
+    {
+      "servicio": "Registro de Visitas Domiciliarias",
+      "categoria": "Visitas domiciliarias / inspecciones",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital",
+      "funcionalidad": "Catálogo de 119 tipos de visita (inspección, verificación, visita, recaudación) con filtros por Unidad y Actividad. Cada ficha indica objetivo, tipo de actividad, temporalidad, modalidad, quién la realiza (enlaces al padrón), trámite relacionado, regulación, sujeto obligado, lugar, procedimiento, duración estimada, frecuencia y derechos y obligaciones.",
+      "tipo": "verificacion",
+      "fuente": "https://portalciudadano.merida.gob.mx/InspeccionesEnLinea/inspecciones",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Registro de Visitas Domiciliarias' – 'Total de registros: 119'; ficha de ejemplo (detalle-inspeccion/119): '¿Quién realiza esta visita domiciliaria?', '¿Cuál es la duración estimada? 45 minuto(s)', '¿Cuáles son los derechos del sujeto regulado?'.",
+      "canales": ["web"],
+      "notas": "Por actividad: inspección 68, verificación 37, visita 13, recaudación 1. Por modalidad: presencial 114, híbrida 5. La nota anunció 118. No se copiaron nombres de servidores públicos."
+    },
+    {
+      "servicio": "Padrón de Inspectores, Verificadores y Visitadores ('Visitadoras y Visitadores')",
+      "categoria": "Visitas domiciliarias / verificación de personal",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital",
+      "funcionalidad": "Consulta pública del personal facultado para inspecciones y visitas, con filtros por Unidad y Cargo (Inspector, Interventor, Notificador, Perito, Recaudador, Verificador, Visitador). Cada ficha individual muestra fotografía, nombre, cargos, vigencia del nombramiento, materias facultadas, visitas relacionadas y autoridad responsable.",
+      "tipo": "verificacion",
+      "fuente": "https://portalciudadano.merida.gob.mx/InspectoresEnLinea/inspectores",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Título 'Padrón de Inspectores, Verificadores y Visitadores.'; etiquetas de la ficha: 'Cargos:', 'Vigencia del nombramiento:', 'Última actualización:', '¿Cuáles son las materias facultadas del funcionario?', '¿Cuáles son las visitas relacionadas?', '¿Quién es la autoridad responsable?'.",
+      "canales": ["web"],
+      "notas": "El HTML contiene 455 fichas (la nota decía 'más de 400'). No se copiaron nombres ni fotos, y las páginas descargadas con datos personales se borraron. En las etiquetas no hay número de credencial ni código QR; la verificación consiste en buscar a la persona y comparar foto y nombre (inferido). Es la base real para el módulo propuesto de verificación de visitas."
+    },
+    {
+      "servicio": "Registro de Regulaciones",
+      "categoria": "Regulaciones / mejora regulatoria",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital",
+      "funcionalidad": "Consulta de 281 regulaciones con filtros por tipo de normativa, ámbito (federal, estatal, municipal) y materia (28), con ficha que incluye el objetivo.",
+      "tipo": "consulta_documental",
+      "fuente": "https://portalciudadano.merida.gob.mx/RegulacionesEnLinea/regulaciones",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Título 'Registro de Regulaciones.'; filtros 'Todas las normativas', 'Todos los Ámbitos', 'Todas las Materias'.",
+      "canales": ["web"],
+      "notas": "Conteo de elementos en el HTML: 281 (la nota anunció 274). Por ámbito: municipal 170, estatal 64, federal 47. Por tipo: reglamento 84, ley 84, acuerdo 58, otros. El menú del portal municipal enlaza 'Regulaciones' a portalciudadano.merida.gob.mx/regulaciones; el del Portal Ciudadano, a www.merida.gob.mx/normatividad (destinos no verificados)."
+    },
+    {
+      "servicio": "Demanda ciudadana (antes 'Protesta Ciudadana')",
+      "categoria": "Quejas / mejora regulatoria",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (módulo de demandas)",
+      "funcionalidad": "Formulario para denunciar la negación de un trámite sin causa justificada o el incumplimiento de lo publicado en una ficha (requisitos, plazos, costos, horarios, visita domiciliaria, etc.). Permite opción anónima, datos del trámite (folio, servidor público, liga), descripción con fecha, hora y lugar, hasta 3 evidencias y notificaciones por correo.",
+      "tipo": "reporte",
+      "fuente": "https://portalciudadano.merida.gob.mx/demanda/demanda-ciudadana/ciudadano",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Tipo de demanda * Negación de la gestión sin causa justificada / Alteración o incumplimiento en lo establecido'; '¿Desea que su demanda/denuncia sea anónima?'; 'Evidencias (PDF, JPG, JPEG, PNG, máx. 3 MB c/u, hasta 3 archivos)'.",
+      "canales": ["web", "presencial: Subdirección de Mejora Regulatoria", "teléfono (999)9420000 ext. 83756"],
+      "notas": "El formulario no se envió. En las fichas, el modal 'Continuar como anónimo' enlaza a https://modprotesta.devel.telecom.lat/demanda-ciudadana/ciudadano, un dominio de desarrollo que no se visitó, mientras que el inicio usa la URL oficial. La captura de CMMERTyS (2025-12-04) lo llamaba 'Protesta Ciudadana'."
+    },
+    {
+      "servicio": "Medios de impugnación",
+      "categoria": "Asistencia jurídica",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital",
+      "funcionalidad": "Información sobre el recurso de reconsideración (10 días hábiles, ante la dependencia), el recurso de revisión (15 días hábiles, ante el Tribunal de lo Contencioso Administrativo) y la negativa ficta.",
+      "tipo": "informativo",
+      "fuente": "https://portalciudadano.merida.gob.mx/MediosImpugnacion/mediosimpugnacion",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'Los Medios de Impugnación son recursos de defensa que constituyen mecanismos legales de protección personal a los derechos de los habitantes...' 'El plazo de interposición es de 10 días hábiles...' (reconsideración).",
+      "canales": ["web", "presencial (por escrito)"]
+    },
+    {
+      "servicio": "Expediente Digital",
+      "categoria": "Identidad digital / documentos",
+      "sistemaDeOrigen": "Expediente Digital (expedientedigital.merida.gob.mx) – MIDigital",
+      "funcionalidad": "Cuenta ciudadana para acreditar la identidad digital, iniciar trámites a cualquier hora, darles seguimiento con notificaciones y consultar o descargar documentos oficiales. Se inicia sesión con CURP, celular o correo y contraseña.",
+      "tipo": "otro",
+      "fuente": "https://expedientedigital.merida.gob.mx/",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'La información y documentos de tu Expediente Digital tienen la misma validez jurídica que la versión física. Si están vigentes, las dependencias municipales no podrán solicitarlos nuevamente en los trámites y servicios que estén vinculados a este servicio.'; beneficios 'Acredita tu identidad digital', 'Inicia trámites y servicios 24/7 en esta plataforma', 'Seguimiento en tiempo real', 'Accede a tu información oficial'.",
+      "canales": ["web", "correo expedientedigital@merida.gob.mx", "guía en video (https://youtu.be/CrgySyJGs5k)"],
+      "notas": "Sólo se observó la pantalla pública: no se creó cuenta ni se inició sesión. La página está protegida por reCAPTCHA y usa el tema Argon Dashboard con Material Icons. El portal municipal la enlaza en el pie y el Portal Ciudadano mediante /another/auth/ed/redirect/expediente_digital. El 'Expediente Digital ficticio' del prototipo es una simulación PROPUESTA."
+    },
+    {
+      "servicio": "Visor Urbano",
+      "categoria": "Mapa / información territorial",
+      "sistemaDeOrigen": "Visor Urbano (visorurbano.merida.gob.mx) – MIDigital",
+      "funcionalidad": "Según las fuentes, mapa digital para consultar datos urbanos y catastrales e iniciar trámites. No se pudo observar.",
+      "tipo": "consulta_territorial",
+      "fuente": "https://visorurbano.merida.gob.mx/",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Tarjeta del Portal Ciudadano: 'Explora el mapa, consulta datos urbanos y catastrales, e inicia tus trámites municipales de forma más ágil.' Nota de prensa: 'un mapa digital con 75 capas de información urbana y catastral'.",
+      "canales": ["web"],
+      "notas": "La consulta devolvió 'Radware Page' (bot manager). No se verificaron las 75 capas. El mapa de calor y las celdas H3 del prototipo son PROPUESTA."
+    },
+    {
+      "servicio": "Bolsa de trabajo para la ciudadanía (MID-PBE-299) / Empleo",
+      "categoria": "Empleo",
+      "sistemaDeOrigen": "Bolsa de Trabajo (merida.gob.mx/empleo → geoportal.merida.gob.mx/empleo/) – Prosperidad y Bienestar Económico",
+      "funcionalidad": "Registro con correo y contraseña, aceptación de carta compromiso, perfil y currículum en línea, búsqueda de vacantes en mapa y postulación. Resolutivo: folio de registro.",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/299",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Procedimiento en línea: 'Registrarse como ciudadana o ciudadano en la plataforma digital de la bolsa de trabajo a través de su correo electrónico y crear una contraseña. Aceptar la carta compromiso de la ciudadanía. Iniciar sesión ... Postularse a las vacantes deseadas.'",
+      "requisitosPublicados": ["Formato de Registro - Obligatorio", "Identificación Oficial con fotografía de la Persona Física vigente - Obligatorio", "Correo Electrónico - Obligatorio", "Carta Compromiso - Obligatorio"],
+      "canales": ["web (Iniciar → https://www.merida.gob.mx/empleo/)", "presencial: Dirección de Prosperidad y Bienestar Económico, Calle 59, No. Ext. 432, Entre 50, y 52, Col. Centro", "correo empleo@merida.gob.mx / bolsadetrabajomerida@merida.gob.mx", "teléfono 9999286977 ext. 81542"],
+      "notas": "Costo 'Gratuito'; vigencia del resolutivo '30 días naturales'; tiempo 'Inmediato'; última actualización 2026-10-12. La ficha está verificada, pero geoportal.merida.gob.mx/empleo/ devolvió captcha. El micrositio se leyó en la captura del 2025-12-05 (https://web.archive.org/web/20251205000554/http://www.merida.gob.mx/empleo/)."
+    },
+    {
+      "servicio": "Bolsa de Trabajo para Empresas (MID-PBE-300)",
+      "categoria": "Empleo",
+      "sistemaDeOrigen": "Bolsa de Trabajo (geoportal.merida.gob.mx/empleo/empresa)",
+      "funcionalidad": "Publicación de vacantes por empresas y vinculación con candidatos.",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://web.archive.org/web/20251205000554/http://www.merida.gob.mx/empleo/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Empresas ¡Publica aquí tus vacantes! Accede aquí' (enlace https://geoportal.merida.gob.mx/empleo/empresa); el catálogo lista 'MID-PBE-300 | Bolsa de Trabajo para Empresas ... 100% en línea'.",
+      "canales": ["web"],
+      "notas": "Captura del 2025-12-05; la plataforma en vivo está bloqueada."
+    },
+    {
+      "servicio": "Capacitación para el empleo y autoempleo (MID-PBE-298, MID-PBE-313, MID-PBE-312)",
+      "categoria": "Empleo / capacitación",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo) / Prosperidad y Bienestar Económico",
+      "funcionalidad": "Cursos de capacitación para el empleo y el autoempleo (Gestión en línea), talleres para el empleo o autoempleo (presencial) y bolsa de trabajo para personas con discapacidad, grupos vulnerables y adultos mayores (presencial).",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'MID-PBE-298 | Cursos de capacitación para el empleo y el autoempleo.' (Gestión en línea); 'MID-PBE-313 | Talleres para el empleo o autoempleo' (100% Presencial); 'MID-PBE-312 | Bolsa de Trabajo para personas con discapacidad, grupo vulnerable y adulto mayor.' (100% Presencial).",
+      "canales": ["web", "presencial"],
+      "notas": "Sólo se verificó el listado."
+    },
+    {
+      "servicio": "Sistema de Apertura Rápida de Empresas – SARE (MID-PBE-296)",
+      "categoria": "Negocios / apertura y licencias",
+      "sistemaDeOrigen": "CAE – Centro de Atención Empresarial (merida.gob.mx/cae) + isla.merida.gob.mx/serviciosinternet/cae",
+      "funcionalidad": "Licencia de Uso de Suelo para Funcionamiento y Licencia de Funcionamiento Municipal en 3 días hábiles, para negocios de hasta 100 m2 con giros de bajo impacto. Puede tramitarse en línea o en persona, con pago 'Pago SARE'.",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/296",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Resolutivo: 'Licencia de Uso de suelo para Funcionamiento Municipal y Licencia de Funcionamiento Municipal'; tiempo máximo '3 días hábiles'; ficta 'Afirmativa'. Sitio CAE (captura del 2026-03-31): 'Obtén tu licencia de Uso de Suelo y de Funcionamiento Municipal en 3 días Para negocios de hasta 100 m2 de superficie...'.",
+      "requisitosPublicados": ["Acreditar la legal posesión del predio - Obligatorio", "Plano arquitectónico - Obligatorio", "Fotografias - Obligatorio", "Pago actualizado del Impuesto Predial - Obligatorio", "Identificación Oficial con fotografía del Representante Legal - Obligatorio", "Registro Federal de Contribuyentes (RFC) - Obligatorio", "Pago actualizado del servicio de recolección de residuos sólidos no peligrosos - Obligatorio", "Acta Constitutiva - Obligatorio", "Poder Notarial - Obligatorio"],
+      "canales": ["web (Iniciar → https://www.merida.gob.mx/cae/)", "presencial: Dirección de Prosperidad y Bienestar Económico, calle 59 número 432 entre 50 y 52, col. Centro", "teléfono (999) 928 6977 ext. 81542, 81585 y 81586 (captura)", "WhatsApp 999 956 80 73 (captura)"],
+      "notas": "Costo 'Fijo'; el monto no se extrajo y queda pendiente. Última actualización 2026-10-12. Página CAE/SARE leída en https://web.archive.org/web/20260331230112/https://www.merida.gob.mx/cae/sare.php."
+    },
+    {
+      "servicio": "Licencia de Funcionamiento Municipal por Apertura de establecimientos comerciales – Alta (MID-FTM-206)",
+      "categoria": "Negocios / licencias",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (ficha) → merida.gob.mx/funcionamiento – Finanzas y Tesorería",
+      "funcionalidad": "Alta de la Licencia de Funcionamiento Municipal en línea. La vigencia termina el último día de la administración que la emitió.",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/206",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'La vigencia de la Licencia de Funcionamiento inicia en la fecha de su expedición y termina el último día del periodo constitucional de la Administración Municipal que la emitió.'; tiempo máximo '5 días hábiles'; '¿Cuántos días tengo para atender las observaciones de mi solicitud? 15 días hábiles'.",
+      "requisitosPublicados": ["Registro Federal de Contribuyentes (RFC) - Obligatorio", "Pago actualizado del Impuesto Predial - Obligatorio", "Acreditar la legal posesión del predio - Obligatorio", "Licencia de Uso de Suelo para la Licencia de Funcionamiento - Obligatorio", "Asignación de Categoría a Estacionamiento Público - Obligatorio", "Determinación Sanitaria para la venta de bebidas alcohólicas - Obligatorio", "Acreditación del representante o apoderado legal para persona moral o persona física - Obligatorio", "Identificación Oficial con fotografía vigente - Obligatorio", "Formato - Obligatorio", "Actualización de los registros catastrales del predio donde se ubica el establecimiento. - Obligatorio", "Pago actualizado del servicio de recolección de residuos sólidos no peligrosos - Obligatorio"],
+      "canales": ["web (Iniciar → https://merida.gob.mx/funcionamiento)", "correo acontribuyente@merida.gob.mx", "teléfono 9999420000"],
+      "notas": "Costo 'Fijo' (monto pendiente). La ficha marca todos los requisitos como 'Obligatorio' aunque varios dependen del giro, según su propia descripción. Última actualización 2026-08-31."
+    },
+    {
+      "servicio": "Licencias de uso de suelo y revalidación/cambios/baja de funcionamiento (MID-DEU-117, 131, 132, 414; MID-FTM-189)",
+      "categoria": "Negocios / licencias / desarrollo urbano",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo)",
+      "funcionalidad": "Fichas '100% en línea': Factibilidad de Uso del Suelo, Licencia de Uso del Suelo para Licencia de Construcción, Licencia de Uso del Suelo para Funcionamiento Municipal, renovación de licencia de uso de suelo, y Licencia de Funcionamiento por revalidación, cambio de propietario, cambio de denominación o baja.",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'MID-DEU-132 | Licencia de Uso del Suelo para el trámite de Funcionamiento Municipal ... 100% en línea'; 'MID-FTM-189 | Licencia de Funcionamiento Municipal por: a) Revalidación, b) Cambio de propietario ... d) Cierre definitivo del establecimiento (Baja) ... 100% en línea'.",
+      "canales": ["web"],
+      "notas": "Sólo se verificó el listado."
+    },
+    {
+      "servicio": "Negocios y Empresas (sección del portal)",
+      "categoria": "Negocios",
+      "sistemaDeOrigen": "Portal Municipal (negocios.php)",
+      "funcionalidad": "Concentrador con cuatro bloques: Formación (Innovación, Centro de Alfabetización Digital, Centro Municipal de Emprendedores, Centros de Capacitación Laboral, Cursos CAE), Sustento (Micromer, Créditos a Proyectos Productivos, Directorio Empresarial, Círculo 47, CAE, Paneles Solares), Trámites para abrir tu negocio y Ventanillas Únicas. Incluye el botón 'Ir al CMMERTYS'.",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20260415184238/https://merida.gob.mx/municipio/portal/negocios.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Negocios y Empresas Formación Amplia tus conocimientos Sustento Elige el sustento que necesitas Trámites Abre tu negocio o empresa Ventanillas Agiliza tus trámites'.",
+      "canales": ["web"],
+      "notas": "Captura del 2026-04-15; la página en vivo devolvió captcha el 2026-10-17. El enlace se observó en el menú del inicio."
+    },
+    {
+      "servicio": "Abre tu Empresa",
+      "categoria": "Negocios / apertura",
+      "sistemaDeOrigen": "Micrositio merida.gob.mx/abretuempresa",
+      "funcionalidad": "Orientación sobre los pasos para abrir una empresa, según el directorio. No se observó el contenido.",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20260415224220/https://merida.gob.mx/municipio/portal/sitios.php",
+      "estadoVerificacion": "pendiente",
+      "evidencia": "'Abre tu Empresa Descubre como abrir tu empresa, te orientamos sobre los pasos a seguir. merida.gob.mx/abretuempresa'.",
+      "canales": ["web"],
+      "notas": "El enlace aparece en el menú 'Mejora Regulatoria' del inicio (https://www.merida.gob.mx/abretuempresa). No se visitó por el bloqueo."
+    },
+    {
+      "servicio": "Ventanilla Única Municipal",
+      "categoria": "Trámites presenciales / citas",
+      "sistemaDeOrigen": "Micrositio merida.gob.mx/ventanilla",
+      "funcionalidad": "Trámites de Catastro, Desarrollo Urbano y Finanzas en un solo lugar, con ubicaciones, horarios y citas.",
+      "tipo": "cita",
+      "fuente": "https://web.archive.org/web/20260415184238/https://merida.gob.mx/municipio/portal/negocios.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Ventanilla Única Realiza los trámites de Catastro, Desarrollo Urbano y Finanzas en un solo lugar. Ubica la Ventanilla de tu interés y haz tu cita.'",
+      "canales": ["presencial", "web"],
+      "notas": "No se verificó el sistema de citas: merida.gob.mx/ventanilla no se visitó."
+    },
+    {
+      "servicio": "Pago del Impuesto Predial base Valor Catastral (MID-FTM-201) / Predial en línea",
+      "categoria": "Pagos",
+      "sistemaDeOrigen": "Predial (merida.gob.mx/predial → isla.merida.gob.mx/serviciosinternet/predial) – Finanzas y Tesorería",
+      "funcionalidad": "'Predial en 3 Pasos': ubicar el predio (por dirección, sección y manzana, tablaje, folio o RMC), consultar el adeudo y pagar en línea. También ofrece recibo oficial electrónico, verificador de recibos, facturación, cálculo del impuesto y opciones para inmobiliarias.",
+      "tipo": "pago",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Ficha: 'Modalidad: 100% en línea' con 'Iniciar' → https://www.merida.gob.mx/predial; formas de pago 'Efectivo / Tarjeta de crédito / Tarjeta de débito'; 'Meses sin intereses, convenio de pago en parcialidades y pago en diversos establecimientos comerciales y bancos'. Sitio Predial (captura del 2025-11-16): '1 UBICA tu predio + 2 CONSULTA tu adeudo + 3 PAGA en línea'.",
+      "requisitosPublicados": ["Proporcionar los datos de identificación del predio - Obligatorio", "Descripción: a)Dirección b)Tablaje catastral c)Folio catastral d)RMC"],
+      "canales": ["web", "Ventanilla Única Municipal", "Oficina Recaudadora de Finanzas y Tesorería Municipal", "bancos y tiendas de autoservicio (según FAQ archivada)", "WhatsApp (999) 122.19.99 (sólo mensajes, captura)"],
+      "notas": "Costo 'Variable'; tiempo 'Inmediato'; última actualización 2026-10-14. Sitio Predial leído en https://web.archive.org/web/20251116021007/https://isla.merida.gob.mx/serviciosinternet/predial/index.phpx. Banner del inicio: 'Del 1 al 31 de marzo, obtén el 8% de descuento...' (sin año; no implica vigencia)."
+    },
+    {
+      "servicio": "Pagos Electrónicos (antes Carrito Electrónico)",
+      "categoria": "Pagos",
+      "sistemaDeOrigen": "Pagos Electrónicos (merida.gob.mx/carrito → isla.merida.gob.mx/serviciosinternet/pagoselectronicos)",
+      "funcionalidad": "Pago en línea de varios servicios municipales, con o sin registro (certificado de no adeudo de predial, licencia de funcionamiento, predial base valor catastral y contraprestación, pago SARE).",
+      "tipo": "pago",
+      "fuente": "https://web.archive.org/web/20241128115458/https://isla.merida.gob.mx/serviciosinternet/pagoselectronicos/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Pagos Electrónicos ¡Disfruta de los beneficios! Múltiples pagos en una sola exhibición ... Trámites sin necesidad de registro ... Certificado de no adeudar Impuesto Predial / Licencia de Funcionamiento Municipal / Predial Base Valor Catastral / Predial Base Contraprestación ... Pago SARE'.",
+      "canales": ["web"],
+      "notas": "La captura es antigua (2024-11-28). El directorio de sitios (captura del 2026-04-15) dice: '¡Tu pagos en línea de servicios municipales, se ha mudado de plataforma!'. La plataforma actual no se verificó. Enlace 'Pagos Electrónicos' observado en el menú del inicio (https://www.merida.gob.mx/carrito)."
+    },
+    {
+      "servicio": "Recibo oficial electrónico y Verificador de recibos oficiales",
+      "categoria": "Pagos / verificación",
+      "sistemaDeOrigen": "isla.merida.gob.mx/serviciosinternet (Recibos, verificarecibooficial, validareferenciapago)",
+      "funcionalidad": "Recuperar el recibo oficial electrónico de pagos en línea y verificar recibos ingresando la referencia de pago.",
+      "tipo": "verificacion",
+      "fuente": "https://web.archive.org/web/20251116021007/https://isla.merida.gob.mx/serviciosinternet/predial/index.phpx",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'VERIFICADOR DE RECIBOS OFICIALES Ingresa tu referencia de pago y verifica'; 'RECIBO OFICIAL ELECTRÓNICO Para pagos realizados en línea estableciemientos y bancos'.",
+      "canales": ["web"],
+      "notas": "Sólo se observó en capturas; no se usó."
+    },
+    {
+      "servicio": "Buen Fin 2026 (descuentos en contribuciones municipales)",
+      "categoria": "Pagos / promociones",
+      "sistemaDeOrigen": "Portal Municipal (carrusel) → merida.gob.mx/buenfin",
+      "funcionalidad": "Aviso de campaña de regularización de pagos con descuentos.",
+      "tipo": "pago",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Tarjeta 'Trámites y servicios' – 'Buen Fin 2026' – 'Del 16 de octubre al 30 de noviembre ¡Ponte al día en tus pagos y ahorra! merida.gob.mx/buenfin'.",
+      "canales": ["web"],
+      "notas": "El sitio de destino no se visitó, así que las condiciones quedan pendientes. Otro banner del carrusel con alt 'Buen Fin 2025' dice '¡Último día! 100% de descuento en multas, recargos y honorarios *Aplica para pagos en una sola exhibición.' sin fecha; no implica vigencia."
+    },
+    {
+      "servicio": "Tu Casa Segura (incendio / robo) (MID-ADM-003, MID-ADM-004)",
+      "categoria": "Pagos / apoyos vinculados al predial",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo) / Administración",
+      "funcionalidad": "Apoyo económico a propietarios de vivienda afectados por incendio o robo, condicionado al pago del predial.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'El Programa Tu Casa Segura, consiste en la entrega de un apoyo económico a personas propietarias de inmuebles ubicados en el municipio de Mérida ... La entrega del apoyo estará condicionada a que las personas propietarias hayan cubierto el pago del impuesto predial anual correspondiente...'",
+      "canales": ["presencial"],
+      "notas": "Modalidad '100% Presencial'."
+    },
+    {
+      "servicio": "Agenda de Simplificación y Digitalización de trámites y servicios",
+      "categoria": "Regulaciones / mejora regulatoria",
+      "sistemaDeOrigen": "isla.merida.gob.mx – Subdirección de Mejora Regulatoria",
+      "funcionalidad": "Herramienta para que las dependencias identifiquen costos burocráticos y calendaricen acciones de simplificación y digitalización, con consulta pública semestral y formulario de opinión.",
+      "tipo": "informativo",
+      "fuente": "https://isla.merida.gob.mx/serviciosinternet/MejoraRegulatoria/php/AgendaSimplificada.phpx",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'La Agenda de simplificación y Digitalización es la herramienta que tiene por objeto que las dependencias identifiquen los costos burocráticos de sus trámites y servicios...'; 'Período de Consulta Pública: 20 de julio al 14 de agosto de 2026.'",
+      "canales": ["web"],
+      "notas": "El periodo publicado ya concluyó a la fecha de consulta y no implica vigencia. Cita 'Artículos 21 al 25 de la Ley Nacional para Eliminar Trámites Burocráticos'."
+    },
+    {
+      "servicio": "Agenda Regulatoria Municipal",
+      "categoria": "Regulaciones / mejora regulatoria",
+      "sistemaDeOrigen": "isla.merida.gob.mx – Mejora Regulatoria",
+      "funcionalidad": "No observada.",
+      "tipo": "informativo",
+      "fuente": "https://isla.merida.gob.mx/serviciosinternet/MejoraRegulatoria/php/AgendaRegulatoria.phpx",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Enlace 'Agenda Regulatoria Municipal' en el menú 'Mejora Regulatoria' del inicio; la página devolvió 'Radware Captcha Page'.",
+      "canales": ["web"]
+    },
+    {
+      "servicio": "Análisis de Impacto Regulatorio Ex Ante / Ex Post",
+      "categoria": "Regulaciones / mejora regulatoria",
+      "sistemaDeOrigen": "air.merida.gob.mx (Ex Ante); merida.gob.mx/mejoraregulatoria/herramientas.php (Ex Post)",
+      "funcionalidad": "No observada.",
+      "tipo": "informativo",
+      "fuente": "https://air.merida.gob.mx/",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Enlaces 'Análisis de Impacto Regulatorio Ex Ante' y 'Análisis de Impacto Regulatorio Ex Post' en el menú 'Mejora Regulatoria' del Portal Ciudadano y del directorio de sitios.",
+      "canales": ["web"],
+      "notas": "air.merida.gob.mx no respondió (HTTP 000) y la página Ex Post no se visitó."
+    },
+    {
+      "servicio": "CMMERTyS – Catálogo Municipal de Mérida de Regulaciones, Trámites y Servicios ('Portal Único de Trámites y Servicios del Municipio de Mérida')",
+      "categoria": "Regulaciones / catálogo municipal",
+      "sistemaDeOrigen": "Micrositio merida.gob.mx/catalogomunicipal (plataforma 'remtys')",
+      "funcionalidad": "En la captura, catálogo con contadores, enlaces a Trámites y Servicios, Inspecciones e inspectores, Regulaciones y Protesta Ciudadana, más el formulario 'Oriéntate' para dudas sobre trámites y visitas. Enlazaba al Registro Estatal y al Catálogo Nacional.",
+      "tipo": "consulta_documental",
+      "fuente": "https://web.archive.org/web/20251204234100/https://www.merida.gob.mx/catalogomunicipal/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Contadores '378 Trámites y Servicios', '110 Inspecciones', '462 Inspectores', '280 Regulaciones'; 'Oriéntate ... Horario de atención: De Lunes a Viernes, de 8:00 a.m. a 3:00 p.m.'",
+      "canales": ["web", "Ayuntatel (999) 924 4000"],
+      "notas": "Captura del 2025-12-04. En el pie enlazaba 'Inicio de sesión del funcionario' a https://remtys-merida-preprod.azurewebsites.net/Admin/Login (entorno preprod). Hoy el menú del Portal Ciudadano lo llama 'Portal Único de Trámites y Servicios del Municipio de Mérida'. No se verificó si ahora redirige al Portal Ciudadano (inferido que es su antecesor)."
+    },
+    {
+      "servicio": "Cultura (merida.gob.mx/cultura)",
+      "categoria": "Cultura",
+      "sistemaDeOrigen": "Micrositio Cultura – Dirección de Identidad y Cultura",
+      "funcionalidad": "Según el directorio, consulta de eventos, convocatorias y apoyos culturales. No se observó el contenido.",
+      "tipo": "informativo",
+      "fuente": "http://merida.gob.mx/cultura/",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Directorio (captura del 2026-04-15): 'Cultura Consulta eventos, convocatorias, apoyos culturales y mucho más. merida.gob.mx/cultura'. Carrusel del inicio: 'Festival de Jazz Mérida 18-22 nov | ¡Conoce todos los eventos! merida.gob.mx/cultura'.",
+      "canales": ["web"],
+      "notas": "La página en vivo está bloqueada por Radware y Wayback sólo guardó el captcha. El año del festival no aparece en el texto (la imagen se llama img-jazz2026.png, por lo que 2026 es inferido)."
+    },
+    {
+      "servicio": "Trámites y servicios de Identidad y Cultura (talleres, centros municipales, museos, planetario)",
+      "categoria": "Cultura",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo) / Identidad y Cultura",
+      "funcionalidad": "15 fichas: inscripción a talleres y cursos culturales, Centro Municipal de Danza y de Música, talleres de Lengua Maya, apoyos culturales, apoyo a proyectos literarios, recepción de proyectos para el Festival de la Ciudad, grupos artísticos, visitas a museos (de la Ciudad y de Historia Natural), biblioteca con internet y Planetario Arcadio Poveda Ricalde.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'MID-IDC-263 | Inscripción a Talleres y Cursos Culturales ... Modalidad: 100% Presencial'; 'MID-IDC-259 | Inscripción al Centro Municipal de Danza'; 'MID-IDC-262 | Apoyos culturales'.",
+      "canales": ["presencial"],
+      "notas": "Todas las fichas de Identidad y Cultura observadas son '100% Presencial'. Sus requisitos no se abrieron y quedan pendientes."
+    },
+    {
+      "servicio": "Eventos y avisos (Entérate, Cartelera Cultural, avisos fijos)",
+      "categoria": "Cultura / eventos",
+      "sistemaDeOrigen": "Portal Municipal (enterate.php, avisos fijos) y merida.gob.mx/eventos",
+      "funcionalidad": "Tarjetas de eventos y avisos con enlace a micrositios.",
+      "tipo": "informativo",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Festival de las Ánimas Consulta los eventos del 24 oct al 2 nov Ver programa'; 'Feria del Panucho 2026 18 oct | Lugar: Barrio Mágico de la Ermita'; 'La Noche Blanca 22 y 23 de mayo Ver cartelera'; 'Día inhábil: 16 sept'.",
+      "canales": ["web"],
+      "notas": "Hay avisos de fechas pasadas (Noche Blanca de mayo, día inhábil del 16 de septiembre) que siguen visibles, así que un aviso visible no implica vigencia. enterate.php no se visitó."
+    },
+    {
+      "servicio": "Mérida, Ciudad del Aprendizaje",
+      "categoria": "Educación",
+      "sistemaDeOrigen": "Micrositio merida.gob.mx/ciudaddelaprendizaje",
+      "funcionalidad": "Concentrador de oferta educativa gratuita por dependencia (Centros Aprende, talleres de Bienestar Humano, educación ambiental UMABA, cursos de Prosperidad y CAE, cursos culturales, Centro de Alfabetización Digital, DIF, Mérida Aprende en Línea, cursos de verano), con PDF descargables.",
+      "tipo": "programa",
+      "fuente": "https://web.archive.org/web/20250814101428/https://merida.gob.mx/ciudaddelaprendizaje/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Tu formación inicia aquí. Un espacio donde encontrarás aprendizaje gratuito para impulsar tu crecimiento personal y profesional.'",
+      "canales": ["web"],
+      "notas": "La captura es del 2025-08-14, pero enlaza un PDF 'centros-aprendesep-dic2025', por lo que la fecha real de captura o de contenido es dudosa. El sitio conserva textos de plantilla ('Subsección 1 lorem.'). Es el destino del acceso rápido 'Educación' del inicio."
+    },
+    {
+      "servicio": "Becas de Cursos Propedéuticos / Cursos propedéuticos EXANI I y EXANI II (MID-BIH-401)",
+      "categoria": "Educación",
+      "sistemaDeOrigen": "Portal Municipal (carrusel) → merida.gob.mx/propedeuticos; Portal Ciudadano (ficha 401)",
+      "funcionalidad": "Cursos gratuitos de preparación para EXANI I y II, con inscripción en línea.",
+      "tipo": "programa",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Tarjeta 'Educación' – 'Becas de Cursos Propedéuticos' – 'Inscripciones del 13 al 30 oct merida.gob.mx/propedeuticos'. El catálogo lista 'MID-BIH-401 | Cursos propedéuticos EXANI I y EXANI II ... 100% en línea'.",
+      "canales": ["web"],
+      "notas": "El texto no indica el año (la imagen se llama img-propedeuticos26.png, por lo que 2026 es inferido). La ficha 401 no se abrió."
+    },
+    {
+      "servicio": "Becas y cursos educativos (MID-BIH-037, MID-BIH-008, MID-BIH-005, MID-IGI-265)",
+      "categoria": "Educación",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo)",
+      "funcionalidad": "Beca de Excelencia Universitaria y Asignación de Becas de Descuento (presenciales), Academia Municipal de Inglés (presencial) y Talleres de Alfabetización Digital (Gestión en línea).",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'MID-BIH-037 | Beca de Excelencia Universitaria ... 100% Presencial'; 'MID-IGI-265 | Talleres de Alfabetización Digital ... Gestión en línea'.",
+      "canales": ["presencial", "web"],
+      "notas": "Sólo se verificó el listado."
+    },
+    {
+      "servicio": "Trámites de deporte (instalaciones, entrenamientos, natación, box, apoyos a deportistas)",
+      "categoria": "Deporte",
+      "sistemaDeOrigen": "Portal Ciudadano MIDigital (catálogo) / Bienestar Humano",
+      "funcionalidad": "Fichas de Anuencias de Uso de Instalaciones Deportivas, Entrenamientos Deportivos (para menores de 15 y en campos municipales), Clases de Natación en el Centro Acuático, Clases de Box, Apoyos a Deportistas de Alto Rendimiento, Apoyo para Eventos Deportivos Especiales, Curso de Verano y Sala de Fiestas La Chula.",
+      "tipo": "programa",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "estadoVerificacion": "verificada",
+      "evidencia": "'MID-BIH-019 | Anuencias de Uso de Instalaciones Deportivas ... 100% Presencial'; 'MID-BIH-034 | Clases de Natación en el Centro Acuático de Mérida'.",
+      "canales": ["presencial"],
+      "notas": "Todas las fichas de deporte observadas son presenciales."
+    },
+    {
+      "servicio": "Liga y Torneos Municipales / Mérida Fútbol Fest / Marat'hon Mérida 2027",
+      "categoria": "Deporte",
+      "sistemaDeOrigen": "Portal Municipal (carrusel y avisos) → merida.gob.mx/bienestar, /meridafutbolfest, /marathon",
+      "funcionalidad": "Avisos de convocatorias deportivas con enlace a micrositios de inscripción e información.",
+      "tipo": "programa",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Liga y Torneos Municipales Conoce las sedes y categorias ¡Participa y sé parte de los torneos! merida.gob.mx/bienestar'; 'Marat'hon 2027 10 de enero ¡Inscríbete!'.",
+      "canales": ["web"],
+      "notas": "Los destinos no se visitaron (bloqueados). Mérida Fútbol Fest aparece en el directorio de sitios (captura del 2026-04-15)."
+    },
+    {
+      "servicio": "Bienestar Humano (merida.gob.mx/bienestar)",
+      "categoria": "Bienestar / salud / deporte",
+      "sistemaDeOrigen": "Micrositio Bienestar Humano",
+      "funcionalidad": "Según el directorio, programas y eventos de apoyo a la salud, el deporte y la educación. No se observó el contenido.",
+      "tipo": "informativo",
+      "fuente": "http://merida.gob.mx/bienestar",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Directorio: 'Bienestar Humano Infórmate sobre programas y eventos de apoyo a la salud, deportes y educación del Ayuntamiento. merida.gob.mx/bienestar'.",
+      "canales": ["web"],
+      "notas": "Bloqueado por Radware; Wayback sólo guardó el captcha (2026-05-07)."
+    },
+    {
+      "servicio": "Diseña tu Ciudad (presupuesto participativo) y Cabildo Abierto – Mérida Decide Contigo",
+      "categoria": "Participación ciudadana",
+      "sistemaDeOrigen": "decide.merida.gob.mx",
+      "funcionalidad": "Según los avisos, propuestas y registro para el presupuesto participativo por distrito y selección de temas de Cabildo Abierto.",
+      "tipo": "programa",
+      "fuente": "https://decide.merida.gob.mx/processes/disenatuciudad2027",
+      "estadoVerificacion": "no_accesible",
+      "evidencia": "Carrusel: 'Diseña tu Ciudad ¡Tú propones en donde se invertirá el presupuesto! Participa en decide.merida.gob.mx'; aviso 'Cabildo Abierto Decide el próximo tema y participa'; banner 'Cabildo Abierto Fecha de la sesión: 21 de agosto Tema: Desarrollo Social Regístrate del 6 al 12 de agosto'.",
+      "canales": ["web"],
+      "notas": "decide.merida.gob.mx devolvió captcha. El banner de Cabildo Abierto no tiene año y parece vencido. Los avisos visibles no implican vigencia."
+    },
+    {
+      "servicio": "Sistema Municipal de Denuncias (Contraloría)",
+      "categoria": "Quejas / integridad",
+      "sistemaDeOrigen": "denunciacontraloria.merida.gob.mx – Dirección de Contraloría Municipal",
+      "funcionalidad": "Denuncia en línea por presuntas faltas administrativas de servidores públicos municipales.",
+      "tipo": "reporte",
+      "fuente": "https://denunciacontraloria.merida.gob.mx/",
+      "estadoVerificacion": "parcial",
+      "evidencia": "En las fichas: 'En línea en el Sistema Municipal de Denuncias: https://denunciacontraloria.merida.gob.mx/'; 'Vía correo electrónico a la cuenta institucional: contraloriateescucha@merida.gob.mx'.",
+      "canales": ["web", "correo contraloriateescucha@merida.gob.mx", "presencial: calle 50, número 471, entre 51 y 53, Colonia Centro"],
+      "notas": "El sitio es una aplicación Angular (<app-root>) que sólo funciona con JavaScript; con curl no se ve contenido. También existe la ficha MID-COM-373 de quejas ('Gestión en línea')."
+    },
+    {
+      "servicio": "Transparencia (Unidad de Transparencia, Art. 70, 71, 102, CIMTRA, PNT)",
+      "categoria": "Transparencia",
+      "sistemaDeOrigen": "Portal Municipal (mega menú) → merida.gob.mx/transparencia",
+      "funcionalidad": "Enlaces a obligaciones de transparencia, la Plataforma Nacional, una guía para solicitar información y el manual de procedimiento.",
+      "tipo": "consulta_documental",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Mega menú 'Transparencia': 'www.merida.gob.mx/transparencia Tel. (999) 924 6361 24hrs, 7 días de la semana Unidad de Transparencia Municipal Artículo 70 Artículo 71 Artículo 102 CIMTRA ... Plataforma Nacional de Transparencia'.",
+      "canales": ["web", "teléfono (999) 924 6361"],
+      "notas": "Los destinos no se visitaron."
+    },
+    {
+      "servicio": "Gaceta Municipal",
+      "categoria": "Regulaciones / publicaciones oficiales",
+      "sistemaDeOrigen": "merida.gob.mx/gaceta",
+      "funcionalidad": "Publicación de disposiciones oficiales del Ayuntamiento, según la página Ciudadanía. No se observó.",
+      "tipo": "consulta_documental",
+      "fuente": "https://www.merida.gob.mx/gaceta",
+      "estadoVerificacion": "pendiente",
+      "evidencia": "Ciudadanía (captura del 2026-03-31): 'Gaceta Municipal Conoce las disposiciones oficiales emitidas por el Ayuntamiento de Mérida. merida.gob.mx/gaceta'.",
+      "canales": ["web"],
+      "notas": "No se visitó por el bloqueo."
+    },
+    {
+      "servicio": "Protección Civil (boletines de ciclones, albergues y refugios temporales)",
+      "categoria": "Emergencias / protección civil",
+      "sistemaDeOrigen": "Portal Municipal (sección de alerta) → merida.gob.mx/proteccioncivil",
+      "funcionalidad": "Bloque de alerta de ciclón tropical con niveles, boletines y ubicación de albergues.",
+      "tipo": "informativo",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Ante la proximidad de un huracán, el municipio cuenta con 68 albergues y refugios temporales para cuidar de ti y tu familia ¡Ubícalos!'; niveles 'Aviso Prevención Preparación Alarma Afectación'.",
+      "canales": ["web", "teléfono 999 928 8311", "Facebook @proteccioncivilmerida"],
+      "notas": "El bloque está en el HTML; su visibilidad depende de la temporada o de JavaScript (inferido). El HTML también trae un modal sobre el 'Huracán Milton', que es contenido antiguo. refugios.php y boletin.php no se visitaron."
+    },
+    {
+      "servicio": "Sitios Web Municipales (directorio de micrositios)",
+      "categoria": "Portal / directorio",
+      "sistemaDeOrigen": "Portal Municipal (sitios.php)",
+      "funcionalidad": "Directorio de unos 100 micrositios municipales con descripción y URL (gobierno, eventos, participación, aprendizaje, negocios, bienestar, seguridad, ordenamiento territorial, apps).",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20260415224220/https://merida.gob.mx/municipio/portal/sitios.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Entradas como 'Notifícame Mantente informado sobre trámites y servicios relacionados a tu predio.', 'Internet Gratuito Ubica las zonas, parques y edificios con internet gratuito en la ciudad.', 'Geoportal Consulta a través de imágenes satelitales, información y datos del municipio.'",
+      "canales": ["web"],
+      "notas": "Captura del 2026-04-15; la página en vivo está bloqueada."
+    },
+    {
+      "servicio": "Ciudadanía (sección del portal)",
+      "categoria": "Ciudadanía",
+      "sistemaDeOrigen": "Portal Municipal (ciudadania.php)",
+      "funcionalidad": "Concentrador con los bloques Participa, Reporta, Cuídate, Exprésate, Aprende y Diviértete, con tarjetas hacia programas (Mérida Limpia, Mérida Decide Contigo, Mérida Nos Une, Mérida Diversa, Mérida Te Cuida, Ayuntatel, App Mérida Móvil, Industrias al 100, Reporta en línea, Fauna, DIF, Instituto de las Mujeres, Tarjeta Mérida Contigo, etc.).",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20260331235949/https://merida.gob.mx/municipio/portal/ciudadania.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'Reporta por Mérida Reportar es el primer paso para tener una mejor ciudad, hazlo desde cualquier dispositivo'; 'Ayuntatel Comunícate vía telefónica con Ayuntatel al 9999244000 para aclarar tus dudas y realizar tus reportes.'",
+      "canales": ["web"],
+      "notas": "Captura del 2026-03-31; la página en vivo está bloqueada."
+    },
+    {
+      "servicio": "Otras apps municipales: En Bici, Visit Mérida, ÁrbolMID",
+      "categoria": "Apps",
+      "sistemaDeOrigen": "Portal Municipal (apps.php)",
+      "funcionalidad": "En Bici: renta de bicicletas. Visit Mérida: guía turística. ÁrbolMID: datos del arbolado urbano.",
+      "tipo": "app",
+      "fuente": "https://web.archive.org/web/20260828115138/https://merida.gob.mx/municipio/portal/apps.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "'EN BICI El servicio de renta de bicicletas para trasladarte por la ciudad.'; 'VISIT MÉRIDA Explora, descubre y encuentra, lo mejor de Mérida, Yucatán.'; 'ÁRBOLMID Datos del arbolado en la ciudad, cuidado y beneficios.'",
+      "canales": ["App Store", "Google Play"],
+      "notas": "Captura del 2026-08-28. No se revisaron las tiendas."
+    }
+  ],
+  "uiObservations": [
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/css/styles.css",
+      "aspecto": "Colores – tokens principales (:root)",
+      "observacion": "Hay variables CSS declaradas: --cr-1n #002c72 (azul marino primario: navbar, títulos .color-1n, botones flotantes), --cr-2n #74ba47 (verde: fondo del body con clase bg-color-2n y botones píldora), --cr-15n #6bac42 (verde de la barra inferior), --cr-10n y --dfl-blue #1c256a (azul, igual a meta theme-color), --cr-6n #f4f9f0 (fondo de las tarjetas Investiga), --cr-7n #b6b9c7 (bordes), --cr-11n #404045 (texto oscuro), --cr-21 #e3f1da (hover del slider), --cr-1 #d43987 (botón flotante Apps), --cr-19n #006aff, --cr-20n #b7ed3b. Otras: --cr-2n-dark #983852, --cr-3n #f5e9ec, --cr-4n #e3adb7, --cr-16n #c75a6f, --cr-17n #f44c7f, --cr-21n #fe6f61.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/css/plus/navbar.css",
+      "aspecto": "Colores – aplicación en componentes",
+      "observacion": "La navbar usa background-color var(--cr-1n) (#002c72) con texto blanco. .bg-color-2n aplica #74ba47 y la regla .gradient-nav-footer usa linear-gradient(var(--cr-15n), var(--cr-15n)), o sea #6bac42 plano. Como navbar.css se carga después de styles.css y default.css, sus reglas prevalecen: la barra inferior queda verde #6bac42 y el pie (.bg-dfl-blue) queda #002c72, no el #264089 de default.css.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/css/plus/slider.css",
+      "aspecto": "Colores – tarjetas del slider",
+      "observacion": "--slider-color-1 #c9e4b7 (fondo de la etiqueta de categoría), --slider-color-2 var(--cr-2n) #74ba47 (botón), --slider-color-3 var(--cr-11n) #404045 (título). Hover de la tarjeta: #e3f1da.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Meta y PWA",
+      "observacion": "meta theme-color '#1c256a'; manifest en assets/img/institution/favicon/manifest.json; metas apple-mobile-web-app. El viewport incluye 'maximum-scale=1.0, user-scalable=0', lo que impide el zoom en móvil y es un problema de accesibilidad.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/css/material-kit.css",
+      "aspecto": "Tipografía",
+      "observacion": "Base Material Kit v2.0.6 (Creative Tim). Importa desde Google Fonts Barlow (100–900), Montserrat (100–900) y Poppins (css2, pesos 100, 400, 500, 700, 800, 900). Define --font-family-default: \"Poppins\", \"Barlow\", \"Roboto\", \"Helvetica\", \"Arial\", sans-serif y lo aplica a body y h1–h6, con tamaño base del cuerpo 0.875rem. El HTML enlaza además Montserrat y Barlow, y default.css define las utilidades .montserrat y .barlow. La fuente efectiva por defecto es Poppins.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/img/institution/logo-top.svg",
+      "aspecto": "Logotipo – versión horizontal (encabezado)",
+      "observacion": "SVG de Illustrator (viewBox 331.8×120) con colores #B7ED3B, #1C3174 y #FFFFFF. Se descargó y se vio sobre fondo #002c72. Izquierda: isotipo con forma de corazón que forma una 'M' de arcos en verde lima, rematado por un elemento escalonado blanco con un brote de planta. Derecha: 'MÉRIDA' en blanco en caja alta, la píldora lima con 'CONTIGO ES MEJOR' en azul marino y 'AYUNTAMIENTO 2024-2027' en blanco. Está pensado para fondo oscuro; sobre blanco sólo se ven el isotipo y la píldora.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://www.merida.gob.mx/municipio/portal/assets/img/logo2024-2027.svg",
+      "aspecto": "Logotipo – versión vertical a color (fondo claro)",
+      "observacion": "Versión vertical (viewBox 500×500) con colores #B7ED3B y #1C3174: isotipo corazón-M lima con remate azul, 'MÉRIDA' grande en azul marino, píldora lima con 'CONTIGO ES MEJOR' en azul y 'AYUNTAMIENTO 2024-2027' en azul.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/img/institution/logo-pie.svg",
+      "aspecto": "Logotipo – variantes de pie y monocromo",
+      "observacion": "logo-pie.svg es la versión vertical para fondo oscuro, con texto blanco, isotipo lima y píldora lima. logo-pie2.svg (https://merida.gob.mx/municipio/portal/assets/img/institution/logo-pie2.svg) es la versión monocroma azul #1C3174 con texto blanco en la píldora; su CSS interno trae un color inválido '.st1{fill:#fffff;}'. El Portal Ciudadano usa svg/logo-simple.svg: sólo el isotipo, en lima #9def0f y blanco.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/img/institution/favicon/favicon.svg",
+      "aspecto": "Favicon – escudo de Mérida",
+      "observacion": "El favicon es el escudo heráldico de la ciudad: corona dorada, escudo partido en azul (castillo dorado) y verde (león rampante dorado), ramas de laurel y listón con 'MUY NOBLE Y MUY LEAL CIUDAD DE MERIDA'. Hay variantes PNG: apple-touch-icon.png (180×180) y android-chrome-192x192.png.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/assets/img/elements/banner/log-middigital.svg",
+      "aspecto": "Logotipo MIDigital",
+      "observacion": "Wordmark 'MIDigital' en blanco pensado para fondo azul. La 'D' tiene forma de globo de diálogo con una barra en degradado verde (#79B32A a #B8E837) y hay un punto verde. Debajo, en arco, dice 'Tu trámite en línea' con un ícono de cursor. Aparece en banners del carrusel del inicio ('Conoce una nueva forma de hacer trámites digitales: portalciudadano.merida.gob.mx').",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://portalciudadano.merida.gob.mx/svg/VU-AZUL.svg",
+      "aspecto": "Logotipo Visor Urbano",
+      "observacion": "Wordmark 'VISOR URBANO' ('VISOR' en negrita y 'URBANO' en peso regular) con 'MÉRIDA' espaciado debajo, todo en #002c72. Arriba lleva una ilustración lineal de la catedral, el palacio y árboles.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Encabezado y navegación",
+      "observacion": "Header sticky (clase sticky-top) con navbar azul #002c72 y logo-top.svg (#logoNav de 130px de ancho, navbar-brand de 80px de alto). Menú: Inicio, Ayuntamiento (mega menú con foto y cargo de la presidenta municipal y enlaces de gobierno), Dependencias, Portal Ciudadano (externo), Transparencia, Mejora Regulatoria (mega menú), Entérate y Temas, más buscador y redes sociales. Un segundo menú lleva Eventos, Ciudadanía, Negocios y Empresas, Turismo y Sitios web oficiales, con íconos de buscar y huracán.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Tarjetas / carrusel 'Trámites y servicios'",
+      "observacion": "Slider (slick) de tarjetas con etiqueta de categoría en píldora (h4 .__tag sobre #c9e4b7), título h3 de peso 500, subtítulo h4, imagen a la derecha y URL corta (p. ej. 'merida.gob.mx/buenfin'). Categorías vistas: Trámites y servicios, Ciudadanía, Mujer, Eventos, Educación, Convocatorias y Entérate. Debajo hay tarjetas de 'avisos fijos' con imagen y CTA ('Infórmate', 'Conoce más', 'Ver programa', 'Ver cartelera'). El contenido está dentro de cajas blancas redondeadas ('border rounded bg-white') sobre el fondo verde del body.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Botones",
+      "observacion": "Botones píldora (.btn.btn-round, border-radius 30px) en verde #74ba47 con texto blanco de 20px: '¡Encuéntralo!' (Gaceta, Predial, Reportes, Educación) y 'Comunícate' (Emergencias, Línea Mujer, Ayuntatel, Protección Civil, con ícono de llamada ico-llamada-v2.svg y enlaces tel:). Los botones flotantes fijos a la derecha son círculos de 48px con sombra: Accesibilidad, Atención Ciudadana (ícono FA 'fa-question' sobre #002c72), Apps Municipales (#d43987) y Temporada de Huracanes (#8467d1, animado).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Tarjetas 'Investiga'",
+      "observacion": "Cuatro tarjetas con ícono SVG grande y etiqueta de 22px, peso 500, en azul: Ciudadanía, Negocios y Empresas, Turismo y Ayuntamiento. Usan la clase alert bg-color-6n (#f4f9f0) con borde de 2px #74ba47 (.item-investiga) y sombra al pasar el cursor (0 1px 7px rgb(28 37 106/36%)).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Pie de página",
+      "observacion": "Pie (clase bg-dfl-blue) con logo-pie.svg, enlace 'Ver ubicación' a Google Maps y redes (Facebook, Twitter, Instagram, YouTube, TikTok). La barra inferior verde trae Expediente Digital, Avisos de Privacidad, Reconocimientos y Atención Ciudadana, y en pantallas de menos de 992px se colapsa con una flecha. La dirección del Palacio Municipal está comentada en el HTML y no se muestra.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Iconografía",
+      "observacion": "Font Awesome (assets/js/plugins/font-awesome.js; clases fas fa-question, fa-angle-down, fa-external-link-alt) e íconos SVG propios en assets/img/elements/ (ico-llamada-v2, ico-ciudadania, ico-negocios, ico-turismo, ico-ayuntamiento, ico-buscar-n, ico-huracan-n, ico-accesibilidad, rsocial/__facebook…). Los íconos del Portal Ciudadano (ico-tramites, ico-visitas, ico-visitadores, ico-regulaciones) son pictogramas rellenos en verde suave #c1d7b0.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Tecnología / stack",
+      "observacion": "jQuery, Popper, Bootstrap Material Design, Material Kit, slick, select2, lightbox, moment, nouislider y accessibility.js. También Google Analytics (gtag G-RWH91GBNJC) y un script de Radware Bot Manager (stormcaster.js / validate.perfdrive.com). El buscador envía a buscador.php con parámetros cx e ie.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://portalciudadano.merida.gob.mx/",
+      "aspecto": "Portal Ciudadano – estructura de inicio",
+      "observacion": "Navbar azul con logo-simple.svg y el título 'Portal Ciudadano Ayuntamiento de Mérida 2024 - 2027', con íconos de inicio, acceso (Expediente Digital) y menú. Bloque '¿Qué deseas buscar?' con buscador y cuatro tiles con ícono: 'Trámites y servicios', 'Visitas domiciliarias', 'Visitadoras y Visitadores' y 'Regulaciones'. Siguen 'Lo más consultado', 'Descubre' (tarjetas de Expediente Digital y Visor Urbano), 'Infórmate' (Medios de impugnación, Demanda ciudadana) y un banner con la ilustración pie-ciudad.svg. El pie lleva dirección, enlaces de servicios y avisos de privacidad. El HTML conserva el comentario 'saved from url=(0048)https://merida.gob.mx/municipio/portal/index.php', lo que sugiere que se construyó a partir de una copia del portal municipal; también reutiliza sus CSS (material-kit, styles, navbar).",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://portalciudadano.merida.gob.mx/css/styles.css",
+      "aspecto": "Portal Ciudadano – colores adicionales",
+      "observacion": "Conserva los tokens del portal (--cr-1n #002c72, --cr-2n #74ba47) y agrega --cr-29 #006CF6 (botón 'Iniciar', clase .bg-color-VU-SARE-botton), --cr-28 #fa7165 (separador '|' de la clave, .color-exp), --cr-30 #e7f0ff, --cr-31 #DEF1DA (submenús), --cr-25 #1A385E, --cr-26 #BFE4B7, --cr-27 #4EB246 y --cr-33 #dd6f62. El selector de resultados por página usa fondo #74ba47.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+      "aspecto": "Portal Ciudadano – listado y ficha",
+      "observacion": "Listado de tarjetas blancas (alert bg-white item-investiga). Cada tarjeta muestra 'MID-XXX-NNN | Nombre' en azul con separador coral, la unidad en texto pequeño, 'Descripción:', 'Modalidad:', un botón circular '+' a la ficha y un botón píldora azul 'Iniciar >' (border-radius 50px). Hay migas de pan 'Inicio | Trámites y Servicios', 'Total de registros' y filtros en selects con buscador interno. La ficha se organiza en acordeones con preguntas ('¿De qué trata?', '¿Cuáles son los requisitos?', '¿Cuál es el costo?', '¿Cómo y dónde realizarlo?', 'Responsable del trámite') y lista de módulos con enlaces a Google Maps.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://expedientedigital.merida.gob.mx/",
+      "aspecto": "Expediente Digital – UI",
+      "observacion": "Plantilla Argon Dashboard con Material Icons y Font Awesome 5.15.4. Pantalla dividida: a un lado, beneficios con íconos (candado, reloj, documentos, ciclo); al otro, el formulario 'Iniciar sesión' (Usuario: 'CURP, Celular, Correo'; Contraseña). Lleva insignia 'NUEVO', modal de 'Guías' con video y aviso de reCAPTCHA. En el HTML aparecen #002c72, #006ff2, #67bd45, #5caf3f y #00326e, pero no se determinó a qué elemento corresponde cada uno.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "https://portalciudadano.merida.gob.mx/",
+      "aspecto": "Nombres de servicios y lemas",
+      "observacion": "Nombres literales observados: 'MIDigital – Tu trámite en línea', 'Portal Ciudadano', 'Expediente Digital', 'Visor Urbano', 'Trámites y servicios', 'Visitas domiciliarias', 'Visitadoras y Visitadores', 'Regulaciones', 'Demanda ciudadana', 'Medios de impugnación', 'Ayuntatel', 'Línea Mujer', 'Mérida Móvil', 'Reporta en línea', 'Ciudad del Aprendizaje', 'Comunícate', 'Investiga', '¡Encuéntralo!'. Lema de marca: 'Contigo es mejor'; hashtag de prensa: '#MeridaContigoEsMejor'.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "aspecto": "Contenido desactualizado visible",
+      "observacion": "En el HTML del inicio coexisten avisos con fechas pasadas o sin año: el modal del 'Huracán Milton', 'Cabildo Abierto Fecha de la sesión: 21 de agosto', 'La Noche Blanca 22 y 23 de mayo', 'Día inhábil: 16 sept', el descuento de predial 'Del 1 al 31 de marzo' y un aviso de mantenimiento del 'martes 21 de julio'. Varios están en modales o carruseles cuya visibilidad depende de JavaScript.",
+      "confianza": "observado"
+    }
+  ],
+  "criticalFacts": [
+    {
+      "hecho": "Teléfonos de emergencia, Ayuntatel y Protección Civil publicados en el inicio",
+      "valor": "911; Ayuntatel 999 924 4000 o 070; Protección Civil 999 928 8311",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "citaTextual": "Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311."
+    },
+    {
+      "hecho": "Línea Mujer (botón 'Comunícate' del inicio)",
+      "valor": "800 455 7672 (tel:8004557672)",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "citaTextual": "<a ... href=\"tel:8004557672\" ...> ... Línea Mujer"
+    },
+    {
+      "hecho": "Línea Mujer: procedimiento y disponibilidad",
+      "valor": "8004557672; 24 horas, 7 días",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+      "citaTextual": "1. La mujer llama a la Línea Mujer (8004557672) y solicita atención ante alguna situación de violencia."
+    },
+    {
+      "hecho": "Teléfono de Transparencia",
+      "valor": "(999) 924 6361, 24 horas",
+      "fuente": "https://merida.gob.mx/municipio/portal/index.php",
+      "citaTextual": "Tel. (999) 924 6361 24hrs, 7 días de la semana"
+    },
+    {
+      "hecho": "Dirección del Ayuntamiento (pie del Portal Ciudadano)",
+      "valor": "Calle 62 s/n, Palacio Municipal, Col. Centro, C.P. 97000, Mérida",
+      "fuente": "https://portalciudadano.merida.gob.mx/",
+      "citaTextual": "Calle 62 s/n, Palacio Municipal Colonia Centro, C.P. 97000 Mérida, Yucatán"
+    },
+    {
+      "hecho": "Módulo de atención ciudadana y canales generales (nota de prensa del 22 de julio de 2026)",
+      "valor": "Bajos del Palacio Municipal, L-V 8:00 a.m.–5:00 p.m.; Ayuntatel 924 40 00 / 070; app Mérida Móvil",
+      "fuente": "https://prensa.merida.gob.mx/12478/Escuchar-y-resolver-es-la-mejor-forma-de-gobernar-Cecilia-Patron/amp",
+      "citaTextual": "Para realizar algún reporte, solicitud o consultar trámites y programas las familias meridanas pueden realizarlo ingresando a la página web merida.gob.mx, mediante Ayuntatel marcando al 924 40 00, al 070 o a través de la aplicación Mérida Móvil, así como acudir al módulo de atención ciudadana en los bajos de Palacio Municipal de lunes a viernes de 8:00 a.m. a 5:00 p.m."
+    },
+    {
+      "hecho": "Horarios de Ayuntatel (captura del 2025-12-04)",
+      "valor": "L-V 7:30 a.m.–9:30 p.m.; sábados 8:30 a.m.–6:30 p.m.; domingos y festivos 8:30 a.m.–1:30 p.m.",
+      "fuente": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+      "citaTextual": "Ayuntatel al 070 o (999) 924.4000 De lunes a viernes de 7:30 a.m. a 9:30 p.m. Sábados de 8:30 a.m. a 6:30 p.m. Domingos y días festivos de 8:30 a.m. a 1:30 p.m."
+    },
+    {
+      "hecho": "Chat ciudadano (captura del 2025-12-04)",
+      "valor": "L-V 8:00 a.m.–9:00 p.m.",
+      "fuente": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+      "citaTextual": "Chat ciudadano De lunes a viernes de 8:00 a.m. a 9:00 p.m."
+    },
+    {
+      "hecho": "Atención Ciudadana Presencial en el Palacio Municipal (ficha MID-PAC-314)",
+      "valor": "Calle 62 s/n entre 61 y 63, Centro; 999-942-00-00 ext. 80119",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/314",
+      "citaTextual": "Palacio Municipal Dirección: Calle 62, No. Ext. Sin número, Entre 61, y 63, Col. Centro Teléfono: 999-942-00-00 Extensión: 80119"
+    },
+    {
+      "hecho": "Dónde presentar una demanda ciudadana (Subdirección de Mejora Regulatoria)",
+      "valor": "Calle 64-A núm. 538-B entre 77 y 79, Centro (Ermita Santa Isabel); L-V 8:00–15:00; (999) 9420000 ext. 83756",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+      "citaTextual": "Puedes hacerlo de forma presencial en las oficinas de la Subdirección de Mejora Regulatoria ubicada en la calle 64-A número 538-B entre 77 y 79 Colonia Centro, Mérida (Ermita Santa Isabel), de lunes a viernes de 8:00 a. m. a 3:00 p. m. También podrás hacerlo vía telefónica al número (999)9420000 extensión 83756 o través del siguiente enlace:"
+    },
+    {
+      "hecho": "Denuncias contra servidores públicos (Contraloría Municipal): oficina",
+      "valor": "Calle 50 núm. 471 entre 51 y 53, Centro; L-V 08:00–15:00",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+      "citaTextual": "Por escrito o de manera presencial en las oficinas de la Dirección de Contraloría Municipal, ubicadas en la calle 50, número 471, entre 51 y 53, Colonia Centro (Horario de atención de lunes a viernes de 08:00 a 15:00 horas)."
+    },
+    {
+      "hecho": "Denuncias contra servidores públicos: correo y sistema en línea",
+      "valor": "contraloriateescucha@merida.gob.mx; https://denunciacontraloria.merida.gob.mx/",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+      "citaTextual": "Vía correo electrónico a la cuenta institucional: contraloriateescucha@merida.gob.mx En línea en el Sistema Municipal de Denuncias: https://denunciacontraloria.merida.gob.mx/"
+    },
+    {
+      "hecho": "Asistencia al Contribuyente (predial), captura del 2025-12-04",
+      "valor": "L-V 8:00–15:00; (999) 942 00 00 ext. 80610, 80655, 80681 y 80684; asistencia.contribuyente@merida.gob.mx; WhatsApp 9991 22 19 99",
+      "fuente": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+      "citaTextual": "Asistencia al Contribuyente Horario de atención: lunes a viernes de 8:00 a.m. a 3:00 p.m. Teléfono: (999) 942 00 00 Extensiones: 80610, 80655, 80681 y 80684 Correo: asistencia.contribuyente@merida.gob.mx WhatsApp: 9991 22 19 99 (Únicamente mensajes)"
+    },
+    {
+      "hecho": "WhatsApp de ayuda del sitio Predial (captura del 2025-11-16)",
+      "valor": "(999) 122.19.99, L-V 8 a.m.–3 p.m., sólo mensajes",
+      "fuente": "https://web.archive.org/web/20251116021007/https://isla.merida.gob.mx/serviciosinternet/predial/index.phpx",
+      "citaTextual": "Envíanos un WhatsApp* al (999) 122.19.99 De lunes a viernes de 8 a.m. a 3 p.m. * Sólo mensajes"
+    },
+    {
+      "hecho": "Pago por transferencia: solicitud de línea de captura (captura del 2025-12-04)",
+      "valor": "tesoreria.spei@merida.gob.mx",
+      "fuente": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+      "citaTextual": "Transferencias electrónicas: Para llevar a cabo este procedimiento la ciudadanía debe solicitar por correo a tesoreria.spei@merida.gob.mx la línea de captura correspondiente"
+    },
+    {
+      "hecho": "Correo de dudas de Expediente Digital",
+      "valor": "expedientedigital@merida.gob.mx",
+      "fuente": "https://expedientedigital.merida.gob.mx/",
+      "citaTextual": "¿Tienes dudas sobre el Expediente Digital? Escríbenos a expedientedigital@merida.gob.mx"
+    },
+    {
+      "hecho": "Bolsa de trabajo: correos alternos de registro",
+      "valor": "empleo@merida.gob.mx; bolsadetrabajomerida@merida.gob.mx",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/299",
+      "citaTextual": "En caso de no poder registrarse en línea, enviar correo electrónico a empleo@merida.gob.mx y/o bolsadetrabajomerida@merida.gob.mx."
+    },
+    {
+      "hecho": "Oficina de Prosperidad y Bienestar Económico (Bolsa de Trabajo)",
+      "valor": "Calle 59 núm. 432 entre 50 y 52, Centro; 9999286977 ext. 81542",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/299",
+      "citaTextual": "Dirección de Prosperidad y Bienestar Económico Dirección: Calle 59, No. Ext. 432, Entre 50, y 52, Col. Centro Teléfono: 9999286977 Extensión: 81542"
+    },
+    {
+      "hecho": "Orientación SARE/CAE (captura del 2026-03-31)",
+      "valor": "(999) 928 6977 ext. 81542, 81585 y 81586; WhatsApp 999 956 80 73",
+      "fuente": "https://web.archive.org/web/20260331230112/https://www.merida.gob.mx/cae/sare.php",
+      "citaTextual": "Teléfono: (999) 928 6977 Ext. 81542, 81585 y 81586 ... Envíanos un WhatsApp al 999 956 80 73 de lunes a viernes de 8:00 a.m. a 3:00 p.m."
+    },
+    {
+      "hecho": "Apoyo psicológico: correo para solicitar cita (publicado con tilde)",
+      "valor": "psicología@merida.gob.mx",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+      "citaTextual": "Enviar correo a psicología@merida.gob.mx"
+    },
+    {
+      "hecho": "Instituto de las Mujeres: contacto del área responsable de Línea Mujer",
+      "valor": "tramites.inm@merida.gob.mx; 9999240296",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+      "citaTextual": "Correo electrónico: tramites.inm@merida.gob.mx Teléfono: 9999240296"
+    },
+    {
+      "hecho": "Tribunal de lo Contencioso Administrativo (recurso de revisión)",
+      "valor": "Calle 60 x 29 y 27 núm. 311, Col. Alcalá Martín",
+      "fuente": "https://portalciudadano.merida.gob.mx/MediosImpugnacion/mediosimpugnacion",
+      "citaTextual": "Se interpone directamente ante el Tribunal de lo Contencioso Administrativo del Municipio de Mérida, ubicado en la Calle 60 x 29 y 27 No. 311 de la Colonia Alcalá Martin, de Mérida."
+    },
+    {
+      "hecho": "Dirección de la Subdirección de Mejora Regulatoria (sitio isla)",
+      "valor": "Calle 64-A núm. 538-B entre 77 y 79, Centro, C.P. 97000",
+      "fuente": "https://isla.merida.gob.mx/serviciosinternet/MejoraRegulatoria/php/AgendaSimplificada.phpx",
+      "citaTextual": "Subdirección de Mejora Regulatoria Calle 64-A número 538-B entre 77 y 79 Colonia Centro, C.P. 97000 Mérida, Yucatán, México"
+    },
+    {
+      "hecho": "Teléfono publicado para Bacheo, distinto al de Ayuntatel del inicio",
+      "valor": "9999420000",
+      "fuente": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+      "citaTextual": "Contacto Ayuntatel: 9999420000"
+    }
+  ],
+  "limitations": [
+    "Fecha de consulta: 2026-10-17. Todas las URL se registraron en cada fila.",
+    "merida.gob.mx y www.merida.gob.mx usan Radware Bot Manager. Tras unas 14 solicitudes (inicio, 5 CSS y 8 logos), todas las páginas redirigieron a validate.perfdrive.com ('Radware Captcha Page'), incluida la prueba con WebFetch, que sale por la misma IP. No se intentó resolver ni evadir el captcha. Se quedaron sin leer en vivo ciudadania.php, negocios.php, turismo.php, sitios.php, apps.php, temas.php, atencionciudadana, cultura, bienestar, mujer, reporta, predial, carrito, empleo, cae, catalogomunicipal, gaceta y transparencia.",
+    "Como alternativa se leyeron capturas de la Wayback Machine (web.archive.org): ciudadania (2026-03-31), negocios (2026-04-15), sitios (2026-04-15), apps (2026-08-28), atencionciudadana (2025-12-04), predial (2025-11-16), empleo (2025-12-05), ciudaddelaprendizaje (2025-08-14), pagos electrónicos/carrito (2024-11-28), cae/sare (2026-03-31) y catalogomunicipal (2025-12-04). Su contenido puede no estar vigente; esas filas quedaron como 'parcial'. Para cultura, bienestar, reporta y mujer, Wayback sólo había guardado el captcha.",
+    "También respondieron con captcha Radware: visorurbano.merida.gob.mx, geoportal.merida.gob.mx/empleo/, decide.merida.gob.mx y la Agenda Regulatoria en isla.merida.gob.mx. La nota de prensa 11621 (baches) dio HTTP 403. air.merida.gob.mx no respondió (HTTP 000).",
+    "denunciacontraloria.merida.gob.mx es una aplicación Angular que sólo funciona con JavaScript; con curl no se ve su contenido.",
+    "Expediente Digital pide inicio de sesión con reCAPTCHA. No se creó cuenta ni se inició sesión; sólo se observó la pantalla pública.",
+    "No se envió ningún formulario (Demanda ciudadana, Oriéntate, contacto de la Bolsa de Trabajo, buscador). Los botones 'Iniciar' no se siguieron, así que sus flujos y la integración entre sistemas no están verificados. Los atributos data-dominio (*.gestiondetramites.merida.gob.mx) indican un ruteo, pero que el portal enlace a otro sistema no prueba integración técnica.",
+    "Los conteos del Portal Ciudadano (387 trámites, 119 visitas, 455 personas en el padrón, 281 regulaciones) salen del HTML estático, por atributos data-*. Pueden diferir de lo que muestra la interfaz con JavaScript y cambian con el tiempo.",
+    "Datos personales: no se copiaron nombres, fotografías ni correos personales de servidores públicos. Se borraron las páginas descargadas del padrón de inspectores, de un perfil de inspector y de una ficha de visita con nombres. En las fichas guardadas se reemplazaron por '[OMITIDO]' los nombres de responsables y los correos personales. Sólo se registran correos institucionales.",
+    "Sólo se abrieron 12 fichas de detalle (201, 299, 296, 206, 314, 397, 16, 7, 334, 275, la visita 119 y un perfil). En el resto de las filas basadas en el catálogo, requisitos, costos y horarios quedan pendientes. Los montos de costo 'Fijo' (SARE, licencia de funcionamiento) no se extrajeron.",
+    "Requisitos literales: se eliminó un guion suave invisible (U+00AD) en 'fotografía' que aparece en el HTML; no se alteró ningún otro texto.",
+    "WebSearch casi no devolvió páginas de merida.gob.mx y mezcló resultados de Mérida, España (merida.es); no se usó como evidencia.",
+    "Hay avisos y banners con fechas pasadas o sin año (Huracán Milton, Cabildo Abierto 21 de agosto, Noche Blanca en mayo, predial en marzo, día inhábil 16 de septiembre). Que estén visibles no implica vigencia.",
+    "Solicitudes aproximadas por sitio: merida.gob.mx/www unas 22 (incluidas las bloqueadas); portalciudadano unas 30; web.archive.org 15; prensa 3; expedientedigital, visorurbano, geoportal, decide, denunciacontraloria y air 1 cada uno; isla 2. Ninguno superó 60.",
+    "Lo que el proyecto llama 'Bache a la vista' (verificación ciudadana y recompensas), mapa de calor y celdas H3, mascota de salud mental, asistente de IA con voz y Expediente Digital ficticio es PROPUESTA del prototipo. Ninguna fuente muestra que exista algo equivalente."
+  ],
+  "assetsSaved": [
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portal_index.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/css/styles.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/css/default.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/css/plus_navbar.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/css/plus_slider.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/css/material-kit.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/logo-top.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/logo-pie.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/logo-pie2.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/logo2024-2027.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/favicon.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/log-middigital.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/apple-touch-icon.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/android-chrome-192x192.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/logo-top.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/logo-pie.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/logo-pie2.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/logo2024-2027.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/favicon.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/render/log-middigital.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/ondark/dark-logo-top.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/ondark/dark-logo-pie.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/logos/ondark/dark-log-middigital.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/prensa/midigital_amp.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/prensa/n12478_amp.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/index.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/tramites.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/tramites_parsed.json",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/inspecciones.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/regulaciones.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t201.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t299.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t296.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t206.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t314.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t397.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t16.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t7.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t334.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/t275.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/impugnacion.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/detalle/demanda.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/css/styles.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/css/navbar.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/logo-simple.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/VU-AZUL.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/ico-tramites.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/ico-visitas.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/ico-visitadores.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/ico-regulaciones.svg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/render/dark-logo-simple.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/portalciudadano/svg/render/VU-AZUL.svg.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/otros/expedientedigital.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/otros/denunciacontraloria.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/otros/visorurbano_BLOQUEADO_radware.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/sitios/isla_agendasimplificada.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/pages/ciudadania_BLOQUEADO_radware.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/ciudadania.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/negocios.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/sitios.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/apps_descomprimido.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/atencionciudadana.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/predial.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/empleo.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/ciudaddelaprendizaje.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/carrito.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/sare.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-portal-municipal/wayback/catalogomunicipal.html"
+  ]
+}

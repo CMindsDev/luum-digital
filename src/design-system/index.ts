@@ -1,5 +1,13 @@
 /** Design system de merida-unificada: tokens (tokens.css), componentes base accesibles y utilidades de UI. */
 export { Avatar, type AvatarProps } from "./components/Avatar";
+export {
+  BandaTematica,
+  type AlineacionBanda,
+  type BandaTematicaProps,
+  type EnlaceBanda,
+  type FotoBanda,
+  type TonoBanda,
+} from "./components/BandaTematica";
 export { Badge, type BadgeProps } from "./components/Badge";
 export { BrandLogo, type BrandLogoProps } from "./components/BrandLogo";
 export { Button, type ButtonProps } from "./components/Button";
@@ -12,11 +20,14 @@ export { DemoTag, type DemoTagProps } from "./components/DemoTag";
 export { Dialog, type DialogProps } from "./components/Dialog";
 export { EmptyState, type EmptyStateProps } from "./components/EmptyState";
 export { ErrorState, type ErrorStateProps } from "./components/ErrorState";
+export { GlifoPixel, type GlifoPixelProps } from "./components/GlifoPixel";
 export { IconButton, IconButtonLink, type IconButtonLinkProps, type IconButtonProps } from "./components/IconButton";
 export { LabGlyph, type LabGlyphProps } from "./components/LabGlyph";
 export { LoadingState, type LoadingStateProps } from "./components/LoadingState";
+export { MosaicoLaboratorio, type MosaicoLaboratorioProps } from "./components/MosaicoLaboratorio";
 export { OfflineNotice, type OfflineNoticeProps } from "./components/OfflineNotice";
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
+export { PatronCadena, type PatronCadenaProps } from "./components/PatronCadena";
 export { SectionLabel, type SectionLabelProps } from "./components/SectionLabel";
 export { Sheet, type SheetProps } from "./components/Sheet";
 export { Skeleton, type SkeletonProps } from "./components/Skeleton";
@@ -50,5 +61,6 @@ export { describirError, esErrorDefinitivo, type ErrorDescrito, type TipoError }
 export * from "./lib/estados";
 export { formatearFecha, formatearFechaHora, type EstiloFecha } from "./lib/fechas";
 export { ICONO_PREDETERMINADO, NOMBRES_ICONOS, resolverIcono } from "./lib/iconos";
+export { FOTOS_BANDA, ICONOS_BANDA } from "./lib/recursos-laboratorio";
 export { descartarAviso, notificar, useAvisos, type AvisoEmergente, type NuevoAviso, type TonoAviso } from "./lib/toast-store";
 export { CLASES_INSIGNIA, CLASES_MOSAICO, type TonoInsignia, type TonoMosaico } from "./lib/tonos";

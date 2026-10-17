@@ -59,6 +59,10 @@ export async function navegarA(page: Page, seccion: SeccionE2E) {
     await principal.getByRole("link", { name: datos.etiqueta, exact: true }).click();
   }
   await expect(page).toHaveURL(rutaComoPatron(datos.ruta));
+  if (seccion === "operador") {
+    await page.getByRole("link", { name: "Revisión y verificaciones", exact: true }).click();
+    await expect(page).toHaveURL(/\/operador\/revision$/);
+  }
   return esperarTitulo(page);
 }
 
@@ -71,6 +75,10 @@ async function abrirMenuIdentidad(page: Page) {
 export async function cambiarIdentidad(page: Page, nombre: string) {
   await abrirMenuIdentidad(page);
   await page.getByRole("button", { name: new RegExp(nombre) }).click();
+  if (nombre === "Carmen Dzib" || nombre === "Administración demo") {
+    await expect(page.getByRole("heading", { level: 1, name: "Centro de operaciones" })).toBeVisible();
+    await page.getByRole("link", { name: "Revisión y verificaciones", exact: true }).click();
+  }
   await expect(page.getByRole("button", { name: new RegExp(`Identidad de demostración: ${nombre}`) })).toBeVisible();
 }
 

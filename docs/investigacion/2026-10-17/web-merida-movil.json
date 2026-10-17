@@ -1,0 +1,725 @@
+{
+  "summary": "Consulta del 2026-10-17. Mérida Móvil es la app del Ayuntamiento de Mérida, Yucatán (iOS id1065129797, bundle gob.ayuntamiento.Me-rida-Mo-vil; Android app.meridamovil.com; vendedor «MUNICIPIO DE MERIDA YUCATAN»). Está en la versión 4.0.2. App Store la publicó el 2026-10-16 a las 18:36 UTC; Google Play muestra «Actualización 15 oct 2026» y la versión 4.0.2 aparece en sus datos embebidos. Las notas de 4.0.0, 4.0.1 y 4.0.2 (12, 14 y 16 de octubre de 2026) dicen: «¡Mérida Móvil se renovó! Conoce su nueva imagen, nuevos elementos visuales y una presentación renovada de sus contenidos. Además, entérate de lo último de tu Ayuntamiento en el apartado de Novedades.» Calificaciones: App Store MX 2.4 (41 calificaciones); Google Play 2.2 (285 opiniones, «50 k+ Descargas»).\n\nAcceso a las fuentes: merida.gob.mx/app y merida.gob.mx/reporta (http y https, con y sin www) redirigen a un captcha de Radware Bot Manager. No se intentó evadirlo. En su lugar se leyeron capturas de Wayback Machine: /app/ del 2025-07-11 (anterior a la v4) y /reporta/index.php del 2026-04-25. También /reporta/reporte.php del 2026-10-12, que es igual en estructura a la del 2026-04-25.\n\nEXISTENTE (observado en las fuentes oficiales). Los módulos con nombre exacto son: «Reportes rápidos», «Catálogo de reportes», «Mis Reportes» (mosaico) o «Mis reportes» (pantalla y ficha), «Novedades» y «Catálogo Municipal» (muestra el «Portal Ciudadano»). Los reportes al instante son «Bache a la vista» y «Desazolve de rejilla» (versión 3.1.0 del 26-dic-2024) y «Basura en vía pública» (sólo en la descripción de App Store). La bolsa de empleo y los eventos culturales del día aparecen sólo en la descripción. Las categorías visibles en la lista «Selecciona un servicio» son «Animal muerto», «Bache», «Limpieza de parques y jardines», «Luminaria» y «Queja por falta de recolección de basura»; la lista está recortada en la captura. La app no usa la palabra «alumbrado»: el término es «Luminaria».\n\nRECORRIDO DE REPORTE EN LA APP (orden de las capturas oficiales más los textos de la ficha):\n1) Inicio de sesión con «Correo electrónico» y «Contraseña», o «Crear una cuenta». El registro exige confirmar el correo.\n2) Pantalla de inicio: «Hola, [nombre]» / «¿Qué quieres hacer hoy?», una tarjeta destacada y la sección «ACCESOS RÁPIDOS». Desde ahí se entra a «Reportes rápidos».\n3) «Ubicación del reporte»: «Ajusta el marcador sobre el punto exacto» en un mapa. Según las notas de la 3.1.3, si la app no detecta la ubicación se puede escribir la dirección o elegirla en el mapa.\n4) Hoja inferior «Selecciona un servicio»: «Elige el tipo de atención que necesitas».\n5) Según la ficha: «captura la información, agrega fotos o video». Esta pantalla no aparece en las capturas.\n6) Modal con «Tu folio de reporte es:», el número, «Dale seguimiento en el botón de 'Mis Reportes'» y el botón «ACEPTAR».\n7) «Mis reportes»: «Fecha inicio», «Fecha fin», «FILTRAR RESULTADOS» y «Buscar por folio». Los reportes se agrupan por estatus: «Registrado», «En proceso de atención», «Solucionado» y «Motivo de cancelación».\nLos reportes al instante dan folio «con solo confirmar tu ubicación».\n\nCAMPOS. En la app sólo se ven la ubicación (marcador) y el tipo de servicio. La descripción y las fotos o video se mencionan en la ficha, pero sus campos no se ven. En la web, «Reporta en línea» tiene tres pasos:\n- «Datos del reporte»: «Listado de servicios»; «En dónde se presenta la situación a reportar» (Particular, Comercio/Empresa u Otro); ubicación «Por dirección» o «Por mapa». Los campos de ubicación son Calle*, Letra de calle, Número predio, Letra predio, Cruzamiento 1*, Cruzamiento 2, Colonia o Comisaría* y «Lista de coincidencias»*. Además, fotografía opcional (.jpg, .jpeg o .png, máximo 5 MB) y descripción* de 15 a 300 caracteres.\n- «Datos del solicitante»: ¿Es empleado del ayuntamiento?*, Nombre(s)*, Apellido paterno*, Apellido materno, Edad (mínimo 18), dirección*, Teléfono* de 10 dígitos, Correo electrónico* y su confirmación*.\n- «Confirme su información»: aceptar el Aviso de Privacidad Simplificado y pulsar «Finalizar». Aparece el modal «Reporte Creado» con el folio y se envía una copia al correo.\nLa web detecta duplicados con el mensaje «Solicitud existente». Los reportes no son anónimos: «al asignarse un folio, no pueden ser anónimo». Para el seguimiento web se pregunta «¿Tu reporte es de noviembre de 2017 en adelante?» y se ingresa el «Folio» (sólo números) con el botón «Buscar».\n\nFORMATO DE FOLIO: numérico. En la captura de tienda tiene 7 dígitos; no se reproduce el número.\n\nCANALES: Ayuntatel al 999 924 4000 o al 070, la app, la web y el módulo presencial de Atención Ciudadana (ver criticalFacts).\n\nPROPUESTO (no existe en ninguna fuente): la verificación ciudadana, las recompensas, el mapa de calor o celdas H3, el asistente de IA y la voz son propuestas del prototipo. La nota MIDigital (11-ago-2026) no menciona Mérida Móvil ni cambios en la app; describe Portal Ciudadano, Expediente Digital y Visor Urbano.",
+  "inventory": [
+    {
+      "servicio": "Mérida Móvil (app)",
+      "categoria": "App municipal de reportes y servicios",
+      "sistemaDeOrigen": "Mérida Móvil – Ayuntamiento de Mérida, Yucatán (vendedor «MUNICIPIO DE MERIDA YUCATAN»); iOS id1065129797 (bundle gob.ayuntamiento.Me-rida-Mo-vil); Android app.meridamovil.com",
+      "funcionalidad": "Según la ficha: «Realizar reportes las 24 horas, los 365 días del año», «Dar seguimiento a tus reportes realizados», «Consultar y recibir orientación de todos los trámites y servicios del Ayuntamiento», «Reportar muchos más temas municipales», «Conocer las vacantes de la bolsa de empleo y postularte a ellas», «Conocer los eventos culturales del día».",
+      "tipo": "app",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://itunes.apple.com/lookup?id=1065129797&country=mx | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX (consultadas 2026-10-17)",
+      "estadoVerificacion": "verificada",
+      "evidencia": "En iOS, la versión 4.0.2 se publicó el 2026-10-16T18:36:06Z; la 4.0.1 el 2026-10-14 y la 4.0.0 el 2026-10-12. Lanzamiento: 2015-12-15. Tamaño 17.6 MB, «Requiere iOS 13.0 o posterior», categoría Estilo de vida, «© 2016 Ayuntamiento de Mérida, Yucatán», calificación 2.4 (41). En Google Play: «Actualización 15 oct 2026», versión 4.0.2 en datos embebidos, «50 k+ Descargas», 2.2 (285 opiniones), etiqueta «Gobierno». Notas de versión: «¡Mérida Móvil se renovó! Conoce su nueva imagen, nuevos elementos visuales y una presentación renovada de sus contenidos. Además, entérate de lo último de tu Ayuntamiento en el apartado de Novedades.»",
+      "canales": ["App iOS (App Store)", "App Android (Google Play)", "iPad"],
+      "requisitosPublicados": ["«Al registrarte en la App, deberás hacer clic en el correo de confirmación, encuentra el mensaje en tu bandeja de entrada o elementos no deseados.»", "iOS: «Requiere iOS 13.0 o posterior.»"],
+      "notas": "Las declaraciones de privacidad no coinciden entre tiendas. App Store dice «No se recopilan datos». Google Play dice «Es posible que esta app recopile estos tipos de datos: Información personal y Dispositivo u otros IDs», «Los datos no están encriptados» y «Puedes solicitar que se borren los datos». Política de privacidad enlazada: http://www.merida.gob.mx/municipio/portal/politicasm.phpx (App Store) y http://www.merida.gob.mx/avisoprivacidad (Play). La página /reporta también enlaza a la app («Reporta vía App Mérida Móvil»)."
+    },
+    {
+      "servicio": "Inicio de sesión / «Crear una cuenta»",
+      "categoria": "Cuenta de usuario",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Pantalla «Bienvenido de nuevo» con el texto «Ingresa tus datos para continuar con tus trámites». Tiene los campos «Correo electrónico» y «Contraseña» (con ícono de ojo), los enlaces «¿Olvidaste tu contraseña?» y «¿Necesitas ayuda? Contáctanos», y el botón «Iniciar sesión». Debajo, «¿Aún no tienes cuenta?» lleva a «Crear una cuenta».",
+      "tipo": "otro",
+      "fuente": "Captura iPhone 1: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/37/d3/f9/37d3f911-1172-90fe-52ed-8e164407534e/001.jpg/1206x2622bb.jpg | Captura iPad 1: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/52/26/55/522655da-3f01-0b30-157c-6849c66d90b1/login.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Textos legibles en las capturas oficiales: «Nueva imagen desde el inicio.», «Una nueva forma de entrar a Mérida Móvil», «Bienvenido de nuevo», «Iniciar sesión», «Crear una cuenta».",
+      "canales": ["App"],
+      "requisitosPublicados": ["Correo electrónico", "Contraseña", "Confirmación por correo al registrarse (texto de la ficha)"],
+      "notas": "Versión 3.2.0 (2026-08-12): «Ahora podrás aceptar el aviso de privacidad», «Cambiar y actualizar tu contraseña con mayor protección», «Dar de baja tu cuenta si lo deseas». Versión 3.2.1 (2026-08-20): se aclararon las acciones para reenviar el correo de validación. Los campos del formulario de registro no aparecen en las capturas (pendiente)."
+    },
+    {
+      "servicio": "Reportes rápidos",
+      "categoria": "Reportes ciudadanos",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "La ficha de Play dice: «Con los “Reportes rápidos”, te llevamos de la mano para que tu reporte sea más ágil, sencillo y puedas agregar la información que consideres, como ubicación detallada, fotos y/o videos.» El texto de la captura dice: «Confirma tu ubicación, captura la información, agrega fotos o video y obtén tu folio.»",
+      "tipo": "reporte",
+      "fuente": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX | Captura iPhone 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg | Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "En «ACCESOS RÁPIDOS» hay un mosaico «Reportes rápidos» (ícono de lápiz sobre cuadro, borde inferior azul). Las capturas muestran las pantallas «Ubicación del reporte» y «Selecciona un servicio».",
+      "canales": ["App"],
+      "requisitosPublicados": ["«Confirma tu ubicación»", "«captura la información»", "«agrega fotos o video» (opcional según Play: «puedas agregar la información que consideres»)"],
+      "notas": "Las capturas oficiales no muestran la pantalla para capturar la descripción, las fotos o el video (pendiente)."
+    },
+    {
+      "servicio": "Bache a la vista",
+      "categoria": "Reportes al instante",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Reporte inmediato de baches: se confirma la ubicación y se obtiene el folio.",
+      "tipo": "reporte",
+      "fuente": "Historial de versiones 3.1.0 (2024-12-26): https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | Descripción en Play: https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Versión 3.1.0: «Creamos reportes al instante, Bache a la vista y Desazolve de rejilla, ¡obtén tu folio al confirmar tu ubicación!». Play: «¡NUEVO! Bache a la vista y desazolve de rejilla, donde puedes reportar de manera inmediata y sencilla estos servicios, con solo confirmar tu ubicación.»",
+      "canales": ["App"],
+      "requisitosPublicados": ["Confirmar ubicación"],
+      "notas": "En la captura iPhone 2, detrás del modal de folio, se ve a medias una tarjeta azul con el texto «BA…» / «a l…». Probablemente es «Bache a la vista», pero no está confirmado. Ninguna fuente menciona verificación ciudadana ni recompensas para este reporte."
+    },
+    {
+      "servicio": "Desazolve de rejilla",
+      "categoria": "Reportes al instante",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Reporte inmediato de rejillas o drenaje pluvial que necesitan desazolve: se confirma la ubicación y se obtiene el folio.",
+      "tipo": "reporte",
+      "fuente": "Historial de versiones 3.1.0 (2024-12-26): https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "verificada",
+      "evidencia": "«Creamos reportes al instante, Bache a la vista y Desazolve de rejilla, ¡obtén tu folio al confirmar tu ubicación!»",
+      "canales": ["App"],
+      "requisitosPublicados": ["Confirmar ubicación"],
+      "notas": "Ninguna captura oficial muestra esta opción."
+    },
+    {
+      "servicio": "Basura en vía pública",
+      "categoria": "Reportes al instante",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Reporte inmediato de basura en la vía pública: sólo hay que confirmar la ubicación.",
+      "tipo": "reporte",
+      "fuente": "Descripción en App Store: https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://itunes.apple.com/lookup?id=1065129797&country=mx",
+      "estadoVerificacion": "parcial",
+      "evidencia": "«¡NUEVO! Basura en vía pública, donde puedes reportar de manera inmediata y sencilla estos servicios, con solo confirmar tu ubicación.»",
+      "canales": ["App"],
+      "requisitosPublicados": ["Confirmar ubicación"],
+      "notas": "Sólo aparece en la descripción de App Store; no está en la de Play ni en las capturas. No se publica la fecha en que se agregó. Es distinto de la categoría «Queja por falta de recolección de basura»."
+    },
+    {
+      "servicio": "Catálogo de reportes",
+      "categoria": "Reportes ciudadanos",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Play: «El “Catálogo de reportes” te ofrecerá una amplia gama de temas que ahora podrás reportar desde la app.»",
+      "tipo": "reporte",
+      "fuente": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX | Captura iPhone 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Mosaico «Catálogo de reportes» con ícono de cuadrícula 2×2 y borde inferior verde.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "La lista completa de temas no se ve; ver las categorías observadas en «Selecciona un servicio». La página /app/ archivada (2025-07-11) dice: «El listado de colonias que se ofrecen en la app para reportar, son los nombres catastrales de cada una de ellas.»"
+    },
+    {
+      "servicio": "Animal muerto",
+      "categoria": "Tipo de servicio en «Selecciona un servicio»",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Opción de la hoja «Selecciona un servicio – Elige el tipo de atención que necesitas», que aparece sobre el mapa «Ubicación del reporte». Muestra un chevron hacia abajo; probablemente despliega subtipos, que no se ven.",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Texto «Animal muerto» con ilustración lineal de una pala sobre un montículo.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "Subtipos no visibles (pendiente)."
+    },
+    {
+      "servicio": "Bache",
+      "categoria": "Tipo de servicio en «Selecciona un servicio»",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Opción de la lista «Selecciona un servicio». Muestra un chevron derecho; probablemente lleva directo al siguiente paso.",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Texto «Bache» con ilustración lineal de un automóvil.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "Es distinto del reporte al instante «Bache a la vista»."
+    },
+    {
+      "servicio": "Limpieza de parques y jardines",
+      "categoria": "Tipo de servicio en «Selecciona un servicio»",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Opción de la lista «Selecciona un servicio», con chevron derecho.",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Texto «Limpieza de parques y jardines» con ilustración de un parque con árboles y una banca (acentos verdes).",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": ""
+    },
+    {
+      "servicio": "Luminaria",
+      "categoria": "Tipo de servicio en «Selecciona un servicio»",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Opción de la lista «Selecciona un servicio». Muestra un chevron hacia abajo; probablemente despliega subtipos.",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Texto «Luminaria» con ilustración lineal de un poste de luz (acento verde).",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "Es el término de la app para alumbrado público; la palabra «alumbrado» no aparece en la captura. Subtipos no visibles (pendiente)."
+    },
+    {
+      "servicio": "Queja por falta de recolección de basura",
+      "categoria": "Tipo de servicio en «Selecciona un servicio»",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Opción de la lista «Selecciona un servicio». Muestra un chevron hacia abajo; probablemente despliega subtipos.",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Texto «Queja por falta de recolección de basura» con ícono de bote de basura. Es la última opción visible; la lista sigue más abajo, recortada.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "Las opciones siguientes de la lista no se ven (pendiente)."
+    },
+    {
+      "servicio": "Folio de reporte (confirmación)",
+      "categoria": "Reportes ciudadanos",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Modal que aparece al terminar el reporte: «Tu folio de reporte es:», el número, «Dale seguimiento en el botón de 'Mis Reportes'» y el botón «ACEPTAR».",
+      "tipo": "reporte",
+      "fuente": "Captura iPhone 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg",
+      "estadoVerificacion": "verificada",
+      "evidencia": "En la captura oficial, el folio es un número de 7 dígitos en verde; no se reproduce.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "El folio es numérico. En la web, el campo de seguimiento sólo acepta números (clase «only-numbers»)."
+    },
+    {
+      "servicio": "Mis reportes",
+      "categoria": "Seguimiento de reportes",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Texto promocional: «Búsquedas ágiles – Encuentra tus reportes por fecha, estatus y más.» La pantalla tiene «Fecha inicio» y «Fecha fin», el botón «FILTRAR RESULTADOS» y la búsqueda «Buscar por folio». Agrupa por estatus con contador: «Registrado», «En proceso de atención», «Solucionado» y «Motivo de cancelación». Sin resultados muestra «No tienes reportes en este periodo». Play: «En “Mis reportes”, podrás identificar el estatus en el cual se encuentra tu reporte desde el inicio hasta su atención.»",
+      "tipo": "reporte",
+      "fuente": "Captura iPad 3: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/38/12/9b/38129bdc-9295-3417-82dc-b0860b90b57c/003.jpg/1548x2064bb.jpg | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX | Versión 3.1.5 en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Versión 3.1.5 (2026-02-05): «Ahora tu sección: “Mis reportes” tiene un nuevo filtro para buscar por fechas». El mosaico «Mis Reportes» tiene ícono de portapapeles y borde inferior coral o rojo.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "El detalle de un reporte individual no aparece en las capturas (pendiente). La versión anterior, según el FAQ de /app/ archivado el 2025-07-11, guardaba los folios en «Mi cuenta» y tenía una sección «no atendido» (histórico)."
+    },
+    {
+      "servicio": "Novedades",
+      "categoria": "Comunicación institucional",
+      "sistemaDeOrigen": "Mérida Móvil (versión 4.0.x)",
+      "funcionalidad": "«¡Entérate de lo último de tu Ayuntamiento!» Lista de noticias con etiqueta de categoría (SERVICIOS, DESTACADO, CULTURA, AVISO), título, fecha y botón para refrescar.",
+      "tipo": "informativo",
+      "fuente": "Captura iPhone 3: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/1f/9b/5f/1f9b5f71-98de-eaea-2f87-b14395fdad04/003_2.jpg/1206x2622bb.jpg | Captura iPad 4: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/b0/4f/f8/b04ff870-f7fa-aefe-fb02-25613995df21/004.jpg/1548x2064bb.jpg | Notas 4.0.0–4.0.2",
+      "estadoVerificacion": "verificada",
+      "evidencia": "Titulares de ejemplo, todos con fecha «23 de septiembre, 2026»: «Amplían los horarios de atención para reportes ciudadanos», «Mérida estrena nuevos servicios digitales para la ciudadanía», «Consulta la cartelera de actividades culturales y familiares de este fin de semana», «Mantenimiento programado del sistema de reportes».",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "Son capturas promocionales: los titulares no prueban vigencia ni que el contenido sea real."
+    },
+    {
+      "servicio": "Catálogo Municipal (muestra el «Portal Ciudadano»)",
+      "categoria": "Trámites, servicios y mejora regulatoria",
+      "sistemaDeOrigen": "Pantalla de Mérida Móvil que muestra el Portal Ciudadano (MIDigital); probablemente es una vista web embebida",
+      "funcionalidad": "Play: «Desde el “Catálogo Municipal”, accederás a las herramientas de mejora regulatoria más utilizadas así como obtener orientación directa de cualquier trámite y servicio.» Captura: «Portal Ciudadano – Encuentra en un solo lugar, Trámites, Servicios, Regulaciones, Visitas domiciliarias, Visitadoras y Visitadores.»",
+      "tipo": "informativo",
+      "fuente": "Captura iPhone 4: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/85/6d/a2/856da2a3-36b9-658e-b31d-c13f9b06e19d/004_2.jpg/1206x2622bb.jpg | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX | https://prensa.merida.gob.mx/12522/Presenta-Cecilia-Patron-MIDigital-innovadora-transformacion-tecnologica-del-Ayuntamiento-de-Merida/amp",
+      "estadoVerificacion": "verificada",
+      "evidencia": "La barra superior dice «CATÁLOGO MUNICIPAL» y la cabecera «Portal Ciudadano». Hay un buscador «¿Qué deseas buscar?» con «Escribe una palabra» y «Buscar», y tarjetas «388 Trámites y servicios» y «115 Visitas domiciliarias» (cifras de la captura, sin fecha).",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "La nota MIDigital (11-ago-2026) cita «395 trámites y servicios», «118 tipos de visitas domiciliarias» y portalciudadano.merida.gob.mx, pero no menciona la app. Que el portal se muestre dentro de la app no prueba integración técnica."
+    },
+    {
+      "servicio": "Bolsa de empleo",
+      "categoria": "Empleo",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "«Conocer las vacantes de la bolsa de empleo y postularte a ellas.»",
+      "tipo": "otro",
+      "fuente": "Descripciones en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 y https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Sólo el texto de la ficha. En la segunda fila de «ACCESOS RÁPIDOS» hay un ícono de maletín cuya etiqueta no se lee.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "El nombre exacto del módulo en la v4 no se ve (pendiente). En la imagen de 2024 archivada en /app/, el mosaico se llamaba «EMPLEO»."
+    },
+    {
+      "servicio": "Eventos culturales del día",
+      "categoria": "Cultura",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "«Conocer los eventos culturales del día.»",
+      "tipo": "informativo",
+      "fuente": "Descripciones en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 y https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Sólo el texto de la ficha. En la segunda fila de accesos hay un ícono de calendario con nota musical cuya etiqueta no se lee.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "En la imagen de 2024 archivada, el mosaico se llamaba «EVENTOS». El nombre en la v4 está pendiente."
+    },
+    {
+      "servicio": "Geoportal",
+      "categoria": "Información territorial",
+      "sistemaDeOrigen": "Mérida Móvil (según notas de versión de 2024)",
+      "funcionalidad": "Notas de las versiones 2.1.24 (2024-09-16) y 3.0.1 (2024-10-02): «Se integra el Geoportal.»",
+      "tipo": "consulta_territorial",
+      "fuente": "Historial de versiones en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Sólo el texto de las notas de versión.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "No aparece en las capturas de la v4.0; no se sabe si sigue vigente. Esta mención no prueba relación con el Visor Urbano de MIDigital."
+    },
+    {
+      "servicio": "Reporte Express (histórico)",
+      "categoria": "Reportes ciudadanos",
+      "sistemaDeOrigen": "Mérida Móvil (versiones 2.1.21 a 2.1.23)",
+      "funcionalidad": "«¡Nuevo Reporte Express! Al utilizarlo ayudarás a detectar las zonas de mayor necesidad de atención en la ciudad.»",
+      "tipo": "reporte",
+      "fuente": "Historial de versiones (2023-04-15 a 2024-02-22) en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Texto de las notas de versión.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "No aparece en la versión 3.1 en adelante ni en las capturas actuales; probablemente lo sustituyeron los reportes al instante. No es un mapa de calor público."
+    },
+    {
+      "servicio": "Perfil / cuenta (ajustes)",
+      "categoria": "Cuenta de usuario",
+      "sistemaDeOrigen": "Mérida Móvil",
+      "funcionalidad": "Versión 3.2.0: aceptar el aviso de privacidad, cambiar la contraseña y dar de baja la cuenta. Versión 3.1.3: «Agregamos información útil sobre la versión de tu app y el correo con el que iniciaste sesión». Versión 3.1.0: «Informamos de todas las novedades realizadas, ¡desde tu perfil!»",
+      "tipo": "otro",
+      "fuente": "Historial de versiones en https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Sólo el texto de las notas de versión.",
+      "canales": ["App"],
+      "requisitosPublicados": [],
+      "notas": "La pantalla no aparece en las capturas. Probablemente se accede desde el menú hamburguesa del inicio, cuyo contenido no se ve."
+    },
+    {
+      "servicio": "Asistencia Mérida Móvil (respuestas rápidas y «Formulario de asistencia»)",
+      "categoria": "Soporte a usuarios",
+      "sistemaDeOrigen": "Página informativa merida.gob.mx/app (título «Aplicación Mérida Móvil»)",
+      "funcionalidad": "«Elige un asunto y obtén respuestas rápidas». Cubre 10 temas: confirmación de registro, inicio de sesión, contraseña olvidada, colonia que no aparece, no poder reportar, ubicación que no carga, reporte sin folio, dónde están los folios, servicio que no está en la app y problemas de instalación. El «Formulario de asistencia» pide dispositivo, descripción del fallo, imagen, edad, correo y su confirmación, «¿Perteneces a un pueblo originario?», lugar de nacimiento, ciudad de residencia y aceptación del aviso de privacidad.",
+      "tipo": "informativo",
+      "fuente": "https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/ (la original https://www.merida.gob.mx/app/ estaba bloqueada por captcha el 2026-10-17)",
+      "estadoVerificacion": "parcial",
+      "evidencia": "«Realiza tus reportes con audio, video, fotografía o imagen ¡Desde cualquier lugar!»; enlaces a https://itunes.apple.com/mx/app/merida-movil/id1065129797 y https://play.google.com/store/apps/details?id=app.meridamovil.com",
+      "canales": ["Web", "Formulario de asistencia"],
+      "requisitosPublicados": ["«Todos los campos son obligatorios»", "«Las extensiones de archivos permitidos son .jpg, .jpeg, .png con un tamaño máximo de 10 MB»"],
+      "notas": "La captura archivada es del 2025-07-11, anterior a la v4.0, y puede estar desactualizada. No se envió el formulario."
+    },
+    {
+      "servicio": "Reporta en línea (formulario web)",
+      "categoria": "Reportes ciudadanos (web)",
+      "sistemaDeOrigen": "Portal Reporta – merida.gob.mx/reporta/reporte.php (Ayuntamiento de Mérida 2024-2027)",
+      "funcionalidad": "Asistente de 3 pasos. (1) «Datos del reporte»: «Listado de servicios»; «En dónde se presenta la situación a reportar» (Particular, Comercio/Empresa u Otro); «Selecciona cómo deseas ingresar la ubicación: Por dirección / Por mapa». Los campos de ubicación son Calle, Letra de calle, Número predio, Letra predio, Cruzamiento 1 y 2 con su letra, y Colonia o Comisaría. Luego «Buscar ubicación» y «Lista de coincidencias», foto opcional y descripción. (2) «Datos del solicitante». (3) «Confirme su información» y «Finalizar», que muestra el modal «Reporte Creado» con el folio.",
+      "tipo": "reporte",
+      "fuente": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php (también https://web.archive.org/web/20260425005157/https://merida.gob.mx/reporta/reporte.php); la original https://merida.gob.mx/reporta/ estaba bloqueada por captcha el 2026-10-17",
+      "estadoVerificacion": "parcial",
+      "evidencia": "«Proporciona la información solicitada para atender tu reporte. Este es confidencial, pero al asignarse un folio, no pueden ser anónimo.» Modal «Reporte Creado»: «Hemos enviado una copia del reporte al correo electrónico que ingresaste en tu registro, recuerda revisar tu bandeja de elementos no deseados.» El JS archivado muestra «Tu número de folio es: … ¡Gracias por reportar!» y «Solicitud existente»: «El reporte no se generará, debido a que otra persona lo registró y ya existe.»",
+      "canales": ["Web"],
+      "requisitosPublicados": ["Servicio o incidente*", "En dónde se presenta la situación* (Particular, Comercio/Empresa u Otro)", "Calle*, Cruzamiento 1* y Colonia o Comisaría* (o ubicación por mapa)", "Selección en «Lista de coincidencias»*", "Descripción* de 15 a 300 caracteres", "Fotografía opcional: «.jpg, .jpeg, .png con un tamaño máximo de 5 MB»", "¿Es empleado del ayuntamiento?* (si responde que sí, número de empleado*)", "Nombre(s)* y Apellido paterno* (Apellido materno opcional)", "Edad opcional, mínimo 18", "Dirección del solicitante: Calle*, Número*, Cruzamiento 1*, Colonia o Comisaría* (o «Misma dirección del reporte»)", "Teléfono* de 10 dígitos", "Correo electrónico* y su confirmación*", "«He leído el Aviso de Privacidad Simplificado»"],
+      "notas": "El «Listado de servicios» se carga desde un servicio web y no quedó archivado, así que las categorías web están pendientes. Junto al campo Teléfono hay un ícono de WhatsApp, pero no se publica un número de WhatsApp para reportar. El formulario usa reCAPTCHA. No se envió nada."
+    },
+    {
+      "servicio": "Seguimiento de reportes (web)",
+      "categoria": "Seguimiento de reportes",
+      "sistemaDeOrigen": "Portal Reporta – merida.gob.mx/reporta/index.php",
+      "funcionalidad": "«Seguimiento de reportes»: pregunta «¿Tu reporte es de noviembre de 2017 en adelante?» (Si/No), pide «Ingresa tu folio de seguimiento» en el campo «Folio» y tiene el botón «Buscar». Si no lo encuentra, muestra el modal «Reporte no encontrado» con los datos de Ayuntatel.",
+      "tipo": "reporte",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Formulario «formFollowReport» con el campo «folio» (sólo números) y radios «typeSearch».",
+      "canales": ["Web"],
+      "requisitosPublicados": ["Número de folio"],
+      "notas": "En el snapshot del 2025-05-27 el texto era: «Consulta el estado de tu reporte en nuestra plataforma o a través de Atención Ciudadana»."
+    },
+    {
+      "servicio": "Reporta vía telefónica (Ayuntatel)",
+      "categoria": "Canal de reporte",
+      "sistemaDeOrigen": "Ayuntatel – Ayuntamiento de Mérida",
+      "funcionalidad": "«Comunícate a Ayuntatel al tel. 9999244000 o al 070»",
+      "tipo": "reporte",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Tarjeta «Reporta vía telefónica» con botón «Llama» (tel:9999244000).",
+      "canales": ["Teléfono 999 924 4000", "070"],
+      "requisitosPublicados": [],
+      "notas": "Horario publicado en el modal «Reporte no encontrado»: lunes a viernes de 8:30 a.m. a 9:30 p.m.; sábados de 8:30 a.m. a 6:30 p.m.; domingos y días festivos de 8:30 a.m. a 1:30 p.m. Viene de un snapshot del 2026-04-25 y no se pudo confirmar en vivo."
+    },
+    {
+      "servicio": "Reporte vía Presencial (módulo de Atención Ciudadana)",
+      "categoria": "Canal de reporte",
+      "sistemaDeOrigen": "Atención Ciudadana – Palacio Municipal",
+      "funcionalidad": "«En el módulo de Atención Ciudadana de lunes a viernes de 8:00 a.m. a 5:00 p.m. Bajos del Palacio Municipal, Col. Centro»",
+      "tipo": "reporte",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Tarjeta «Reporte vía Presencial» con botón «Ver ubicación» (enlace a Google Maps).",
+      "canales": ["Presencial"],
+      "requisitosPublicados": [],
+      "notas": "El horario viene de un snapshot archivado y no se pudo confirmar en vivo."
+    },
+    {
+      "servicio": "Comentarios y sugerencias / Atención Ciudadana en línea",
+      "categoria": "Canal de atención",
+      "sistemaDeOrigen": "merida.gob.mx/atencionciudadana",
+      "funcionalidad": "El pie de página dice: «Comentarios y sugerencias Ayuntatel: (999) 924 4000 En línea: merida.gob.mx/ atencionciudadana»",
+      "tipo": "otro",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "estadoVerificacion": "pendiente",
+      "evidencia": "Enlace https://www.merida.gob.mx/atencionciudadana en el pie de página.",
+      "canales": ["Teléfono", "Web"],
+      "requisitosPublicados": [],
+      "notas": "No se visitó el sitio enlazado, que es del mismo dominio bloqueado por captcha."
+    },
+    {
+      "servicio": "Dictamen de corte de árbol (bloque oculto en /reporta)",
+      "categoria": "Trámite relacionado",
+      "sistemaDeOrigen": "Liga a http://www.merida.gob.mx/municipio/sitiosphp/sustentable/contacto/dictamen-corte-de-arbol.php",
+      "funcionalidad": "Texto del bloque: «Si necesitas cortar un árbol en la vía pública, realiza este trámite. El Comité de Flora Urbana evaluará tu solicitud y determinará la mejor solución, siendo el corte la última opción.»",
+      "tipo": "tramite_en_linea",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "estadoVerificacion": "pendiente",
+      "evidencia": "El bloque está dentro de un comentario HTML (<!-- -->) en los snapshots del 2025-05-27 y del 2026-04-25, así que no se muestra al usuario.",
+      "canales": ["Web"],
+      "requisitosPublicados": [],
+      "notas": "No debe presentarse como opción visible de /reporta."
+    },
+    {
+      "servicio": "Línea Mujer (app separada)",
+      "categoria": "Otra app del mismo desarrollador",
+      "sistemaDeOrigen": "App independiente del Ayuntamiento de Mérida, Yucatán: App Store id1293535345 (subtítulo «Botón de Pánico»); Google Play com.ayuntamientodemerida.linearosa",
+      "funcionalidad": "Sólo se listan su nombre y su subtítulo en «Más de Ayuntamiento de Mérida, Yucatán».",
+      "tipo": "app",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Aparece en «Más de Ayuntamiento de Mérida, Yucatán» en ambas tiendas.",
+      "canales": ["App iOS", "App Android"],
+      "requisitosPublicados": [],
+      "notas": "Ninguna fuente la presenta como módulo de Mérida Móvil ni indica integración. Su ficha no se revisó."
+    },
+    {
+      "servicio": "Otras apps del Ayuntamiento (Visit Mérida MX, ARBOLMID, Bitácora de Peritaje)",
+      "categoria": "Otras apps del mismo desarrollador",
+      "sistemaDeOrigen": "Visit Mérida MX («Descubre Mérida», id1532687136, com.rckgames.visitmeridamx); ARBOLMID («Educación», id1565398865, wbio.app.arbolmid); Bitácora de Peritaje («Peritos en Construcción», id1360417388, ayuntamiento.merida.pcm)",
+      "funcionalidad": "Sólo se listan; sus funciones no se revisaron.",
+      "tipo": "app",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "estadoVerificacion": "parcial",
+      "evidencia": "Sección «Más de Ayuntamiento de Mérida, Yucatán».",
+      "canales": ["App iOS", "App Android"],
+      "requisitosPublicados": [],
+      "notas": "Son apps separadas; no son módulos de Mérida Móvil."
+    }
+  ],
+  "uiObservations": [
+    {
+      "fuente": "Capturas iPhone 1-4 y iPad 1-4 de App Store (https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797); las capturas de Google Play son el mismo arte",
+      "aspecto": "Estructura de navegación",
+      "observacion": "El inicio funciona como un centro de accesos. De arriba abajo tiene: encabezado con logo, saludo, tarjeta destacada y cuadrícula «ACCESOS RÁPIDOS» de 3 columnas con al menos 2 filas. Arriba a la derecha hay un botón circular de menú hamburguesa. Las pantallas internas («Novedades», «Mis reportes», «CATÁLOGO MUNICIPAL») tienen una barra superior con botón de regreso a la izquierda, título y, a veces, una acción a la derecha (refrescar). Ninguna captura muestra barra inferior de pestañas; la captura del inicio está recortada abajo, así que no se puede descartar.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPhone 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg",
+      "aspecto": "Encabezado del inicio",
+      "observacion": "Una foto ocupa todo el ancho como fondo (persona con atuendo tradicional yucateco). Encima, arriba a la izquierda, están el logo pequeño y el texto «MÉRIDA» / «CONTIGO ES MEJOR» en blanco, en dos líneas. Arriba a la derecha hay un botón circular claro con ícono de hamburguesa navy.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPhone 2 (recorte local crops/iphone02_header.jpg)",
+      "aspecto": "Saludo personalizado",
+      "observacion": "Tarjeta oscura semitransparente de esquinas redondeadas, con efecto de vidrio esmerilado. Dice «Hola, [nombre de usuario]» en negrita clara y «¿Qué quieres hacer hoy?» en tamaño menor. A la derecha hay un botón circular translúcido con ícono de expandir (cuatro esquinas). El nombre de la captura no se reproduce.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPhone 2 (recorte local crops/iphone02_card_bache.jpg)",
+      "aspecto": "Tarjeta destacada",
+      "observacion": "Tarjeta azul con degradado y esquinas redondeadas. Tiene un contenedor de ícono cuadrado translúcido y texto blanco en negrita, con la primera línea en mayúsculas («BA…») y la segunda «a l…». El modal tapa el resto. Probablemente es el acceso «BACHE a la vista».",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Captura iPhone 2 (recortes crops/iphone02_home_tiles.jpg y crops/iphone02_tiles_row2.jpg)",
+      "aspecto": "Cuadrícula de mosaicos «ACCESOS RÁPIDOS»",
+      "observacion": "La etiqueta de sección va en mayúsculas pequeñas («ACCESOS RÁPIDOS»). Los mosaicos son tarjetas claras de esquinas muy redondeadas con un ícono de contorno navy centrado y la etiqueta navy centrada en 1 o 2 líneas. Cada mosaico tiene un borde inferior grueso de color: azul en «Reportes rápidos», verde en «Catálogo de reportes» y coral o rojo en «Mis Reportes». La segunda fila muestra íconos de dos personas, calendario con nota musical y maletín, con etiquetas no legibles.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Capturas iPhone 2 e iPad 2",
+      "aspecto": "Iconografía",
+      "observacion": "Los mosaicos usan íconos de contorno sin relleno, con trazo uniforme de unos 2 px y terminaciones redondeadas: lápiz sobre cuadro, cuadrícula 2×2, portapapeles, personas, calendario y maletín. El estilo se parece a Lucide o Feather. La lista «Selecciona un servicio» usa ilustraciones lineales grises con acentos verdes dentro de contenedores cuadrados gris claro. Los chevrons de navegación son finos.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Capturas de tienda y https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+      "aspecto": "Tipografía",
+      "observacion": "La app usa una sans geométrica de apariencia Poppins: títulos en semibold o bold navy, cuerpo regular y secundarios en gris. El arte de tienda combina Poppins Light y Bold en verde lima y blanco. El sitio web Reporta carga Poppins 400–900 desde Google Fonts, lo que sí está observado en el HTML.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Muestreo de píxeles en capturas App Store (iPhone 1-4, iPad 1-4)",
+      "aspecto": "Colores de la interfaz (hex estimado)",
+      "observacion": "Texto principal navy #1F3051 a #223253. Botón primario navy #34477F («Iniciar sesión») y #2D406B («FILTRAR RESULTADOS»). Tarjeta destacada de Novedades: parte superior #1B306F y bloque inferior #2E416B. Verde de acento: #94BB4E (botón «ACEPTAR»), #92BA46 (etiqueta «SERVICIOS»), #A4C36B (etiqueta «CONTIGO ES MEJOR») y #9FC253 (contorno de «Crear una cuenta»). Fondo de pantalla #EFF3F4; tarjetas y campos #FFFFFF. Texto secundario gris #81878C a #898E97. Enlace «Contáctanos» #6687C3.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Captura iPad 3: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/38/12/9b/38129bdc-9295-3417-82dc-b0860b90b57c/003.jpg/1548x2064bb.jpg",
+      "aspecto": "Colores de estatus de reporte (hex estimado)",
+      "observacion": "Puntos de estatus: «Registrado» gris #B5BFCF, «En proceso de atención» azul pizarra #7489AC, «Solucionado» verde #91BA49 y «Motivo de cancelación» rojo #BE5A54. Los bordes de los mosaicos del inicio, oscurecidos por el modal, miden azul #2A519C, verde #5E823C y rojo #944D47; los tonos reales deben ser más claros.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Ícono 512 px: https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/03/a5/46/03a5461e-1670-decf-0a9f-65ae9ed34996/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.png y https://play-lh.googleusercontent.com/Hd1ls7FzdIG_RkEZpbgElFPXnI838a-W6Dpfj-1U7LDD-w7g9KkM5IQ_jedra31RmqmRuTfKMpoxfIRsIevx-Q=s512",
+      "aspecto": "Identidad de marca (ícono)",
+      "observacion": "El ícono tiene fondo navy (#00297A estimado) y un emblema en «M» formado por arcos verde lima (#66EF00 estimado), con un remate blanco de libro u hojas. Debajo dice «MÉRIDA» en blanco extrabold, «CONTIGO ES MEJOR» en una franja verde con texto navy y «AYUNTAMIENTO 2024-2027» en blanco.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Capturas de tienda (arte promocional)",
+      "aspecto": "Arte de tienda",
+      "observacion": "Fondo azul (#3B66A9 estimado) con foto desenfocada de arquitectura del Centro. Titulares en verde lima (#B7ED3A estimado) que combinan peso ligero y negrita, con subtítulos en blanco. La app aparece en un mockup de teléfono o iPad. Bandas onduladas verdes llevan un patrón floral de flores y gotas en dos verdes.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "https://web.archive.org/web/20260905222841/https://merida.gob.mx/reporta/assets/css/default.css",
+      "aspecto": "Tokens de color del sitio web Reporta",
+      "observacion": "El CSS archivado define --dfl-cr-1: rgb(0, 44, 114) (#002C72), --dfl-cr-2: rgb(121, 184, 78) (#79B84E), --dfl-cr-3: rgb(0, 106, 255) (#006AFF), --dfl-cr-4: rgb(250, 113, 101) (#FA7165), --dfl-cr-5: rgb(244, 76, 127) (#F44C7F) y --dfl-bg: var(--dfl-cr-1). El HTML tiene meta theme-color #002c72. Estos valores son del sitio web, no de la app.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Capturas iPhone 1 e iPad 1",
+      "aspecto": "Pantalla de inicio de sesión",
+      "observacion": "Composición centrada sobre fondo gris claro. Arriba, el logo en una tarjeta blanca cuadrada redondeada con sombra; debajo, «MÉRIDA» en navy y la etiqueta verde «CONTIGO ES MEJOR». Siguen el título «Bienvenido de nuevo», alineado a la izquierda, y el subtítulo gris. Los campos son blancos, de esquinas redondeadas, con ícono de sobre o candado a la izquierda y ojo para mostrar la contraseña. El enlace «¿Olvidaste tu contraseña?» va alineado a la derecha. El botón primario navy «Iniciar sesión» ocupa todo el ancho, con sombra suave. Después vienen «¿Necesitas ayuda? Contáctanos», un divisor con «¿Aún no tienes cuenta?» y el botón secundario «Crear una cuenta» con contorno verde.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPad 2: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/a7/ce/92/a7ce9284-253a-5e68-7e18-bb6f36768b60/002.jpg/1548x2064bb.jpg",
+      "aspecto": "Formulario de reporte: mapa y ubicación",
+      "observacion": "Mapa a pantalla completa con encabezado centrado: ícono de pin, «Ubicación del reporte» y debajo, en gris, «Ajusta el marcador sobre el punto exacto». El mapa muestra calles de Mérida («C. 61», «C. 62», «Plaza principal de Mérida»). Por su estilo parece Google Maps.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPad 2 (recorte crops/ipad02_service_list.jpg)",
+      "aspecto": "Formulario de reporte: selección de servicio",
+      "observacion": "Hoja modal sobre el mapa, que queda oscurecido. Tiene un botón cerrar «X» en un cuadro blanco redondeado, el título «Selecciona un servicio» y el subtítulo «Elige el tipo de atención que necesitas». Cada opción es una tarjeta blanca redondeada con ilustración a la izquierda, etiqueta en navy y un indicador a la derecha: chevron hacia abajo si despliega opciones o chevron derecho si navega.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Capturas iPhone 2 e iPad 2 (texto promocional) y https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/",
+      "aspecto": "Formulario de reporte: foto, video y descripción",
+      "observacion": "Los textos oficiales mencionan «captura la información, agrega fotos o video» y, en la página /app/ archivada, «Realiza tus reportes con audio, video, fotografía o imagen». Ninguna captura muestra la pantalla de adjuntos ni los campos de descripción.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPhone 2 (recorte crops/iphone02_home_tiles.jpg)",
+      "aspecto": "Pantalla de folio (confirmación)",
+      "observacion": "Modal blanco centrado de esquinas redondeadas sobre fondo oscurecido. «Tu folio de reporte es:» va en navy semibold; debajo, el número grande en verde (7 dígitos) y el texto gris «Dale seguimiento en el botón de 'Mis Reportes'». Cierra con un botón verde ancho «ACEPTAR» en mayúsculas.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPad 3",
+      "aspecto": "Pantalla de seguimiento «Mis reportes»",
+      "observacion": "Barra superior con chevron de regreso y el título «Mis reportes». Hay dos selectores de fecha en tarjetas blancas («Fecha inicio» y «Fecha fin», con valores tipo «1 ene 2026» y «31 dic 2026»), el botón navy «FILTRAR RESULTADOS» con ícono de embudo y el buscador «Buscar por folio» con lupa. Los estatus se listan en filas blancas con punto de color, etiqueta, contador en círculo gris y chevron. El estado vacío muestra un ícono de documento en un círculo gris y «No tienes reportes en este periodo». En iPad el contenido queda en una columna central angosta.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Capturas iPhone 3 e iPad 4",
+      "aspecto": "Tarjetas de contenido (Novedades)",
+      "observacion": "Barra superior con botón de regreso cuadrado blanco redondeado, el título «Novedades» y un botón de refrescar con el mismo estilo. La tarjeta destacada tiene imagen arriba (logo sobre navy) y un bloque inferior azul pizarra con etiqueta verde de categoría («SERVICIOS»), título blanco y fecha gris clara. El resto de la lista son tarjetas blancas con miniatura cuadrada redondeada, categoría en mayúsculas verdes (DESTACADO, CULTURA, AVISO), título navy de 2 a 3 líneas, fecha gris y chevron a la derecha.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "Captura iPhone 4: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/85/6d/a2/856da2a3-36b9-658e-b31d-c13f9b06e19d/004_2.jpg/1206x2622bb.jpg",
+      "aspecto": "Catálogo Municipal / Portal Ciudadano",
+      "observacion": "La barra nativa clara dice «CATÁLOGO MUNICIPAL» en mayúsculas navy, con botón de regreso. Debajo hay contenido de estilo web: cabecera navy con logo, «Portal Ciudadano» e íconos verdes de casa, usuario y menú; bloque navy con «¿Qué deseas buscar?» en blanco extrabold y buscador en píldora («Escribe una palabra» y botón verde «Buscar»). Las tarjetas blancas llevan un ícono grande de contorno verde claro, una cifra grande verde y una etiqueta, con borde inferior verde. Por el estilo parece una vista web embebida.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Todas las capturas de tienda",
+      "aspecto": "Jerarquía de textos",
+      "observacion": "Los títulos de pantalla van en navy medium (20–22 pt aprox.) y los saludos en negrita. Las etiquetas de sección y categoría van en mayúsculas pequeñas (gris o verde) y las fechas y textos de ayuda en gris. Algunos botones van en mayúsculas («ACEPTAR», «FILTRAR RESULTADOS») y otros en tipo oración («Iniciar sesión», «Crear una cuenta»).",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Todas las capturas de tienda",
+      "aspecto": "Botones y tarjetas",
+      "observacion": "Hay tres tipos de botón: primario navy relleno con radio de unos 12 px y sombra suave, de confirmación verde relleno y secundario con contorno verde. Los botones de ícono son cuadrados blancos redondeados (regresar, refrescar) o circulares (menú, expandir). Las tarjetas son blancas, con radio de 16 a 20 px y sombra muy suave sobre el fondo gris azulado #EFF3F4.",
+      "confianza": "inferido"
+    },
+    {
+      "fuente": "Capturas iPad 1-4 (barra de estado «Vie 25 de sep»)",
+      "aspecto": "Comportamiento en tableta",
+      "observacion": "En iPad la app conserva el diseño de una sola columna centrada, sin cuadrícula ni panel lateral. La barra de estado de las capturas de iPad dice «Vie 25 de sep».",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://web.archive.org/web/20241004011441im_/https://merida.gob.mx/app/assets/img/elements/img-homeapp2024.png (imagen oficial archivada de /app/)",
+      "aspecto": "Versión anterior (2024) del inicio, histórica",
+      "observacion": "Foto superior de bailarinas de vaquería con el escudo. Debajo, mosaicos blancos con ilustraciones lineales azules de dos tonos y etiquetas en mayúsculas azules: «REPORTES CON ESTATUS», «TRÁMITES Y SERVICIOS», «EVENTOS», «EMPLEO» y «MI CUENTA». Abajo, una barra navy de ancho completo dice «PORTAL WEB DEL AYUNTAMIENTO». No corresponde a la versión actual 4.0.",
+      "confianza": "observado"
+    },
+    {
+      "fuente": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+      "aspecto": "Formulario web Reporta (estructura)",
+      "observacion": "Asistente por pasos (jquery.steps) con las secciones «Datos del reporte», «Datos del solicitante» y «Confirme su información». Usa listas con búsqueda (select2) para servicios y colonias, tooltips de ayuda (por ejemplo, «Particular»: «Ejemplo: casas, apartamentos, privados o vehículos personales.»), avisos de «Los campos marcados con * son obligatorios», modales de éxito o error con íconos y reCAPTCHA. Está hecho con Bootstrap y Material Kit, con botones verdes redondeados («Llama», «Ver ubicación»).",
+      "confianza": "observado"
+    }
+  ],
+  "criticalFacts": [
+    {
+      "hecho": "Teléfono de reporte (Ayuntatel) y número corto",
+      "valor": "999 924 4000 y 070",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php (original https://merida.gob.mx/reporta/, bloqueada por captcha el 2026-10-17)",
+      "citaTextual": "Reporta vía telefónica Comunícate a Ayuntatel al tel. 9999244000 o al 070"
+    },
+    {
+      "hecho": "Horario de Ayuntatel para folios no encontrados",
+      "valor": "Lunes a viernes de 8:30 a 21:30; sábados de 8:30 a 18:30; domingos y festivos de 8:30 a 13:30",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "citaTextual": "Si no encontraste el folio de tu reporte comunícate a: Ayuntatel (999) 924 40 00 o al 070 Lunes a viernes de 8:30 a.m a 9:30 p.m. Sábados de 8:30 a.m a 6:30 p.m. Domingos y días festivos de 8:30 a.m. a 1:30 p.m."
+    },
+    {
+      "hecho": "Reporte presencial",
+      "valor": "Módulo de Atención Ciudadana, bajos del Palacio Municipal, lunes a viernes de 8:00 a 17:00",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "citaTextual": "Reporte vía Presencial En el módulo de Atención Ciudadana de lunes a viernes de 8:00 a.m. a 5:00 p.m. Bajos del Palacio Municipal, Col. Centro"
+    },
+    {
+      "hecho": "Reporte por la app desde el portal Reporta",
+      "valor": "Mérida Móvil para iOS y Android",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "citaTextual": "Reporta vía App Mérida Móvil ¡Descárgala! y reporta desde cualquier lugar Disponible para IOS y Android"
+    },
+    {
+      "hecho": "Folio al finalizar el reporte web y canal para corregir datos",
+      "valor": "Se asigna folio; las correcciones se hacen con Ayuntatel 999 924 4000 o 070",
+      "fuente": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+      "citaTextual": "Al hacer clic en el botón: \"Finalizar\", tu reporte quedará registrado con un número de folio. Si después necesitas corregir o actualizar cualquier dato, personal o del reporte, comunícate a Ayuntatel al: 999 924 4000 o 070."
+    },
+    {
+      "hecho": "Los reportes web no son anónimos",
+      "valor": "Son confidenciales, pero no anónimos",
+      "fuente": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+      "citaTextual": "Proporciona la información solicitada para atender tu reporte. Este es confidencial, pero al asignarse un folio, no pueden ser anónimo."
+    },
+    {
+      "hecho": "Reporte sin folio en la app (FAQ)",
+      "valor": "Ayuntatel 9999244000",
+      "fuente": "https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/",
+      "citaTextual": "Si acabas de realizar un reporte y no recibiste el folio, posiblemente haya existido una intermitencia en la red, por favor intenta de nuevo o comunícate a Ayuntatel al 9999244000"
+    },
+    {
+      "hecho": "Servicios que no están en la app",
+      "valor": "Web www.merida.gob.mx/reportaenlinea o Ayuntatel",
+      "fuente": "https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/",
+      "citaTextual": "Para reportes más extensos puedes hacerlo en línea a través de la pagina web: www.merida.gob.mx/reportaenlinea o vía telefónica en Ayuntatel al: 9999244000"
+    },
+    {
+      "hecho": "Correo de ayuda de la app",
+      "valor": "contacto@merida.gob.mx",
+      "fuente": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "citaTextual": "Correo de ayuda contacto@merida.gob.mx"
+    },
+    {
+      "hecho": "Comentarios y sugerencias",
+      "valor": "Ayuntatel (999) 924 4000 y merida.gob.mx/atencionciudadana",
+      "fuente": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+      "citaTextual": "Comentarios y sugerencias Ayuntatel: (999) 924 4000 En línea: merida.gob.mx/ atencionciudadana"
+    },
+    {
+      "hecho": "Versión vigente en App Store",
+      "valor": "4.0.2, publicada el 2026-10-16 a las 18:36:06 UTC",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://itunes.apple.com/lookup?id=1065129797&country=mx",
+      "citaTextual": "Versión 4.0.2 — ¡Mérida Móvil se renovó! Conoce su nueva imagen, nuevos elementos visuales y una presentación renovada de sus contenidos. Además, entérate de lo último de tu Ayuntamiento en el apartado de Novedades."
+    },
+    {
+      "hecho": "Fecha de actualización en Google Play",
+      "valor": "15 oct 2026 (versión 4.0.2 en los datos de la página)",
+      "fuente": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "citaTextual": "Actualización 15 oct 2026"
+    },
+    {
+      "hecho": "Origen de «Bache a la vista» y «Desazolve de rejilla»",
+      "valor": "Versión 3.1.0, 2024-12-26",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 (historial de versiones)",
+      "citaTextual": "Creamos reportes al instante, Bache a la vista y Desazolve de rejilla, ¡obtén tu folio al confirmar tu ubicación!"
+    },
+    {
+      "hecho": "Reporte al instante «Basura en vía pública»",
+      "valor": "Existe según la descripción de App Store",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+      "citaTextual": "¡NUEVO! Basura en vía pública, donde puedes reportar de manera inmediata y sencilla estos servicios, con solo confirmar tu ubicación."
+    },
+    {
+      "hecho": "Confirmación de folio en la app",
+      "valor": "Folio numérico (7 dígitos en la captura); el seguimiento se hace en «Mis Reportes»",
+      "fuente": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg",
+      "citaTextual": "Tu folio de reporte es: [número] Dale seguimiento en el botón de 'Mis Reportes' ACEPTAR"
+    },
+    {
+      "hecho": "Estatus de reporte en «Mis reportes»",
+      "valor": "Registrado / En proceso de atención / Solucionado / Motivo de cancelación",
+      "fuente": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/38/12/9b/38129bdc-9295-3417-82dc-b0860b90b57c/003.jpg/1548x2064bb.jpg",
+      "citaTextual": "Registrado | En proceso de atención | Solucionado | Motivo de cancelación"
+    },
+    {
+      "hecho": "Registro con confirmación por correo",
+      "valor": "Obligatorio para usar la app",
+      "fuente": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797 | https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+      "citaTextual": "Al registrarte en la App, deberás hacer clic en el correo de confirmación, encuentra el mensaje en tu bandeja de entrada o elementos no deseados. Y si ya tienes cuenta, accede con tu mismo usuario y contraseña."
+    },
+    {
+      "hecho": "Límite de foto en el reporte web",
+      "valor": "JPG, JPEG o PNG, máximo 5 MB, opcional",
+      "fuente": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+      "citaTextual": "Agrega fotografia de evidencia (opcional) Las extensiones de archivos permitidos son .jpg, .jpeg, .png con un tamaño máximo de 5 MB"
+    },
+    {
+      "hecho": "Detección de reportes duplicados (web)",
+      "valor": "Si el reporte ya existe, la web no lo genera y muestra el folio existente",
+      "fuente": "https://web.archive.org/web/20260425005241/https://merida.gob.mx/reporta/assets/js/page/reporte.js",
+      "citaTextual": "El reporte no se generará, debido a que otra persona lo registró y ya existe."
+    },
+    {
+      "hecho": "La nota MIDigital no menciona Mérida Móvil",
+      "valor": "Martes 11 de agosto de 2026; sólo habla de Portal Ciudadano, Expediente Digital y Visor Urbano",
+      "fuente": "https://prensa.merida.gob.mx/12522/Presenta-Cecilia-Patron-MIDigital-innovadora-transformacion-tecnologica-del-Ayuntamiento-de-Merida/amp",
+      "citaTextual": "Indicó que la estrategia se articula mediante tres herramientas fundamentales: el Portal Ciudadano que concentra la información oficial sobre trámites, servicios, regulaciones e inspecciones municipales; el Expediente Digital que permite resguardar de manera segura documentos e información para acreditar la identidad ante el Ayuntamiento; y el Visor Urbano que pone al alcance de todas y todos un mapa digital con 75 capas de información urbana y catastral"
+    }
+  ],
+  "limitations": [
+    "https://www.merida.gob.mx/app/ y https://merida.gob.mx/reporta/ (y sus variantes http, https, con y sin www) responden 302 hacia validate.perfdrive.com, el «Radware Captcha Page». No se intentó evadirlo. El contenido vivo del 2026-10-17 no está verificado; se usaron snapshots de Wayback Machine: /app/ del 2025-07-11, /reporta/ del 2025-05-27, /reporta/index.php del 2026-04-25, /reporta/reporte.php del 2026-04-25 y del 2026-10-12, y default.css del 2026-09-05. Por eso esos datos quedan como «parcial».",
+    "merida.gob.mx/app no tenía capturas propias accesibles. Sólo se recuperó, desde el archivo, la imagen oficial img-homeapp2024.png, que muestra la versión de 2024.",
+    "Las capturas de tienda son arte promocional y no cubren todas las pantallas. No se ven: la pantalla para capturar descripción, fotos o video; el contenido del menú hamburguesa; las etiquetas de la segunda fila de accesos; las opciones de «Selecciona un servicio» después de la quinta; los subtipos de las opciones desplegables; el detalle de un reporte; ni el formulario de registro.",
+    "Las capturas tienen datos de demostración: un nombre de usuario en el saludo, un folio de 7 dígitos y noticias fechadas el 23 de septiembre de 2026. No se reproducen y las noticias no implican vigencia. El nombre del saludo coincide con un contacto personal de servidor público de la ficha de Play, que tampoco se registró.",
+    "Los colores hex son estimados a partir de píxeles de JPG o PNG comprimidos; los bordes de los mosaicos están oscurecidos por el modal. Sólo los tokens del CSS archivado de Reporta son valores exactos.",
+    "Las categorías del formulario web («Listado de servicios») se cargan dinámicamente desde un servicio web que no quedó archivado. No se consultó en vivo, así que la lista web está pendiente.",
+    "Las descripciones de las tiendas no coinciden: App Store menciona «Basura en vía pública» y Play menciona «Bache a la vista», «Reportes rápidos», «Mis reportes», «Catálogo de reportes» y «Catálogo Municipal». Pueden ir rezagadas respecto a la versión 4.0.",
+    "El FAQ archivado de /app/ (2025-07-11) describe una interfaz anterior («Mi cuenta», sección «no atendido») y puede estar desactualizado.",
+    "El JS archivado de reporte.js dice «Ayuntatel al 999924400» (9 dígitos) en el mensaje de éxito. No coincide con 9999244000 y parece una errata del sitio, así que no debe usarse ese número.",
+    "Los avisos de mantenimiento archivados no implican vigencia: «Hoy martes 21 de julio … De 9:30 p.m. a 10:30 p.m.» en reporte.php (2026-10-12) y «domingo 4 de mayo» en /reporta (2025-05-27).",
+    "El bloque «Dictamen de corte de árbol» de /reporta está comentado en el HTML, así que no se muestra a los usuarios.",
+    "El Geoportal (2024) y el Reporte Express (2023–2024) sólo aparecen en el historial de versiones; no se confirmó que sigan en la v4.0.",
+    "La relación entre «Catálogo Municipal» y el Portal Ciudadano sólo se ve en una captura, y la nota MIDigital no menciona la app. Mostrar el portal no prueba integración técnica.",
+    "No se encontró ninguna evidencia de verificación ciudadana de reportes, recompensas, mapa de calor público, celdas H3, asistente de IA ni voz en Mérida Móvil. En el prototipo deben tratarse como PROPUESTAS.",
+    "Las reseñas de usuarios en Google Play contienen nombres de personas y no se copiaron. Los artículos de prensa de terceros (posta.com.mx, 14-jun-2026) sólo se usaron como contexto secundario.",
+    "No se enviaron formularios, no se crearon cuentas y no se ejecutó nada descargado. Se hicieron 60 solicitudes o menos por sitio."
+  ],
+  "assetsSaved": [
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_iphone_01.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_iphone_02.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_iphone_03.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_iphone_04.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_ipad_01.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_ipad_02.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_ipad_03.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_ipad_04.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_icon_merida_movil.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_screen_01.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_screen_02.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_screen_03.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_screen_04.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_icon.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_app_img-homeapp2024.png",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/crops/iphone02_header.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/crops/iphone02_home_tiles.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/crops/iphone02_tiles_row2.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/crops/iphone02_card_bache.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/crops/ipad02_service_list.jpg",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/itunes_lookup_mx.json",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/appstore_mx.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_details.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/gplay_search.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/prensa_midigital_amp.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_app_20250711.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_20250527.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_20241209.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_index_20260425.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_reporte_20260425.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_reporte_20261012.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_default.css",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/wayback_reporta_reporte.js.txt",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/app_index.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/reporta_index.html",
+    "/private/tmp/claude-501/-Users-angelmac-Documents-Anjee1dev-LuumDigital/45ffb8e1-3870-405d-b5a4-c85cb5b13dac/scratchpad/research/downloads/web-merida-movil/prensa_headers.txt"
+  ]
+}

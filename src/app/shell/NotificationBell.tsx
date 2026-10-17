@@ -1,11 +1,10 @@
 import { Bell } from "lucide-react";
 import { IconButtonLink } from "@/design-system";
+import { useUnreadCount } from "@/services/hooks";
 
-/**
- * Campana del encabezado. PENDIENTE: el conteo de no leídas usa useUnreadCount() de
- * "@/services/hooks" en cuanto exista la capa de hooks (F2).
- */
-export function NotificationBell({ sinLeer = 0 }: { sinLeer?: number }) {
+/** Campana del encabezado con el número de notificaciones sin leer de la identidad activa. */
+export function NotificationBell() {
+  const sinLeer = useUnreadCount();
   const etiqueta = sinLeer > 0 ? `Notificaciones, ${sinLeer} sin leer` : "Notificaciones";
   return <IconButtonLink to="/notificaciones" etiqueta={etiqueta} icono={Bell} variante="oscuro" insignia={sinLeer} data-guia="encabezado.notificaciones" />;
 }
