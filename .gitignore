@@ -1,0 +1,23 @@
+# Dependencias y artefactos
+node_modules
+dist
+dist-ssr
+coverage
+test-results
+playwright-report
+*.tsbuildinfo
+
+# Variables de entorno: sólo se versiona el ejemplo
+.env
+.env.*
+!.env.example
+
+# Editor y sistema
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.log
+
+# Originales de Figma (pesados); se sirven copias JPEG en public/brand/laboratorio/tablero
+docs/referencias/figma/originales/

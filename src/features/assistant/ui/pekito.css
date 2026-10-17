@@ -1,0 +1,63 @@
+/*
+ * Pekito — asistente de demostración (diseño provisional del Laboratorio de Innovación, Figma 22:67).
+ * No es un personaje oficial del Ayuntamiento.
+ *
+ * Colores del frame 22:67 con ajustes de contraste (WCAG 2.2 AA) sobre el fondo #FFF8EC:
+ *  - tinta #101511 (título): 18.4:1.
+ *  - texto tenue: Figma usa #9C9C9C (2.6:1, insuficiente incluso para texto grande);
+ *    se oscurece a #6E6E6E (4.9:1) conservando el gris.
+ *  - "1/5" (#BFBFBF, 1.7:1) y "Saltar" (blanco, 1.06:1 en Figma) usan --color-tinta-suave (6.7:1).
+ *  - pista de progreso #5B615D y relleno magenta #F62FA2 (gráfico; el progreso también se expone como texto).
+ */
+@import "@fontsource/unbounded/400.css";
+@import "@fontsource-variable/host-grotesk";
+
+.pekito {
+  --pekito-fondo: #fff8ec;
+  --pekito-tinta: #101511;
+  --pekito-tenue: #6e6e6e;
+  --pekito-cursor: #bfbfbf;
+  --pekito-pista: #5b615d;
+  --pekito-acento: var(--color-magenta);
+  font-family: "Host Grotesk Variable", "Host Grotesk", var(--font-sans);
+}
+
+.pekito-marca {
+  font-family: "Unbounded", "Host Grotesk Variable", var(--font-sans);
+}
+
+@keyframes pekito-cursor {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pekito-respira {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.pekito-cursor {
+  animation: pekito-cursor 1.1s steps(1) infinite;
+}
+
+.pekito-respira {
+  animation: pekito-respira 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pekito-cursor,
+  .pekito-respira {
+    animation: none;
+  }
+}

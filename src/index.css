@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "./design-system/tokens.css";
+
+/*
+ * Estilos globales mínimos. Todo lo demás se resuelve con utilidades que usan tokens.
+ * La fuente Onest (variable) se importa en src/main.tsx (autoalojada con @fontsource-variable).
+ */
+
+@layer base {
+  html {
+    background-color: var(--color-fondo);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Los anclajes (#acerca, #requisitos…) no quedan bajo el encabezado fijo. */
+    scroll-padding-top: calc(var(--altura-encabezado) + 1rem);
+    scroll-padding-bottom: calc(var(--altura-nav-inferior) + var(--espacio-asistente) + 1rem);
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-marino);
+    font-weight: 600;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Foco visible de 3 px en todos los elementos interactivos. */
+  :focus-visible {
+    outline: 3px solid var(--color-foco);
+    outline-offset: 2px;
+  }
+
+  /* Los encabezados y regiones que reciben foco programático no muestran anillo con el ratón. */
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-lima-logo);
+    color: var(--color-marino);
+  }
+
+  dialog::backdrop {
+    background-color: rgb(28 49 116 / 0.45);
+  }
+
+  /* Sin animaciones ni desplazamientos suaves con movimiento reducido. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+/*
+ * Presencia visual calmada del acompañante de salud mental (no es Pekito ni una mascota oficial).
+ * Respira muy lento sólo si la persona no pidió reducir el movimiento; con movimiento reducido queda
+ * estática. Sin colores sueltos: usa los tokens del design system.
+ */
+@keyframes presencia-calma-respirar {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.78;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.presencia-calma-glifo {
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .presencia-calma-glifo {
+    animation: presencia-calma-respirar 7s ease-in-out infinite;
+  }
+}
+
+/* Resaltado temporal cuando el acompañante señala una parte de esta pantalla (useSenalamiento). */
+[data-guia^="salud_mental."][data-senalado="true"] {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 6px;
+  border-radius: var(--radius-tarjeta);
+}

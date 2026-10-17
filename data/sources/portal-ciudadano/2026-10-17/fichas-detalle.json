@@ -1,0 +1,5176 @@
+[
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/1",
+  "clave": "MID-ABM-001",
+  "nombreLegal": "Sacrificio y faenado de Ganado",
+  "nombreCiudadano": "Matanza",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Abastos de Mérida",
+  "prefijo": "ABM",
+  "dominioGestion": null,
+  "dominioPublicoED": null,
+  "departamento": "Administración y Finanzas",
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "Servicio de sacrificio y faenado de ganado bovino, porcino, caprino, ovino y equino.",
+  "porQue": "Proporcionar a la población el sacrificio y faenado de ganado vacuno, porcino, caprino, ovino y equino para el abastecimiento de productos cárnicos, mediante una operación eficiente, instalaciones higiénicas y el estricto cumplimiento de las normas sanitarias competentes, para el consumo humano.",
+  "resolutivo": "Factura del pago al derecho de sacrifio y faenado de ganado ",
+  "vigenciaResolutivo": "24 horas",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Servicio de sanidad animal",
+   "Protección sanitaria",
+   "Salud"
+  ],
+  "fechaActualizacion": "2026-10-01 11:33:26",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "fijo",
+  "costoTexto": "Por cabeza de ganado: · VACUNO $469.24 (4 UMA). · OVINO $ 117.31 (1 UMA). · CAPRINO $ 117.31 (1 UMA). · EQUINO $469.24 (4 UMA). Por cada cabeza de ganado PORCINO: · peso de hasta 50 kg. $117.31 (1 UMA). · peso de entre 50.01 hasta 85 kg. $175.96 (1.5 UMA). · peso de entre 85.01 hasta 135 kg. $ 234.62 (2 UMA). · peso de más de 135 kg. $ 351.93 (3 UMA). El valor de un UMA es de $117.31",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [
+   "Caja de la Unidad Administrativa"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-157",
+    "nombre": "Guí­a sanitaria de movilización animal",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Guía sanitaria de movilizaciónn animal, expedida por SAGARPA"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [
+   "Inspección Sanitaria"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de Abastos de Mérida",
+    "articulos": [
+     "1",
+     "4",
+     "3",
+     "2",
+     "2",
+     "3",
+     "4",
+     "2",
+     "3",
+     "4",
+     "2",
+     "3",
+     "4"
+    ]
+   },
+   {
+    "nombre": "Ley de la Ganadería para el Estado de Yucatán",
+    "articulos": [
+     "98 al 109",
+     "112 al 114",
+     "115 al 128"
+    ]
+   },
+   {
+    "nombre": "Ley de Gobierno de los Municipios del Estado de Yucatán",
+    "articulos": [
+     "89"
+    ]
+   },
+   {
+    "nombre": "Ley que crea un Organismo Municipal Descentralizado del Ayuntamiento de Mérida denominado Abastos de Mérida",
+    "articulos": [
+     "2"
+    ]
+   },
+   {
+    "nombre": "Ley de Salud del Estado de Yucatán",
+    "articulos": [
+     "208 al 215"
+    ]
+   },
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "82 al 86"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Llevar al rastro municipal el ganado",
+     "Presentar la guía sanitaria de movilización animal",
+     "Pagar los derechos correspondientes.",
+     "Acudir al rastro municipal por el producto terminado."
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:30:00-17:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Abastos de Mérida-Rastro Municipal"
+  ],
+  "observaciones": "Desde el ingreso del ganado hasta la entrega, 15 horas",
+  "criterio": "En caso de no presentar la guia sanitaria de movilización, no podrá tener acceso al servicio."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/117",
+  "clave": "MID-DEU-117",
+  "nombreLegal": "Factibilidad de Uso del Suelo",
+  "nombreCiudadano": "Factibilidad de Uso de Suelo",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Desarrollo Urbano",
+  "prefijo": "DEU",
+  "dominioGestion": "https://deumerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/deumerida",
+  "departamento": "Factibilidad de Usos de Suelo y Autorizaciones de Desarrollos Inmobiliarios",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "La Factibilidad de Uso del Suelo, es el documento que otorga la Dirección de Desarrollo urbano, a solicitud de parte interesada y en el cual se informa si el uso o destino que se pretende dar al \"PREDIO\" o \"INMUEBLE\" es compatible con lo establecido en el Programa de Desarrollo Urbano del Municipio de Mérida y con las normas aplicables.",
+  "porQue": "Cuando se requiere un uso de suelo o desarrollo inmobiliario dentro de un predio(s), en el Municipio de Mérida Yucatán.",
+  "resolutivo": "Oficio de Factibilidad",
+  "vigenciaResolutivo": "Tendrá una vigencia de 30 días hábiles a partir de la fecha de su expedición, siempre y cuando el PROGRAMA aplicable no cambie.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Emprendedores",
+   "Hombres",
+   "Mujeres",
+   "Adultos mayores",
+   "Adolescentes"
+  ],
+  "categorias": [
+   "Apertura de negocios",
+   "Construcción",
+   "Economía",
+   "Territorio y vivienda"
+  ],
+  "fechaActualizacion": "2026-08-25 12:17:49",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|10|habiles",
+  "ficta": "negativa",
+  "prevencion": "1|5 habiles|cumplir 30 naturales",
+  "tipoCosto": "variable",
+  "costoTexto": "a).- Para el establecimiento con venta de bebidas alcohólicas en envase cerrado Veces U.M.A. 73 Unidad de medida Constancias $8,563.63 b).- Para establecimiento con venta de bebidas alcohólicas para su consumo en el mismo lugar Veces U.M.A. 73 Unidad de medida Constancias $8,563.63 c).- Para establecimiento con giro no habitacional diferente a los mencionados en los incisos a), b), d), e), f), h), i), j), k) y l) de esta fracción 1. Zona 1. Consolidación Urbana Veces U.M.A. 0.85 Unidad de medida",
+  "unidadMedidaMonto": "umas",
+  "facilidades": "No aplica",
+  "cuandoPagar": "Realizar el pago al inicio de la solicitud",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal",
+   "Caja de la Unidad Administrativa"
+  ],
+  "formasPago": [
+   "Tarjeta de crédito",
+   "Tarjeta de débito",
+   "Efectivo",
+   "Transferencia bancaria"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 1,
+  "visorUrbano": 1,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-022",
+    "nombre": "Pago del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Comprobante del pago de derechos"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [
+   "Factibilidad de Uso del Suelo"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "75 y 76"
+    ]
+   },
+   {
+    "nombre": "Ley de Ingresos del Municipio de Mérida, Yucatán para el Ejercicio Fiscal 2026",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Gobierno de los Municipios del Estado de Yucatán",
+    "articulos": [
+     "7"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Ingresar o crear tu Expediente Digital",
+     "Proporcionar la información que solicita el sitio web.",
+     "Dar seguimiento en tu Expediente Digital",
+     "Realizar el pago mediante la liga enviada vía correo electrónico",
+     "Esperar la verificación",
+     "Recibir y descargar el documento resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Proporcionar los datos solicitados",
+     "Programar la visita de inspección",
+     "Realizar el pago del trámite o servicio",
+     "Recibir el resolutivo en el mismo modulo donde se realizó la solicitud"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Central de Orden, Planeación y Desarrollo Urbano",
+   "Dirección de Finanzas y Tesorería",
+   "Dirección de Obras Públicas",
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Pensiones (San Damián)",
+   "Gran Plaza",
+   "Plaza Akrópolis",
+   "Plaza Pericenter",
+   "Registro Público de la Propiedad",
+   "Colonia México"
+  ],
+  "observaciones": "No aplica",
+  "criterio": "Que cumpla con lo establecido en el Programa de Desarrollo Urbano de Mérida, Reglamento de Construcciones del Municipio de Mérida y demás normas relativas vigentes Los giros con consumo y o venta de bebidas alcohólicas con base en la fracción XI del art. 219 de la Ley de Gobierno de los Municipios d"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/152",
+  "clave": "MID-DEU-152",
+  "nombreLegal": "Constancia de Cédula Urbana",
+  "nombreCiudadano": "Cédula urbana",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Desarrollo Urbano",
+  "prefijo": "DEU",
+  "dominioGestion": "https://deumerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/deumerida",
+  "departamento": "Factibilidad de Usos de Suelo y Autorizaciones de Desarrollos Inmobiliarios",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "La Cédula Urbana es un documento de carácter oficial emitido por la Dirección de Desarrollo urbano, la cual contiene información escrita sobre la vocación de un predio o tablaje, en la cual se describe las vialidades de influencia y zonificación que acreditan los usos y destinos del suelo y su compatibilidad, de acuerdo a lo establecido en el Programa Municipal de Desarrollo Urbano vigente",
+  "porQue": "Para conocer los usos permitidos en un predio del Municipio de Mérida.",
+  "resolutivo": "Cédula Urbana",
+  "vigenciaResolutivo": "Será vigente en tanto no se modifique el Programa Municipal de Desarrollo Urbano que originó la información proporcionada",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Mujeres",
+   "Hombres"
+  ],
+  "categorias": [
+   "Apertura de negocios",
+   "Territorio y vivienda",
+   "Construcción"
+  ],
+  "fechaActualizacion": "2026-10-05 13:37:30",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|habiles",
+  "ficta": "no",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "fijo",
+  "costoTexto": "Veces U.M.A. 5.52 Unidad de medida Cédula $647.55 Nota: Valor actual de la Unidad de Medida y Actualización (U.M.A) es de 117.31 pesos.",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al inicio de la solicitud",
+  "dondePagar": [
+   "Ventanilla Única Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito",
+   "Cheque certificado"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://isla.merida.gob.mx/serviciosinternet/CedulaUrbana",
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Formato de solicitud del Trámite o Servicio de la Dependencia"
+    ]
+   },
+   {
+    "codigo": "R-022",
+    "nombre": "Pago del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Comprobante del pago de derechos"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de Construcciones del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://isla.merida.gob.mx/serviciosinternet/CedulaUrbana",
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Proporcionar la información que solicita el sitio web.",
+     "Realizar el pago del trámite o servicio",
+     "Enviar la solicitud",
+     "Recibir y descargar el documento resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Proporcionar los datos solicitados",
+     "Realizar el pago del trámite o servicio",
+     "Recibir el resolutivo en el mismo modulo donde se realizó la solicitud"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Central de Orden, Planeación y Desarrollo Urbano"
+  ],
+  "observaciones": "",
+  "criterio": "La ubicación y su clasificación de acuerdo PMDUM y demás normas relativas vigentes-"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+  "clave": "MID-BIH-016",
+  "nombreLegal": "Atención Psicológica",
+  "nombreCiudadano": "Psicología",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Bienestar Humano",
+  "prefijo": "BIH",
+  "dominioGestion": "https://bihmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Salud Mental",
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "Trabajar en los programas prioritarios en salud mental, otorgar consultas psicológicas, talleres y pláticas en los módulos de salud, así como en las diversas instituciones de la ciudad de Mérida que lo soliciten.",
+  "porQue": "Para solicitar el servicio, es necesario ser mayor de edad. Si se es menor, la solicitud debe hacerla el tutor legal. El servicio se puede pedir directamente en el módulo de su elección. Está sujeto a la disponibilidad de espacios. En caso de necesitar un tratamiento especializado es canalizado a ot",
+  "resolutivo": "Respuesta a su solicitud.",
+  "vigenciaResolutivo": "Permanente.",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Adultos mayores",
+   "Estudiantes",
+   "Hombres",
+   "Mujeres",
+   "Jóvenes"
+  ],
+  "categorias": [
+   "Salud"
+  ],
+  "fechaActualizacion": "2026-09-29 09:19:14",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|None",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Escrito libre"
+    ]
+   },
+   {
+    "codigo": "R-329",
+    "nombre": "Firma de consentimiento.",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)"
+    ]
+   },
+   {
+    "codigo": "R-017",
+    "nombre": "Clave Única de Registro de Población (CURP)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Clave Única de Registro de Población (CURP)"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento Municipal de Asistencia Social de Mérida",
+    "articulos": [
+     "Artículo 11 al 14, y 28",
+     "Artículo 17 "
+    ]
+   },
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Solicitar el servicio a la Institución correspondiente",
+     "Entregar información de Requisitos y los Documentos",
+     "Proporcionar los datos solicitados",
+     "Brindar el servicio solicitado por parte del personal"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Centro de Atención Médica a la Mujer",
+   "Centro de Desarrollo Integral Sara Mena de Correa",
+   "Módulo Médico Azcorra",
+   "Módulo Médico en Comisaría Caucel",
+   "Módulo Médico en Comisaría Cholul",
+   "Módulo Médico en Comisaría Sitpach",
+   "Módulo Médico Melitón Salazar",
+   "Módulo Médico Mulsay",
+   "Módulo Médico San Antonio Xluch",
+   "Módulo Médico Santa Rosa",
+   "Módulo Médico Vergel",
+   "Módulo Médico en Comisaría San José Tzal",
+   "Módulo Médico Manuel Crescencio Rejón",
+   "Módulo Médico Renacimiento"
+  ],
+  "observaciones": "",
+  "criterio": "Disponibilidad de la fecha solicitada."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/171",
+  "clave": "MID-DIF-171",
+  "nombreLegal": "Programa de Otorgamiento de Becas para Personas con Discapacidad",
+  "nombreCiudadano": "Becas",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "DIF Municipal",
+  "prefijo": "DIF",
+  "dominioGestion": "https://difmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/difmerida",
+  "departamento": null,
+  "modalidad": "Gestión en línea",
+  "modalidadClave": "GES_LINEA",
+  "descripcion": "Apoyo económico mediante becas a personas con discapacidad permanente y/o autismo hasta los 35 años, pertenecientes a poblaciones en situación económica vulnerables y que asistan a escuela educativa o institución de rehabilitación, cultural, deportiva, recreativa u organización de la sociedad civil con la finalidad de obtener una mejor calidad de vida",
+  "porQue": "El servicio puede ser solicitado por personas con discapacidad permanente, y/o autismo hasta los 35 años, en situación de vulnerabilidad, que asistan a alguna escuela educativa o institución de rehabilitación, cultural, deportiva, recreativa u organización de la sociedad civil.",
+  "resolutivo": "Tarjetón para el cobro de la beca",
+  "vigenciaResolutivo": "10 meses de septiembre a junio.",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Personas con discapacidad"
+  ],
+  "categorias": [
+   "Economía",
+   "Asistencia social"
+  ],
+  "fechaActualizacion": "2026-09-18 08:21:30",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|60|naturales",
+  "ficta": "negativa",
+  "prevencion": "1|5 habiles|cumplir 5 habiles",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-017",
+    "nombre": "Clave Única de Registro de Población (CURP)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Clave Única de Registro de Población (CURP)"
+    ]
+   },
+   {
+    "codigo": "R-021",
+    "nombre": "Comprobante de Domicilio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Recibo de luz",
+     "Recibo de Agua"
+    ]
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)"
+    ]
+   },
+   {
+    "codigo": "R-112",
+    "nombre": "comprobante de estudios académicos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Constancia de estudios"
+    ]
+   },
+   {
+    "codigo": "R-121",
+    "nombre": "Fotografias",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x2"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Fotografía tamaño infaltil blanco y negro",
+     "Fotografía tamaño infantil a color"
+    ]
+   },
+   {
+    "codigo": "R-123",
+    "nombre": "Valoración médica",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial del Centro de Rehabilitación y Educación Especial (CREE)",
+     "Diagnostico médico"
+    ]
+   },
+   {
+    "codigo": "R-136",
+    "nombre": "Comprobante de Ingresos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Comprobante de ingresos, no mayor a 15 dí­as de la fecha de emisión",
+     "Recibo de nómina, Último recibo",
+     "Constancia de la empresa donde labora el trabajador"
+    ]
+   }
+  ],
+  "formatos": [
+   "Constancia de Ingresos"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [
+   "Programa de Otorgamiento de Becas para Personas con Discapacidad"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento Municipal de Asistencia Social de Mérida",
+    "articulos": [
+     "9",
+     "9",
+     "11",
+     "12",
+     "17",
+     "18"
+    ]
+   },
+   {
+    "nombre": "Reglamento para la Inclusión de las Personas con Discapacidad en el Municipio de Mérida",
+    "articulos": [
+     "6",
+     "6",
+     "6",
+     "6",
+     "6"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Adjuntar la documentación de los requisitos",
+     "Enviar la solicitud",
+     "Dar seguimiento en tu Expediente Digital",
+     "Acudir a las oficinas para finalizar el trámite o servicio",
+     "Recibe resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a la mesa de Atención DIF",
+     "Entregar documentación de los requisitos",
+     "Esperar resultado de investigación social"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "DIF Municipal",
+   "Palacio Municipal"
+  ],
+  "observaciones": "\"Proporcionar información socioeconómica falsa con el propósito de recibir indebidamente los apoyos y servicios contenidos en los programas del DIF Municipal, será objeto de suspensión o baja de los programas\".",
+  "criterio": "1 Es necesario residir en el Municipio de Mérida y sus comisarías. 2 Es necesario presentar discapacidad permanente y/o autismo hasta los 35 años, 3 Es necesario que el ingreso familar cumpla con las siguientes características: En familias de 1 a 3 integrantes se tomará el resultado del salario míni"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+  "clave": "MID-ADM-002",
+  "nombreLegal": "Registro al Padrón de Proveedores",
+  "nombreCiudadano": "Registro de Proveedor",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Administración",
+  "prefijo": "ADM",
+  "dominioGestion": "https://sadmmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/sadmmerida",
+  "departamento": "Atención y Control Interno",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Registrar a las personas físicas o morales que cumplan las formalidades requeridas para formar parte del Padrón de Proveedores del Ayuntamiento de Mérida.",
+  "porQue": "Cuando las personas físicas o morales deseen establecer una relación comercial con el Ayuntamiento de Mérida.",
+  "resolutivo": "Constancia de Registro al Padrón de Proveedores",
+  "vigenciaResolutivo": "31 de agosto del año 2027",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Emprendedores",
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Economía"
+  ],
+  "fechaActualizacion": "2026-09-28 08:11:34",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|15|habiles",
+  "ficta": "negativa",
+  "prevencion": "1|15 habiles|cumplir 15 naturales",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": null,
+  "facilidades": "",
+  "cuandoPagar": null,
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-083",
+    "nombre": "Constancia de Situación Fiscal SAT",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Constancia de Situación Fiscal SAT"
+    ]
+   },
+   {
+    "codigo": "R-006",
+    "nombre": "Acta de Nacimiento",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Acta de Nacimiento"
+    ]
+   },
+   {
+    "codigo": "R-017",
+    "nombre": "Clave Única de Registro de Población (CURP)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Clave Única de Registro de Población (CURP)"
+    ]
+   },
+   {
+    "codigo": "R-065",
+    "nombre": "Certificado de Antecedentes no Penales",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente",
+     "Cédula profesional con fotografía"
+    ]
+   },
+   {
+    "codigo": "R-049",
+    "nombre": "Licencia de Funcionamiento",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Licencia de Funcionamiento vigente, emitida por la Dirección de Finanzas y Tesorería del Municipio de Mérida",
+     "Número de la licencia de funcinamiento para verificar en el sistema Municipal"
+    ]
+   },
+   {
+    "codigo": "R-088",
+    "nombre": "Opinion positiva de cumplimiento de obligaciones fiscales ante el SAT",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Opinion positiva de cumplimiento de obligaciones fiscales ante el SAT"
+    ]
+   },
+   {
+    "codigo": "R-390",
+    "nombre": "Acta Constitutiva",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Acta constitutiva"
+    ]
+   },
+   {
+    "codigo": "R-031",
+    "nombre": "Identificación Oficial con fotografí­a del Apoderado",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente",
+     "Cédula profesional con fotografía"
+    ]
+   },
+   {
+    "codigo": "R-039",
+    "nombre": "Última Modificación del Acta Constitutiva",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-171",
+    "nombre": "Poder notarial del Representante Legal",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-052",
+    "nombre": "Pago actualizado del Impuesto Predial",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Recibo del pago del impuesto predial actual, emitido por el Ayuntamiento de Mérida"
+    ]
+   },
+   {
+    "codigo": "R-213",
+    "nombre": "Alta de Hacienda",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-174",
+    "nombre": "Identificación Oficial con fotografí­a del Representante Legal",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente",
+     "Cédula profesional con fotografía"
+    ]
+   },
+   {
+    "codigo": "R-191",
+    "nombre": "Comprobante de domicilio fiscal",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Recibo de luz, emitido por la CFE.",
+     "Recibo de agua, emitido por la JAPAY.",
+     "Recibo telefónico, emitido por la compañía telefónica."
+    ]
+   },
+   {
+    "codigo": "R-355",
+    "nombre": "Certificado de adeudo de obligaciones alimentarias",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de Adquisiciones, Arrendamientos de Bienes y Servicios del Municipio de Mérida",
+    "articulos": [
+     "12",
+     "13",
+     "13 bis",
+     "Artículos 12, 13 y 13 Bis"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Adjuntar la documentación de los requisitos",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Dar seguimiento en tu Expediente Digital",
+     "Firmar la solicitud con la e.firma",
+     "Descargar el resolutivo"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [],
+  "modulos": [],
+  "observaciones": "El plazo de 15 días hábiles para el Registro al Padrón de Proveedores, no aplica cuando presente faltantes u observación(es) la documentación electrónica entregada por el solicitante, durante las etapas de revisiones y vistos buenos del procedimiento. Siendo su responsabilidad solventar o atender la",
+  "criterio": "El plazo para el Registro al Padrón de Proveedores empieza a contarse a partir del día hábil siguiente en que el solicitante recibe notificación de que se ha recibido su documentación electrónica completa y correcta conforme a los requisitos."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+  "clave": "MID-FTM-201",
+  "nombreLegal": "Pago del Impuesto Predial base Valor Catastral (predio)",
+  "nombreCiudadano": "Pago del impuesto predial",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Finanzas y Tesorería",
+  "prefijo": "FTM",
+  "dominioGestion": "https://ftmmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/ftmmerida",
+  "departamento": "Recaudación",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Realizar el pago del Impuesto Predial base Valor Catastral (predio) siempre y cuando no cause sobre la base de la Contraprestación (rentas)",
+  "porQue": "Cumplir con la obligación de pago",
+  "resolutivo": "Comprobante de pago con el registro del sello de la operación realizada.",
+  "vigenciaResolutivo": "Hasta por el periodo pagado",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Impuestos y contribuciones"
+  ],
+  "fechaActualizacion": "2026-10-14 08:22:03",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|None",
+  "ficta": "no",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "variable",
+  "costoTexto": "",
+  "unidadMedidaMonto": null,
+  "facilidades": "Meses sin intereses, convenio de pago en parcialidades y pago en diversos establecimientos comerciales y bancos",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://www.merida.gob.mx/predial",
+  "requisitos": [
+   {
+    "codigo": "R-395",
+    "nombre": "Proporcionar los datos de identificación del predio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "Artículo 27"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://www.merida.gob.mx/predial",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Capturar la información del predio o domicilio"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Proporcionar los datos solicitados"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Dirección de Finanzas y Tesorería",
+   "Parque Zooógico del Centenario",
+   "Dirección de Policía Municipal",
+   "Palacio Municipal",
+   "Panteón Xoclán",
+   "Colonia México",
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Pensiones (San Damián)",
+   "Gran Plaza",
+   "Plaza Akrópolis",
+   "Plaza Pericenter",
+   "Registro Público de la Propiedad",
+   "Central de Orden, Planeación y Desarrollo Urbano",
+   "Dirección de Desarrollo Social y Combate a la Pobreza",
+   "Parque Zoológico del Bicentenario Animaya",
+   "Dirección de Obras Públicas",
+   "Mercado Lucas de Gálvez"
+  ],
+  "observaciones": "",
+  "criterio": "De manera presencial el pago se puede realizar: a) En Efectivo b) Con cheque, el cual será expedido a nombre del Municipio de Mérida, Yucatán, cuando el importe exceda de $5,000.00 M.N. o cuando la sucursal de la institución de crédito se ubique fuera del Municipio de Mérida, el cheque deberá estar "
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/206",
+  "clave": "MID-FTM-206",
+  "nombreLegal": "Licencia de Funcionamiento Municipal por Apertura de establecimientos comerciales (Alta).",
+  "nombreCiudadano": "Licencia de Funcionamiento Municipal por Apertura de establecimientos comerciales (Alta).",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Finanzas y Tesorería",
+  "prefijo": "FTM",
+  "dominioGestion": "https://ftmmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/ftmmerida",
+  "departamento": "Administración Tributaria",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Trámite municipal que permite registrar los establecimientos comerciales o de servicios en Mérida, Yucatán.",
+  "porQue": "Cumplir con las disposiciones fiscales municipales y evitar infracciones.",
+  "resolutivo": "Licencia de Funcionamiento",
+  "vigenciaResolutivo": "La vigencia de la Licencia de Funcionamiento inicia en la fecha de su expedición y termina el último día del periodo constitucional de la Administración Municipal que la emitió.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Impuestos y contribuciones"
+  ],
+  "fechaActualizacion": "2026-08-31 09:38:18",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|5|habiles",
+  "ficta": "no",
+  "prevencion": "1|5 habiles|cumplir 15 habiles",
+  "tipoCosto": "fijo",
+  "costoTexto": "1.-El importe de $586.55 (5 U.M.A.) por la emisión de la Licencia de Funcionamiento de acuerdo a la Fracción I del Artículo 161 de la Ley de Hacienda del Municipio de Mérida. 2.-Tratándose de apertura para obtener la Licencia para el Funcionamiento de establecimientos dedicados al expendio, distribución, suministro, almacenamiento o que ofrezcan bebidas alcohólicas y/o cerveza, para su consumo en lugar diferente se cobrará un derecho de acuerdo al Artículo 111 de la Ley de Hacienda del Municipio",
+  "unidadMedidaMonto": "umas",
+  "facilidades": "N/A",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal",
+   "Pago en línea"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito",
+   "Cheque simple",
+   "Transferencia bancaria"
+  ],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://merida.gob.mx/funcionamiento",
+  "requisitos": [
+   {
+    "codigo": "R-260",
+    "nombre": "Registro Federal de Contribuyentes (RFC)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Registro Federal de Contribuyentes (RFC), emitido por el Servicio de Administración Tributaria (SAT)"
+    ]
+   },
+   {
+    "codigo": "R-052",
+    "nombre": "Pago actualizado del Impuesto Predial",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Recibo del pago del impuesto predial actual, emitido por el Ayuntamiento de Mérida"
+    ]
+   },
+   {
+    "codigo": "R-018",
+    "nombre": "Acreditar la legal posesión del predio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Contrato de arrendamiento",
+     "Contrato de comodato",
+     "Convenio transaccional de desocupación y entrega",
+     "Resolución de adjudicación de Herencia mediante juicio sucesorio",
+     "Mandato Judicial, para verificar en el sistema municipal"
+    ]
+   },
+   {
+    "codigo": "R-051",
+    "nombre": "Licencia de Uso de Suelo para la Licencia de Funcionamiento",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Licencia de Uso de Suelo para la Licencia de Funcionamiento vigente, emitida por la Dirección de Desarrollo Urbano del Municipio de Mérida"
+    ]
+   },
+   {
+    "codigo": "R-138",
+    "nombre": "Asignación de Categorí­a a Estacionamiento Público",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Oficio de asignaciónde categoría emitido por el Municipio de Mérida"
+    ]
+   },
+   {
+    "codigo": "R-271",
+    "nombre": "Determinación Sanitaria para la venta de bebidas alcohólicas",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Determinación Sanitaria para la venta de bebidas alcohólicas, emitida por la Secretaría de Salud del Estado de Yucatán"
+    ]
+   },
+   {
+    "codigo": "R-518",
+    "nombre": "Acreditación del representante o apoderado legal para persona moral o persona física",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Acta constitutiva",
+     "Poder notarial"
+    ]
+   },
+   {
+    "codigo": "R-517",
+    "nombre": "Identificación Oficial con fotografía vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Cartilla Militar emitida por la Secretaría de la Defensa Nacional",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "INAPAM",
+     "Tarjeta de residente permanente emitido por la Secretaría de Relaciones Exteriores"
+    ]
+   },
+   {
+    "codigo": "R-034",
+    "nombre": "Formato",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Formato de Solicitud de Licencia de Funcionamiento"
+    ]
+   },
+   {
+    "codigo": "R-393",
+    "nombre": "Actualización de los registros catastrales del predio donde se ubica el establecimiento.",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-040",
+    "nombre": "Pago actualizado del servicio de recolección de residuos sólidos no peligrosos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Pago actualizado del servicio de recolección de residuos sólidos no peligrosos"
+    ]
+   }
+  ],
+  "formatos": [
+   "Formato de Solicitud de Licencia de Funcionamiento (múltiple)"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "Artículo 161",
+     "Artículo 113",
+     "Artículo 112",
+     "Artículo 111",
+     "Artículo 31"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": null,
+    "enlace": "https://merida.gob.mx/funcionamiento",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Capturar nombre de usuario y contraseña",
+     "Adjuntar la documentación de los requisitos",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Recibir por correo electrónico el folio de reporte",
+     "Firmar la solicitud con la e.firma",
+     "Esperar las indicaciones correspondientes para continuar el proceso de la solicitud",
+     "Recibir el presupuesto generado por el área",
+     "Realizar el pago del trámite o servicio",
+     "Descargar el resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir al módulo a la ventanilla única mas cercana",
+     "Descargar o solicitar los formatos al asesor",
+     "Entregar documentación de los requisitos",
+     "Esperar las indicaciones correspondientes para continuar el proceso de la solicitud",
+     "Realizar el pago del trámite o servicio",
+     "Recibir el resolutivo en el mismo modulo donde se realizó la solicitud"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Dirección de Finanzas y Tesorería",
+   "Colonia México",
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Pensiones (San Damián)",
+   "Gran Plaza",
+   "Plaza Akrópolis",
+   "Plaza Pericenter",
+   "Registro Público de la Propiedad",
+   "Central de Orden, Planeación y Desarrollo Urbano",
+   "Dirección de Obras Públicas"
+  ],
+  "observaciones": "",
+  "criterio": "1.-Los documentos presentados a solicitud del trámite deberán ser veraces y vigente 2.-El uso autorizado en la licencia de uso de suelo servirá de uso la licencia de funcionamiento. 3.-Los predios complementarios también serán revisados a razón de los requisitos a cumplir."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/216",
+  "clave": "MID-GOB-216",
+  "nombreLegal": "Cartilla de Identidad Militar",
+  "nombreCiudadano": "Cartilla Militar",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Gobernación",
+  "prefijo": "GOB",
+  "dominioGestion": "https://gobmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/gobmerida",
+  "departamento": "Junta Municipal de Reclutamiento",
+  "modalidad": "Gestión en línea",
+  "modalidadClave": "GES_LINEA",
+  "descripcion": "Todos los mexicanos mayores de edad, de clase, remisos y avecindados en el Municipio de Mérida, deberán inscribirse en la Junta Municipal de Reclutamiento según marque la normatividad aplicable.",
+  "porQue": "Para obtener el documento que es necesario para realizar el Servicio Militar Nacional y diversos trámites de carácter personal, profesional y laboral",
+  "resolutivo": "Cartilla de Identidad del Servicio Militar Nacional",
+  "vigenciaResolutivo": "No tiene vigencia, ya que solo se realiza una vez",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Jóvenes"
+  ],
+  "categorias": [
+   "Seguridad, legalidad y justicia",
+   "Educación"
+  ],
+  "fechaActualizacion": "2026-08-10 17:11:45",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|8|naturales",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://www.merida.gob.mx/cartillamilitar",
+  "requisitos": [
+   {
+    "codigo": "R-006",
+    "nombre": "Acta de Nacimiento",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Copia certificada x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Acta de Nacimiento"
+    ]
+   },
+   {
+    "codigo": "R-017",
+    "nombre": "Clave Única de Registro de Población (CURP)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Clave Única de Registro de Población (CURP)"
+    ]
+   },
+   {
+    "codigo": "R-021",
+    "nombre": "Comprobante de Domicilio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Recibo de luz",
+     "Recibo de Agua",
+     "Recibo de teléfono",
+     "Recibo del pago del impuesto predial actual, emitido por el Ayuntamiento de Mérida"
+    ]
+   },
+   {
+    "codigo": "R-112",
+    "nombre": "comprobante de estudios académicos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Boleta de calificación emitida por la institución académica",
+     "Certificado de terminación de estudios emitida por la institución académica",
+     "Constancia de estudios",
+     "Certificado parcial de estudios emitida por la institución académica"
+    ]
+   },
+   {
+    "codigo": "R-121",
+    "nombre": "Fotografias",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x4"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Fotografía tipo cartilla militar blaco y negro"
+    ]
+   },
+   {
+    "codigo": "R-139",
+    "nombre": "Constancia de no registro",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Constancia de No registro en el Municipio de Mérida."
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley del Servicio Militar",
+    "articulos": [
+     "5,11 y 12"
+    ]
+   },
+   {
+    "nombre": "Reglamento de la Ley del Servicio Militar",
+    "articulos": [
+     "2,17 y 18"
+    ]
+   },
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": null,
+    "enlace": "https://www.merida.gob.mx/cartillamilitar",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Crear usuario y contraseña",
+     "Adjuntar la documentación de los requisitos",
+     "Recibir el correo electronico de confirmación de registro",
+     "Acudir a las oficinas para finalizar el trámite o servicio"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Entregar documentación de los requisitos",
+     "Firmar y colocar su huella dactilar en la Cartilla de Identidad del Servicio Militar Nacional",
+     "Recibir el comprobante",
+     "Acudir a la plática informativa"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Subdirección Operativa, Dirección de Gobernación"
+  ],
+  "observaciones": "Todos los jóvenes que cumplen los 18 años de edad, inclusive si los cumplieran hasta el 31 de diciembre del mismo año les corresponde alistarse (clase), así como a los remisos que no cumplieron en tiempo y forma",
+  "criterio": "contar con los requisitos completos y la edad correspondiente."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/222",
+  "clave": "MID-GOB-222",
+  "nombreLegal": "Constancia de Cumplimiento de Requisitos en Materia de Protección Civil",
+  "nombreCiudadano": "Constancia de cumplimiento de protección civil",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Gobernación",
+  "prefijo": "GOB",
+  "dominioGestion": "https://gobmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/gobmerida",
+  "departamento": "Protección Civil",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Es el documento a través del cual se avala el cumplimiento de las medidas de seguridad para la realización de un evento masivo",
+  "porQue": "Porque es un requisito indispensable para obtener el permiso del Departamento de Espectáculos. Además, fomenta la seguridad en la realización de espectáculos públicos",
+  "resolutivo": "Constancia de Cumplimiento de Requisitos en Materia de Protección Civil",
+  "vigenciaResolutivo": "fecha de realización del evento",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Empresas",
+   "Emprendedores",
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Seguridad, legalidad y justicia"
+  ],
+  "fechaActualizacion": "2026-09-25 14:21:42",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|habiles",
+  "ficta": "negativa",
+  "prevencion": "1|3 habiles|cumplir 5 habiles",
+  "tipoCosto": "fijo",
+  "costoTexto": "a) Por evento con aforo de 1 y hasta 99 personas, 5 U.M.A ($586.55) b) Por evento con aforo de 100 y hasta 499 personas, 10 U.M.A ($1,173.1) c) Por evento con aforo de 500 y hasta 999 personas, 15 U.M.A ($1,759.65) d) Por evento con aforo de 1,000 y hasta 4,999 personas, 25 U.M.A ($2,932.75) e) Por evento con aforo de 5,00 y hasta 9,999 personas, 50 U.M.A ($5,865.5) f) Por evento con aforo a partir de 10,000 personas, 100 U.M.A ($11,731)",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "No aplica",
+  "cuandoPagar": "Realizar el pago al inicio de la solicitud",
+  "dondePagar": [
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal",
+   "Ventanilla Única Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-023",
+    "nombre": "Acreditar que cuenta con servicios de vigilancia para espectaculos y eventos públicos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Contrato de seguridad privada"
+    ]
+   },
+   {
+    "codigo": "R-033",
+    "nombre": "Acreditar que cuenta con servicios médicos de emergencia para eventos espectáculos y eventos públicos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Contrato o Recibo de pago de la contratación de servicios médicos de emergencia"
+    ]
+   },
+   {
+    "codigo": "R-056",
+    "nombre": "Croquis",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Croquis de ubicación con medidas"
+    ]
+   },
+   {
+    "codigo": "R-151",
+    "nombre": "Acreditar que se cuenta con prestación de servicios sanitarios para eventos espectáculos y eventos públicos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Contrato de Prestación servicios sanitarios"
+    ]
+   },
+   {
+    "codigo": "R-175",
+    "nombre": "Carta Responsiva",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Carta Responsiva para la instalción de la estrcutura del escenario, emitida por la empresa responsable"
+    ]
+   },
+   {
+    "codigo": "R-022",
+    "nombre": "Pago del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Comprobante del pago de derechos"
+    ]
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente"
+    ]
+   },
+   {
+    "codigo": "R-029",
+    "nombre": "Identificación Oficial con fotografí­a de la persona autorizada para oir y recibir notificaciones",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente"
+    ]
+   },
+   {
+    "codigo": "R-031",
+    "nombre": "Identificación Oficial con fotografí­a del Apoderado",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente"
+    ]
+   },
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Formato de solicitud del Trámite o Servicio de la Dependencia"
+    ]
+   },
+   {
+    "codigo": "R-358",
+    "nombre": "Documento notariado que acredite la personalidad del representante legal o apoderado",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1",
+     "Copia certificada x1",
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Escritura pública",
+     "Poder notarial"
+    ]
+   }
+  ],
+  "formatos": [
+   "Solicitud Constancia de Cumplimiento."
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [
+   "Constancia de Cumplimiento de Requisitos en Materia de Protección Civil"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Protección Civil del Estado de Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley General de Protección Civil",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Ley de Protección Civil del Estado de Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Ley General de Protección Civil",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de Protección Civil del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Firmar la solicitud autógrafamente",
+     "Adjuntar la documentación de los requisitos",
+     "Enviar la solicitud",
+     "Dar seguimiento en tu Expediente Digital",
+     "Descargar el resolutivo",
+     "Esperar la inspección"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Descargar y llenar la solicitud",
+     "Entregar documentación de los requisitos",
+     "Entregar recibo de pago",
+     "Entregar documentación complementaria de los requisitos",
+     "Solventar las observaciones de la solicitud en caso de tenerlas",
+     "Realizar el pago del trámite o servicio",
+     "Programar la inspección, verificación o visita",
+     "Estar presente durante la inspección, verificación o visita",
+     "Responder la entrevista realizada por el inspector, verificador o visitador",
+     "Firmar y sellar el reporte generado por el inspector, verificador o visitador",
+     "Recibir copia del acta de la inspección, verificación o visita",
+     "Atender las observaciones que se deriven de la inspección, verificación o visita",
+     "Proporcionar los datos solicitados",
+     "Acudir al domicilio para realizar la inspección, verificación o visita",
+     "Pagar los derechos correspondientes.",
+     "Llenar el formato con las firmas correspondientes",
+     "Se recibe la solicitud."
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Oficina de Asuntos Jurídicos, Dirección de Gobernación"
+  ],
+  "observaciones": "No aplica",
+  "criterio": "Acreditar que las medidas de seguridad previstas para el evento son adecuadas y suficientes para su realización."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/269",
+  "clave": "MID-INMU-269",
+  "nombreLegal": "Afiliarse al servicio denominado Mujeres Seguras en tu Establecimiento",
+  "nombreCiudadano": "Mujeres seguras en tu establecimiento",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Instituto de las Mujeres",
+  "prefijo": "INMU",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Desarrollo de las Mujeres en Comunidades con Perspectiva de Género",
+  "modalidad": "Gestión en línea",
+  "modalidadClave": "GES_LINEA",
+  "descripcion": "Las empresas y/o instituciones que desean ser parte del servicio denominado Mujeres Seguras se contactarán con el Instituto de las Mujeres a través de la Coordinación de Alianzas Estratégicas para conocer los lineamientos y las responsabilidades que se requieren para ser parte del mismo.",
+  "porQue": "Es una estrategia para fomentar espacios seguros y libres de violencia para las mujeres, mediante acciones afirmativas para su desarrollo integral, el conocimiento de sus derechos, atención y acompañamiento en caso de situaciones de violencia.",
+  "resolutivo": "Insignia de Mujeres Seguras",
+  "vigenciaResolutivo": "Durante la administración actual 2024-2027",
+  "personasObjetivo": [
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Mujeres",
+   "Hombres"
+  ],
+  "categorias": [
+   "Economía",
+   "Laboral"
+  ],
+  "fechaActualizacion": "2026-09-29 08:19:13",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|habiles",
+  "ficta": "no",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [],
+  "formatos": [
+   "Oficio de Solicitud de Servicios"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento del Instituto de las Mujeres del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Descargar los formatos del trámite o servicio",
+     "Esperar las indicaciones correspondientes para continuar el proceso de la solicitud",
+     "Consultar los requisitos necesarios",
+     "Recibir el correo electronico de confirmación de inscripción (según disponibilidad)",
+     "En caso de recibir confirmación de inscripción, presentarse al taller en la fecha y hora seleccionada",
+     "Enviar la solicitud"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Esperar las indicaciones correspondientes para continuar el proceso de la solicitud",
+     "Acudir al taller en el horario y día correspondiente",
+     "Llenar el formato con las firmas correspondientes",
+     "Se le informa al solicitante la resolución de su solicitud",
+     "Solicita la firma de conformidad del ciudadano"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Instituto de las Mujeres"
+  ],
+  "observaciones": "",
+  "criterio": "Recibir el proceso de sensibilización y mecanismos de la canalización."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+  "clave": "MID-OBP-275",
+  "nombreLegal": "Bacheo de calles",
+  "nombreCiudadano": "Bacheo de calles",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Obras Públicas",
+  "prefijo": "OBP",
+  "dominioGestion": "https://obpmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Mantenimiento Vial",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Proporcionarle mantenimiento preventivo y correctivo a las calles y avenidas del Municipio de Mérida.",
+  "porQue": "Contar con vías de tránsito en buenas condiciones para el tránsito vehicular y peatonal.",
+  "resolutivo": "Número de Folio de reporte para bacheo de Obras Públicas",
+  "vigenciaResolutivo": "Hasta que se realice la atención del servicio.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Construcción",
+   "Servicios públicos"
+  ],
+  "fechaActualizacion": "2026-09-29 14:14:33",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://merida.gob.mx/reporta/",
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Ley de Obras Públicas y servicios relacionados con las mismas",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://merida.gob.mx/reporta/",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Capturar la información del predio o domicilio",
+     "Recibir por correo electrónico el folio de reporte"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Proporcionar los datos solicitados",
+     "Dirección exacta donde se realizará el servicio solicitado",
+     "Asignación de Folio"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Palacio Municipal",
+   "Dirección de Obras Públicas"
+  ],
+  "observaciones": "",
+  "criterio": "Que las calles se encuentren pavimentadas y dentro del Municipio de Mérida. Si es dentro de algún fraccionamiento, este debe estar Municipalizado."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/296",
+  "clave": "MID-PBE-296",
+  "nombreLegal": "Sistema de Apertura Rápida de Empresas del Municipio de Mérida.",
+  "nombreCiudadano": "Apertura de empresas, Licencia de Uso de suelo, Licencia de funcionamiento",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Prosperidad y Bienestar Económico",
+  "prefijo": "PBE",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Vinculación Empresarial",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "",
+  "porQue": "",
+  "resolutivo": "Licencia de Uso de suelo para Funcionamiento Municipal y Licencia de Funcionamiento Municipal",
+  "vigenciaResolutivo": "Lic. de Uso de Suelo para Funcionamiento es de 1 año (a partir de su expedición) y Lic. de Funcionamiento inicia en la fecha de su expedición y termina el último día de la Admon. Mpal. que la emitió.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres",
+   "Emprendedores"
+  ],
+  "categorias": [
+   "Apertura de negocios"
+  ],
+  "fechaActualizacion": "2026-10-12 11:53:34",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|habiles",
+  "ficta": "afirmativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "fijo",
+  "costoTexto": "1.- Por la emisión de la Licencia de Funcionamiento: De acuerdo a la Fracción I del Artículo 161 de la Ley de Hacienda del Municipio de Mérida el importe es de $586.55 (5 U.M.A) 2.- Licencia de Uso de Suelo para trámite de la Licencia de Funcionamiento Municipal: a) Zona 1. Consolidación Urbana. 1).- Cuya superficie sea de hasta 50.00 metros cuadrados Veces U.M.A. 4.10 Unidad de medida Licencia $480.97 2) Cuya superficie sea de 50.01 hasta 100.00 metros cuadrados Veces U.M.A. 8.20 Unidad de medi",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal",
+   "Pago en línea"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito",
+   "Otro",
+   "Cheque certificado",
+   "Cheque simple",
+   "Transferencia bancaria"
+  ],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://www.merida.gob.mx/cae/",
+  "requisitos": [
+   {
+    "codigo": "R-018",
+    "nombre": "Acreditar la legal posesión del predio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Contrato de arrendamiento",
+     "Contrato de comodato",
+     "Convenio transaccional de desocupación y entrega",
+     "Título de propiedad",
+     "Resolución de adjudicación de Herencia mediante juicio sucesorio"
+    ]
+   },
+   {
+    "codigo": "R-053",
+    "nombre": "Plano arquitectónico",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-121",
+    "nombre": "Fotografias",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-052",
+    "nombre": "Pago actualizado del Impuesto Predial",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-174",
+    "nombre": "Identificación Oficial con fotografí­a del Representante Legal",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Cartilla Militar emitida por la Secretaría de la Defensa Nacional",
+     "FM2",
+     "FM3"
+    ]
+   },
+   {
+    "codigo": "R-260",
+    "nombre": "Registro Federal de Contribuyentes (RFC)",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-040",
+    "nombre": "Pago actualizado del servicio de recolección de residuos sólidos no peligrosos",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-390",
+    "nombre": "Acta Constitutiva",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Acta constitutiva"
+    ]
+   },
+   {
+    "codigo": "R-506",
+    "nombre": "Poder Notarial",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Poder notarial"
+    ]
+   }
+  ],
+  "formatos": [
+   "Formato Único de Apertura SARE"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley De Asentamientos Humanos, Ordenamiento Territorial Y Desarrollo Urbano Del Estado De Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "75",
+     "76",
+     "30"
+    ]
+   },
+   {
+    "nombre": "Ley de Ingresos del Municipio de Mérida, Yucatán para el Ejercicio Fiscal 2026",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento del Sistema de Apertura Rápida de Empresas del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de Construcciones del Municipio de Mérida",
+    "articulos": [
+     "21",
+     "23",
+     "29",
+     "34"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://www.merida.gob.mx/cae/",
+    "pasos": [
+     "Ingresar al portal del SARE",
+     "Completar la información del formato digital",
+     "Adjuntar archivos de los requisitos para finalizar solicitud",
+     "Recibir correos electrónicos de seguimiento durante el proceso",
+     "Realizar el pago en cuanto sea aprobado el trámite",
+     "Recibir y descargar el documento resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas del SARE o alguna ventanilla única",
+     "Entregar de manera física o digital los requisitos solicitados",
+     "Proporcionar la información para el llenado de la solicitud",
+     "Realizar seguimiento durante el proceso",
+     "Realizar el pago en cuanto sea aprobado el trámite",
+     "recibirá vía correo electrónico las licencias solicitadas a través del módulo SARE."
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Dirección de Prosperidad y Bienestar Económico",
+   "Dirección de Finanzas y Tesorería",
+   "Registro Público de la Propiedad",
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Gran Plaza",
+   "Pensiones (San Damián)",
+   "Colonia México",
+   "Central de Orden, Planeación y Desarrollo Urbano",
+   "Dirección de Obras Públicas",
+   "Plaza Akrópolis",
+   "Plaza Pericenter"
+  ],
+  "observaciones": "",
+  "criterio": ""
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/315",
+  "clave": "MID-PAC-315",
+  "nombreLegal": "Atención Ciudadana en Ayuntatel",
+  "nombreCiudadano": "AYUNTATEL",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Secretaría de Participación y Atención Ciudadana",
+  "prefijo": "PAC",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Atención Ciudadana",
+  "modalidad": "Telefónica",
+  "modalidadClave": "TELEFONICA",
+  "descripcion": "Servicio de atención telefónica por medio del número 999924-4000 o la marcación al 070 desde el celular, donde la ciudadanía puede solicitar información de los servicios o programas municipales, y/o realizar algún reporte para que sea atendido por las diversas Unidades Administrativas del Ayuntamiento de Mérida",
+  "porQue": "Se puede realizar consultas y/o reportes vía telefónica, sin necesidad de trasladarse o acudir a la dependencia del Ayuntamiento encargada de atender, así como darle seguimiento vía telefónica",
+  "resolutivo": "Folio de Atención Ciudadana",
+  "vigenciaResolutivo": "Durante la presente Administración 2024-2027.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Adolescentes",
+   "Artesanos",
+   "Empresas",
+   "Grupos en situación de vulnerabilidad",
+   "Adultos mayores",
+   "Emprendedores",
+   "Estudiantes",
+   "Hombres",
+   "Infancias",
+   "Mujeres",
+   "Personas con discapacidad",
+   "Jóvenes",
+   "Mujeres embarazadas",
+   "Turistas"
+  ],
+  "categorias": [
+   "Apertura de negocios",
+   "Asistencia jurídica",
+   "Atención ciudadana",
+   "Asistencia social",
+   "Deporte",
+   "Educación",
+   "Eventos culturales",
+   "Laboral",
+   "Protección sanitaria",
+   "Medio ambiente",
+   "Salud",
+   "Servicios públicos",
+   "Servicio de sanidad animal",
+   "Turismo",
+   "Construcción",
+   "Economía",
+   "Identidad",
+   "Impuestos y contribuciones",
+   "Seguridad, legalidad y justicia",
+   "Territorio y vivienda"
+  ],
+  "fechaActualizacion": "2026-09-29 14:38:53",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|habiles",
+  "ficta": "negativa",
+  "prevencion": "1|1 habiles|cumplir 1 habiles",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-395",
+    "nombre": "Proporcionar los datos de identificación del predio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-196",
+    "nombre": "Número telefónico de contacto",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-17:00:00"
+  ],
+  "modulosKeys": [],
+  "modulos": [],
+  "observaciones": "El reporte o consulta debe ser del ámbito y de competencia del Ayuntamiento de Mérida.",
+  "criterio": "El reporte o solicitud debe ser del ámbito y de competencia del Ayuntamiento de Mérida."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/319",
+  "clave": "MID-SEC-319",
+  "nombreLegal": "Certificado de Vecindad",
+  "nombreCiudadano": "Vecindad",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Secretaría Municipal",
+  "prefijo": "SEC",
+  "dominioGestion": "https://secmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": null,
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "Avala que el ciudadano solicitante tiene inscripción por más de seis meses en el Registro de Población Municipal.",
+  "porQue": "Cuando el ciudadano necesite avalar su vecindad de más de 6 meses en el Municipio, estando inscrito en le Registro de Población Municipal.",
+  "resolutivo": "Certificado de Vecindad",
+  "vigenciaResolutivo": "1 año",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Adultos mayores",
+   "Adolescentes",
+   "Estudiantes",
+   "Infancias",
+   "Mujeres",
+   "Jóvenes",
+   "Mujeres embarazadas",
+   "Hombres",
+   "Personas con discapacidad"
+  ],
+  "categorias": [
+   "Asistencia jurídica",
+   "Identidad",
+   "Seguridad, legalidad y justicia"
+  ],
+  "fechaActualizacion": "2026-09-29 14:36:56",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "variable",
+  "costoTexto": "$117.31(equivalente a una UMA)",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago cuando el asesor le indique",
+  "dondePagar": [
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-006",
+    "nombre": "Acta de Nacimiento",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Acta de Nacimiento"
+    ]
+   },
+   {
+    "codigo": "R-021",
+    "nombre": "Comprobante de Domicilio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [],
+    "documentosAceptados": [
+     "Recibo de luz",
+     "Recibo de Agua"
+    ]
+   },
+   {
+    "codigo": "R-405",
+    "nombre": "Identificación Oficial con fotografía de la persona solicitante",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)"
+    ]
+   },
+   {
+    "codigo": "R-234",
+    "nombre": "Cédula de Inscripción al Registro de Población Municipal",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Cédula de Inscripción al Registro de Población Municipal, emitido por la Secretaría Municipal del Ayuntamiento de Merída"
+    ]
+   },
+   {
+    "codigo": "R-442",
+    "nombre": "Recibo oficial de pago",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-339",
+    "nombre": "Presencia del padre ó madre ó tutor legal",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-454",
+    "nombre": "Identificación oficial del extranjero",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [],
+    "documentosAceptados": [
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores"
+    ]
+   },
+   {
+    "codigo": "R-121",
+    "nombre": "Fotografias",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x2"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Fotografía tamaño infaltil blanco y negro",
+     "Fotografía tamaño infantil a color"
+    ]
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "FM3"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento del Registro de Población del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Entregar documentación de los requisitos",
+     "Proporcionar los datos solicitados",
+     "Realizar el pago del trámite o servicio",
+     "Acude al término de los 3 días hábiles de haber iniciado su trámite",
+     "Recibir el resolutivo en el mismo modulo donde se realizó la solicitud"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-20:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Departamento de Población Municipal"
+  ],
+  "observaciones": "",
+  "criterio": "Estar registrado con un mínimo de 6 meses o más en el Registro de Población Municipal."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/334",
+  "clave": "MID-SEP-334",
+  "nombreLegal": "Reportes de Fallas en el Alumbrado Público",
+  "nombreCiudadano": "Fallas en el Alumbrado Público",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Servicios Públicos",
+  "prefijo": "SEP",
+  "dominioGestion": "https://sepmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Alumbrado Poniente",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Es la atención oportuna de las fallas más comunes de las luminarias del alumbrado público pertenecientes al Municipio de Mérida, tales como: Luminarias apagadas de noche, encendidas de día, que prenden o apagan, sectores apagados de noche y sectores encendidos de día.",
+  "porQue": "Es necesario cuando se presente alguna falla en las luminarias del Alumbrado Público perteneciente al Municipio de Mérida.",
+  "resolutivo": "Número de folio de Reporte",
+  "vigenciaResolutivo": "Hasta que se atienda el reporte.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Atención ciudadana",
+   "Servicios públicos"
+  ],
+  "fechaActualizacion": "2026-10-07 09:32:50",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|2|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://merida.gob.mx/reporta/",
+  "requisitos": [
+   {
+    "codigo": "R-407",
+    "nombre": "Dirección, ubicación o referencias del domicilio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [
+   "Solicitud de Servicio"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [
+   "Reportes de Fallas en el Alumbrado Público"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento para la Prestación de los Servicios Públicos en el Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://merida.gob.mx/reporta/",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Capturar nombre de usuario y contraseña",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Capturar la información del predio o domicilio",
+     "Recibir por correo electrónico el folio de reporte"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Presentar reporte ciudadano",
+     "Proporcionar los datos solicitados",
+     "Entrega de oficio de Solicitud"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Subdirección de Servicios Oriente",
+   "Dirección de Servicios Públicos (Sector Poniente)"
+  ],
+  "observaciones": "- Los reportes por sector apagado-sector encendido se atienden en 24 horas (en Comisarías aplica únicamente en el sector del parque y cancha). - Los reportes de luminarias encendidas de día, apagadas de noche, que prenden y apagan se atienden en 48 horas (no aplica tiempo en Comisarías).",
+  "criterio": "Que la Colonia donde se requiera el servicio pertenezca al Municipio de Mérida. En el caso particular de los Fraccionamientos, que se encuentren Municipalizados."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/345",
+  "clave": "MID-SEP-345",
+  "nombreLegal": "Recolección de Basura en la Vía Pública",
+  "nombreCiudadano": "Basura en la calle",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Servicios Públicos",
+  "prefijo": "SEP",
+  "dominioGestion": "https://sepmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Aseo Urbano Poniente",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Consiste en la recolección de basura en la vía pública que no sea basura domiciliaria. Se recoge la basura que sea producto de limpieza del ciudadano o basura de procedencia desconocida.",
+  "porQue": "Para retirar de la vía pública basura de procedencia desconocida y productos de limpieza del ciudadano a fin de contribuir al cuidado de la salud evitando malos olores, contaminación del medio ambiente, enfermedades y conservar la buena imagen de la vía pública.",
+  "resolutivo": "Número de folio de Reporte",
+  "vigenciaResolutivo": "16 horas a 3 días",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Atención ciudadana",
+   "Servicios públicos",
+   "Salud"
+  ],
+  "fechaActualizacion": "2026-10-07 09:59:09",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|3|naturales",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://merida.gob.mx/reporta/",
+  "requisitos": [
+   {
+    "codigo": "R-196",
+    "nombre": "Número telefónico de contacto",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-407",
+    "nombre": "Dirección, ubicación o referencias del domicilio",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento para la Gestión Integral de Residuos Sólidos del Municipio de Mérida",
+    "articulos": [
+     "65"
+    ]
+   },
+   {
+    "nombre": "Ley de Gobierno de los Municipios del Estado de Yucatán",
+    "articulos": [
+     "Artículo 89",
+     "Artículo 111",
+     "Artículo 111"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://merida.gob.mx/reporta/",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Capturar nombre de usuario y contraseña",
+     "Se ingresa al sitio web https://merida.gob.mx/reporta/",
+     "Proporcionar la información que solicita el sitio web.",
+     "Se descarga la Aplicación gratuita \"Ayuntamiento de Mérida\" para teléfonos o tabletas",
+     "Se le asigna un folio a su reporte con el cual se podrá dar seguimiento."
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Entrega de oficio de Solicitud",
+     "Acudir al domicilio para realizar la inspección, verificación o visita",
+     "Proporcionar los datos solicitados"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Subdirección de Servicios Oriente",
+   "Dirección de Servicios Públicos (Sector Poniente)",
+   "Palacio Municipal"
+  ],
+  "observaciones": "",
+  "criterio": "Que la basura se encuentre en la vía pública, se ignore su procedencia y no sea domiciliaria."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/356",
+  "clave": "MID-MAB-356",
+  "nombreLegal": "Aplicación de Vacuna Antirrábica para animales de compañía (perros y gatos).",
+  "nombreCiudadano": "Campaña antirrábica",
+  "tipo": "Trámite",
+  "estado": "Pendiente",
+  "unidad": "Unidad de Medio Ambiente y Bienestar Animal",
+  "prefijo": "UMA",
+  "dominioGestion": "https://umamerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Salud Animal",
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "Vacunar a los perros y gatos domiciliados de la Ciudad de Mérida y sus comisarías.",
+  "porQue": "En caso de campaña permanente o por solicitud en el módulo veterinario. La vacuna no tiene costo, pero podría requerir de consulta previa para determinar el estado de salud del animal de compañía el cual tiene un costo de 50 pesos. Es necesario aplicar la vacuna antirrábica al menos una vez al año",
+  "resolutivo": "Carnet de vacunación de la mascota",
+  "vigenciaResolutivo": "Permanente",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Adultos mayores",
+   "Estudiantes",
+   "Hombres",
+   "Mujeres",
+   "Grupos en situación de vulnerabilidad",
+   "Emprendedores",
+   "Jóvenes",
+   "Personas con discapacidad",
+   "Turistas"
+  ],
+  "categorias": [
+   "Servicio de sanidad animal",
+   "Salud",
+   "Protección sanitaria"
+  ],
+  "fechaActualizacion": "2026-10-15 10:34:16",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|None",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-232",
+    "nombre": "Carnet de vacunación de la mascota",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-034",
+    "nombre": "Formato",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [
+   "Formato de Solicitud"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley General del Equilibrio Ecológico y la Protección al Ambiente",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Ley General del Equilibrio y la Proteccion al Ambiente en Materia de Evaluación del Impacto Ambiental",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de Protección al Ambiente y Equilibrio Ecológico del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Entregar documentación de los requisitos",
+     "Proporcionar los datos solicitados"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Clínica Veterinaria Municipal",
+   "Módulo Veterinario Municipal Chichén Itzá"
+  ],
+  "observaciones": "",
+  "criterio": "El animal de compañia deberá estar en buen estado de salud y tener al menos un año de edad. El servicio sujeto a disponibilidad de vacunas Las placas sujetas a disponibilidad de existencia"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/363",
+  "clave": "MID-MAB-363",
+  "nombreLegal": "Reportes por maltrato animal",
+  "nombreCiudadano": "Denuncia por maltrato animal",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Unidad de Medio Ambiente y Bienestar Animal",
+  "prefijo": "UMA",
+  "dominioGestion": "https://umamerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Subdirección de Bienestar Animal",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Denuncia ciudadana de actos u omisiones, en contra de los animales, tales como: animales utilizados para trabajos que excedan su resistencia o que no sean propios de su especie; descuidos en el lugar donde viven, ya sea en malas condiciones de ventilación, movilidad o higiene, sin agua y comida adecuada; animales sin atención veterinaria oportuna o en estado de abandono; prácticas donde a los anim",
+  "porQue": "Cuando la ciudadanía observe casos de acciones u omisiones que generen maltrato de animales en el municipio de Mérida y sus comisarías.",
+  "resolutivo": "Folio de reporte Ayuntatel por maltrato animal",
+  "vigenciaResolutivo": "Permanente",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Servicio de sanidad animal",
+   "Protección sanitaria"
+  ],
+  "fechaActualizacion": "2026-09-29 08:54:17",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|90|habiles",
+  "ficta": "no",
+  "prevencion": "1|15 naturales|cumplir 10 naturales",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 1,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://merida.gob.mx/reporta/reporte.php",
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Escrito libre",
+     "Formato de solicitud del Trámite o Servicio de la Dependencia"
+    ]
+   },
+   {
+    "codigo": "R-121",
+    "nombre": "Fotografias",
+    "obligatorio": 0,
+    "presentacion": [],
+    "aplicaA": [],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [
+   "Formato de Solicitud"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [
+   "Reportes por maltrato animal"
+  ],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento para la Protección de la Fauna en el Municipio de Mérida",
+    "articulos": [
+     "11",
+     "11",
+     "11",
+     "20",
+     "28",
+     "29",
+     "30",
+     "31",
+     "35",
+     "69",
+     "78",
+     "100",
+     "101",
+     "102",
+     "104"
+    ]
+   },
+   {
+    "nombre": "Reglamento de Protección al Ambiente y Equilibrio Ecológico del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://merida.gob.mx/reporta/reporte.php",
+    "pasos": [
+     "Se ingresa al sitio web https://merida.gob.mx/reporta/",
+     "Proporcionar la información que solicita el sitio web.",
+     "Se le asigna un folio a su reporte con el cual se podrá dar seguimiento."
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Entrega de oficio de Solicitud",
+     "Asignación de Folio"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:30:00-14:30:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Unidad de Medio Ambiente y Bienestar Animal"
+  ],
+  "observaciones": "La atención a su reporte para erradicar el maltrato animal en el municipio de Mérida",
+  "criterio": "Que el reporte de hecho, acto u omisión contravenga lo dispuesto en el Reglamento para la Protección de la Fauna del Municipio de Mérida. En caso de incumplimiento a los compromisos acordados, de no permitir el ingreso al predio para emitir la resolución correspondiente o constatarse una falta grave"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+  "clave": "MID-INMU-370",
+  "nombreLegal": "Atención Especializada para mujeres en situación de Violencia",
+  "nombreCiudadano": "Atención Especializada para mujeres en situación de Violencia",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Instituto de las Mujeres",
+  "prefijo": "INMU",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Servicios Especializados en Atención a Las Violencias",
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "Brindar atención individualizada a mujeres que soliciten el servicio psicológico, jurídico o del área social, la cual se calendariza a través de una cita, y posterior seguimiento del caso.",
+  "porQue": "Durante la entrevista con la usuaria se detecta si su caso es competencia del Instituto de las Mujeres, en caso de ser afirmativo se realiza la detección de necesidades y valoración de riesgo, en el caso de que sea competencia de otra unidad administrativa se le brinda la información respectiva y se",
+  "resolutivo": "Folio de Registro Único de Atención",
+  "vigenciaResolutivo": "La vigencia del expediente es de 3 años",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Mujeres"
+  ],
+  "categorias": [
+   "Atención ciudadana"
+  ],
+  "fechaActualizacion": "2026-09-29 08:22:39",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|naturales",
+  "ficta": "no",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": null,
+  "facilidades": "",
+  "cuandoPagar": null,
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento del Instituto de las Mujeres del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Acceso de las Mujeres a una Vida Libre de Violencia del Estado de Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley General de Acceso de las Mujeres a una Vida Libre de Violencias",
+    "articulos": []
+   },
+   {
+    "nombre": "NOM-046-SSA2-2005. Violencia Familiar, Sexual y contra las Mujeres. Criterios para la Prevención y Atención",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Solicitar el servicio a la Institución correspondiente",
+     "Esperar las indicaciones correspondientes para continuar el proceso de la solicitud",
+     "Se procede a finalizar el servicio solicitado."
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-18:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Instituto de las Mujeres",
+   "Instituto de la Mujer sede oriente",
+   "Instituto de la Mujer sede poniente",
+   "Instituto de la Mujer sede sur"
+  ],
+  "observaciones": "",
+  "criterio": "Es un servicio que se le brinda a las mujeres del Municipio de Mérida y sus comisarías que se encuentren en situación de violencia de género."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/377",
+  "clave": "MID-TMM-377",
+  "nombreLegal": "Solicitud de Acceso a la Información Pública",
+  "nombreCiudadano": "Solicitud de Acceso a la Información Pública",
+  "tipo": "Trámite",
+  "estado": "Autorizado",
+  "unidad": "Unidad de Transparencia",
+  "prefijo": "TMM",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Unidad de Transparencia",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Obtener Información Pública que se encuentre en documentos que generen, obtengan, adquieran, transformen o conserven las Unidades Administrativas del Ayuntamiento de Mérida",
+  "porQue": "Cuando la ciudadanía requiera información pública que obre en los archivos del Ayuntamiento de Mérida",
+  "resolutivo": "Respuesta a la solicitud de derecho ARCOP",
+  "vigenciaResolutivo": "60 días hábiles para la respuesta, prorrogables hasta por 10 días hábiles adicionales.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Adultos mayores",
+   "Emprendedores",
+   "Estudiantes",
+   "Grupos en situación de vulnerabilidad",
+   "Hombres",
+   "Jóvenes",
+   "Mujeres",
+   "Personas con discapacidad",
+   "Turistas",
+   "Adolescentes",
+   "Personas mayores en situación de calle",
+   "Mujeres embarazadas",
+   "Personas en situación de vulnerabilidad",
+   "Artesanos",
+   "Infancias",
+   "Empresas"
+  ],
+  "categorias": [
+   "Transparencia"
+  ],
+  "fechaActualizacion": "2026-09-29 08:58:44",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|10|habiles",
+  "ficta": "no",
+  "prevencion": "1|5 habiles|cumplir 10 habiles",
+  "tipoCosto": "variable",
+  "costoTexto": "El costo de las copias quedaría de ta siguiente manera: Las primeras 20 hojas simples son sin costo. Después de las 20 hojas simples (la 21 en adelante) tienen un costo de $1.00 c/u Cada copia certificada tiene un costo de $3.00 c/u El formato CD tiene un costo de $10.00 c/u Si el volumen y la naturaleza de la documentación lo permite, la entrega será en formato digital sin costo.",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "Realizar el pago al final del proceso",
+  "dondePagar": [
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://www.plataformadetransparencia.org.mx/Inicio",
+  "requisitos": [],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Transparencia y Acceso a la Información Pública del Estado de Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley General de Transparencia y Acceso a la Información Pública",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de Transparencia y Acceso a la Información Pública del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://www.plataformadetransparencia.org.mx/Inicio",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Iniciar sesión con el correo electrónico y contraseña",
+     "Proporcionar la información que solicita el sitio web.",
+     "Enviar la solicitud",
+     "Recibir acuse o folio de recepción",
+     "Recibe resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Se recibe la solicitud.",
+     "Se le informa al solicitante la resolución de su solicitud",
+     "Realizar el pago del trámite o servicio",
+     "Recibir el resolutivo en el mismo modulo donde se realizó la solicitud"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Unidad de Transparencia y Gestión Archivística"
+  ],
+  "observaciones": "10 días hábiles para la respuesta, prorrogables hasta por 10 días hábiles adicionales.",
+  "criterio": "Cabe señalar que la información que se encuentre clasificada como confidencial o reservada de acuerdo a lo establecido en la Ley General de Transparencia y Acceso a la Información Pública, se entregará en versión pública."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/39",
+  "clave": "MID-CAT-039",
+  "nombreLegal": "Copia Simple de Cédula Catastral Vigente",
+  "nombreCiudadano": "copia de cédula",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Catastro",
+  "prefijo": "CAT",
+  "dominioGestion": "https://catmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/catmerida",
+  "departamento": "Procesos",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Se proporciona copia simple de Cédula Catastral Vigente",
+  "porQue": "Atención a requerimientos de la ciudadanía",
+  "resolutivo": "Copia simple de cédula catastral vigente",
+  "vigenciaResolutivo": "Se considera vigente la última Cédula expedida por el Catastro Municipal",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres"
+  ],
+  "categorias": [
+   "Territorio y vivienda"
+  ],
+  "fechaActualizacion": "2026-10-12 10:48:44",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|habiles",
+  "ficta": "no",
+  "prevencion": "1|1 habiles|cumplir 20 habiles",
+  "tipoCosto": "fijo",
+  "costoTexto": "Copia simple de cédula catastral vigente Veces UMA 0.3 importe $35.19 Nota: Valor actual de la Unidad de Medida y Actualización (U.M.A) es de 117.31 pesos.",
+  "unidadMedidaMonto": "umas",
+  "facilidades": "No aplica",
+  "cuandoPagar": "Realizar el pago cuando el asesor le indique",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito",
+   "Transferencia bancaria"
+  ],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Formato de solicitud del Trámite o Servicio de la Dependencia"
+    ]
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 1,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física",
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)",
+     "Pasaporte emitido por la Secretaría de Relaciones Exteriores",
+     "Licencia de conducir vigente",
+     "Cédula profesional con fotografía",
+     "INAPAM"
+    ]
+   },
+   {
+    "codigo": "R-001",
+    "nombre": "Acreditación del representante legal para persona moral",
+    "obligatorio": 0,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona moral"
+    ],
+    "documentosAceptados": [
+     "Acta constitutiva",
+     "Poder notarial",
+     "Última actualización de acta constitutiva"
+    ]
+   }
+  ],
+  "formatos": [
+   "Solicitud de Tramites Generales"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Ley de Hacienda del Municipio de Mérida",
+    "articulos": [
+     "89"
+    ]
+   },
+   {
+    "nombre": "Reglamento del Catastro del Municipio de Mérida",
+    "articulos": [
+     "20",
+     "28"
+    ]
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Adjuntar la documentación de los requisitos",
+     "Enviar la solicitud",
+     "Se realiza el pago",
+     "Dar seguimiento en tu Expediente Digital",
+     "Recibe resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir al módulo a la ventanilla única mas cercana",
+     "Entregar documentación de los requisitos",
+     "Realizar el pago del trámite o servicio"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Gran Plaza",
+   "Plaza Akrópolis",
+   "Plaza Pericenter",
+   "Central de Orden, Planeación y Desarrollo Urbano",
+   "Registro Público de la Propiedad",
+   "Colonia México",
+   "Dirección de Finanzas y Tesorería",
+   "Pensiones (San Damián)",
+   "Dirección de Obras Públicas"
+  ],
+  "observaciones": "",
+  "criterio": "Inmediato a partir del pago de manera presencial en cualquier Ventanilla Única Municipal"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+  "clave": "MID-INMU-397",
+  "nombreLegal": "Línea Telefónica de Atención de la Violencia contra las Mujeres",
+  "nombreCiudadano": "Linea Mujer",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Instituto de las Mujeres",
+  "prefijo": "INMU",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Despacho de la Subdirectora",
+  "modalidad": "Telefónica",
+  "modalidadClave": "TELEFONICA",
+  "descripcion": "Brindar servicios esenciales de atención inmediata y de primer contacto a mujeres en situación de violencias en razón de género a través de asistencia telefónica las 24 horas del día los 7 días de la semana.",
+  "porQue": "La personas que requieren el servicio telefónico, no se requiere llenar por su propia cuenta algún formato para el acceso al servicio el de información y/o intervención telefónica sólo basta con marcar a la línea Mujer.",
+  "resolutivo": "Recibirá atención telefónica especializada al momento de realizar su llamada.",
+  "vigenciaResolutivo": "No se tiene vigencia del como tal ya que el servicio está disponible las 24 horas del día, los 7 días de las semana.",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Mujeres",
+   "Jóvenes"
+  ],
+  "categorias": [
+   "Atención ciudadana",
+   "Asistencia jurídica",
+   "Seguridad, legalidad y justicia",
+   "Asistencia social"
+  ],
+  "fechaActualizacion": "2026-09-29 08:35:05",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|naturales",
+  "ficta": "no",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": null,
+  "facilidades": "",
+  "cuandoPagar": null,
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento del Instituto de las Mujeres del Municipio de Mérida",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley de Acceso de las Mujeres a una Vida Libre de Violencia del Estado de Yucatán",
+    "articulos": []
+   },
+   {
+    "nombre": "Ley General de Acceso de las Mujeres a una Vida Libre de Violencias",
+    "articulos": []
+   },
+   {
+    "nombre": "NOM-046-SSA2-2005. Violencia Familiar, Sexual y contra las Mujeres. Criterios para la Prevención y Atención",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": []
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-d 00:00:00-12:00:00"
+  ],
+  "modulosKeys": [],
+  "modulos": [],
+  "observaciones": "",
+  "criterio": "Se atienen todas las llamadas entrantes, sin embargo para la canalización de los servicios únicamente aplica a las mujeres del Municipio de Mérida y sus comisarías que se encuentren en alguna situación de violencias."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/400",
+  "clave": "MID-BIH-400",
+  "nombreLegal": "Médico a Domicilio",
+  "nombreCiudadano": "Médico a Domicilio",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Bienestar Humano",
+  "prefijo": "BIH",
+  "dominioGestion": "https://bihmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Protección y Atención a la Salud",
+  "modalidad": "100% Presencial",
+  "modalidadClave": "PRESENCIAL",
+  "descripcion": "El médico a domicilio acude a las colonias y comisarías del Municipio de Mérida, con la finalidad de acercar los servicios médicos a personas de vulnerabilidad, como son: Personas con Discapacidad, Adultos mayores sin capacidad para trasladarse, enfermos postrados y personas en situación de abandono, mujeres embarazadas y niños en situación de pobreza extrema o con dificultad para acceder a un mód",
+  "porQue": "Dirigido a personas imposibilitadas para acudir a las instalaciones de los módulos médicos, de escasos recursos que no cuenta con ningún otro servicio de salud. (Adultos mayores, discapacitados o con enfermedades crónicas y/o degenerativas). La solicitud es vía telefónica.",
+  "resolutivo": "Receta Médica y/o formato de canalización.",
+  "vigenciaResolutivo": "Permanente.",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Grupos en situación de vulnerabilidad"
+  ],
+  "categorias": [
+   "Salud"
+  ],
+  "fechaActualizacion": "2026-09-02 13:52:33",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|1|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": null,
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-329",
+    "nombre": "Firma de consentimiento.",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-236",
+    "nombre": "Cuestionario TRIAGE, COVID-19",
+    "obligatorio": 0,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Responder el Cuestionario TRIAGE, COVID-19"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento Interno del Instituto Municipal de la Salud",
+    "articulos": []
+   },
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Proporcionar los datos solicitados",
+     "Recibe fecha de cita para atención",
+     "Recibir atención médica"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Subdirección de Salud"
+  ],
+  "observaciones": "",
+  "criterio": "La solicitud del servicio debe ser en el Municipio de Mérida y sus Comisarías, está sujeto a la disponibilidad de los móviles médicos. Las consultas son con cita previa. Cabe hacer mención que no se expiden certificados de defunción."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/404",
+  "clave": "MID-PAC-404",
+  "nombreLegal": "Atención Ciudadana por medios digitales",
+  "nombreCiudadano": "Atención ciudadana digital",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Secretaría de Participación y Atención Ciudadana",
+  "prefijo": "PAC",
+  "dominioGestion": "",
+  "dominioPublicoED": null,
+  "departamento": "Atención Ciudadana",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Servicio de atención ciudadana que se genera por el correo electrónico, el sitio web y el chat de atención en línea.",
+  "porQue": "Cuando la ciudadanía desee externar algún comentario o recomendación de las acciones que lleve a cabo el Ayuntamiento de Mérida.",
+  "resolutivo": "Folio de Atención Ciudadana",
+  "vigenciaResolutivo": "Durante la presente Administración 2024-2027",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Adolescentes",
+   "Artesanos",
+   "Adultos mayores",
+   "Emprendedores",
+   "Empresas",
+   "Estudiantes",
+   "Grupos en situación de vulnerabilidad",
+   "Infancias",
+   "Hombres",
+   "Jóvenes",
+   "Mujeres",
+   "Personas con discapacidad",
+   "Mujeres embarazadas",
+   "Turistas"
+  ],
+  "categorias": [
+   "Apertura de negocios",
+   "Asistencia social",
+   "Asistencia jurídica",
+   "Atención ciudadana",
+   "Deporte",
+   "Construcción",
+   "Economía",
+   "Eventos culturales",
+   "Impuestos y contribuciones",
+   "Educación",
+   "Identidad",
+   "Laboral",
+   "Protección sanitaria",
+   "Medio ambiente",
+   "Salud",
+   "Servicio de sanidad animal",
+   "Seguridad, legalidad y justicia",
+   "Servicios públicos",
+   "Transparencia",
+   "Territorio y vivienda",
+   "Turismo"
+  ],
+  "fechaActualizacion": "2026-09-29 14:39:45",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|1|habiles",
+  "ficta": "negativa",
+  "prevencion": "1|1 habiles|cumplir 1 habiles",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": null,
+  "facilidades": "",
+  "cuandoPagar": null,
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": "https://www.merida.gob.mx/atencionciudadana/",
+  "requisitos": [
+   {
+    "codigo": "R-025",
+    "nombre": "Correo Electrónico",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento de la Administración Pública Centralizada del Municipio de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": "https://www.merida.gob.mx/atencionciudadana/",
+    "pasos": [
+     "Ingresar al portal en línea",
+     "Realizar en línea la solicitud del trámite o servicio",
+     "Elegirá el tema relacionado a sus dudas e inquietudes.",
+     "El ciudadano espera el correo de respuesta.",
+     "Si la respuesta recibida no le queda clara, podrá especificar sus dudas y enviarlas a través de un formulario."
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 07:30:00-14:30:00"
+  ],
+  "modulosKeys": [],
+  "modulos": [],
+  "observaciones": "Contar con correo electrónico. Los reportes, solicitudes y consultas sean referentes al Ayuntamiento de Mérida.",
+  "criterio": "Las solicitudes que se reciben, se les otorga respuesta en un tiempo máximo de 24 horas"
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+  "clave": "MID-BIH-007",
+  "nombreLegal": "Apoyo Psicológico",
+  "nombreCiudadano": "Psicología",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Bienestar Humano",
+  "prefijo": "BIH",
+  "dominioGestion": "https://bihmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": null,
+  "departamento": "Salud Mental",
+  "modalidad": "Presolicitud en línea",
+  "modalidadClave": "PRE_LINEA",
+  "descripcion": "Brindar atención psicológica (adulto mayor), a niñas, niños, adolescentes y adultos.",
+  "porQue": "Atender, educar, prevenir y rehabilitar a individuos que presentan problemáticas de tipo cognoscitivo, emocional, conductual y social.",
+  "resolutivo": "Respuesta a su solicitud.",
+  "vigenciaResolutivo": "En tanto se inicia la prestación del servicio.",
+  "personasObjetivo": [
+   "Personas físicas"
+  ],
+  "poblacionObjetivo": [
+   "Adultos mayores",
+   "Hombres",
+   "Estudiantes",
+   "Mujeres",
+   "Jóvenes"
+  ],
+  "categorias": [
+   "Salud"
+  ],
+  "fechaActualizacion": "2026-09-25 12:02:47",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "especifico|1|habiles",
+  "ficta": "negativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "gratuito",
+  "costoTexto": "Gratuito",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "",
+  "cuandoPagar": "No aplica pago",
+  "dondePagar": [],
+  "formasPago": [],
+  "requiereFormatos": 0,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-329",
+    "nombre": "Firma de consentimiento.",
+    "obligatorio": 1,
+    "presentacion": [],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": []
+   },
+   {
+    "codigo": "R-026",
+    "nombre": "Identificación Oficial con fotografí­a de la Persona Fí­sica vigente",
+    "obligatorio": 0,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Credencial para votar emitida por el Instituto Nacional Electoral (INE) o el Instituto Federal Electoral (IFE)"
+    ]
+   },
+   {
+    "codigo": "R-017",
+    "nombre": "Clave Única de Registro de Población (CURP)",
+    "obligatorio": 0,
+    "presentacion": [
+     "Copia simple x1"
+    ],
+    "aplicaA": [
+     "Persona física"
+    ],
+    "documentosAceptados": [
+     "Clave Única de Registro de Población (CURP)"
+    ]
+   }
+  ],
+  "formatos": [],
+  "formatosKeys": [],
+  "inspecciones": [],
+  "regulaciones": [
+   {
+    "nombre": "Reglamento Municipal de Asistencia Social de Mérida",
+    "articulos": []
+   }
+  ],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Se envía  correo electrónico",
+     "Recibe fecha de cita para atención",
+     "Recibir atención médica"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir a las oficinas responsables",
+     "Recibe fecha de cita para atención",
+     "Recibir atención médica"
+    ]
+   },
+   {
+    "tipo": "Telefónico",
+    "clave": "TELEFONICO",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": []
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Alma Nova Sede Norte",
+   "Alma Nova Sede Oriente",
+   "Alma Nova Sede Poniente",
+   "Alma Nova Sede Sur",
+   "Unidad Deportiva Caucel"
+  ],
+  "observaciones": "",
+  "criterio": "Es necesario que las niñas y niños sean mayores de 5 años de edad."
+ },
+ {
+  "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/93",
+  "clave": "MID-CAT-093",
+  "nombreLegal": "Información Catastral (Cédula Pública)",
+  "nombreCiudadano": "Cédula, copia, simple, cédula pública",
+  "tipo": "Servicio",
+  "estado": "Autorizado",
+  "unidad": "Catastro",
+  "prefijo": "CAT",
+  "dominioGestion": "https://catmerida.gestiondetramites.merida.gob.mx",
+  "dominioPublicoED": "https://expedientedigital.merida.gob.mx/catmerida",
+  "departamento": "Procesos",
+  "modalidad": "100% en línea",
+  "modalidadClave": "EN_LINEA",
+  "descripcion": "Se proporciona documento con la información que contiene una cédula catastral exceptuando el nombre del propietario.",
+  "porQue": "Recibe copia Simple de la Cédula Pública que solicita",
+  "resolutivo": "Copia simple de cédula pública con información catastral.",
+  "vigenciaResolutivo": "Se considera vigente la última cédula expedida por el Catastro.",
+  "personasObjetivo": [
+   "Personas físicas",
+   "Personas morales"
+  ],
+  "poblacionObjetivo": [
+   "Hombres",
+   "Mujeres",
+   "Adultos mayores",
+   "Personas con discapacidad"
+  ],
+  "categorias": [
+   "Territorio y vivienda"
+  ],
+  "fechaActualizacion": "2026-10-12 10:48:04",
+  "periodoFiscal": 2026,
+  "tiempoRespuesta": "inmediato|None|None",
+  "ficta": "afirmativa",
+  "prevencion": "0|None None|cumplir None None",
+  "tipoCosto": "fijo",
+  "costoTexto": "Copia simple de cédula catastral vigente veces UMA 0.3 importe $35.19 Nota: Valor actual de la Unidad de Medida y Actualización (U.M.A) es de 117.31 pesos.",
+  "unidadMedidaMonto": "pesos",
+  "facilidades": "NA",
+  "cuandoPagar": "Realizar el pago cuando el asesor le indique",
+  "dondePagar": [
+   "Ventanilla Única Municipal",
+   "Oficina Recaudadora de Finanzas y Tesorería Municipal"
+  ],
+  "formasPago": [
+   "Efectivo",
+   "Tarjeta de crédito",
+   "Tarjeta de débito"
+  ],
+  "requiereFormatos": 1,
+  "requiereInspeccion": 0,
+  "visorUrbano": 0,
+  "enlaceSitio": null,
+  "requisitos": [
+   {
+    "codigo": "R-035",
+    "nombre": "Solicitud del Trámite o Servicio",
+    "obligatorio": 1,
+    "presentacion": [
+     "Original x1"
+    ],
+    "aplicaA": [],
+    "documentosAceptados": [
+     "Formato de solicitud del Trámite o Servicio de la Dependencia"
+    ]
+   }
+  ],
+  "formatos": [
+   "Solicitud de Tramites Generales"
+  ],
+  "formatosKeys": [
+   "cNombre",
+   "id",
+   "pivot"
+  ],
+  "inspecciones": [],
+  "regulaciones": [],
+  "procedimientos": [
+   {
+    "tipo": "Plataforma (en línea)",
+    "clave": "EN_LINEA",
+    "digital": 1,
+    "nivelDigital": 2,
+    "enlace": null,
+    "pasos": [
+     "Haz clic en \"Iniciar\"",
+     "Ingresar o crear tu Expediente Digital",
+     "Adjuntar la documentación de los requisitos",
+     "Realizar el pago del trámite o servicio",
+     "Dar seguimiento en tu Expediente Digital",
+     "Recibe resolutivo"
+    ]
+   },
+   {
+    "tipo": "Presencial",
+    "clave": "MODULOS",
+    "digital": 0,
+    "nivelDigital": null,
+    "enlace": null,
+    "pasos": [
+     "Acudir al módulo a la ventanilla única mas cercana",
+     "Entregar documentación de los requisitos",
+     "Realizar el pago del trámite o servicio"
+    ]
+   }
+  ],
+  "horarios": [
+   "l-v 08:00:00-15:00:00"
+  ],
+  "modulosKeys": [
+   "cCalle",
+   "cColonia",
+   "cCruzamientos1",
+   "cCruzamientos2",
+   "cDescripcionViasAtencion",
+   "cExtensionTelefono",
+   "cLatitud",
+   "cLongitud",
+   "cMunicipio",
+   "cNombre",
+   "cNumExterior",
+   "cNumInterior",
+   "cTelefono",
+   "deleted_at",
+   "fc",
+   "fkTipoModulo",
+   "fkUnidadAdministrativa",
+   "fm",
+   "horarios_atencion_tramite",
+   "iCodigoPostal",
+   "id",
+   "lActivo",
+   "pivot",
+   "uc",
+   "um"
+  ],
+  "modulos": [
+   "Dirección de Catastro Municipal",
+   "Dirección de Finanzas y Tesorería",
+   "Dirección de Obras Públicas",
+   "Colonia México",
+   "Plaza Oriente",
+   "Plaza Fiesta",
+   "Plaza las Américas",
+   "Pensiones (San Damián)",
+   "Gran Plaza",
+   "Plaza Akrópolis",
+   "Plaza Pericenter",
+   "Registro Público de la Propiedad",
+   "Central de Orden, Planeación y Desarrollo Urbano"
+  ],
+  "observaciones": "",
+  "criterio": "Cubrir el derecho y los requisitos."
+ }
+]

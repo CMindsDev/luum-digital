@@ -1,0 +1,11 @@
+export type * from "./bienestar";
+export type * from "./catalogo";
+export type * from "./comunes";
+export type * from "./expediente";
+export type * from "./gestiones";
+export type * from "./identidad";
+export type * from "./mapa";
+export type * from "./notificaciones";
+export type * from "./participacion";
+export type * from "./reportes";
+export type * from "./asistente";

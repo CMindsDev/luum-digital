@@ -1,0 +1,224 @@
+// REFERENCIA (no se compila). Salida de get_design_context para Figma "Laboratorio de Innovación",
+// nodo 32:162 ("Frame 852", 1153 × 7529 px), consultada el 2026-10-17. Las URL temporales de Figma
+// se reemplazaron por los archivos descargados en public/brand/laboratorio/tablero/ (las fotos se
+// sirven como JPEG calidad 82 con las mismas dimensiones; originales PNG en docs/referencias/figma/originales/).
+// Es un prototipo visual con posiciones absolutas: debe traducirse a un layout responsivo del proyecto
+// (tokens, componentes del design system, Tailwind v4), no copiarse tal cual.
+// Captura: docs/referencias/figma/lab-32-162-tablero.png
+//
+// Tipografías: Host Grotesk Regular (titulares 105.218 px / tracking -5.2609 px / leading 0.972;
+// 87.289 px / -4.3644 px en "Medio ambiente" y "Desarrollo Urbano"), Instrument Serif Italic
+// (palabra destacada 120 px; 99.552 px), IBM Plex Mono Medium (pie 16.364 px, mayúsculas,
+// tracking 0.8182 px, leading 1.83).
+// Colores: base #FFF8ED; azul #005BE8; ámbar #FFB600; café #533630; magenta #F62FA2; lima #A2D200;
+// amarillo lima #EEFF54; fin del degradado de Salud #0D63E8; texto blanco #FFFFFF / crema #FFF8ED.
+
+const imgImage6 = "/brand/laboratorio/tablero/foto-hero-calle.jpg";
+const imgImage11 = "/brand/laboratorio/tablero/foto-salud-bienestar.jpg";
+const imgImage13 = "/brand/laboratorio/tablero/foto-movilidad-transito.jpg";
+const imgImage15 = "/brand/laboratorio/tablero/foto-medio-ambiente.jpg";
+const imgImage12 = "/brand/laboratorio/tablero/foto-seguridad-tramites.jpg";
+const imgImage21 = "/brand/laboratorio/tablero/foto-desarrollo-urbano.jpg";
+const imgCapa1 = "/brand/laboratorio/tablero/isotipo-merida-blanco.svg";
+const imgCapa2 = "/brand/laboratorio/tablero/glifo-mosaico-azul.svg";
+const imgCapa3 = "/brand/laboratorio/tablero/glifo-mosaico-ambar-a.svg";
+const imgGroup = "/brand/laboratorio/tablero/patron-cadena-banner.svg";
+const imgCapa4 = "/brand/laboratorio/tablero/glifo-mosaico-ambar-b.svg";
+const imgCapa5 = "/brand/laboratorio/tablero/glifo-mosaico-cafe.svg";
+const imgCapa6 = "/brand/laboratorio/tablero/glifo-mosaico-magenta.svg";
+const imgCapa7 = "/brand/laboratorio/tablero/glifo-mosaico-lima.svg";
+const imgCapa11 = "/brand/laboratorio/tablero/icono-seccion-salud.svg";
+const imgCapa12 = "/brand/laboratorio/tablero/glifo-seccion-blanco.svg";
+const imgCapa13 = "/brand/laboratorio/tablero/glifo-seccion-cafe.svg";
+const imgGroup1 = "/brand/laboratorio/tablero/patron-cadena-cierre.svg";
+
+export default function Frame852() {
+  return (
+    <div className="relative size-full" data-node-id="32:162">
+      <div className="absolute bg-[#fff8ed] h-[7529px] left-0 rounded-[15px] top-0 w-[1153px]" data-node-id="4:330" />
+      <div className="absolute h-[624px] left-0 rounded-tl-[15px] rounded-tr-[15px] top-0 w-[1153px]" data-node-id="4:336" style={{ backgroundImage: "linear-gradient(132.81419747303204deg, rgb(255, 248, 237) 1.338%, rgb(0, 91, 232) 56.086%)" }} />
+      <div className="absolute contents inset-[2.6%_41.2%_93.95%_40.16%]" data-node-id="4:338" data-name="Recurso 1 1">
+        <div className="absolute inset-[2.6%_41.2%_93.95%_40.16%]" data-node-id="4:339" data-name="Capa 1">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa1} />
+        </div>
+      </div>
+      <div className="absolute h-[769px] left-0 top-[624px] w-[1153px]" data-node-id="14:205" data-name="image 6">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage6} />
+      </div>
+      <div className="absolute contents left-[144px] top-[832px]" data-node-id="22:1352">
+        <div className="absolute bg-[#005be8] left-[144px] rounded-[32.22px] size-[184.532px] top-[832px]" data-node-id="22:944" />
+        <div className="absolute inset-[11.46%_74.18%_86.91%_15.27%]" data-node-id="22:953" data-name="Capa 2">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa2} />
+        </div>
+      </div>
+      <div className="absolute inset-[11.56%_54.67%_86.82%_34.78%]" data-node-id="22:973" data-name="Capa 3">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa3} />
+      </div>
+      <div className="absolute contents left-[357.39px] top-[1064.95px]" data-node-id="22:1356">
+        <div className="absolute bg-gradient-to-r from-[#fff8ed] h-[184.939px] left-[357.39px] rounded-[32.22px] to-[#005be8] top-[1064.95px] w-[612.609px]" data-node-id="22:1023" />
+        <div className="absolute contents inset-[14.79%_31.95%_84.05%_45.65%]" data-node-id="22:1025" style={{ containerType: "size" }} data-name="Capa 8">
+          <div className="absolute flex inset-[14.79%_31.95%_84.05%_45.65%] items-center justify-center" data-node-id="22:1026" style={{ containerType: "size" }}>
+            <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+              <div className="relative size-full" data-name="Group">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute contents left-[357.82px] top-[832px]" data-node-id="22:1353">
+        <div className="absolute bg-[#ffb600] left-[357.82px] rounded-[32.22px] size-[184.532px] top-[832px]" data-node-id="22:945" />
+        <div className="absolute inset-[11.49%_55.82%_86.89%_33.62%]" data-node-id="22:983" data-name="Capa 4">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa4} />
+        </div>
+      </div>
+      <div className="absolute contents left-[571.65px] top-[834.2px]" data-node-id="22:1354">
+        <div className="absolute bg-[#533630] left-[571.65px] rounded-[32.22px] size-[184.532px] top-[834.2px]" data-node-id="22:947" />
+        <div className="absolute inset-[11.49%_37.09%_86.89%_52.36%]" data-node-id="22:993" data-name="Capa 5">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa5} />
+        </div>
+      </div>
+      <div className="absolute contents left-[785.47px] top-[834.2px]" data-node-id="22:1355">
+        <div className="absolute bg-[#f62fa2] left-[785.47px] rounded-[32.22px] size-[184.532px] top-[834.2px]" data-node-id="22:949" />
+        <div className="absolute inset-[11.51%_18.58%_86.87%_70.86%]" data-node-id="22:1003" data-name="Capa 6">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa6} />
+        </div>
+      </div>
+      <div className="absolute inset-[14.55%_74.02%_83.83%_15.42%]" data-node-id="22:1013" data-name="Capa 7">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa7} />
+      </div>
+      <div className="absolute bg-gradient-to-b from-[#fff8ed] h-[755px] left-0 to-[#0d63e8] top-[2146px] w-[1153px]" data-node-id="22:1274" />
+      <div className="[word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[0] left-[98px] not-italic text-[#fff8ed] text-[16.364px] top-[2688px] tracking-[0.8182px] uppercase whitespace-nowrap" data-node-id="22:1335">
+        <p className="leading-[1.83] mb-0">Línea de la Vida, atención psicológica y</p>
+        <p className="leading-[1.83]">prevención del suicidio.</p>
+      </div>
+      <div className="absolute inset-[30.55%_83.72%_68.27%_8.59%]" data-node-id="22:1323" data-name="Capa 11">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa11} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[109px] top-[2421px] w-[403px]" data-node-id="22:1332">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[#fff8ed] text-[0px] tracking-[-5.2609px] w-[439px] whitespace-pre-wrap" data-node-id="22:1333">
+          <p className="leading-[0.972] mb-0 text-[105.218px]">{`Salud y `}</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[120px]">Bienestar</p>
+        </div>
+      </div>
+      <div className="absolute h-[427px] left-[669px] rounded-[50px] top-[2330px] w-[395px]" data-node-id="22:1277" data-name="image 11">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[50px]">
+          <img alt="" className="absolute h-[158.23%] left-[-13.92%] max-w-none top-[-19.83%] w-[114.03%]" src={imgImage11} />
+        </div>
+      </div>
+      <div className="absolute h-[254.912px] left-[57px] rounded-[18.232px] top-[1633.37px] w-[235.809px]" data-node-id="29:1444" data-name="image 17">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[18.232px]">
+          <img alt="" className="absolute h-[158.23%] left-[-13.92%] max-w-none top-[-19.83%] w-[114.03%]" src={imgImage11} />
+        </div>
+      </div>
+      <div className="absolute h-[254.912px] left-[324.23px] rounded-[18.232px] top-[1633.37px] w-[235.809px]" data-node-id="29:1446" data-name="image 18">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[18.232px]">
+          <img alt="" className="absolute h-[158.23%] left-[-13.92%] max-w-none top-[-19.83%] w-[114.03%]" src={imgImage11} />
+        </div>
+      </div>
+      <div className="absolute h-[254.912px] left-[594.96px] rounded-[18.232px] top-[1633.37px] w-[235.809px]" data-node-id="29:1448" data-name="image 19">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[18.232px]">
+          <img alt="" className="absolute h-[158.23%] left-[-13.92%] max-w-none top-[-19.83%] w-[114.03%]" src={imgImage11} />
+        </div>
+      </div>
+      <div className="absolute h-[254.912px] left-[862.19px] rounded-[18.232px] top-[1629px] w-[235.809px]" data-node-id="29:1450" data-name="image 20">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[18.232px]">
+          <img alt="" className="absolute h-[158.23%] left-[-13.92%] max-w-none top-[-19.83%] w-[114.03%]" src={imgImage11} />
+        </div>
+      </div>
+      <div className="absolute bg-[#f62fa2] h-[755px] left-0 top-[2901px] w-[1153px]" data-node-id="22:1337" />
+      <p className="-translate-x-full [word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[1.83] left-[1050px] not-italic text-[16.364px] text-right text-white top-[3441px] tracking-[0.8182px] uppercase w-[490px]" data-node-id="22:1338">
+        Línea Mujer, 911, atención a emergencias y prevención de la violencia.
+      </p>
+      <div className="absolute inset-[40.6%_7.75%_58.21%_84.56%]" data-node-id="22:1339" data-name="Capa 12">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa12} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[586px] top-[3169px] w-[403px]" data-node-id="22:1348">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[0px] text-right text-white tracking-[-5.2609px] w-[567px] whitespace-pre-wrap" data-node-id="22:1349">
+          <p className="leading-[0.972] mb-0 text-[105.218px]">{`Seguridad y `}</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[120px]">Protección</p>
+        </div>
+      </div>
+      <div className="absolute bg-[#ffb600] h-[721px] left-0 top-[3656px] w-[1153px]" data-node-id="22:1357" />
+      <p className="[word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[1.83] left-[98px] not-italic text-[#533630] text-[16.364px] top-[4176px] tracking-[0.8182px] uppercase whitespace-nowrap" data-node-id="22:1358">
+        tránsito y movilidad urbana
+      </p>
+      <div className="absolute inset-[50.31%_83.72%_48.51%_8.59%]" data-node-id="22:1359" data-name="Capa 13">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa13} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[133px] top-[3915px] w-[403px]" data-node-id="22:1368">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[#533630] text-[0px] tracking-[-5.2609px] w-[501px]" data-node-id="22:1369">
+          <p className="leading-[0.972] mb-0 text-[105.218px]">Movilidad y</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[120px]">Tránsito</p>
+        </div>
+      </div>
+      <div className="absolute h-[427px] left-[669px] rounded-[50px] top-[3818px] w-[395px]" data-node-id="22:1370" data-name="image 13">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[50px] size-full" src={imgImage13} />
+      </div>
+      <div className="absolute bg-[#eeff54] h-[755px] left-0 top-[4377px] w-[1153px]" data-node-id="29:1372" />
+      <p className="[word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[1.83] left-[97px] not-italic text-[#533630] text-[16.364px] top-[4925px] tracking-[0.8182px] uppercase whitespace-nowrap" data-node-id="29:1373">
+        arbolado urbano y cuidado ambiental.
+      </p>
+      <div className="absolute inset-[60.5%_84.59%_38.32%_7.72%]" data-node-id="29:1374" data-name="Capa 14">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa13} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[75px] top-[4692px] w-[667px]" data-node-id="29:1383">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[#533630] text-[0px] tracking-[-4.3644px] w-[625px]" data-node-id="29:1384">
+          <p className="leading-[0.972] mb-0 text-[87.289px]">Medio ambiente</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[99.552px]">y sostenibilidad</p>
+        </div>
+      </div>
+      <div className="absolute h-[400px] left-[714px] rounded-[46.838px] top-[4565px] w-[370.023px]" data-node-id="29:1385" data-name="image 15">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[46.838px] size-full" src={imgImage15} />
+      </div>
+      <div className="absolute bg-[#533630] h-[755px] left-0 top-[5887px] w-[1153px]" data-node-id="29:1429" />
+      <p className="[word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[1.83] left-[161px] not-italic text-[16.364px] text-white top-[6424px] tracking-[0.8182px] uppercase whitespace-nowrap" data-node-id="29:1430">
+        Geoportal Mérida, Visor Urbano, información catastral y consultas territoriales.
+      </p>
+      <div className="absolute inset-[80.24%_46.08%_18.58%_46.23%]" data-node-id="29:1431" data-name="Capa 16">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa12} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[252px] top-[6179px] w-[667px]" data-node-id="29:1440">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[0px] text-center text-white tracking-[-4.3644px] w-full" data-node-id="29:1441">
+          <p className="leading-[0.972] mb-0 text-[87.289px]">Desarrollo Urbano</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[99.552px]">y territorio</p>
+        </div>
+      </div>
+      <div className="absolute bg-[#a2d200] left-[144px] rounded-[32.22px] size-[184.532px] top-[1064.06px]" data-node-id="22:951" />
+      <div className="absolute inset-[14.55%_74.02%_83.83%_15.42%]" data-node-id="22:1279" data-name="Capa 10">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa7} />
+      </div>
+      <div className="absolute h-[400px] left-[98px] rounded-[46.838px] top-[3106px] w-[370.023px]" data-node-id="29:1387" data-name="image 12">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[46.838px] size-full" src={imgImage12} />
+      </div>
+      <div className="absolute bg-[#a2d200] h-[755px] left-0 top-[5132px] w-[1153px]" data-node-id="29:1399" />
+      <p className="-translate-x-full [word-break:break-word] absolute font-['IBM_Plex_Mono:Medium'] leading-[1.83] left-[1050px] not-italic text-[#533630] text-[16.364px] text-right top-[5672px] tracking-[0.8182px] uppercase w-[490px]" data-node-id="29:1400">
+        Portal Ciudadano, pagos, consultas, trámites y seguimiento de solicitudes.
+      </p>
+      <div className="absolute inset-[70.24%_7.75%_28.58%_84.56%]" data-node-id="29:1401" data-name="Capa 15">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapa13} />
+      </div>
+      <div className="absolute content-stretch flex flex-col items-center left-[586px] top-[5400px] w-[403px]" data-node-id="29:1410">
+        <div className="[word-break:break-word] font-['Host_Grotesk:Regular'] font-normal leading-[0] relative shrink-0 text-[#533630] text-[0px] text-right tracking-[-5.2609px] w-[567px] whitespace-pre-wrap" data-node-id="29:1411">
+          <p className="leading-[0.972] mb-0 text-[105.218px]">{`Trámites y `}</p>
+          <p className="font-['Instrument_Serif:Italic'] italic leading-[0.972] text-[120px]">{`Atención `}</p>
+        </div>
+      </div>
+      <div className="absolute h-[400px] left-[98px] rounded-[46.838px] top-[5337px] w-[370.023px]" data-node-id="29:1412" data-name="image 16">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[46.838px] size-full" src={imgImage12} />
+      </div>
+      <div className="absolute h-[400px] left-[392px] rounded-[46.838px] top-[6514px] w-[370.023px]" data-node-id="32:161" data-name="image 21">
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[46.838px] size-full" src={imgImage21} />
+      </div>
+      <div className="absolute contents inset-[93.61%_37.25%_5.09%_37.55%]" data-node-id="34:1452" style={{ containerType: "size" }} data-name="Capa 17">
+        <div className="absolute flex inset-[93.61%_37.25%_5.09%_37.55%] items-center justify-center" data-node-id="34:1453" style={{ containerType: "size" }}>
+          <div className="flex-none h-[100cqw] rotate-90 w-[100cqh]">
+            <div className="relative size-full" data-name="Group">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup1} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
