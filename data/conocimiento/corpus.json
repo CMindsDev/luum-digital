@@ -300,7 +300,7 @@
   "id": "estructura:resumen",
   "tipo": "estructura",
   "titulo": "Cuántas dependencias y áreas tiene el Ayuntamiento de Mérida",
-  "texto": "La lista oficial de áreas municipales publica 27 áreas: el Cabildo y 26 dependencias. Direcciones: 14. Secretarías: 4. Unidades: 4. Institutos y organismos: 3. Presidencia: 1. Cabildo: 1. Los conteos son los de la lista publicada; la lista oficial puede cambiar.",
+  "texto": "La lista oficial de áreas municipales publica 27 áreas: el Cabildo y 26 dependencias. Direcciones: 14. Secretarías: 4. Unidades: 4. Institutos y organismos: 3. Presidencia: 1. Cabildo: 1. Sin contar el Cabildo ni la Presidencia, son 25 áreas (direcciones, secretarías, unidades, institutos y organismos). Si alguien pregunta en general por «direcciones» o «dependencias», aclara ambos números. Los conteos son los de la lista publicada; la lista oficial puede cambiar.",
   "fuente": {
    "titulo": "Portal del Ayuntamiento de Mérida · Dependencias Municipales",
    "url": "https://merida.gob.mx/municipio/portal/gobierno/dependencias.php",
@@ -311,7 +311,7 @@
   "id": "estructura:direccion",
   "tipo": "estructura",
   "titulo": "Direcciones del Ayuntamiento de Mérida (14)",
-  "texto": "El Ayuntamiento de Mérida tiene 14 direcciones en la lista oficial de áreas municipales. Son: Dirección de Administración; Dirección de Catastro Municipal; Dirección de Identidad y Cultura; Dirección de Finanzas y Tesorería; Dirección de Gobernación; Dirección de Prosperidad y Bienestar Económico; Dirección de Desarrollo Social y Combate a la Pobreza; Dirección de Desarrollo Urbano; Dirección de Obras Públicas; Dirección de la Policía Municipal; Dirección de Bienestar Humano; Dirección de Servicios Públicos; Dirección de Innovación y Gobierno Inteligente; Dirección de Contraloría Municipal.",
+  "texto": "El Ayuntamiento de Mérida tiene 14 direcciones en la lista oficial de áreas municipales. Son: Dirección de Administración; Dirección de Catastro Municipal; Dirección de Identidad y Cultura; Dirección de Finanzas y Tesorería; Dirección de Gobernación; Dirección de Prosperidad y Bienestar Económico; Dirección de Desarrollo Social y Combate a la Pobreza; Dirección de Desarrollo Urbano; Dirección de Obras Públicas; Dirección de la Policía Municipal; Dirección de Bienestar Humano; Dirección de Servicios Públicos; Dirección de Innovación y Gobierno Inteligente; Dirección de Contraloría Municipal. Ojo: 14 áreas llevan «Dirección» en su nombre; en total la lista oficial publica 25 áreas sin contar el Cabildo ni la Presidencia (además de las direcciones hay secretarías, unidades, institutos y organismos).",
   "fuente": {
    "titulo": "Portal del Ayuntamiento de Mérida · Dependencias Municipales",
    "url": "https://merida.gob.mx/municipio/portal/gobierno/dependencias.php",
@@ -4994,6 +4994,1832 @@
    "fechaConsulta": "2026-10-17"
   },
   "ruta": "/servicios/mid-dif-429"
+ },
+ {
+  "id": "dato:1",
+  "tipo": "dato",
+  "titulo": "Teléfonos de emergencia, Ayuntatel y Protección Civil publicados en el inicio",
+  "texto": "Teléfonos de emergencia, Ayuntatel y Protección Civil publicados en el inicio: 911; Ayuntatel 999 924 4000 o 070; Protección Civil 999 928 8311. Texto publicado en la fuente: «Informacíon y emergencias | Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://merida.gob.mx/municipio/portal/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:2",
+  "tipo": "dato",
+  "titulo": "Línea Mujer (botón 'Comunícate' del inicio)",
+  "texto": "Línea Mujer (botón 'Comunícate' del inicio): 800 455 7672 (tel:8004557672). Texto publicado en la fuente: «<a class=\"btn btn-round bg-color-2n px-4 py-2 d-flex justify-content-around item-comunicate\" href=\"tel:8004557672\" target=\"_blank\"> <p class=\"fz-20 dfl-white text-none mb-0 __fontSize\"> <span class=\"p-320\">Línea Mujer</span>»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://merida.gob.mx/municipio/portal/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:3",
+  "tipo": "dato",
+  "titulo": "Línea Mujer: procedimiento y disponibilidad",
+  "texto": "Línea Mujer: procedimiento y disponibilidad: 8004557672; 24 horas, 7 días. Texto publicado en la fuente: «Vigencia del resolutivo: | No se tiene vigencia del como tal ya que el servicio está disponible las 24 horas del día, los 7 días de las semana. ... 1. La mujer llama a la Línea Mujer (8004557672) y solicita atención ante alguna situación de violencia.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:4",
+  "tipo": "dato",
+  "titulo": "Teléfono de Transparencia",
+  "texto": "Teléfono de Transparencia: (999) 924 6361, 24 horas. Texto publicado en la fuente: «Transparencia | www.merida.gob.mx/transparencia | Tel. (999) 924 6361 24hrs, 7 días de la semana»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://merida.gob.mx/municipio/portal/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:5",
+  "tipo": "dato",
+  "titulo": "Dirección del Ayuntamiento (pie del Portal Ciudadano)",
+  "texto": "Dirección del Ayuntamiento (pie del Portal Ciudadano): Calle 62 s/n, Palacio Municipal, Col. Centro, C.P. 97000, Mérida. Texto publicado en la fuente: «Ayuntamiento de Mérida | Calle 62 s/n, Palacio Municipal | Colonia Centro, C.P. 97000 | Mérida, Yucatán | Ver ubicación»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:6",
+  "tipo": "dato",
+  "titulo": "Módulo de atención ciudadana y canales generales (nota de prensa del 22 de julio de 2026)",
+  "texto": "Módulo de atención ciudadana y canales generales (nota de prensa del 22 de julio de 2026): Bajos del Palacio Municipal, L-V 8:00 a.m.–5:00 p.m.; Ayuntatel 924 40 00 / 070; app Mérida Móvil. Texto publicado en la fuente: «Para realizar algún reporte, solicitud o consultar trámites y programas las familias meridanas pueden realizarlo ingresando a la página web merida.gob.mx, mediante Ayuntatel marcando al 924 40 00, al 070 o a través de la aplicación Mérida Móvil, así como acudir al módulo de atención ciudadana en los bajos de Palacio Municipal de lunes a viernes de 8:00 a.m. a 5:00 p.m.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12478/Escuchar-y-resolver-es-la-mejor-forma-de-gobernar-Cecilia-Patron/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:7",
+  "tipo": "dato",
+  "titulo": "Horarios de Ayuntatel (captura del 2025-12-04)",
+  "texto": "Horarios de Ayuntatel (captura del 2025-12-04): L-V 7:30 a.m.–9:30 p.m.; sábados 8:30 a.m.–6:30 p.m.; domingos y festivos 8:30 a.m.–1:30 p.m.. Texto publicado en la fuente: «Telefónica | Ayuntatel al 070 o (999) 924.4000 | De lunes a viernes de 7:30 a.m. a 9:30 p.m. Sábados de 8:30 a.m. a 6:30 p.m. Domingos y días festivos de 8:30 a.m. a 1:30 p.m.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-12-04)",
+   "url": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:8",
+  "tipo": "dato",
+  "titulo": "Chat ciudadano (captura del 2025-12-04)",
+  "texto": "Chat ciudadano (captura del 2025-12-04): L-V 8:00 a.m.–9:00 p.m.. Texto publicado en la fuente: «Chat ciudadano | De lunes a viernes de 8:00 a.m. a 9:00 p.m. | Iniciar Chat»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-12-04)",
+   "url": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:9",
+  "tipo": "dato",
+  "titulo": "Atención Ciudadana Presencial en el Palacio Municipal (ficha MID-PAC-314)",
+  "texto": "Atención Ciudadana Presencial en el Palacio Municipal (ficha MID-PAC-314): Calle 62 s/n entre 61 y 63, Centro; 999-942-00-00 ext. 80119. Texto publicado en la fuente: «Módulos | Palacio Municipal | Dirección: | Calle 62, No. Ext. Sin número, Entre 61, y 63, Col. Centro | Teléfono: | 999-942-00-00 | Extensión: | 80119»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/314",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:10",
+  "tipo": "dato",
+  "titulo": "Dónde presentar una demanda ciudadana (Subdirección de Mejora Regulatoria)",
+  "texto": "Dónde presentar una demanda ciudadana (Subdirección de Mejora Regulatoria): Calle 64-A núm. 538-B entre 77 y 79, Centro (Ermita Santa Isabel); L-V 8:00–15:00; (999) 9420000 ext. 83756. Texto publicado en la fuente: «Puedes hacerlo de forma presencial en las oficinas de la Subdirección de Mejora Regulatoria ubicada en la calle 64-A número 538-B entre 77 y 79 Colonia Centro, Mérida (Ermita Santa Isabel), de lunes a viernes de 8:00 a. m. a 3:00 p. m. | También podrás hacerlo vía telefónica al número (999)9420000 extensión 83756 o través del siguiente enlace:»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:11",
+  "tipo": "dato",
+  "titulo": "Denuncias contra servidores públicos (Contraloría Municipal): oficina",
+  "texto": "Denuncias contra servidores públicos (Contraloría Municipal): oficina: Calle 50 núm. 471 entre 51 y 53, Centro; L-V 08:00–15:00. Texto publicado en la fuente: «Por escrito o de manera presencial en las oficinas de la Dirección de Contraloría Municipal, ubicadas en la calle 50, número 471, entre 51 y 53, Colonia Centro (Horario de atención de lunes a viernes de 08:00 a 15:00 horas).»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:12",
+  "tipo": "dato",
+  "titulo": "Denuncias contra servidores públicos: correo y sistema en línea",
+  "texto": "Denuncias contra servidores públicos: correo y sistema en línea: contraloriateescucha@merida.gob.mx; https://denunciacontraloria.merida.gob.mx/. Texto publicado en la fuente: «Vía correo electrónico a la cuenta institucional: contraloriateescucha@merida.gob.mx | En línea en el Sistema Municipal de Denuncias: https://denunciacontraloria.merida.gob.mx/»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/201",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:13",
+  "tipo": "dato",
+  "titulo": "Asistencia al Contribuyente (predial), captura del 2025-12-04",
+  "texto": "Asistencia al Contribuyente (predial), captura del 2025-12-04: L-V 8:00–15:00; (999) 942 00 00 ext. 80610, 80655, 80681 y 80684; asistencia.contribuyente@merida.gob.mx; WhatsApp 9991 22 19 99. Texto publicado en la fuente: «Asistencia al Contribuyente | Horario de atención: | lunes a viernes de 8:00 a.m. a 3:00 p.m. | Teléfono: | (999) 942 00 00 | Extensiones: | 80610, 80655, 80681 y 80684 | Correo: | asistencia.contribuyente@merida.gob.mx | WhatsApp: | 9991 22 19 99 | (Únicamente mensajes)»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-12-04)",
+   "url": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:14",
+  "tipo": "dato",
+  "titulo": "WhatsApp de ayuda del sitio Predial (captura del 2025-11-16)",
+  "texto": "WhatsApp de ayuda del sitio Predial (captura del 2025-11-16): (999) 122.19.99, L-V 8 a.m.–3 p.m., sólo mensajes. Texto publicado en la fuente: «¿Necesitas ayuda? | Envíanos un WhatsApp* al (999) 122.19.99 | De lunes a viernes de 8 a.m. a 3 p.m. | * Sólo mensajes»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-11-16)",
+   "url": "https://web.archive.org/web/20251116021007/https://isla.merida.gob.mx/serviciosinternet/predial/index.phpx",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:15",
+  "tipo": "dato",
+  "titulo": "Pago por transferencia: solicitud de línea de captura (captura del 2025-12-04)",
+  "texto": "Pago por transferencia: solicitud de línea de captura (captura del 2025-12-04): tesoreria.spei@merida.gob.mx. Texto publicado en la fuente: «Transferencias electrónicas: | Para llevar a cabo este procedimiento la ciudadanía debe solicitar por correo a tesoreria.spei@merida.gob.mx | la línea de captura correspondiente adjuntando su estado de cuenta o la documentación del trámite y/o servicio según corresponda.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-12-04)",
+   "url": "https://web.archive.org/web/20251204234024/https://www.merida.gob.mx/atencionciudadana/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:16",
+  "tipo": "dato",
+  "titulo": "Correo de dudas de Expediente Digital",
+  "texto": "Correo de dudas de Expediente Digital: expedientedigital@merida.gob.mx. Texto publicado en la fuente: «¿Tienes dudas sobre el Expediente Digital? Escríbenos a expedientedigital@merida.gob.mx»",
+  "fuente": {
+   "titulo": "Expediente Digital de Mérida",
+   "url": "https://expedientedigital.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:17",
+  "tipo": "dato",
+  "titulo": "Bolsa de trabajo: correos alternos de registro",
+  "texto": "Bolsa de trabajo: correos alternos de registro: empleo@merida.gob.mx; bolsadetrabajomerida@merida.gob.mx. Texto publicado en la fuente: «Información complementaria: En caso de no poder registrarse en línea, enviar correo electrónico a empleo@merida.gob.mx y/o bolsadetrabajomerida@merida.gob.mx.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/299",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:18",
+  "tipo": "dato",
+  "titulo": "Oficina de Prosperidad y Bienestar Económico (Bolsa de Trabajo)",
+  "texto": "Oficina de Prosperidad y Bienestar Económico (Bolsa de Trabajo): Calle 59 núm. 432 entre 50 y 52, Centro; 9999286977 ext. 81542. Texto publicado en la fuente: «Módulos | Dirección de Prosperidad y Bienestar Económico | Dirección: | Calle 59, No. Ext. 432, Entre 50, y 52, Col. Centro | Teléfono: | 9999286977 | Extensión: | 81542»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/299",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:19",
+  "tipo": "dato",
+  "titulo": "Orientación SARE/CAE (captura del 2026-03-31)",
+  "texto": "Orientación SARE/CAE (captura del 2026-03-31): (999) 928 6977 ext. 81542, 81585 y 81586; WhatsApp 999 956 80 73. Texto publicado en la fuente: «Orientación | De lunes a viernes de: | 8:00 a.m. a 3:00 p.m. | Teléfono: (999) 928 6977 | Ext. 81542, 81585 y 81586 | ... | Envíanos un WhatsApp al 999 956 80 73 | de lunes a viernes de 8:00 a.m. a 3:00 p.m. | *Únicamente se recibirán mensajes de texto»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-03-31)",
+   "url": "https://web.archive.org/web/20260331230112/https://www.merida.gob.mx/cae/sare.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:20",
+  "tipo": "dato",
+  "titulo": "Apoyo psicológico: correo para solicitar cita (publicado con tilde)",
+  "texto": "Apoyo psicológico: correo para solicitar cita (publicado con tilde): psicología@merida.gob.mx. Texto publicado en la fuente: «Información complementaria | Enviar correo a psicología@merida.gob.mx»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:21",
+  "tipo": "dato",
+  "titulo": "Instituto de las Mujeres: contacto del área responsable de Línea Mujer",
+  "texto": "Instituto de las Mujeres: contacto del área responsable de Línea Mujer: tramites.inm@merida.gob.mx; 9999240296. Texto publicado en la fuente: «Correo electrónico: tramites.inm@merida.gob.mx | Teléfono: 9999240296 | Días y horarios de atención: Lunes a Domingo | 00:00 - 12:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:22",
+  "tipo": "dato",
+  "titulo": "Tribunal de lo Contencioso Administrativo (recurso de revisión)",
+  "texto": "Tribunal de lo Contencioso Administrativo (recurso de revisión): Calle 60 x 29 y 27 núm. 311, Col. Alcalá Martín. Texto publicado en la fuente: «RECURSO DE REVISIÓN: | Se interpone directamente ante el Tribunal de lo Contencioso Administrativo del Municipio de Mérida, ubicado en la Calle 60 x 29 y 27 No. 311 de la Colonia Alcalá Martin, de Mérida.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/MediosImpugnacion/mediosimpugnacion",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:23",
+  "tipo": "dato",
+  "titulo": "Dirección de la Subdirección de Mejora Regulatoria (sitio isla)",
+  "texto": "Dirección de la Subdirección de Mejora Regulatoria (sitio isla): Calle 64-A núm. 538-B entre 77 y 79, Centro, C.P. 97000. Texto publicado en la fuente: «Subdirección de Mejora Regulatoria | Calle 64-A número 538-B entre 77 y 79 | Colonia Centro, C.P. 97000 | Mérida, Yucatán, México»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://isla.merida.gob.mx/serviciosinternet/MejoraRegulatoria/php/AgendaSimplificada.phpx",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:24",
+  "tipo": "dato",
+  "titulo": "Teléfono publicado para Bacheo, distinto al de Ayuntatel del inicio",
+  "texto": "Teléfono publicado para Bacheo, distinto al de Ayuntatel del inicio: 9999420000. Texto publicado en la fuente: «¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | Contacto Ayuntatel: 9999420000»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/275",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:25",
+  "tipo": "dato",
+  "titulo": "Ayuntatel (reportes y consultas telefónicas) y horario",
+  "texto": "Ayuntatel (reportes y consultas telefónicas) y horario: 9999244000 o 070 desde celular; L-V 7:30 a.m.–9:30 p.m., sáb 8:30 a.m.–6:30 p.m., dom y festivos 8:30 a.m.–2:30 p.m.. Texto publicado en la fuente: «Debe llamar al número de Ayuntatel 9999244000 o al 070 desde el celular para reportar algún servicio o solicitar información de los programas Municipales. Proporcionar nombre completo, dirección, número de celular, así como indicar la dirección exacta del reporte que esté solicitando Horario de atención de lunes a viernes de 7:30 a.m. a 9:30 p.m. Sábados de 8:30 a.m. a 6:30 p.m. Domingos y días festivos de 8:30 a.m.…»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/315",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:26",
+  "tipo": "dato",
+  "titulo": "Emergencias, Ayuntatel y Protección Civil (aviso en modal de Protección Civil, sin fecha)",
+  "texto": "Emergencias, Ayuntatel y Protección Civil (aviso en modal de Protección Civil, sin fecha): 911; Ayuntatel 999 924 4000 o 070; Protección Civil 999 928 8311. Texto publicado en la fuente: «Protección civil informa | Temporada de ciclones | ... | Informacíon y emergencias | Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:27",
+  "tipo": "dato",
+  "titulo": "Reporte de maltrato animal por teléfono y por web o app",
+  "texto": "Reporte de maltrato animal por teléfono y por web o app: (999) 924 4000 o 070; https://merida.gob.mx/reporta/reporte.php o App Mérida Móvil. Texto publicado en la fuente: «1.- Ingresar a la página https://merida.gob.mx/reporta/reporte.php o a la App Mérida Móvil 2.- Seleccionar el servicio Maltrato Animal ... | ¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | 1.- Llamar a Ayuntatel al (999) 924 4000 o al 070»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/363",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:28",
+  "tipo": "dato",
+  "titulo": "Demanda ciudadana por mala atención en trámites (Subdirección de Mejora Regulatoria; texto común en las fichas)",
+  "texto": "Demanda ciudadana por mala atención en trámites (Subdirección de Mejora Regulatoria; texto común en las fichas): (999)9420000 ext. 83756; calle 64-A número 538-B entre 77 y 79, Centro; L-V 8:00 a.m.–3:00 p.m.. Texto publicado en la fuente: «Puedes hacerlo de forma presencial en las oficinas de la Subdirección de Mejora Regulatoria ubicada en la calle 64-A número 538-B entre 77 y 79 Colonia Centro, Mérida (Ermita Santa Isabel), de lunes a viernes de 8:00 a. m. a 3:00 p. m. | También podrás hacerlo vía telefónica al número (999)9420000 extensión 83756 o través del siguiente enlace:»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:29",
+  "tipo": "dato",
+  "titulo": "Denuncias ante Contraloría Municipal (texto común en las fichas)",
+  "texto": "Denuncias ante Contraloría Municipal (texto común en las fichas): contraloriateescucha@merida.gob.mx; https://denunciacontraloria.merida.gob.mx/. Texto publicado en la fuente: «Vía correo electrónico a la cuenta institucional: contraloriateescucha@merida.gob.mx | En línea en el Sistema Municipal de Denuncias: https://denunciacontraloria.merida.gob.mx/»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/2",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:30",
+  "tipo": "dato",
+  "titulo": "Unidad de Transparencia (encabezado del portal)",
+  "texto": "Unidad de Transparencia (encabezado del portal): (999) 924 6361, 24 h, 7 días. Texto publicado en la fuente: «Transparencia | www.merida.gob.mx/transparencia | Tel. (999) 924 6361 24hrs, 7 días de la semana | Unidad de Transparencia Municipal»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:31",
+  "tipo": "dato",
+  "titulo": "Apoyo Psicológico (salud mental): presolicitud por correo y teléfono del módulo Unidad Deportiva Caucel",
+  "texto": "Apoyo Psicológico (salud mental): presolicitud por correo y teléfono del módulo Unidad Deportiva Caucel: psicología@merida.gob.mx; 999 942-00-00 ext. 81951. Texto publicado en la fuente: «Enviar correo a psicología@merida.gob.mx | ... | Unidad Deportiva Caucel | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 96, No. Ext. Sin número, Entre 31, y 39, Col. Ciudad Caucel | Teléfono: | 999 942-00-00 | Extensión: | 81951»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:32",
+  "tipo": "dato",
+  "titulo": "Total de fichas en el catálogo del Portal Ciudadano",
+  "texto": "Total de fichas en el catálogo del Portal Ciudadano: 387. Texto publicado en la fuente: «Inicio | Trámites y Servicios | Total de registros: 387»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/tramites",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:33",
+  "tipo": "dato",
+  "titulo": "Validez jurídica declarada del Expediente Digital",
+  "texto": "Validez jurídica declarada del Expediente Digital: Misma validez que la versión física; documentos vigentes no se vuelven a solicitar en trámites vinculados. Texto publicado en la fuente: «La información y documentos de tu Expediente Digital tienen la misma validez jurídica que la versión física. Si están vigentes, las dependencias municipales no podrán solicitarlos nuevamente en los trámites y servicios que estén vinculados a este servicio.»",
+  "fuente": {
+   "titulo": "Expediente Digital de Mérida",
+   "url": "https://expedientedigital.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:34",
+  "tipo": "dato",
+  "titulo": "Aviso de privacidad integral del Expediente Digital (fecha)",
+  "texto": "Aviso de privacidad integral del Expediente Digital (fecha): PDF ADM-MR-I012, última actualización 16 de julio de 2026. Texto publicado en la fuente: «Mérida, Yucatán a dieciséis de julio de dos mil veintiséis. (Última Actualización).»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://www.merida.gob.mx/avisoprivacidad/contenido/pdf/administracion/dep-mejora/ADM-MR-I012.pdf",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:35",
+  "tipo": "dato",
+  "titulo": "Descripción oficial del Geoportal",
+  "texto": "Descripción oficial del Geoportal: Portal geográfico con mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral municipal. Texto publicado en la fuente: «<meta name=\"description\" content=\"El GEOPORTAL DE MÉRIDA es un portal geográfico que, a través de mapas, imágenes de satélite, coordenadas, datos estadísticos e información catastral municipal, en interacción con otras funcionalidades, facilita conocer, ubicar y analizar al Municipio de Mérida para fines tanto personales como profesionales.\" />»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:36",
+  "tipo": "dato",
+  "titulo": "Texto «Acerca de» del Geoportal",
+  "texto": "Texto «Acerca de» del Geoportal: Plataforma de información espacial del Ayuntamiento, incluidas las comisarías; administración 2024-2027. Texto publicado en la fuente: «APP.ABOUT = JSON.parse(... \"content\": \"Bienvenido a la plataforma de información espacial del Ayuntamiento de Mérida. A través de sus diferentes herramientas puedes consultar imágenes de satélite, información catastral y datos estadísticos del municipio de Mérida incluyendo sus comisarías. ... Ayuntamiento de Mérida 2024 - 2027\"»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:37",
+  "tipo": "dato",
+  "titulo": "Descripción oficial del Visor Urbano",
+  "texto": "Descripción oficial del Visor Urbano: Plataforma municipal de gestión urbana. Texto publicado en la fuente: «<meta name=\"description\" content=\"Plataforma municipal de gestión urbana con mapas interactivos catastrales y visualización de zonificación.\"/>»",
+  "fuente": {
+   "titulo": "Visor Urbano de Mérida",
+   "url": "https://visorurbano.merida.gob.mx/robots.txt",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:38",
+  "tipo": "dato",
+  "titulo": "La consulta de uso de suelo del Visor es una simulación",
+  "texto": "La consulta de uso de suelo del Visor es una simulación: Simulación de giros; no otorga autorización. Texto publicado en la fuente: «\"Condiciones de Uso\" ... L.jsx(\"p\",{children:\"La información desplegada en este sitio es una simulación de los giros posibles para un predio seleccionado. Sin embargo, los criterios y restricciones variarán según el uso y la superficie que pretenda construir o establecer; ...»",
+  "fuente": {
+   "titulo": "Visor Urbano de Mérida",
+   "url": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:39",
+  "tipo": "dato",
+  "titulo": "Exclusión de autorización",
+  "texto": "Exclusión de autorización: Nada de lo desplegado otorga autorización. Texto publicado en la fuente: «Hago de su conocimiento que la Dirección de Desarrollo Urbano desconoce los alcances e intenciones de los giros, usos y destinos a establecer, y/o proyecto alguno. Por ningún motivo la información desplegada en este sitio otorga autorización alguna.»",
+  "fuente": {
+   "titulo": "Visor Urbano de Mérida",
+   "url": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:40",
+  "tipo": "dato",
+  "titulo": "Requisito normativo citado por el Visor",
+  "texto": "Requisito normativo citado por el Visor: Licencia de Uso del Suelo. Texto publicado en la fuente: «De acuerdo a los Artículos 20, 23 y 24 del Reglamento de Construcciones del Municipio de Mérida y el Artículo 76 de la Ley de Asentamientos Humanos del Estado de Yucatán, para poder otorgar un uso o destino a un predio deberá contar con la Licencia de Uso del Suelo respectiva.»",
+  "fuente": {
+   "titulo": "Visor Urbano de Mérida",
+   "url": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:41",
+  "tipo": "dato",
+  "titulo": "Visor Urbano dentro de MIDigital (prensa)",
+  "texto": "Visor Urbano dentro de MIDigital (prensa): Diario de Yucatán, publicada el 11-ago-2026. Texto publicado en la fuente: «La plataforma MIDigital se divide en tres herramientas: Expediente Digital, Portal Ciudadano y Visor Urbano.»",
+  "fuente": {
+   "titulo": "www.yucatan.com.mx",
+   "url": "https://www.yucatan.com.mx/merida/2026/08/11/presentan-midigital-nueva-estrategia-del-ayuntamiento-de-merida-para-realizar-mas-de-70-tramites-en-linea.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:42",
+  "tipo": "dato",
+  "titulo": "Contenido del Visor según prensa",
+  "texto": "Contenido del Visor según prensa: Planos catastrales, usos de suelo, datos prediales y más de 50 capas. Texto publicado en la fuente: «Planos catastrales, usos de suelos, datos prediales y más de medio centenar de capas de información respecto a predios, terrenos y espacios dentro de la demarcación municipal»",
+  "fuente": {
+   "titulo": "www.yucatan.com.mx",
+   "url": "https://www.yucatan.com.mx/merida/2026/08/11/presentan-midigital-nueva-estrategia-del-ayuntamiento-de-merida-para-realizar-mas-de-70-tramites-en-linea.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:43",
+  "tipo": "dato",
+  "titulo": "Licencias de negocio en línea (anuncio en tiempo futuro)",
+  "texto": "Licencias de negocio en línea (anuncio en tiempo futuro): Por Esto, 20-ene-2026; vigencia actual no verificada. Texto publicado en la fuente: «Una parte fundamental será el “Visor Urbano”, ... Esta plataforma permitirá la emisión de licencias a negocios totalmente en línea, desarrollada en colaboración con Bloomberg, y permisos comerciales que permitan conocer las vocaciones del espacio urbano.»",
+  "fuente": {
+   "titulo": "www.poresto.com",
+   "url": "https://www.poresto.com/yucatan/merida/2026/1/20/presenta-cecilia-patron-el-plan-merida-ordenada-para-un-crecimiento-urbano-sostenible.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:44",
+  "tipo": "dato",
+  "titulo": "Fecha publicada en la atribución de la capa «Preedial 2025»",
+  "texto": "Fecha publicada en la atribución de la capa «Preedial 2025»: 06/03/2026. Texto publicado en la fuente: «{\"texto\": \"<br><b style='color: blue;'>Última actualización: 06/03/2026<b>\", \"nombre\": \"Preedial 2025\", \"urlFuente\": \" \"}»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:45",
+  "tipo": "dato",
+  "titulo": "Catálogo de estatus de reportes (SIPAC) en la configuración del Geoportal",
+  "texto": "Catálogo de estatus de reportes (SIPAC) en la configuración del Geoportal: Inicial, Por Asignar, Asignada, Por Atender, Atendida. Texto publicado en la fuente: «WS_SIPAC_CATALOGO_ESTATUS: { \"cancelables\": [\"Inicial\", \"Por atender\", \"Asignada\"], \"agendables\": [\"Inicial\", \"Por atender\"], \"todos\": [ { \"nombre\": \"Inicial\", \"id\": 1 }, { \"nombre\": \"Por Asignar\", \"id\": 2 }, { \"nombre\": \"Asignada\", \"id\": 3 }, { \"nombre\": \"Por Atender\", \"id\": 4 }, { \"nombre\": \"Atendida\", \"id\": 5 } ] }»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:46",
+  "tipo": "dato",
+  "titulo": "Filtro de visibilidad en capas de reportes",
+  "texto": "Filtro de visibilidad en capas de reportes: Reportes públicos frente a reportes de gestores. Texto publicado en la fuente: «{ \"nombre\": \"Reportes Ciudadanos\", \"customFilterCheck\": { \"checked\": true, ... \"tooltipActive\": \"Incluir reportes públicos\", \"iconActive\": \"mdi-account\", \"inactiveFilter\": [ [\"solicitante\", \"<>\", \"PÚBLICO\"], \"OR\", [\"solicitante\", \"=\", null] ], \"tooltipInactive\": \"Ver sólo reportes de gestores\"»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:47",
+  "tipo": "dato",
+  "titulo": "Acceso institucional al Geoportal",
+  "texto": "Acceso institucional al Geoportal: Cuentas de correo institucional / SIIMM. Texto publicado en la fuente: «\"<p style='font-size:16px;'>Se ha detectado que tiene una cuenta de <b>correo institucional</b>, \" + \"por lo que puedes iniciar sesión con tu <b>usuario y contraseña del SIIMM</b></p>\"»",
+  "fuente": {
+   "titulo": "Geoportal de Mérida",
+   "url": "https://geoportal.merida.gob.mx/js/app.js?gtv=20260715",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:48",
+  "tipo": "dato",
+  "titulo": "Normativa citada por el Visor en la consulta de uso de suelo",
+  "texto": "Normativa citada por el Visor en la consulta de uso de suelo: Reglamento de Construcciones del Municipio de Mérida, Ley de Asentamientos Humanos del Estado de Yucatán y PMDU. Texto publicado en la fuente: «De acuerdo a los Artículos 20, 23 y 24 del Reglamento de Construcciones del Municipio de Mérida y el Artículo 76 de la Ley de Asentamientos Humanos del Estado de Yucatán ... | ... de acuerdo al Programa Municipal de Desarrollo Urbano de Mérida vigente y a su Tabla de Compatibilidades de Usos y Destinos del Suelo del mismo (Anexo 2: N-03).»",
+  "fuente": {
+   "titulo": "Visor Urbano de Mérida",
+   "url": "https://visorurbano.merida.gob.mx/assets/map-CQ7S38Mg.js",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:49",
+  "tipo": "dato",
+  "titulo": "Teléfono de reporte (Ayuntatel) y número corto",
+  "texto": "Teléfono de reporte (Ayuntatel) y número corto: 999 924 4000 y 070. Texto publicado en la fuente: «Reporta vía telefónica | Comunícate a Ayuntatel | al tel. 9999244000 o al 070 | Llama»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:50",
+  "tipo": "dato",
+  "titulo": "Horario de Ayuntatel para folios no encontrados",
+  "texto": "Horario de Ayuntatel para folios no encontrados: Lunes a viernes de 8:30 a 21:30; sábados de 8:30 a 18:30; domingos y festivos de 8:30 a 13:30. Texto publicado en la fuente: «Reporte no encontrado | Si no encontraste el folio de tu reporte comunícate a: | Ayuntatel (999) 924 40 00 o al 070 | Lunes a viernes de 8:30 a.m a 9:30 p.m. | Sábados de 8:30 a.m a 6:30 p.m. | Domingos y días festivos de 8:30 a.m. a 1:30 p.m.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:51",
+  "tipo": "dato",
+  "titulo": "Reporte presencial",
+  "texto": "Reporte presencial: Módulo de Atención Ciudadana, bajos del Palacio Municipal, lunes a viernes de 8:00 a 17:00. Texto publicado en la fuente: «Reporte vía Presencial | En el módulo de Atención Ciudadana | de lunes a viernes de 8:00 a.m. a 5:00 p.m. | Bajos del Palacio Municipal, Col. Centro»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:52",
+  "tipo": "dato",
+  "titulo": "Reporte por la app desde el portal Reporta",
+  "texto": "Reporte por la app desde el portal Reporta: Mérida Móvil para iOS y Android. Texto publicado en la fuente: «Reporta vía App Mérida Móvil | ¡Descárgala! y reporta desde cualquier lugar | Disponible para IOS y Android»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:53",
+  "tipo": "dato",
+  "titulo": "Folio al finalizar el reporte web y canal para corregir datos",
+  "texto": "Folio al finalizar el reporte web y canal para corregir datos: Se asigna folio; las correcciones se hacen con Ayuntatel 999 924 4000 o 070. Texto publicado en la fuente: «Al hacer clic en el botón: \"Finalizar\", tu reporte quedará registrado con un número de folio. Si después necesitas corregir o actualizar cualquier dato, personal o del reporte, comunícate a Ayuntatel al: 999 924 4000 o 070.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-10-12)",
+   "url": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:54",
+  "tipo": "dato",
+  "titulo": "Los reportes web no son anónimos",
+  "texto": "Los reportes web no son anónimos: Son confidenciales, pero no anónimos. Texto publicado en la fuente: «Proporciona la información solicitada para atender tu reporte. | Este es confidencial, pero al asignarse un folio, no pueden ser anónimo.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-10-12)",
+   "url": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:55",
+  "tipo": "dato",
+  "titulo": "Reporte sin folio en la app (FAQ)",
+  "texto": "Reporte sin folio en la app (FAQ): Ayuntatel 9999244000. Texto publicado en la fuente: «7. Reporté y no tengo número de folio | Si acabas de realizar un reporte y no recibiste el folio, posiblemente haya existido una intermitencia en la red, por favor intenta de nuevo o comunícate a Ayuntatel al 9999244000»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-07-11)",
+   "url": "https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:56",
+  "tipo": "dato",
+  "titulo": "Servicios que no están en la app",
+  "texto": "Servicios que no están en la app: Web www.merida.gob.mx/reportaenlinea o Ayuntatel. Texto publicado en la fuente: «9. Quiero reportar un servicio que no esta en la app | Para reportes más extensos puedes hacerlo en línea a través de la pagina web: www.merida.gob.mx/reportaenlinea | o vía telefónica en Ayuntatel al: 9999244000»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-07-11)",
+   "url": "https://web.archive.org/web/20250711032358/https://merida.gob.mx/app/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:57",
+  "tipo": "dato",
+  "titulo": "Correo de ayuda de la app",
+  "texto": "Correo de ayuda de la app: contacto@merida.gob.mx. Texto publicado en la fuente: «Asistencia de la app | ... | Correo de ayuda | contacto@merida.gob.mx (href=\"mailto:contacto@merida.gob.mx\")»",
+  "fuente": {
+   "titulo": "play.google.com",
+   "url": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:58",
+  "tipo": "dato",
+  "titulo": "Comentarios y sugerencias",
+  "texto": "Comentarios y sugerencias: Ayuntatel (999) 924 4000 y merida.gob.mx/atencionciudadana. Texto publicado en la fuente: «Comentarios y sugerencias | Ayuntatel: (999) 924 4000 | En línea: merida.gob.mx/ atencionciudadana»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005233/https://merida.gob.mx/reporta/index.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:59",
+  "tipo": "dato",
+  "titulo": "Versión vigente en App Store",
+  "texto": "Versión vigente en App Store: 4.0.2, publicada el 2026-10-16 a las 18:36:06 UTC. Texto publicado en la fuente: «App Store: \"primarySubtitle\":\"Versión 4.0.2\",\"secondarySubtitle\":\"Fri Oct 16 2026 18:36:06 GMT+0000 (Coordinated Universal Time)\" | Lookup: version 4.0.2; currentVersionReleaseDate 2026-10-16T18:36:06Z; releaseNotes «¡Mérida Móvil se renovó! Conoce su nueva imagen, nuevos elementos visuales y una presentación renovada de sus contenidos. Además, entérate de lo último de tu Ayuntamiento en el apartado de Novedades.»»",
+  "fuente": {
+   "titulo": "apps.apple.com",
+   "url": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:60",
+  "tipo": "dato",
+  "titulo": "Fecha de actualización en Google Play",
+  "texto": "Fecha de actualización en Google Play: 15 oct 2026 (versión 4.0.2 en los datos de la página). Texto publicado en la fuente: «<div class=\"lXlx5\">Actualización</div><div class=\"xg1aie\">15 oct 2026</div> ... [[\"4.0.2\"]]»",
+  "fuente": {
+   "titulo": "play.google.com",
+   "url": "https://play.google.com/store/apps/details?id=app.meridamovil.com&hl=es_419&gl=MX",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:61",
+  "tipo": "dato",
+  "titulo": "Origen de «Bache a la vista» y «Desazolve de rejilla»",
+  "texto": "Origen de «Bache a la vista» y «Desazolve de rejilla»: Versión 3.1.0, 2024-12-26. Texto publicado en la fuente: «- Creamos reportes al instante, Bache a la vista y Desazolve de rejilla, ¡obtén tu folio al confirmar tu ubicación! ... <span class=\"svelte-1t5dyc5\">3.1.0</span> <time datetime=\"2024-12-26\" class=\"svelte-1t5dyc5\">26/12/2024</time>»",
+  "fuente": {
+   "titulo": "apps.apple.com",
+   "url": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:62",
+  "tipo": "dato",
+  "titulo": "Reporte al instante «Basura en vía pública»",
+  "texto": "Reporte al instante «Basura en vía pública»: Existe según la descripción de App Store. Texto publicado en la fuente: «- ¡NUEVO! Basura en vía pública, donde puedes reportar de manera inmediata y sencilla estos servicios, con solo confirmar tu ubicación.»",
+  "fuente": {
+   "titulo": "apps.apple.com",
+   "url": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:63",
+  "tipo": "dato",
+  "titulo": "Confirmación de folio en la app",
+  "texto": "Confirmación de folio en la app: Folio numérico (7 dígitos en la captura); el seguimiento se hace en «Mis Reportes». Texto publicado en la fuente: «Tu folio de reporte es: [número de 7 dígitos] | Dale seguimiento en el botón de 'Mis Reportes' | ACEPTAR»",
+  "fuente": {
+   "titulo": "is1-ssl.mzstatic.com",
+   "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/79/5a/5b/795a5b13-69e5-9e22-0ebe-14c6464f3a40/002_2.jpg/1206x2622bb.jpg",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:64",
+  "tipo": "dato",
+  "titulo": "Estatus de reporte en «Mis reportes»",
+  "texto": "Estatus de reporte en «Mis reportes»: Registrado / En proceso de atención / Solucionado / Motivo de cancelación. Texto publicado en la fuente: «Mis reportes | Fecha inicio 1 ene 2026 | Fecha fin 31 dic 2026 | FILTRAR RESULTADOS | Buscar por folio | Registrado | En proceso de atención | Solucionado | Motivo de cancelación»",
+  "fuente": {
+   "titulo": "is1-ssl.mzstatic.com",
+   "url": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/38/12/9b/38129bdc-9295-3417-82dc-b0860b90b57c/003.jpg/1548x2064bb.jpg",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:65",
+  "tipo": "dato",
+  "titulo": "Registro con confirmación por correo",
+  "texto": "Registro con confirmación por correo: Obligatorio para usar la app. Texto publicado en la fuente: «Nota importante: Al registrarte en la App, deberás hacer clic en el correo de confirmación, encuentra el mensaje en tu bandeja de entrada o elementos no deseados. Y si ya tienes cuenta, accede con tu mismo usuario y contraseña.»",
+  "fuente": {
+   "titulo": "apps.apple.com",
+   "url": "https://apps.apple.com/mx/app/m%C3%A9rida-m%C3%B3vil/id1065129797",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:66",
+  "tipo": "dato",
+  "titulo": "Límite de foto en el reporte web",
+  "texto": "Límite de foto en el reporte web: JPG, JPEG o PNG, máximo 5 MB, opcional. Texto publicado en la fuente: «Adjuntar | Agrega fotografia de evidencia (opcional) | Las extensiones de archivos permitidos son .jpg, .jpeg, .png con un tamaño máximo de 5 MB»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-10-12)",
+   "url": "https://web.archive.org/web/20261012162906/https://merida.gob.mx/reporta/reporte.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:67",
+  "tipo": "dato",
+  "titulo": "Detección de reportes duplicados (web)",
+  "texto": "Detección de reportes duplicados (web): Si el reporte ya existe, la web no lo genera y muestra el folio existente. Texto publicado en la fuente: «if (errors.includes(\"SolicitudExistente\")) { const folio = errors.split(\":\")[1]; msgSendFailTitle.innerHTML = \"Solicitud existente\"; msgSendFailText.innerHTML = `El reporte no se generará, debido a que otra persona lo registró y ya existe.<br><br>Folio: <b class=\"dfl-cr-1\">${folio}</b>...»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-25)",
+   "url": "https://web.archive.org/web/20260425005241/https://merida.gob.mx/reporta/assets/js/page/reporte.js",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:68",
+  "tipo": "dato",
+  "titulo": "La nota MIDigital no menciona Mérida Móvil",
+  "texto": "La nota MIDigital no menciona Mérida Móvil: Martes 11 de agosto de 2026; sólo habla de Portal Ciudadano, Expediente Digital y Visor Urbano. Texto publicado en la fuente: «Martes 11 de Agosto de 2026 | ... Indicó que la estrategia se articula mediante tres herramientas fundamentales: el Portal Ciudadano que concentra la información oficial sobre trámites, servicios, regulaciones e inspecciones municipales; el Expediente Digital que permite resguardar de manera segura documentos e información para acreditar la identidad ante el Ayuntamiento; y el Visor Urbano que pone al alcance de tod…»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12522/Presenta-Cecilia-Patron-MIDigital-innovadora-transformacion-tecnologica-del-Ayuntamiento-de-Merida/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:69",
+  "tipo": "dato",
+  "titulo": "Número de Línea Mujer (Instituto de las Mujeres)",
+  "texto": "Número de Línea Mujer (Instituto de las Mujeres): 800 455 76 72 (gratuita). Texto publicado en la fuente: «1. La mujer llama a la Línea Mujer (8004557672) y solicita atención ante alguna situación de violencia. ... | ¿Cuál es el costo? | + | Gratuito»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:70",
+  "tipo": "dato",
+  "titulo": "Horario de Línea Mujer",
+  "texto": "Horario de Línea Mujer: 24 horas, 7 días. Texto publicado en la fuente: «Vigencia del resolutivo: | No se tiene vigencia del como tal ya que el servicio está disponible las 24 horas del día, los 7 días de las semana.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:71",
+  "tipo": "dato",
+  "titulo": "Descripción oficial de Línea Mujer (horario 24/7)",
+  "texto": "Descripción oficial de Línea Mujer (horario 24/7): 24 horas del día, 7 días de la semana. Texto publicado en la fuente: «MID-INMU-397 | Línea Telefónica de Atención de la Violencia contra las Mujeres | Instituto de las Mujeres | Descripción: | Brindar servicios esenciales de atención inmediata y de primer contacto a mujeres en situación de violencias en razón de género a través de asistencia telefónica las 24 horas del día los 7 días de la semana. | Modalidad: | Telefónica»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/tramites",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:72",
+  "tipo": "dato",
+  "titulo": "Contacto del responsable de MID-INMU-397 (horario inconsistente con 24/7)",
+  "texto": "Contacto del responsable de MID-INMU-397 (horario inconsistente con 24/7): tramites.inm@merida.gob.mx; 9999240296; 'Lunes a Domingo | 00:00 - 12:00'. Texto publicado en la fuente: «Departamento: Despacho de la Subdirectora | Correo electrónico: tramites.inm@merida.gob.mx | Teléfono: 9999240296 | Días y horarios de atención: Lunes a Domingo | 00:00 - 12:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:73",
+  "tipo": "dato",
+  "titulo": "Línea Mujer en pie de página del sitio del Instituto (captura 2026-06-27)",
+  "texto": "Línea Mujer en pie de página del sitio del Instituto (captura 2026-06-27): 800.455.76.72. Texto publicado en la fuente: «Línea Mujer | Línea gratuita: 800.455.76.72 | App móvil: iOS | Android»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-06-27)",
+   "url": "https://web.archive.org/web/20260627170626/https://merida.gob.mx/mujer/atencion.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:74",
+  "tipo": "dato",
+  "titulo": "Bloque de emergencias del sitio del Instituto (captura 2026-03-29)",
+  "texto": "Bloque de emergencias del sitio del Instituto (captura 2026-03-29): 911 y 800.455.76.72. Texto publicado en la fuente: «Emergencias | 911 | Consulta todas las líneas telefónicas | Línea de la mujer | 800.455.76.72»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-03-29)",
+   "url": "https://web.archive.org/web/20260329010606/https://merida.gob.mx/mujer/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:75",
+  "tipo": "dato",
+  "titulo": "Aviso de emergencias del Portal Ciudadano (en vivo 2026-10-17; también en apps.php captura 2026-08-28)",
+  "texto": "Aviso de emergencias del Portal Ciudadano (en vivo 2026-10-17; también en apps.php captura 2026-08-28): 911; Ayuntatel 999 924 4000 o 070; Protección Civil 999 928 8311. Texto publicado en la fuente: «Informacíon y emergencias | Si tienes una emergencia llama al 911, también estamos atentos a tus reportes en Ayuntatel 999 924 4000 o al 070 y Protección Civil 999 928 8311.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:76",
+  "tipo": "dato",
+  "titulo": "Teléfono '24hrs' del menú Transparencia del Portal Ciudadano (NO es Línea Mujer)",
+  "texto": "Teléfono '24hrs' del menú Transparencia del Portal Ciudadano (NO es Línea Mujer): (999) 924 6361. Texto publicado en la fuente: «Transparencia | www.merida.gob.mx/transparencia | Tel. (999) 924 6361 24hrs, 7 días de la semana | Unidad de Transparencia Municipal»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/397",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:77",
+  "tipo": "dato",
+  "titulo": "Teléfono, horario y correo del Instituto de las Mujeres (captura 2026-06-27)",
+  "texto": "Teléfono, horario y correo del Instituto de las Mujeres (captura 2026-06-27): (999) 924.02.96; Lunes a viernes 8:00 a.m.-6:00 p.m.; mujer@merida.gob.mx. Texto publicado en la fuente: «Contáctanos: | Teléfono: (999) 924.02.96 | Lunes a viernes de 8:00 a.m. a 6:00 p.m. | mujer@merida.gob.mx»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-06-27)",
+   "url": "https://web.archive.org/web/20260627170626/https://merida.gob.mx/mujer/atencion.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:78",
+  "tipo": "dato",
+  "titulo": "Dirección del Instituto de las Mujeres (captura 2026-06-27)",
+  "texto": "Dirección del Instituto de las Mujeres (captura 2026-06-27): Calle 50 por 71 número 550-A, Col. Centro, Barrio de San Cristóbal. Texto publicado en la fuente: «Instituto de las mujeres | Calle 50 por 71 número 550-A, | Col. Centro | Barrio de San Cristóbal, Mérida, México»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-06-27)",
+   "url": "https://web.archive.org/web/20260627170626/https://merida.gob.mx/mujer/atencion.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:79",
+  "tipo": "dato",
+  "titulo": "Ubicaciones del Instituto de las Mujeres (captura 2026-03-29)",
+  "texto": "Ubicaciones del Instituto de las Mujeres (captura 2026-03-29): 4: Oficina Central, Sede sur, Sede Oriente y Sede poniente. Texto publicado en la fuente: «Para tu comodidad nos encontramos en 4 ubicaciones: Oficina Central, Sede sur, Sede Oriente y Sede poniente donde te brindaremos la atención y orientación que necesitas.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-03-29)",
+   "url": "https://web.archive.org/web/20260329010606/https://merida.gob.mx/mujer/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:80",
+  "tipo": "dato",
+  "titulo": "Contacto y horario de Atención Especializada (MID-INMU-370) y Refugio (MID-INMU-399)",
+  "texto": "Contacto y horario de Atención Especializada (MID-INMU-370) y Refugio (MID-INMU-399): tramites.inm@merida.gob.mx; 9999240296; Lunes a Viernes 08:00-18:00. Texto publicado en la fuente: «Correo electrónico: tramites.inm@merida.gob.mx | Teléfono: 9999240296 | Días y horarios de atención: Lunes a Viernes | 08:00 - 18:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:81",
+  "tipo": "dato",
+  "titulo": "Horario del refugio (captura 2026-06-27)",
+  "texto": "Horario del refugio (captura 2026-06-27): 24 horas, 365 días. Texto publicado en la fuente: «Centro de atención y refugio para mujeres sus hijas e hijos en situación de violencia extrema | ... | Servicio de Seguridad Interna y Externa | Las 24 horas, los 365 días del año.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-06-27)",
+   "url": "https://web.archive.org/web/20260627170626/https://merida.gob.mx/mujer/atencion.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:82",
+  "tipo": "dato",
+  "titulo": "Contacto y horario de servicios comunitarios del Instituto (MID-INMU-266, 267, 269, 371)",
+  "texto": "Contacto y horario de servicios comunitarios del Instituto (MID-INMU-266, 267, 269, 371): tramites.inm@merida.gob.mx; 9999240296; Lunes a Viernes 08:00-15:00. Texto publicado en la fuente: «Correo electrónico: tramites.inm@merida.gob.mx | Teléfono: 9999240296 | Días y horarios de atención: Lunes a Viernes | 08:00 - 15:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/266",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:83",
+  "tipo": "dato",
+  "titulo": "Correo para solicitar talleres del Instituto (MID-INMU-266)",
+  "texto": "Correo para solicitar talleres del Instituto (MID-INMU-266): solicitudtaller@merida.gob.mx. Texto publicado en la fuente: «Información complementaria | La dirección de correo electrónico es: solicitudtaller@merida.gob.mx»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/266",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:84",
+  "tipo": "dato",
+  "titulo": "Función de llamada de la app Línea Mujer (App Store)",
+  "texto": "Función de llamada de la app Línea Mujer (App Store): Botón de llamada directa a la Línea Mujer. Texto publicado en la fuente: «Una alternativa de comunicación que te servirá en una situación de emergencia o de peligro. Únicamente presionando el botón de llamada accederas directamente a la Línea Mujer, un número telefónico gratuito para solicitar ayuda en el Municipio de Mérida, Yucatán.»",
+  "fuente": {
+   "titulo": "apps.apple.com",
+   "url": "https://apps.apple.com/mx/app/l%C3%ADnea-mujer/id1293535345",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:85",
+  "tipo": "dato",
+  "titulo": "Función de alerta con ubicación de la app (Google Play)",
+  "texto": "Función de alerta con ubicación de la app (Google Play): SMS con ubicación a contactos de confianza. Texto publicado en la fuente: «Esta aplicación además, te permite guardar tus contactos de confianza predeterminados, como familiares cercanos, amigos, vecinos, etc, a quienes se les envía una alerta con tu ubicación a través de un SMS.»",
+  "fuente": {
+   "titulo": "play.google.com",
+   "url": "https://play.google.com/store/apps/details?id=com.ayuntamientodemerida.linearosa&hl=es_419&gl=MX",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:86",
+  "tipo": "dato",
+  "titulo": "Correo de ayuda de la app (Google Play)",
+  "texto": "Correo de ayuda de la app (Google Play): contacto@merida.gob.mx. Texto publicado en la fuente: «Asistencia de la app | ... | Correo de ayuda | contacto@merida.gob.mx»",
+  "fuente": {
+   "titulo": "play.google.com",
+   "url": "https://play.google.com/store/apps/details?id=com.ayuntamientodemerida.linearosa&hl=es_419&gl=MX",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:87",
+  "tipo": "dato",
+  "titulo": "Botón central de la app según el sitio del Instituto (captura 2026-03-29)",
+  "texto": "Botón central de la app según el sitio del Instituto (captura 2026-03-29): Botón central → Línea Mujer. Texto publicado en la fuente: «Línea mujer | Presiona el botón central y accede a la Línea de Mujer, donde podrás solicitar ayuda.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-03-29)",
+   "url": "https://web.archive.org/web/20260329010606/https://merida.gob.mx/mujer/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:88",
+  "tipo": "dato",
+  "titulo": "Línea Mujer en el catálogo de apps municipales (captura 2026-08-28)",
+  "texto": "Línea Mujer en el catálogo de apps municipales (captura 2026-08-28): Acceso directo al número gratuito. Texto publicado en la fuente: «LÍNEA MUJER | Acceso directo al número gratuito para solicitar ayuda en caso de emergencia. | merida.gob.mx/mujer»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-08-28)",
+   "url": "https://web.archive.org/web/20260828115138/https://merida.gob.mx/municipio/portal/apps.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:89",
+  "tipo": "dato",
+  "titulo": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Número anterior atribuido a Línea Mujer (artículo 2021 y página Alerta Segura según buscador)",
+  "texto": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Número anterior atribuido a Línea Mujer (artículo 2021 y página Alerta Segura según buscador): (999) 923 09 73 — probablemente no vigente; NO usar. Texto publicado en la fuente: «Entre los programas que ofrece el Instituto de la Mujer destaca la “Línea Mujer” (9999-23-09-73), que es la puerta de entrada a todos los apoyos municipales enfocados a ese sector.»",
+  "fuente": {
+   "titulo": "www.yucatan.com.mx",
+   "url": "https://www.yucatan.com.mx/merida/gobierno/2021/03/10/resaltan-agenda-del-instituto-de-la-mujer-en-merida.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:90",
+  "tipo": "dato",
+  "titulo": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] WhatsApp del Instituto reportado por medio (dic-2025, vía buscador)",
+  "texto": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] WhatsApp del Instituto reportado por medio (dic-2025, vía buscador): 9991 14 10 08. Texto publicado en la fuente: «De forma adicional, mediante la modalidad Mujeres Seguras en tu Establecimiento, se brindaron talleres a empresas e instituciones ... Para mayor información, las personas interesadas pueden comunicarse al teléfono 999-924-02-96, extensiones 84024 y 84008, al WhatsApp 9991-14-10-08 o al correo electrónico solicitudtaller@merida.gob.mx.»",
+  "fuente": {
+   "titulo": "www.poresto.com",
+   "url": "https://www.poresto.com/yucatan/merida/2025/12/29/implementan-medidas-en-merida-para-fortalecer-el-desarrollo-personal-y-economico-de-las-mujeres-y-sus-familias.amp.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:91",
+  "tipo": "dato",
+  "titulo": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Norte",
+  "texto": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Norte: Calle 8, No. Ext. Sin número, Entre 13, Col. José María Iturralda — Horario: Lunes a Viernes de 1:00 pm a 7:00 pm. Texto publicado en la fuente: «Alma Nova Sede Norte | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 8, No. Ext. Sin número, Entre 13, Col. José María Iturralda»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:92",
+  "tipo": "dato",
+  "titulo": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Oriente",
+  "texto": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Oriente: Calle 14, No. Ext. Sin número, Entre 75, y 77, Col. San Antonio Kaua — Horario: Lunes a Viernes de 1:00 pm a 7:00 pm. Texto publicado en la fuente: «Alma Nova Sede Oriente | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 14, No. Ext. Sin número, Entre 75, y 77, Col. San Antonio Kaua»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:93",
+  "tipo": "dato",
+  "titulo": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Poniente",
+  "texto": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Poniente: Calle 5-D, No. Ext. Sin número, Entre 58, y 21, Col. Residencial Pensiones V etapa — Horario: Lunes a Viernes de 1:00 pm a 7:00 pm. Texto publicado en la fuente: «Alma Nova Sede Poniente | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 5-D, No. Ext. Sin número, Entre 58, y 21, Col. Residencial Pensiones V etapa»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:94",
+  "tipo": "dato",
+  "titulo": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Sur",
+  "texto": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Alma Nova Sede Sur: Calle 155-A, No. Ext. Sin número, Entre 56, y 58, Col. Brisas de San José — Horario: Lunes a Viernes de 1:00 pm a 7:00 pm. Texto publicado en la fuente: «Alma Nova Sede Sur | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 155-A, No. Ext. Sin número, Entre 56, y 58, Col. Brisas de San José»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:95",
+  "tipo": "dato",
+  "titulo": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Unidad Deportiva Caucel",
+  "texto": "Sede de atención psicológica Alma Nova listada en ficha MID-BIH-007 'Apoyo Psicológico' (consulta 2026-10-17; últ. act. de la ficha 2026-09-25): Unidad Deportiva Caucel: Calle 96, No. Ext. Sin número, Entre 31, y 39, Col. Ciudad Caucel — Horario: Lunes a Viernes de 1:00 pm a 7:00 pm — Tel.: 999 942-00-00 ext. 81951. Texto publicado en la fuente: «Unidad Deportiva Caucel | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 96, No. Ext. Sin número, Entre 31, y 39, Col. Ciudad Caucel | Teléfono: | 999 942-00-00 | Extensión: | 81951»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:96",
+  "tipo": "dato",
+  "titulo": "Almanova Sede Oriente según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada) — incluye correo genérico correo@merida.gob.mx (probable marcador)",
+  "texto": "Almanova Sede Oriente según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada) — incluye correo genérico correo@merida.gob.mx (probable marcador): Calle 14 S/N por 75 y 77, Col. San Antonio Kaua / (Frente al Estadio Carlos Iturralde) / Horarios de atención: 1:00 a 7:00 p.m. / correo@merida.gob.mx / 999 942 0000 Ext. 86900. Texto publicado en la fuente: «Almanova Sede Oriente | Calle 14 S/N por 75 y 77, Col. San Antonio Kaua | (Frente al Estadio Carlos Iturralde) | Ver ubicación | Horarios de atención: | 1:00 a 7:00 p.m. | correo@merida.gob.mx | 999 942 0000 Ext. 86900»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:97",
+  "tipo": "dato",
+  "titulo": "Almanova Sede Poniente según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada) — incluye correo genérico correo@merida.gob.mx (probable marcador)",
+  "texto": "Almanova Sede Poniente según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada) — incluye correo genérico correo@merida.gob.mx (probable marcador): Calle 5D por 58 y 21 Diagonal, / Residencial Pensiones V Etapa / Horarios de atención: 1:00 a 7:00 p.m. / correo@merida.gob.mx / 999 942 0000 Ext. 86900. Texto publicado en la fuente: «Almanova Sede Poniente | Calle 5D por 58 y 21 Diagonal, | Residencial Pensiones V Etapa | Ver ubicación | Horarios de atención: | 1:00 a 7:00 p.m. | correo@merida.gob.mx | 999 942 0000 Ext. 86900»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:98",
+  "tipo": "dato",
+  "titulo": "Almanova Sede Sur según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada)",
+  "texto": "Almanova Sede Sur según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada): Calle 155-A por 56 y 58, / Col. Brisas de San José Tecoh / Horarios de atención: 8:00 a.m. a 6:00 p.m. / psicologia@merida.gob.mx / 999 942 00 00 ext. 86900. Texto publicado en la fuente: «Almanova Sede Sur | Calle 155-A por 56 y 58, | Col. Brisas de San José Tecoh | Ver ubicación | Horarios de atención: | 8:00 a.m. a 6:00 p.m. | psicologia@merida.gob.mx | 999 942 00 00 ext. 86900»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:99",
+  "tipo": "dato",
+  "titulo": "Almanova Sede Norte según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada)",
+  "texto": "Almanova Sede Norte según página oficial 'Centros Municipales de apoyo a la de Salud Mental (Almanova)' en captura Wayback 2026-05-19 (anterior a la sede Caucel; puede estar desactualizada): Calle 8 entre 13 y 9, / Fracc. José María Iturralde (Las Águilas) / Horarios de atención: 1:00 a 8:00 p.m. / psicologia@merida.gob.mx / 999 942 00 00 ext. 86900. Texto publicado en la fuente: «Almanova Sede Norte | Calle 8 entre 13 y 9, | Fracc. José María Iturralde (Las Águilas) | Ver ubicación | Horarios de atención: | 1:00 a 8:00 p.m. | psicologia@merida.gob.mx | 999 942 00 00 ext. 86900»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:100",
+  "tipo": "dato",
+  "titulo": "Correo, teléfono y horario del área de Salud Mental (MID-BIH-007)",
+  "texto": "Correo, teléfono y horario del área de Salud Mental (MID-BIH-007): psicologia@merida.gob.mx; 9999420000; Lunes a Viernes 08:00-15:00. Texto publicado en la fuente: «Departamento: Salud Mental | Correo electrónico: psicologia@merida.gob.mx | Teléfono: 9999420000 | Días y horarios de atención: Lunes a Viernes | 08:00 - 15:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:101",
+  "tipo": "dato",
+  "titulo": "Canales para pedir cita de Apoyo Psicológico (MID-BIH-007)",
+  "texto": "Canales para pedir cita de Apoyo Psicológico (MID-BIH-007): Correo, presencial o teléfono. Texto publicado en la fuente: «Solicitud del Trámite o Servicio | - Obligatorio | Descripción: | Solicitar una cita para la atención. Vía correo electrónico, presencial o vía telefónica.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:102",
+  "tipo": "dato",
+  "titulo": "Procedimiento telefónico de Apoyo Psicológico (MID-BIH-007)",
+  "texto": "Procedimiento telefónico de Apoyo Psicológico (MID-BIH-007): Llamada → fecha de cita o canalización. Texto publicado en la fuente: «¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | 1. Realice una llamada telefónica. 2. Recibe fecha de cita para atención o canalización.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:103",
+  "tipo": "dato",
+  "titulo": "Correo escrito con tilde en el texto de la ficha (errata; el mailto es psicologia@merida.gob.mx)",
+  "texto": "Correo escrito con tilde en el texto de la ficha (errata; el mailto es psicologia@merida.gob.mx): psicologia@merida.gob.mx. Texto publicado en la fuente: «Correo electrónico: <a href=\"mailto:psicologia@merida.gob.mx\" class=\"enlace-color-1n\"> psicologia@merida.gob.mx»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:104",
+  "tipo": "dato",
+  "titulo": "Edad mínima para Apoyo Psicológico (MID-BIH-007)",
+  "texto": "Edad mínima para Apoyo Psicológico (MID-BIH-007): Mayores de 5 años. Texto publicado en la fuente: «¿Cuáles son los criterios a considerar? | + | Es necesario que las niñas y niños sean mayores de 5 años de edad.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/7",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:105",
+  "tipo": "dato",
+  "titulo": "Correo genérico en salud-mental.php (sedes Oriente y Poniente; probable marcador — NO usar)",
+  "texto": "Correo genérico en salud-mental.php (sedes Oriente y Poniente; probable marcador — NO usar): correo@merida.gob.mx. Texto publicado en la fuente: «Horarios de atención: | 1:00 a 7:00 p.m. | correo@merida.gob.mx | 999 942 0000 Ext. 86900 | ipsum dolor sit.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:106",
+  "tipo": "dato",
+  "titulo": "Servicio para riesgo suicida en sedes Almanova (captura 2026-05-19) — \"código 100\" es protocolo, no teléfono",
+  "texto": "Servicio para riesgo suicida en sedes Almanova (captura 2026-05-19) — \"código 100\" es protocolo, no teléfono: código 100 (protocolo). Texto publicado en la fuente: «Servicios gratuitos en las sedes: | ... | Atención a grupos de alto riesgo de intento suicida código 100 | Atención psicológica a partir de los 5 años»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:107",
+  "tipo": "dato",
+  "titulo": "Composición de la red AlmaNova (nota 12647, fecha visible 12-oct-2026)",
+  "texto": "Composición de la red AlmaNova (nota 12647, fecha visible 12-oct-2026): 5 sedes y 14 puntos. Texto publicado en la fuente: «la red AlmaNova, integrada por cinco sedes y 14 puntos de atención psicológica gratuita distribuidos en colonias y comisarías.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12647/Cecilia-Patron-fortalece-la-Ruta-de-la-Salud-Mental-con-evaluaciones-gratuitas-para-estudiantes-universitarios/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:108",
+  "tipo": "dato",
+  "titulo": "Zonas de las 5 sedes Almanova (nota 12370, fecha visible 4-jun-2026)",
+  "texto": "Zonas de las 5 sedes Almanova (nota 12370, fecha visible 4-jun-2026): Norte, Ciudad Caucel, Poniente, Oriente y Sur. Texto publicado en la fuente: «el Centro Municipal de Apoyo a la Salud Mental Almanova continúa ampliando su alcance a través de sus cinco sedes ubicadas en las zonas Norte, Ciudad Caucel, Poniente, Oriente y Sur.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12370/Cecilia-Patron-fortalece-acciones-para-proteger-la-salud-de-las-familias-e-intensifica-trabajos-de-bacheo-en-toda-la-ciudad-por-temporada-de-lluvias/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:109",
+  "tipo": "dato",
+  "titulo": "Ubicación de sedes según nota 11633 (20-may-2025)",
+  "texto": "Ubicación de sedes según nota 11633 (20-may-2025): Sur (Brisas de San José), Oriente (San Antonio Kaua), Poniente (Pensiones V Etapa); Norte en Las Águilas. Texto publicado en la fuente: «la alcaldesa inauguró el cuarto centro Alma Nova ubicado en el fraccionamiento Las Águilas ... la ciudadanía también puede acercarse a los centros Alma Nova Sur (Brisas de San José), Oriente (Colonia San Antonio Kaua) y Poniente (Pensiones V Etapa)»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/11633/Inaugura-Cecilia-Patron-nuevo-Alma-Nova-donde-daran-consultas-psicologicas-gratuitas/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:110",
+  "tipo": "dato",
+  "titulo": "[ÍNDICE DEL BUSCADOR — no leído en la página; pendiente] Teléfono/WhatsApp para citas Alma Nova",
+  "texto": "[ÍNDICE DEL BUSCADOR — no leído en la página; pendiente] Teléfono/WhatsApp para citas Alma Nova: 990 101 0714 (escrito también 99 01 01 07 14). Texto publicado en la fuente: «La nueva sede Alma Nova de Ciudad Caucel brindará atención psicológica gratuita de 1 p.m., a 8 p.m., con última cita a las 7 p.m., ... | Las citas podrán solicitarse vía telefónica o al WhatsApp 9901-01-07-14.»",
+  "fuente": {
+   "titulo": "www.yucatan.com.mx",
+   "url": "https://www.yucatan.com.mx/merida/2026/05/20/servicios-de-salud-mental-gratis-en-ciudad-caucel-inauguran-sede-de-alma-nova.html",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:111",
+  "tipo": "dato",
+  "titulo": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Contacto Alma Nova publicado en medio (10-sep-2025)",
+  "texto": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Contacto Alma Nova publicado en medio (10-sep-2025): L-V 8-18 h; 999 942 00 00 ext. 86900; celular 999 338 82 87. Texto publicado en la fuente: «Para mayor información de los Centros Municipales de Apoyo a la Salud Mental Alma Nova podrán comunicarse de lunes a viernes de 8 a 18 horas al 999 942 00 00 ext. 86900, al teléfono celular 999 338 82 87 o por correo a [email protected]»",
+  "fuente": {
+   "titulo": "www.lajornadamaya.mx",
+   "url": "https://www.lajornadamaya.mx/yucatan/252295/ruta-de-la-salud-mental-unidad-movil-que-brindara-atencion-sicologica-gratuita-a-jovenes-de-merida-cecilia-patron",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:112",
+  "tipo": "dato",
+  "titulo": "[ÍNDICE DEL BUSCADOR — no leído en la página; pendiente] Horario ampliado de Centros AlmaNova (anuncio de sep-2026 en medios)",
+  "texto": "[ÍNDICE DEL BUSCADOR — no leído en la página; pendiente] Horario ampliado de Centros AlmaNova (anuncio de sep-2026 en medios): 8:00 a 20:00, lunes a viernes. Texto publicado en la fuente: «los 19 puntos AlmaNova atenderán de 8 de la mañana a 8 de la noche, con servicios gratuitos para niñas, niños, jóvenes, adultos y personas mayores. | ... Los Centros AlmaNova ampliarán sus horarios de atención para ofrecer servicios de apoyo psicológico gratuito durante 12 horas al día, de lunes a viernes»",
+  "fuente": {
+   "titulo": "lineasemergentes.mx",
+   "url": "https://lineasemergentes.mx/amplian-horarios-de-atencion-psicologica-gratuita-en-merida/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:113",
+  "tipo": "dato",
+  "titulo": "Fecha visible de la nota de la Ruta de la Salud Mental (12647)",
+  "texto": "Fecha visible de la nota de la Ruta de la Salud Mental (12647): Lunes 12 de octubre de 2026 (datePublished 2026-10-16T08:56:56-05:00). Texto publicado en la fuente: «Lunes 12 de Octubre de 2026»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12647/Cecilia-Patron-fortalece-la-Ruta-de-la-Salud-Mental-con-evaluaciones-gratuitas-para-estudiantes-universitarios/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:114",
+  "tipo": "dato",
+  "titulo": "Definición de la Ruta de la Salud Mental (12647)",
+  "texto": "Definición de la Ruta de la Salud Mental (12647): Consultorio móvil en universidades. Texto publicado en la fuente: «Esta nueva acción se suma al trabajo que realiza la Ruta de la Salud Mental, que lleva orientación y acompañamiento psicológico a las universidades mediante un consultorio móvil, acercando los servicios directamente a la comunidad estudiantil.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12647/Cecilia-Patron-fortalece-la-Ruta-de-la-Salud-Mental-con-evaluaciones-gratuitas-para-estudiantes-universitarios/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:115",
+  "tipo": "dato",
+  "titulo": "Duración del tamizaje universitario (12647)",
+  "texto": "Duración del tamizaje universitario (12647): 10 minutos; cuestionario digital. Texto publicado en la fuente: «Con solo 10 minutos de su tiempo, las y los estudiantes podrán responder un tamizaje gratuito de salud mental, mediante un cuestionario digital que permitirá realizar una evaluación inicial de su bienestar psicológico»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12647/Cecilia-Patron-fortalece-la-Ruta-de-la-Salud-Mental-con-evaluaciones-gratuitas-para-estudiantes-universitarios/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:116",
+  "tipo": "dato",
+  "titulo": "Canal web citado por la nota 12647",
+  "texto": "Canal web citado por la nota 12647: merida.gob.mx/bienestar/salud.php (inaccesible por CAPTCHA). Texto publicado en la fuente: «Más información sobre los servicios de salud mental que ofrece el Ayuntamiento de Mérida en merida.gob.mx/bienestar/salud.php»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12647/Cecilia-Patron-fortalece-la-Ruta-de-la-Salud-Mental-con-evaluaciones-gratuitas-para-estudiantes-universitarios/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:117",
+  "tipo": "dato",
+  "titulo": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Horarios de la unidad móvil de la Ruta (lanzamiento sep-2025)",
+  "texto": "[SECUNDARIA/NO OFICIAL — pendiente de verificación] Horarios de la unidad móvil de la Ruta (lanzamiento sep-2025): Escuelas 8-19 h; colonias y comisarías 14-19 h. Texto publicado en la fuente: «La nueva unidad móvil se trasladó en su primer día al Campus de Ciencias Sociales de la Universidad Autónoma de Yucatán y recorrerá diferentes centros escolares de 8 a 19 horas. Cuando se programe la visita a las colonias y comisarías llegará en horario vespertino, de 14 a 19 horas.»",
+  "fuente": {
+   "titulo": "www.lajornadamaya.mx",
+   "url": "https://www.lajornadamaya.mx/yucatan/252295/ruta-de-la-salud-mental-unidad-movil-que-brindara-atencion-sicologica-gratuita-a-jovenes-de-merida-cecilia-patron",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:118",
+  "tipo": "dato",
+  "titulo": "Dirección de la Dirección de Bienestar Humano (pie de página, capturas 2025-11 y 2026-05)",
+  "texto": "Dirección de la Dirección de Bienestar Humano (pie de página, capturas 2025-11 y 2026-05): Calle 65 número 368A entre 40 y 42, Colonia Centro, C.P. 97000. Texto publicado en la fuente: «Dirección de Bienestar Humano | Calle 65 número 368A entre 40 y 42 | Colonia Centro, C.P. 97000 | Mérida, Yucatán, México»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-05-19)",
+   "url": "https://web.archive.org/web/20260519200621/http://merida.gob.mx/bienestar/salud-mental.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:119",
+  "tipo": "dato",
+  "titulo": "Dirección y teléfono de la Dirección de Bienestar Humano (MID-BIH-008, 028, 032, 037)",
+  "texto": "Dirección y teléfono de la Dirección de Bienestar Humano (MID-BIH-008, 028, 032, 037): Calle 65, No. 368-A, entre 40 y 42, Centro; 9999420000 ext. 81850. Texto publicado en la fuente: «Módulos | Dirección de Bienestar Humano | Dirección: | Calle 65, No. Ext. 368-A, Entre 40, y 42, Col. Centro | Teléfono: | 9999420000 | Extensión: | 81850»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/8",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:120",
+  "tipo": "dato",
+  "titulo": "Contacto y horario de trámites de Bienestar Humano (fichas de salud)",
+  "texto": "Contacto y horario de trámites de Bienestar Humano (fichas de salud): tramites.bih@merida.gob.mx; 9999420000; Lunes a Viernes 08:00-15:00. Texto publicado en la fuente: «Departamento: Protección y Atención a la Salud | Correo electrónico: tramites.bih@merida.gob.mx | Teléfono: 9999420000 | Días y horarios de atención: Lunes a Viernes | 08:00 - 15:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/15",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:121",
+  "tipo": "dato",
+  "titulo": "Dirección de la Subdirección de Salud (MID-BIH-010, 018, 024, 400)",
+  "texto": "Dirección de la Subdirección de Salud (MID-BIH-010, 018, 024, 400): Calle 50, No. 402, entre 29 y 31, Fracc. Pacaptún. Texto publicado en la fuente: «Módulos | Subdirección de Salud | Dirección: | Calle 50, No. Ext. 402, Entre 29, y 31, Col. Fraccionamiento Pacaptún»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/18",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:122",
+  "tipo": "dato",
+  "titulo": "Contacto de la Subdirección de Salud (MID-BIH-018)",
+  "texto": "Contacto de la Subdirección de Salud (MID-BIH-018): tramites.sbs@merida.gob.mx; 9999823329; Lunes a Viernes 08:00-15:00. Texto publicado en la fuente: «Departamento: Subdirección de Salud | Correo electrónico: tramites.sbs@merida.gob.mx | Teléfono: 9999823329 | Días y horarios de atención: Lunes a Viernes | 08:00 - 15:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/18",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:123",
+  "tipo": "dato",
+  "titulo": "Teléfonos para agendar Médico a Domicilio (MID-BIH-400)",
+  "texto": "Teléfonos para agendar Médico a Domicilio (MID-BIH-400): (999) 982 67 29 o (999) 982 33 29. Texto publicado en la fuente: «¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | Comunicarse vía telefónica a la Subdirección de salud para agendar la visita al (999) 9 82 67 29 o (999) 9 82 33 29.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/400",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:124",
+  "tipo": "dato",
+  "titulo": "Dirección y teléfono del CEMANUD (MID-BIH-006, 017, 021, 022, 023)",
+  "texto": "Dirección y teléfono del CEMANUD (MID-BIH-006, 017, 021, 022, 023): Calle 59, No. 539, entre 66 y 68, Centro; (999) 942 00 00 ext. 84282. Texto publicado en la fuente: «Centro Municipal de Atención Nutricional y Diabetes \"CEMANUD\" | Dirección: | Calle 59, No. Ext. 539, Entre 66, y 68, Col. Centro | Teléfono: | (999) 942 00 00 | Extensión: | 84282»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/17",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:125",
+  "tipo": "dato",
+  "titulo": "Correo del CEMANUD (MID-BIH-017)",
+  "texto": "Correo del CEMANUD (MID-BIH-017): cemanud@merida.gob.mx. Texto publicado en la fuente: «Procedimiento | Enviar correo a cemanud@merida.gob.mx solicitando el programa Consulta de Nutrición en CEMANUD»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/17",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:126",
+  "tipo": "dato",
+  "titulo": "Extensión alternativa del CEMANUD en procedimiento telefónico (MID-BIH-017)",
+  "texto": "Extensión alternativa del CEMANUD en procedimiento telefónico (MID-BIH-017): 9420000 ext. 84287. Texto publicado en la fuente: «¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | 1. Marca al 9420000 ext. 84287 2. Espera respuesta»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/17",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:127",
+  "tipo": "dato",
+  "titulo": "Extensión alternativa del CEMANUD para enfermedades crónicas (MID-BIH-021)",
+  "texto": "Extensión alternativa del CEMANUD para enfermedades crónicas (MID-BIH-021): 9420000 ext. 84289. Texto publicado en la fuente: «¿Cuál es el procedimiento vía telefónica? | + | Información complementaria | 1. Marca al 9420000 ext. 84289 2. Espera respuesta»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/21",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:128",
+  "tipo": "dato",
+  "titulo": "Dirección del CAMM (MID-BIH-025)",
+  "texto": "Dirección del CAMM (MID-BIH-025): Calle 88-A, No. 311-D, entre 141 y 143, Col. Emiliano Zapata Sur I y II. Texto publicado en la fuente: «Centro de Atención Médica a la Mujer | Dirección: | Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Colonia Emiliano Zapata Sur I y II»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/25",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:129",
+  "tipo": "dato",
+  "titulo": "Costos publicados del CAMM, incluida consulta psicológica (conflicto con \"Gratuito\")",
+  "texto": "Costos publicados del CAMM, incluida consulta psicológica (conflicto con \"Gratuito\"): Médica/ginecológica $25; psicológica $15; mastografía $100; ultrasonido $100; dental $25. Texto publicado en la fuente: «¿Cuál es el costo? | + | Variable | Consulta Médica o Ginecológica $25.00 | Consulta Psicológica $ 15.00 | Mastografía : $100.00 | Ultrasonido : $100.00 | Consulta Dental: $25.00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/25",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:130",
+  "tipo": "dato",
+  "titulo": "Costos publicados de la consulta en módulos médicos (MID-BIH-015)",
+  "texto": "Costos publicados de la consulta en módulos médicos (MID-BIH-015): $15 / $40 / curación $15 / inyección $5 / suturas $25 / glucosa $5. Texto publicado en la fuente: «¿Cuál es el costo? | + | Variable | Consulta sin medicamentos: $15.00 | Consulta con medicamentos: $40.00 | Curación: $15.00 | Aplicación de inyección con jeringas: $5.00 | Suturas: $25.00 | Glucosa $5.00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/15",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:131",
+  "tipo": "dato",
+  "titulo": "Edades para mastografía y ultrasonido mamario (MID-BIH-024)",
+  "texto": "Edades para mastografía y ultrasonido mamario (MID-BIH-024): Mastografía 40-69 años; ultrasonido menores de 40. Texto publicado en la fuente: «La mastografia se realiza en pacientes de 40 a 69 años de edad y el ultrasonido mamario a pacientes menores de 40 años de edad.»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/24",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:132",
+  "tipo": "dato",
+  "titulo": "Centro Acuático Municipal: dirección, teléfono y costos (MID-BIH-034)",
+  "texto": "Centro Acuático Municipal: dirección, teléfono y costos (MID-BIH-034): Calle 96 entre 31, Ciudad Caucel; 9999420000 ext. 81851; $400 (2 días) / $500 (3 días) por 8 semanas. Texto publicado en la fuente: «Centro Acuático Municipal | Dirección: | Calle 96, No. Ext. Sin número, Entre 31, Col. Ciudad Caucel | Teléfono: | 9999420000 | Extensión: | 81851 || Variable | 2 días a la semana | Martes y Jueves (8 semanas) = $400 | 3 días a la semana | Lunes, Miércoles y Viernes (8 semanas) =$500»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/34",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:133",
+  "tipo": "dato",
+  "titulo": "Gimnasio Polifuncional Municipal (MID-BIH-029)",
+  "texto": "Gimnasio Polifuncional Municipal (MID-BIH-029): Calle 26 entre 5 D y 5 F, Col. Juan Pablo II. Texto publicado en la fuente: «Gimnasio Polifuncional Municipal | Dirección: | Calle 26, No. Ext. Sin número, Entre 5 D, y 5 F, Col. Juan Pablo II»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/29",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:134",
+  "tipo": "dato",
+  "titulo": "Teléfono marcador en Academia Municipal de Inglés (MID-BIH-005) — NO usar",
+  "texto": "Teléfono marcador en Academia Municipal de Inglés (MID-BIH-005) — NO usar: 9999999999. Texto publicado en la fuente: «Departamento: Fortalecimiento Educativo | Correo electrónico: [correo personal omitido] | Teléfono: 9999999999 | Días y horarios de atención: Lunes a Viernes | 08:00 - 15:00»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/5",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:135",
+  "tipo": "dato",
+  "titulo": "Feria de Becas de Descuento 2026: fecha, hora y lugar (nota 12396; evento pasado)",
+  "texto": "Feria de Becas de Descuento 2026: fecha, hora y lugar (nota 12396; evento pasado): Sábado 4 de julio de 2026, 9:00-14:00, canchas Juan Pablo II \"El Papa\". Texto publicado en la fuente: «La Feria de Becas de Descuento se llevará a cabo el próximo sábado 4 de julio, de 9:00 de la mañana a 2:00 de la tarde, en las canchas de básquetbol Juan Pablo II \"El Papa\"»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida",
+   "url": "https://prensa.merida.gob.mx/12396/Mas-de-5-mil-becas-abriran-nuevas-oportunidades-para-las-juventudes-de-Merida/amp",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:136",
+  "tipo": "dato",
+  "titulo": "Evento fechado en el sitio Bienestar (captura 2025-11-19; pasado)",
+  "texto": "Evento fechado en el sitio Bienestar (captura 2025-11-19; pasado): Prueba gratuita de detección de diabetes, miércoles 19 nov, Plaza Grande. Texto publicado en la fuente: «Prueba gratuita de | Detección de Diabetes | Miércoles 19 nov | Lugar: Plaza Grande | ¡Ven y hazte la prueba! Consulta los requisitos»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2025-11-19)",
+   "url": "https://web.archive.org/web/20251119235416/https://merida.gob.mx/bienestar/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:137",
+  "tipo": "dato",
+  "titulo": "Registro Educación Universitaria para las Mujeres (captura 2026-03-29; cerrado)",
+  "texto": "Registro Educación Universitaria para las Mujeres (captura 2026-03-29; cerrado): 9 al 29 de marzo de 2026. Texto publicado en la fuente: «Educación Universitaria para las Mujeres | Registro: 9 de marzo al 29 de marzo de 2026 | El Registro ha finalizado, espera los resultados el 20 de abril»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-03-29)",
+   "url": "https://web.archive.org/web/20260329010606/https://merida.gob.mx/mujer/",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:138",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Centro de Atención Médica a la Mujer",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Centro de Atención Médica a la Mujer: Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Colonia Emiliano Zapata Sur I y II — Horario: Lunes a Jueves de 8:00 am a 1:00 pm; Lunes de 8:00 am a 1:00 pm; Miércoles de 8:00 am a 1:00 pm; Jueves de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Centro de Atención Médica a la Mujer | Horario de atención: | Lunes a Jueves de 8:00 am a 1:00 pm | Lunes de 8:00 am a 1:00 pm | Miércoles de 8:00 am a 1:00 pm | Jueves de 8:00 am a 1:00 pm | Dirección: | Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Colonia Emiliano Zapata Sur I y II»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:139",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Centro de Desarrollo Integral Sara Mena de Correa",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Centro de Desarrollo Integral Sara Mena de Correa: Calle 57, No. Ext. Sin número, Entre 46, Col. Fraccionamiento Fidel Velázquez. Texto publicado en la fuente: «Centro de Desarrollo Integral Sara Mena de Correa | Dirección: | Calle 57, No. Ext. Sin número, Entre 46, Col. Fraccionamiento Fidel Velázquez»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:140",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Azcorra",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Azcorra: Calle 18, No. Ext. 571, Entre 71, y 71 A, Col. Azcorra — Horario: Martes a Viernes de 8:00 am a 1:00 pm; Martes de 8:00 am a 1:00 pm; Jueves de 8:00 am a 1:00 pm; Viernes de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Módulo Médico Azcorra | Horario de atención: | Martes a Viernes de 8:00 am a 1:00 pm | Martes de 8:00 am a 1:00 pm | Jueves de 8:00 am a 1:00 pm | Viernes de 8:00 am a 1:00 pm | Dirección: | Calle 18, No. Ext. 571, Entre 71, y 71 A, Col. Azcorra»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:141",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Caucel",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Caucel: Calle 22, No. Ext. Sin número, Entre 21, y 23, Col. Caucel. Texto publicado en la fuente: «Módulo Médico en Comisaría Caucel | Dirección: | Calle 22, No. Ext. Sin número, Entre 21, y 23, Col. Caucel»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:142",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Cholul",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Cholul: Calle 21, Entre 20, y 22 A, Col. Cholul, Mérida — Horario: Miércoles de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Módulo Médico en Comisaría Cholul | Horario de atención: | Miércoles de 8:00 am a 1:00 pm | Dirección: | Calle 21, Entre 20, y 22 A, Col. Cholul, Mérida»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:143",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Sitpach",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría Sitpach: Calle 11, No. Ext. Sin número, Entre 8, y 10, Col. Sitpach — Horario: Lunes a Viernes de 8:00 am a 1:00 pm; Lunes de 8:00 am a 1:00 pm; Viernes de 8:00 am a 1:00 pm — Tel.: 999 928 69 77 ext. 81535. Texto publicado en la fuente: «Módulo Médico en Comisaría Sitpach | Horario de atención: | Lunes a Viernes de 8:00 am a 1:00 pm | Lunes de 8:00 am a 1:00 pm | Viernes de 8:00 am a 1:00 pm | Dirección: | Calle 11, No. Ext. Sin número, Entre 8, y 10, Col. Sitpach | Teléfono: | 999 928 69 77 | Extensión: | 81535»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:144",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Melitón Salazar",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Melitón Salazar: Calle 103, No. Ext. Sin número, Entre 64 I, y 64 J, Col. Melitón Salazar. Texto publicado en la fuente: «Módulo Médico Melitón Salazar | Dirección: | Calle 103, No. Ext. Sin número, Entre 64 I, y 64 J, Col. Melitón Salazar»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:145",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Mulsay",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Mulsay: Calle 61, No. Ext. Sin número, Entre 114, y 118, Col. Xoclán la Reja — Horario: Lunes a Viernes de 8:00 am a 1:00 pm; Lunes de 8:00 am a 1:00 pm; Viernes de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Módulo Médico Mulsay | Horario de atención: | Lunes a Viernes de 8:00 am a 1:00 pm | Lunes de 8:00 am a 1:00 pm | Viernes de 8:00 am a 1:00 pm | Dirección: | Calle 61, No. Ext. Sin número, Entre 114, y 118, Col. Xoclán la Reja»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:146",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico San Antonio Xluch",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico San Antonio Xluch: Calle 137, No. Ext. 125, Entre 72, y 74, Col. San Antonio Xluch. Texto publicado en la fuente: «Módulo Médico San Antonio Xluch | Dirección: | Calle 137, No. Ext. 125, Entre 72, y 74, Col. San Antonio Xluch»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:147",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Santa Rosa",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Santa Rosa: Calle 46, No. Ext. Sin número, Entre 97, y 95, Col. Santa Rosa — Tel.: 999 928.69.77 ext. 81535. Texto publicado en la fuente: «Módulo Médico Santa Rosa | Dirección: | Calle 46, No. Ext. Sin número, Entre 97, y 95, Col. Santa Rosa | Teléfono: | 999 928.69.77 | Extensión: | 81535»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:148",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Vergel",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Vergel: Calle 15 B, No. Ext. 236, Entre 10 C, y 10 B, Col. Vergel. Texto publicado en la fuente: «Módulo Médico Vergel | Dirección: | Calle 15 B, No. Ext. 236, Entre 10 C, y 10 B, Col. Vergel»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:149",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría San José Tzal",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico en Comisaría San José Tzal: Calle 23, No. Ext. Sin número, Entre 14, y 16, Col. San José Tzal — Horario: Martes de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Módulo Médico en Comisaría San José Tzal | Horario de atención: | Martes de 8:00 am a 1:00 pm | Dirección: | Calle 23, No. Ext. Sin número, Entre 14, y 16, Col. San José Tzal»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:150",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Manuel Crescencio Rejón",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Manuel Crescencio Rejón: Calle 25, No. Ext. Sin número, Entre 24, y 24 A, Col. Manuel Crescencio Rejón. Texto publicado en la fuente: «Módulo Médico Manuel Crescencio Rejón | Dirección: | Calle 25, No. Ext. Sin número, Entre 24, y 24 A, Col. Manuel Crescencio Rejón»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:151",
+  "tipo": "dato",
+  "titulo": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Renacimiento",
+  "texto": "Punto de atención psicológica (ficha MID-BIH-016 'Atención Psicológica', 100% presencial, gratuito; últ. act. 2026-09-29): Módulo Médico Renacimiento: Calle 163, No. Ext. Sin número, Entre 76, y 78, Col. Emilio Zapata Sur I y II — Horario: Martes a Viernes de 8:00 am a 1:00 pm; Martes de 8:00 am a 1:00 pm; Jueves de 8:00 am a 1:00 pm; Viernes de 8:00 am a 1:00 pm. Texto publicado en la fuente: «Módulo Médico Renacimiento | Horario de atención: | Martes a Viernes de 8:00 am a 1:00 pm | Martes de 8:00 am a 1:00 pm | Jueves de 8:00 am a 1:00 pm | Viernes de 8:00 am a 1:00 pm | Dirección: | Calle 163, No. Ext. Sin número, Entre 76, y 78, Col. Emilio Zapata Sur I y II»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/16",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:152",
+  "tipo": "dato",
+  "titulo": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de las Mujeres",
+  "texto": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de las Mujeres: Calle 50, No. Ext. 550 A, Entre 71, Col. Centro. Texto publicado en la fuente: «Instituto de las Mujeres | Dirección: | Calle 50, No. Ext. 550 A, Entre 71, Col. Centro»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:153",
+  "tipo": "dato",
+  "titulo": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede oriente",
+  "texto": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede oriente: Calle 57, No. Ext. Sin número, Entre 46, Col. Fidel Velázquez — Tel.: (9999) 82-25-98 (formato textual de la fuente; normalización a 10 dígitos no verificada). Texto publicado en la fuente: «Instituto de la Mujer sede oriente | Dirección: | Calle 57, No. Ext. Sin número, Entre 46, Col. Fidel Velázquez | Teléfono: | (9999) 82-25-98»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:154",
+  "tipo": "dato",
+  "titulo": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede poniente",
+  "texto": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede poniente: Calle 32, No. Ext. Sin número, Entre 21, Col. Fracc. Juan Pablo Ampliación II — Tel.: (9991) 82-11-94 (formato textual de la fuente; normalización a 10 dígitos no verificada). Texto publicado en la fuente: «Instituto de la Mujer sede poniente | Dirección: | Calle 32, No. Ext. Sin número, Entre 21, Col. Fracc. Juan Pablo Ampliación II | Teléfono: | (9991) 82-11-94»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:155",
+  "tipo": "dato",
+  "titulo": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede sur",
+  "texto": "Sede del Instituto de las Mujeres para 'Atención Especializada para mujeres en situación de Violencia' (MID-INMU-370; últ. act. 2026-09-29): Instituto de la Mujer sede sur: Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Emiliano Zapata Sur I y II — Tel.: 9999—56-80-66 (formato textual de la fuente; normalización a 10 dígitos no verificada). Texto publicado en la fuente: «Instituto de la Mujer sede sur | Dirección: | Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Emiliano Zapata Sur I y II | Teléfono: | 9999—56-80-66»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/370",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:156",
+  "tipo": "dato",
+  "titulo": "Módulos donde se presta 'Atención Médica a Población Abierta' (MID-BIH-015; consulta 2026-10-17; últ. act. 2026-09-25)",
+  "texto": "Módulos donde se presta 'Atención Médica a Población Abierta' (MID-BIH-015; consulta 2026-10-17; últ. act. 2026-09-25): 20 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Módulos | Centro de Atención Médica a la Mujer | Dirección: | Calle 88-A, No. Ext. 311-D, Entre 141, y 143, Col. Colonia Emiliano Zapata Sur I y II | Módulo Médico Azcorra | Dirección: | Calle 18, No. Ext. 571, Entre 71, y 71 A, Col. Azcorra | ... | Módulo Médico Xoclán | Dirección: | Calle 55 B, No. Ext. Sin número, Entre 132, y 134, Col. Xoclán Santos»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/15",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:157",
+  "tipo": "dato",
+  "titulo": "Módulos/centros adicionales listados para 'Atención de enfermería' (MID-BIH-013) y/o 'Atención Odontológica' (MID-BIH-009) que no aparecen en MID-BIH-015",
+  "texto": "Módulos/centros adicionales listados para 'Atención de enfermería' (MID-BIH-013) y/o 'Atención Odontológica' (MID-BIH-009) que no aparecen en MID-BIH-015: 10 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Módulo Médico Emiliano Zapata Sur | Dirección: | Calle 88 B, Entre 161, y 163, Col. Emiliano Zapata Sur, Mérida | ... | Módulo Médico Xoclán Susulá | Dirección: | Calle 130, No. Ext. Sin número, Entre 67 A, y 69, Col. Xoclán Susulá»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/13",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:158",
+  "tipo": "dato",
+  "titulo": "Módulos de 'Servicios de Rehabilitación a Población Abierta' (MID-BIH-014; gratuito; últ. act. 2026-09-25)",
+  "texto": "Módulos de 'Servicios de Rehabilitación a Población Abierta' (MID-BIH-014; gratuito; últ. act. 2026-09-25): 7 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Módulo Médico en Comisaría Caucel | Dirección: | Calle 22, No. Ext. Sin número, Entre 21, y 23, Col. Caucel | ... | Módulo Médico Santa Rosa | Dirección: | Calle 46, No. Ext. Sin número, Entre 97, y 95, Col. Santa Rosa | Teléfono: | 999 928.69.77 | Extensión: | 81535»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/14",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:159",
+  "tipo": "dato",
+  "titulo": "Sedes de la 'Academia Municipal de Inglés' (MID-BIH-005; últ. act. 2026-09-25)",
+  "texto": "Sedes de la 'Academia Municipal de Inglés' (MID-BIH-005; últ. act. 2026-09-25): 7 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Centro Cultural Casa Mata | Dirección: | Calle 12, No. Ext. Sin número, Entre 63 c, Col. Cortés Sarmiento | ... | Academia Minicipal de Inglés | Dirección: | Calle 55, No. Ext. -, Entre 152, y 54, Col. Centro | Teléfono: | 999420000 | Extensión: | 81851 | Módulo de Inglés Francisco de Montejo | Dirección: | Calle 55-B, No. Ext. 182, Entre 42, Col. Francisco de Montejo»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/5",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:160",
+  "tipo": "dato",
+  "titulo": "Sedes del 'Curso de Verano' (MID-BIH-028; gratuito; últ. act. 2026-09-29)",
+  "texto": "Sedes del 'Curso de Verano' (MID-BIH-028; gratuito; últ. act. 2026-09-29): 5 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Dirección de Bienestar Humano | Dirección: | Calle 65, No. Ext. 368-A, Entre 40, y 42, Col. Centro | Teléfono: | 9999420000 | Extensión: | 81850 | Unidad Deportiva San José Tecoh | ... | Unidad Deportiva Los Héroes | Dirección: | Calle 144, No. Ext. 371, Entre 135, y 139, Col. Fraccionamiento Los Héroes | Teléfono: | 999 942-00-00 | Extensión: | 81951»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/28",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:161",
+  "tipo": "dato",
+  "titulo": "Sedes de 'Talleres de Expresión Artística' (MID-BIH-033; gratuito)",
+  "texto": "Sedes de 'Talleres de Expresión Artística' (MID-BIH-033; gratuito): 12 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Molas | Dirección: | Calle 21, No. Ext. 115, Entre 24, Col. Comisaría de Molas | ... | Ludoteca Polígono 108 | Dirección: | Calle 26 D, No. Ext. 322, Entre 27 A, y 27 B, Col. Poligono 108»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/33",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:162",
+  "tipo": "dato",
+  "titulo": "Sedes del 'Taller de Acompañamiento Académico' (MID-BIH-036; gratuito)",
+  "texto": "Sedes del 'Taller de Acompañamiento Académico' (MID-BIH-036; gratuito): 12 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Centro Cultural Cholul | Dirección: | Calle 21, No. Ext. Sin número, Entre 20, y 22, Col. Comisaría Cholul | ... | Bibilioteca Un Viaje al Conocimiento | Horario de atención: | Lunes a Viernes de 1:00 pm a 7:00 pm | Dirección: | Calle 25, No. Ext. 318, Entre 24, y 24-A, Col. Manuel Crescencio Rejón | ... | Ludoteca La Magia de los Libros | Dirección: | Calle 88-A, No. Ext. Sin número, Entre 141, y 143, Col. Emiliano…»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/36",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:163",
+  "tipo": "dato",
+  "titulo": "Sedes de 'Educación Alimentaria y Nutricional' (MID-BIH-022)",
+  "texto": "Sedes de 'Educación Alimentaria y Nutricional' (MID-BIH-022): 2 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Centro de Educación Alimentaria y Nutricional Cholul | Dirección: | Calle 21, No. Ext. Sin número, Entre 20, y 22, Col. Cholul | Centro Municipal de Atención Nutricional y Diabetes \"CEMANUD\" | Dirección: | Calle 59, No. Ext. 539, Entre 66, y 68, Col. Centro | Teléfono: | (999) 942 00 00 | Extensión: | 84282»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/22",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:164",
+  "tipo": "dato",
+  "titulo": "Módulos de 'Consulta de Nutrición en Módulos de Salud' (MID-BIH-035; gratuito)",
+  "texto": "Módulos de 'Consulta de Nutrición en Módulos de Salud' (MID-BIH-035; gratuito): 4 sedes/módulos con dirección textual (ver citaTextual; cada entrada: nombre | [horario] | dirección | [teléfono | extensión]). Texto publicado en la fuente: «Módulo Médico en Comisaría Caucel | Dirección: | Calle 22, No. Ext. Sin número, Entre 21, y 23, Col. Caucel | Módulo Médico Melitón Salazar | ... | Módulo Médico Vergel | ... | Módulo Médico Santa Rosa | Dirección: | Calle 46, No. Ext. Sin número, Entre 97, y 95, Col. Santa Rosa | Teléfono: | 999 928.69.77 | Extensión: | 81535»",
+  "fuente": {
+   "titulo": "Portal Ciudadano (MIDigital)",
+   "url": "https://portalciudadano.merida.gob.mx/TramitesEnLinea/detalle-tramite/35",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:165",
+  "tipo": "dato",
+  "titulo": "Módulos médicos 'en colonias' con dirección y horario según página oficial Módulos Médicos en captura Wayback 2026-04-05 (anterior a cambios de mayo-2026; puede estar desactualizada)",
+  "texto": "Módulos médicos 'en colonias' con dirección y horario según página oficial Módulos Médicos en captura Wayback 2026-04-05 (anterior a cambios de mayo-2026; puede estar desactualizada): 18 módulos (ver cita). Texto publicado en la fuente: «Módulos en colonias | ÁGUILAS | Calle 13 por 8 y 8-A Edif. Elvia Carrillo, Col. Las Águilas | Horario: | Lunes a viernes de 8:00 a.m. a 2:00 p.m. | ... | XOCLÁN | Calle 55-B lote 9 entre 132 y 134 , Col. Xoclán | Horario: | Lunes a viernes de 8:00 a.m. a 2:00 p.m.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-05)",
+   "url": "https://web.archive.org/web/20260405220623/https://merida.gob.mx/bienestar/modulos-medicos.php",
+   "fechaConsulta": "2026-10-17"
+  }
+ },
+ {
+  "id": "dato:166",
+  "tipo": "dato",
+  "titulo": "Módulos médicos 'en comisarías' con dirección y horario según captura Wayback 2026-04-05",
+  "texto": "Módulos médicos 'en comisarías' con dirección y horario según captura Wayback 2026-04-05: 7 módulos (ver cita). Texto publicado en la fuente: «Módulos en comisarías | CHABLEKAL | Calle 17 entre 18 y 14 | Horario: | Lunes a viernes de 8:00 a.m. a 2:00 p.m. | ... | SITPACH | Calle 11 s/n por 8 y 10 (a un lado de la comisaría) | Horario: | Lunes a viernes de 8:00 a.m. a 2:00 p.m.»",
+  "fuente": {
+   "titulo": "Portal del Ayuntamiento de Mérida (copia archivada del 2026-04-05)",
+   "url": "https://web.archive.org/web/20260405220623/https://merida.gob.mx/bienestar/modulos-medicos.php",
+   "fechaConsulta": "2026-10-17"
+  }
  },
  {
   "id": "plataforma:inicio",

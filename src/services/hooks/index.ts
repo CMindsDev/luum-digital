@@ -1,3 +1,4 @@
+export * from "./busqueda";
 export * from "./catalog";
 export * from "./digital-file";
 export * from "./incidents";

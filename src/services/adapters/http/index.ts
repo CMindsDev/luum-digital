@@ -1,6 +1,7 @@
 import {
   IntegracionNoDisponibleError,
   type DigitalFileRepository,
+  type IncidentRepository,
   type NotificationRepository,
   type ProcedureRepository,
   type Repositories,
@@ -90,6 +91,23 @@ const wellbeing: WellbeingRepository = {
   getAggregatedDemand: noDisponible("WellbeingRepository.getAggregatedDemand"),
 };
 
+
+const incidents: IncidentRepository = {
+  listAreas: noDisponible("IncidentRepository.listAreas"),
+  list: noDisponible("IncidentRepository.list"),
+  get: noDisponible("IncidentRepository.get"),
+  findByFolio: noDisponible("IncidentRepository.findByFolio"),
+  summary: noDisponible("IncidentRepository.summary"),
+  register: noDisponible("IncidentRepository.register"),
+  reviewClassification: noDisponible("IncidentRepository.reviewClassification"),
+  confirmAssignment: noDisponible("IncidentRepository.confirmAssignment"),
+  discardProposal: noDisponible("IncidentRepository.discardProposal"),
+  returnToCoordination: noDisponible("IncidentRepository.returnToCoordination"),
+  registerAttention: noDisponible("IncidentRepository.registerAttention"),
+  cancel: noDisponible("IncidentRepository.cancel"),
+  addInternalNote: noDisponible("IncidentRepository.addInternalNote"),
+};
+
 const notifications: NotificationRepository = {
   list: noDisponible("NotificationRepository.list"),
   markRead: noDisponible("NotificationRepository.markRead"),
@@ -97,5 +115,5 @@ const notifications: NotificationRepository = {
 };
 
 export function crearRepositoriosHttp(): Repositories {
-  return { catalog, procedures, reports, verifications, rewards, digitalFile, wellbeing, notifications };
+  return { catalog, procedures, reports, verifications, rewards, digitalFile, wellbeing, notifications, incidents };
 }

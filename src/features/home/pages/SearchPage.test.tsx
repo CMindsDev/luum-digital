@@ -1,5 +1,5 @@
 import { screen, waitFor, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/renderWithProviders";
 import SearchPage from "./SearchPage";
 
@@ -11,10 +11,21 @@ function renderBusqueda(ruta: string) {
   });
 }
 
+const RESPUESTA_VACIA = { respuesta: null, generada: false, citas: [], pasajes: [], intencion: { categoria: null, modo: "shadow" } } as const;
+
 describe("SearchPage", () => {
+  beforeEach(() => {
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify(RESPUESTA_VACIA), { status: 200, headers: { "Content-Type": "application/json" } })));
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("sin consulta muestra sugerencias con las consultas del brief", () => {
     renderBusqueda("/buscar");
     expect(screen.getByRole("heading", { level: 1, name: "Buscar" })).toBeInTheDocument();
+    expect(screen.getByText(/Buscamos en trámites, dependencias y la plataforma/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Quiero reportar un bache" })).toHaveAttribute("href", "/buscar?q=Quiero%20reportar%20un%20bache");
     // La consulta de salud mental no lleva el texto en la URL.
     expect(screen.getByRole("link", { name: "Busco apoyo psicológico" })).toHaveAttribute("href", "/buscar");

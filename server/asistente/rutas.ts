@@ -3,6 +3,7 @@
  * Patrones de Vital Oceans (AlexRuntime) y Tricologs (rutas del asistente).
  */
 import { Hono } from "hono";
+import { SolicitudBusquedaSchema, type RespuestaBusqueda } from "../../shared/asistente/busqueda";
 import { SolicitudConocimientoSchema } from "../../shared/asistente/conocimiento";
 import {
   CODIGOS_ERROR,
@@ -14,6 +15,7 @@ import {
 } from "../../shared/asistente/servidor";
 import type { ConfiguracionServidor } from "../config";
 import type { IndiceConocimiento } from "../conocimiento/indice";
+import type { Redactor, RespuestaRedactada } from "../conocimiento/respuesta";
 import type { ClienteClef } from "../proveedores/clef";
 import type { ClienteRealtime } from "../proveedores/openai-realtime";
 import type { Registrador } from "../registro";
@@ -33,12 +35,14 @@ export interface DependenciasRutasAsistente {
   limitadorInicios: LimitadorVentana;
   limitadorGuardas: LimitadorVentana;
   conocimiento: IndiceConocimiento;
+  /** Redacta la respuesta citada de la búsqueda; null si no hay IA configurada. */
+  redactor: Redactor | null;
   registrar: Registrador;
   ahora: () => number;
 }
 
 export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
-  const { config, clef, realtime, llamadas, limitadorInicios, limitadorGuardas, conocimiento, registrar, ahora } = dependencias;
+  const { config, clef, realtime, llamadas, limitadorInicios, limitadorGuardas, conocimiento, redactor, registrar, ahora } = dependencias;
   const app = new Hono();
   let sinCreditosHasta = 0;
 
@@ -204,6 +208,50 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
       return respuestaError(c, 400, { error: "La consulta no es válida.", codigo: CODIGOS_ERROR.solicitudInvalida });
     }
     return c.json(await conocimiento.buscar(resultado.data.consulta));
+  });
+
+  // Búsqueda inteligente: Clef (intención) + conocimiento verificado + respuesta citada. No registra la consulta.
+  app.post("/busqueda", async (c) => {
+    const limite = limitadorGuardas.intentar(ipDe(c));
+    if (!limite.permitido) {
+      return respuestaError(c, 429, {
+        error: "Demasiadas consultas en poco tiempo.",
+        codigo: CODIGOS_ERROR.limite,
+        reintentarEnSegundos: limite.reintentarEnSegundos,
+      });
+    }
+    const lectura = await leerJson(c);
+    if (!lectura.ok) return lectura.respuesta;
+    const resultado = SolicitudBusquedaSchema.safeParse(lectura.valor);
+    if (!resultado.success) {
+      return respuestaError(c, 400, { error: "La consulta no es válida.", codigo: CODIGOS_ERROR.solicitudInvalida });
+    }
+    const { consulta } = resultado.data;
+    const [intencion, encontrados] = await Promise.all([
+      clasificarIntencion({ clef, modo: config.guardas, texto: consulta, registrar }),
+      conocimiento.buscar(consulta),
+    ]);
+    const categoria = intencion.categoria;
+    // Lo sensible y lo que no es de la plataforma no se responde aquí: lo atiende la ayuda humana o se declina.
+    const sinRespuesta = categoria === "fuera_de_alcance" || categoria === "riesgo_o_emergencia" || categoria === "bienestar" || categoria === "conversacion";
+    const pasajes = categoria === "fuera_de_alcance" || categoria === "riesgo_o_emergencia" || categoria === "bienestar" ? [] : encontrados.pasajes;
+
+    let redactada: RespuestaRedactada | null = null;
+    if (redactor && !sinRespuesta && pasajes.length > 0) {
+      try {
+        redactada = await redactor(consulta, pasajes);
+      } catch (error) {
+        registrar("busqueda_redaccion_fallida", { tipo: error instanceof Error ? error.message.slice(0, 40) : "desconocido" });
+      }
+    }
+    const cuerpo: RespuestaBusqueda = {
+      respuesta: redactada?.texto ?? null,
+      generada: redactada !== null,
+      citas: redactada?.citas ?? [],
+      pasajes: pasajes.slice(0, 3),
+      intencion: { categoria, modo: intencion.modo },
+    };
+    return c.json(cuerpo);
   });
 
   app.post("/guardas/accion", async (c) => {

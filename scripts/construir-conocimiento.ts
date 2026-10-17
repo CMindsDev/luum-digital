@@ -2,16 +2,18 @@
  * Construye el conocimiento del asistente (RAG) a partir de las fuentes guardadas:
  *   - data/sources/dependencias/dependencias.html  (lista oficial de áreas municipales)
  *   - src/data/catalogo/servicios.generated.json   (catálogo de trámites y servicios)
+ *   - docs/investigacion/2026-10-17/verify-datos-criticos.json (datos verificados con su cita textual)
  * Escribe data/conocimiento/corpus.json y, si hay OPENAI_API_KEY (en .env.local), data/conocimiento/vectores.json.
  *
  * Uso: npm run conocimiento:construir
  */
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { crearEmbedder } from "../server/conocimiento/embeddings";
-import { construirPasajes, extraerAreas, leerServicios, textoParaEmbedding } from "../server/conocimiento/ingesta";
+import { construirPasajes, extraerAreas, leerHechos, leerServicios, textoParaEmbedding } from "../server/conocimiento/ingesta";
 import { codificarVectores, DIMENSIONES_EMBEDDING, MODELO_EMBEDDING, type ArchivoVectores } from "../server/conocimiento/vectores";
 
 const RUTA_HTML = "data/sources/dependencias/dependencias.html";
+const RUTA_HECHOS = "docs/investigacion/2026-10-17/verify-datos-criticos.json";
 const RUTA_SERVICIOS = "src/data/catalogo/servicios.generated.json";
 const RUTA_CORPUS = "data/conocimiento/corpus.json";
 const RUTA_VECTORES = "data/conocimiento/vectores.json";
@@ -25,9 +27,10 @@ if (areas.length === 0) throw new Error("No se extrajo ninguna área de la pági
 const servicios = leerServicios(JSON.parse(readFileSync(RUTA_SERVICIOS, "utf8")));
 const fechaConsultaDependencias = statSync(RUTA_HTML).mtime.toISOString().slice(0, 10);
 
-const pasajes = construirPasajes({ areas, servicios, fechaConsultaDependencias });
+const hechos = leerHechos(JSON.parse(readFileSync(RUTA_HECHOS, "utf8")));
+const pasajes = construirPasajes({ areas, servicios, fechaConsultaDependencias, hechos, fechaConsultaHechos: "2026-10-17" });
 writeFileSync(RUTA_CORPUS, `${JSON.stringify(pasajes, null, 1)}\n`);
-console.log(`Corpus: ${pasajes.length} pasajes (${areas.length} áreas, ${servicios.length} servicios) → ${RUTA_CORPUS}`);
+console.log(`Corpus: ${pasajes.length} pasajes (${areas.length} áreas, ${servicios.length} servicios, ${pasajes.filter((p) => p.tipo === "dato").length} datos verificados) → ${RUTA_CORPUS}`);
 
 const apiKey = process.env.OPENAI_API_KEY?.trim();
 if (!apiKey) {

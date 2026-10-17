@@ -133,6 +133,43 @@ export function slugDeAreaCatalogo(dependencia: string): string | null {
   return AREA_DE_CATALOGO[primera] ?? null;
 }
 
+// --- Datos verificados con cita (investigación del 2026-10-17) ---
+
+const HechoSchema = z.object({
+  hecho: z.string(),
+  valor: z.union([z.string(), z.number()]).transform(String),
+  fuente: z.string(),
+  estado: z.string(),
+  fragmento: z.string().optional(),
+  nota: z.string().optional(),
+});
+export type HechoFuente = z.infer<typeof HechoSchema>;
+
+export function leerHechos(datos: unknown): HechoFuente[] {
+  return z.object({ facts: z.array(HechoSchema) }).parse(datos).facts;
+}
+
+/** Hechos técnicos o vencidos que no sirven a la ciudadanía. */
+const HECHO_NO_CIUDADANO = /\b(wms|proxy|rastreo|token|endpoint|contrase[ñn]a|css|paleta|banner|street view)\b|vencido/i;
+
+const NOMBRES_SITIO: ReadonlyArray<readonly [RegExp, string]> = [
+  [/portalciudadano\.merida\.gob\.mx/, "Portal Ciudadano (MIDigital)"],
+  [/visorurbano\.merida\.gob\.mx/, "Visor Urbano de Mérida"],
+  [/geoportal\.merida\.gob\.mx/, "Geoportal de Mérida"],
+  [/expedientedigital\.merida\.gob\.mx/, "Expediente Digital de Mérida"],
+  [/merida\.gob\.mx/, "Portal del Ayuntamiento de Mérida"],
+];
+
+/** Título legible y URL de una fuente de la investigación (las copias archivadas se avisan como tales). */
+export function describirFuente(fuente: string): { titulo: string; url?: string } {
+  const url = /https?:\/\/[^\s)]+/.exec(fuente)?.[0]?.replace(/[.,;]+$/, "");
+  if (!url) return { titulo: "Fuente oficial del Ayuntamiento de Mérida" };
+  const archivada = /web\.archive\.org\/web\/(\d{4})(\d{2})(\d{2})/.exec(url);
+  const original = archivada ? /web\.archive\.org\/web\/\d+\/(https?:\/\/[^\s)]+)/.exec(url)?.[1] : url;
+  const nombre = NOMBRES_SITIO.find(([patron]) => patron.test(original ?? url))?.[1] ?? new URL(original ?? url).hostname;
+  return { titulo: archivada ? `${nombre} (copia archivada del ${archivada[1]}-${archivada[2]}-${archivada[3]})` : nombre, url };
+}
+
 // --- Pasajes ---
 
 function recortar(texto: string, maximo: number = LIMITES_CONOCIMIENTO.maxCaracteresPasaje): string {
@@ -149,6 +186,10 @@ export interface OpcionesPasajes {
   servicios: readonly ServicioFuente[];
   /** AAAA-MM-DD de la consulta de la página de dependencias. */
   fechaConsultaDependencias: string;
+  /** Datos verificados con cita (sólo los «confirmados» se usan). */
+  hechos?: readonly HechoFuente[];
+  /** AAAA-MM-DD de la consulta de los hechos. */
+  fechaConsultaHechos?: string;
 }
 
 function pasajesDeAreas({ areas, servicios, fechaConsultaDependencias }: OpcionesPasajes): Pasaje[] {
@@ -182,6 +223,7 @@ function pasajesDeAreas({ areas, servicios, fechaConsultaDependencias }: Opcione
   const porTipo = new Map<TipoArea, AreaMunicipal[]>();
   for (const area of areas) porTipo.set(area.tipo, [...(porTipo.get(area.tipo) ?? []), area]);
   const dependencias = areas.filter((area) => area.tipo !== "cabildo");
+  const operativas = areas.filter((area) => area.tipo !== "cabildo" && area.tipo !== "presidencia");
   const orden: TipoArea[] = ["direccion", "secretaria", "unidad", "instituto_u_organismo", "presidencia", "cabildo"];
 
   pasajes.push({
@@ -198,7 +240,8 @@ function pasajesDeAreas({ areas, servicios, fechaConsultaDependencias }: Opcione
             return `${etiqueta}: ${grupo.length}.`;
           })
           .join(" ") +
-        " Los conteos son los de la lista publicada; la lista oficial puede cambiar.",
+        ` Sin contar el Cabildo ni la Presidencia, son ${operativas.length} áreas (direcciones, secretarías, unidades, institutos y organismos). ` +
+        "Si alguien pregunta en general por «direcciones» o «dependencias», aclara ambos números. Los conteos son los de la lista publicada; la lista oficial puede cambiar.",
     ),
     fuente,
   });
@@ -212,7 +255,10 @@ function pasajesDeAreas({ areas, servicios, fechaConsultaDependencias }: Opcione
       tipo: "estructura",
       titulo: `${etiqueta} del Ayuntamiento de Mérida (${grupo.length})`,
       texto: recortar(
-        `El Ayuntamiento de Mérida tiene ${grupo.length} ${grupo.length === 1 ? ETIQUETA_TIPO[tipo].singular.toLowerCase() : ETIQUETA_TIPO[tipo].plural.toLowerCase()} en la lista oficial de áreas municipales. Son: ${lista(grupo.map((area) => area.nombre))}.`,
+        `El Ayuntamiento de Mérida tiene ${grupo.length} ${grupo.length === 1 ? ETIQUETA_TIPO[tipo].singular.toLowerCase() : ETIQUETA_TIPO[tipo].plural.toLowerCase()} en la lista oficial de áreas municipales. Son: ${lista(grupo.map((area) => area.nombre))}.` +
+          (tipo === "direccion"
+            ? ` Ojo: ${grupo.length} áreas llevan «Dirección» en su nombre; en total la lista oficial publica ${operativas.length} áreas sin contar el Cabildo ni la Presidencia (además de las direcciones hay secretarías, unidades, institutos y organismos).`
+            : ""),
       ),
       fuente,
     });
@@ -314,6 +360,28 @@ const GUIA_PLATAFORMA: ReadonlyArray<{ id: string; titulo: string; texto: string
   },
 ];
 
+function pasajesDeHechos(hechos: readonly HechoFuente[], fechaConsulta: string): Pasaje[] {
+  const vistos = new Set<string>();
+  const pasajes: Pasaje[] = [];
+  for (const hecho of hechos) {
+    if (hecho.estado !== "confirmado" || HECHO_NO_CIUDADANO.test(`${hecho.hecho} ${hecho.valor}`)) continue;
+    const clave = `${hecho.hecho}|${hecho.valor}`;
+    if (vistos.has(clave)) continue;
+    vistos.add(clave);
+    const fuente = describirFuente(hecho.fuente);
+    const partes = [`${hecho.hecho}: ${hecho.valor}.`];
+    if (hecho.fragmento) partes.push(`Texto publicado en la fuente: «${recortar(hecho.fragmento, 420)}»`);
+    pasajes.push({
+      id: `dato:${pasajes.length + 1}`,
+      tipo: "dato",
+      titulo: hecho.hecho,
+      texto: recortar(partes.join(" ")),
+      fuente: { titulo: fuente.titulo, ...(fuente.url ? { url: fuente.url } : {}), fechaConsulta },
+    });
+  }
+  return pasajes;
+}
+
 export function construirPasajes(opciones: OpcionesPasajes): Pasaje[] {
   const plataforma: Pasaje[] = GUIA_PLATAFORMA.map((entrada) => ({
     id: `plataforma:${entrada.id}`,
@@ -323,7 +391,8 @@ export function construirPasajes(opciones: OpcionesPasajes): Pasaje[] {
     fuente: FUENTE_PLATAFORMA,
     ...(entrada.ruta ? { ruta: entrada.ruta } : {}),
   }));
-  return [...pasajesDeAreas(opciones), ...opciones.servicios.map(pasajeDeServicio), ...plataforma];
+  const datos = pasajesDeHechos(opciones.hechos ?? [], opciones.fechaConsultaHechos ?? opciones.fechaConsultaDependencias);
+  return [...pasajesDeAreas(opciones), ...opciones.servicios.map(pasajeDeServicio), ...datos, ...plataforma];
 }
 
 /** Texto que se embebe de cada pasaje: título + texto. */

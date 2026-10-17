@@ -4,7 +4,7 @@
  */
 import { z } from "zod";
 
-export const TIPOS_PASAJE = ["dependencia", "estructura", "servicio", "plataforma"] as const;
+export const TIPOS_PASAJE = ["dependencia", "estructura", "servicio", "plataforma", "dato"] as const;
 export type TipoPasaje = (typeof TIPOS_PASAJE)[number];
 
 export const LIMITES_CONOCIMIENTO = {

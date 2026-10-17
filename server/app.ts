@@ -9,6 +9,7 @@ import { routePath } from "hono/route";
 import { CODIGOS_ERROR } from "../shared/asistente/servidor";
 import { indiceVacio } from "./conocimiento/cargar";
 import type { IndiceConocimiento } from "./conocimiento/indice";
+import { crearRedactor, type Redactor } from "./conocimiento/respuesta";
 import { RegistroLlamadas, type Temporizador } from "./asistente/llamadas";
 import { rutasAsistente } from "./asistente/rutas";
 import type { ConfiguracionServidor } from "./config";
@@ -30,6 +31,8 @@ export interface DependenciasServidor {
   temporizador?: Temporizador;
   /** Conocimiento (RAG). Por omisión, un índice vacío (el arranque real lo carga de data/conocimiento/). */
   conocimiento?: IndiceConocimiento;
+  /** Redactor de la respuesta citada. Por omisión, uno con la clave de OpenAI del servidor (si la hay). */
+  redactor?: Redactor | null;
 }
 
 export type AppServidor = Hono & {
@@ -90,6 +93,12 @@ export function createApp(config: ConfiguracionServidor, dependencias: Dependenc
       limitadorInicios: new LimitadorVentana({ limite: config.maxIniciosHora, ventanaMs: 60 * 60 * 1000, ahora }),
       limitadorGuardas: new LimitadorVentana({ limite: LIMITE_GUARDAS_POR_MINUTO, ventanaMs: 60 * 1000, ahora }),
       conocimiento: dependencias.conocimiento ?? indiceVacio(),
+      redactor:
+        dependencias.redactor !== undefined
+          ? dependencias.redactor
+          : config.openaiApiKey
+            ? crearRedactor({ apiKey: config.openaiApiKey, modelo: config.modeloBusqueda, fetch: fetchProveedores })
+            : null,
       registrar,
       ahora,
     }),

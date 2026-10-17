@@ -16,6 +16,9 @@ export const VOZ_PREDETERMINADA = "marin";
 /** Llamadas abiertas a la vez en este proceso (no configurable en el prototipo). */
 export const MAX_LLAMADAS_SIMULTANEAS = 8;
 
+/** Modelo por defecto de la respuesta citada de la búsqueda (rápido y barato). */
+export const MODELO_BUSQUEDA_PREDETERMINADO = "gpt-4.1-mini";
+
 export const MODELOS_CLEF = ["clef", "clef-flash"] as const;
 export type ModeloClef = (typeof MODELOS_CLEF)[number];
 
@@ -23,6 +26,8 @@ export interface ConfiguracionServidor {
   puerto: number;
   openaiApiKey: string | null;
   modeloRealtime: string;
+  /** Modelo que redacta la respuesta citada de la búsqueda (chat completions). */
+  modeloBusqueda: string;
   voz: string;
   /** Duración máxima de una conversación Realtime (60–3600 s). */
   maxSegundos: number;
@@ -156,6 +161,7 @@ export function leerConfiguracion(entorno: Entorno): ResultadoConfiguracion {
     puerto: entero(entorno, "PORT", 8787, 1, 65_535, invalidas),
     openaiApiKey: secreto(entorno, "OPENAI_API_KEY", invalidas),
     modeloRealtime: patron(entorno, "ASISTENTE_REALTIME_MODEL", nombreModelo, MODELO_REALTIME_PREDETERMINADO, invalidas),
+    modeloBusqueda: patron(entorno, "BUSQUEDA_MODELO", nombreModelo, MODELO_BUSQUEDA_PREDETERMINADO, invalidas),
     voz: patron(entorno, "ASISTENTE_VOZ", nombreVoz, VOZ_PREDETERMINADA, invalidas),
     maxSegundos: entero(entorno, "ASISTENTE_MAX_SEGUNDOS", 900, 60, 3600, invalidas),
     maxIniciosHora: entero(entorno, "ASISTENTE_MAX_INICIOS_HORA", 20, 1, 1000, invalidas),

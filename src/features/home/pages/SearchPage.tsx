@@ -5,7 +5,8 @@ import { CampoBusqueda } from "../components/CampoBusqueda";
 import { ContenidoBusqueda } from "../components/ContenidoBusqueda";
 import { consultaDelEstado, esConsultaSensible, LARGO_MAXIMO_CONSULTA } from "../lib/destino-busqueda";
 
-const AYUDA_CAMPO = "Escribe con tus palabras. La búsqueda usa reglas locales de demostración: no usa IA y tu consulta no sale de este navegador.";
+const AYUDA_CAMPO = "Escribe con tus palabras. Buscamos en trámites, dependencias y la plataforma, y citamos la fuente de cada dato.";
+const NOTA_PRIVACIDAD = "Las consultas sobre salud mental o violencia no se envían a ningún servicio.";
 
 /**
  * /buscar?q=: búsqueda en lenguaje natural sobre el catálogo (useCatalogSearch). Muestra la intención
@@ -28,15 +29,10 @@ export default function SearchPage() {
   return (
     <>
       <PageHeader titulo="Buscar" descripcion="Dime qué necesitas y te llevo a la pantalla donde lo resuelves." />
-      <CampoBusqueda
-        key={consulta}
-        valorInicial={consulta}
-        etiqueta="¿Qué necesitas?"
-        etiquetaVisible
-        ayuda={AYUDA_CAMPO}
-        guia="busqueda.campo"
-        className="mb-8 max-w-3xl"
-      />
+      <div className="mb-8 max-w-3xl">
+        <CampoBusqueda key={consulta} valorInicial={consulta} etiqueta="¿Qué necesitas?" etiquetaVisible ayuda={AYUDA_CAMPO} guia="busqueda.campo" />
+        <p className="mt-2 text-sm text-tinta-suave">{NOTA_PRIVACIDAD}</p>
+      </div>
       <ContenidoBusqueda consulta={consulta} />
     </>
   );

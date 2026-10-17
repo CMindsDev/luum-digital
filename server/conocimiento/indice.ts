@@ -8,6 +8,7 @@ import { LIMITES_CONOCIMIENTO, type Pasaje, type RespuestaConocimiento } from ".
 import type { Registrador } from "../registro";
 import type { Embedder } from "./embeddings";
 import { crearIndiceLexico } from "./lexico";
+import { normalizar } from "./texto";
 import { coseno, decodificarVectores, type ArchivoVectores } from "./vectores";
 
 /** Por debajo de estos umbrales un pasaje no cuenta como relacionado con la consulta. */
@@ -60,6 +61,10 @@ export function crearIndiceConocimiento(opciones: OpcionesIndice): IndiceConocim
     conVectores,
     async buscar(consulta) {
       const puntosLexicos = lexico.puntuar(consulta);
+      // «Cuántas…» pide un conteo: los pasajes de estructura ya lo traen hecho y deben ganar a una coincidencia suelta.
+      if (/\bcuant/.test(normalizar(consulta))) {
+        for (const [id, puntos] of puntosLexicos) if (id.startsWith("estructura:")) puntosLexicos.set(id, puntos * 1.8);
+      }
 
       let cosenos: Map<string, number> | null = null;
       if (matriz && embedder) {

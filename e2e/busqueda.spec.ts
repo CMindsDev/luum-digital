@@ -34,6 +34,33 @@ const CASOS: CasoBusqueda[] = [
   { consulta: "Busco actividades culturales", intencion: "Cultura y actividades", accion: /^Ver cultura y actividades/, ruta: /\/servicios\/categoria\/cultura$/ },
 ];
 
+
+function respuestaBusqueda(consulta: string) {
+  const texto = consulta.trim().toLowerCase();
+  if (texto.includes("licencia de funcionamiento")) {
+    return {
+      respuesta: "Puedes revisar la ficha del trámite [1] y confirmar los requisitos antes de empezar [2].",
+      generada: true,
+      citas: [
+        { n: 1, titulo: "Licencia de funcionamiento", ruta: "/servicios/licencia-funcionamiento", fechaConsulta: "2026-10-10" },
+        { n: 2, titulo: "Requisitos del trámite", ruta: "/servicios/licencia-funcionamiento#requisitos", fechaConsulta: "2026-10-09" },
+      ],
+      pasajes: [
+        {
+          id: "pasaje-licencia",
+          tipo: "servicio",
+          titulo: "Licencia de funcionamiento",
+          texto: "Antes de iniciar revisa la ficha del servicio, los requisitos y el apartado de costos para preparar tus documentos.",
+          fuente: { titulo: "Catálogo de servicios", fechaConsulta: "2026-10-08" },
+          ruta: "/servicios/licencia-funcionamiento",
+        },
+      ],
+      intencion: { categoria: "consulta_tramite", modo: "shadow" },
+    };
+  }
+  return { respuesta: null, generada: false, citas: [], pasajes: [], intencion: { categoria: null, modo: "shadow" } };
+}
+
 async function buscarDesdeInicio(page: Page, consulta: string) {
   await page.goto("/");
   await esperarTitulo(page);
@@ -44,6 +71,13 @@ async function buscarDesdeInicio(page: Page, consulta: string) {
 }
 
 test.describe("Búsqueda en lenguaje natural", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route("**/api/asistente/busqueda", async (ruta) => {
+      const datos = ruta.request().postDataJSON() as { consulta?: string } | null;
+      await ruta.fulfill({ status: 200, json: respuestaBusqueda(datos?.consulta ?? "") });
+    });
+  });
+
   for (const caso of CASOS) {
     test(`«${caso.consulta}» ofrece acciones que abren vistas internas`, async ({ page, baseURL }) => {
       await buscarDesdeInicio(page, caso.consulta);
@@ -113,6 +147,32 @@ test.describe("Búsqueda en lenguaje natural", () => {
     await page.getByRole("link", { name: "Busco actividades culturales" }).first().click();
     await expect(page).toHaveURL(/\/buscar\?q=Busco%20actividades%20culturales$/);
     await expect(page.getByRole("region", { name: "Cultura y actividades" })).toBeVisible();
+  });
+
+  test("muestra una respuesta citada con fuentes y enlaces internos", async ({ page }) => {
+    await page.goto("/buscar?q=licencia%20de%20funcionamiento");
+    await esperarTitulo(page);
+    const respuesta = page.getByRole("region", { name: "Respuesta de Pekito" });
+    await expect(respuesta).toBeVisible();
+    await expect(respuesta.getByText(/Puedes revisar la ficha del trámite/)).toBeVisible();
+    await respuesta.getByRole("button", { name: "Ir a la fuente 1" }).click();
+    await expect(respuesta.getByText(/\[1\] Licencia de funcionamiento/)).toBeVisible();
+    await expect(respuesta.getByRole("link", { name: "Ver ficha en la app" }).first()).toHaveAttribute("href", "/servicios/licencia-funcionamiento");
+  });
+
+  test.describe("si el servicio no está disponible", () => {
+    test.use({ erroresPermitidos: [/status of 503/] });
+
+    test("degrada en silencio sin romper la búsqueda", async ({ page }) => {
+      await page.unroute("**/api/asistente/busqueda");
+      await page.route("**/api/asistente/busqueda", async (ruta) => {
+        await ruta.fulfill({ status: 503, json: { error: "Búsqueda no disponible", codigo: "sin_configuracion" } });
+      });
+      await page.goto("/buscar?q=licencia%20de%20funcionamiento");
+      await esperarTitulo(page);
+      await expect(page.getByRole("region", { name: "Respuesta de Pekito" })).toHaveCount(0);
+      await expect(page.getByRole("region", { name: "Fichas del catálogo" })).toBeVisible();
+    });
   });
 
   test("búsqueda sin violaciones graves de accesibilidad", async ({ page }) => {

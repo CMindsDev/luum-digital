@@ -2,6 +2,7 @@ import { LayoutGrid, Map as MapIcon, Megaphone, Type } from "lucide-react";
 import { ButtonLink, cx, EmptyState, ErrorState, LoadingState } from "@/design-system";
 import { useCatalogSearch } from "@/services/hooks";
 import { PanelIntencion } from "./PanelIntencion";
+import { RespuestaInteligente } from "./RespuestaInteligente";
 import { ResultadosCatalogo } from "./ResultadosCatalogo";
 import { SugerenciasBusqueda } from "./SugerenciasBusqueda";
 import { FUENTE_MONO_ROTULO } from "../lib/tipografia";
@@ -53,17 +54,28 @@ export function ContenidoBusqueda({ consulta }: ContenidoBusquedaProps) {
   }
 
   if (busqueda.isError && !busqueda.data) {
-    return <ErrorState error={busqueda.error} onReintentar={() => void busqueda.refetch()} />;
+    return (
+      <div className="space-y-8">
+        <RespuestaInteligente consulta={consulta} />
+        <ErrorState error={busqueda.error} onReintentar={() => void busqueda.refetch()} />
+      </div>
+    );
   }
 
   if (!busqueda.data) {
-    return <LoadingState etiqueta="Buscando en el catálogo…" variante="tarjetas" />;
+    return (
+      <div className="space-y-8">
+        <RespuestaInteligente consulta={consulta} />
+        <LoadingState etiqueta="Buscando en el catálogo…" variante="tarjetas" />
+      </div>
+    );
   }
 
   const actualizando = busqueda.isPlaceholderData || busqueda.data.consulta !== consulta;
 
   return (
     <div className="space-y-8" aria-busy={actualizando || undefined}>
+      <RespuestaInteligente consulta={consulta} />
       {actualizando ? <LoadingState etiqueta="Actualizando resultados…" variante="compacto" /> : null}
       {busqueda.isError ? <ErrorState error={busqueda.error} onReintentar={() => void busqueda.refetch()} /> : null}
       <PanelIntencion key={`intencion-${busqueda.data.consulta}`} consulta={busqueda.data.consulta} intencion={busqueda.data.intencion} />

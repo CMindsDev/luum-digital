@@ -325,7 +325,7 @@ async function consultarConocimiento(contexto: ContextoEjecucion, { consulta }: 
     mensaje: `Consulté ${respuesta.pasajes.length === 1 ? "1 fuente" : `${respuesta.pasajes.length} fuentes`} de la plataforma.`,
     datos: {
       consulta,
-      pasajes: respuesta.pasajes.map((pasaje) => ({ tipo: pasaje.tipo, titulo: pasaje.titulo, texto: pasaje.texto, fuente: pasaje.fuente.titulo, ...(pasaje.ruta ? { ruta: pasaje.ruta } : {}) })),
+      pasajes: respuesta.pasajes.map((pasaje) => ({ tipo: pasaje.tipo, titulo: pasaje.titulo, texto: pasaje.texto, fuente: pasaje.fuente.titulo, ...(pasaje.fuente.fechaConsulta ? { consultadaEl: pasaje.fuente.fechaConsulta } : {}), ...(pasaje.ruta ? { ruta: pasaje.ruta } : {}) })),
       fuentes,
     },
   };

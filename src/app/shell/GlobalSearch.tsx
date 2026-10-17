@@ -1,22 +1,25 @@
 import { Search } from "lucide-react";
-import { useId, useState, type FormEvent } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { useId, type FormEvent } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
+import { consultaDelEstado, destinoDeBusqueda, LARGO_MAXIMO_CONSULTA } from "@/features/home/lib/destino-busqueda";
 
-/** Buscador global del encabezado de escritorio: envía a /buscar?q=. */
+/** Buscador global del encabezado de escritorio: abre /buscar y respeta la privacidad de consultas sensibles. */
 export function GlobalSearch() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [parametros] = useSearchParams();
-  const [consulta, setConsulta] = useState(() => parametros.get("q") ?? "");
+  const consultaActual = (consultaDelEstado(location.state) ?? parametros.get("q") ?? "").slice(0, LARGO_MAXIMO_CONSULTA);
   const id = useId();
 
   const enviar = (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
-    const texto = consulta.trim();
-    navigate(texto ? `/buscar?q=${encodeURIComponent(texto)}` : "/buscar");
+    const datos = new FormData(evento.currentTarget);
+    const destino = destinoDeBusqueda(String(datos.get("q") ?? ""));
+    navigate(destino.to, { state: destino.state });
   };
 
   return (
-    <form role="search" onSubmit={enviar} className="relative w-full max-w-md" data-guia="encabezado.buscador">
+    <form key={consultaActual} role="search" onSubmit={enviar} className="relative w-full max-w-md" data-guia="encabezado.buscador">
       <label htmlFor={id} className="sr-only">
         Buscar trámites, servicios o reportes
       </label>
@@ -24,11 +27,12 @@ export function GlobalSearch() {
       <input
         id={id}
         type="search"
-        value={consulta}
-        onChange={(evento) => setConsulta(evento.target.value)}
+        name="q"
+        defaultValue={consultaActual}
         placeholder="¿Qué necesitas? p. ej. «bache en mi calle»"
         autoComplete="off"
         enterKeyHint="search"
+        maxLength={LARGO_MAXIMO_CONSULTA}
         className="h-11 w-full rounded-pildora border border-transparent bg-superficie pr-24 pl-11 text-[0.9375rem] text-tinta placeholder:text-tinta-suave focus-visible:outline-lima-logo"
       />
       <button

@@ -5,6 +5,7 @@ import { useRepositories } from "@/services/repositories-context";
 /** Raíces de claves de consulta. Todas las claves con datos personales incluyen la identidad activa. */
 export const CLAVES = {
   catalogo: "catalogo",
+  busquedaInteligente: "busqueda-inteligente",
   gestiones: "gestiones",
   reportes: "reportes",
   verificaciones: "verificaciones",

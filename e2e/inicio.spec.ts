@@ -1,7 +1,26 @@
+import type { Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 import { esMovil, esperarTitulo, revisarAccesibilidad, sinDesplazamientoHorizontal, TEXTO_ROTULO_DEMO } from "./helpers";
 
 /** Inicio (brief §8 y tablero Figma 32:162): saludo, buscador, accesos, seguimiento y bandas temáticas. */
+
+async function interceptarBusqueda(page: Page) {
+  await page.route("**/api/asistente/busqueda", async (ruta) => {
+    const datos = ruta.request().postDataJSON() as { consulta?: string } | null;
+    const consulta = (datos?.consulta ?? "").trim().toLowerCase();
+    const json = consulta.includes("licencia de funcionamiento")
+      ? {
+          respuesta: "Puedes iniciar el trámite desde su ficha [1].",
+          generada: true,
+          citas: [{ n: 1, titulo: "Licencia de funcionamiento", ruta: "/servicios/licencia-funcionamiento", fechaConsulta: "2026-10-10" }],
+          pasajes: [],
+          intencion: { categoria: "consulta_tramite", modo: "shadow" },
+        }
+      : { respuesta: null, generada: false, citas: [], pasajes: [], intencion: { categoria: null, modo: "shadow" } };
+    await ruta.fulfill({ status: 200, json });
+  });
+}
+
 
 const ACCESOS: { nombre: RegExp; ruta: RegExp }[] = [
   { nombre: /^Bache a la vista/, ruta: /\/reportes\/nuevo\/bache$/ },
@@ -22,6 +41,10 @@ const TEMAS: { titulo: string; enlace: RegExp; ruta: RegExp }[] = [
 ];
 
 test.describe("Inicio", () => {
+  test.beforeEach(async ({ page }) => {
+    await interceptarBusqueda(page);
+  });
+
   test("saludo, rótulo de demostración y un solo h1", async ({ page }) => {
     await page.goto("/");
     const h1 = await esperarTitulo(page);

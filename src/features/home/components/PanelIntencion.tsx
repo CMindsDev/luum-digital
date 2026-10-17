@@ -131,10 +131,7 @@ export function PanelIntencion({ consulta, intencion }: PanelIntencionProps) {
         </div>
       ) : null}
 
-      <p className="mt-5 text-sm text-tinta-suave">
-        Interpretación automática con reglas locales de demostración (sin IA). Si no es lo que buscabas, revisa las fichas de abajo o
-        escribe con otras palabras.
-      </p>
+      <p className="mt-5 text-sm text-tinta-suave">Interpretación automática para orientarte dentro de la app. Si no es lo que buscabas, revisa las fichas de abajo o escribe con otras palabras.</p>
     </section>
   );
 }
