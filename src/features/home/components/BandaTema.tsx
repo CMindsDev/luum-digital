@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { cx } from "@/design-system";
 import type { FondoTema, TemaInicio } from "../lib/temas";
-import { FUENTE_MONO_ROTULO, FUENTE_SERIF_ACENTO } from "../lib/tipografia";
+import { FUENTE_SERIF_ACENTO } from "../lib/tipografia";
 
 /*
  * Banda temática del tablero Figma 32:162 (bandas 04–09) con las correcciones de contraste de
@@ -15,24 +15,26 @@ import { FUENTE_MONO_ROTULO, FUENTE_SERIF_ACENTO } from "../lib/tipografia";
  * - Desarrollo Urbano: blanco sobre café 10.84:1.
  * En superficies oscuras el foco pasa a lima del logotipo (superficie-oscura); en claras, a café.
  */
-const ESTILO: Record<FondoTema, { fondo: string; texto: string; boton: string; oscuro: boolean }> = {
+const ESTILO: Record<FondoTema, { fondo: string; texto: string; boton: string; secundario: string; oscuro: boolean }> = {
   salud: {
     fondo:
       "bg-[linear-gradient(180deg,var(--color-crema)_0,var(--color-azul-salud,var(--color-azul))_8rem)] @5xl/banda:bg-[linear-gradient(180deg,var(--color-crema)_0,var(--color-azul-salud,var(--color-azul))_11rem)]",
     texto: "text-crema",
     boton: "bg-superficie text-marino hover:bg-crema",
+    secundario: "border-crema text-crema hover:bg-white/10",
     oscuro: true,
   },
-  seguridad: { fondo: "bg-magenta-fuerte", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", oscuro: true },
-  movilidad: { fondo: "bg-ambar", texto: "text-cafe", boton: "bg-cafe text-crema hover:bg-marino", oscuro: false },
+  seguridad: { fondo: "bg-magenta-fuerte", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", secundario: "border-white text-white hover:bg-white/10", oscuro: true },
+  movilidad: { fondo: "bg-ambar", texto: "text-cafe", boton: "bg-cafe text-crema hover:bg-marino", secundario: "border-cafe text-cafe hover:bg-cafe/5", oscuro: false },
   medio_ambiente: {
     fondo: "bg-[var(--color-lima-clara,var(--color-amarillo-lima,var(--color-lima-suave)))]",
     texto: "text-cafe",
     boton: "bg-cafe text-crema hover:bg-marino",
+    secundario: "border-cafe text-cafe hover:bg-cafe/5",
     oscuro: false,
   },
-  tramites: { fondo: "bg-lima", texto: "text-cafe", boton: "bg-cafe text-crema hover:bg-marino", oscuro: false },
-  territorio: { fondo: "bg-cafe", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", oscuro: true },
+  tramites: { fondo: "bg-lima", texto: "text-cafe", boton: "bg-cafe text-crema hover:bg-marino", secundario: "border-cafe text-cafe hover:bg-cafe/5", oscuro: false },
+  territorio: { fondo: "bg-cafe", texto: "text-white", boton: "bg-superficie text-marino hover:bg-crema", secundario: "border-white text-white hover:bg-white/10", oscuro: true },
 };
 
 /*
@@ -113,22 +115,21 @@ export function BandaTema({ tema }: BandaTemaProps) {
           </h3>
           <p
             className={cx(
-              FUENTE_MONO_ROTULO,
-              "mt-6 text-sm leading-[1.83] font-medium tracking-[0.05em] uppercase @5xl/banda:mt-10 @5xl/banda:text-base",
+              "mt-6 text-base leading-relaxed lg:mt-8",
               centrada ? "max-w-[53rem]" : "max-w-[30rem]",
             )}
           >
             {tema.descriptor}
           </p>
           <div className={cx("mt-7 flex flex-wrap gap-3 lg:justify-start", centrada ? "justify-center" : "justify-start")}>
-            {tema.enlaces.map((enlace) => (
+            {tema.enlaces.map((enlace, indice) => (
               <Link
                 key={enlace.ruta}
                 to={enlace.ruta}
                 data-guia={enlace.guia}
                 className={cx(
-                  "group inline-flex min-h-12 items-center gap-2 rounded-pildora px-5 text-base font-semibold no-underline shadow-suave transition-colors",
-                  estilo.boton,
+                  "group inline-flex min-h-12 items-center gap-2 rounded-pildora border-2 px-5 text-base font-semibold no-underline transition-colors motion-reduce:transition-none",
+                  indice === 0 ? cx("border-transparent shadow-suave", estilo.boton) : estilo.secundario,
                 )}
               >
                 {enlace.etiqueta}

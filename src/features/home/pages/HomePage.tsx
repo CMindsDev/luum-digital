@@ -24,7 +24,7 @@ export default function HomePage() {
         <SectionLabel id="titulo-seguimiento" className="mb-3">
           Tu seguimiento
         </SectionLabel>
-        <div className="grid items-start gap-4 lg:grid-cols-2 lg:gap-6">
+        <div className="grid grid-cols-1 items-start gap-4 lg:grid-cols-2 lg:gap-6">
           <ResumenGestiones />
           <ResumenReportes />
         </div>

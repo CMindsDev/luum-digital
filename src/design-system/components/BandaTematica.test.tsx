@@ -12,7 +12,7 @@ function renderizar(props: Partial<BandaTematicaProps> = {}) {
         lineaSerif="Bienestar"
         pie="Programas municipales de salud, con su fuente oficial."
         icono="/brand/laboratorio/tablero/icono-seccion-salud.svg"
-        foto={{ src: "/brand/laboratorio/tablero/foto-salud-bienestar.jpg" }}
+        foto={{ src: "/brand/laboratorio/tablero/foto-salud-bienestar.png" }}
         enlaces={[{ etiqueta: "Ver programas", to: "/bienestar", guia: "inicio.tema_salud" }]}
         {...props}
       />
@@ -45,7 +45,7 @@ describe("BandaTematica", () => {
     const icono = container.querySelector('img[src$="icono-seccion-salud.svg"]');
     expect(icono).toHaveAttribute("alt", "");
     expect(icono).toHaveAttribute("aria-hidden", "true");
-    const foto = container.querySelector('img[src$="foto-salud-bienestar.jpg"]');
+    const foto = container.querySelector('img[src$="foto-salud-bienestar.png"]');
     expect(foto).toHaveAttribute("alt", "");
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });

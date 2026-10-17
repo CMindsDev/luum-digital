@@ -2,7 +2,6 @@ import {
   Bell,
   ClipboardList,
   FolderOpen,
-  HeartHandshake,
   House,
   LayoutGrid,
   Map as MapIcon,
@@ -13,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Rol } from "@/types";
+import { IconoSaludBienestar } from "@/design-system/components/IconoSaludBienestar";
 
 export type SeccionId =
   | "inicio"
@@ -97,7 +97,7 @@ export const SECCIONES: readonly SeccionNavegacion[] = [
     etiqueta: "Bienestar",
     etiquetaCorta: "Bienestar",
     ruta: "/bienestar",
-    icono: HeartHandshake,
+    icono: IconoSaludBienestar,
     prefijos: ["/bienestar"],
     guia: "nav.bienestar",
     tono: "magenta",

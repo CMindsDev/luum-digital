@@ -1,5 +1,5 @@
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
-import { LabGlyph } from "@/design-system";
+import { FOTOS_BANDA, ICONOS_BANDA } from "@/design-system/lib/recursos-laboratorio";
 
 /**
  * Banda «Salud y Bienestar» del tablero del Laboratorio (32:162, banda 04) como encabezado de la
@@ -9,30 +9,30 @@ import { LabGlyph } from "@/design-system";
  */
 export function BandaSaludBienestar() {
   return (
-    <header className="superficie-oscura relative mb-8 overflow-hidden rounded-tarjeta bg-azul text-white">
+    <header className="superficie-oscura relative left-1/2 mb-8 w-[100cqw] -translate-x-1/2 overflow-hidden bg-azul text-white">
       <div aria-hidden="true" className="h-14 bg-linear-to-b from-crema to-azul sm:h-20" />
       <div className="grid gap-6 px-5 pb-6 sm:px-8 sm:pb-8 md:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] md:items-end lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
         <div className="min-w-0">
-          <LabGlyph tamano={52} className="text-crema" />
+          <img src={ICONOS_BANDA.salud} alt="" aria-hidden="true" width={64} height={52} className="h-13 w-auto" />
           <h1 tabIndex={-1} className="mt-5 text-[clamp(2.4rem,8vw,4.75rem)] leading-[0.972] font-normal tracking-[-0.05em] text-white">
             <span className="block">Salud y</span>{" "}
             <span className="block font-serif tracking-[-0.044em] italic">Bienestar</span>
           </h1>
-          <p className="mt-5 max-w-md font-mono text-sm leading-[1.83] font-medium tracking-[0.05em] text-white uppercase">
-            Programas municipales de salud, salud mental, educación, deporte y mujeres, con su fuente oficial.
+          <p className="mt-5 max-w-md text-base leading-relaxed text-white">
+            Encuentra programas de salud, salud mental, educación, deporte y atención para mujeres. Cada programa indica su fuente oficial.
           </p>
           <div className="mt-6 max-w-sm">
             <AyudaInmediata guia="bienestar.ayuda_inmediata" anchoCompleto className="ring-2 ring-white" />
           </div>
         </div>
         <img
-          src="/brand/laboratorio/tablero/foto-salud-bienestar.jpg"
+          src={FOTOS_BANDA.salud}
           alt=""
-          width={500}
-          height={750}
+          width={780}
+          height={591}
           loading="lazy"
           decoding="async"
-          className="hidden aspect-[370/400] w-full rounded-[2rem] object-cover object-[50%_34%] md:block"
+          className="hidden aspect-[370/400] w-full rounded-[2rem] object-cover object-[60%_50%] md:block"
         />
       </div>
     </header>

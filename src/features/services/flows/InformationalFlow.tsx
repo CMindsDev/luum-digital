@@ -1,7 +1,8 @@
-import { Footprints, HeartHandshake, LayoutGrid, ListChecks, Megaphone, MessagesSquare } from "lucide-react";
+import { Footprints, LayoutGrid, ListChecks, Megaphone, MessagesSquare } from "lucide-react";
 import { useState } from "react";
 import { AyudaInmediata } from "@/components/ayuda/AyudaInmediata";
 import { Checkbox } from "@/design-system";
+import { IconoSaludBienestar } from "@/design-system/components/IconoSaludBienestar";
 import { AvisoPendiente } from "../components/AvisoPendiente";
 import { ListaCanales } from "../components/ListaCanales";
 import { ReferenciaOficial } from "../components/ReferenciaOficial";
@@ -38,7 +39,7 @@ export function InformationalFlow({ servicio }: FlowProps) {
     <div className="flex flex-col gap-5">
       {enOtroModulo ? (
         <PuenteModulo
-          icono={servicio.rutaInterna.startsWith("/bienestar") ? HeartHandshake : servicio.rutaInterna.startsWith("/reportes") ? Megaphone : LayoutGrid}
+          icono={servicio.rutaInterna.startsWith("/bienestar") ? IconoSaludBienestar : servicio.rutaInterna.startsWith("/reportes") ? Megaphone : LayoutGrid}
           titulo={`Este servicio está en ${nombreModulo(servicio.rutaInterna)}`}
           descripcion="Ahí encuentras la información completa y sus canales, dentro de la misma app."
           ruta={servicio.rutaInterna}

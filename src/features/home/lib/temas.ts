@@ -3,6 +3,8 @@
  * enlaces a módulos reales del prototipo. Los pies (descriptores) son texto de diseño adaptado a lo
  * que la app ofrece hoy; los teléfonos y servicios concretos salen siempre del catálogo verificado.
  */
+import { FOTOS_BANDA, ICONOS_BANDA } from "@/design-system/lib/recursos-laboratorio";
+
 export type FondoTema = "salud" | "seguridad" | "movilidad" | "medio_ambiente" | "tramites" | "territorio";
 export type AlineacionTema = "izquierda" | "derecha" | "centro";
 
@@ -40,9 +42,9 @@ export const TEMAS_INICIO: readonly TemaInicio[] = [
     lineaSans: "Salud y",
     lineaSerif: "Bienestar",
     descriptor: "Línea de la Vida, atención psicológica y prevención del suicidio.",
-    foto: `${BASE}/foto-salud-bienestar.jpg`,
-    posicionFoto: "50% 34%",
-    icono: `${BASE}/icono-seccion-salud.svg`,
+    foto: FOTOS_BANDA.salud,
+    posicionFoto: "60% 50%",
+    icono: ICONOS_BANDA.salud,
     alineacion: "izquierda",
     enlaces: [
       { etiqueta: "Ir a Bienestar", ruta: "/bienestar", guia: "inicio.tema_salud" },
@@ -86,8 +88,7 @@ export const TEMAS_INICIO: readonly TemaInicio[] = [
     lineaSans: "Trámites y",
     lineaSerif: "Atención",
     descriptor: "Catálogo del Portal Ciudadano, pagos simulados, consultas y seguimiento de tus gestiones.",
-    // El tablero aún no tiene foto propia para Trámites: reutiliza la de Seguridad (como en Figma).
-    foto: `${BASE}/foto-seguridad-tramites.jpg`,
+    foto: FOTOS_BANDA.tramites,
     icono: `${BASE}/glifo-seccion-cafe.svg`,
     alineacion: "derecha",
     enlaces: [

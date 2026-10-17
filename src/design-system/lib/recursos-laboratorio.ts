@@ -2,7 +2,7 @@
 const BASE = "/brand/laboratorio/tablero";
 
 export const ICONOS_BANDA = {
-  salud: `${BASE}/icono-seccion-salud.svg`,
+  salud: "/brand/icon-saludybienestar.svg",
   seguridad: `${BASE}/glifo-seccion-blanco.svg`,
   movilidad: `${BASE}/glifo-seccion-cafe.svg`,
   ambiente: `${BASE}/icono-seccion-medio-ambiente.svg`,
@@ -12,8 +12,9 @@ export const ICONOS_BANDA = {
 
 export const FOTOS_BANDA = {
   hero: `${BASE}/foto-hero-calle.jpg`,
-  salud: `${BASE}/foto-salud-bienestar.jpg`,
+  salud: `${BASE}/foto-salud-bienestar.png`,
   seguridad: `${BASE}/foto-seguridad-tramites.jpg`,
+  tramites: `${BASE}/foto-atencionciudadana.png`,
   movilidad: `${BASE}/foto-movilidad-transito.jpg`,
   ambiente: `${BASE}/foto-medio-ambiente.jpg`,
   territorio: `${BASE}/foto-desarrollo-urbano.jpg`,
