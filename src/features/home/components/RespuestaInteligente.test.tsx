@@ -54,7 +54,7 @@ describe("RespuestaInteligente", () => {
 
     renderRespuesta("licencia de funcionamiento");
 
-    expect(screen.getByRole("heading", { level: 2, name: "Respuesta de Pekito" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Respuesta de Peekito" })).toBeInTheDocument();
     expect(screen.getByRole("status")).toHaveTextContent("Buscando información…");
 
     resolver(respuestaJson(RESPUESTA_BASE));
@@ -66,8 +66,8 @@ describe("RespuestaInteligente", () => {
     vi.stubGlobal("fetch", fetchMock);
     const { user } = renderRespuesta("licencia de funcionamiento");
 
-    await screen.findByText(/Pekito puede equivocarse/);
-    const region = screen.getByRole("region", { name: "Respuesta de Pekito" });
+    await screen.findByText(/Peekito puede equivocarse/);
+    const region = screen.getByRole("region", { name: "Respuesta de Peekito" });
     const botonFuente = within(region).getByRole("button", { name: "Ir a la fuente 1" });
     await user.click(botonFuente);
 
@@ -102,11 +102,11 @@ describe("RespuestaInteligente", () => {
       rutasExtra: [{ path: "*", element: <p>Destino</p> }],
     });
 
-    await waitFor(() => expect(screen.queryByRole("region", { name: "Respuesta de Pekito" })).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole("region", { name: "Respuesta de Peekito" })).not.toBeInTheDocument());
 
     primera.unmount();
     renderRespuesta("predial");
-    await waitFor(() => expect(screen.queryByRole("region", { name: "Respuesta de Pekito" })).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole("region", { name: "Respuesta de Peekito" })).not.toBeInTheDocument());
   });
 
   it("muestra un mensaje amable cuando la consulta queda fuera de alcance", async () => {
@@ -118,7 +118,7 @@ describe("RespuestaInteligente", () => {
     renderRespuesta("cuéntame un chiste");
 
     await screen.findByText(/Eso queda fuera de lo que puedo ayudarte aquí/);
-    const region = screen.getByRole("region", { name: "Respuesta de Pekito" });
+    const region = screen.getByRole("region", { name: "Respuesta de Peekito" });
     expect(within(region).getByRole("link", { name: "Quiero reportar un bache" })).toBeInTheDocument();
   });
 
@@ -129,6 +129,6 @@ describe("RespuestaInteligente", () => {
     renderRespuesta("Busco apoyo psicológico");
 
     await waitFor(() => expect(fetchMock).not.toHaveBeenCalled());
-    expect(screen.queryByRole("region", { name: "Respuesta de Pekito" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Respuesta de Peekito" })).not.toBeInTheDocument();
   });
 });

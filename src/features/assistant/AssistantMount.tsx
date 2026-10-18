@@ -6,6 +6,8 @@ import { suscribirActuacion } from "./runtime/acting-bus";
 import { useAsistenteStore } from "./runtime/store";
 import { CapaActuacion } from "./ui/CapaActuacion";
 import { usePekitoUI } from "./ui/estado-pekito";
+import { ExpertoPekitoContext, TransicionExpertoContext } from "./ui/expertos";
+import { useTransicionExperto } from "./ui/useTransicionExperto";
 import { PekitoOnboarding } from "./ui/PekitoOnboarding";
 import { leerPreferenciasPekito } from "./ui/pekito-preferencias";
 import { describirPresencia, TIEMPOS_PRESENCIA, ultimoMensajeAsistente } from "./ui/presencia";
@@ -36,6 +38,7 @@ export function AssistantMount() {
   const { pathname } = useLocation();
   const oculto = esRutaSinPekito(pathname);
   const pekito = useControladorPekito();
+  const cambiandoExperto = useTransicionExperto(pekito.experto);
   const { controlador } = pekito;
   const botonRef = useRef<HTMLButtonElement>(null);
   const tarjeta = useMediaQuery(CONSULTA_TARJETA);
@@ -140,7 +143,8 @@ export function AssistantMount() {
   };
 
   return (
-    <>
+    <ExpertoPekitoContext value={pekito.experto}>
+      <TransicionExpertoContext value={cambiandoExperto}>
       <PresenciaPekito
         lado={lado}
         abierto={abierto}
@@ -172,6 +176,7 @@ export function AssistantMount() {
       ) : null}
 
       <CapaActuacion />
-    </>
+      </TransicionExpertoContext>
+    </ExpertoPekitoContext>
   );
 }

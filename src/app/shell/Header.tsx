@@ -14,7 +14,7 @@ export function Header() {
     <div className="superficie-oscura bg-marino text-white">
       <div className="flex h-16 items-center gap-2 px-3 sm:gap-3 sm:px-4 lg:h-[4.5rem] lg:px-6">
         <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2.5 rounded-boton py-1 sm:gap-3 sm:pr-2" data-guia="encabezado.inicio">
-          <BrandLogo className="h-9 sm:h-10 lg:h-11" />
+          <BrandLogo className="h-8! sm:h-10! lg:h-11!" />
           <span aria-hidden="true" className="hidden h-8 w-px bg-white/30 sm:block" />
           <span className="hidden text-[0.8125rem] leading-[1.15] font-semibold text-white whitespace-pre-line sm:block sm:text-sm">{t("Servicios\ndigitales")}</span>
         </Link>

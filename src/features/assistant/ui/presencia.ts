@@ -84,7 +84,7 @@ export function describirPresencia(entrada: EntradaPresencia): LineaPresencia | 
   if (entrada.vozActiva) {
     if (entrada.estadoSesion === "hablando") {
       const ultimo = ultimoMensajeAsistente(entrada.mensajes);
-      return { tipo: "hablando", texto: ultimo ? colaSubtitulo(ultimo.texto) : msg("Pekito está hablando"), enLlamada };
+      return { tipo: "hablando", texto: ultimo ? colaSubtitulo(ultimo.texto) : msg("Peekito está hablando"), enLlamada };
     }
     if (entrada.estadoSesion === "pensando") return { tipo: "pensando", texto: msg("Pensando…"), enLlamada };
     if (entrada.estadoSesion === "conectando") return { tipo: "conectando", texto: msg("Conectando…"), enLlamada };

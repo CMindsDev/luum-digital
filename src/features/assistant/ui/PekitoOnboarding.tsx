@@ -154,7 +154,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
         <div className="flex flex-1 flex-col items-center justify-center gap-6 py-6 text-center min-[400px]:gap-8">
           {/* Título (22:76): PEKITO en Unbounded + subtítulo en Host Grotesk, 26/33. */}
           <h2 id={idTitulo} ref={tituloRef} tabIndex={-1} className="text-[26px] leading-[33px] font-normal text-[var(--pekito-tinta)] outline-none">
-            <span className="pekito-marca block">PEKITO</span>
+            <span className="pekito-marca block">PEEKITO</span>
             <span className="block">{t("Un agente que sí te atiende")}</span>
           </h2>
 
@@ -246,7 +246,7 @@ export function PekitoOnboarding({ abierto, onCerrar }: PekitoOnboardingProps) {
           <button
             type="button"
             onClick={avanzar}
-            aria-label={ultimo ? t("Empezar con Pekito") : t("Continuar")}
+            aria-label={ultimo ? t("Empezar con Peekito") : t("Continuar")}
             className="grid size-11 place-items-center rounded-full focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-foco"
           >
             <span className="grid size-[38px] place-items-center rounded-[19px] bg-[var(--pekito-acento)]">

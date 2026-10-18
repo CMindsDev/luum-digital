@@ -9,6 +9,8 @@ import { describirPantalla, type PantallaActual } from "../../shared/asistente/p
 import { INSTRUCCIONES_BIENESTAR } from "../instrucciones/bienestar";
 import { INSTRUCCIONES_GENERAL } from "../instrucciones/general";
 import { INSTRUCCIONES_MAYA } from "../instrucciones/maya";
+import type { ExpertoGeneral } from "../../shared/asistente/expertos";
+import { instruccionesExperto } from "../instrucciones/expertos";
 
 export const MODELO_TRANSCRIPCION = "gpt-4o-mini-transcribe";
 
@@ -36,12 +38,13 @@ function nombreSeguro(nombre: string | undefined): string | null {
   return limpio.length >= 2 ? limpio : null;
 }
 
-export function instruccionesDeSesion(ambito: AmbitoAsistente, pantalla: PantallaActual, nombreParaSaludo?: string, idioma: IdiomaAsistente = "es"): string {
+export function instruccionesDeSesion(ambito: AmbitoAsistente, pantalla: PantallaActual, nombreParaSaludo?: string, idioma: IdiomaAsistente = "es", experto: ExpertoGeneral = "general"): string {
   const base = ambito === "bienestar" ? INSTRUCCIONES_BIENESTAR : INSTRUCCIONES_GENERAL;
   const nombre = nombreSeguro(nombreParaSaludo);
   const saludo = nombre ? `\n\nPuedes llamar a la persona «${nombre}» (nombre ficticio de demostración).` : "";
   return [
     `${base}${saludo}`,
+    ambito === "bienestar" ? "El acompañante se llama Alma. Es una IA opcional de acompañamiento, no una profesional de salud ni una mascota oficial. Conserva todas las reglas de privacidad y ayuda humana." : instruccionesExperto(experto),
     ...(idioma === "yua" ? [INSTRUCCIONES_MAYA] : []),
     "La pantalla de abajo es la de cuando empezó la conversación. Si en la conversación hay un ítem «[Pantalla actual]» más reciente, ése es el vigente.",
     describirPantalla(pantalla),
@@ -55,12 +58,13 @@ export function armarSesionRealtime(opciones: {
   voz: string;
   nombreParaSaludo?: string;
   idioma?: IdiomaAsistente;
+  experto?: ExpertoGeneral;
 }): Record<string, unknown> {
   return {
     type: "realtime",
     model: opciones.modelo,
     output_modalities: ["text"],
-    instructions: instruccionesDeSesion(opciones.ambito, opciones.pantalla, opciones.nombreParaSaludo, opciones.idioma),
+    instructions: instruccionesDeSesion(opciones.ambito, opciones.pantalla, opciones.nombreParaSaludo, opciones.idioma, opciones.experto),
     tools: herramientasDelAmbito(opciones.ambito),
     tool_choice: "auto",
     audio: {

@@ -105,7 +105,7 @@ export function MensajePekito({ mensaje, onIrA }: MensajePekitoProps) {
     <div className="flex items-start gap-2.5" aria-busy={mensaje.pendiente || undefined}>
       <PekitoMascota ancho={28} className="mt-0.5 shrink-0" />
       <div className="min-w-0 flex-1 text-[0.9375rem] leading-relaxed text-(--pk-texto)">
-        <span className="sr-only">{t("Pekito: ")}</span>
+        <span className="sr-only">{t("Peekito: ")}</span>
         <TextoPekito texto={mensaje.texto} />
         {mensaje.fuentes && mensaje.fuentes.length > 0 ? <Fuentes fuentes={mensaje.fuentes} onIrA={onIrA} /> : null}
       </div>

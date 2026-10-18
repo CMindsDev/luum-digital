@@ -47,11 +47,11 @@ export function Acompanante({ acompanante, alertaRiesgo, onAbrirAyuda, onDescart
   return (
     <section id="acompanante" aria-labelledby="acompanante-titulo" className="space-y-4 rounded-tarjeta border border-borde bg-crema p-4 sm:p-6">
       <div className="flex items-start gap-4">
-        {figuraVisible ? <PresenciaCalma tamano={56} /> : null}
+        {figuraVisible ? <PresenciaCalma tamano={56} estado={pensando ? "pensando" : estadoSesion === "hablando" ? "hablando" : "reposo"} /> : null}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h2 id="acompanante-titulo" tabIndex={-1} className="text-xl font-semibold text-marino">
-              {t("Acompañante de demostración")}
+              {t("Alma · Salud mental")}
             </h2>
             <DemoTag>{t("Simulación")}</DemoTag>
           </div>

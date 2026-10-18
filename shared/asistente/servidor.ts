@@ -7,6 +7,7 @@
  */
 import { z } from "zod";
 import { IdiomaAsistenteSchema } from "./idioma";
+import { ExpertoGeneralSchema } from "./expertos";
 import { PantallaActualSchema } from "./pantalla";
 
 export const RUTAS_API_ASISTENTE = {
@@ -60,6 +61,8 @@ export const SolicitudConexionSchema = z.object({
   nombreParaSaludo: z.string().max(40).optional(),
   /** Idioma en que debe responder el asistente (por omisión, español). */
   idioma: IdiomaAsistenteSchema.optional(),
+  /** Bienestar mantiene su ámbito aislado; los demás perfiles sólo cambian la orientación. */
+  experto: ExpertoGeneralSchema.optional(),
 });
 export type SolicitudConexion = z.infer<typeof SolicitudConexionSchema>;
 

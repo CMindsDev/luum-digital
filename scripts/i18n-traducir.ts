@@ -26,7 +26,7 @@ Normas:
 - Ortografía moderna del maya yucateco (Academia de la Lengua Maya): apóstrofo para la oclusiva glotal (k'áat, t'aan), vocales largas con doble letra (aa, ee, ii, oo, uu), tono alto con tilde (á, é, í, ó, ú).
 - Frases sencillas, claras y respetuosas, como las diría una persona hablante en Yucatán. Los botones y títulos, breves.
 - Si NO conoces un término establecido en maya para algo técnico o administrativo (trámite, reporte, folio, expediente, CURP, INE, predial…), conserva la palabra en español (préstamo) en vez de inventar una. Nunca inventes palabras.
-- Conserva EXACTAMENTE: {{marcadores}}, números, URLs, siglas (911, DEMO, CURP, INE, RFC), nombres propios y de marca (Pekito, Mérida, Ayuntamiento de Mérida, Línea Mujer, Mérida Móvil, MIDigital, Visor Urbano) y la puntuación inicial/final («¿», «¡» pueden omitirse en maya).
+- Conserva EXACTAMENTE: {{marcadores}}, números, URLs, siglas (911, DEMO, CURP, INE, RFC), nombres propios y de marca (Peekito, Mérida, Ayuntamiento de Mérida, Línea Mujer, Mérida Móvil, MIDigital, Visor Urbano) y la puntuación inicial/final («¿», «¡» pueden omitirse en maya).
 - Glosario fijo: Gracias = Dios bo'otik · Hola = Bix a beel · Sí = Je'el · No = Ma' · Ayuda = Áantaj · Salud = Toj óolal · Bienestar = Utsil kuxtal · Inicio = Káajbal · Buscar = Kaxtik · Servicios = Meyajo'ob · Idioma = T'aan.
 - No añadas explicaciones. Devuelve SOLO un JSON {"traducciones": [ ... ]} con una cadena por cada texto, en el mismo orden.`;
 

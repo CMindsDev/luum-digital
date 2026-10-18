@@ -13,9 +13,9 @@ describe("construirPantalla", () => {
       <h1>Inicio</h1>
       <button data-guia="nav.reportes">Reportes</button>
       <div data-asistente-ui>
-        <button data-guia="asistente.abrir">Pekito</button>
-        <div role="dialog" aria-modal="true" aria-label="Pekito">
-          <form aria-label="Escribe a Pekito"><textarea data-guia="asistente.mensaje">texto privado</textarea></form>
+        <button data-guia="asistente.abrir">Peekito</button>
+        <div role="dialog" aria-modal="true" aria-label="Peekito">
+          <form aria-label="Escribe a Peekito"><textarea data-guia="asistente.mensaje">texto privado</textarea></form>
         </div>
       </div>
     `;

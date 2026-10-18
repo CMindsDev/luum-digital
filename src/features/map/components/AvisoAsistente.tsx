@@ -34,7 +34,7 @@ export function AvisoAsistente() {
     <div role="status" className="mb-4 flex items-start gap-3 rounded-tarjeta border border-magenta/40 bg-magenta-suave px-4 py-3">
       <Sparkles aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-magenta-tinta" />
       <p className="min-w-0 flex-1 text-sm text-tinta">
-        <strong className="font-semibold text-magenta-tinta">Abierto por Pekito, el asistente de demostración.</strong>{" "}
+        <strong className="font-semibold text-magenta-tinta">Abierto por Peekito, el asistente de demostración.</strong>{" "}
         {detalles.length > 0 ? `Preparó el mapa con ${detalles.join(" y ")}. ` : ""}
         Revisa los filtros y cámbialos cuando quieras.
       </p>

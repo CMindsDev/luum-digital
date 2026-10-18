@@ -1,0 +1,94 @@
+/* El morph de cambio de avatar vive en motion.g; los recursos SVG no se alteran. */
+.pekito-mascota[data-estatico="true"] .pk-cuerpo,
+.pekito-mascota[data-estatico="true"] .pk-luz {
+  animation: none;
+}
+
+@keyframes alma-calma {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012, 1.02); }
+}
+@keyframes alma-escucha {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(1deg) translateY(-1%); }
+}
+@keyframes alma-piensa {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+@keyframes alma-habla {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1, calc(1 + var(--nivel) * 0.025)); }
+}
+@keyframes ave-equilibrio {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg) translateY(-1%); }
+}
+@keyframes ave-escucha {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(-1deg) translateY(-2%); }
+}
+@keyframes ave-piensa {
+  0%, 100% { transform: rotate(3deg) translateX(1%); }
+  50% { transform: rotate(-3deg) translateX(-1%); }
+}
+@keyframes ave-habla {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(calc(var(--nivel) * 3deg)) translateY(-1%); }
+}
+@keyframes juridico-calma {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1%) scaleY(1.01); }
+}
+@keyframes juridico-escucha {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(2deg); }
+}
+@keyframes juridico-piensa {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(1deg) translateY(-2%); }
+}
+@keyframes juridico-habla {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(calc(1 + var(--nivel) * 0.03)) rotate(-1deg); }
+}
+@keyframes tortuga-respira {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025, 1.015); }
+}
+@keyframes tortuga-escucha {
+  0%, 100% { transform: translateX(0) rotate(-1deg); }
+  50% { transform: translateX(1.5%) rotate(1deg); }
+}
+@keyframes tortuga-piensa {
+  0%, 100% { transform: translateX(-1.5%); }
+  50% { transform: translateX(1.5%) scaleY(0.985); }
+}
+@keyframes tortuga-habla {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(calc(var(--nivel) * 2%)) scaleY(1.015); }
+}
+@keyframes iguana-calma {
+  0%, 100% { transform: rotate(-0.7deg); }
+  50% { transform: rotate(0.7deg) scaleX(1.015); }
+}
+@keyframes iguana-escucha {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2%) rotate(-2deg); }
+}
+@keyframes iguana-piensa {
+  0%, 100% { transform: rotate(-2deg) translateX(-1%); }
+  50% { transform: rotate(2deg) translateX(1%); }
+}
+@keyframes iguana-habla {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(calc(var(--nivel) * -2deg)) scaleX(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pekito-mascota[data-estado="saludando"] .pk-cuerpo { transform: rotate(-3deg); }
+  .pekito-mascota[data-estado="escuchando"] .pk-cuerpo { transform: rotate(-2deg); }
+  .pekito-mascota[data-estado="pensando"] .pk-cuerpo { transform: rotate(2deg); }
+  .pekito-mascota[data-estado="trabajando"] .pk-cuerpo { transform: translateY(-1%); }
+  .pekito-mascota[data-estado="triste"] .pk-cuerpo { transform: translateY(2%); }
+}

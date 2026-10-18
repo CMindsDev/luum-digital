@@ -39,7 +39,7 @@ function montar(ruta: string) {
   return { router, user: userEvent.setup(), ...resultado };
 }
 
-const ABRIR = { name: /Abrir Pekito/ };
+const ABRIR = { name: /Abrir Peekito/ };
 
 afterEach(() => {
   storeAsistenteGeneral.getState().resetear();
@@ -47,7 +47,7 @@ afterEach(() => {
 });
 
 describe("AssistantMount", () => {
-  it("publica --espacio-asistente mientras se ve y lo libera en salud mental y Línea Mujer (sin botón de Pekito)", async () => {
+  it("publica --espacio-asistente mientras se ve y lo libera en salud mental y Línea Mujer (sin botón de Peekito)", async () => {
     const { router } = montar("/");
     expect(await screen.findByRole("button", ABRIR)).toBeInTheDocument();
     expect(document.documentElement.style.getPropertyValue("--espacio-asistente")).toBe("5rem");
@@ -66,7 +66,7 @@ describe("AssistantMount", () => {
     const { router, user } = montar("/");
     await user.click(await screen.findByRole("button", ABRIR));
     await user.click(await screen.findByRole("button", { name: "Saltar" }));
-    expect(await screen.findByRole("dialog", { name: /PEKITO/i })).toBeInTheDocument();
+    expect(await screen.findByRole("dialog", { name: /PEEKITO/i })).toBeInTheDocument();
 
     await router.navigate("/bienestar/salud-mental");
     await waitFor(() => expect(usePekitoUI.getState().abierto).toBe(false));
@@ -80,14 +80,14 @@ describe("AssistantMount", () => {
     expect(await screen.findByText("Un agente que sí te atiende")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Saltar" }));
 
-    const panel = await screen.findByRole("dialog", { name: /PEKITO/i });
+    const panel = await screen.findByRole("dialog", { name: /PEEKITO/i });
     // Salta a la conversación escrita (modo «escribir» por omisión): vuelve al lanzador.
     await user.click(within(panel).getByRole("button", { name: /Volver a «Por texto o por voz»/ }));
     expect(within(panel).getByRole("heading", { name: /Por texto o por voz/ })).toBeInTheDocument();
     const hablar = within(panel).getByRole("button", { name: /Hablar/ });
     expect(hablar).toHaveAttribute("aria-disabled", "true");
     expect(within(panel).getByText("La voz no está disponible ahora. Puedes escribirme.")).toBeInTheDocument();
-    expect(within(panel).getByText(/Pekito te ayuda a orientarte en la app/i)).toBeInTheDocument();
+    expect(within(panel).getByText(/Peekito te ayuda a orientarte en la app/i)).toBeInTheDocument();
     expect(within(panel).getByText(/Prototipo de demostración en Laboratorio de Innovación Digital\. No realiza gestiones oficiales/i)).toBeInTheDocument();
   });
 
@@ -95,9 +95,9 @@ describe("AssistantMount", () => {
     const { router, user } = montar("/");
     await user.click(await screen.findByRole("button", ABRIR));
     await user.click(await screen.findByRole("button", { name: "Saltar" }));
-    const panel = await screen.findByRole("dialog", { name: /PEKITO/i });
+    const panel = await screen.findByRole("dialog", { name: /PEEKITO/i });
 
-    await user.type(within(panel).getByRole("textbox", { name: "Escribe a Pekito" }), "Quiero reportar un bache en la calle 60 del Centro{Enter}");
+    await user.type(within(panel).getByRole("textbox", { name: "Escribe a Peekito" }), "Quiero reportar un bache en la calle 60 del Centro{Enter}");
 
     await waitFor(() => expect(router.state.location.pathname).toBe("/reportes/nuevo/bache"), { timeout: 4000 });
     const estado = JSON.parse((await screen.findByTestId("estado")).textContent ?? "null") as { prefill: Record<string, unknown> };
@@ -118,7 +118,7 @@ describe("AssistantMount", () => {
 
     // Al reabrir: la persona, el recibo y la respuesta, con «Revisar y confirmar».
     await user.click(screen.getByRole("button", ABRIR));
-    const reabierto = await screen.findByRole("dialog", { name: /PEKITO/i });
+    const reabierto = await screen.findByRole("dialog", { name: /PEEKITO/i });
     expect(within(reabierto).getByRole("button", { name: "Revisar y confirmar" })).toBeInTheDocument();
     expect(within(reabierto).getByText(/Nada se envía hasta que tú lo confirmes/)).toBeInTheDocument();
   });
@@ -127,9 +127,9 @@ describe("AssistantMount", () => {
     const { user } = montar("/");
     await user.click(await screen.findByRole("button", ABRIR));
     await user.click(await screen.findByRole("button", { name: "Saltar" }));
-    const panel = await screen.findByRole("dialog", { name: /PEKITO/i });
+    const panel = await screen.findByRole("dialog", { name: /PEEKITO/i });
     await user.click(within(panel).getByRole("button", { name: "Consultar mi folio" }));
-    expect(within(panel).getByRole("textbox", { name: "Escribe a Pekito" })).toHaveValue("Quiero consultar mi folio");
+    expect(within(panel).getByRole("textbox", { name: "Escribe a Peekito" })).toHaveValue("Quiero consultar mi folio");
     expect(storeAsistenteGeneral.getState().mensajes).toEqual([]);
   });
 
@@ -138,7 +138,7 @@ describe("AssistantMount", () => {
     const mascota = await screen.findByRole("button", ABRIR);
     await user.click(mascota);
     await user.click(await screen.findByRole("button", { name: "Saltar" }));
-    await screen.findByRole("dialog", { name: /PEKITO/i });
+    await screen.findByRole("dialog", { name: /PEEKITO/i });
     await user.keyboard("{Escape}");
     await waitFor(() => expect(usePekitoUI.getState().abierto).toBe(false));
     await waitFor(() => expect(screen.getByRole("button", ABRIR)).toHaveFocus());

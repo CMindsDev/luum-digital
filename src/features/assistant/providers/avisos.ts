@@ -21,6 +21,7 @@ export type TipoAviso =
   | "microfono_no_disponible"
   | "audio_bloqueado"
   | "respuesta_fallida"
+  | "transcripcion_fallida"
   | "accion_fallida";
 
 const AVISOS: Record<TipoAviso, AvisoAsistente> = {
@@ -103,6 +104,12 @@ const AVISOS: Record<TipoAviso, AvisoAsistente> = {
     titulo: msg("No pude terminar la respuesta"),
     detalle: msg("Inténtalo de nuevo."),
     accion: "reintentar",
+  },
+  transcripcion_fallida: {
+    tono: "precaucion",
+    titulo: msg("No pude entender lo que dijiste"),
+    detalle: msg("Vuelve a decirlo o escríbeme para continuar."),
+    accion: "escribir",
   },
   accion_fallida: {
     tono: "precaucion",

@@ -10,6 +10,7 @@ import type { Embedder } from "./embeddings";
 import { crearIndiceLexico } from "./lexico";
 import { normalizar } from "./texto";
 import { coseno, decodificarVectores, type ArchivoVectores } from "./vectores";
+import { preguntaPorPreferenciasDelAsistente } from "./alcance";
 
 /** Por debajo de estos umbrales un pasaje no cuenta como relacionado con la consulta. */
 export const UMBRALES = {
@@ -60,6 +61,7 @@ export function crearIndiceConocimiento(opciones: OpcionesIndice): IndiceConocim
     tamano: pasajes.length,
     conVectores,
     async buscar(consulta) {
+      if (preguntaPorPreferenciasDelAsistente(consulta)) return { pasajes: [], metodo: "lexico" };
       const puntosLexicos = lexico.puntuar(consulta);
       // «Cuántas…» pide un conteo: los pasajes de estructura ya lo traen hecho y deben ganar a una coincidencia suelta.
       if (/\bcuant/.test(normalizar(consulta))) {

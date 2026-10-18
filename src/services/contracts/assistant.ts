@@ -10,6 +10,7 @@
  */
 import type { AmbitoAsistente, NombreAccion, ReciboAccion } from "@shared/asistente/acciones";
 import type { PantallaActual } from "@shared/asistente/pantalla";
+import type { ExpertoAsistente, ExpertoGeneral } from "@shared/asistente/expertos";
 
 export type ModoAsistente = "demostracion" | "openai_realtime";
 
@@ -37,6 +38,7 @@ export interface AvisoAsistente {
 }
 
 export type EventoAsistente =
+  | { tipo: "experto"; experto: ExpertoAsistente }
   | { tipo: "estado"; estado: EstadoSesionAsistente }
   | { tipo: "texto_delta"; mensajeId: string; texto: string }
   | { tipo: "texto_final"; mensajeId: string; texto: string; fuentes?: FuenteCitada[] }
@@ -50,6 +52,7 @@ export interface OpcionesSesion {
   pantalla: PantallaActual;
   /** Nombre ficticio para saludar, sólo si las preferencias de privacidad lo permiten. */
   nombreParaSaludo?: string;
+  experto?: ExpertoGeneral;
 }
 
 export interface SesionAsistente {

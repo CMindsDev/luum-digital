@@ -7,7 +7,8 @@
  *
  * Uso: npm run conocimiento:construir
  */
-import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { z } from "zod";
 import { crearEmbedder } from "../server/conocimiento/embeddings";
 import { construirPasajes, extraerAreas, leerHechos, leerServicios, textoParaEmbedding } from "../server/conocimiento/ingesta";
 import { codificarVectores, DIMENSIONES_EMBEDDING, MODELO_EMBEDDING, type ArchivoVectores } from "../server/conocimiento/vectores";
@@ -25,7 +26,9 @@ const html = readFileSync(RUTA_HTML, "utf8");
 const areas = extraerAreas(html);
 if (areas.length === 0) throw new Error("No se extrajo ninguna área de la página de dependencias.");
 const servicios = leerServicios(JSON.parse(readFileSync(RUTA_SERVICIOS, "utf8")));
-const fechaConsultaDependencias = statSync(RUTA_HTML).mtime.toISOString().slice(0, 10);
+const { fechaConsulta: fechaConsultaDependencias } = z.object({ fechaConsulta: z.iso.date() }).parse(
+  JSON.parse(readFileSync("data/sources/dependencias/fuente.json", "utf8")),
+);
 
 const hechos = leerHechos(JSON.parse(readFileSync(RUTA_HECHOS, "utf8")));
 const pasajes = construirPasajes({ areas, servicios, fechaConsultaDependencias, hechos, fechaConsultaHechos: "2026-10-17" });

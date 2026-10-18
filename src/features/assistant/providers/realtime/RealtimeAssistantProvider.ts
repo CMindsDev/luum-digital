@@ -26,12 +26,14 @@ import { fuentesDeRecibo } from "../../runtime/ejecutor";
 import { pantallaMinima } from "../../runtime/pantalla";
 import { i18n } from "@/i18n";
 import { aviso, avisoPorCodigo, ErrorAsistente } from "../avisos";
+import { ENFOQUES_EXPERTOS, type ExpertoAsistente } from "@shared/asistente/expertos";
+import { enrutarExperto } from "@/domain/expertos-asistente";
 
 /** Turnos de voz por detección semántica; hablar encima interrumpe al asistente. */
 export const DETECCION_TURNOS_VOZ = {
   type: "semantic_vad",
   eagerness: "high",
-  create_response: true,
+  create_response: false,
   interrupt_response: true,
 } as const;
 
@@ -157,6 +159,9 @@ export class SesionRealtime implements SesionAsistente {
   private readonly textoParcial = new Map<string, string>();
   private readonly publicados = new Set<string>();
   private fuentesPendientes: FuenteCitada[] = [];
+  private experto: ExpertoAsistente = "general";
+  private itemExpertoId: string | null = null;
+  private readonly transcripcionesVistas = new Set<string>();
 
   // «[Pantalla actual]».
   private pantalla: PantallaActual | null = null;
@@ -260,7 +265,7 @@ export class SesionRealtime implements SesionAsistente {
     await this.emisor?.replaceTrack(pista);
     this.enviar("voz", {
       type: "session.update",
-      session: { type: "realtime", output_modalities: ["audio"], audio: { input: { turn_detection: DETECCION_TURNOS_VOZ } } },
+      session: { type: "realtime", output_modalities: ["audio"], audio: { input: { turn_detection: { ...DETECCION_TURNOS_VOZ, create_response: this.ambito !== "general" } } } },
     });
     this.voz = true;
     this.audio.muted = false;
@@ -328,6 +333,7 @@ export class SesionRealtime implements SesionAsistente {
   // --- Conexión ---
 
   async conectar(opciones: OpcionesSesionRealtime): Promise<void> {
+    this.experto = opciones.experto ?? "general";
     this.pantalla = opciones.pantalla;
     this.cambiarEstado("conectando");
     try {
@@ -422,6 +428,7 @@ export class SesionRealtime implements SesionAsistente {
           ...(opciones.consentimientoBienestar !== undefined ? { consentimientoBienestar: opciones.consentimientoBienestar } : {}),
           ...(opciones.nombreParaSaludo ? { nombreParaSaludo: opciones.nombreParaSaludo } : {}),
           idioma: i18n.language === "yua" ? "yua" : "es",
+          ...(opciones.experto ? { experto: opciones.experto } : {}),
         }),
       });
     let respuesta: Response;
@@ -498,8 +505,30 @@ export class SesionRealtime implements SesionAsistente {
       type: "conversation.item.create",
       item: { type: "message", role: "user", content: [{ type: "input_text", text: contenido }] },
     });
+    this.enrutarTurno(contenido);
     this.solicitarRespuesta();
     this.cambiarEstado("pensando");
+  }
+
+  private enrutarTurno(contenido: string) {
+    if (this.ambito !== "general") return;
+    const siguiente = enrutarExperto(contenido, this.experto);
+    if (siguiente !== this.experto) {
+      if (this.itemExpertoId) this.enviar("tema_borrar", { type: "conversation.item.delete", item_id: this.itemExpertoId });
+      const id = `tema_${hexAleatorio(24)}`;
+      this.enviar("tema", {
+        type: "conversation.item.create",
+        item: {
+          id,
+          type: "message",
+          role: "system",
+          content: [{ type: "input_text", text: `[Tema de orientación automático]\n${ENFOQUES_EXPERTOS[siguiente]}\nNo cambian tus fuentes, permisos ni reglas de seguridad. No transfieras mensajes al ámbito privado de bienestar.` }],
+        },
+      });
+      this.itemExpertoId = id;
+      this.experto = siguiente;
+    }
+    this.emitir({ tipo: "experto", experto: siguiente });
   }
 
   private solicitarRespuesta() {
@@ -589,9 +618,29 @@ export class SesionRealtime implements SesionAsistente {
       case "conversation.item.input_audio_transcription.completed": {
         const itemId = texto(evento.item_id);
         const transcripcion = texto(evento.transcript);
-        if (itemId && transcripcion?.trim()) this.emitir({ tipo: "transcripcion_usuario", mensajeId: itemId, texto: transcripcion });
+        if (!itemId || this.transcripcionesVistas.has(itemId)) return;
+        this.transcripcionesVistas.add(itemId);
+        if (!transcripcion?.trim()) {
+          if (this.voz && this.ambito === "general") {
+            this.emitir({ tipo: "aviso", aviso: aviso("transcripcion_fallida") });
+            this.cambiarEstado("escuchando");
+          }
+          return;
+        }
+        this.emitir({ tipo: "transcripcion_usuario", mensajeId: itemId, texto: transcripcion });
+        if (this.voz && this.ambito === "general") {
+          this.enrutarTurno(transcripcion);
+          this.necesitaRespuesta = true;
+          this.continuar();
+        }
         return;
       }
+      case "conversation.item.input_audio_transcription.failed":
+        if (this.voz && this.ambito === "general") {
+          this.emitir({ tipo: "aviso", aviso: aviso("transcripcion_fallida") });
+          this.cambiarEstado("escuchando");
+        }
+        return;
       case "input_audio_buffer.speech_started":
         this.cambiarEstado("escuchando");
         return;

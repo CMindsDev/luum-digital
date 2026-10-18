@@ -22,7 +22,7 @@ const ESTADOS: Record<string, string> = {
   conectando: msg("Conectando…"),
   escuchando: msg("Te escucho"),
   pensando: msg("Pensando…"),
-  hablando: msg("Pekito está hablando"),
+  hablando: msg("Peekito está hablando"),
   listo: msg("Te escucho"),
 };
 
@@ -40,7 +40,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
 
   const ultimo = mensajes.at(-1);
   const subtitulo = ultimo ? colaSubtitulo(ultimo.texto) : "";
-  const quienHabla = ultimo?.rol === "persona" ? t("Tú") : "Pekito";
+  const quienHabla = ultimo?.rol === "persona" ? t("Tú") : "Peekito";
   const ultimoFinal = useMemo(() => [...mensajes].reverse().find((mensaje) => !mensaje.pendiente), [mensajes]);
   const estado = silenciado ? t("Micrófono silenciado") : t(ESTADOS[estadoSesion] ?? msg("En llamada"));
 
@@ -53,7 +53,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
       <div className="grid flex-1 place-items-center py-6">
         <div
           style={reducido ? undefined : { transform: `scale(${1 + Math.min(1, nivel) * 0.16})` }}
-          className={cx("rounded-full", reducido ? "" : "transition-transform duration-100 ease-out")}
+          className={cx("pekito-orbe grid aspect-square w-[15.5rem] max-w-[70vw] place-items-center rounded-full p-6", reducido ? "" : "transition-transform duration-100 ease-out")}
         >
           <PekitoMascota ancho={190} estado={estadoMascota} nivel={nivel} className="max-w-[55vw]" />
         </div>
@@ -69,7 +69,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
         ) : null}
       </p>
       <div role="log" aria-live="polite" className="sr-only">
-        {ultimoFinal ? `${ultimoFinal.rol === "persona" ? t("Tú") : "Pekito"}: ${ultimoFinal.texto}` : ""}
+        {ultimoFinal ? `${ultimoFinal.rol === "persona" ? t("Tú") : "Peekito"}: ${ultimoFinal.texto}` : ""}
       </div>
 
       <ListaAvisosPekito onAccion={onAccionAviso} className="mt-3 w-full max-w-[24rem] space-y-2 text-left" />
@@ -99,7 +99,7 @@ export function LlamadaPekito({ silenciado, onSilenciar, onColgar, onAccionAviso
         </button>
       </div>
       <p className="mt-4 max-w-[22rem] text-xs leading-snug text-(--pk-texto-suave)">
-        {t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
+        {t("Peekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
       </p>
     </div>
   );

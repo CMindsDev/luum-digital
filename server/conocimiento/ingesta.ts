@@ -299,7 +299,7 @@ const GUIA_PLATAFORMA: ReadonlyArray<{ id: string; titulo: string; texto: string
     id: "inicio",
     titulo: "Qué puedes hacer en la plataforma de servicios digitales de Mérida",
     texto:
-      "Aquí puedes buscar trámites y servicios del Ayuntamiento, consultar requisitos y a qué área corresponden, levantar reportes ciudadanos (bache, luminaria, basura y más), ver el estado de tus reportes y gestiones, revisar un mapa de incidencias, guardar tu expediente de documentos, conocer programas de bienestar y acompañarte con Pekito, el asistente.",
+      "Aquí puedes buscar trámites y servicios del Ayuntamiento, consultar requisitos y a qué área corresponden, levantar reportes ciudadanos (bache, luminaria, basura y más), ver el estado de tus reportes y gestiones, revisar un mapa de incidencias, guardar tu expediente de documentos, conocer programas de bienestar y acompañarte con Peekito, el asistente.",
     ruta: "/",
   },
   {

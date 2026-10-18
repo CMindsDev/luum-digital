@@ -58,7 +58,7 @@ export default function StartServicePage() {
         <div role="status" className="mb-5 flex items-start gap-3 rounded-tarjeta border border-magenta/40 bg-magenta-suave px-4 py-3">
           <Bot aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-magenta-tinta" />
           <p className="text-[0.9375rem] text-tinta">
-            <strong className="font-semibold text-magenta-tinta">{t("Preparado por Pekito. ")}</strong>
+            <strong className="font-semibold text-magenta-tinta">{t("Preparado por Peekito. ")}</strong>
             {t("Revisa y confirma cada paso: no se envió nada por ti.")}
           </p>
         </div>

@@ -8,6 +8,7 @@
  */
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import type { ExpertoAsistente } from "@shared/asistente/expertos";
 import { buscarIdentidad, useDemoSession } from "@/app/session/store";
 import { useRepositories } from "@/services/repositories-context";
 import { DemoAssistantProvider } from "./providers/demo/DemoAssistantProvider";
@@ -37,6 +38,7 @@ export interface Pekito {
   controlador: ControladorAsistente;
   servidor: ServidorPekito;
   proveedor: ProveedorElegido;
+  experto: ExpertoAsistente;
   /** Vuelve a abrir la pantalla que preparó una acción (si la persona se movió). */
   repetirNavegacion(llamadaId: string): boolean;
 }
@@ -44,6 +46,7 @@ export interface Pekito {
 export function useControladorPekito(): Pekito {
   const repositorios = useRepositories();
   const navigate = useNavigate();
+  const experto = usePekitoUI((estado) => estado.expertoActual);
   const [puente] = useState(() => new PuenteNavegacion());
   const [demo] = useState(() => new DemoAssistantProvider());
   const [servidor, setServidor] = useState<ServidorPekito>({ consultado: false, realtime: null, motivoSinVoz: MOTIVO_SIN_VOZ_PREDETERMINADO });
@@ -56,6 +59,7 @@ export function useControladorPekito(): Pekito {
       repositorios,
       obtenerActor: () => buscarIdentidad(useDemoSession.getState().identidadId),
       navegar: puente.navegar,
+      alCambiarExperto: (nuevo) => usePekitoUI.getState().actualizarExperto(nuevo),
       // La ayuda humana se muestra dentro de la conversación, sin sacar a la persona de donde está.
       abrirApoyoHumano: () => usePekitoUI.getState().mostrarApoyo(),
       guardas: puente.guardas,
@@ -120,5 +124,5 @@ export function useControladorPekito(): Pekito {
     [puente],
   );
 
-  return { controlador, servidor, proveedor, repetirNavegacion };
+  return { controlador, servidor, proveedor, experto, repetirNavegacion };
 }

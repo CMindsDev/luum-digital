@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { esRutaSinPekito } from "./rutas-privadas";
 
 describe("esRutaSinPekito", () => {
-  it("oculta a Pekito en salud mental y Línea Mujer, con subrutas y barra final", () => {
+  it("oculta a Peekito en salud mental y Línea Mujer, con subrutas y barra final", () => {
     for (const ruta of [
       "/bienestar/salud-mental",
       "/bienestar/salud-mental/",

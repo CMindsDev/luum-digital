@@ -1,3 +1,5 @@
+@import "./expertos-keyframes.css";
+
 /*
  * Pekito animado — estados de la mascota (reposo, saludando, conectando, escuchando, silenciado,
  * pensando, trabajando, hablando, feliz y triste). Todo es CSS sobre `data-estado`.
@@ -18,6 +20,45 @@
 
 .pekito-noche .pekito-mascota {
   --pk-fx: var(--pk-lima, #ebff57);
+}
+
+.pekito-claro .pekito-mascota {
+  --pk-led: var(--pekito-acento-tinta);
+}
+
+.pekito-mascota[data-experto="bienestar"] {
+  --pkm-reposo: alma-calma;
+  --pkm-escucha: alma-escucha;
+  --pkm-piensa: alma-piensa;
+  --pkm-habla: alma-habla;
+}
+
+.pekito-mascota[data-experto="urbano"] {
+  --pkm-reposo: ave-equilibrio;
+  --pkm-escucha: ave-escucha;
+  --pkm-piensa: ave-piensa;
+  --pkm-habla: ave-habla;
+}
+
+.pekito-mascota[data-experto="juridico"] {
+  --pkm-reposo: juridico-calma;
+  --pkm-escucha: juridico-escucha;
+  --pkm-piensa: juridico-piensa;
+  --pkm-habla: juridico-habla;
+}
+
+.pekito-mascota[data-experto="tramites"] {
+  --pkm-reposo: tortuga-respira;
+  --pkm-escucha: tortuga-escucha;
+  --pkm-piensa: tortuga-piensa;
+  --pkm-habla: tortuga-habla;
+}
+
+.pekito-mascota[data-experto="medio_ambiente"] {
+  --pkm-reposo: iguana-calma;
+  --pkm-escucha: iguana-escucha;
+  --pkm-piensa: iguana-piensa;
+  --pkm-habla: iguana-habla;
 }
 
 .pekito-mascota .pk-cuerpo {
@@ -109,30 +150,30 @@
 @media (prefers-reduced-motion: no-preference) {
   /* Cuerpo */
   .pekito-mascota[data-estado="reposo"] .pk-cuerpo {
-    animation: pkm-respira 4s ease-in-out infinite;
+    animation: var(--pkm-reposo, pkm-respira) 4s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="saludando"] .pk-cuerpo {
     animation:
       pkm-saluda 1.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1,
-      pkm-respira 4s ease-in-out 1.7s infinite;
+      var(--pkm-reposo, pkm-respira) 4s ease-in-out 1.7s infinite;
   }
   .pekito-mascota[data-estado="conectando"] .pk-cuerpo {
-    animation: pkm-respira 1.4s ease-in-out infinite;
+    animation: var(--pkm-reposo, pkm-respira) 1.4s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="escuchando"] .pk-cuerpo {
-    animation: pkm-atento 2.4s ease-in-out infinite;
+    animation: var(--pkm-escucha, pkm-atento) 2.4s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="silenciado"] .pk-cuerpo {
     animation: pkm-dormita 6s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="pensando"] .pk-cuerpo {
-    animation: pkm-pensando 2.4s ease-in-out infinite;
+    animation: var(--pkm-piensa, pkm-pensando) 2.4s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="trabajando"] .pk-cuerpo {
     animation: pkm-trabaja 0.46s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="hablando"] .pk-cuerpo {
-    animation: pkm-habla 0.5s ease-in-out infinite;
+    animation: var(--pkm-habla, pkm-habla) 0.8s ease-in-out infinite;
   }
   .pekito-mascota[data-estado="feliz"] .pk-cuerpo {
     animation: pkm-feliz 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 3;

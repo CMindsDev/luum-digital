@@ -71,10 +71,10 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
   };
 
   return (
-    <form onSubmit={enviar} aria-label={t("Escribe a Pekito")} className="px-4 pt-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-5">
+    <form onSubmit={enviar} aria-label={t("Escribe a Peekito")} className="px-4 pt-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-5">
       <div className="pekito-compositor flex items-end gap-1.5 rounded-[28px] p-1.5">
         <label htmlFor={idCampo} className="sr-only">
-          {t("Escribe a Pekito")}
+          {t("Escribe a Peekito")}
         </label>
         <textarea
           id={idCampo}
@@ -94,7 +94,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
           <button
             type="button"
             onClick={onHablar}
-            aria-label={t("Hablar con Pekito")}
+            aria-label={t("Hablar con Peekito")}
             data-guia="asistente.dictar"
             className="grid size-11 shrink-0 place-items-center rounded-full text-(--pk-texto-suave) hover:text-(--pk-texto)"
           >
@@ -103,7 +103,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
         ) : null}
         <button
           type="submit"
-          aria-label={ocupado ? t("Enviar (espera a que Pekito termine)") : t("Enviar")}
+          aria-label={ocupado ? t("Enviar (espera a que Peekito termine)") : t("Enviar")}
           disabled={deshabilitado}
           data-guia="asistente.enviar"
           className={cx(
@@ -115,7 +115,7 @@ export function CompositorPekito({ valor, onCambiar, onEnviar, ocupado, vozDispo
         </button>
       </div>
       <p id={idAyuda} className="mt-2 px-2 text-center text-xs text-(--pk-texto-suave)">
-        {t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
+        {t("Peekito puede equivocarse. Confirma los datos importantes con la fuente oficial. No compartas datos personales reales.")}
       </p>
     </form>
   );

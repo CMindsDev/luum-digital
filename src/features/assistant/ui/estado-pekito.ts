@@ -3,6 +3,7 @@
  * preferencia no sensible). La conversación vive aparte, en el store del runtime (sólo memoria).
  */
 import { create } from "zustand";
+import type { ExpertoAsistente } from "@shared/asistente/expertos";
 import { guardarPreferenciasPekito, leerPreferenciasPekito, type LadoPekito } from "./pekito-preferencias";
 
 /** Lanzador «Por texto o por voz», conversación escrita o llamada de voz. */
@@ -23,6 +24,7 @@ interface DatosUIPekito {
   mensajeVisto: string | null;
   /** Último aviso que ya ocupó la píldora. */
   avisoVisto: string | null;
+  expertoActual: ExpertoAsistente;
 }
 
 interface AccionesUIPekito {
@@ -44,6 +46,7 @@ interface AccionesUIPekito {
   mostrarApoyo(): void;
   /** Tras «Borrar conversación»: vuelve al lanzador sin borrador. */
   reiniciarConversacion(): void;
+  actualizarExperto(experto: ExpertoAsistente): void;
 }
 
 export type EstadoUIPekito = DatosUIPekito & AccionesUIPekito;
@@ -58,6 +61,7 @@ export const usePekitoUI = create<EstadoUIPekito>()((set) => ({
   enfoquePendiente: false,
   mensajeVisto: null,
   avisoVisto: null,
+  expertoActual: "general",
 
   abrir: (vista) => set((estado) => ({ abierto: true, panelMontado: true, bienvenidaAbierta: false, vista: vista ?? estado.vista })),
   cerrar: () => set({ abierto: false }),
@@ -75,7 +79,8 @@ export const usePekitoUI = create<EstadoUIPekito>()((set) => ({
   pedirEnfoque: () => set({ enfoquePendiente: true }),
   consumirEnfoque: () => set({ enfoquePendiente: false }),
   mostrarApoyo: () => set((estado) => ({ abierto: true, panelMontado: true, bienvenidaAbierta: false, vista: estado.vista === "llamada" ? "llamada" : "chat" })),
-  reiniciarConversacion: () => set({ vista: "lanzador", borrador: "", mensajeVisto: null, avisoVisto: null }),
+  reiniciarConversacion: () => set({ vista: "lanzador", borrador: "", mensajeVisto: null, avisoVisto: null, expertoActual: "general" }),
+  actualizarExperto: (expertoActual) => set({ expertoActual }),
 }));
 
 /**

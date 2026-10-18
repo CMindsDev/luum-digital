@@ -32,7 +32,7 @@ export function EtiquetaModoPekito({ etiqueta, oscuro = false, className }: Etiq
       )}
     >
       <Icono aria-hidden="true" className="size-3.5 shrink-0" />
-      <span className="sr-only">{t("Estado de Pekito: ")}</span>
+      <span className="sr-only">{t("Estado de Peekito: ")}</span>
       <span className="min-w-0">{t(etiqueta.texto)}</span>
     </p>
   );

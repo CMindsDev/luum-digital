@@ -13,6 +13,8 @@ import { usePekitoUI } from "./estado-pekito";
 import { LanzadorPekito } from "./LanzadorPekito";
 import { LlamadaPekito } from "./LlamadaPekito";
 import { PekitoMascota } from "./PekitoMascota";
+import { ESTILO_TRANSICION_EXPERTO } from "./expertos";
+import { EstadoExperto } from "./EstadoExperto";
 import { CONSULTA_TARJETA, useMediaQuery } from "./useMediaQuery";
 import { useEstadoMascota } from "./useEstadoMascota";
 import { usePanelDialogo } from "./usePanelDialogo";
@@ -137,8 +139,10 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
       data-asistente-ui
       data-lado={lado}
       data-guia="asistente.panel"
+      data-experto={pekito.experto}
+      style={ESTILO_TRANSICION_EXPERTO}
       className={cx(
-        "pekito pekito-noche m-0 flex-col overflow-hidden p-0 open:flex",
+        "pekito pekito-claro m-0 flex-col overflow-hidden p-0 open:flex",
         modal
           ? "h-dvh max-h-none w-full max-w-none backdrop:bg-black/60"
           : "pekito-panel-flotante z-50 rounded-[22px] shadow-flotante ring-1 ring-(--pk-borde)",
@@ -167,12 +171,12 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
                 tabIndex={-1}
                 className="pekito-marca min-w-0 flex-1 text-lg leading-tight font-normal tracking-[0.02em] text-(--pk-texto) outline-none"
               >
-                PEKITO
+                PEEKITO
               </h2>
               <button
                 type="button"
                 onClick={() => usePekitoUI.getState().moverA(lado === "derecha" ? "izquierda" : "derecha")}
-                aria-label={lado === "derecha" ? t("Mover Pekito al lado izquierdo") : t("Mover Pekito al lado derecho")}
+                aria-label={lado === "derecha" ? t("Mover Peekito al lado izquierdo") : t("Mover Peekito al lado derecho")}
                 data-guia="asistente.mover"
                 className={CLASE_ICONO_ENCABEZADO}
               >
@@ -183,13 +187,17 @@ export default function PanelPekito({ pekito, retornoRespaldo }: PanelPekitoProp
                   <Trash2 aria-hidden="true" className="size-5" />
                 </button>
               ) : null}
-              <button type="button" onClick={cerrar} aria-label={t("Cerrar Pekito")} data-guia="asistente.cerrar" className={`${CLASE_ICONO_ENCABEZADO} -mr-2`}>
+              <button type="button" onClick={cerrar} aria-label={t("Cerrar Peekito")} data-guia="asistente.cerrar" className={`${CLASE_ICONO_ENCABEZADO} -mr-2`}>
                 <X aria-hidden="true" className="size-5" />
               </button>
             </div>
-            <EtiquetaModoPekito etiqueta={etiqueta} oscuro className="mt-1" />
+            <EstadoExperto experto={pekito.experto} />
+            <EtiquetaModoPekito etiqueta={etiqueta} className="mt-1" />
             <p className="pekito-rotulo mt-2 text-[0.6875rem] leading-snug text-(--pk-texto-suave)">{t(TEXTO_ROTULO_DEMO)}</p>
           </header>
+          <div className="space-y-1 px-4 pb-3 text-xs leading-snug text-(--pk-texto-suave) sm:px-5">
+            <p>{t("Orientación con IA. No sustituye la atención de una persona profesional ni una resolución oficial.")}</p>
+          </div>
 
           {vista === "lanzador" ? (
             <LanzadorPekito

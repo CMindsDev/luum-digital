@@ -104,8 +104,8 @@ describe("normalizarRespuesta (citas)", () => {
     { id: "c", tipo: "estructura", titulo: "Resumen", texto: "t", fuente: { titulo: "Portal", url: "https://x.test/a" } },
   ];
 
-  it("renumera en orden de aparición y descarta marcadores inexistentes", () => {
-    const resultado = normalizarRespuesta("El horario es de 8 a 3 [2]. El teléfono es 911 [1][9].", dos);
+  it("renumera las citas válidas en orden de aparición", () => {
+    const resultado = normalizarRespuesta("El horario es de 8 a 3 [2]. El teléfono es 911 [1].", dos);
     expect(resultado?.texto).toBe("El horario es de 8 a 3 [1]. El teléfono es 911 [2].");
     expect(resultado?.citas.map((cita) => cita.n)).toEqual([1, 2]);
     expect(resultado?.citas[0]?.titulo).toContain("Horario");
@@ -120,6 +120,7 @@ describe("normalizarRespuesta (citas)", () => {
   it("sin citas reales o sin información no hay respuesta", () => {
     expect(normalizarRespuesta("Es 911.", dos)).toBeNull();
     expect(normalizarRespuesta("Es 911 [7].", dos)).toBeNull();
+    expect(normalizarRespuesta("Es 911 [1]. Otro dato [9].", dos)).toBeNull();
     expect(normalizarRespuesta("SIN_INFORMACION", dos)).toBeNull();
   });
 });
@@ -144,7 +145,7 @@ describe("índice de conocimiento (sólo palabras)", () => {
   });
 
   it("no devuelve nada para preguntas fuera del alcance", async () => {
-    for (const fuera of ["cuál es la capital de Francia", "dame una receta de cochinita pibil", "quién ganó el mundial"]) {
+    for (const fuera of ["cuál es la capital de Francia", "dame una receta de cochinita pibil", "quién ganó el mundial", "¿Cuál es tu comida favorita en el Ayuntamiento de Mérida?"]) {
       expect((await indice.buscar(fuera)).pasajes).toEqual([]);
     }
   });
@@ -235,6 +236,19 @@ describe("POST /api/asistente/busqueda", () => {
     expect(cuerpo.generada).toBe(false);
     expect(cuerpo.pasajes[0]?.id).toBe("estructura:direccion");
     expect(cuerpo.intencion.categoria).toBeNull();
+  });
+
+  it("no llama al redactor para gustos personales, incluso sin Clef", async () => {
+    let llamadas = 0;
+    const app = crear(async () => {
+      llamadas += 1;
+      return { texto: "No debe generarse", citas: [] };
+    });
+    const respuesta = await post(app, { consulta: "¿Cuál es tu comida favorita en Mérida?" });
+    expect(await respuesta.json()).toMatchObject({
+      respuesta: null, generada: false, citas: [], pasajes: [], intencion: { categoria: "fuera_de_alcance" },
+    });
+    expect(llamadas).toBe(0);
   });
 
   it("si el redactor falla no rompe la búsqueda", async () => {

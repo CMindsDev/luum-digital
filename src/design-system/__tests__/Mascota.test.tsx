@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 // accesibilidad y de movimiento reducido como parte de la alineación del design system.
 import { PekitoMascota } from "@/features/assistant/ui/PekitoMascota";
 
-describe("Mascota del asistente (Pekito)", () => {
+describe("Mascota del asistente (Peekito)", () => {
   it("es decorativa: alt vacío, aria-hidden y sin arrastre de imagen", () => {
     const { container } = render(<PekitoMascota />);
     const imagen = container.querySelector("img");

@@ -10,10 +10,10 @@ import { esperarTitulo, sinDesplazamientoHorizontal } from "./helpers";
  * - Pekito prepara y abre; la persona confirma. Nunca inventa folios ni envía formularios.
  */
 
-const MASCOTA = { name: /Abrir Pekito/ };
+const MASCOTA = { name: /Abrir Peekito/ };
 
 function panel(page: Page) {
-  return page.getByRole("dialog", { name: /PEKITO/i });
+  return page.getByRole("dialog", { name: /PEEKITO/i });
 }
 
 /** Abre Pekito, salta la bienvenida (la primera vez) y deja la conversación escrita lista. */
@@ -21,18 +21,18 @@ async function abrirChat(page: Page) {
   await page.getByRole("button", MASCOTA).click();
   await page.getByRole("button", { name: "Saltar" }).click();
   await expect(panel(page)).toBeVisible();
-  await expect(panel(page).getByRole("textbox", { name: "Escribe a Pekito" })).toBeVisible();
+  await expect(panel(page).getByRole("textbox", { name: "Escribe a Peekito" })).toBeVisible();
 }
 
 async function escribir(page: Page, texto: string) {
-  const campo = panel(page).getByRole("textbox", { name: "Escribe a Pekito" });
+  const campo = panel(page).getByRole("textbox", { name: "Escribe a Peekito" });
   await campo.fill(texto);
   await panel(page).getByRole("button", { name: "Enviar", exact: true }).click();
 }
 
 /** Espera a que Pekito termine el turno (ya no «piensa» ni hay una acción en curso); el panel pudo ceder la pantalla. */
 async function esperarTurno(page: Page) {
-  await expect(page.getByText(/Pekito está pensando…|^Pensando…$|^Buscando en el catálogo…$|^Consultando|^Abriendo|^Preparando/)).toHaveCount(0, { timeout: 10_000 });
+  await expect(page.getByText(/Peekito está pensando…|^Pensando…$|^Buscando en el catálogo…$|^Consultando|^Abriendo|^Preparando/)).toHaveCount(0, { timeout: 10_000 });
 }
 
 async function reabrir(page: Page) {
@@ -41,7 +41,7 @@ async function reabrir(page: Page) {
   await expect(panel(page)).toBeVisible();
 }
 
-test.describe("Recorrido J · Pekito, el asistente global", () => {
+test.describe("Recorrido J · Peekito, el asistente global", () => {
   // Independiente del servidor real: por omisión la voz no está disponible.
   test.beforeEach(async ({ page }) => {
     await page.route("**/api/asistente/estado", (ruta) =>
@@ -67,7 +67,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await expect(bienvenida).toBeHidden();
 
     // Segunda vez: no vuelve a salir sola. Con la conversación vacía abre el lanzador.
-    await panel(page).getByRole("button", { name: "Cerrar Pekito" }).click();
+    await panel(page).getByRole("button", { name: "Cerrar Peekito" }).click();
     await expect(panel(page)).toBeHidden();
     await page.getByRole("button", MASCOTA).click();
     await expect(page.getByRole("dialog", { name: /Un agente que sí te atiende/ })).toBeHidden();
@@ -75,16 +75,16 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await expect(lanzador.getByRole("button", { name: /Volver a «Por texto o por voz»/ })).toHaveCount(0);
     await expect(lanzador.getByRole("heading", { name: /Por texto\s+o por voz/ })).toBeVisible();
     await expect(lanzador.getByText(/Prototipo de demostración en Laboratorio de Innovación Digital\. No realiza gestiones oficiales/i)).toBeVisible();
-    await expect(lanzador.getByText(/Pekito te ayuda a orientarte en la app/i)).toBeVisible();
+    await expect(lanzador.getByText(/Peekito te ayuda a orientarte en la app/i)).toBeVisible();
 
     // «Hablar» explica por qué no está disponible; «Escribir» abre el chat con el estado vacío del Figma.
     const hablar = lanzador.getByRole("button", { name: /^Hablar/ });
     await expect(hablar).toHaveAttribute("aria-disabled", "true");
     await expect(lanzador.getByText("La voz no está disponible ahora. Puedes escribirme.")).toBeVisible();
     await lanzador.getByRole("button", { name: /^Escribir/ }).click();
-    await expect(lanzador.getByRole("heading", { name: "Hola, soy Pekito" })).toBeVisible();
-    await expect(lanzador.getByRole("textbox", { name: "Escribe a Pekito" })).toBeFocused();
-    await expect(lanzador.getByText(/Pekito puede equivocarse\. Confirma los datos importantes con la fuente oficial/i)).toBeVisible();
+    await expect(lanzador.getByRole("heading", { name: "Hola, soy Peekito" })).toBeVisible();
+    await expect(lanzador.getByRole("textbox", { name: "Escribe a Peekito" })).toBeFocused();
+    await expect(lanzador.getByText(/Peekito puede equivocarse\. Confirma los datos importantes con la fuente oficial/i)).toBeVisible();
     const sugerencias = lanzador.getByRole("list", { name: "Sugerencias para empezar" }).getByRole("button");
     await expect(sugerencias).toHaveText([
       "Reportar un bache",
@@ -104,7 +104,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
 
     // Las sugerencias prellenan; nunca envían solas.
     await panel(page).getByRole("button", { name: "Reportar un bache" }).click();
-    await expect(panel(page).getByRole("textbox", { name: "Escribe a Pekito" })).toHaveValue("Quiero reportar un bache");
+    await expect(panel(page).getByRole("textbox", { name: "Escribe a Peekito" })).toHaveValue("Quiero reportar un bache");
     await expect(panel(page).getByRole("log")).not.toContainText("Quiero reportar un bache");
 
     await escribir(page, "Quiero reportar un bache en la calle 60 del Centro");
@@ -121,7 +121,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
       await expect(page.getByRole("button", { name: "Enviar a la simulación" })).toHaveCount(0);
     });
 
-    await test.step("Pekito cede la pantalla y cuenta qué hizo en una línea", async () => {
+    await test.step("Peekito cede la pantalla y cuenta qué hizo en una línea", async () => {
       await expect(panel(page)).toBeHidden({ timeout: 8000 });
       await expect(page.getByRole("status").filter({ hasText: /Listo: abrí «Bache a la vista»/ })).toBeVisible();
     });
@@ -224,7 +224,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await expect(page.getByRole("dialog", { name: "Ayuda inmediata" })).toBeVisible();
   });
 
-  test("Pekito no aparece en salud mental ni en Línea Mujer y libera el espacio reservado", async ({ page }) => {
+  test("Peekito no aparece en salud mental ni en Línea Mujer y libera el espacio reservado", async ({ page }) => {
     await page.goto("/");
     await esperarTitulo(page);
     await expect(page.getByRole("button", MASCOTA)).toBeVisible();
@@ -243,7 +243,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await expect(page.getByRole("button", MASCOTA)).toBeVisible();
   });
 
-  test("al pedir apoyo psicológico lo lleva a Salud mental, donde Pekito ya no está", async ({ page }) => {
+  test("al pedir apoyo psicológico lo lleva a Salud mental, donde Peekito ya no está", async ({ page }) => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
@@ -254,7 +254,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
     await expect(panel(page)).toHaveCount(0);
   });
 
-  test("señala un control con un cursor guía que vuela desde Pekito (anillo en táctil y con movimiento reducido)", async ({ page }, info) => {
+  test("señala un control con un cursor guía que vuela desde Peekito (anillo en táctil y con movimiento reducido)", async ({ page }, info) => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
@@ -375,7 +375,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
       await page.getByRole("button", { name: "Saltar" }).click();
       await panel(page).getByRole("button", { name: /Volver a «Por texto o por voz»/ }).click();
 
-      await test.step("si la voz está disponible, Pekito la ofrece sin pedir elegir proveedor", async () => {
+      await test.step("si la voz está disponible, Peekito la ofrece sin pedir elegir proveedor", async () => {
         await expect(panel(page).getByRole("button", { name: /^Hablar/ })).not.toHaveAttribute("aria-disabled", "true");
         await expect(panel(page).getByRole("radio")).toHaveCount(0);
         await expect(panel(page).getByText(/OpenAI Realtime|Respuestas programadas/)).toHaveCount(0);
@@ -395,7 +395,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
         await servidor(page, { type: "response.created", response: { id: "r1" } });
         await servidor(page, { type: "response.output_audio_transcript.delta", item_id: "m1", delta: "Claro, te ayudo con ese reporte." });
         await expect(panel(page).getByText("Claro, te ayudo con ese reporte.")).toBeVisible();
-        await expect(panel(page).getByRole("status").filter({ hasText: "Pekito está hablando" })).toBeVisible();
+        await expect(panel(page).getByRole("status").filter({ hasText: "Peekito está hablando" })).toBeVisible();
         await servidor(page, {
           type: "response.done",
           response: { id: "r1", status: "completed", output: [{ id: "m1", type: "message", content: [{ type: "output_audio", transcript: "Claro, te ayudo con ese reporte." }] }] },
@@ -429,7 +429,7 @@ test.describe("Recorrido J · Pekito, el asistente global", () => {
         await page.getByRole("button", { name: "Colgar" }).click();
         await expect(page.getByRole("button", { name: "Colgar" })).toHaveCount(0);
         await reabrir(page);
-        await expect(panel(page).getByRole("textbox", { name: "Escribe a Pekito" })).toBeVisible();
+        await expect(panel(page).getByRole("textbox", { name: "Escribe a Peekito" })).toBeVisible();
         await expect(panel(page).getByRole("log")).toContainText("Claro, te ayudo con ese reporte.");
         await expect(panel(page).getByRole("region", { name: /Preparado para que lo revises: Bache a la vista/ })).toBeVisible();
       });

@@ -1,23 +1,24 @@
-import { cx, LabGlyph } from "@/design-system";
-import "./presencia-calma.css";
+import { cx } from "@/design-system";
+import { PekitoMascota } from "@/features/assistant";
 
 export interface PresenciaCalmaProps {
   tamano?: number;
   className?: string;
+  estado?: "reposo" | "pensando" | "conectando" | "escuchando" | "hablando";
 }
 
 /**
- * Figura del acompañante: glifo del Laboratorio en tonos suaves que respira lento. Es decorativa
+ * Alma, figura opcional del acompañante, con movimientos lentos. Es decorativa
  * (aria-hidden), opcional (se puede ocultar) y distinta de Pekito, el asistente general.
  */
-export function PresenciaCalma({ tamano = 72, className }: PresenciaCalmaProps) {
+export function PresenciaCalma({ tamano = 72, className, estado = "reposo" }: PresenciaCalmaProps) {
   return (
     <span
       aria-hidden="true"
       className={cx("inline-flex shrink-0 items-center justify-center rounded-full bg-azul-suave text-azul/60 ring-8 ring-lima-suave", className)}
       style={{ width: tamano, height: tamano }}
     >
-      <LabGlyph tamano={Math.round(tamano * 0.5)} className="presencia-calma-glifo" />
+      <PekitoMascota experto="bienestar" ancho={Math.round(tamano * 0.75)} estado={estado} />
     </span>
   );
 }

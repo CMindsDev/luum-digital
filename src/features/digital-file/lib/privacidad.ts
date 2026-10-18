@@ -15,7 +15,7 @@ export interface DefinicionPreferencia {
 export const PREFERENCIAS_EDITABLES: readonly DefinicionPreferencia[] = [
   {
     clave: "asistentePuedeUsarNombre",
-    etiqueta: msg("Pekito puede saludarte por tu nombre"),
+    etiqueta: msg("Peekito puede saludarte por tu nombre"),
     descripcion: msg("Sólo usa tu nombre ficticio. Nunca lee tus documentos ni tus datos de contacto, y no envía nada por ti."),
     guia: "expediente.privacidad_nombre_asistente",
   },

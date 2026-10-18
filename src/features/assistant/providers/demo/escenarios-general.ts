@@ -373,7 +373,7 @@ export const escenariosGeneral: Escenarios = async (texto, n, herramientas) => {
   if (/\b(eres|estoy hablando con) (una |un )?(ia|inteligencia artificial|persona|humano|humana|real|robot|bot|oficial)\b|\bquien eres\b|\bque eres\b/.test(n)) {
     herramientas.decir(
       t(
-        "No soy una persona: soy Pekito, un asistente virtual para orientarte en la app. Tampoco sustituyo la atención oficial: te ayudo a encontrar servicios, preparar reportes y moverte por aquí. Tú siempre confirmas antes de continuar.",
+        "No soy una persona: soy Peekito, un asistente virtual para orientarte en la app. Tampoco sustituyo la atención oficial: te ayudo a encontrar servicios, preparar reportes y moverte por aquí. Tú siempre confirmas antes de continuar.",
       ),
     );
     return;

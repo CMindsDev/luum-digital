@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { AmbitoAsistente } from "@shared/asistente/acciones";
 import type { EventoAsistente } from "@/services/contracts";
 import { cambiarIdioma } from "@/i18n";
+import type { ExpertoGeneral } from "@shared/asistente/expertos";
 import { pantallaDe } from "../../runtime/__fixtures__/repositorios";
 import { ErrorAsistente } from "../avisos";
 import { RealtimeAssistantProvider, type SalidaAudio } from "./RealtimeAssistantProvider";
@@ -83,6 +84,15 @@ function audioFalso(): SalidaAudio & { play: ReturnType<typeof vi.fn> } {
   return { play: vi.fn(async () => undefined), pause: vi.fn(), muted: true, srcObject: null, autoplay: true };
 }
 
+function microfonoFalso() {
+  const pista = { stop: vi.fn(), enabled: true };
+  vi.stubGlobal("MediaStream", class {
+    getAudioTracks() { return [pista]; }
+    getTracks() { return [pista]; }
+  });
+  return { pista, microfono: new MediaStream() };
+}
+
 function servidorFalso(respuestaConexion?: () => Response) {
   return vi.fn<typeof fetch>(async (entrada, init) => {
     const ruta = String(entrada);
@@ -94,7 +104,7 @@ function servidorFalso(respuestaConexion?: () => Response) {
   });
 }
 
-async function conectar(opciones: { ambito?: AmbitoAsistente; fetch?: ReturnType<typeof servidorFalso>; tiempoCanalMs?: number } = {}) {
+async function conectar(opciones: { ambito?: AmbitoAsistente; experto?: ExpertoGeneral; fetch?: ReturnType<typeof servidorFalso>; tiempoCanalMs?: number } = {}) {
   const fetchFalso = opciones.fetch ?? servidorFalso();
   const proveedor = new RealtimeAssistantProvider({
     fetch: fetchFalso,
@@ -106,7 +116,7 @@ async function conectar(opciones: { ambito?: AmbitoAsistente; fetch?: ReturnType
     pantallaDebounceMs: 400,
     ...(opciones.tiempoCanalMs ? { tiempoCanalMs: opciones.tiempoCanalMs } : {}),
   });
-  const sesion = await proveedor.iniciar({ ambito: opciones.ambito ?? "general", pantalla: pantallaDe() });
+  const sesion = await proveedor.iniciar({ ambito: opciones.ambito ?? "general", pantalla: pantallaDe(), ...(opciones.experto ? { experto: opciones.experto } : {}) });
   const peer = PeerFalso.ultimo;
   if (!peer) throw new Error("No se creó el peer");
   const eventos: EventoAsistente[] = [];
@@ -156,11 +166,19 @@ describe("RealtimeAssistantProvider", () => {
     sesion.cerrar();
   });
 
+  it.each(["urbano", "juridico", "tramites", "medio_ambiente"] as const)("envía el perfil %s al servidor de voz y texto", async (experto) => {
+    const { fetchFalso, sesion } = await conectar({ experto });
+    expect(JSON.parse(String(fetchFalso.mock.calls[0]?.[1]?.body))).toMatchObject({ ambito: "general", experto });
+    sesion.cerrar();
+  });
+
   it("envía texto como ítem de usuario y pide una respuesta; los deltas y el texto final llegan como eventos", async () => {
     const { sesion, canal, eventos } = await conectar();
     sesion.enviarTexto("Quiero reportar un bache");
-    expect(canal.tipos()).toEqual(["conversation.item.create", "response.create"]);
+    expect(canal.tipos()).toEqual(["conversation.item.create", "conversation.item.create", "response.create"]);
     expect(canal.enviados[0]).toMatchObject({ item: { type: "message", role: "user", content: [{ type: "input_text", text: "Quiero reportar un bache" }] } });
+    expect(canal.enviados[1]).toMatchObject({ item: { role: "system", content: [{ text: expect.stringContaining("Orientación urbana") }] } });
+    expect(eventos).toContainEqual({ tipo: "experto", experto: "urbano" });
 
     canal.servidor({ type: "response.created", response: { id: "resp_1" } });
     canal.servidor({ type: "response.output_text.delta", item_id: "item_1", delta: "Claro, " });
@@ -315,5 +333,65 @@ describe("RealtimeAssistantProvider", () => {
     const { canal, eventos } = await conectar();
     canal.servidor({ type: "conversation.item.input_audio_transcription.completed", item_id: "voz_1", transcript: "Hay un bache" });
     expect(eventos).toContainEqual({ tipo: "transcripcion_usuario", mensajeId: "voz_1", texto: "Hay un bache" });
+  });
+
+  it("enruta la voz antes de responder, una sola vez por turno y sin colgar el micrófono", async () => {
+    const { sesion, canal, eventos, peer } = await conectar();
+    const { pista, microfono } = microfonoFalso();
+    await sesion.iniciarVoz(microfono);
+    expect(canal.enviados[0]).toMatchObject({
+      type: "session.update",
+      session: { audio: { input: { turn_detection: { create_response: false, interrupt_response: true } } } },
+    });
+    canal.enviados.length = 0;
+    canal.servidor({ type: "input_audio_buffer.speech_stopped" });
+    expect(canal.tipos()).not.toContain("response.create");
+    canal.servidor({ type: "conversation.item.input_audio_transcription.completed", item_id: "voz_a", transcript: "¿Qué reglamento aplica?" });
+    expect(canal.tipos()).toEqual(["conversation.item.create", "response.create"]);
+    expect(canal.enviados[0]).toMatchObject({ item: { role: "system", content: [{ text: expect.stringContaining("jurídica") }] } });
+    expect(eventos).toContainEqual({ tipo: "experto", experto: "juridico" });
+    canal.servidor({ type: "conversation.item.input_audio_transcription.completed", item_id: "voz_a", transcript: "¿Qué reglamento aplica?" });
+    expect(canal.tipos().filter((tipo) => tipo === "response.create")).toHaveLength(1);
+    expect(eventos.filter((evento) => evento.tipo === "transcripcion_usuario")).toHaveLength(1);
+    expect(peer.cerrado).toBe(false);
+    expect(pista.stop).not.toHaveBeenCalled();
+    sesion.cerrar();
+  });
+
+  it("cambia de tema y vuelve al perro en la misma conexión, sin acumular perfiles", async () => {
+    const { sesion, canal, eventos } = await conectar({ experto: "urbano" });
+    sesion.enviarTexto("Hola");
+    expect(eventos).toContainEqual({ tipo: "experto", experto: "general" });
+    expect(canal.enviados[1]).toMatchObject({ item: { content: [{ text: expect.stringContaining("perro orquestador") }] } });
+    canal.servidor({ type: "response.done", response: { status: "completed", output: [] } });
+    canal.enviados.length = 0;
+    sesion.enviarTexto("Quiero pagar predial");
+    expect(canal.tipos()).toEqual(["conversation.item.create", "conversation.item.delete", "conversation.item.create", "response.create"]);
+    expect(eventos).toContainEqual({ tipo: "experto", experto: "tramites" });
+    sesion.cerrar();
+  });
+
+  it("si falla la transcripción no responde sin conocer la pregunta y avisa", async () => {
+    const { sesion, canal, eventos } = await conectar();
+    const { microfono } = microfonoFalso();
+    await sesion.iniciarVoz(microfono);
+    canal.enviados.length = 0;
+    canal.servidor({ type: "input_audio_buffer.speech_stopped" });
+    canal.servidor({ type: "conversation.item.input_audio_transcription.failed", item_id: "voz_fallo" });
+    expect(eventos).toContainEqual({ tipo: "aviso", aviso: expect.objectContaining({ titulo: "No pude entender lo que dijiste" }) });
+    expect(canal.tipos()).not.toContain("response.create");
+    expect(eventos.at(-1)).toEqual({ tipo: "estado", estado: "escuchando" });
+    sesion.cerrar();
+  });
+
+  it("mostrar Alma en el router no abre ni transfiere la conversación privada", async () => {
+    const { sesion, canal, eventos, fetchFalso } = await conectar();
+    sesion.enviarTexto("Necesito apoyo psicológico");
+    expect(eventos).toContainEqual({ tipo: "experto", experto: "bienestar" });
+    expect(sesion.ambito).toBe("general");
+    expect(canal.enviados[1]).toMatchObject({ item: { content: [{ text: expect.stringContaining("no transfieras mensajes") }] } });
+    expect(fetchFalso).toHaveBeenCalledTimes(1);
+    expect(eventos.some((evento) => evento.tipo === "accion")).toBe(false);
+    sesion.cerrar();
   });
 });

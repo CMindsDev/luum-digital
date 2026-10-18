@@ -7,8 +7,8 @@ import { esperarTitulo, revisarAccesibilidad, sinDesplazamientoHorizontal } from
  * tres pantallas y que no deje animaciones infinitas con movimiento reducido. Sin red externa.
  */
 
-const MASCOTA = { name: /Abrir Pekito/ };
-const panel = (page: Page) => page.getByRole("dialog", { name: /PEKITO/i });
+const MASCOTA = { name: /Abrir Peekito/ };
+const panel = (page: Page) => page.getByRole("dialog", { name: /PEEKITO/i });
 
 type Caja = { x: number; y: number; width: number; height: number };
 
@@ -28,7 +28,7 @@ async function abrirChat(page: Page) {
   await expect(panel(page)).toBeVisible();
 }
 
-test.describe("Pekito · accesibilidad y layout", () => {
+test.describe("Peekito · accesibilidad y layout", () => {
   // Independiente del servidor real: por omisión la voz no está disponible.
   test.beforeEach(async ({ page }) => {
     await page.route("**/api/asistente/estado", (ruta) =>
@@ -67,16 +67,16 @@ test.describe("Pekito · accesibilidad y layout", () => {
 
     // Con la píldora (acción y respuesta) y en el otro lado.
     await abrirChat(page);
-    await panel(page).getByRole("textbox", { name: "Escribe a Pekito" }).fill("Quiero reportar un bache en la calle 60 del Centro");
+    await panel(page).getByRole("textbox", { name: "Escribe a Peekito" }).fill("Quiero reportar un bache en la calle 60 del Centro");
     await panel(page).getByRole("button", { name: "Enviar", exact: true }).click();
     await expect(page.locator('[data-guia="asistente.linea"]')).toContainText("Listo: abrí", { timeout: 8000 });
     await verificar("con la píldora");
     await sinDesplazamientoHorizontal(page);
 
-    await page.getByRole("button", { name: "Descartar mensaje de Pekito" }).click();
+    await page.getByRole("button", { name: "Descartar mensaje de Peekito" }).click();
     await mascota.click();
-    await panel(page).getByRole("button", { name: /^Mover Pekito al lado/ }).click();
-    await panel(page).getByRole("button", { name: "Cerrar Pekito" }).click();
+    await panel(page).getByRole("button", { name: /^Mover Peekito al lado/ }).click();
+    await panel(page).getByRole("button", { name: "Cerrar Peekito" }).click();
     await expect(panel(page)).toBeHidden();
     await expect(page.locator("[data-asistente-ui][data-lado]").first()).toHaveAttribute("data-lado", "izquierda");
     await verificar("en el lado izquierdo");
@@ -117,7 +117,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
 
     // Con la bienvenida ya vista, el panel se abre con teclado.
     await expect(panel(page)).toBeVisible();
-    await expect(panel(page).getByRole("heading", { name: "PEKITO", exact: true })).toBeFocused();
+    await expect(panel(page).getByRole("heading", { name: "PEEKITO", exact: true })).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(panel(page)).toBeHidden();
     await expect(mascota).toBeFocused();
@@ -141,12 +141,12 @@ test.describe("Pekito · accesibilidad y layout", () => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
-    const campo = panel(page).getByRole("textbox", { name: "Escribe a Pekito" });
+    const campo = panel(page).getByRole("textbox", { name: "Escribe a Peekito" });
     await campo.focus();
     await page.keyboard.type("Hola");
     await page.keyboard.press("Shift+Enter");
-    await page.keyboard.type("Pekito");
-    await expect(campo).toHaveValue("Hola\nPekito");
+    await page.keyboard.type("Peekito");
+    await expect(campo).toHaveValue("Hola\nPeekito");
     await expect(panel(page).getByRole("log")).not.toContainText("Hola");
     await page.keyboard.press("Enter");
     await expect(campo).toHaveValue("");
@@ -155,7 +155,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
     await expect(panel(page).getByRole("button", { name: "Enviar", exact: true })).toBeDisabled();
   });
 
-  test("Alt + flecha mueve a Pekito de lado con teclado", async ({ page }) => {
+  test("Alt + flecha mueve a Peekito de lado con teclado", async ({ page }) => {
     await page.goto("/");
     await esperarTitulo(page);
     const mascota = page.getByRole("button", MASCOTA);
@@ -179,7 +179,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
     await expect(panel(page)).toBeVisible();
 
     // Chat vacío (estado inicial del Figma 22:253).
-    await expect(panel(page).getByRole("heading", { name: "Hola, soy Pekito" })).toBeVisible();
+    await expect(panel(page).getByRole("heading", { name: "Hola, soy Peekito" })).toBeVisible();
     await revisarAccesibilidad(page);
 
     // Lanzador «Por texto o por voz».
@@ -189,7 +189,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
 
     // Chat con respuesta, fuentes y tarjeta de ayuda humana.
     await panel(page).getByRole("button", { name: /^Escribir/ }).click();
-    await panel(page).getByRole("textbox", { name: "Escribe a Pekito" }).fill("Me quiero morir");
+    await panel(page).getByRole("textbox", { name: "Escribe a Peekito" }).fill("Me quiero morir");
     await panel(page).getByRole("button", { name: "Enviar", exact: true }).click();
     await expect(panel(page).getByRole("heading", { name: "¿Necesitas ayuda ahora?" })).toBeVisible();
     await expect(panel(page).getByRole("log")).toContainText("Lo más importante ahora");
@@ -200,7 +200,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
-    await panel(page).getByRole("textbox", { name: "Escribe a Pekito" }).fill("Quiero consultar el folio DEMO-R-9999999");
+    await panel(page).getByRole("textbox", { name: "Escribe a Peekito" }).fill("Quiero consultar el folio DEMO-R-9999999");
     await panel(page).getByRole("button", { name: "Enviar", exact: true }).click();
     await expect(page.getByText(/No encontré un reporte/).first()).toBeVisible();
     if (!(await panel(page).isVisible())) await page.getByRole("button", { name: MASCOTA.name }).click();
@@ -212,7 +212,7 @@ test.describe("Pekito · accesibilidad y layout", () => {
     await page.goto("/");
     await esperarTitulo(page);
     await abrirChat(page);
-    const log = panel(page).getByRole("log", { name: "Conversación con Pekito" });
+    const log = panel(page).getByRole("log", { name: "Conversación con Peekito" });
     await expect(log).toHaveAttribute("aria-live", "polite");
     const sinNombre = await panel(page).evaluate((raiz) =>
       Array.from(raiz.querySelectorAll("button, a[href], textarea, input")).filter((el) => {

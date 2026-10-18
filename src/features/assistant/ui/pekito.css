@@ -28,11 +28,67 @@
   --pekito-tenue: #6e6e6e;
   --pekito-cursor: #bfbfbf;
   --pekito-pista: #5b615d;
-  --pekito-acento: var(--color-magenta);
-  --pekito-halo: rgb(246 47 162 / 0.1);
-  --pekito-halo-2: rgb(246 47 162 / 0.16);
-  --pekito-halo-3: rgb(246 47 162 / 0.22);
+  --pekito-acento: var(--color-magenta-tinta);
+  --pekito-acento-tinta: var(--pekito-acento);
+  --pekito-tema-suave: var(--color-magenta-suave);
+  --pekito-orbe-fondo: var(--pekito-tema-suave);
+  --pekito-halo: color-mix(in srgb, var(--pekito-acento) 10%, transparent);
+  --pekito-halo-2: color-mix(in srgb, var(--pekito-acento) 16%, transparent);
+  --pekito-halo-3: color-mix(in srgb, var(--pekito-acento) 22%, transparent);
   font-family: "Host Grotesk Variable", "Host Grotesk", var(--font-sans);
+}
+
+.pekito[data-experto="bienestar"] {
+  --pekito-acento: var(--color-lila-tinta);
+  --pekito-tema-suave: var(--color-lila-suave);
+}
+
+.pekito[data-experto="urbano"] {
+  --pekito-acento: var(--color-exito);
+  --pekito-tema-suave: var(--color-verde-suave);
+}
+
+.pekito[data-experto="juridico"] {
+  --pekito-acento: var(--color-cafe);
+  --pekito-tema-suave: var(--color-cafe-suave);
+  --pekito-orbe-fondo: var(--color-crema-calida);
+}
+
+.pekito[data-experto="tramites"] {
+  --pekito-acento: var(--color-azul);
+  --pekito-tema-suave: var(--color-azul-suave);
+}
+
+.pekito[data-experto="medio_ambiente"] {
+  --pekito-acento: var(--color-exito);
+  --pekito-tema-suave: var(--color-lima-suave);
+}
+
+.pekito-orbe {
+  background-color: var(--pekito-orbe-fondo);
+  transition:
+    background-color var(--pekito-duracion-morph) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--pekito-duracion-morph) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--duracion-media) var(--ease-suave);
+}
+
+.pekito-linea,
+.pekito-estado-experto,
+.pekito-halo {
+  transition:
+    background-color var(--pekito-duracion-morph, var(--duracion-lenta)) ease,
+    border-color var(--pekito-duracion-morph, var(--duracion-lenta)) ease,
+    color var(--pekito-duracion-morph, var(--duracion-lenta)) ease;
+}
+
+@keyframes pekito-cambio-experto {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.pekito-progreso-experto {
+  transform-origin: left;
+  animation: pekito-cambio-experto var(--pekito-duracion-morph) cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .pekito-noche {
@@ -50,6 +106,24 @@
   background-color: var(--pk-noche);
   color: var(--pk-texto);
   color-scheme: dark;
+}
+
+.pekito-claro {
+  --pk-noche: var(--pekito-fondo);
+  --pk-noche-2: var(--color-superficie-2);
+  --pk-borde: var(--pekito-pista);
+  --pk-texto: var(--pekito-tinta);
+  --pk-texto-suave: var(--pekito-tenue);
+  --pk-placeholder: var(--pekito-tenue);
+  --pk-lima: var(--pekito-acento-tinta);
+  --pk-chip: var(--pekito-tema-suave);
+  --pk-superficie: var(--color-superficie);
+  --pk-compositor: var(--color-superficie);
+  --pk-peligro: var(--color-peligro);
+  --color-foco: var(--pekito-acento-tinta);
+  background-color: var(--pekito-fondo);
+  color: var(--pk-texto);
+  color-scheme: light;
 }
 
 .pekito-marca {
@@ -280,7 +354,14 @@
     opacity: 1;
   }
   .pekito-presencia,
-  .pekito-borde-actuacion {
+  .pekito-borde-actuacion,
+  .pekito-orbe,
+  .pekito-linea,
+  .pekito-estado-experto,
+  .pekito-halo {
     transition: none;
+  }
+  .pekito-progreso-experto {
+    animation: none;
   }
 }

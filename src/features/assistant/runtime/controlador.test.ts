@@ -46,7 +46,7 @@ class ProveedorFalso implements AssistantProvider {
   }
 }
 
-function crear(proveedor: AssistantProvider) {
+function crear(proveedor: AssistantProvider, alCambiarExperto = vi.fn()) {
   const store = createAssistantStore("general");
   const navegar = vi.fn();
   const controlador = crearControladorAsistente({
@@ -58,6 +58,7 @@ function crear(proveedor: AssistantProvider) {
     obtenerPantalla: () => pantallaDe(),
     guardas: null,
     store,
+    alCambiarExperto,
   });
   return { controlador, store, navegar };
 }
@@ -92,6 +93,40 @@ describe("crearControladorAsistente", () => {
     const { controlador } = crear(new DemoAssistantProvider({ retrasoMs: 0 }));
     await controlador.iniciar();
     expect(controlador.silenciarVoz(true)).toBe(false);
+  });
+
+  it("enruta cada pregunta automáticamente sin reconectar ni borrar mensajes", async () => {
+    const proveedor = new ProveedorFalso();
+    const alCambiarExperto = vi.fn();
+    const { controlador, store } = crear(proveedor, alCambiarExperto);
+    await controlador.enviarTexto("Necesito un trámite");
+    expect(alCambiarExperto).toHaveBeenLastCalledWith("tramites");
+    await controlador.enviarTexto("Consulta el reglamento municipal");
+    expect(alCambiarExperto).toHaveBeenLastCalledWith("juridico");
+    expect(proveedor.sesiones).toHaveLength(1);
+    expect(store.getState().mensajes.map((mensaje) => mensaje.texto)).toEqual(["Necesito un trámite", "Consulta el reglamento municipal"]);
+    controlador.cerrar();
+    expect(alCambiarExperto).toHaveBeenLastCalledWith("general");
+    await controlador.enviarTexto("¿Y dónde lo encuentro?");
+    expect(alCambiarExperto).toHaveBeenLastCalledWith("general");
+    controlador.cerrar();
+  });
+
+  it("si se pausa mientras conecta, cierra la sesión descartada cuando llegue", async () => {
+    const proveedor = new ProveedorFalso();
+    const sesion = await proveedor.iniciar({ ambito: "general", pantalla: pantallaDe() });
+    const cerrar = vi.spyOn(sesion, "cerrar");
+    type SesionFalsa = Awaited<ReturnType<ProveedorFalso["iniciar"]>>;
+    let resolver: ((valor: SesionFalsa) => void) | undefined;
+    vi.spyOn(proveedor, "iniciar").mockImplementationOnce(() => new Promise<SesionFalsa>((resolve) => { resolver = resolve; }));
+    const { controlador, store } = crear(proveedor);
+    const pendiente = controlador.iniciar();
+    controlador.pausar();
+    resolver?.(sesion);
+    expect((await pendiente).ok).toBe(false);
+    expect(cerrar).toHaveBeenCalledOnce();
+    expect(controlador.sesion).toBeNull();
+    expect(store.getState().avisos).toEqual([]);
   });
 
   it("con el proveedor demo prepara «Bache a la vista» y deja el recibo anclado tras el mensaje de la persona", async () => {

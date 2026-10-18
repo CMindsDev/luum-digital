@@ -8,7 +8,7 @@ export function AvisoAsistente() {
       <div className="min-w-0 text-[0.9375rem] text-tinta">
         <p className="font-semibold text-marino">Preparado por el asistente: revisa y confirma</p>
         <p className="mt-0.5">
-          Pekito llenó algunos campos con lo que le dijiste. Corrige lo que haga falta: nada se envía hasta que tú lo confirmes.
+          Peekito llenó algunos campos con lo que le dijiste. Corrige lo que haga falta: nada se envía hasta que tú lo confirmes.
         </p>
       </div>
     </div>

@@ -23,6 +23,7 @@ import { ipDe, leerJson, respuestaError, type LimitadorVentana } from "../seguri
 import { clasificarIntencion, evaluarAccionSolicitada } from "./guardas";
 import type { RegistroLlamadas } from "./llamadas";
 import { armarSesionRealtime } from "./sesion-realtime";
+import { preguntaPorPreferenciasDelAsistente } from "../conocimiento/alcance";
 
 /** Tras "insufficient_quota" las conexiones nuevas no llaman al proveedor durante este tiempo. */
 const PAUSA_SIN_CREDITOS_MS = 60_000;
@@ -139,6 +140,7 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
         voz: config.voz,
         ...(solicitud.nombreParaSaludo ? { nombreParaSaludo: solicitud.nombreParaSaludo } : {}),
         ...(solicitud.idioma ? { idioma: solicitud.idioma } : {}),
+        ...(solicitud.experto ? { experto: solicitud.experto } : {}),
       });
       const llamada = await realtime.crearLlamada(solicitud.sdp, sesion);
       if (!llamada.ok) {
@@ -228,6 +230,15 @@ export function rutasAsistente(dependencias: DependenciasRutasAsistente): Hono {
       return respuestaError(c, 400, { error: "La consulta no es válida.", codigo: CODIGOS_ERROR.solicitudInvalida });
     }
     const { consulta, idioma } = resultado.data;
+    if (preguntaPorPreferenciasDelAsistente(consulta)) {
+      return c.json({
+        respuesta: null,
+        generada: false,
+        citas: [],
+        pasajes: [],
+        intencion: { categoria: "fuera_de_alcance", modo: config.guardas },
+      } satisfies RespuestaBusqueda);
+    }
     const [intencion, encontrados] = await Promise.all([
       clasificarIntencion({ clef, modo: config.guardas, texto: consulta, registrar }),
       conocimiento.buscar(consulta),

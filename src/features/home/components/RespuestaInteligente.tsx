@@ -85,7 +85,7 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
     return (
       <Card as="section" relleno="lg" aria-labelledby="titulo-respuesta-inteligente" aria-live="polite" aria-busy="true" data-guia="busqueda.respuesta">
         <h2 id="titulo-respuesta-inteligente" className="text-xl font-semibold text-marino sm:text-2xl">
-          {t("Respuesta de Pekito")}
+          {t("Respuesta de Peekito")}
         </h2>
         <div className="mt-4">
           <LoadingState etiqueta={t("Buscando información…")} variante="compacto" />
@@ -114,10 +114,10 @@ export function RespuestaInteligente({ consulta }: RespuestaInteligenteProps) {
         <div>
           <p className={cx("text-xs font-medium tracking-[0.12em] text-tinta-suave uppercase", FUENTE_MONO_ROTULO)}>{t("Orientación con fuentes")}</p>
           <h2 id="titulo-respuesta-inteligente" className="mt-1 text-xl font-semibold text-marino sm:text-2xl">
-            {t("Respuesta de Pekito")}
+            {t("Respuesta de Peekito")}
           </h2>
         </div>
-        <p className="text-sm text-tinta-suave">{t("Pekito puede equivocarse. Confirma los datos importantes con la fuente oficial.")}</p>
+        <p className="text-sm text-tinta-suave">{t("Peekito puede equivocarse. Confirma los datos importantes con la fuente oficial.")}</p>
       </div>
 
       {mostrarFueraDeAlcance ? (

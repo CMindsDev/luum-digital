@@ -100,6 +100,8 @@
   /* Magenta para fondos con texto blanco de tamaño normal (5.22:1). #F62FA2 sólo da 3.59:1. */
   --color-magenta-fuerte: #c2307f;
   --color-magenta-tinta: #9e1667;
+  --color-lila-suave: #eee8fc;
+  --color-lila-tinta: #65459b;
   --color-lima: #a2d200;
   /* Lima clara / amarillo lima de la banda Medio ambiente (café encima 9.84:1). */
   --color-lima-clara: #eeff54;

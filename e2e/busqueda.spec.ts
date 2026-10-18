@@ -152,7 +152,7 @@ test.describe("Búsqueda en lenguaje natural", () => {
   test("muestra una respuesta citada con fuentes y enlaces internos", async ({ page }) => {
     await page.goto("/buscar?q=licencia%20de%20funcionamiento");
     await esperarTitulo(page);
-    const respuesta = page.getByRole("region", { name: "Respuesta de Pekito" });
+    const respuesta = page.getByRole("region", { name: "Respuesta de Peekito" });
     await expect(respuesta).toBeVisible();
     await expect(respuesta.getByText(/Puedes revisar la ficha del trámite/)).toBeVisible();
     await respuesta.getByRole("button", { name: "Ir a la fuente 1" }).click();
@@ -170,7 +170,7 @@ test.describe("Búsqueda en lenguaje natural", () => {
       });
       await page.goto("/buscar?q=licencia%20de%20funcionamiento");
       await esperarTitulo(page);
-      await expect(page.getByRole("region", { name: "Respuesta de Pekito" })).toHaveCount(0);
+      await expect(page.getByRole("region", { name: "Respuesta de Peekito" })).toHaveCount(0);
       await expect(page.getByRole("region", { name: "Fichas del catálogo" })).toBeVisible();
     });
   });

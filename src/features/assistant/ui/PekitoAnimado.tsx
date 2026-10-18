@@ -1,7 +1,10 @@
 import type { CSSProperties } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cx } from "@/design-system";
 import type { EstadoMascota } from "./estado-mascota";
 import "./pekito-mascota.css";
+import type { ExpertoAsistente } from "@shared/asistente/expertos";
+import { AVATARES, DURACION_MORPH_MS } from "./expertos";
 
 /** Proporciones del recurso exportado de Figma (nodo 34:1586, 212.885 × 198.681). */
 const ANCHO = 212.885;
@@ -27,18 +30,25 @@ export interface PekitoAnimadoProps {
   /** Nivel de voz 0..1 (lo usa «hablando» para modular luces y cuerpo). */
   nivel?: number;
   className?: string;
+  experto?: ExpertoAsistente;
+  estatico?: boolean;
 }
 
 /**
  * Pekito animado. El cuerpo es el recurso de Figma sin cambios; los huecos funcionan como luces
  * (detrás del cuerpo) y los efectos (burbujas de pensamiento, ondas, chispas…) rodean la figura.
- * Todo es CSS (`pekito-mascota.css`): con movimiento reducido queda quieto pero cada estado conserva
- * una pose distinta (luces fijas). Es decorativo: el estado lo comunica el texto que lo acompaña.
+ * Los estados usan CSS y el cambio de figura usa un morph visual con Motion, sin alterar los SVG.
+ * Con movimiento reducido conserva poses fijas. El estado lo comunica el texto que lo acompaña.
  */
-export function PekitoAnimado({ estado, ancho = ANCHO, nivel, className }: PekitoAnimadoProps) {
+export function PekitoAnimado({ estado, ancho = ANCHO, nivel, className, experto = "general", estatico = false }: PekitoAnimadoProps) {
+  const reducido = useReducedMotion();
   const alto = Math.round((ancho * ALTO) / ANCHO);
   const efectos = ancho >= ANCHO_MINIMO_EFECTOS;
   const estilo = nivel === undefined ? undefined : ({ "--nivel": Math.min(1, Math.max(0, nivel)).toFixed(2) } as CSSProperties);
+  const avatar = AVATARES[experto];
+  const escala = Math.min(ANCHO / avatar.ancho, ALTO / avatar.alto);
+  const anchoImagen = avatar.ancho * escala;
+  const altoImagen = avatar.alto * escala;
 
   return (
     <svg
@@ -48,6 +58,8 @@ export function PekitoAnimado({ estado, ancho = ANCHO, nivel, className }: Pekit
       aria-hidden="true"
       focusable="false"
       data-estado={estado}
+      data-experto={experto}
+      data-estatico={estatico || undefined}
       data-pekito-animado
       style={estilo}
       className={cx("pekito-mascota block select-none", className)}
@@ -63,12 +75,24 @@ export function PekitoAnimado({ estado, ancho = ANCHO, nivel, className }: Pekit
       ) : null}
 
       <g className="pk-cuerpo">
-        <g className="pk-luces">
-          {LUCES.map((luz, indice) => (
-            <circle key={indice} className="pk-luz" style={{ "--i": indice } as CSSProperties} cx={luz.x} cy={luz.y} r="11.2" />
-          ))}
-        </g>
-        <image href="/brand/laboratorio/agente/pekito-mascota.svg" width={ANCHO} height={ALTO} />
+        <AnimatePresence initial={false}>
+          <motion.g
+            key={experto}
+            data-avatar-capa={experto}
+            initial={reducido ? false : { opacity: 0, scaleX: 0.92, scaleY: 1.06, filter: "blur(3px)" }}
+            animate={reducido ? { opacity: 1 } : { opacity: [0, 0.75, 1], scaleX: [0.92, 1.02, 1], scaleY: [1.06, 0.99, 1], filter: ["blur(3px)", "blur(1px)", "blur(0px)"] }}
+            exit={reducido ? { opacity: 0 } : { opacity: 0, scaleX: 1.04, scaleY: 0.96, filter: "blur(3px)" }}
+            transition={{ duration: reducido ? 0 : DURACION_MORPH_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: `${ANCHO / 2}px ${ALTO / 2}px` }}
+          >
+            {experto === "general" ? <g className="pk-luces">
+              {LUCES.map((luz, indice) => (
+                <circle key={indice} className="pk-luz" style={{ "--i": indice } as CSSProperties} cx={luz.x} cy={luz.y} r="11.2" />
+              ))}
+            </g> : null}
+            <image href={`/brand/laboratorio/agente/${avatar.ruta}`} x={(ANCHO - anchoImagen) / 2} y={ALTO - altoImagen} width={anchoImagen} height={altoImagen} />
+          </motion.g>
+        </AnimatePresence>
       </g>
 
       {efectos ? (

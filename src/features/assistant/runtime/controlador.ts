@@ -11,6 +11,8 @@
  */
 import type { AmbitoAsistente } from "@shared/asistente/acciones";
 import type { PantallaActual } from "@shared/asistente/pantalla";
+import type { ExpertoAsistente } from "@shared/asistente/expertos";
+import { enrutarExperto } from "@/domain/expertos-asistente";
 import type { AssistantProvider, AvisoAsistente, EventoAsistente, LlamadaAccion, SesionAsistente } from "@/services/contracts";
 import type { IdentidadDemo } from "@/types";
 import { aviso, ErrorAsistente } from "../providers/avisos";
@@ -43,6 +45,7 @@ export interface OpcionesControlador {
   consentimientoBienestar?: boolean;
   /** Nombre ficticio para saludar (sólo si la privacidad lo permite). */
   nombreParaSaludo?: string;
+  alCambiarExperto?: (experto: ExpertoAsistente) => void;
 }
 
 export type ResultadoInicio = { ok: true } | { ok: false; aviso: AvisoAsistente };
@@ -82,6 +85,8 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
   const conocimiento = opciones.conocimiento === undefined ? crearClienteConocimiento() : opciones.conocimiento;
   const obtenerPantalla = opciones.obtenerPantalla ?? (() => construirPantalla({ rol: obtenerActor().rol }));
   let proveedor = opciones.proveedor;
+  let experto: ExpertoAsistente = "general";
+  let generacion = 0;
   let sesion: SesionAsistente | null = null;
   let desuscribir: (() => void) | null = null;
   let iniciando: Promise<ResultadoInicio> | null = null;
@@ -108,6 +113,7 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
   };
 
   const desconectar = () => {
+    generacion += 1;
     desuscribir?.();
     desuscribir = null;
     sesion?.cerrar();
@@ -116,6 +122,11 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
   };
 
   const alEvento = (evento: EventoAsistente, sesionDelEvento: SesionAsistente) => {
+    if (evento.tipo === "experto") {
+      experto = evento.experto;
+      opciones.alCambiarExperto?.(experto);
+      return;
+    }
     store.getState().aplicarEvento(evento);
     if (evento.tipo === "accion") ejecutar(evento.llamada, sesionDelEvento);
     // La sesión se cerró sola (red cortada, tiempo máximo): el siguiente mensaje abre otra.
@@ -128,22 +139,29 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
   };
 
   async function abrir(): Promise<ResultadoInicio> {
+    const turno = generacion;
     const estado = store.getState();
     estado.establecerModo(proveedor.modo, proveedor.etiqueta);
     estado.aplicarEvento({ tipo: "estado", estado: "conectando" });
     const opcionesSesion: OpcionesSesionRealtime = {
       ambito,
       pantalla: obtenerPantalla(),
+      ...(ambito === "general" ? { experto: experto === "bienestar" ? "general" : experto } : {}),
       ...(opciones.nombreParaSaludo ? { nombreParaSaludo: opciones.nombreParaSaludo } : {}),
       ...(opciones.consentimientoBienestar !== undefined ? { consentimientoBienestar: opciones.consentimientoBienestar } : {}),
     };
     try {
       const nueva = await proveedor.iniciar(opcionesSesion);
+      if (turno !== generacion) {
+        nueva.cerrar();
+        return { ok: false, aviso: aviso("conexion_fallida") };
+      }
       sesion = nueva;
       desuscribir = nueva.suscribir((evento) => alEvento(evento, nueva));
       store.getState().aplicarEvento({ tipo: "estado", estado: "listo" });
       return { ok: true };
     } catch (error) {
+      if (turno !== generacion) return { ok: false, aviso: aviso("conexion_fallida") };
       const avisoInicio = error instanceof ErrorAsistente ? error.aviso : aviso("conexion_fallida");
       store.getState().agregarAviso(avisoInicio);
       store.getState().aplicarEvento({ tipo: "estado", estado: "inactivo" });
@@ -173,7 +191,13 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
       if (!limpio) return;
       store.getState().agregarMensajePersona(limpio, "texto");
       const inicio = await controlador.iniciar();
-      if (inicio.ok) sesion?.enviarTexto(limpio);
+      if (inicio.ok) {
+        if (ambito === "general" && !(sesion instanceof SesionRealtime)) {
+          experto = enrutarExperto(limpio, experto);
+          opciones.alCambiarExperto?.(experto);
+        }
+        sesion?.enviarTexto(limpio);
+      }
     },
 
     async iniciarVoz() {
@@ -242,6 +266,8 @@ export function crearControladorAsistente(opciones: OpcionesControlador): Contro
 
     cerrar() {
       desconectar();
+      experto = "general";
+      if (ambito === "general") opciones.alCambiarExperto?.(experto);
       store.getState().resetear();
     },
   };

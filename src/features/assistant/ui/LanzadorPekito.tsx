@@ -68,7 +68,7 @@ export function LanzadorPekito({ servidor, onHablar, onEscribir, onVerBienvenida
     ? t("Revisando si la voz está disponible…")
     : !hayReal
       ? t(servidor.motivoSinVoz)
-      : t("Pekito te escucha sólo mientras dure la llamada.");
+      : t("Peekito te escucha sólo mientras dure la llamada.");
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-6 pt-2 pb-6">
@@ -106,7 +106,7 @@ export function LanzadorPekito({ servidor, onHablar, onEscribir, onVerBienvenida
       </p>
 
       <p className="mt-5 text-xs leading-snug text-(--pk-texto-suave)">
-        {t("Pekito te ayuda a orientarte en la app. Lo que conversas en Bienestar va por separado.")}
+        {t("Peekito te ayuda a orientarte en la app. Lo que conversas en Bienestar va por separado.")}
       </p>
       <button
         type="button"
