@@ -43,12 +43,12 @@ export function SelectorIdioma({ className }: { className?: string }) {
       aria-label={`${t("Cambiar idioma a {{idioma}}", { idioma: destino.nombre })}`}
       title={t("Cambiar idioma a {{idioma}}", { idioma: destino.nombre })}
       className={cx(
-        "inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-boton px-2 text-xs font-semibold text-white hover:bg-white/10 focus-visible:outline-3 focus-visible:outline-foco disabled:opacity-60 sm:px-3 sm:text-sm",
+        "inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 rounded-boton px-2 text-xs font-semibold text-white hover:bg-white/10 focus-visible:outline-3 focus-visible:outline-foco disabled:opacity-60 sm:px-3 sm:text-sm",
         className,
       )}
     >
       <Languages aria-hidden="true" className="size-5 shrink-0" />
-      <span>{destino.nombreNativo}</span>
+      <span className="hidden sm:inline">{destino.nombreNativo}</span>
     </button>
   );
 }

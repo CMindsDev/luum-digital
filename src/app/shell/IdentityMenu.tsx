@@ -70,11 +70,11 @@ export function IdentityMenu() {
         aria-controls={idPanel}
         onClick={() => setAbierto((valor) => !valor)}
         data-guia="encabezado.identidad"
-        className="flex min-h-11 items-center gap-1.5 rounded-pildora py-1 pr-2 pl-1 text-white hover:bg-white/12"
+        className="flex min-h-11 min-w-11 items-center justify-center rounded-pildora p-1 text-white hover:bg-white/12 sm:gap-1.5 sm:pr-2"
       >
         <Avatar iniciales={identidad.iniciales} tamano="sm" />
         <span className="sr-only">{t("Identidad de demostración: {{nombre}}. Abrir menú de identidad", { nombre: identidad.nombre })}</span>
-        <ChevronDown aria-hidden="true" className={cx("size-4 transition-transform", abierto && "rotate-180")} />
+        <ChevronDown aria-hidden="true" className={cx("hidden size-4 transition-transform sm:block", abierto && "rotate-180")} />
       </button>
 
       <div
